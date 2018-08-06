@@ -3,7 +3,7 @@ package com.taskdoc.www.database.dto;
 import org.apache.ibatis.type.Alias;
 
 @Alias("sample")	// 해당명이 mybatis 에 참조됨.
-public class sample {
+public class Sample {
 	private String name;
 
 	public String getName() {
