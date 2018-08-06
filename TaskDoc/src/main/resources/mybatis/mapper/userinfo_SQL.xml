@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
+<mapper namespace="userinfo_SQL">
+	<select id="userinfolist" resultType="userinfo">
+
+		SELECT * FROM userinfo
+
+	</select>
+
+	<insert id="userinfoinsert" parameterType="userinfo">
+
+		INSERT INTO userinfo VALUES(#{uid}, #{upasswd}, #{uname}, #{ustate}, #{upone})
+
+	</insert>
+
+	<select id="userinfoview" parameterType="String"
+		resultType="userinfo">
+
+		SELECT * FROM userinfo WHERE uid=#{userId}
+
+	</select>
+
+	<update id="userinfoupdate" parameterType="userinfo">
+
+		UPDATE userinfo SET uid=#{changeId}, upasswd=#{userInfo.upasswd},
+		uname=#{userInfo.uname}, ustate=#{userInfo.ustate}, upone=#{upone} WHERE
+		uid=#{userInfo.uid}
+
+	</update>
+</mapper>
+	
+		

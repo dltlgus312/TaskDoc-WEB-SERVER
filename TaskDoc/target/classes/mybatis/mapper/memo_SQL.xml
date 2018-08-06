@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
+<mapper namespace="memo_SQL">
+
+	<select id="memolist" resultType="memo">
+		
+		SELECT * FROM memo WHERE ptcode=#{ptcode} ORDER BY mdate ASC
+
+	</select>
+	
+	<select id="memoview" resultType="memo">
+	
+		SELECT * FROM memo WHERE mcode=#{mcode};
+	
+	</select>
+
+	<insert id="memoinsert" parameterType="memo" useGeneratedKeys="true" keyProperty="mcode">
+
+		INSERT INTO memo VALUES(NULL, #{ptcode}, #{mcontents}, NOW())
+
+	</insert>
+
+	<update id="memoupdate" parameterType="memo">
+	
+		UPDATE memo SET mcontents=#{mcontents} WHERE mcode=#{mcode}
+
+	</update>
+
+	<delete id="memodelete">
+
+		DELETE FROM memo WHERE mcode=#{mcode}
+
+	</delete>
+	
+</mapper>
+	
