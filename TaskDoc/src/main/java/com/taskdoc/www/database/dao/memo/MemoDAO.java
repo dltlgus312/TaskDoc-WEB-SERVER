@@ -1,5 +1,13 @@
 package com.taskdoc.www.database.dao.memo;
 
-public interface MemoDAO {
+import java.util.List;
 
+import com.taskdoc.www.database.dto.MemoVO;
+
+public interface MemoDAO {
+	public List<MemoVO> memoList(int ptcode);
+	public MemoVO memoView(int mcode);
+	public int memoInsert(MemoVO memo);
+	public int memoUpdate(MemoVO memo);
+	public int memoDelete(int mcode);
 }
