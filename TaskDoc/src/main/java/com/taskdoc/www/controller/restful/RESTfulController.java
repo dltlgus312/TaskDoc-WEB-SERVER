@@ -1,39 +1,38 @@
 package com.taskdoc.www.controller.restful;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.taskdoc.www.database.dto.userinfoVO;
-import com.taskdoc.www.service.userinfo.UserInfoService;
+import com.taskdoc.www.database.dao.userinfo.UserInfoDAO;
+import com.taskdoc.www.database.dto.UserInfoVO;
 
 @RestController
+@RequestMapping("/user")
 public class RESTfulController {
 
 	@Autowired
-	UserInfoService uservice;
+	UserInfoDAO userInfoDao;
 
-	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-	public List<userinfoVO> selectUser(@PathVariable String id) {
-		return null;
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public UserInfoVO selectUser(@PathVariable String id) {
+		return userInfoDao.userInfoView(id);
 	}
-	@RequestMapping(value = "/userinsert", method = RequestMethod.POST)
-	public int insertUser(userinfoVO userinfoVO) {
+	
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	public int insertUser(UserInfoVO userinfoVO) {
 		return 1;
 	}
 
-	@RequestMapping(value = "/userupdate", method = RequestMethod.PUT)
-	public int updateUser(userinfoVO userinfoVO) {
+	@RequestMapping(value = "/update", method = RequestMethod.PUT)
+	public int updateUser(UserInfoVO userinfoVO) {
 		return 1;
 	}
 	
-	@RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public int deleteUser(@PathVariable String id) {
 		return 1;
 	}
-
 }

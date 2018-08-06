@@ -13,9 +13,9 @@ public class ChatContentsImpl implements ChatContentsDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
-	private final String NAMESPACE = "chatcontents.";
-	private final String CHATCONTENTSLIST = "chatContentsList";
-	private final String CHATCONTENTSINSERT = "chatContentsInsert";
+	private final String NAMESPACE = "chatcontents_SQL.";
+	private final String CHATCONTENTSLIST = "chatcontentslist";
+	private final String CHATCONTENTSINSERT = "chatcontentsinsert";
 
 	@Override
 	public List<ChatContentsVO> chatContentsList(int crcode) {

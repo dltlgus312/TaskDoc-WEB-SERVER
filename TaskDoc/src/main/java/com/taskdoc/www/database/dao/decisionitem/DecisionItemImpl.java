@@ -13,12 +13,12 @@ public class DecisionItemImpl implements DecisionItemDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
-	private final String NAMESPACE = "decisionitem.";
-	private final String DECISIONITEMLIST = "decisionItemList";
-	private final String DECISIONITEMVIEW = "decisionItemView";
-	private final String DECISIONITEMINSERT = "decisionItemInsert";
-	private final String DECISIONITEMUPDATE = "decisionItemUpdate";
-	private final String DECISIONITEMDELETE = "decisionItemDelete";
+	private final String NAMESPACE = "decisionitem_SQL.";
+	private final String DECISIONITEMLIST = "decisionitemlist";
+	private final String DECISIONITEMVIEW = "decisionitemview";
+	private final String DECISIONITEMINSERT = "decisioniteminsert";
+	private final String DECISIONITEMUPDATE = "decisionitemupdate";
+	private final String DECISIONITEMDELETE = "decisionitemdelete";
 	
 	@Override
 	public List<DecisionItemVO> decisionItemList(int dscode) {

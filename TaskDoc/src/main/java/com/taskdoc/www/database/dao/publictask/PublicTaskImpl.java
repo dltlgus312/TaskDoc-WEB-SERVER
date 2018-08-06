@@ -13,12 +13,12 @@ public class PublicTaskImpl implements PublicTaskDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
-	private final String NAMESPACE = "publictask.";
-	private final String PUBLICTASKLIST = "publicTaskList";
-	private final String PUBLICTASKINSERT = "publicTaskInsert";
-	private final String PUBLICTASKVIEW = "publicTaskView";
-	private final String PUBLICTASKUPDATE = "publicTaskUpdate";
-	private final String PUBLICTASKDELETE = "publicTaskDelete";
+	private final String NAMESPACE = "publictask_SQL.";
+	private final String PUBLICTASKLIST = "publictasklist";
+	private final String PUBLICTASKINSERT = "publictaskinsert";
+	private final String PUBLICTASKVIEW = "publictaskview";
+	private final String PUBLICTASKUPDATE = "publictaskupdate";
+	private final String PUBLICTASKDELETE = "publictaskdelete";
 
 	@Override
 	public List<PublicTaskVO> publicTaskList(int pcode) {

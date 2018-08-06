@@ -13,12 +13,12 @@ public class DecisionImpl implements DecisionDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
-	private final String NAMESPACE = "decision.";
-	private final String DECISIONLIST = "decisionList";
-	private final String DECISIONVIEW = "decisionView";
-	private final String DECISIONINSERT = "decisionInsert";
-	private final String DECISIONUPDATE = "decisionUpdate";
-	private final String DECISIONDELETE = "decisionDelete";
+	private final String NAMESPACE = "decision_SQL.";
+	private final String DECISIONLIST = "decisionlist";
+	private final String DECISIONVIEW = "decisionview";
+	private final String DECISIONINSERT = "decisioninsert";
+	private final String DECISIONUPDATE = "decisionupdate";
+	private final String DECISIONDELETE = "decisiondelete";
 	
 	@Override
 	public List<DecisionVO> decisionList(int crcode) {

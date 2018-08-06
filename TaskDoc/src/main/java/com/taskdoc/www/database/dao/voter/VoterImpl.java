@@ -15,11 +15,11 @@ public class VoterImpl implements VoterDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
-	private final String NAMESPACE = "voter.";
-	private final String VOTERLIST = "voterList";
-	private final String VOTERINSERT = "voterInsert";
-	private final String VOTERUPDATE = "voterUpdate";
-	private final String VOTERDELETE = "voterDelete";
+	private final String NAMESPACE = "voter_SQL.";
+	private final String VOTERLIST = "voterlist";
+	private final String VOTERINSERT = "voterinsert";
+	private final String VOTERUPDATE = "voterupdate";
+	private final String VOTERDELETE = "voterdelete";
 
 	@Override
 	public List<VoterVO> voterList(int dsicode) {
