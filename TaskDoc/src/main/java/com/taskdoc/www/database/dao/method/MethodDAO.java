@@ -1,5 +1,9 @@
 package com.taskdoc.www.database.dao.method;
 
-public interface MethodDAO {
+import java.util.List;
 
+import com.taskdoc.www.database.dto.MethodBoardVO;
+
+public interface MethodDAO {
+	
 }
