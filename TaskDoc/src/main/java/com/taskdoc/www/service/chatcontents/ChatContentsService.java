@@ -1,5 +1,10 @@
 package com.taskdoc.www.service.chatcontents;
 
-public interface ChatContentsService {
+import java.util.List;
 
+import com.taskdoc.www.database.dto.ChatContentsVO;
+
+public interface ChatContentsService {
+	
+	
 }
