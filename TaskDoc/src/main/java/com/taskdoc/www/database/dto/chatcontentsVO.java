@@ -14,7 +14,6 @@ public class chatcontentsVO {
 	
 	
 	public int getCrcode() {
-		String a;
 		return crcode;
 	}
 	public void setCrcode(int crcode) {
