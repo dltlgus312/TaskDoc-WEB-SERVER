@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
+<mapper namespace="chatroom_SQL">
+
+	<select id="chatroomlist" resultType="chatroom">
+	
+		SELECT * FROM chatroom WHERE crcode=#{crcode} AND pcode=#{pcode} ORDER BY crcode ASC
+
+	</select>
+	
+	<select id="chatroomview" resultType="chatroom">
+	
+		SELECT * FROM chatroom WHERE crcode=#{crcode}
+	
+	</select>
+
+	<insert id="chatroominsert" parameterType="chatroom" useGeneratedKeys="true" keyProperty="crcode">
+
+		INSERT INTO chatroom VALUES(null, NOW(), #{crmode}, #{close}, #{pcode}, 
+		<choose>
+			<when test="tcode != 0">
+				#{tcode}
+			</when>
+			<otherwise>
+				null
+			</otherwise>
+		</choose>
+		)
+	</insert>
+	
+	<update id="chatroomupdate">
+	
+		UPDATE chatroom SET close=#{close} WHERE crcode=#{crcode}
+	
+	</update>
+	
+	<delete id="chatroomdelete">
+	
+		DELETE FROM chatroom WHERE crcode=#{crcode}
+	
+	</delete>
+</mapper>
+	

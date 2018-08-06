@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
+<mapper namespace="projectjoin_SQL">
+	<select id="projectjoinlist" resultType="Integer">
+
+		SELECT pcode FROM projectjoin WHERE uid=#{uid}
+
+	</select>
+
+	<insert id="projectjoininsert" parameterType="projectjoin">
+
+		INSERT INTO projectjoin VALUES(#{pcode}, #{uid}, #{ppermission}, #{pinvite})
+
+	</insert>
+	
+	<select id="projectjoinview" resultType="projectjoin">
+	
+		SELECT * FROM projectjoin WHERE pcode=#{pcode} AND uid=#{uid}
+		
+	</select>
+	
+	<update id="projectjoinupdate" parameterType="projectjoin">
+		UPDATE projectjoin SET ppermission=#{ppermission} pinvite=#{pinvite} WHERE pcode=#{pcode} AND uid=#{uid}
+	</update>
+</mapper>
+	
+		

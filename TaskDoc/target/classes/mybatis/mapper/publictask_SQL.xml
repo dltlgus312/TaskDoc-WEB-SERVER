@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
+<mapper namespace="publictask_SQL">
+	<select id="publictasklist" resultType="publictask">
+
+		SELECT * FROM publictask WHERE pcode=#{pcode} ORDER BY tcode ASC
+
+	</select>
+	
+	<select id="publictaskview" resultType="publictask">
+	
+		SELECT * FROM publictask WHERE tcode=#{tcode}
+	
+	</select>
+
+	<insert id="publictaskinsert" parameterType="publictask" useGeneratedKeys="true" keyProperty="tcode">
+
+		INSERT INTO publictask VALUES(null, #{ttitle}, #{tcolor}, #{tsdate}, #{tedate}, 0, 0, #{trefference}, #{pcode})
+
+	</insert>
+	
+	<update id="publictaskupdate" parameterType="publictask">
+		
+		UPDATE publictast SET ttitle=#{ttitle}, tcolor=#{tcolor}, tsdate=#{tsdate}, tedate=#{tedate}, tpercent=#{tpercent} WHERE tcode=#{tcode}
+		
+	</update>
+	
+	<delete id="publictaskdelete">
+	
+		DELETE FROM publictask WHERE tcode=#{tcode}
+	
+	</delete>
+</mapper>
+	

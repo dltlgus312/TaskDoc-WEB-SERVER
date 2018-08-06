@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
+<mapper namespace="document_SQL">
+	<select id="documentlist" resultType="document">
+		
+		SELECT * FROM document WHERE crcode=#{crcode} ORDER BY dsisequence ASC
+
+	</select>
+
+	<select id="documentview" resultType="document">
+
+		SELECT * FROM document WHERE dsicode=#{dsicode}
+
+	</select>
+
+	<insert id="documentinsert" parameterType="document"
+		useGeneratedKeys="true" keyProperty="dmcode">
+
+		INSERT INTO document VALUES(null, #{dmtitle}, #{dmcontents}, #{dmdate}, #{dmposition}, #{crcode}, #{tcode}, #{uid})
+
+	</insert>
+
+	<update id="documentupdate" parameterType="document">
+	
+		UPDATE document SET dmtitle=#{dmtitle}, dmcontents=#{dmcontents}, dmposition=#{dmposition}, tcode=#{tcode} WHERE dmcode=#{dmcode}
+
+	</update>
+
+	<delete id="documentdelete">
+
+		DELETE FROM document WHERE dmcode=#{dmcode}
+
+	</delete>
+</mapper>
