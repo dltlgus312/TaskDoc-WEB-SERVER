@@ -16,12 +16,12 @@ public class ChatRoomImpl implements ChatRoomDAO {
 	@Autowired
 	SqlSession sqlSession;
 
-	private final String NAMESPACE = "chatroom.";
-	private final String CHATROOMLIST = "chatRoomList";
-	private final String CHATROOMVIEW = "chatRoomView";
-	private final String CHATROOMINSERT = "chatRoomInsert";
-	private final String CHATROOMUPDATE = "chatRoomUpdate";
-	private final String CHATROOMDELETE = "chatRoomDelete";
+	private final String NAMESPACE = "chatroom_SQL.";
+	private final String CHATROOMLIST = "chatroomlist";
+	private final String CHATROOMVIEW = "chatroomview";
+	private final String CHATROOMINSERT = "chatroominsert";
+	private final String CHATROOMUPDATE = "chatroomupdate";
+	private final String CHATROOMDELETE = "chatroomdelete";
 	
 	@Override
 	public List<ChatRoomVO> chatRoomList(List<Integer> crcodeList, int pcode) {

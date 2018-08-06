@@ -15,11 +15,11 @@ public class UserInfoImpl implements UserInfoDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
-	private final String NAMESPACE = "userinfo.";
-	private final String SELECTLIST = "userInfoList";
-	private final String INSERTUSERINFO = "userInfoInsert";
-	private final String USERINFOVIEW = "userInfoView";
-	private final String USERINFOUPDATE = "userInfoUpdate";
+	private final String NAMESPACE = "userinfo_SQL.";
+	private final String SELECTLIST = "userinfolist";
+	private final String INSERTUSERINFO = "userinfoinsert";
+	private final String USERINFOVIEW = "userinfoview";
+	private final String USERINFOUPDATE = "userinfoupdate";
 
 	@Override
 	public List<UserInfoVO> userInfoList() {

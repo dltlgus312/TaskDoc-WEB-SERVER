@@ -13,12 +13,12 @@ public class FeedBackImpl implements FeedBackDAO {
 	@Autowired
 	SqlSession sqlSession;
 
-	private final String NAMESPACE = "feedback.";
-	private final String FEEDBACKLIST = "feedBackList";
-	private final String FEEDBACKVIEW = "feedBackView";
-	private final String FEEDBACKINSERT = "feedBackInsert";
-	private final String FEEDBACKUPDATE = "feedBackUpdate";
-	private final String FEEDBACKDELETE = "feedBackDelete";
+	private final String NAMESPACE = "feedback_SQL.";
+	private final String FEEDBACKLIST = "feedbacklist";
+	private final String FEEDBACKVIEW = "feedbackview";
+	private final String FEEDBACKINSERT = "feedbackinsert";
+	private final String FEEDBACKUPDATE = "feedbackupdate";
+	private final String FEEDBACKDELETE = "feedbackdelete";
 
 	@Override
 	public List<FeedBackVO> feedBackList(int dmcode) {

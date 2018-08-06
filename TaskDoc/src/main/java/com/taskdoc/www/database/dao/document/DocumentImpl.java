@@ -13,12 +13,12 @@ public class DocumentImpl implements DocumentDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
-	private final String NAMESPACE = "document.";
-	private final String DOCUMENTLIST = "documentList";
-	private final String DOCUMENTVIEW = "documentView";
-	private final String DOCUMENTINSERT = "documentInsert";
-	private final String DOCUMENTUPDATE = "documentUpdate";
-	private final String DOCUMENTDELETE = "documentDelete";
+	private final String NAMESPACE = "document_SQL.";
+	private final String DOCUMENTLIST = "documentlist";
+	private final String DOCUMENTVIEW = "documentview";
+	private final String DOCUMENTINSERT = "documentinsert";
+	private final String DOCUMENTUPDATE = "documentupdate";
+	private final String DOCUMENTDELETE = "documentdelete";
 	
 	@Override
 	public List<DocumentVO> documentList(int crcode) {

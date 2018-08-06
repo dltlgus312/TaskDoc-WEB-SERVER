@@ -9,5 +9,5 @@ import com.taskdoc.www.database.dao.decisionitem.DecisionItemDAO;
 public class DecisionItemServiceImpl implements DecisionItemService{
 
 	@Autowired
-	DecisionItemDAO
+	DecisionItemDAO dao;
 }

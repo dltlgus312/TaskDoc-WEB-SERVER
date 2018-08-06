@@ -13,10 +13,10 @@ public class ChatRoomJoinImpl implements ChatRoomJoinDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
-	private final String NAMESPACE = "chatroomjoin.";
-	private final String CHATROOMJOINLIST = "chatRoomJoinList";
-	private final String CHATROOMJOININSERT = "chatRoomJoinInsert";
-	private final String CHATROOMJOINDELETE = "chatRoomJoinDelete";
+	private final String NAMESPACE = "chatroomjoin_SQL.";
+	private final String CHATROOMJOINLIST = "chatroomjoinlist";
+	private final String CHATROOMJOININSERT = "chatroomjoininsert";
+	private final String CHATROOMJOINDELETE = "chatroomjoindelete";
 	
 	@Override
 	public List<Integer> chatRoomJoinList(String uid) {

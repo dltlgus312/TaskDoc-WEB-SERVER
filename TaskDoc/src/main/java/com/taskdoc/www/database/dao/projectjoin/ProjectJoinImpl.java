@@ -15,11 +15,11 @@ public class ProjectJoinImpl implements ProjectJoinDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
-	private final String NAMESPACE = "projectjoin.";
-	private final String PROJECTJOINLIST = "projectJoinList";
-	private final String PROJECTJOININSERT = "projectJoinInsert";
-	private final String PROJECTJOINUPDATE = "projectJoinUpdate";
-	private final String PROJECTJOINVIEW = "projectJoinView";
+	private final String NAMESPACE = "projectjoin_SQL.";
+	private final String PROJECTJOINLIST = "projectjoinlist";
+	private final String PROJECTJOININSERT = "projectjoininsert";
+	private final String PROJECTJOINUPDATE = "projectjoinupdate";
+	private final String PROJECTJOINVIEW = "projectjoinview";
 	
 	@Override
 	public List<Integer> projectJoinList(String uid) {

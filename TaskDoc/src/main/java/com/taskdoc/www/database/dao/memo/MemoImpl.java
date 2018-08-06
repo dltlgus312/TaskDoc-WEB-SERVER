@@ -13,12 +13,12 @@ public class MemoImpl implements MemoDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
-	private final String NAMESPACE = "memo.";
-	private final String MEMOLIST = "memoList";
-	private final String MEMOVIEW = "memoView";
-	private final String MEMOINSERT = "memoInsert";
-	private final String MEMOUPDATE = "memoUpdate";
-	private final String MEMODELETE = "memoDelete";
+	private final String NAMESPACE = "memo_SQL.";
+	private final String MEMOLIST = "memolist";
+	private final String MEMOVIEW = "memoview";
+	private final String MEMOINSERT = "memoinsert";
+	private final String MEMOUPDATE = "memoupdate";
+	private final String MEMODELETE = "memodelete";
 	
 	@Override
 	public List<MemoVO> memoList(int ptcode) {
