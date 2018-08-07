@@ -21,18 +21,18 @@ public class RESTfulController {
 		return userInfoDao.userInfoView(id);
 	}
 	
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@RequestMapping(value = "/userinfo", method = RequestMethod.POST)
 	public int insertUser(UserInfoVO userinfoVO) {
-		return 1;
+		return userInfoDao.insertUserInfo(userinfoVO);
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.PUT)
+	@RequestMapping(value = "/userinfo", method = RequestMethod.PUT)
 	public int updateUser(UserInfoVO userinfoVO) {
-		return 1;
+		return userInfoDao.updateUserInfo(userinfoVO);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public int deleteUser(@PathVariable String id) {
-		return 1;
+		return userInfoDao.deleteUserInfo(id);
 	}
 }
