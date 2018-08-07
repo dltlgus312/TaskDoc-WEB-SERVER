@@ -15,7 +15,7 @@
 	<insert id="projectinsert" parameterType="project"
 		useGeneratedKeys="true" keyProperty="pcode">
 
-		INSERT INTO project VALUES(null,
+		INSERT INTO project VALUES(#{pcode},
 		#{ptitle}, #{psubtitle}, #{psdate}, #{pedate})
 
 	</insert>

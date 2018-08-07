@@ -21,12 +21,11 @@
 <body>
 
 
+	<input type="text" id="pcode" name="pcode"> code
 	<input type="text" id="ptitle" name="ptitle"> title
 	<input type="text" id="psubtitle" name="psubtitle"> sub
 	<input type="text" id="psdate" name="psdate"> sdate
 	<input type="text" id="pedate" name="pedate"> edate
-
-
 	<input type="text" id="uid" name="uid"> id
 	<input type="text" id="upasswd" name="upasswd"> pw
 	<input type="text" id="uname" name="uname">	name
@@ -43,18 +42,16 @@
 				'uname' : document.getElementById("uname").value,
 				'ustate' : document.getElementById("ustate").value,
 				'uphone' : document.getElementById("uphone").value,
-				
-				
+				'pcode' : document.getElementById("pcode").value,
 				'ptitle' : document.getElementById("ptitle").value,
 				'psubtitle' : document.getElementById("psubtitle").value,
 				'psdate' : document.getElementById("psdate").value,
 				'pedate' : document.getElementById("pedate").value
 			};
 			$.ajax({
-				type : 'POST',
-				url : '/project/',
-				contentType : "application/json; charset=utf-8",
-				data : JSON.stringify(param),
+				type : 'DELETE',
+				url : '/project/1',
+				data : param,
 				success : function(response) {
 					alert("CONTROLLER RETURN VALUE : " + response);
 				},

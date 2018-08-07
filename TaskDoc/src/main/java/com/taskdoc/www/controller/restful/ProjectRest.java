@@ -24,7 +24,7 @@ public class ProjectRest {
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public int insertProject(@RequestBody ProjectVO projectVo, @RequestBody UserInfoVO userinfoVo) {
+	public int insertProject(ProjectVO projectVo,  UserInfoVO userinfoVo) {
 		try {
 			return service.projectInsert(projectVo, userinfoVo);
 		} catch (Exception e) {
