@@ -5,18 +5,17 @@
 
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="userinfo_SQL">
-	<select id="userinfolist" resultType="userinfo">
 
-		SELECT * FROM userinfo
-
-	</select>
-
+	<!-- 회원가입 -->
 	<insert id="userinfoinsert" parameterType="userinfo">
 
-		INSERT INTO userinfo VALUES(#{uid}, #{upasswd}, #{uname}, #{ustate}, #{upone})
+		INSERT INTO userinfo
+		VALUES(#{uid}, #{upasswd}, #{uname}, #{ustate}, #{upone})
 
 	</insert>
 
+
+	<!-- 유저 정보 받아오기 -->
 	<select id="userinfoview" parameterType="String"
 		resultType="userinfo">
 
@@ -24,13 +23,24 @@
 
 	</select>
 
+
+	<!-- 회원 정보 업데이트 -->
 	<update id="userinfoupdate" parameterType="userinfo">
 
-		UPDATE userinfo SET uid=#{changeId}, upasswd=#{userInfo.upasswd},
-		uname=#{userInfo.uname}, ustate=#{userInfo.ustate}, upone=#{upone} WHERE
-		uid=#{userInfo.uid}
+		UPDATE userinfo SET
+		upasswd=#{upasswd},
+		ustate=#{ustate},
+		uphone=#{uphone} WHERE
+		uid=#{uid}
 
 	</update>
+	
+	
+	<!-- 회원 삭제 -->
+	<delete id="userinfodelete" parameterType="String">
+		DELETE FROM userinfo WHERE uid=#{uid}
+	</delete>
+
 </mapper>
 	
 		

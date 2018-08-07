@@ -1,9 +1,5 @@
 package com.taskdoc.www.database.dao.userinfo;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,61 +8,38 @@ import com.taskdoc.www.database.dto.UserInfoVO;
 
 @Repository
 public class UserInfoImpl implements UserInfoDAO {
+	
 	@Autowired
 	SqlSession sqlSession;
 	
 	private final String NAMESPACE = "userinfo_SQL.";
-	private final String SELECTLIST = "userinfolist";
-	private final String INSERTUSERINFO = "userinfoinsert";
-	private final String USERINFOVIEW = "userinfoview";
-	private final String USERINFOUPDATE = "userinfoupdate";
+	private final String INSERT = "userinfoinsert";
+	private final String VIEW = "userinfoview";
+	private final String UPDATE = "userinfoupdate";
+	private final String DELETE = "userinfodelete";
 
-	@Override
-	public List<UserInfoVO> userInfoList() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAMESPACE + SELECTLIST);
-	}
 
 	@Override
 	public int insertUserInfo(UserInfoVO userInfo) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(NAMESPACE + INSERTUSERINFO, userInfo);
+		return sqlSession.insert(NAMESPACE + INSERT, userInfo);
 	}
 
 	@Override
 	public UserInfoVO userInfoView(String userId) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(NAMESPACE + USERINFOVIEW, userId);
+		return sqlSession.selectOne(NAMESPACE + VIEW, userId);
 	}
 
 	@Override
-	public void deleteUserInfo(String userId) {
+	public int updateUserInfo(UserInfoVO userInfo) {
 		// TODO Auto-generated method stub
-		
+		return sqlSession.update(NAMESPACE + UPDATE, userInfo);
 	}
-
+	
 	@Override
-	public int updateUserInfo(UserInfoVO userInfo, String changeId) {
+	public int deleteUserInfo(String userId) {
 		// TODO Auto-generated method stub
-		
-		if(userInfo.getUid() == null && userInfo.getUpasswd() == null && userInfo.getUname() == null)
-			return -1;
-		
-		Map<String, Object> param = new HashMap<>();
-		param.put("userInfo", userInfo);
-		param.put("changeId", changeId);
-		
-		return sqlSession.update(NAMESPACE + USERINFOUPDATE, param);
-	}
-
-	@Override
-	public boolean checkPw(String userId, String upasswd) {
-		UserInfoVO userInfo = sqlSession.selectOne(NAMESPACE + USERINFOVIEW, userId);
-		if(userInfo == null) return false;
-		else { 
-			if(userInfo.getUpasswd().equals(upasswd))
-				return true;
-		}
-		return false;
+		 return sqlSession.delete(NAMESPACE + DELETE, userId);
 	}
 }
