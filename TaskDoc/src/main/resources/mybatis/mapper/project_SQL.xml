@@ -5,17 +5,14 @@
 
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="project_SQL">
-	<select id="projectlist" resultType="project">
 
+	<select id="projectlist" resultType="project">
 		SELECT * FROM project WHERE
 		pcode=#{pcode}
-
 	</select>
 
 	<select id="projectview" resultType="project">
-
 		SELECT * FROM project WHERE pcode=#{pcode}
-
 	</select>
 
 	<insert id="projectinsert" parameterType="project"

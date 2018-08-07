@@ -10,7 +10,7 @@
 	<insert id="userinfoinsert" parameterType="userinfo">
 
 		INSERT INTO userinfo
-		VALUES(#{uid}, #{upasswd}, #{uname}, #{ustate}, #{upone})
+		VALUES(#{uid}, #{upasswd}, #{uname}, #{ustate}, #{uphone})
 
 	</insert>
 
