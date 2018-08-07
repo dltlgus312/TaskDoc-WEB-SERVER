@@ -16,23 +16,10 @@ public class ProjectJoinImpl implements ProjectJoinDAO {
 	SqlSession sqlSession;
 	
 	private final String NAMESPACE = "projectjoin_SQL.";
-	private final String PROJECTJOINLIST = "projectjoinlist";
 	private final String PROJECTJOININSERT = "projectjoininsert";
 	private final String PROJECTJOINUPDATE = "projectjoinupdate";
 	private final String PROJECTJOINVIEW = "projectjoinview";
 	
-	@Override
-	public List<Integer> projectJoinList(String uid) {
-		// TODO Auto-generated method stub
-		List<Integer> pcodeList = sqlSession.selectList(NAMESPACE + PROJECTJOINLIST, uid);
-		return pcodeList;
-	}
-
-	@Override
-	public int projectJoinInsert(ProjectJoinVO projectJoin) {
-		// TODO Auto-generated method stub
-		return sqlSession.insert(NAMESPACE + PROJECTJOININSERT, projectJoin);
-	}
 
 	@Override
 	public ProjectJoinVO projectJoinView(int pcode, String uid) {
@@ -42,10 +29,17 @@ public class ProjectJoinImpl implements ProjectJoinDAO {
 		map.put("uid", uid);
 		return sqlSession.selectOne(NAMESPACE + PROJECTJOINVIEW, map);
 	}
+	
+	
+	@Override
+	public int projectJoinInsert(ProjectJoinVO projectJoinVo) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(NAMESPACE + PROJECTJOININSERT, projectJoinVo);
+	}
 
 	@Override
-	public int projectJoinUpdate(ProjectJoinVO projectJoin) {
+	public int projectJoinUpdate(ProjectJoinVO projectJoinVo) {
 		// TODO Auto-generated method stub
-		return sqlSession.update(NAMESPACE + PROJECTJOINUPDATE, projectJoin);
+		return sqlSession.update(NAMESPACE + PROJECTJOINUPDATE, projectJoinVo);
 	}
 }

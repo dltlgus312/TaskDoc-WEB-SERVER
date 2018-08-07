@@ -20,6 +20,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<<<<<<< HEAD
 	<form action="/www/user/userinfo" method="POST">
 		<input type="text" name="uid"> <input type="text" name="upasswd">
 		<input type="text" name="uname"> <input type="text" name="ustate">
@@ -28,17 +29,47 @@
 	</form>
 	<!-- <button type="button" onclick="test()"></button> -->
 	<!-- <script type="text/javascript">
+=======
+
+
+	<input type="text" id="ptitle" name="ptitle"> title
+	<input type="text" id="psubtitle" name="psubtitle"> sub
+	<input type="text" id="psdate" name="psdate"> sdate
+	<input type="text" id="pedate" name="pedate"> edate
+
+
+	<input type="text" id="uid" name="uid"> id
+	<input type="text" id="upasswd" name="upasswd"> pw
+	<input type="text" id="uname" name="uname">	name
+	<input type="text" id="ustate" name="ustate"> state
+	<input type="text" id="uphone" name="uphone"> phone
+
+
+	<button type="button" onclick="test()"></button>
+	<script type="text/javascript">
+>>>>>>> branch 'SQL_DTO' of https://github.com/dltlgus312/TaskDoc.git
 		function test() {
 			var param = {
 				'uid' : document.getElementById("uid").value,
 				'upasswd' : document.getElementById("upasswd").value,
 				'uname' : document.getElementById("uname").value,
 				'ustate' : document.getElementById("ustate").value,
-				'uphone' : document.getElementById("uphone").value
+				'uphone' : document.getElementById("uphone").value,
+				
+				
+				'ptitle' : document.getElementById("ptitle").value,
+				'psubtitle' : document.getElementById("psubtitle").value,
+				'psdate' : document.getElementById("psdate").value,
+				'pedate' : document.getElementById("pedate").value
 			};
 			$.ajax({
 				type : 'POST',
+<<<<<<< HEAD
 				url : '/www/user/userinfo',
+=======
+				url : '/project/',
+				contentType : "application/json; charset=utf-8",
+>>>>>>> branch 'SQL_DTO' of https://github.com/dltlgus312/TaskDoc.git
 				data : JSON.stringify(param),
 				success : function(response) {
 					alert("CONTROLLER RETURN VALUE : " + response);
