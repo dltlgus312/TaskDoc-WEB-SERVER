@@ -19,12 +19,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <input type="text" id="uid" >
-	<input type="text" id="upasswd" >
-	<input type="text" id="uname" >
-	<input type="text" id="ustate" >
-	<input type="text" id="uphone" >
-	
+
+
+	<input type="text" id="ptitle" name="ptitle"> title
+	<input type="text" id="psubtitle" name="psubtitle"> sub
+	<input type="text" id="psdate" name="psdate"> sdate
+	<input type="text" id="pedate" name="pedate"> edate
+
+
+	<input type="text" id="uid" name="uid"> id
+	<input type="text" id="upasswd" name="upasswd"> pw
+	<input type="text" id="uname" name="uname">	name
+	<input type="text" id="ustate" name="ustate"> state
+	<input type="text" id="uphone" name="uphone"> phone
+
+
 	<button type="button" onclick="test()"></button>
 	<script type="text/javascript">
 		function test() {
@@ -33,11 +42,17 @@
 				'upasswd' : document.getElementById("upasswd").value,
 				'uname' : document.getElementById("uname").value,
 				'ustate' : document.getElementById("ustate").value,
-				'uphone' : document.getElementById("uphone").value
+				'uphone' : document.getElementById("uphone").value,
+				
+				
+				'ptitle' : document.getElementById("ptitle").value,
+				'psubtitle' : document.getElementById("psubtitle").value,
+				'psdate' : document.getElementById("psdate").value,
+				'pedate' : document.getElementById("pedate").value
 			};
 			$.ajax({
 				type : 'POST',
-				url : 'http://172.26.1.148:8080/userinfo',
+				url : '/project/',
 				contentType : "application/json; charset=utf-8",
 				data : JSON.stringify(param),
 				success : function(response) {
