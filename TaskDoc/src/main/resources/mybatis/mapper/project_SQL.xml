@@ -5,14 +5,6 @@
 
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="project_SQL">
-<<<<<<< HEAD
-
-	<select id="projectlist" resultType="project">
-		SELECT * FROM project WHERE
-		pcode=#{pcode}
-	</select>
-=======
->>>>>>> branch 'SQL_DTO' of https://github.com/dltlgus312/TaskDoc.git
 
 	<select id="projectview" resultType="project">
 		SELECT * FROM project WHERE pcode=#{pcode}

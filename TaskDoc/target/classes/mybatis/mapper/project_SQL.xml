@@ -7,9 +7,7 @@
 <mapper namespace="project_SQL">
 
 	<select id="projectview" resultType="project">
-
 		SELECT * FROM project WHERE pcode=#{pcode}
-
 	</select>
 
 	<insert id="projectinsert" parameterType="project"
