@@ -6,31 +6,37 @@
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="project_SQL">
 
+	<select id="projectlist" resultType="project">
+		SELECT * FROM project WHERE
+		pcode=#{pcode}
+	</select>
+
 	<select id="projectview" resultType="project">
-
-		SELECT * FROM project WHERE pcode=#{pcode}
-
+		SELECT * FROM project WHERE
+		pcode=#{pcode}
 	</select>
 
 	<insert id="projectinsert" parameterType="project"
 		useGeneratedKeys="true" keyProperty="pcode">
 
-		INSERT INTO project VALUES(null,
-		#{ptitle}, #{psubtitle}, #{psdate}, #{pedate})
+		INSERT INTO project VALUES(null, #{ptitle}, #{psubtitle}, #{psdate}, #{pedate})
 
 	</insert>
 
 	<update id="projectupdate" parameterType="project">
 
-		UPDATE project SET ptitle=#{ptitle}, psubtitle=#{psubtitle},
-		psdate=#{psdate}, pedate=#{pedate} WHERE pcode=#{pcode}
+		UPDATE project SET
+		ptitle=#{ptitle}, psubtitle=#{psubtitle},
+		psdate=#{psdate},
+		pedate=#{pedate} WHERE pcode=#{pcode}
 
 	</update>
-	
+
 	<delete id="projectdelete" parameterType="Integer">
-		DELETE FROM project WHERE pcode=#{pcode}
+		DELETE FROM project
+		WHERE pcode=#{pcode}
 	</delete>
-	
+
 </mapper>
 	
 		

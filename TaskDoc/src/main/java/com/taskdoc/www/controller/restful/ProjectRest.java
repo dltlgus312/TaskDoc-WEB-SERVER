@@ -23,12 +23,11 @@ public class ProjectRest {
 		return service.projectView(pcode);
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public int insertProject(@RequestBody ProjectVO projectVo, @RequestBody UserInfoVO userinfoVo) {
+	@RequestMapping(value = "/sd", method = RequestMethod.POST)
+	public int insertProject(ProjectVO projectVo, UserInfoVO userinfoVo) {
 		try {
 			return service.projectInsert(projectVo, userinfoVo);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return -1;
 		}

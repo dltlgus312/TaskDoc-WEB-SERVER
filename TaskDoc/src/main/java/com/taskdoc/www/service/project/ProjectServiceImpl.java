@@ -32,7 +32,6 @@ public class ProjectServiceImpl implements ProjectService{
 	public int projectInsert(ProjectVO projectVo, UserInfoVO userInfoVo) throws Exception{
 		// TODO Auto-generated method stub
 		projectDao.projectInsert(projectVo);
-		
 		ProjectJoinVO projectJoinVo = new ProjectJoinVO();
 		projectJoinVo.setPcode(projectVo.getPcode());
 		projectJoinVo.setUid(userInfoVo.getUid());
