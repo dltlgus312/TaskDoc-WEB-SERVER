@@ -13,16 +13,16 @@ public class User {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String userLogin() {
-		return "login";
+		return "/user/login";
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String join() {
-		return "join";
+		return "/user/join";
 	}
 
 	@RequestMapping(value = "/infoEdit", method = RequestMethod.GET)
 	public String infoEdit() {
-		return "infoEdit";
+		return "/user/infoEdit";
 	}
 }

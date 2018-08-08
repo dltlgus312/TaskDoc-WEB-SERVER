@@ -58,7 +58,7 @@
 		 -->
 	<!-- show menu div -->
 	<div id="perspective" class="perspective effect-airbnb">
-		
+
 		<div class="container">
 			<div class="wrapper">
 				<div class="codrops-top clearfix">
@@ -133,18 +133,15 @@
 </body>
 
 <script type="text/javascript">
+	/*TEST  */
 	$(function() {
 		$("#JoinButton").click(function() {
-			var state = $("#test").css('display');
-			if (state == 'none') {
-				$("#test").show();
-			}else{
-				$("#test").hide();
-			}
+			location.href = 'http://localhost:8080/www/user/join';
 		});
 		$("#LoginButton").click(function() {
 			alert('login');
 		});
 	});
+	/*/TEST  */
 </script>
 </html>
