@@ -21,9 +21,10 @@ public class ProjectRest {
 	@Autowired
 	ProjectService service;
 
-	@RequestMapping(value = "/{pcode}", method = RequestMethod.GET)
-	public ProjectVO view(@PathVariable int pcode) {
-		return service.projectView(pcode);
+	// 프로젝트 결과 값 = map ( KEY = "projectList", "projectJoinList" )
+	@RequestMapping(value = "/{uid}", method = RequestMethod.GET)
+	public Map<String, Object> list(@PathVariable String uid) {
+		return service.projectList(uid);
 	}
 	
 	// 프로젝트 생성시 생성자는 'OWNER' 로써 프로젝트에 참가 ( Service Transaction 처리 ) > 성공 1, 실패 -1

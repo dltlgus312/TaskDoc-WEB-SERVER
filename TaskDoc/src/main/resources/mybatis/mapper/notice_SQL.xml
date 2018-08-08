@@ -7,7 +7,7 @@
 <mapper namespace="notice_SQL">
 
 	<select id="list" resultType="notice">
-		SELECT ntitle, ndate FROM notice WHERE pcode=#{pcode} ORDER BY ndate ASC
+		SELECT ncode, ntitle, ndate FROM notice WHERE pcode=#{pcode} ORDER BY ndate ASC
 	</select>
 	
 	<select id="view" resultType="notice" parameterType="Integer">

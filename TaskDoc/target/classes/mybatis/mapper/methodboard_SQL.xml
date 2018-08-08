@@ -7,7 +7,7 @@
 <mapper namespace="methodboard_SQL">
 
 	<select id="list" resultType="methodboard">
-		SELECT mbcode, mbtitle, mbdate FROM methodboard ORDER BY mbcode ASC
+		SELECT mbcode, mbtitle, mbdate, uid FROM methodboard ORDER BY mbcode ASC
 	</select>
 	
 	<select id="view" parameterType="Integer" resultType="methodboard">

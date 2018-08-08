@@ -1,0 +1,134 @@
+
+result = int >> success = 1, fail = -1
+
+받기 = GET
+생성 = POST
+수정 = PUT
+삭제 = DELETE
+
+
+===========================================
+
+유저
+	받기
+		/userinfo/{uid}
+		result = UserInfoVO
+	생성
+		/userinfo
+		data = UserInfoVO
+		result = int
+	수정
+		/userinfo
+		data = UserInfoVO
+		result = int
+	삭제
+		/userinfo/{uid}
+		result = int
+	
+프로젝트 
+	받기	
+		내가 참여중인 모든 프로젝트 리스트 ( 참가에 동의하지 않은 프로젝트 포함 )
+		/project/{uid}
+		result = map  > ( KEY = "projectList" : List<ProjectVO>, "projectJoinList" : List<ProjectJoinVO> )
+		
+	생성	 >  projectjoin 테이블 자동 등록 (Transaction)
+		/project
+		data = ProjectVO, UserInfoVO(uid)
+		result = int
+		
+	수정 
+		/project
+		data = ProjectVO
+		result = int
+	
+	삭제
+		/project/{pcode}
+		result = int
+		
+프로젝트 조인
+	받기
+		현재 프로젝트에 참가하는데 동의한 (success=1) 회원 리스트
+		/projectjoin/{pcode}
+		result = map  > ( KEY = "userList" : List<UserInfoVO>, "joinList" : List<ProjectJoinVO> )
+	
+	생성
+		/projectjoin
+		data = ProjectJoinVO
+		result = int
+	
+	수정 
+		/projectjoin
+		data = ProjectJoinVO
+		result = int
+	
+	삭제	>  기본키가 없기 때문에 ProjectJoinVO 모델을 인자로 받는다.
+		/projectjoin
+		data = ProjectJoinVO
+		result = int
+		
+방법론 게시판
+	받기
+		1. 모든 방법론 리스트
+			/methodboard/all
+			result = List<MethodBoardVO>  >  ( mbcode, mbtitle, mbdate, uid )
+		
+		2. 방법론 하나에 대한 리스트 ( 내용 포함 )
+			/methodboard/{mbcode}
+			result = MethodBoardVO >  ( ALL )
+			
+	생성
+		/methodboard
+		data = MethodBoardVO
+		result = int
+	
+	수정
+		/methodboard
+		data = MethodBoardVO
+		result = int
+		
+	삭제 
+		/methodboard/{mbcode}
+		
+방법론 리스트 ( 내가 추가한 방법론 )
+	받기	>  내 방법론 모든 리스트
+		/methodlist{uid}
+		result = List<MethodListVO>
+	
+	생성
+		/methodlist
+		data = MethodListVO
+		result = int
+	
+	수정
+		/methodlist
+		data = MethodListVO
+		result = int
+		
+	삭제 
+		/methodlist
+		data = MethodListVO
+		result = int
+
+공지사항
+	받기
+		1. 프로젝트의 모든 공지 리스트
+			/notice/{pcode}
+			result = List<NoticeVO>	 >  ( ncode, ntitle, ndate )
+		
+		2. 공지사항 한개의 내용
+			/notice/{ncode}
+			result = NoticeVo	>  ( ALL )
+	
+	생성
+		/notice
+		data = NoticeVO
+		result = int
+		
+	수정
+		/notice
+		data = NoticeVO
+		result = int
+	
+	삭제
+		/notice/{ncode}
+		result = int

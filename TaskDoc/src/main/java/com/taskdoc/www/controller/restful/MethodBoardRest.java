@@ -21,7 +21,7 @@ public class MethodBoardRest {
 	@Autowired
 	MethodBoardService service;
 	
-	// 게시판 목록 전체를 받아온다. > 반환 결과 = mbcode, mbtitle, mbdate 
+	// 게시판 목록 전체를 받아온다. ( mbcode, mbtitle, mbdate )
 	@RequestMapping(value="/all", method=RequestMethod.GET)
 	public List<MethodBoardVO> list() {
 		// TODO Auto-generated method stub

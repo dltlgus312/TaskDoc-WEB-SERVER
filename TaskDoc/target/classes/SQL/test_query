@@ -1,0 +1,15 @@
+
+프로젝트
+insert into project values('1', 'test1', 'test', '201011', '201011');
+insert into project values('2', 'test2', 'test', '201011', '201011');
+insert into project values('3', 'test3', 'test', '201011', '201011');
+insert into project values('4', 'test4', 'test', '201011', '201011');
+
+유저
+insert into userinfo values('d', 'd', 'd', 'd', 'd');
+
+프로젝트 조인
+insert into projectjoin values('d','1','OWNER','1');
+insert into projectjoin values('d','2','OWNER','1');
+insert into projectjoin values('d','3','OWNER','1');
+insert into projectjoin values('d','4','OWNER','1');
