@@ -6,14 +6,14 @@
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="chatcontents_SQL">
 
-	<select id="chatcontentslist" resultType="chatcontents">
+	<select id="list" resultType="chatcontents">
 
 		SELECT * FROM
 		chatcontents WHERE crcode=#{crcode}
 
 	</select>
 
-	<insert id="chatcontentsinsert">
+	<insert id="insert">
 
 		INSERT INTO chatcontents VALUES(#{crcode}, #{uid}, #{ccontents},
 		NOW(),

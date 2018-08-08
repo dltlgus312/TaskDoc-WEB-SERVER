@@ -7,7 +7,7 @@
 <mapper namespace="userinfo_SQL">
 
 	<!-- 회원가입 -->
-	<insert id="userinfoinsert" parameterType="userinfo">
+	<insert id="insert" parameterType="userinfo">
 
 		INSERT INTO userinfo
 		VALUES(#{uid}, #{upasswd}, #{uname}, #{ustate}, #{uphone})
@@ -16,7 +16,7 @@
 
 
 	<!-- 유저 정보 받아오기 -->
-	<select id="userinfoview" parameterType="String"
+	<select id="view" parameterType="String"
 		resultType="userinfo">
 
 		SELECT * FROM userinfo WHERE uid=#{userId}
@@ -25,7 +25,7 @@
 
 
 	<!-- 회원 정보 업데이트 -->
-	<update id="userinfoupdate" parameterType="userinfo">
+	<update id="update" parameterType="userinfo">
 
 		UPDATE userinfo SET
 		upasswd=#{upasswd},
@@ -37,7 +37,7 @@
 	
 	
 	<!-- 회원 삭제 -->
-	<delete id="userinfodelete" parameterType="String">
+	<delete id="delete" parameterType="String">
 		DELETE FROM userinfo WHERE uid=#{uid}
 	</delete>
 

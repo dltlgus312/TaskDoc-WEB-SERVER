@@ -5,27 +5,31 @@
 
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="projectjoin_SQL">
-	<select id="projectjoinlist" resultType="Integer">
+	<select id="listProject" resultType="projectjoin">
 
-		SELECT pcode FROM projectjoin WHERE uid=#{uid}
+		SELECT * FROM projectjoin WHERE uid=#{uid}
 
 	</select>
+	
+	<select id="listUser" resultType="projectjoin">
 
-	<insert id="projectjoininsert" parameterType="projectjoin">
+		SELECT * FROM projectjoin WHERE pcode=#{pcode}
+
+	</select>
+	
+	<insert id="insert" parameterType="projectjoin">
 
 		INSERT INTO projectjoin VALUES(#{pcode}, #{uid}, #{ppermission}, #{pinvite})
 
 	</insert>
 	
-	<select id="projectjoinview" resultType="projectjoin">
-	
-		SELECT * FROM projectjoin WHERE pcode=#{pcode} AND uid=#{uid}
-		
-	</select>
-	
-	<update id="projectjoinupdate" parameterType="projectjoin">
+	<update id="update" parameterType="projectjoin">
 		UPDATE projectjoin SET ppermission=#{ppermission} pinvite=#{pinvite} WHERE pcode=#{pcode} AND uid=#{uid}
 	</update>
+	
+	<delete id="delete" parameterType="projectjoin">
+		DELETE FROM projectjoin WHERE pcode=#{pcode} AND uid=#{uid}
+	</delete>
 </mapper>
 	
 		

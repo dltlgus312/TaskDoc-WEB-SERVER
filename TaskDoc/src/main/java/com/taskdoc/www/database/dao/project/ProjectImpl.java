@@ -10,35 +10,35 @@ import com.taskdoc.www.database.dto.ProjectVO;
 public class ProjectImpl implements ProjectDAO {
 	
 	private final String NAMESPACE = "project_SQL.";
-	private final String INSERT = "projectinsert";
-	private final String VIEW = "projectview";
-	private final String UPDATE = "projectupdate";
-	private final String DELETE = "projectdelete";
+	private final String INSERT = "insert";
+	private final String VIEW = "view";
+	private final String UPDATE = "update";
+	private final String DELETE = "delete";
 	
 	@Autowired
-	SqlSession sqlSession;
+	SqlSession sql;
 
 	@Override
 	public ProjectVO projectView(int pcode) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(NAMESPACE + VIEW, pcode);
+		return sql.selectOne(NAMESPACE + VIEW, pcode);
 	}
 
 	@Override
 	public int projectInsert(ProjectVO project) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(NAMESPACE + INSERT, project);
+		return sql.insert(NAMESPACE + INSERT, project);
 	}
 
 	@Override
 	public int projectUpdate(ProjectVO project) {
 		// TODO Auto-generated method stub
-		return sqlSession.update(NAMESPACE + UPDATE, project);
+		return sql.update(NAMESPACE + UPDATE, project);
 	}
 
 	@Override
 	public int projectDelete(int pcode) {
 		// TODO Auto-generated method stub
-		return sqlSession.delete(NAMESPACE + DELETE, pcode);
+		return sql.delete(NAMESPACE + DELETE, pcode);
 	}
 }

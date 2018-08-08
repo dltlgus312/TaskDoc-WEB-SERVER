@@ -18,22 +18,22 @@ public class UserInfoRest {
 	UserInfoService service;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public UserInfoVO selectUser(@PathVariable String id) {
+	public UserInfoVO view(@PathVariable String id) {
 		return service.userInfoView(id);
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public int insertUser(@RequestBody UserInfoVO userinfoVO) {
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public int insert(@RequestBody UserInfoVO userinfoVO) {
 		return service.insertUserInfo(userinfoVO);
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.PUT)
-	public int updateUser(@RequestBody UserInfoVO userinfoVO) {
+	@RequestMapping(value = "", method = RequestMethod.PUT)
+	public int update(@RequestBody UserInfoVO userinfoVO) {
 		return service.updateUserInfo(userinfoVO);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public int deleteUser(@PathVariable String id) {
+	public int delete(@PathVariable String id) {
 		return service.deleteUserInfo(id);
 	}
 }

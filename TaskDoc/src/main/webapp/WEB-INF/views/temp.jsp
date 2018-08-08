@@ -18,6 +18,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<<<<<<< HEAD
 </head>
 <body>
 <<<<<<< HEAD
@@ -30,8 +31,11 @@
 	<!-- <button type="button" onclick="test()"></button> -->
 	<!-- <script type="text/javascript">
 =======
+=======
+>>>>>>> refs/heads/sql_sihyeon
 
 
+<<<<<<< HEAD
 	<input type="text" id="ptitle" name="ptitle"> title
 	<input type="text" id="psubtitle" name="psubtitle"> sub
 	<input type="text" id="psdate" name="psdate"> sdate
@@ -48,20 +52,31 @@
 	<button type="button" onclick="test()"></button>
 	<script type="text/javascript">
 >>>>>>> branch 'SQL_DTO' of https://github.com/dltlgus312/TaskDoc.git
+=======
+<script type="text/javascript">
+>>>>>>> refs/heads/sql_sihyeon
 		function test() {
-			var param = {
+			
+			var url = $("#url").val();
+			var method = $("#method").val();
+			var type = $("#type").val();
+			var param = new Object;
+			
+			var user = {
 				'uid' : document.getElementById("uid").value,
 				'upasswd' : document.getElementById("upasswd").value,
 				'uname' : document.getElementById("uname").value,
 				'ustate' : document.getElementById("ustate").value,
-				'uphone' : document.getElementById("uphone").value,
-				
-				
+				'uphone' : document.getElementById("uphone").value
+			};
+			var project = {
+				'pcode' : document.getElementById("pcode").value,
 				'ptitle' : document.getElementById("ptitle").value,
 				'psubtitle' : document.getElementById("psubtitle").value,
 				'psdate' : document.getElementById("psdate").value,
 				'pedate' : document.getElementById("pedate").value
 			};
+<<<<<<< HEAD
 			$.ajax({
 				type : 'POST',
 <<<<<<< HEAD
@@ -78,7 +93,76 @@
 					alert("ERROR : " + e.statusText);
 				}
 			});
+=======
+			
+			param = $.extend(true, project, user);
+
+			if(type == 'json'){
+				$.ajax({
+					type : method,
+					url : url,
+					contentType : "application/json; charset=utf-8",
+					data : JSON.stringify(param),
+					success : function(response) {
+						$("#bd").append(JSON.stringify(response));
+					},
+					error : function(e) {
+						alert("ERROR : " + e.statusText);
+					}
+				});
+			}else{
+				$.ajax({
+					type : $("#method").val(),
+					url : $("#url").val(),
+					data : param,
+					success : function(response) {
+						$("#bd").append(JSON.stringify(response));
+					},
+					error : function(e) {
+						alert("ERROR : " + e.statusText);
+					}
+				});
+			}
+			$("#bd").append('<br>');
+>>>>>>> refs/heads/sql_sihyeon
 		}
+<<<<<<< HEAD
 	</script>   -->
+=======
+	</script>
+	
+	
+</head>
+<body>
+
+	<table>
+		<thead>
+			<tr><td><h3>HEAD</h3></td></tr>
+			<tr><td><input type="text" id="url">URL</td>
+			<td><input type="text" id="method">METHOD</td>
+			<td><input type="text" id="type">TYPE</td>
+			<td><button type="button" onclick="test()">SUBMIT</button>
+			<button type="button" onclick="$('#bd').empty();">CLEAR</button></td></tr>
+		</thead>
+			<tr><td><h3>PROJECT</h3></td></tr>
+		<tr>
+			<td><input type="text" id="pcode" name="pcode">PCODE </td>
+			<td><input type="text" id="ptitle" name="ptitle">TITLE</td>
+			<td><input type="text" id="psubtitle" name="psubtitle">SUB</td>
+			<td><input type="text" id="psdate" name="psdate">SDATE</td>
+			<td><input type="text" id="pedate" name="pedate">EDATE</td>
+		</tr>
+				<tr><td><h3>USER</h3></td></tr>
+		<tr>
+			<td><input type="text" id="uid" name="uid">ID</td>
+			<td><input type="text" id="upasswd" name="upasswd">PW</td>
+			<td><input type="text" id="uname" name="uname">NAME</td>
+			<td><input type="text" id="ustate" name="ustate">STATE</td>
+			<td><input type="text" id="uphone" name="uphone">PHONE</td>
+		</tr>
+	</table>
+	
+	<div id="bd"></div>
+>>>>>>> refs/heads/sql_sihyeon
 </body>
 </html>
