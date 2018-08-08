@@ -12,34 +12,48 @@ import com.taskdoc.www.database.dto.ProjectJoinVO;
 
 @Repository
 public class ProjectJoinImpl implements ProjectJoinDAO {
+	
 	@Autowired
-	SqlSession sqlSession;
+	SqlSession sql;
 	
 	private final String NAMESPACE = "projectjoin_SQL.";
-	private final String PROJECTJOININSERT = "projectjoininsert";
-	private final String PROJECTJOINUPDATE = "projectjoinupdate";
-	private final String PROJECTJOINVIEW = "projectjoinview";
+	private final String LISTPROJECT = "listProject";
+	private final String LISTUSER = "listUser";
+	private final String INSERT = "insert";
+	private final String UPDATE = "update";
+	private final String DELETE = "delete";
 	
-
+	
+	// uid > Project list
 	@Override
-	public ProjectJoinVO projectJoinView(int pcode, String uid) {
+	public List<ProjectJoinVO> projectJoinList(String uid) {
 		// TODO Auto-generated method stub
-		Map<String, Object> map = new HashMap<>();
-		map.put("pcode", pcode);
-		map.put("uid", uid);
-		return sqlSession.selectOne(NAMESPACE + PROJECTJOINVIEW, map);
+		return sql.selectList(NAMESPACE + LISTPROJECT, uid);
 	}
 	
-	
+	// pcode > users list
+	@Override 
+	public List<ProjectJoinVO> projectJoinListUser(int pcode) {
+		// TODO Auto-generated method stub
+		return sql.selectList(NAMESPACE + LISTUSER, pcode);
+	}
+
 	@Override
 	public int projectJoinInsert(ProjectJoinVO projectJoinVo) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(NAMESPACE + PROJECTJOININSERT, projectJoinVo);
+		return sql.insert(NAMESPACE + INSERT, projectJoinVo);
 	}
 
 	@Override
 	public int projectJoinUpdate(ProjectJoinVO projectJoinVo) {
 		// TODO Auto-generated method stub
-		return sqlSession.update(NAMESPACE + PROJECTJOINUPDATE, projectJoinVo);
+		return sql.update(NAMESPACE + UPDATE, projectJoinVo);
 	}
+
+	@Override
+	public int projectJoinDelete(ProjectJoinVO projectJoinVo) {
+		// TODO Auto-generated method stub
+		return sql.delete(NAMESPACE + DELETE, projectJoinVo);
+	}
+
 }

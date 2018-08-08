@@ -6,13 +6,13 @@
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="project_SQL">
 
-	<select id="projectview" resultType="project">
+	<select id="view" resultType="project">
 
 		SELECT * FROM project WHERE pcode=#{pcode}
 
 	</select>
 
-	<insert id="projectinsert" parameterType="project"
+	<insert id="insert" parameterType="project"
 		useGeneratedKeys="true" keyProperty="pcode">
 
 		INSERT INTO project VALUES(#{pcode},
@@ -20,14 +20,14 @@
 
 	</insert>
 
-	<update id="projectupdate" parameterType="project">
+	<update id="update" parameterType="project">
 
 		UPDATE project SET ptitle=#{ptitle}, psubtitle=#{psubtitle},
 		psdate=#{psdate}, pedate=#{pedate} WHERE pcode=#{pcode}
 
 	</update>
 	
-	<delete id="projectdelete" parameterType="Integer">
+	<delete id="delete" parameterType="Integer">
 		DELETE FROM project WHERE pcode=#{pcode}
 	</delete>
 	

@@ -10,30 +10,37 @@ import com.taskdoc.www.database.dto.MethodListVO;
 
 @Repository
 public class MethodListImpl implements MethodListDAO {
+	
 	@Autowired
-	SqlSession sqlSession;
+	SqlSession sql;
+	
+	private final String NAMESPACE = "methodlist_SQL.";
+	private final String LIST = "list";
+	private final String INSERT = "insert";
+	private final String UPDATE = "update";
+	private final String DELETE = "delete";
 
 	@Override
-	public List<MethodListVO> methodListList(MethodListVO methodList) {
+	public List<MethodListVO> methodListList(String uid) {
 		// TODO Auto-generated method stub
-		return null;
+		return sql.selectList(NAMESPACE + LIST, uid);
 	}
 
 	@Override
-	public int methodListInsert(MethodListVO methodList) {
+	public int methodListInsert(MethodListVO methodListVo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sql.insert(NAMESPACE + INSERT, methodListVo);
 	}
 
 	@Override
-	public int methodListUpdate(MethodListVO methodList) {
+	public int methodListUpdate(MethodListVO methodListVo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sql.update(NAMESPACE + UPDATE, methodListVo);
 	}
 
 	@Override
-	public int methodListDelete(String uid, int mbcode) {
+	public int methodListDelete(MethodListVO methodListVo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sql.delete(NAMESPACE + DELETE, methodListVo);
 	}
 }

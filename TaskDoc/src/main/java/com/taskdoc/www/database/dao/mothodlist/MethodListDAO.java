@@ -5,8 +5,8 @@ import java.util.List;
 import com.taskdoc.www.database.dto.MethodListVO;
 
 public interface MethodListDAO {
-	public List<MethodListVO> methodListList(MethodListVO methodList);
-	public int methodListInsert(MethodListVO methodList);
-	public int methodListUpdate(MethodListVO methodList);
-	public int methodListDelete(String uid, int mbcode);
+	public List<MethodListVO> methodListList(String uid);
+	public int methodListInsert(MethodListVO methodListVo);
+	public int methodListUpdate(MethodListVO methodListVo);
+	public int methodListDelete(MethodListVO methodListVo);
 }

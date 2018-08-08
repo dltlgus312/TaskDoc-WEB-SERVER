@@ -50,7 +50,7 @@
 					type : method,
 					url : url,
 					contentType : "application/json; charset=utf-8",
-					data : JSON.stringify(user),
+					data : JSON.stringify(param),
 					success : function(response) {
 						$("#bd").append(JSON.stringify(response));
 					},

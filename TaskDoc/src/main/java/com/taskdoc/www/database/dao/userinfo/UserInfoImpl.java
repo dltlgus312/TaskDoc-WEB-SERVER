@@ -10,36 +10,36 @@ import com.taskdoc.www.database.dto.UserInfoVO;
 public class UserInfoImpl implements UserInfoDAO {
 	
 	@Autowired
-	SqlSession sqlSession;
+	SqlSession sql;
 	
 	private final String NAMESPACE = "userinfo_SQL.";
-	private final String INSERT = "userinfoinsert";
-	private final String VIEW = "userinfoview";
-	private final String UPDATE = "userinfoupdate";
-	private final String DELETE = "userinfodelete";
+	private final String INSERT = "insert";
+	private final String VIEW = "view";
+	private final String UPDATE = "update";
+	private final String DELETE = "delete";
 
 
 	@Override
 	public int insertUserInfo(UserInfoVO userInfo) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(NAMESPACE + INSERT, userInfo);
+		return sql.insert(NAMESPACE + INSERT, userInfo);
 	}
 
 	@Override
 	public UserInfoVO userInfoView(String userId) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(NAMESPACE + VIEW, userId);
+		return sql.selectOne(NAMESPACE + VIEW, userId);
 	}
 
 	@Override
 	public int updateUserInfo(UserInfoVO userInfo) {
 		// TODO Auto-generated method stub
-		return sqlSession.update(NAMESPACE + UPDATE, userInfo);
+		return sql.update(NAMESPACE + UPDATE, userInfo);
 	}
 	
 	@Override
 	public int deleteUserInfo(String userId) {
 		// TODO Auto-generated method stub
-		 return sqlSession.delete(NAMESPACE + DELETE, userId);
+		 return sql.delete(NAMESPACE + DELETE, userId);
 	}
 }
