@@ -1,4 +1,0 @@
-select * from projectjoin;
-delete from project where pcode="3";
-insert into projectjoin values('3','d','OWNER','1');
-insert into project values('3','test','test','201011','201011');
