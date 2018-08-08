@@ -5,34 +5,25 @@
 
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="methodboard_SQL">
-	<select id="methodboardlist" resultType="methodboard">
 
-		SELECT * FROM methodboard ORDER BY mbcode ASC
-
+	<select id="list" resultType="methodboard">
+		SELECT mbcode, mbtitle, mbdate FROM methodboard ORDER BY mbcode ASC
 	</select>
 	
-	<select id="methodboardview" parameterType="Integer" resultType="methodboard">
-
+	<select id="view" parameterType="Integer" resultType="methodboard">
 		SELECT * FROM methodboard WHERE mbcode=#{mbcode}
-
 	</select>
 
-	<insert id="methodboardinsert" parameterType="methodboard" useGeneratedKeys="true" keyProperty="mbcode">
-
+	<insert id="insert" parameterType="methodboard" useGeneratedKeys="true" keyProperty="mbcode">
 		INSERT INTO methodboard VALUES(null, #{mbtitle}, #{mbcontents}, NOW(), #{pcode}, #{uid})
-
 	</insert>
 	
-	<update id="methodboardupdate" parameterType="methodboard">
-		
+	<update id="update" parameterType="methodboard">
 		UPDATE methodboard SET mbtitle=#{mbtitle}, mbcontents=#{mbcontents} WHERE mbcode=#{mbcode}
-		
 	</update>
 	
-	<delete id="methodboarddelete">
-	
+	<delete id="delete" parameterType="Integer">
 		DELETE FROM methodboard WHERE mbcode=#{mbcode}
-	
 	</delete>
 </mapper>
 	
