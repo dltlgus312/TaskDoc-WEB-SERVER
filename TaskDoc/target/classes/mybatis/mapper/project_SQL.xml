@@ -12,16 +12,14 @@
 
 	<insert id="insert" parameterType="project"
 		useGeneratedKeys="true" keyProperty="pcode">
-		INSERT INTO project VALUES(#{pcode},
-		#{ptitle}, #{psubtitle}, #{psdate}, #{pedate})
+		INSERT INTO project VALUES(#{pcode}, #{ptitle}, #{psubtitle}, #{psdate}, #{pedate})
 	</insert>
 
 	<update id="update" parameterType="project">
 
-		UPDATE project SET
-		ptitle=#{ptitle}, psubtitle=#{psubtitle},
-		psdate=#{psdate},
+		UPDATE project SET ptitle=#{ptitle}, psubtitle=#{psubtitle}, psdate=#{psdate},
 		pedate=#{pedate} WHERE pcode=#{pcode}
+		
 	</update>
 	
 	<delete id="delete" parameterType="Integer">
@@ -29,5 +27,3 @@
 	</delete>
 
 </mapper>
-	
-		
