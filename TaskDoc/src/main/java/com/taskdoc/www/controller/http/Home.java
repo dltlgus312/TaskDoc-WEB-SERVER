@@ -17,7 +17,7 @@ public class Home {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String TaskDocMain() {
-		return "/active/home";
+		return "taskdocMain";
 	}
 	
 	
