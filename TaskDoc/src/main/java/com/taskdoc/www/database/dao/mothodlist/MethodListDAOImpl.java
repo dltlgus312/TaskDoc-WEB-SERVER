@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.taskdoc.www.database.dto.MethodListVO;
 
 @Repository
-public class MethodListImpl implements MethodListDAO {
+public class MethodListDAOImpl implements MethodListDAO {
 	
 	@Autowired
 	SqlSession sql;

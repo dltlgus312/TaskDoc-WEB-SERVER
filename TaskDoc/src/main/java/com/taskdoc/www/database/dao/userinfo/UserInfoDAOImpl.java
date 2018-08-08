@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.taskdoc.www.database.dto.UserInfoVO;
 
 @Repository
-public class UserInfoImpl implements UserInfoDAO {
+public class UserInfoDAOImpl implements UserInfoDAO {
 	
 	@Autowired
 	SqlSession sql;

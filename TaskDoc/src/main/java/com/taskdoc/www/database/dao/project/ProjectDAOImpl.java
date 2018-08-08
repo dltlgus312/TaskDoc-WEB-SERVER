@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.taskdoc.www.database.dto.ProjectVO;
 
 @Repository
-public class ProjectImpl implements ProjectDAO {
+public class ProjectDAOImpl implements ProjectDAO {
 	
 	private final String NAMESPACE = "project_SQL.";
 	private final String INSERT = "insert";

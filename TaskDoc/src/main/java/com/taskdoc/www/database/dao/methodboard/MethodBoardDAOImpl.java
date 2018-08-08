@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.taskdoc.www.database.dto.MethodBoardVO;
 
 @Repository
-public class MethodBoardImpl implements MethodBoardDAO {
+public class MethodBoardDAOImpl implements MethodBoardDAO {
 	
 	private final String NAMESPACE="methodboard_SQL.";
 	private final String LIST="list";

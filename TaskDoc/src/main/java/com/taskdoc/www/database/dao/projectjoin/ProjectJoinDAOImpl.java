@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.taskdoc.www.database.dto.ProjectJoinVO;
 
 @Repository
-public class ProjectJoinImpl implements ProjectJoinDAO {
+public class ProjectJoinDAOImpl implements ProjectJoinDAO {
 	
 	@Autowired
 	SqlSession sql;
