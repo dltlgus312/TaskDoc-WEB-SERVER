@@ -7,11 +7,12 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import com.taskdoc.www.database.dao.project.ProjectDAO;
 import com.taskdoc.www.database.dao.projectjoin.ProjectJoinDAO;
 import com.taskdoc.www.database.dao.userinfo.UserInfoDAO;
 import com.taskdoc.www.database.dto.ProjectJoinVO;
+import com.taskdoc.www.database.dto.ProjectVO;
 import com.taskdoc.www.database.dto.UserInfoVO;
 
 @Service("ProjectJoinService")
@@ -22,10 +23,30 @@ public class ProjectJoinServiceImpl implements ProjectJoinService{
 	
 	@Autowired
 	UserInfoDAO userDao;
+	
+	@Autowired
+	ProjectDAO projectDao;
+	
+	@Override
+	public Map<String, Object> projectJoinList(String uid) {
+		// TODO Auto-generated method stub
+		 Map<String, Object> map = new HashMap<>();
+		List<ProjectVO> projectList = new ArrayList<>();
+		
+		List<ProjectJoinVO> projectJoinList = joinDao.projectJoinList(uid);
+		
+		for(ProjectJoinVO vo : projectJoinList) {
+			projectList.add(projectDao.projectView(vo.getPcode()));
+		}
+		
+		map.put("projectList", projectList);
+		map.put("projectJoinList", projectJoinList);
+		
+		return map;
+	}
 
 	@Override
-	@Transactional
-	public Map<String, Object> projectJoinListUser(int pcode) {	// 초대에 응한사람의 리스트를 받아온다.
+	public Map<String, Object> projectJoinListUser(int pcode) {
 		// TODO Auto-generated method stub
 		List<ProjectJoinVO> userJoinListAll = joinDao.projectJoinListUser(pcode);
 		
@@ -40,8 +61,8 @@ public class ProjectJoinServiceImpl implements ProjectJoinService{
 			}
 		}
 		
-		map.put("userList", userList);
-		map.put("joinList", joinList);
+		map.put("userInfoList", userList);
+		map.put("projectJoinList", joinList);
 		
 		return map;
 	}

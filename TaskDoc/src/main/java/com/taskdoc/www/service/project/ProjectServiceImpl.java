@@ -1,10 +1,5 @@
 package com.taskdoc.www.service.project;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,25 +19,6 @@ public class ProjectServiceImpl implements ProjectService{
 	@Autowired
 	ProjectJoinDAO projectJoinDao;
 	
-
-	@Override
-	@Transactional
-	public Map<String, Object> projectList(String uid) {
-		// TODO Auto-generated method stub
-		 Map<String, Object> map = new HashMap<>();
-		List<ProjectVO> projectList = new ArrayList<>();
-		
-		List<ProjectJoinVO> projectJoinList = projectJoinDao.projectJoinList(uid);
-		
-		for(ProjectJoinVO vo : projectJoinList) {
-			projectList.add(projectDao.projectView(vo.getPcode()));
-		}
-		
-		map.put("projectList", projectList);
-		map.put("projectJoinList", projectJoinList);
-		
-		return map;
-	}
 	
 	@Override
 	@Transactional

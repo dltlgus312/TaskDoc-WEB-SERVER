@@ -27,13 +27,11 @@ result = int >> success = 1, fail = -1
 	
 프로젝트 
 	받기	
-		내가 참여중인 모든 프로젝트 리스트 ( 참가에 동의하지 않은 프로젝트 포함 )
-		/project/{uid}
-		result = map  > ( KEY = "projectList" : List<ProjectVO>, "projectJoinList" : List<ProjectJoinVO> )
+		
 		
 	생성	 >  projectjoin 테이블 자동 등록 (Transaction)
 		/project
-		data = ProjectVO, UserInfoVO(uid)
+		data = map  >  ( KEY = "project" : ProjectVO, "userInfo" : UserInfoVO )
 		result = int
 		
 	수정 
@@ -47,10 +45,15 @@ result = int >> success = 1, fail = -1
 		
 프로젝트 조인
 	받기
-		현재 프로젝트에 참가하는데 동의한 (success=1) 회원 리스트
-		/projectjoin/{pcode}
-		result = map  > ( KEY = "userList" : List<UserInfoVO>, "joinList" : List<ProjectJoinVO> )
-	
+		1
+			내가 참여중인 모든 프로젝트 리스트 ( 참가에 동의하지 않은 프로젝트 포함 )
+			/project/{uid}
+			result = map  > ( KEY = "projectList" : List<ProjectVO>, "projectJoinList" : List<ProjectJoinVO> )
+		2
+			현재 프로젝트에 참가하는데 동의한 (success=1) 회원 리스트
+			/projectjoin/{pcode}
+			result = map  > ( KEY = "userInfoList" : List<UserInfoVO>, "projectJoinList" : List<ProjectJoinVO> )
+		
 	생성
 		/projectjoin
 		data = ProjectJoinVO
@@ -132,3 +135,13 @@ result = int >> success = 1, fail = -1
 	삭제
 		/notice/{ncode}
 		result = int
+		
+방법론
+	받기
+		1. 모든 메소드 목록
+			/method
+			result = List<MethodVO>  >  ( mcode, method )
+		
+		2. 메소드에 대한 정보
+			/method/{mcode}
+			result = map  > ( KEY = "method" : MethodVO, "methodItemList" : List<MethodItemVO> )
