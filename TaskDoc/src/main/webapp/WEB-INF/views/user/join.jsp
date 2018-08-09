@@ -101,11 +101,13 @@
 	</div>
 </body>
 <script type="text/javascript">
+	var testHost = 'http://localhost:8080/';
+	var serverHost = '';
 	/*Cancel시 Main으로*/
 	function goMain() {
-		location.href = 'http://localhost:8080/www';
+		location.href = testHost + 'www';
 	}
-	
+
 	$(function() {
 		//아이디 중복검사를할 플래그
 		var jbFlag = true;

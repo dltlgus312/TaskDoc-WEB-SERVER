@@ -139,7 +139,7 @@
 			location.href = 'http://localhost:8080/www/user/join';
 		});
 		$("#LoginButton").click(function() {
-			alert('login');
+			location.href='http://localhost:8080/www/user/login';
 		});
 	});
 	/*/TEST  */
