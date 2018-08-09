@@ -17,26 +17,31 @@ public class Chat {
 		return "main";
 	}
 
+	//session
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create() {
 		return "create";
 	}
-
+	
+	//session
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.GET)
 	public String fileUpload() {
 		return "fileUpload";
 	}
 
+	//session
 	@RequestMapping(value = "/decision", method = RequestMethod.GET)
 	public String decision() {
 		return "decision";
 	}
 
+	//session
 	@RequestMapping(value = "/focus", method = RequestMethod.GET)
 	public String focus() {
 		return "focus";
 	}
 
+	//session
 	@RequestMapping(value = "/documentFeedback", method = RequestMethod.GET)
 	public String documentFeedback() {
 		return "documentFeedback";

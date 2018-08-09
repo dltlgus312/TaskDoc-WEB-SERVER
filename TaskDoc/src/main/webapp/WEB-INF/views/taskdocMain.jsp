@@ -26,67 +26,35 @@
 
 </head>
 <body>
-	<!-- 
-		layer login
-		<div class="layer_login" id="dpopupLogin" style="display: none;" data-loginForm='{ "mail" : "txtLoginEmail2", "password" : "txtLoginPW2", "submit" : "btnLoginSubmit2" , "isPopup" : true }' >
-			<h2>티몬 채용 로그인</h2>
-			<div class="home_login">
-				<fieldset>
-					<legend>로그인</legend>
-					<div class="login_item">
-						<label for="loginMail" class="blind">이메일 입력</label>
-						<input type="text" id="txtLoginEmail2" placeholder="이메일" />
-					</div>
-					<div class="login_item">
-						<label for="loginPw" class="blind">비밀번호 입력</label>
-						<input type="password" id="txtLoginPW2" placeholder="비밀번호" />
-					</div>
-				</fieldset>
-			</div>
-			<div class="login_link">
-				<a href="/join/begin" class="join">회원가입</a>
-				<a href="/personal/search/mail">이메일 찾기</a>
-				<a href="/personal/search/pw">비밀번호 찾기</a>
-			</div>
-			<button type="button" class="btn_lylogin" id="btnLoginSubmit2">이메일로 로그인</button>
-			<span class="tail"></span>
-			
-			<button type="button" class="btn_login" style="display: inline;" data-viewCommand='{ "name" : "btnLogin" , "options" : { "target" : "dpopupLogin" } }' ><i class="blind" >로그인</i></button>
-			layer 화살표
-		</div>
-		//layer login
-		 -->
-	<!-- show menu div -->
 	<div id="perspective" class="perspective effect-airbnb">
-
 		<div class="container">
 			<div class="wrapper">
 				<div class="codrops-top clearfix">
 					<a class="codrops-icon codrops-icon-prev"><span>TaskDoc</span></a>
 					<button id="showMenu" style="font-size: 11px;">Show Menu</button>
-					<span class="right"> <!-- LOGIN BUTTON -->
+
+					<!-- LOGIN BUTTON -->
+					<span class="right">
 						<button id="LoginButton" class="codrops-icon codrops-icon-drop">
 							<span style="font-size: 11px;">LOGIN</span>
-						</button> <!-- /LOGIN BUTTON -->
-
-					</span> <span class="right"> <!-- JOIN BUTTON -->
+						</button> <!-- /LOGIN BUTTON --> <!-- JOIN BUTTON -->
+					</span> <span class="right">
 						<button id="JoinButton" class="codrops-icon codrops-icon-drop">
 							<span style="font-size: 11px;">JOIN</span>
 						</button> <!-- /JOIN BUTTON -->
-
 					</span>
 				</div>
+				
 				<header class="codrops-header">
 					<h1>
-						TaskDoc <span>gggggggggggggggggggggggg</span>
+						TaskDoc <span>Task(작업) + Document(기록)</span>
 					</h1>
 				</header>
 
 
 				<div class="main clearfix">
 					<div class="column">
-						<p>Click on this button to see the content being pushed away
-							in 3D to reveal a navigation or other items.</p>
+						<p>- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
 					</div>
 					<div class="column">
 						<nav class="codrops-demos">
@@ -98,12 +66,10 @@
 					<div class="related">
 						<p>If you enjoyed this demo you might also like:</p>
 						<p>
-							<a href="http://tympanus.net/Tutorials/AnimatedBorderMenus/">Animated
-								Border Menus</a>
+							<a href="">Animated Border Menus</a>
 						</p>
 						<p>
-							<a href="http://tympanus.net/Development/SidebarTransitions/">Transitions
-								for Off-Canvas Navigations</a>
+							<a href="">Transitions for Off-Canvas Navigations</a>
 						</p>
 					</div>
 				</div>
@@ -133,13 +99,16 @@
 </body>
 
 <script type="text/javascript">
+	var testHost = 'http://localhost:8080/';
+	var serverHost = '';
+
 	/*TEST  */
 	$(function() {
 		$("#JoinButton").click(function() {
-			location.href = 'http://localhost:8080/www/user/join';
+			location.href = testHost + 'www/user/join';
 		});
 		$("#LoginButton").click(function() {
-			location.href='http://localhost:8080/www/user/login';
+			location.href = testHost + 'www/user/login';
 		});
 	});
 	/*/TEST  */

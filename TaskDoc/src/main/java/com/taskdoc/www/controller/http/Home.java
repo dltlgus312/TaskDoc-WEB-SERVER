@@ -30,26 +30,37 @@ public class Home {
 	 * 
 	 */
 	
+	//session
 	@RequestMapping(value = "/publicTaskMain", method = RequestMethod.GET)
 	public String publicTaskMain() {
 		return "publicTaskMain";
 	}
+	
+	//session
 	@RequestMapping(value = "/publicTaskCreate", method = RequestMethod.GET)
 	public String publicTaskCreate() {
 		return "publicTaskCreate";
 	}
+	
+	//session
 	@RequestMapping(value = "/publicTaskEdit", method = RequestMethod.GET)
 	public String publicTaskEdit() {
 		return "publicTaskEdit";
 	}
+	
+	//session
 	@RequestMapping(value = "/privateTaskMain", method = RequestMethod.GET)
 	public String privateTaskMain() {
 		return "privateTaskMain";
 	}
+	
+	//session
 	@RequestMapping(value = "/privateTaskCreate", method = RequestMethod.GET)
 	public String privateTaskCreate() {
 		return "privateTaskCreate";
 	}
+	
+	//session
 	@RequestMapping(value = "/privateTaskEdit", method = RequestMethod.GET)
 	public String privateTaskEdit() {
 		return "privateTaskEdit";
@@ -61,10 +72,13 @@ public class Home {
 	 * 
 	 */
 	
+	//session
 	@RequestMapping(value = "/methodBoard", method = RequestMethod.GET)
 	public String methodBoard() {
 		return "methodBoard";
 	}
+	
+	//session
 	@RequestMapping(value = "/methodBoardEdit", method = RequestMethod.GET)
 	public String methodBoardEdit() {
 		return "methodBoardEdit";

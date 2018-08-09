@@ -21,6 +21,7 @@ public class User {
 		return "/user/join";
 	}
 
+	//session
 	@RequestMapping(value = "/infoEdit", method = RequestMethod.GET)
 	public String infoEdit() {
 		return "/user/infoEdit";
