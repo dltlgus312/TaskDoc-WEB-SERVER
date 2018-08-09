@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,22 +17,25 @@
 <link
 	href="${pageContext.request.contextPath }/resources/css/user/login.css"
 	rel="stylesheet">
-
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
 <!-- 부가적인 테마 -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script
 	src="${pageContext.request.contextPath }/resources/css/bootstrap/js/ie-emulation-modes-warning.js"></script>
+
+<!--TaskDocMain css -> For button use  -->
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/resources/css/taskdocMain/normalize.css?ver=42" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/resources/css/taskdocMain/demo.css?ver=42" />
+<!--/TaskDocMain css -> For button use  -->
 </head>
 
 <body>
-
 	<div class="container">
-
 		<form class="form-signin">
 			<h2 class="form-signin-heading">Please sign in</h2>
 			<input type="text" id="inputId" class="form-control" placeholder="ID"
@@ -44,10 +46,11 @@
 					Remember me
 				</label>
 			</div>
-			<button class="btn btn-lg btn-primary btn-block" type="button"
-				id="sign">Sign in</button>
-			<button class="btn btn-lg btn-primary btn-block" type="button"
-				id="goMain">Cancel</button>
+			<div style="display: grid">
+				<button type="button" class="sign" style="font-size: 13px;">Sign
+					in</button>
+				<button type="button" class="goMain" style="font-size:13px;">Cancel</button>
+			</div>
 		</form>
 	</div>
 </body>
@@ -57,28 +60,27 @@
 	$(function() {
 
 		/*Cancel시 Main으로*/
-		$("#goMain").click(function() {
+		$(".goMain").click(function() {
 			location.href = testHost + 'www';
 		});
 		/*/Cancel시 Main으로*/
 
 		/*Login 처리*/
-		$("#sign").click(
-				function() {
-					$.ajax({
-						type : 'GET',
-						url : '/www/userinfo/' + uid,
-						success : function(response) {
-							/* REST 처리*/
-						},
-						error : function(e) {
-							alert("ERROR : " + e.statusText);
-						}
-					});
+		$(".sign").click(function() {
+			$.ajax({
+				type : 'GET',
+				url : '/www/userinfo/' + uid,
+				success : function(response) {
+					/* REST 처리*/
+				},
+				error : function(e) {
+					alert("ERROR : " + e.statusText);
+				}
+			});
 
-				});
+		});
 		/* /Login 처리*/
-		
+
 	});
 </script>
 </html>

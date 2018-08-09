@@ -48,7 +48,7 @@
 							<div style="display: -webkit-box;">
 								<input id="uid" style="width: 80%;" type="text"
 									class="form-control">
-								<button id="showMenu" class="userDuplicate"
+								<button class="userDuplicate"
 									style="font-size: 13px; margin: auto 0; margin-left: 6px;">중복확인</button>
 							</div>
 							<span class="help-block">아이디는 로그인 하는데 사용됩니다.</span>
@@ -79,22 +79,19 @@
 
 						<!-- 휴대폰 번호입력 -->
 						<div class="form-group">
-							<label for="uphone">휴대폰 번호</label> <input id="uphone"
-								style="width: 80%;" type="text" class="form-control"
-								name="userEmail" value=""> <span class="help-block">휴대폰
-								번호(' - '는 빼주세요)를 입력 해주세요.</span>
+							<label>휴대폰 번호</label> <input id="uphone" style="width: 80%;"
+								type="text" class="form-control" name="userEmail" value="">
+							<span class="help-block">휴대폰 번호(' - '는 빼주세요)를 입력 해주세요.</span>
 						</div>
 						<!-- /휴대폰 번호입력 -->
 					</div>
 
 					<div class="modal-footer">
-						<button id="showMenu" class="userJoin"
+						<button class="userJoin"
 							style="font-size: 13px; margin: auto 0; margin-left: 6px;">CREATE
 							NEW ACCOUNT</button>
-						<button type="button" class="btn btn-default btn-icon"
-							onclick="goMain()">
-							<i class="fa fa-times-circle"></i> Cancel
-						</button>
+						<button type="button" style="font-size: 13px;"
+							class="current-demo" onclick="goMain()">Cancel</button>
 					</div>
 				</div>
 			</div>
