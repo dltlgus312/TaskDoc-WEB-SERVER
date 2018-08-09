@@ -15,30 +15,30 @@ public class Project {
 	//session
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main() {
-		return "main";
+		return "/active/project/main";
 	}
 
 	//session
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create() {
-		return "create";
+		return "/active/project/create";
 	}
 
 	//session
 	@RequestMapping(value = "/userInvite", method = RequestMethod.GET)
 	public String userInvite() {
-		return "userInvite";
+		return "/active/project/userInvite";
 	}
 
 	//session
 	@RequestMapping(value = "/infoEdit", method = RequestMethod.GET)
 	public String infoEdit() {
-		return "infoEdit";
+		return "/active/project/infoEdit";
 	}
 
 	//session
 	@RequestMapping(value = "/notice", method = RequestMethod.GET)
 	public String notice() {
-		return "notice";
+		return "/active/project/notice";
 	}
 }

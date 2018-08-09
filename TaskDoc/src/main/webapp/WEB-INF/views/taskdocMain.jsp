@@ -38,11 +38,25 @@
 						<button id="LoginButton" class="codrops-icon codrops-icon-drop">
 							<span style="font-size: 11px;">LOGIN</span>
 						</button> <!-- /LOGIN BUTTON --> <!-- JOIN BUTTON -->
-					</span> <span class="right">
+					</span>
+					 <span class="right">
 						<button id="JoinButton" class="codrops-icon codrops-icon-drop">
 							<span style="font-size: 11px;">JOIN</span>
 						</button> <!-- /JOIN BUTTON -->
 					</span>
+					
+					<!-- TEST -->
+					 <span class="right">
+						<button id="proButton" class="codrops-icon codrops-icon-drop">
+							<span style="font-size: 11px;">PROJECT</span>
+						</button> <!-- /JOIN BUTTON -->
+					</span>
+					 <span class="right">
+						<button id="chatButton" class="codrops-icon codrops-icon-drop">
+							<span style="font-size: 11px;">CHAT</span>
+						</button> <!-- /JOIN BUTTON -->
+					</span>
+					<!-- /TEST -->
 				</div>
 				
 				<header class="codrops-header">
@@ -102,7 +116,6 @@
 	var testHost = 'http://localhost:8080/';
 	var serverHost = '';
 
-	/*TEST  */
 	$(function() {
 		$("#JoinButton").click(function() {
 			location.href = testHost + 'www/user/join';
@@ -111,6 +124,20 @@
 			location.href = testHost + 'www/user/login';
 		});
 	});
-	/*/TEST  */
-</script>
+	
+	/* TEST  */
+	$(function() {
+		$("#proButton").click(function() {
+			location.href = testHost + 'www/project/main';
+		});
+		$("#chatButton").click(function() {
+			location.href = testHost + 'www/chat/main';
+		});
+	});
+	
+	
+	
+	/* /TEST */
+
+	</script>
 </html>

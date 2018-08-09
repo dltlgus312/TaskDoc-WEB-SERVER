@@ -14,31 +14,31 @@ public class Chat {
 
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main() {
-		return "main";
+		return "/active/chat/main";
 	}
 
 	//session
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create() {
-		return "create";
+		return "/active/chat/create";
 	}
 	
 	//session
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.GET)
 	public String fileUpload() {
-		return "fileUpload";
+		return "/active/chat/fileUpload";
 	}
 
 	//session
 	@RequestMapping(value = "/decision", method = RequestMethod.GET)
 	public String decision() {
-		return "decision";
+		return "/active/chat/decision";
 	}
 
 	//session
 	@RequestMapping(value = "/focus", method = RequestMethod.GET)
 	public String focus() {
-		return "focus";
+		return "/active/chat/focus";
 	}
 
 	//session

@@ -15,21 +15,25 @@
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
 <!-- 부가적인 테마 -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
+<!--TaskDocMain css -> For button use  -->
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/resources/css/taskdocMain/normalize.css?ver=42" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/resources/css/taskdocMain/demo.css?ver=42" />
+<!--/TaskDocMain css -> For button use  -->
 
 <link href="${pageContext.request.contextPath }/resources/css/join.css" />
 </head>
 <body>
 	<div>
-		<div class="container" style="width: 600px; margin-top: 30px;">
+		<div class="container" style="width: 600px; margin-top: 20px;">
 			<div class="row">
 				<div class="modal-content">
 
@@ -44,10 +48,8 @@
 							<div style="display: -webkit-box;">
 								<input id="uid" style="width: 80%;" type="text"
 									class="form-control">
-								<button type="button" id="userDuplicate"
-									class="btn btn-default btn-icon" style="margin-left: 6px;">
-									<i class="fa fa-times-circle"></i> 중복확인
-								</button>
+								<button id="showMenu" class="userDuplicate"
+									style="font-size: 13px; margin: auto 0; margin-left: 6px;">중복확인</button>
 							</div>
 							<span class="help-block">아이디는 로그인 하는데 사용됩니다.</span>
 						</div>
@@ -86,10 +88,9 @@
 					</div>
 
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success btn-icon"
-							id="userJoin">
-							<i class="fa fa-check"></i> Create My Account
-						</button>
+						<button id="showMenu" class="userJoin"
+							style="font-size: 13px; margin: auto 0; margin-left: 6px;">CREATE
+							NEW ACCOUNT</button>
 						<button type="button" class="btn btn-default btn-icon"
 							onclick="goMain()">
 							<i class="fa fa-times-circle"></i> Cancel
@@ -100,6 +101,7 @@
 		</div>
 	</div>
 </body>
+
 <script type="text/javascript">
 	var testHost = 'http://localhost:8080/';
 	var serverHost = '';
@@ -110,62 +112,32 @@
 
 	$(function() {
 		//아이디 중복검사를할 플래그
-		var jbFlag = true;
+		var jbFlag = false;
+		var jbId = "";
 
 		/*중복 검사*/
-		$("#userDuplicate").click(
-				function() {
-					var uid = $('#uid').val();
-					if (uid == "") {
-						alert('아이디를 입력해주시길 바랍니다.');
-					} else {
-						$.ajax({
-							type : 'GET',
-							url : '/www/userinfo/' + uid,
-							success : function(response) {
-								if (uid == response.uid) {
-									alert('중복된 아이디입니다.');
-								} else {
-									if (confirm("이 아이디를 선택하시겠습니까?")) {
-										jbFlag = false;
-										$("#uid").attr("readonly", true).attr(
-												"disabled", false);
-										$("#userDuplicate").attr("readonly",
-												false).attr("disabled", true);
-									} else {
-										return;
-									}
-								}
-							},
-							error : function(e) {
-								alert("ERROR : " + e.statusText);
-							}
-						});
-					}
-				});
-		/* /중복 검사 */
-
-		/*회원가입 처리  */
-		$("#userJoin").click(function() {
+		$('.userDuplicate').click(function() {
 			var uid = $('#uid').val();
-			var param = {
-				'uid' : $('#uid').val(),
-				'upasswd' : $('#upasswd').val(),
-				'uname' : $('#uname').val(),
-				'ustate' : $('#ustate').val(),
-				'uphone' : $('#uphone').val(),
-			};
-			if (jbFlag == true) {
-				alert('아이디 중복검사를 해주세요');
+			if (uid == "") {
+				alert('아이디를 입력해주시길 바랍니다.');
 			} else {
 				$.ajax({
-					type : 'POST',
-					url : '/www/userinfo/',
-					contentType : 'application/json',
-					data : JSON.stringify(param),
+					type : 'GET',
+					url : '/www/userinfo/' + uid,
 					success : function(response) {
-						alert('회원가입이 완료되었습니다!');
-						goMain();
+						if (uid == response.uid) {
+							/* DB검색 후 uid와 내가 입력한 uid가 같다면
+							       회원가입 불가.
+							 */
+							jbFlag == true;
+							alert('중복된 아이디입니다.');
+						} else {
+							/* 
+							 */
+							jbId = uid;
+							jbFlag == false;
+							alert('사용가능한 아이디입니다.');
+						}
 					},
 					error : function(e) {
 						alert("ERROR : " + e.statusText);
@@ -173,6 +145,44 @@
 				});
 			}
 		});
+		/* /중복 검사 */
+
+		/*회원가입 처리  */
+		$('.userJoin').click(
+				function() {
+					var uid = $('#uid').val();
+					if ($('#uid').val() == "" || $('#upasswd').val() == ""
+							|| $('#uname').val() == ""
+							|| $('#ustate').val() == ""
+							|| $('#uphone').val() == "") {
+						alert('정보를 모두 입력해주세요');
+					} else {
+						var param = {
+							'uid' : $('#uid').val(),
+							'upasswd' : $('#upasswd').val(),
+							'uname' : $('#uname').val(),
+							'ustate' : $('#ustate').val(),
+							'uphone' : $('#uphone').val(),
+						};
+						if (jbFlag == true || jbId != uid) {
+							alert('아이디 중복검사를 해주세요');
+						} else if (jbFlag == false) {
+							$.ajax({
+								type : 'POST',
+								url : '/www/userinfo/',
+								contentType : 'application/json',
+								data : JSON.stringify(param),
+								success : function(response) {
+									alert('회원가입이 완료되었습니다!');
+									goMain();
+								},
+								error : function(e) {
+									alert("ERROR : " + e.statusText);
+								}
+							});
+						}
+					}
+				});
 		/* /회원가입 처리  */
 	});
 </script>
