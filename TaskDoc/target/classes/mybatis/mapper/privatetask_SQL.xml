@@ -5,34 +5,32 @@
 
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="privatetask_SQL">
-	<select id="privatetasklist" resultType="privatetask">
 
-		SELECT * FROM privatetask WHERE uid=#{uid} ORDER BY ptcode ASC
-
+	<select id="codelist" resultType="privatetask">
+		SELECT * FROM privatetask WHERE tcode=#{tcode} ORDER BY ptrefference ASC, ptsequence ASC;
 	</select>
 	
-	<select id="privatetaskview" resultType="privatetask">
-	
-		SELECT * FROM privatetask WHERE ptcode=#{ptcode}
-	
+	<select id="idlist" resultType="privatetask">
+		SELECT * FROM privatetask WHERE uid=#{uid}ORDER BY ptrefference ASC, ptsequence ASC;
 	</select>
-
-	<insert id="privatetaskinsert" parameterType="privatetask" useGeneratedKeys="true" keyProperty="ptcode">
-
-		INSERT INTO privatetask VALUES(null, #{pttitle}, #{ptcolor}, #{ptsdate}, #{ptedate}, 0, 0, #{ptrefference}, #{tcode}, #{uid})
-
+	
+	<insert id="insert" parameterType="privatetask" useGeneratedKeys="true" keyProperty="ptcode">
+		INSERT INTO privatetask VALUES(null, #{pttitle}, #{ptcolor}, #{ptsdate}, #{ptedate}, 0, 0, <choose>
+			<when test="tcode != 0">
+				#{ptrefference}
+			</when>
+			<otherwise>
+				null
+			</otherwise>
+			</choose>, #{tcode}, #{uid})
 	</insert>
 	
-	<update id="privatetaskupdate" parameterType="privatetask">
-		
+	<update id="update" parameterType="privatetask">
 		UPDATE privatetask SET pttitle=#{pttitle}, ptcolor=#{ptcolor}, ptsdate=#{ptsdate}, ptedate=#{ptedate}, ptpercent=#{ptpercent} WHERE ptcode=#{ptcode}
-		
 	</update>
 	
-	<delete id="privatetaskdelete">
-	
+	<delete id="delete">
 		DELETE FROM privatetask WHERE ptcode=#{ptcode}
-	
 	</delete>
 </mapper>
 	

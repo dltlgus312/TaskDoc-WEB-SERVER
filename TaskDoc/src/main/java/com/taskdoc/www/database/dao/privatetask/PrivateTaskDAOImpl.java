@@ -10,36 +10,46 @@ import com.taskdoc.www.database.dto.PrivateTaskVO;
 
 @Repository
 public class PrivateTaskDAOImpl implements PrivateTaskDAO {
+	
 	@Autowired
-	SqlSession sqlSession;
+	SqlSession sql;
+	
+	private final String NAMESPACE = "privatetask_SQL.";
+	private final String UIDLIST = "idlist";
+	private final String TCODELIST = "codelist";
+	private final String INSERT = "insert";
+	private final String UPDATE = "update";
+	private final String DELETE = "delete";
+
+	@Override
+	public List<PrivateTaskVO> privateTaskList(int tcode) {
+		// TODO Auto-generated method stub
+		return sql.selectList(NAMESPACE + TCODELIST, tcode);
+	}
 
 	@Override
 	public List<PrivateTaskVO> privateTaskList(String uid) {
 		// TODO Auto-generated method stub
-		return null;
+		return sql.selectList(NAMESPACE + UIDLIST, uid);
 	}
 
 	@Override
-	public PrivateTaskVO privateTaskView(int ptcode) {
+	public int privateTaskInsert(PrivateTaskVO privateTaskVo) {
 		// TODO Auto-generated method stub
-		return null;
+		sql.insert(NAMESPACE + INSERT, privateTaskVo);
+		return privateTaskVo.getPtcode();
 	}
 
 	@Override
-	public int privateTaskInsert(PrivateTaskVO privateTask) {
+	public int privateTaskupdate(PrivateTaskVO privateTaskVo) {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int privateTaskupdate(PrivateTaskVO privateTask) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sql.update(NAMESPACE + UPDATE, privateTaskVo);
 	}
 
 	@Override
 	public int privateTaskDelete(int ptcode) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sql.delete(NAMESPACE + DELETE, ptcode);
 	}
+	
 }

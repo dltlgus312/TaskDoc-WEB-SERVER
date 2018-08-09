@@ -5,34 +5,25 @@
 
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="document_SQL">
-	<select id="documentlist" resultType="document">
-		
+
+	<select id="tasklist" resultType="document">
+		SELECT * FROM document WHERE tcode=#{tcode} ORDER BY dmdate ASC
+	</select>
+
+	<select id="roomlist" resultType="document">
 		SELECT * FROM document WHERE crcode=#{crcode} ORDER BY dsisequence ASC
-
 	</select>
 
-	<select id="documentview" resultType="document">
-
-		SELECT * FROM document WHERE dsicode=#{dsicode}
-
-	</select>
-
-	<insert id="documentinsert" parameterType="document"
+	<insert id="insert" parameterType="document"
 		useGeneratedKeys="true" keyProperty="dmcode">
-
 		INSERT INTO document VALUES(null, #{dmtitle}, #{dmcontents}, #{dmdate}, #{dmposition}, #{crcode}, #{tcode}, #{uid})
-
 	</insert>
 
-	<update id="documentupdate" parameterType="document">
-	
+	<update id="update" parameterType="document">
 		UPDATE document SET dmtitle=#{dmtitle}, dmcontents=#{dmcontents}, dmposition=#{dmposition}, tcode=#{tcode} WHERE dmcode=#{dmcode}
-
 	</update>
 
-	<delete id="documentdelete">
-
+	<delete id="delete">
 		DELETE FROM document WHERE dmcode=#{dmcode}
-
 	</delete>
 </mapper>

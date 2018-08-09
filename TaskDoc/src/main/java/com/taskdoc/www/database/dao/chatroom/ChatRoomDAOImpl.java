@@ -1,9 +1,6 @@
 package com.taskdoc.www.database.dao.chatroom;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,52 +11,42 @@ import com.taskdoc.www.database.dto.ChatRoomVO;
 @Repository
 public class ChatRoomDAOImpl implements ChatRoomDAO {
 	@Autowired
-	SqlSession sqlSession;
+	SqlSession sql;
 
 	private final String NAMESPACE = "chatroom_SQL.";
-	private final String CHATROOMLIST = "chatroomlist";
-	private final String CHATROOMVIEW = "chatroomview";
-	private final String CHATROOMINSERT = "chatroominsert";
-	private final String CHATROOMUPDATE = "chatroomupdate";
-	private final String CHATROOMDELETE = "chatroomdelete";
+	private final String LIST = "list";
+	private final String VIEW = "view";
+	private final String INSERT = "insert";
+	private final String UPDATE = "update";
+	private final String DELETE = "delete";
 	
 	@Override
-	public List<ChatRoomVO> chatRoomList(List<Integer> crcodeList, int pcode) {
+	public List<ChatRoomVO> list(int tcode) {
 		// TODO Auto-generated method stub
-		List<ChatRoomVO> chatRoomList = new ArrayList<>();
-		
-		for(Integer i : crcodeList) {
-			Map<String, Integer> map = new HashMap<>();
-			map.put("crcode", i);
-			map.put("pcode", pcode);
-			
-			chatRoomList.add(sqlSession.selectOne(NAMESPACE + CHATROOMLIST, map));
-		}
-		
-		return chatRoomList;
-	}
-
-	@Override
-	public ChatRoomVO chatRoomView(int crcode) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne(NAMESPACE + CHATROOMVIEW, crcode);
-	}
-
-	@Override
-	public int chatRoomInsert(ChatRoomVO chatRoom) {
-		// TODO Auto-generated method stub
-		return sqlSession.insert(NAMESPACE + CHATROOMINSERT, chatRoom);
-	}
-
-	@Override
-	public int chatRoomUpdate(ChatRoomVO chatRoom) {
-		// TODO Auto-generated method stub
-		return sqlSession.update(NAMESPACE + CHATROOMUPDATE, chatRoom);
+		return sql.selectList(NAMESPACE + LIST, tcode);
 	}
 	
+	@Override
+	public ChatRoomVO view(int crcode) {
+		// TODO Auto-generated method stub
+		return sql.selectOne(NAMESPACE + VIEW, crcode);
+	}
+	
+	@Override
+	public int chatRoomInsert(ChatRoomVO chatRoomVo) {
+		// TODO Auto-generated method stub
+		sql.insert(NAMESPACE + INSERT, chatRoomVo);
+		return chatRoomVo.getCrcode();
+	}
+	@Override
+	public int chatRoomUpdate(ChatRoomVO chatRoomVo) {
+		// TODO Auto-generated method stub
+		return sql.update(NAMESPACE + UPDATE, chatRoomVo);
+	}
 	@Override
 	public int chatRoomDelete(int crcode) {
 		// TODO Auto-generated method stub
-		return sqlSession.delete(NAMESPACE + CHATROOMDELETE, crcode);
+		return sql.delete(NAMESPACE + DELETE, crcode);
 	}
+	
 }

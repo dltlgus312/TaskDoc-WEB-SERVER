@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.taskdoc.www.database.dto.MethodBoardVO;
 import com.taskdoc.www.service.methodboard.MethodBoardService;
 
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
-
 @RestController
 @RequestMapping("/methodboard")
 public class MethodBoardRest {

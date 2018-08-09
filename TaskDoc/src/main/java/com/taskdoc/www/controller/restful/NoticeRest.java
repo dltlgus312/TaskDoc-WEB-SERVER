@@ -1,7 +1,6 @@
 package com.taskdoc.www.controller.restful;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.taskdoc.www.database.dto.NoticeVO;
-import com.taskdoc.www.database.dto.ProjectVO;
-import com.taskdoc.www.database.dto.UserInfoVO;
 import com.taskdoc.www.service.notice.NoticeService;
-import com.taskdoc.www.system.JsonMapper;
 
 @RestController
 @RequestMapping("/notice")
@@ -24,7 +20,7 @@ public class NoticeRest {
 	NoticeService service;
 	
 	// 프로젝트별 공지사항 리스트 ( ncode, ntitle, ndate )
-	@RequestMapping(value = "/{pcode}", method = RequestMethod.GET)
+	@RequestMapping(value = "/project/{pcode}", method = RequestMethod.GET)
 	public List<NoticeVO> list(@PathVariable int pcode) {
 		return service.noticeList(pcode);
 	}

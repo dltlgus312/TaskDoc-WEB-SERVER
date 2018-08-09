@@ -10,44 +10,39 @@ import com.taskdoc.www.database.dto.MemoVO;
 
 @Repository
 public class MemoDAOImpl implements MemoDAO {
+	
 	@Autowired
-	SqlSession sqlSession;
+	SqlSession sql;
 	
 	private final String NAMESPACE = "memo_SQL.";
-	private final String MEMOLIST = "memolist";
-	private final String MEMOVIEW = "memoview";
-	private final String MEMOINSERT = "memoinsert";
-	private final String MEMOUPDATE = "memoupdate";
-	private final String MEMODELETE = "memodelete";
+	private final String LIST = "list";
+	private final String INSERT = "insert";
+	private final String UPDATE = "update";
+	private final String DELETE = "delete";
 	
 	@Override
 	public List<MemoVO> memoList(int ptcode) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAMESPACE + MEMOLIST, ptcode);
+		return sql.selectList(NAMESPACE + LIST, ptcode);
 	}
 
 	@Override
-	public MemoVO memoView(int mcode) {
+	public int memoInsert(MemoVO memoVo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(NAMESPACE + MEMOVIEW, mcode);
+		sql.insert(NAMESPACE + INSERT, memoVo);
+		return memoVo.getMcode();
 	}
 
 	@Override
-	public int memoInsert(MemoVO memo) {
+	public int memoUpdate(MemoVO memoVo) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(NAMESPACE + MEMOINSERT, memo);
-	}
-
-	@Override
-	public int memoUpdate(MemoVO memo) {
-		// TODO Auto-generated method stub
-		return sqlSession.update(NAMESPACE + MEMOUPDATE, memo);
+		return sql.update(NAMESPACE + UPDATE, memoVo);
 	}
 
 	@Override
 	public int memoDelete(int mcode) {
 		// TODO Auto-generated method stub
-		return sqlSession.delete(NAMESPACE + MEMODELETE, mcode);
+		return sql.delete(NAMESPACE + DELETE, mcode);
 	}
 
 }

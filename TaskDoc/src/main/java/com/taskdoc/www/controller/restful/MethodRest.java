@@ -19,7 +19,7 @@ public class MethodRest {
 	@Autowired
 	MethodService service;
 	
-	@RequestMapping(value = "", method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public List<MethodVO> list(){
 		return service.methodList();
 	}

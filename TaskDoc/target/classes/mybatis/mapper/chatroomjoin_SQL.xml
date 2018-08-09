@@ -5,22 +5,21 @@
 
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="chatroomjoin_SQL">
-	<select id="chatroomjoinlist" resultType="Integer">
-	
-		SELECT crcode FROM chatroomjoin WHERE uid=#{uid}
 
+	<select id="roomlist" resultType="Integer" parameterType="chatroomjoin">
+		SELECT crcode FROM chatroomjoin WHERE uid=#{uid} AND pcode=#{pcode}
 	</select>
 	
-	<insert id="chatroomjoininsert">
-
-		INSERT INTO chatroomjoin VALUES(#{crcode}, #{uid})
-
+	<select id="userlist" resultType="String" parameterType="chatroomjoin">
+		SELECT uid FROM chatroomjoin WHERE crcode=#{crcode} AND pcode=#{pcode}
+	</select>
+	
+	<insert id="insert" parameterType="chatroomjoin">
+		INSERT INTO chatroomjoin VALUES(#{pcode}, #{crcode}, #{uid})
 	</insert>
 	
-	<delete id="chatroomjoindelete">
-	
-		DELETE FROM chatroomjoin WHERE crcode=#{crcode} AND uid=#{uid}
-	
+	<delete id="delete" parameterType="chatroomjoin">
+		DELETE FROM chatroomjoin WHERE crcode=#{crcode} AND uid=#{uid} AND pcode=#{pcode}
 	</delete>
 </mapper>
 	

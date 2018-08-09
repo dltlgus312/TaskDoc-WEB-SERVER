@@ -10,8 +10,8 @@ import com.taskdoc.www.database.dto.ProjectVO;
 public class ProjectDAOImpl implements ProjectDAO {
 	
 	private final String NAMESPACE = "project_SQL.";
-	private final String INSERT = "insert";
 	private final String VIEW = "view";
+	private final String INSERT = "insert";
 	private final String UPDATE = "update";
 	private final String DELETE = "delete";
 	
@@ -25,15 +25,16 @@ public class ProjectDAOImpl implements ProjectDAO {
 	}
 
 	@Override
-	public int projectInsert(ProjectVO project) {
+	public int projectInsert(ProjectVO projectVo) {
 		// TODO Auto-generated method stub
-		return sql.insert(NAMESPACE + INSERT, project);
+		sql.insert(NAMESPACE + INSERT, projectVo);
+		return projectVo.getPcode();
 	}
 
 	@Override
-	public int projectUpdate(ProjectVO project) {
+	public int projectUpdate(ProjectVO projectVo) {
 		// TODO Auto-generated method stub
-		return sql.update(NAMESPACE + UPDATE, project);
+		return sql.update(NAMESPACE + UPDATE, projectVo);
 	}
 
 	@Override

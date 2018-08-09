@@ -37,9 +37,19 @@ insert into method values(null, 'm2', 'ttttttt');
 insert into method values(null, 'm3', 'ttttttt');
 insert into method values(null, 'm4', 'ttttttt');
 
+방법론 아이템
 insert into methoditem values("i1", 1, 1);
 insert into methoditem values("i2", 2, 1);
 insert into methoditem values("i3", 3, 1);
 insert into methoditem values("i4", 4, 1);
 insert into methoditem values("i5", 5, 1);
+
+
+공유 업무
+insert into publictask values(null, 'tite', '0xff0000', 20101111, 20101111, 100, 0, -1, 1);
+insert into publictask values(null, 'tite', '0xff0000', 20101111, 20101111, 100, 0, -1, 1);
+insert into publictask values(null, 'tite', '0xff0000', 20101111, 20101111, 100, 0, -1, 1);
+insert into publictask values(null, 'tite', '0xff0000', 20101111, 20101111, 100, 0, -1, 1);
+insert into publictask values(null, 'tite', '0xff0000', 20101111, 20101111, 100, 0, -1, 1);
+insert into publictask values(null, 'tite', '0xff0000', 20101111, 20101111, 100, 0, 6, 1);
 
