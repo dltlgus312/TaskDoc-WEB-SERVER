@@ -6,29 +6,16 @@
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="voter_SQL">
 
-	<select id="voterlist" resultType="voter">
-		
+	<select id="list" resultType="voter">
 		SELECT * FROM voter WHERE dsicode=#{dsicode}
-
 	</select>
 
-	<insert id="voterinsert" parameterType="voter"
-		useGeneratedKeys="true" keyProperty="dsicode">
-
+	<insert id="insert" parameterType="voter">
 		INSERT INTO voter VALUES(#{dsicode}, #{uid})
-
 	</insert>
 
-	<update id="voterupdate" parameterType="hashmap">
-	
-		UPDATE voter SET dsicode=#{changeCode} WHERE dsicode=#{voter.dsicode} AND uid=#{voter.uid}
-
-	</update>
-
 	<delete id="voterdelete" parameterType="voter">
-
 		DELETE FROM voter WHERE dsicode=#{dsicode} AND uid=#{uid}
-
 	</delete>
 	
 </mapper>

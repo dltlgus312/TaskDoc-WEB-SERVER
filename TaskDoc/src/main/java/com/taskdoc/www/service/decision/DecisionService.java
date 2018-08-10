@@ -1,5 +1,13 @@
 package com.taskdoc.www.service.decision;
 
-public interface DecisionService {
+import java.util.List;
 
+import com.taskdoc.www.database.dto.DecisionVO;
+
+public interface DecisionService {
+	public List<DecisionVO> taskList(int tcode);
+	public List<DecisionVO> roomList(int crcode);
+	public int decisionInsert(DecisionVO decisionVo);
+	public int decisionUpdate(DecisionVO decisionVo);
+	public int decisionDelete(int dscode);
 }

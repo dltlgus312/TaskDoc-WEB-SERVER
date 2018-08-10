@@ -13,21 +13,39 @@ public class UserInfoServiceImpl implements UserInfoService{
 	UserInfoDAO dao;
 
 	@Override
-	public int insertUserInfo(UserInfoVO userInfo) {
-		// TODO Auto-generated method stub
-		return dao.insertUserInfo(userInfo);
-	}
-
-	@Override
 	public UserInfoVO userInfoView(String userId) {
 		// TODO Auto-generated method stub
 		return dao.userInfoView(userId);
 	}
+	
+	@Override
+	public int loginUser(UserInfoVO userInfoVo) {
+		// TODO Auto-generated method stub
+		
+		UserInfoVO storageUserInfo = dao.userInfoView(userInfoVo.getUid());
+		
+		if(storageUserInfo == null) {
+			// ID is Null
+			return -1;
+		}
+		else if(storageUserInfo.getUpasswd() != userInfoVo.getUpasswd()) {
+			// PW check Fail
+			return -2;
+		}
+		
+		return 1;
+	}
+	
+	@Override
+	public int insertUserInfo(UserInfoVO userInfoVo) {
+		// TODO Auto-generated method stub
+		return dao.insertUserInfo(userInfoVo);
+	}
 
 	@Override
-	public int updateUserInfo(UserInfoVO userInfo) {
+	public int updateUserInfo(UserInfoVO userInfoVo) {
 		// TODO Auto-generated method stub
-		return dao.updateUserInfo(userInfo);
+		return dao.updateUserInfo(userInfoVo);
 	}
 
 	@Override
@@ -35,4 +53,5 @@ public class UserInfoServiceImpl implements UserInfoService{
 		// TODO Auto-generated method stub
 		return dao.deleteUserInfo(userId);
 	}
+
 }

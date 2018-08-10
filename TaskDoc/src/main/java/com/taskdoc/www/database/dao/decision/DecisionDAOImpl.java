@@ -11,43 +11,53 @@ import com.taskdoc.www.database.dto.DecisionVO;
 @Repository
 public class DecisionDAOImpl implements DecisionDAO {
 	@Autowired
-	SqlSession sqlSession;
+	SqlSession sql;
 	
 	private final String NAMESPACE = "decision_SQL.";
-	private final String DECISIONLIST = "decisionlist";
-	private final String DECISIONVIEW = "decisionview";
-	private final String DECISIONINSERT = "decisioninsert";
-	private final String DECISIONUPDATE = "decisionupdate";
-	private final String DECISIONDELETE = "decisiondelete";
+	private final String TASKLIST = "taskist";
+	private final String ROOMLIST = "roomist";
+	private final String VIEW = "view";
+	private final String INSERT = "decisioninsert";
+	private final String UPDATE = "update";
+	private final String DELETE = "delete";
+
+	@Override
+	public List<DecisionVO> taskList(int tcode) {
+		// TODO Auto-generated method stub
+		return sql.selectList(NAMESPACE + TASKLIST, tcode);
+	}
+
+	@Override
+	public List<DecisionVO> roomList(int crcode) {
+		// TODO Auto-generated method stub
+		return sql.selectList(NAMESPACE + ROOMLIST, crcode);
+	}
 	
 	@Override
-	public List<DecisionVO> decisionList(int crcode) {
+	public DecisionVO view(int dscode) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAMESPACE + DECISIONLIST, crcode);
+		return sql.selectOne(NAMESPACE + VIEW, dscode);
+	}
+	
+	@Override
+	public int decisionInsert(DecisionVO decisionVo) {
+		// TODO Auto-generated method stub
+		sql.insert(NAMESPACE + INSERT, decisionVo);
+		return decisionVo.getDscode();
 	}
 
 	@Override
-	public DecisionVO decisionView(int dscode) {
+	public int decisionUpdate(DecisionVO decisionVo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(NAMESPACE + DECISIONVIEW, dscode);
-	}
-
-	@Override
-	public int decisionInsert(DecisionVO decision) {
-		// TODO Auto-generated method stub
-		return sqlSession.insert(NAMESPACE + DECISIONINSERT, decision);
-	}
-
-	@Override
-	public int decisionUpdate(DecisionVO decision) {
-		// TODO Auto-generated method stub
-		return sqlSession.update(NAMESPACE + DECISIONUPDATE, decision);
+		return sql.update(NAMESPACE + UPDATE, decisionVo);
 	}
 
 	@Override
 	public int decisionDelete(int dscode) {
 		// TODO Auto-generated method stub
-		return sqlSession.delete(NAMESPACE + DECISIONDELETE, dscode);
+		return sql.delete(NAMESPACE + DELETE, dscode);
 	}
+
+
 
 }

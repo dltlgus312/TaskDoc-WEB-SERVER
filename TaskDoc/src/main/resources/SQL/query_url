@@ -11,8 +11,15 @@ result = int >> success = 1, fail = -1
 
 유저
 	받기
-		/userinfo/{uid}
-		result = UserInfoVO
+		1. 유저의 정보
+			/userinfo/{uid}
+			result = UserInfoVO
+			
+		2. 유저 로그인
+			/userinfo/login
+			data = UserInfoVO
+			result = int ( success = 1, ID NULL = -1, PW CHECK FAIL = -2 )
+		
 	생성
 		/userinfo
 		data = UserInfoVO
@@ -216,27 +223,97 @@ result = int >> success = 1, fail = -1
 		result = int
 
 채팅방 참여
-		받기
-			1. 프로젝트내에서 내가 참여하고 있는 채팅방 리스트 ( focus 제외 )
-				/chatroomjoin/room
-				data = ChatRoomJoinVO  >  (pcode, uid)
-				result = List<ChatRoomVO>
-			
-			2. 채팅방에 참여 중인 유저 리스트
-				/chatroomjoin/user
-				data = ChatRoomJoinVO	>  (pcode, crcode)
-				result = List<UserInfoVO>
+	받기
+		1. 프로젝트내에서 내가 참여하고 있는 채팅방 리스트 ( focus 제외 )
+			/chatroomjoin/room
+			data = ChatRoomJoinVO  >  (pcode, uid)
+			result = List<ChatRoomVO>
 		
-		생성
-			/chatroomjoin
-			data = ChatRoomJoinVO
-			result = int
-			
-		삭제
-			/chatroomjoin
-			data = ChatRoomJoinVO
-			result = int
+		2. 채팅방에 참여 중인 유저 리스트
+			/chatroomjoin/user
+			data = ChatRoomJoinVO	>  (pcode, crcode)
+			result = List<UserInfoVO>
+	
+	생성
+		/chatroomjoin
+		data = ChatRoomJoinVO
+		result = int
 		
+	삭제
+		/chatroomjoin
+		data = ChatRoomJoinVO
+		result = int
+		
+채팅 내용
+	받기
+		/chatcontents/{crcode}
+		result = List<ChatContentsVO>
+		
+	생성
+		/chatcontents
+		data = ChatContentsVO
+		result = int
+			
+의사결정
+	받기
+		1. 업무별 의사결정 리스트
+			/decision/{tcode}
+			result = List<DecisionVO>
+		
+		2. 채팅방별 의사결정 리스트
+			/decision/{crcode}
+			result = List<DecisionVO>
+	
+	생성
+		/decision
+		data = List<DecisionVO>
+		result = List<DecisionVO>  ( Generate Key )
+		
+	수정
+		/decision
+		data = DecisionVO
+		result = int
+		
+	삭제
+		/decision/{dscode}
+		result = int
+		
+의사결정 아이템
+	받기
+		/decisionitem/{dscode}
+		reustl = List<DecisionItemVO>
+	
+	생성
+		/decisionitem
+		data = DecisionItemVO
+		result = int  ( Generate Key )
+		
+	수정
+		/decisionitem
+		data = DecisionItemVO
+		result = int
+		
+	삭제
+		/decisionitem/{dsicode}
+		result = int
+		
+결정자
+	받기
+		/voter/{dsicode}
+		result = List<VoterVO>
+		
+	수정
+		/voter
+		data = map  >  ( KEY = "oldVo" : VoterVO, "newVo" : VoterVO )
+		
+	생성
+		/voter
+		data = VoterVO
+		
+	삭제
+		/voter
+		data = VoterVO
+	
 방법론
 	받기
 		1. 모든 메소드 목록
