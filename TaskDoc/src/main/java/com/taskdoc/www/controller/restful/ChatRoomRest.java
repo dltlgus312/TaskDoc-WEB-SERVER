@@ -24,10 +24,16 @@ public class ChatRoomRest {
 	ChatRoomService service;
 	
 	
-	@RequestMapping(value = "/{tcode}", method = RequestMethod.GET)
-	public List<ChatRoomVO> list(@PathVariable int tcode) {
+	@RequestMapping(value = "/task/{tcode}", method = RequestMethod.GET)
+	public List<ChatRoomVO> taskList(@PathVariable int tcode) {
 		// TODO Auto-generated method stub
-		return service.list(tcode);
+		return service.taskList(tcode);
+	}
+
+	@RequestMapping(value = "/room/{crcode}", method = RequestMethod.GET)
+	public List<ChatRoomVO> roomList(@PathVariable int crcode) {
+		// TODO Auto-generated method stub
+		return service.roomList(crcode);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)

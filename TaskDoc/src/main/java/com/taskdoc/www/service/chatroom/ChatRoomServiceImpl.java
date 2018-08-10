@@ -15,48 +15,47 @@ import com.taskdoc.www.database.dto.ProjectVO;
 import com.taskdoc.www.database.dto.UserInfoVO;
 
 @Service("ChatRoomService")
-public class ChatRoomServiceImpl implements ChatRoomService{
-	
+public class ChatRoomServiceImpl implements ChatRoomService {
+
 	@Autowired
 	ChatRoomDAO roomDao;
 
 	@Autowired
 	ChatRoomJoinDAO joinDao;
-	
+
 	@Override
-	@Transactional
-	public List<ChatRoomVO> list(int tcode) {
+	public List<ChatRoomVO> taskList(int tcode) {
+		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 		List<ChatRoomVO> focusList = new ArrayList<>();
-		List<ChatRoomVO> roomList = roomDao.list(tcode);
-		
-		for(ChatRoomVO vo : roomList) {
-			if(vo.getCrmode() == 3) {
+		List<ChatRoomVO> roomList = roomDao.taskList(tcode);
+
+		for (ChatRoomVO vo : roomList) {
+			if (vo.getCrmode() == 3) {
 				focusList.add(vo);
 			}
 		}
 		return focusList;
 	}
-	
+
 	@Override
-	public ChatRoomVO view(int crcode) {
+	public List<ChatRoomVO> roomList(int crcode) {
 		// TODO Auto-generated method stub
-		return roomDao.view(crcode);
+		return roomDao.roomList(crcode);
 	}
 
 	@Override
 	@Transactional
-	public int chatRoomInsert(ChatRoomVO chatRoomVo, UserInfoVO userInfoVo, ProjectVO projectVo) throws Exception{
+	public int chatRoomInsert(ChatRoomVO chatRoomVo, UserInfoVO userInfoVo, ProjectVO projectVo) throws Exception {
 		// TODO Auto-generated method stub
 		roomDao.chatRoomInsert(chatRoomVo);
-		
+
 		ChatRoomJoinVO chatRoomJoinVo = new ChatRoomJoinVO();
-		
+
 		chatRoomJoinVo.setPcode(projectVo.getPcode());
 		chatRoomJoinVo.setCrcode(chatRoomVo.getCrcode());
 		chatRoomJoinVo.setUid(userInfoVo.getUid());
-		
-		
+
 		return joinDao.chatRoomJoinInsert(chatRoomJoinVo);
 	}
 

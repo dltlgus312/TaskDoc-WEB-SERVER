@@ -6,8 +6,12 @@
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="chatroom_SQL">
 	
-	<select id="list" resultType="chatroom" parameterType="Integer">
+	<select id="tasklist" resultType="chatroom" parameterType="Integer">
 		SELECT * FROM chatroom WHERE tcode=#{tcode} ORDER BY crcode ASC
+	</select>
+
+	<select id="roomlist" resultType="chatroom" parameterType="Integer">
+		SELECT * FROM chatroom WHERE crcoderef=#{crcode} ORDER BY crcode ASC
 	</select>
 	
 	<select id="view" resultType="chatroom">
@@ -15,10 +19,19 @@
 	</select>
 	
 	<insert id="insert" parameterType="chatroom" useGeneratedKeys="true" keyProperty="crcode">
-		INSERT INTO chatroom VALUES(null, NOW(), #{crmode}, #{crclose},
+		INSERT INTO chatroom VALUES(null, NOW(), #{crmode}, #{fctitle}, #{crclose},
 		<choose>
 			<when test="tcode != 0">
-				#{tcode}
+				#{tcode},
+			</when>
+			<otherwise>
+				null,
+			</otherwise>
+		</choose>
+		
+		<choose>
+			<when test="tcode != 0">
+				#{crcoderef}
 			</when>
 			<otherwise>
 				null
@@ -27,7 +40,7 @@
 	</insert>
 	
 	<update id="update">
-		UPDATE chatroom SET close=#{close}, tcode=#{tcode} WHERE crcode=#{crcode}
+		UPDATE chatroom SET fctitle=#{fctitle}, close=#{close}, tcode=#{tcode} WHERE crcode=#{crcode}
 	</update>
 	
 	<delete id="delete">

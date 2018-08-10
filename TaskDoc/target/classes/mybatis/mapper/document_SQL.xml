@@ -11,7 +11,7 @@
 	</select>
 
 	<select id="roomlist" resultType="document">
-		SELECT * FROM document WHERE crcode=#{crcode} ORDER BY dsisequence ASC
+		SELECT * FROM document WHERE crcode=#{crcode} ORDER BY dmdate ASC
 	</select>
 
 	<insert id="insert" parameterType="document"

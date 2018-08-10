@@ -14,10 +14,10 @@ public class DecisionDAOImpl implements DecisionDAO {
 	SqlSession sql;
 	
 	private final String NAMESPACE = "decision_SQL.";
-	private final String TASKLIST = "taskist";
-	private final String ROOMLIST = "roomist";
+	private final String TASKLIST = "tasklist";
+	private final String ROOMLIST = "roomlist";
 	private final String VIEW = "view";
-	private final String INSERT = "decisioninsert";
+	private final String INSERT = "insert";
 	private final String UPDATE = "update";
 	private final String DELETE = "delete";
 

@@ -33,19 +33,19 @@ public class DecisionRest {
 	
 
 	@RequestMapping(value="", method = RequestMethod.POST)
-	public int decisionInsert(@RequestBody DecisionVO decision) {
+	public int insert(@RequestBody DecisionVO decisionVo) {
 		// TODO Auto-generated method stub
-		return service.decisionInsert(decision);
+		return service.decisionInsert(decisionVo);
 	}
 
 	@RequestMapping(value="", method = RequestMethod.PUT)
-	public int decisionUpdate(@RequestBody DecisionVO decision) {
+	public int update(@RequestBody DecisionVO decision) {
 		// TODO Auto-generated method stub
 		return service.decisionUpdate(decision);
 	}
 
 	@RequestMapping(value="/{dscode}", method = RequestMethod.DELETE)
-	public int decisionDelete(@PathVariable int dscode) {
+	public int delete(@PathVariable int dscode) {
 		// TODO Auto-generated method stub
 		return service.decisionDelete(dscode);
 	}

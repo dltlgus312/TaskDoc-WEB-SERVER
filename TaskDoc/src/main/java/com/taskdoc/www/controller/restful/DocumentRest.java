@@ -26,7 +26,7 @@ public class DocumentRest {
 	
 	@RequestMapping(value="/room/{crcode}", method = RequestMethod.GET)
 	public List<DocumentVO> roomList(@PathVariable int crcode){
-		return service.taskList(crcode);
+		return service.roomList(crcode);
 	}
 	
 	@RequestMapping(value="", method = RequestMethod.POST)

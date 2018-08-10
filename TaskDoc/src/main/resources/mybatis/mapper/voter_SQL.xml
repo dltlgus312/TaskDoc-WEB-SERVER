@@ -14,7 +14,7 @@
 		INSERT INTO voter VALUES(#{dsicode}, #{uid})
 	</insert>
 
-	<delete id="voterdelete" parameterType="voter">
+	<delete id="delete" parameterType="voter">
 		DELETE FROM voter WHERE dsicode=#{dsicode} AND uid=#{uid}
 	</delete>
 	

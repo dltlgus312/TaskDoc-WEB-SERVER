@@ -9,6 +9,8 @@ public class ChatRoomVO {
 	private int crmode;
 	private int crclose;
 	private int tcode;
+	private int crcoderef;
+	private String fctitle;
 	
 	public int getCrcode() {
 		return crcode;
@@ -39,6 +41,18 @@ public class ChatRoomVO {
 	}
 	public void setTcode(int tcode) {
 		this.tcode = tcode;
+	}
+	public int getCrcoderef() {
+		return crcoderef;
+	}
+	public void setCrcoderef(int crcoderef) {
+		this.crcoderef = crcoderef;
+	}
+	public String getFctitle() {
+		return fctitle;
+	}
+	public void setFctitle(String fctitle) {
+		this.fctitle = fctitle;
 	}
 	
 }

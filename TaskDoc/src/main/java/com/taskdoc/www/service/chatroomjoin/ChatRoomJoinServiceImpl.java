@@ -29,7 +29,7 @@ public class ChatRoomJoinServiceImpl implements ChatRoomJoinService{
 
 		for(int i : roomCodeList) {
 			
-			ChatRoomVO chatRoom = chatDao.view(i);
+			ChatRoomVO chatRoom = chatDao.chatRoomView(i);
 
 			if(chatRoom.getCrmode() != 3) {
 				roomList.add(chatRoom);

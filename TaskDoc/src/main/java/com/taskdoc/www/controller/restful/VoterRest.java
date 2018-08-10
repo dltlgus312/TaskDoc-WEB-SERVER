@@ -47,11 +47,5 @@ public class VoterRest {
 			return -1;
 		}
 	}
-
-	@RequestMapping(value="/{dsicode}", method = RequestMethod.DELETE)
-	public int delete(@PathVariable VoterVO voterVo) {
-		// TODO Auto-generated method stub
-		return service.voterDelete(voterVo);
-	}
 	
 }
