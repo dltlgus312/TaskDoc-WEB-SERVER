@@ -14,19 +14,29 @@
 		SELECT * FROM privatetask WHERE uid=#{uid}ORDER BY ptrefference ASC, ptsequence ASC;
 	</select>
 	
+	<select id="selfRefMax" resultType="Integer">
+	 	SELECT MAX(ptsequence) FROM privatetask WHERE tcode=#{tcode} AND ptcode=ptrefference;
+	</select>
+	
+	<select id="sameRefMax" resultType="Integer">
+	 	SELECT MAX(ptsequence) FROM privatetask WHERE ptrefference=#{ptrefference} AND NOT ptcode=ptrefference;
+	</select>
+	
 	<insert id="insert" parameterType="privatetask" useGeneratedKeys="true" keyProperty="ptcode">
-		INSERT INTO privatetask VALUES(null, #{pttitle}, #{ptcolor}, #{ptsdate}, #{ptedate}, 0, 0, <choose>
-			<when test="tcode != 0">
+		INSERT INTO privatetask VALUES(null, #{pttitle}, #{ptcolor}, #{ptsdate}, #{ptedate}, 0, 0, 
+		<choose>
+			<when test="ptrefference != 0">
 				#{ptrefference}
 			</when>
 			<otherwise>
 				null
 			</otherwise>
-			</choose>, #{tcode}, #{uid})
+		</choose>, #{tcode}, #{uid})
 	</insert>
 	
 	<update id="update" parameterType="privatetask">
-		UPDATE privatetask SET pttitle=#{pttitle}, ptcolor=#{ptcolor}, ptsdate=#{ptsdate}, ptedate=#{ptedate}, ptpercent=#{ptpercent} WHERE ptcode=#{ptcode}
+		UPDATE privatetask SET pttitle=#{pttitle}, ptcolor=#{ptcolor}, ptsdate=#{ptsdate}, ptedate=#{ptedate}, ptpercent=#{ptpercent}, 
+				ptsequence=#{ptsequence}, ptrefference=#{ptrefference} WHERE ptcode=#{ptcode}
 	</update>
 	
 	<delete id="delete">

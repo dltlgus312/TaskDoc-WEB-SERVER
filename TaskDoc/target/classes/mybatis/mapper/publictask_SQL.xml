@@ -5,6 +5,7 @@
 
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="publictask_SQL">
+	
 	<select id="list" resultType="publictask">
 		SELECT * FROM publictask WHERE pcode=#{pcode} ORDER BY trefference ASC, tsequence ASC;
 	</select>
@@ -14,12 +15,12 @@
 	</select>
 	
 	<select id="sameRefMax" resultType="Integer">
-	 	SELECT MAX(tsequence) FROM publictask WHERE trefference=#{trefference} AND NOT tcode=trefference;
+	 	SELECT MAX(tsequence) FROM publictask WHERE  trefference=#{trefference} AND NOT tcode=trefference;
 	</select>
 	
 	<insert id="insert" parameterType="publictask" useGeneratedKeys="true" keyProperty="tcode">
 		INSERT INTO publictask VALUES(null, #{ttitle}, #{tcolor}, #{tsdate}, #{tedate}, 0, 0, <choose>
-			<when test="tcode != 0">
+			<when test="trefference != 0">
 				#{trefference}
 			</when>
 			<otherwise>

@@ -20,6 +20,8 @@ public class PrivateTaskDAOImpl implements PrivateTaskDAO {
 	private final String INSERT = "insert";
 	private final String UPDATE = "update";
 	private final String DELETE = "delete";
+	private final String SELFREFMAX = "selfRefMax";
+	private final String SAMEREFMAX = "sameRefMax";
 
 	@Override
 	public List<PrivateTaskVO> privateTaskList(int tcode) {
@@ -41,7 +43,7 @@ public class PrivateTaskDAOImpl implements PrivateTaskDAO {
 	}
 
 	@Override
-	public int privateTaskupdate(PrivateTaskVO privateTaskVo) {
+	public int privateTaskUpdate(PrivateTaskVO privateTaskVo) {
 		// TODO Auto-generated method stub
 		return sql.update(NAMESPACE + UPDATE, privateTaskVo);
 	}
@@ -50,6 +52,18 @@ public class PrivateTaskDAOImpl implements PrivateTaskDAO {
 	public int privateTaskDelete(int ptcode) {
 		// TODO Auto-generated method stub
 		return sql.delete(NAMESPACE + DELETE, ptcode);
+	}
+
+	@Override
+	public Integer selfRefMax(int tcode) {
+		// TODO Auto-generated method stub
+		return sql.selectOne(NAMESPACE + SELFREFMAX, tcode);
+	}
+
+	@Override
+	public Integer sameRefMax(int ptrefference) {
+		// TODO Auto-generated method stub
+		return sql.selectOne(NAMESPACE + SAMEREFMAX, ptrefference);
 	}
 	
 }
