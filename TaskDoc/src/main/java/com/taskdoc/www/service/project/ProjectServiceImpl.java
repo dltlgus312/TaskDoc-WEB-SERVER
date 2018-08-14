@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.taskdoc.www.database.dao.project.ProjectDAO;
 import com.taskdoc.www.database.dao.projectjoin.ProjectJoinDAO;
-import com.taskdoc.www.database.dao.publictask.PublicTaskDAO;
 import com.taskdoc.www.database.dto.ChatRoomVO;
 import com.taskdoc.www.database.dto.ProjectJoinVO;
 import com.taskdoc.www.database.dto.ProjectVO;
