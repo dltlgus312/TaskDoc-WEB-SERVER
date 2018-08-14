@@ -4,10 +4,19 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("notice")
 public class NoticeVO {
+	private int ncode;
 	private int pcode;
 	private String ntitle;
 	private String ncontents;
 	private String ndate;
+	
+	
+	public int getNcode() {
+		return ncode;
+	}
+	public void setNcode(int ncode) {
+		this.ncode = ncode;
+	}
 	public int getPcode() {
 		return pcode;
 	}

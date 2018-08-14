@@ -12,15 +12,11 @@
 	</select>
 	
 	<select id="listUser" resultType="projectjoin">
-
 		SELECT * FROM projectjoin WHERE pcode=#{pcode}
-
 	</select>
 	
 	<insert id="insert" parameterType="projectjoin">
-
 		INSERT INTO projectjoin VALUES(#{pcode}, #{uid}, #{ppermission}, #{pinvite})
-
 	</insert>
 	
 	<update id="update" parameterType="projectjoin">

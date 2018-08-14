@@ -18,23 +18,22 @@ public class UserInfoDAOImpl implements UserInfoDAO {
 	private final String UPDATE = "update";
 	private final String DELETE = "delete";
 
-
-	@Override
-	public int insertUserInfo(UserInfoVO userInfo) {
-		// TODO Auto-generated method stub
-		return sql.insert(NAMESPACE + INSERT, userInfo);
-	}
-
 	@Override
 	public UserInfoVO userInfoView(String userId) {
 		// TODO Auto-generated method stub
 		return sql.selectOne(NAMESPACE + VIEW, userId);
 	}
+	
+	@Override
+	public int insertUserInfo(UserInfoVO userInfoVo) {
+		// TODO Auto-generated method stub
+		return sql.insert(NAMESPACE + INSERT, userInfoVo);
+	}
 
 	@Override
-	public int updateUserInfo(UserInfoVO userInfo) {
+	public int updateUserInfo(UserInfoVO userInfoVo) {
 		// TODO Auto-generated method stub
-		return sql.update(NAMESPACE + UPDATE, userInfo);
+		return sql.update(NAMESPACE + UPDATE, userInfoVo);
 	}
 	
 	@Override

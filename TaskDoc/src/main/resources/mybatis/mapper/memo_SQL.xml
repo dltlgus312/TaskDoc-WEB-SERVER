@@ -6,34 +6,20 @@
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="memo_SQL">
 
-	<select id="memolist" resultType="memo">
-		
+	<select id="list" resultType="memo">
 		SELECT * FROM memo WHERE ptcode=#{ptcode} ORDER BY mdate ASC
-
 	</select>
 	
-	<select id="memoview" resultType="memo">
-	
-		SELECT * FROM memo WHERE mcode=#{mcode};
-	
-	</select>
-
-	<insert id="memoinsert" parameterType="memo" useGeneratedKeys="true" keyProperty="mcode">
-
+	<insert id="insert" parameterType="memo" useGeneratedKeys="true" keyProperty="mcode">
 		INSERT INTO memo VALUES(NULL, #{ptcode}, #{mcontents}, NOW())
-
 	</insert>
 
-	<update id="memoupdate" parameterType="memo">
-	
+	<update id="update" parameterType="memo">
 		UPDATE memo SET mcontents=#{mcontents} WHERE mcode=#{mcode}
-
 	</update>
 
-	<delete id="memodelete">
-
+	<delete id="delete">
 		DELETE FROM memo WHERE mcode=#{mcode}
-
 	</delete>
 	
 </mapper>

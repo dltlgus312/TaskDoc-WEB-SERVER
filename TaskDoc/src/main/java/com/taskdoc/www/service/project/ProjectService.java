@@ -4,8 +4,7 @@ import com.taskdoc.www.database.dto.ProjectVO;
 import com.taskdoc.www.database.dto.UserInfoVO;
 
 public interface ProjectService {
-	public ProjectVO projectView(int pcode);
-	public int projectInsert(ProjectVO project, UserInfoVO userInfoVo) throws Exception;
-	public int projectUpdate(ProjectVO project);
+	public int projectInsert(ProjectVO projectVo, UserInfoVO userInfoVo) throws Exception;
+	public int projectUpdate(ProjectVO projectVo);
 	public int projectDelete(int pcode);
 }

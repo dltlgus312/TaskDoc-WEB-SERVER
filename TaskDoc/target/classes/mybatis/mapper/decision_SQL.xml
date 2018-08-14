@@ -5,35 +5,29 @@
 
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="decision_SQL">
-	<select id="decisionlist" resultType="decision">
-		
-		SELECT * FROM decision WHERE crcode=#{crcode} ORDER BY dscode ASC
 
+	<select id="tasklist" resultType="decision" parameterType="Integer">
+		SELECT * FROM decision WHERE tcode=#{tcode} ORDER BY dsdate ASC
 	</select>
 
-	<select id="decisionview" resultType="decision">
-
-		SELECT * FROM decision WHERE dscode=#{dscode}
-
+	<select id="roomlist" resultType="decision" parameterType="Integer">
+		SELECT * FROM decision WHERE crcode=#{crcode} ORDER BY dsdate ASC
+	</select>
+	
+	<select id="view" resultType="decision" parameterType="Integer">
+		SELECT * FROM decision WHERE dsicode=#{dsicode}
 	</select>
 
-	<insert id="decisioninsert" parameterType="decision"
-		useGeneratedKeys="true" keyProperty="dscode">
-
+	<insert id="insert" parameterType="decision" useGeneratedKeys="true" keyProperty="dscode">
 		INSERT INTO decision VALUES(null, #{dstitle}, NOW(), 0, #{crcode}, #{tcode})
-
 	</insert>
 
-	<update id="decisionupdate" parameterType="decision">
-		<!-- dmposition 이 결국 t 코드이므로 추후에 변경을 고려한다. -->
-		UPDATE decision SET dstitle=#{dstitle}, dsclose=#{dsclose} WHERE dscode=#{dscode}
-
+	<update id="update" parameterType="decision">
+		UPDATE decision SET tdoct=#{tcode}, dstitle=#{dstitle}, dsclose=#{dsclose} WHERE dscode=#{dscode}
 	</update>
-
-	<delete id="decisiondelete">
-
+	
+	<delete id="delete">
 		DELETE FROM decision WHERE dscode=#{dscode}
-
 	</delete>
 </mapper>
 	

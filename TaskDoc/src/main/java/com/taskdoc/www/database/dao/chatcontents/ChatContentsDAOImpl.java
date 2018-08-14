@@ -11,21 +11,21 @@ import com.taskdoc.www.database.dto.ChatContentsVO;
 @Repository
 public class ChatContentsDAOImpl implements ChatContentsDAO {
 	@Autowired
-	SqlSession sqlSession;
+	SqlSession sql;
 	
 	private final String NAMESPACE = "chatcontents_SQL.";
-	private final String CHATCONTENTSLIST = "chatcontentslist";
-	private final String CHATCONTENTSINSERT = "chatcontentsinsert";
+	private final String LIST = "list";
+	private final String INSERT = "insert";
 
 	@Override
 	public List<ChatContentsVO> chatContentsList(int crcode) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAMESPACE + CHATCONTENTSLIST, crcode);
+		return sql.selectList(NAMESPACE + LIST, crcode);
 	}
 
 	@Override
-	public int chatContentsInsert(ChatContentsVO chatContents) {
+	public int chatContentsInsert(ChatContentsVO chatContentsVo) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(NAMESPACE + CHATCONTENTSINSERT, chatContents);
+		return sql.insert(NAMESPACE + INSERT, chatContentsVo);
 	}
 }

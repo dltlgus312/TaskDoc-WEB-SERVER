@@ -11,42 +11,39 @@ import com.taskdoc.www.database.dto.DecisionItemVO;
 @Repository
 public class DecisionItemDAOImpl implements DecisionItemDAO {
 	@Autowired
-	SqlSession sqlSession;
+	SqlSession sql;
 	
 	private final String NAMESPACE = "decisionitem_SQL.";
-	private final String DECISIONITEMLIST = "decisionitemlist";
-	private final String DECISIONITEMVIEW = "decisionitemview";
-	private final String DECISIONITEMINSERT = "decisioniteminsert";
-	private final String DECISIONITEMUPDATE = "decisionitemupdate";
-	private final String DECISIONITEMDELETE = "decisionitemdelete";
+	private final String LIST = "list";
+	private final String INSERT = "insert";
+	private final String UPDATE = "update";
+	private final String DELETE = "delete";
 	
 	@Override
 	public List<DecisionItemVO> decisionItemList(int dscode) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAMESPACE + DECISIONITEMLIST, dscode);
+		return sql.selectList(NAMESPACE + LIST, dscode);
+	}
+
+
+	@Override
+	public List<DecisionItemVO> decisionItemInsert(List<DecisionItemVO> itemList) {
+		// TODO Auto-generated method stub
+		for(DecisionItemVO vo : itemList) {
+			sql.insert(NAMESPACE + INSERT, vo);
+		}
+		return itemList;
 	}
 
 	@Override
-	public DecisionItemVO decisionItemView(int dsicode) {
+	public int decisionItemUpdate(DecisionItemVO decisionItemVo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(NAMESPACE + DECISIONITEMVIEW, dsicode);
-	}
-
-	@Override
-	public int decisionItemInsert(DecisionItemVO decisionItem) {
-		// TODO Auto-generated method stub
-		return sqlSession.insert(NAMESPACE + DECISIONITEMINSERT, decisionItem);
-	}
-
-	@Override
-	public int decisionItemUpdate(DecisionItemVO decisionItem) {
-		// TODO Auto-generated method stub
-		return sqlSession.update(NAMESPACE + DECISIONITEMUPDATE, decisionItem);
+		return sql.update(NAMESPACE + UPDATE, decisionItemVo);
 	}
 
 	@Override
 	public int decisionItemDelete(int dsicode) {
 		// TODO Auto-generated method stub
-		return sqlSession.delete(NAMESPACE + DECISIONITEMDELETE, dsicode);
+		return sql.delete(NAMESPACE + DELETE, dsicode);
 	}
 }
