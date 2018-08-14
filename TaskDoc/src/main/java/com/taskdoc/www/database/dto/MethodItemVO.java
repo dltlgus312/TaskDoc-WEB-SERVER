@@ -4,17 +4,15 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("methoditem")
 public class MethodItemVO {
-	private int micode;
 	private String mititle;
 	private int misequence;
-	private String method;
+	private int mcode;
 	
-	
-	public int getMicode() {
-		return micode;
+	public int getMcode() {
+		return mcode;
 	}
-	public void setMicode(int micode) {
-		this.micode = micode;
+	public void setMcode(int micode) {
+		this.mcode = micode;
 	}
 	public String getMititle() {
 		return mititle;
@@ -27,11 +25,5 @@ public class MethodItemVO {
 	}
 	public void setMisequence(int misequence) {
 		this.misequence = misequence;
-	}
-	public String getMethod() {
-		return method;
-	}
-	public void setMethod(String method) {
-		this.method = method;
 	}
 }

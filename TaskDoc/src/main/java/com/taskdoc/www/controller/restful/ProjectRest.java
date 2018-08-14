@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taskdoc.www.database.dto.ProjectVO;
 import com.taskdoc.www.database.dto.UserInfoVO;
 import com.taskdoc.www.service.project.ProjectService;
@@ -20,19 +22,14 @@ public class ProjectRest {
 
 	@Autowired
 	ProjectService service;
-
-	@RequestMapping(value = "/{pcode}", method = RequestMethod.GET)
-	public ProjectVO view(@PathVariable int pcode) {
-		return service.projectView(pcode);
-	}
 	
 	// 프로젝트 생성시 생성자는 'OWNER' 로써 프로젝트에 참가 ( Service Transaction 처리 ) > 성공 1, 실패 -1
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public int insert(@RequestBody Map<String, Object> data) {
 		
 		ProjectVO projectVo = JsonMapper.mapToJson(data.get("project"), ProjectVO.class);
-		UserInfoVO userinfoVo = JsonMapper.mapToJson(data.get("userinfo"), UserInfoVO.class);
-
+		UserInfoVO userinfoVo = JsonMapper.mapToJson(data.get("userInfo"), UserInfoVO.class);
+		
 		try {
 			return service.projectInsert(projectVo, userinfoVo);
 		} catch (Exception e) {

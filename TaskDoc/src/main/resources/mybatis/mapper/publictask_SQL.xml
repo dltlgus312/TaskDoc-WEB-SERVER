@@ -5,34 +5,37 @@
 
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="publictask_SQL">
-	<select id="publictasklist" resultType="publictask">
-
-		SELECT * FROM publictask WHERE pcode=#{pcode} ORDER BY tcode ASC
-
+	
+	<select id="list" resultType="publictask">
+		SELECT * FROM publictask WHERE pcode=#{pcode} ORDER BY trefference ASC, tsequence ASC;
 	</select>
 	
-	<select id="publictaskview" resultType="publictask">
-	
-		SELECT * FROM publictask WHERE tcode=#{tcode}
-	
+	<select id="selfRefMax" resultType="Integer">
+	 	SELECT MAX(tsequence) FROM publictask WHERE pcode=#{pcode} AND tcode=trefference;
 	</select>
-
-	<insert id="publictaskinsert" parameterType="publictask" useGeneratedKeys="true" keyProperty="tcode">
-
-		INSERT INTO publictask VALUES(null, #{ttitle}, #{tcolor}, #{tsdate}, #{tedate}, 0, 0, #{trefference}, #{pcode})
-
+	
+	<select id="sameRefMax" resultType="Integer">
+	 	SELECT MAX(tsequence) FROM publictask WHERE  trefference=#{trefference} AND NOT tcode=trefference;
+	</select>
+	
+	<insert id="insert" parameterType="publictask" useGeneratedKeys="true" keyProperty="tcode">
+		INSERT INTO publictask VALUES(null, #{ttitle}, #{tcolor}, #{tsdate}, #{tedate}, 0, 0, <choose>
+			<when test="trefference != 0">
+				#{trefference}
+			</when>
+			<otherwise>
+				null
+			</otherwise>
+		</choose>, #{pcode})
 	</insert>
 	
-	<update id="publictaskupdate" parameterType="publictask">
-		
-		UPDATE publictast SET ttitle=#{ttitle}, tcolor=#{tcolor}, tsdate=#{tsdate}, tedate=#{tedate}, tpercent=#{tpercent} WHERE tcode=#{tcode}
-		
+	<update id="update" parameterType="publictask">
+		UPDATE publictask SET ttitle=#{ttitle}, tcolor=#{tcolor}, tsdate=#{tsdate}, tedate=#{tedate}, tpercent=#{tpercent} 
+		, trefference=#{trefference}, tsequence=#{tsequence} WHERE tcode=#{tcode}
 	</update>
 	
-	<delete id="publictaskdelete">
-	
+	<delete id="delete">
 		DELETE FROM publictask WHERE tcode=#{tcode}
-	
 	</delete>
 </mapper>
 	

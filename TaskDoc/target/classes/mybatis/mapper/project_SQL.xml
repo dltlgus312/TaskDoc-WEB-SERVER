@@ -16,10 +16,8 @@
 	</insert>
 
 	<update id="update" parameterType="project">
-
 		UPDATE project SET ptitle=#{ptitle}, psubtitle=#{psubtitle}, psdate=#{psdate},
 		pedate=#{pedate} WHERE pcode=#{pcode}
-		
 	</update>
 	
 	<delete id="delete" parameterType="Integer">

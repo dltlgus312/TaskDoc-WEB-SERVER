@@ -1,6 +1,6 @@
 package com.taskdoc.www.controller.restful;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,16 +18,18 @@ public class ProjectJoinRest {
 
 	@Autowired
 	ProjectJoinService service;
-
-	// 한 회원이 참가하는 프로젝트의 리스트
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public List<ProjectJoinVO> listProject(@PathVariable String id) {
-		return service.projectJoinList(id);
-	}
 	
+	// 내가 참가하는 모든 프로젝트를 검색
+	// 프로젝트 결과 값 = map ( KEY = "projectList", "projectJoinList" )
+	@RequestMapping(value = "/{uid}", method = RequestMethod.GET)
+	public Map<String, Object> listProject(@PathVariable String uid) {
+		return service.projectJoinList(uid);
+	}
+
 	// 프로젝트에 참가하는 모든 회원을 검색
+	// 프로젝트 결과 값 = map ( KEY = "userList", "joinList" )
 	@RequestMapping(value = "/collaboration/{pcode}", method = RequestMethod.GET)
-	public List<ProjectJoinVO> listUser(@PathVariable int pcode) {
+	public Map<String, Object> listUser(@PathVariable int pcode) {
 		return service.projectJoinListUser(pcode);
 	}
 	

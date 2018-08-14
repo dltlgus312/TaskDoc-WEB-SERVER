@@ -7,14 +7,10 @@
 <mapper namespace="chatcontents_SQL">
 
 	<select id="list" resultType="chatcontents">
-
-		SELECT * FROM
-		chatcontents WHERE crcode=#{crcode}
-
+		SELECT * FROM chatcontents WHERE crcode=#{crcode}
 	</select>
 
 	<insert id="insert">
-
 		INSERT INTO chatcontents VALUES(#{crcode}, #{uid}, #{ccontents},
 		NOW(),
 		<choose>

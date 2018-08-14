@@ -5,9 +5,10 @@ import java.util.List;
 import com.taskdoc.www.database.dto.ChatRoomVO;
 
 public interface ChatRoomDAO {
-	public List<ChatRoomVO> chatRoomList(List<Integer> crcodeList, int pcode);
+	public List<ChatRoomVO> taskList(int tcode);
+	public List<ChatRoomVO> roomList(int crcode);
 	public ChatRoomVO chatRoomView(int crcode);
-	public int chatRoomInsert(ChatRoomVO chatRoom);
-	public int chatRoomUpdate(ChatRoomVO chatRoom);
+	public int chatRoomInsert(ChatRoomVO chatRoomVo);
+	public int chatRoomUpdate(ChatRoomVO chatRoomVo);
 	public int chatRoomDelete(int crcode);
 }

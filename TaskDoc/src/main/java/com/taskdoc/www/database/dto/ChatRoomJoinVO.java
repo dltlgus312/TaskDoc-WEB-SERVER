@@ -6,7 +6,14 @@ import org.apache.ibatis.type.Alias;
 public class ChatRoomJoinVO {
 	private int crcode;
 	private String uid;
+	private int pcode;
 	
+	public int getPcode() {
+		return pcode;
+	}
+	public void setPcode(int pcode) {
+		this.pcode = pcode;
+	}
 	public int getCrcode() {
 		return crcode;
 	}

@@ -5,22 +5,25 @@
 
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="notice_SQL">
-	<select id="noticelist" resultType="notice">
 
-		SELECT * FROM notice WHERE pcode=#{pcode} ORDER BY ndate ASC
-
+	<select id="list" resultType="notice">
+		SELECT ncode, ntitle, ndate FROM notice WHERE pcode=#{pcode} ORDER BY ndate ASC
+	</select>
+	
+	<select id="view" resultType="notice" parameterType="Integer">
+		SELECT * FROM notice WHERE ncode=#{ncode}
 	</select>
 
-	<insert id="noticeinsert" parameterType="notice">
-
-		INSERT INTO notice VALUES(#{pcode}, #{ntitle}, #{ncontents}, NOW())
-
+	<insert id="insert" parameterType="notice" useGeneratedKeys="true" keyProperty="ncode">
+		INSERT INTO notice VALUES(null, #{pcode}, #{ntitle}, #{ncontents}, NOW())
 	</insert>
 	
-	<update id="noticeupdate" parameterType="notice">
-		
-		UPDATE notice SET ntitle=#{ntitle}, ncontents=#{ncontents} WHERE pcode=#{pcode}
-		
+	<update id="update" parameterType="notice">
+		UPDATE notice SET ntitle=#{ntitle}, ncontents=#{ncontents} WHERE ncode=#{ncode}
 	</update>
+	
+	<delete id="delete">
+		DELETE FROM notice WHERE ncode=#{ncode}
+	</delete>
 </mapper>
 	

@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.taskdoc.www.database.dto.MethodBoardVO;
 import com.taskdoc.www.service.methodboard.MethodBoardService;
 
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
-
 @RestController
 @RequestMapping("/methodboard")
 public class MethodBoardRest {
@@ -21,7 +19,7 @@ public class MethodBoardRest {
 	@Autowired
 	MethodBoardService service;
 	
-	// 게시판 목록 전체를 받아온다. > 반환 결과 = mbcode, mbtitle, mbdate 
+	// 게시판 목록 전체를 받아온다. ( mbcode, mbtitle, mbdate )
 	@RequestMapping(value="/all", method=RequestMethod.GET)
 	public List<MethodBoardVO> list() {
 		// TODO Auto-generated method stub

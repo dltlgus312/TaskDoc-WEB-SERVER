@@ -6,34 +6,20 @@
 <!-- 다른 mapper과 중복 되지 않도록 네임스페이스 기재 -->
 <mapper namespace="feedback_SQL">
 
-	<select id="feedbacklist" resultType="feedback">
-		
+	<select id="list" resultType="feedback" parameterType="Integer">
 		SELECT * FROM feedback WHERE dmcode=#{dmcode} ORDER BY fbdate ASC
-
-	</select>
-	
-	<select id="feedbackview" resultType="feedback">
-	
-		SELECT * FROM feedback WHERE fbcode=#{fbcode};
-	
 	</select>
 
-	<insert id="feedbackinsert" parameterType="feedback" useGeneratedKeys="true" keyProperty="fbcode">
-
+	<insert id="insert" parameterType="feedback" useGeneratedKeys="true" keyProperty="fbcode">
 		INSERT INTO feedback VALUES(NULL, #{dmcode}, #{uid}, #{fbcontents}, NOW())
-
 	</insert>
 
-	<update id="feedbackupdate" parameterType="feedback">
-	
+	<update id="update" parameterType="feedback">
 		UPDATE feedback SET fbcontents=#{fbcontents} WHERE fbcode=#{fbcode}
-
 	</update>
 
-	<delete id="feedbackdelete">
-
+	<delete id="delete" parameterType="Integer">
 		DELETE FROM feedback WHERE fbcode=#{fbcode}
-
 	</delete>
 	
 </mapper>

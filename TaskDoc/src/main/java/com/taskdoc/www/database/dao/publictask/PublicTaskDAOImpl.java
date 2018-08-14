@@ -11,43 +11,51 @@ import com.taskdoc.www.database.dto.PublicTaskVO;
 @Repository
 public class PublicTaskDAOImpl implements PublicTaskDAO {
 	@Autowired
-	SqlSession sqlSession;
+	SqlSession sql;
 	
 	private final String NAMESPACE = "publictask_SQL.";
-	private final String PUBLICTASKLIST = "publictasklist";
-	private final String PUBLICTASKINSERT = "publictaskinsert";
-	private final String PUBLICTASKVIEW = "publictaskview";
-	private final String PUBLICTASKUPDATE = "publictaskupdate";
-	private final String PUBLICTASKDELETE = "publictaskdelete";
+	private final String LIST = "list";
+	private final String INSERT = "insert";
+	private final String UPDATE = "update";
+	private final String DELETE = "delete";
+	private final String SELFREFMAX = "selfRefMax";
+	private final String SAMEREFMAX = "sameRefMax";
 
 	@Override
 	public List<PublicTaskVO> publicTaskList(int pcode) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAMESPACE + PUBLICTASKLIST, pcode);
+		return sql.selectList(NAMESPACE + LIST, pcode);
 	}
 	
 	@Override
-	public PublicTaskVO publicTaskView(int tcode) {
+	public int publicTaskInsert(PublicTaskVO publicTaskVo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(NAMESPACE + PUBLICTASKVIEW, tcode);
+		sql.insert(NAMESPACE + INSERT, publicTaskVo);
+		return publicTaskVo.getTcode();
 	}
 
 	@Override
-	public int publicTaskInsert(PublicTaskVO publicTask) {
+	public int publicTaskUpdate(PublicTaskVO publicTaskVo) {
 		// TODO Auto-generated method stub
-		sqlSession.insert(NAMESPACE + PUBLICTASKINSERT, publicTask);
-		return publicTask.getTcode();
-	}
-
-	@Override
-	public int publicTaskUpdate(PublicTaskVO publicTask) {
-		// TODO Auto-generated method stub
-		return sqlSession.update(NAMESPACE + PUBLICTASKUPDATE, publicTask);
+		return sql.update(NAMESPACE + UPDATE, publicTaskVo);
 	}
 
 	@Override
 	public int publicTaskDelete(int tcode) {
 		// TODO Auto-generated method stub
-		return sqlSession.delete(NAMESPACE + PUBLICTASKDELETE, tcode);
+		return sql.delete(NAMESPACE + DELETE, tcode);
 	}
+
+	@Override
+	public Integer selfRefMax(int pcode) {
+		// TODO Auto-generated method stub
+		return sql.selectOne(NAMESPACE + SELFREFMAX, pcode);
+	}
+
+	@Override
+	public Integer sameRefMax(int trefference) {
+		// TODO Auto-generated method stub
+		return sql.selectOne(NAMESPACE + SAMEREFMAX, trefference);
+	}
+	
 }
