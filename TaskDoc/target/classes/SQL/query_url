@@ -1,4 +1,4 @@
-
+﻿
 result = int >> success = 1, fail = -1
 
 받기 = GET
@@ -14,24 +14,30 @@ result = int >> success = 1, fail = -1
 		1. 유저의 정보
 			/userinfo/{uid}
 			result = UserInfoVO
+			method = GET
 			
 		2. 유저 로그인
 			/userinfo/login
 			data = UserInfoVO
 			result = int ( success = 1, ID NULL = -1, PW CHECK FAIL = -2 )
-		
+			method = POST
+
 	생성
 		/userinfo
 		data = UserInfoVO
 		result = int
+		method = POST
+	
 	수정
 		/userinfo
 		data = UserInfoVO
 		result = int
+		method = PUT
+	
 	삭제
 		/userinfo/{uid}
 		result = int
-	
+		method = DELETE
 프로젝트 
 	생성	
 		/project
