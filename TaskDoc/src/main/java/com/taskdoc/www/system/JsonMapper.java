@@ -12,7 +12,7 @@ public class JsonMapper {
 		
 		String jsonString = null;
 		T result = null;
-			
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		
 		try {
