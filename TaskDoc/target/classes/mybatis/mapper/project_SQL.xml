@@ -12,12 +12,24 @@
 
 	<insert id="insert" parameterType="project"
 		useGeneratedKeys="true" keyProperty="pcode">
+<<<<<<< HEAD
+		INSERT INTO project VALUES(#{pcode},
+		#{ptitle}, #{psubtitle}, #{psdate}, #{pedate})
+=======
 		INSERT INTO project VALUES(#{pcode}, #{ptitle}, #{psubtitle}, #{psdate}, #{pedate})
+>>>>>>> branch 'SQL_DTO' of https://github.com/dltlgus312/TaskDoc.git
 	</insert>
 
 	<update id="update" parameterType="project">
 		UPDATE project SET ptitle=#{ptitle}, psubtitle=#{psubtitle}, psdate=#{psdate},
 		pedate=#{pedate} WHERE pcode=#{pcode}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+		
+>>>>>>> branch 'SQL_DTO' of https://github.com/dltlgus312/TaskDoc.git
+>>>>>>> branch 'SQL_DTO' of https://github.com/dltlgus312/TaskDoc.git
 	</update>
 	
 	<delete id="delete" parameterType="Integer">
