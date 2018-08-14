@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taskdoc.www.database.dao.chatroom.ChatRoomDAO;
 import com.taskdoc.www.database.dao.chatroomjoin.ChatRoomJoinDAO;
 import com.taskdoc.www.database.dto.ChatRoomJoinVO;
@@ -48,6 +49,8 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	@Transactional
 	public int chatRoomInsert(ChatRoomVO chatRoomVo, UserInfoVO userInfoVo, ProjectVO projectVo) throws Exception {
 		// TODO Auto-generated method stub
+		ObjectMapper ob = new ObjectMapper();
+		System.out.println(ob.writeValueAsString(chatRoomVo));
 		roomDao.chatRoomInsert(chatRoomVo);
 
 		ChatRoomJoinVO chatRoomJoinVo = new ChatRoomJoinVO();
