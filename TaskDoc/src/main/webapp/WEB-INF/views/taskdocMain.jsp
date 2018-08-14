@@ -110,7 +110,6 @@
 		src="${pageContext.request.contextPath }/resources/js/taskdocMain/menu.js"></script>
 	<!-- /전체적인 Bootstrap resource -->
 
-</body>
 
 <script type="text/javascript">
 	var testHost = 'http://localhost:8080/';
