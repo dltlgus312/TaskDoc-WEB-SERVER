@@ -69,7 +69,7 @@
 		$(".sign").click(function() {
 			$.ajax({
 				type : 'GET',
-				url : '/www/userinfo/' + uid,
+				url : '/www/userinfo/login' + uid,
 				success : function(response) {
 					/* REST 처리*/
 				},
