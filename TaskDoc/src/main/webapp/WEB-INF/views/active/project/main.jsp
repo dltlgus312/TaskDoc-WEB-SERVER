@@ -11,7 +11,7 @@
 </body>
 
 <script type="text/javascript">
-/* 나의 프로젝트 리스트*/
+/* 내가 참가하는 모든 프로젝트를 검색*/
 $.ajax({
 		type : 'GET',
 		url : '/www/projectjoin/'+'현재 접속한 ID',
@@ -45,9 +45,62 @@ $.ajax({
 		}
 	});
 
-/*/나의 프로젝트 리스트*/
+/* /내가 참가하는 모든 프로젝트를 검색*/
 
-/* 프로젝트 인원 초대 , 수정 , 삭제 기능들......*/
+/* 프로젝트에 사람 초대 */
+var param={
+		'pcode': '현재 PCODE',
+		'uid': '초대할 ID',
+		'ppermission': 'MEMBER',
+		'pinvite': 0
+};
+$.ajax({
+		type : 'POST',
+		url : '/www/projectjoin',
+		contentType : 'application/json',
+		data : JSON.stringify(param),
+		success : function(response) {
+			if (response == 1) {
+				alert('프로젝트에 사람 초대 완료!');
+			}
+			else{
+				alert('Server or Client ERROR, 프로젝트에 사람 초대  실패!');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
 
+/*/프로젝트에 사람 초대 */
+
+
+/* 프로젝트에 초대받은사람 수락할때  
+ * projectjoin_SQL 다시알아보기★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+ */
+var param={
+		'pcode': '현재 PCODE',
+		'uid': '현재 수락할 ID',
+		'ppermission': 'MEMBER',
+		'pinvite': 1
+};
+$.ajax({
+		type : 'PUT',
+		url : '/www/projectjoin',
+		contentType : 'application/json',
+		data : JSON.stringify(param),
+		success : function(response) {
+			if (response == 1) {
+				alert('초대 수락 완료!');
+			}
+			else{
+				alert('Server or Client ERROR, 초대 수락  실패!');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+/*/프로젝트에 초대받은사람 수락할때 */
 </script>
 </html>

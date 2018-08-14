@@ -38,7 +38,7 @@
 	<div class="container">
 		<form class="form-signin">
 			<h2 class="form-signin-heading">Please sign in</h2>
-			<input type="text" id="inputId" class="form-control" placeholder="ID"
+			<input type="text" id=uid class="form-control" placeholder="ID"
 				required autofocus> <input type="password" id="upasswd"
 				class="form-control" placeholder="PASSWD">
 			<div class="checkbox">
@@ -67,11 +67,30 @@
 
 		/*Login 처리*/
 		$(".sign").click(function() {
+			var param={
+					'uid' : $("#uid"),
+					'upasswd':$("#upasswd")	
+			};
 			$.ajax({
-				type : 'GET',
-				url : '/www/userinfo/login' + uid,
+				type : 'POST',
+				url : '/www/userinfo/login',
+				contentType : 'application/json',
+				data : JSON.stringify(param),
 				success : function(response) {
-					/* REST 처리*/
+					/* ID NULL =>-1
+					   PW 틀리면  =>-2
+					       성공 => 1
+					   */
+					  if(response==-1){
+						  alert('해당되는 ID가 없습니다.');
+					  }
+					  else if(response==-2){
+						  alert('비밀번호가 틀렸습니다.');
+					  }
+					  else if(response==1){
+						  alert('로그인 완료');
+					  }
+					  
 				},
 				error : function(e) {
 					alert("ERROR : " + e.statusText);

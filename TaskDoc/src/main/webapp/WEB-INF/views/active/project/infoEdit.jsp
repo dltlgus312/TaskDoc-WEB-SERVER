@@ -20,7 +20,7 @@ var param = {
 	};
 	$.ajax({
 		type : 'PUT',
-		url : '/www/project/',
+		url : '/www/project',
 		contentType : 'application/json',
 		data : JSON.stringify(param),
 		success : function(response) {
@@ -40,7 +40,7 @@ var param = {
 /*프로젝트 삭제  */
 	$.ajax({
 		type : 'DELETE',
-		url : '/www/project/'+$("#example"),
+		url : '/www/project/'+ '삭제하고자하는 프로젝트의 PID',
 		success : function(response) {
 			if (response == 1) {
 				alert('프로젝트 삭제 완료!');
@@ -86,7 +86,31 @@ var param = {
 			alert("ERROR : " + e.statusText);
 		}
 	});
- 
 /*/프로젝트에 소속된 유저 리스트불러오기*/
+ 
+/* 프로젝트에 소속된 멤버가 탈퇴 OR 강퇴해버리기!*/ 
+var param = {
+		'pcode' : '내가 소속되어있는 프로젝트의 PCODE',
+		'uid':'탈퇴하고싶거나 추방하고싶은 회원의 ID'
+	};
+	$.ajax({
+		type : 'DELETE',
+		url : '/www/projectjoin',
+		contentType : 'application/json',
+		data : JSON.stringify(param),
+		success : function(response) {
+			if (response == 1) {
+				alert('프로젝트 나가기 및 회원 추방 성공');
+			}
+			else{
+				alert('Server or Client ERROR, 프로젝트 나가기 및 회원 추방 실패');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+/*/프로젝트에 소속된 멤버가 탈퇴 OR 강퇴해버리기!*/
+
 </script>
 </html>

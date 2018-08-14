@@ -16,27 +16,32 @@ public class UserInfoRest {
 
 	@Autowired
 	UserInfoService service;
-
+	
+	//중복검사 , 유저정보 수정시 보여줄 정보
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public UserInfoVO view(@PathVariable String id) {
 		return service.userInfoView(id);
 	}
 	
+	//로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public int loginUser(@RequestBody UserInfoVO userInfoVo) {
 		return service.loginUser(userInfoVo);
 	}
 	
+	//회원가입
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public int insert(@RequestBody UserInfoVO userInfoVo) {
 		return service.insertUserInfo(userInfoVo);
 	}
-
+	
+	//유저정보 수정
 	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public int update(@RequestBody UserInfoVO userInfoVo) {
 		return service.updateUserInfo(userInfoVo);
 	}
 	
+	//회원 탈퇴
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public int delete(@PathVariable String id) {
 		return service.deleteUserInfo(id);

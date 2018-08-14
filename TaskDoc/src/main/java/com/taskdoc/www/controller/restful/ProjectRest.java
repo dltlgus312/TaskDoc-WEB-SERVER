@@ -23,7 +23,7 @@ public class ProjectRest {
 	@Autowired
 	ProjectService service;
 	
-	// 프로젝트 생성시 생성자는 'OWNER' 로써 프로젝트에 참가 ( Service Transaction 처리 ) > 성공 1, 실패 -1
+	// 프로젝트 생성시 생성자는 'OWNER' 로써 프로젝트에 참가 ( Service Transaction 처리 ) > 성공 pid값, 실패 -1
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public int insert(@RequestBody Map<String, Object> data) {
 		

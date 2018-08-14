@@ -20,26 +20,22 @@ public class ProjectDAOImpl implements ProjectDAO {
 
 	@Override
 	public ProjectVO projectView(int pcode) {
-		// TODO Auto-generated method stub
 		return sql.selectOne(NAMESPACE + VIEW, pcode);
 	}
 
 	@Override
 	public int projectInsert(ProjectVO projectVo) {
-		// TODO Auto-generated method stub
 		sql.insert(NAMESPACE + INSERT, projectVo);
 		return projectVo.getPcode();
 	}
 
 	@Override
 	public int projectUpdate(ProjectVO projectVo) {
-		// TODO Auto-generated method stub
 		return sql.update(NAMESPACE + UPDATE, projectVo);
 	}
 
 	@Override
 	public int projectDelete(int pcode) {
-		// TODO Auto-generated method stub
 		return sql.delete(NAMESPACE + DELETE, pcode);
 	}
 }

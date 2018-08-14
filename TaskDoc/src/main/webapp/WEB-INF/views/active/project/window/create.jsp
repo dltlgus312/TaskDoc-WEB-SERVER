@@ -29,10 +29,10 @@ var param = {
 		contentType : 'application/json',
 		data : JSON.stringify(param),
 		success : function(response) {
-			if (response == 1) {
-				alert('프로젝트 생성 완료!');
+			if (response != -1) {
+				alert('프로젝트 생성 완료! 프로젝트의 pid값은'+responseㄹ);
 			}
-			else{
+			else if(response==-1){
 				alert('Server or Client ERROR, 프로젝트 생성 실패');
 			}
 		},
