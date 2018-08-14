@@ -68,8 +68,8 @@
 		/*Login 처리*/
 		$(".sign").click(function() {
 			var param={
-					'uid' : $("#uid"),
-					'upasswd':$("#upasswd")	
+					'uid' : $("#uid").val(),
+					'upasswd':$("#upasswd").val()	
 			};
 			$.ajax({
 				type : 'POST',

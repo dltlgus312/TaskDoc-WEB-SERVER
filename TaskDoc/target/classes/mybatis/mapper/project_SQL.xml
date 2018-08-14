@@ -18,25 +18,6 @@
 	<update id="update" parameterType="project">
 		UPDATE project SET ptitle=#{ptitle}, psubtitle=#{psubtitle}, psdate=#{psdate},
 		pedate=#{pedate} WHERE pcode=#{pcode}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> refs/heads/SQL_DTO
-		
-<<<<<<< HEAD
-=======
->>>>>>> branch 'SQL_DTO' of https://github.com/dltlgus312/TaskDoc.git
->>>>>>> branch 'SQL_DTO' of https://github.com/dltlgus312/TaskDoc.git
-=======
->>>>>>> refs/heads/sql_sihyeon
->>>>>>> refs/heads/SQL_DTO
-=======
->>>>>>> refs/heads/SQL_DTO
 	</update>
 	
 	<delete id="delete" parameterType="Integer">

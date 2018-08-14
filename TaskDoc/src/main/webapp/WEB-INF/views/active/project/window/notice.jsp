@@ -18,7 +18,7 @@ $.ajax({
 	success : function(response) {
 		/*
 		response는 List 형태로 날라옴
-		ncode : ? , ntitle : ?, ndate : ?
+		ncode : ? , pcode : ? , ntitle : ?, ncontents : ?, ndate : ?
 		JSON.parser 이용해서 js 변수에 담아서 뿌려보자.
 		*/
 	},
