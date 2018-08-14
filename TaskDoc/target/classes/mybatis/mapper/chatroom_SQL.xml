@@ -30,7 +30,7 @@
 		</choose>
 		
 		<choose>
-			<when test="tcode != 0">
+			<when test="crcoderef != 0">
 				#{crcoderef}
 			</when>
 			<otherwise>
