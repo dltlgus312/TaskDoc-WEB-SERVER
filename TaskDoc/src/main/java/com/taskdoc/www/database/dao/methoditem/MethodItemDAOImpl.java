@@ -10,36 +10,16 @@ import com.taskdoc.www.database.dto.MethodItemVO;
 
 @Repository
 public class MethodItemDAOImpl implements MethodItemDAO {
+	
 	@Autowired
-	SqlSession sqlSession;
+	SqlSession sql;
 
+	private final String NAMESPACE = "methoditem_SQL.";
+	private final String LIST = "list";
+	
 	@Override
-	public List<MethodItemVO> methodItemList() {
+	public List<MethodItemVO> methodItemList(int mcode) {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public MethodItemVO methodItemView(int mbcode) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int methodItemInsert(MethodItemVO methodBoard) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int methodItemUpdate(MethodItemVO methodBoard) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int methodItemDelete(int mbcode) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sql.selectList(NAMESPACE + LIST, mcode);
 	}
 }

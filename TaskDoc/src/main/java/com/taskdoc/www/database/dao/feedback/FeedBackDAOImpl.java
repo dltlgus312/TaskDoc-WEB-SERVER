@@ -14,40 +14,34 @@ public class FeedBackDAOImpl implements FeedBackDAO {
 	SqlSession sqlSession;
 
 	private final String NAMESPACE = "feedback_SQL.";
-	private final String FEEDBACKLIST = "feedbacklist";
-	private final String FEEDBACKVIEW = "feedbackview";
-	private final String FEEDBACKINSERT = "feedbackinsert";
-	private final String FEEDBACKUPDATE = "feedbackupdate";
-	private final String FEEDBACKDELETE = "feedbackdelete";
+	private final String LIST = "list";
+	private final String INSERT = "insert";
+	private final String UPDATE = "update";
+	private final String DELETE = "delete";
 
 	@Override
 	public List<FeedBackVO> feedBackList(int dmcode) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAMESPACE + FEEDBACKLIST, dmcode);
+		return sqlSession.selectList(NAMESPACE + LIST, dmcode);
 	}
 
 	@Override
-	public FeedBackVO feedBackView(int fbcode) {
+	public int feedBackInsert(FeedBackVO feedBackVo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(NAMESPACE + FEEDBACKVIEW, fbcode);
+		sqlSession.insert(NAMESPACE + INSERT, feedBackVo);
+		return feedBackVo.getDmcode();
 	}
 
 	@Override
-	public int feedBackInsert(FeedBackVO feedBack) {
+	public int feedBackUpdate(FeedBackVO feedBackVo) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(NAMESPACE + FEEDBACKINSERT, feedBack);
+		return sqlSession.update(NAMESPACE + UPDATE, feedBackVo);
 	}
 
 	@Override
-	public int feedBackUpdate(FeedBackVO feedBack) {
+	public int feedBackDelete(int fbcode) {
 		// TODO Auto-generated method stub
-		return sqlSession.update(NAMESPACE + FEEDBACKUPDATE, feedBack);
-	}
-
-	@Override
-	public int feedBackDelete(FeedBackVO feedBack) {
-		// TODO Auto-generated method stub
-		return sqlSession.delete(NAMESPACE + FEEDBACKDELETE, feedBack);
+		return sqlSession.delete(NAMESPACE + DELETE, fbcode);
 	}
 
 }

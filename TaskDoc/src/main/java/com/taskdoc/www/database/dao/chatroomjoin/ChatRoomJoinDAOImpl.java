@@ -14,26 +14,33 @@ public class ChatRoomJoinDAOImpl implements ChatRoomJoinDAO {
 	SqlSession sqlSession;
 	
 	private final String NAMESPACE = "chatroomjoin_SQL.";
-	private final String CHATROOMJOINLIST = "chatroomjoinlist";
-	private final String CHATROOMJOININSERT = "chatroomjoininsert";
-	private final String CHATROOMJOINDELETE = "chatroomjoindelete";
+	private final String ROOMLIST = "roomlist";
+	private final String USERLIST = "userlist";
+	private final String INSERT = "insert";
+	private final String DELETE = "delete";
 	
 	@Override
-	public List<Integer> chatRoomJoinList(String uid) {
+	public List<Integer> roomList(ChatRoomJoinVO chatRoomJoinVo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAMESPACE + CHATROOMJOINLIST, uid);
+		return sqlSession.selectList(NAMESPACE + ROOMLIST, chatRoomJoinVo);
+	}
+	
+	@Override
+	public List<String> userList(ChatRoomJoinVO chatRoomJoinVo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(NAMESPACE + USERLIST, chatRoomJoinVo);
 	}
 
 	@Override
-	public int chatRoomJoinInsert(ChatRoomJoinVO chatRoomJoin) {
+	public int chatRoomJoinInsert(ChatRoomJoinVO chatRoomJoinVo) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(NAMESPACE + CHATROOMJOININSERT, chatRoomJoin);
+		return sqlSession.insert(NAMESPACE + INSERT, chatRoomJoinVo);
 	}
 
 	@Override
-	public int chatRoomJoinDelete(ChatRoomJoinVO chatRoomJoin) {
+	public int chatRoomJoinDelete(ChatRoomJoinVO chatRoomJoinVo) {
 		// TODO Auto-generated method stub
-		return sqlSession.delete(NAMESPACE + CHATROOMJOINDELETE, chatRoomJoin);
+		return sqlSession.delete(NAMESPACE + DELETE, chatRoomJoinVo);
 	}
 
 }

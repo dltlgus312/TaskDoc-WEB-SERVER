@@ -22,14 +22,19 @@ public class UserInfoRest {
 		return service.userInfoView(id);
 	}
 	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public int loginUser(@RequestBody UserInfoVO userInfoVo) {
+		return service.loginUser(userInfoVo);
+	}
+	
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public int insert(@RequestBody UserInfoVO userinfoVO) {
-		return service.insertUserInfo(userinfoVO);
+	public int insert(@RequestBody UserInfoVO userInfoVo) {
+		return service.insertUserInfo(userInfoVo);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.PUT)
-	public int update(@RequestBody UserInfoVO userinfoVO) {
-		return service.updateUserInfo(userinfoVO);
+	public int update(@RequestBody UserInfoVO userInfoVo) {
+		return service.updateUserInfo(userInfoVo);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

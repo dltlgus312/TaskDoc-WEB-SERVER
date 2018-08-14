@@ -6,7 +6,6 @@ import com.taskdoc.www.database.dto.VoterVO;
 
 public interface VoterDAO {
 	public List<VoterVO> voterList(int dsicode);
-	public int voterInsert(VoterVO voter);
-	public int voterUpdate(VoterVO voter, int changeCode);
-	public int voterDelete(VoterVO voter);
+	public int voterInsert(VoterVO voterVo);
+	public int voterDelete(VoterVO voterVo);
 }

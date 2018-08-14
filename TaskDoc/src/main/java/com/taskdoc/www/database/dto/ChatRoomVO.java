@@ -8,8 +8,9 @@ public class ChatRoomVO {
 	private String crdate;
 	private int crmode;
 	private int crclose;
-	private int pcode;
 	private int tcode;
+	private int crcoderef;
+	private String fctitle;
 	
 	public int getCrcode() {
 		return crcode;
@@ -35,17 +36,23 @@ public class ChatRoomVO {
 	public void setCrclose(int crclose) {
 		this.crclose = crclose;
 	}
-	public int getPcode() {
-		return pcode;
-	}
-	public void setPcode(int pcode) {
-		this.pcode = pcode;
-	}
 	public int getTcode() {
 		return tcode;
 	}
 	public void setTcode(int tcode) {
 		this.tcode = tcode;
+	}
+	public int getCrcoderef() {
+		return crcoderef;
+	}
+	public void setCrcoderef(int crcoderef) {
+		this.crcoderef = crcoderef;
+	}
+	public String getFctitle() {
+		return fctitle;
+	}
+	public void setFctitle(String fctitle) {
+		this.fctitle = fctitle;
 	}
 	
 }
