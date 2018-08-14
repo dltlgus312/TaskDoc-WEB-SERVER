@@ -28,6 +28,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 			// ID is Null
 			return -1;
 		} else if (!storageUserInfo.getUpasswd().equals(userInfoVo.getUpasswd())) {
+		}
+		else if(!storageUserInfo.getUpasswd().equals(userInfoVo.getUpasswd())) {
 			// PW check Fail
 			return -2;
 		}
