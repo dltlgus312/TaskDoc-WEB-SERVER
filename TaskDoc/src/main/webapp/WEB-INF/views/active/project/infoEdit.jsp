@@ -9,4 +9,84 @@
 <body>
 
 </body>
+
+<script type="text/javascript">
+/*프로젝트 수정  */
+var param = {
+			'ptitle' : $("#example"),
+			'psubtitle' : $("#example"),
+			'psdate' : $("#example"),
+			'pedate' : $("#example")
+	};
+	$.ajax({
+		type : 'PUT',
+		url : '/www/project/',
+		contentType : 'application/json',
+		data : JSON.stringify(param),
+		success : function(response) {
+			if (response == 1) {
+				alert('프로젝트 수정 완료!');
+			}
+			else{
+				alert('Server or Client ERROR, 프로젝트 수정 실패');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+/*/프로젝트 수정*/
+
+/*프로젝트 삭제  */
+	$.ajax({
+		type : 'DELETE',
+		url : '/www/project/'+$("#example"),
+		success : function(response) {
+			if (response == 1) {
+				alert('프로젝트 삭제 완료!');
+			}
+			else{
+				alert('Server or Client ERROR, 프로젝트 삭제 실패');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+/* /프로젝트 삭제  */
+
+/* 프로젝트에 소속된 유저 리스트불러오기*/
+ $.ajax({
+		type : 'GET',
+		url : '/www/projectjoin/collaboration/'+ '현재 프로젝트 PID',
+		success : function(response) {
+			/*
+			 프로젝트에 참가하는 모든 회원을 검색
+			 
+			프로젝트 결과 값 = map ( KEY = "userList", "joinList" )
+			유저 정보들
+			userList{
+				uid;
+				upasswd;
+				uname;
+				ustate;
+				uphone;
+			}
+			
+			특정 프로젝트에 소속되어있는 회원들의 정보
+			joinList{
+				pcode;
+				uid;
+				ppermission;
+				pinvite;
+			}
+			*/
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+ 
+/*/프로젝트에 소속된 유저 리스트불러오기*/
+</script>
 </html>
