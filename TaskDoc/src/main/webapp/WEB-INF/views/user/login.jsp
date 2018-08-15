@@ -34,6 +34,12 @@
 <!--/TaskDocMain css -> For button use  -->
 </head>
 
+<style>
+#uid, #upasswd,h2, label {
+	font-family: Title_Light;
+}
+</style>
+
 <body>
 	<div class="container">
 		<form class="form-signin">
@@ -49,7 +55,7 @@
 			<div style="display: grid">
 				<button type="button" class="sign" style="font-size: 13px;">Sign
 					in</button>
-				<button type="button" class="goMain" style="font-size:13px;">Cancel</button>
+				<button type="button" class="goMain" style="font-size: 13px;">Cancel</button>
 			</div>
 		</form>
 	</div>
@@ -61,36 +67,34 @@
 
 		/*Cancel시 Main으로*/
 		$(".goMain").click(function() {
-			location.href = testHost + 'www';
+			location.href = testHost;
 		});
 		/*/Cancel시 Main으로*/
 
 		/*Login 처리*/
 		$(".sign").click(function() {
-			var param={
-					'uid' : $("#uid").val(),
-					'upasswd':$("#upasswd").val()	
+			var param = {
+				'uid' : $("#uid").val(),
+				'upasswd' : $("#upasswd").val()
 			};
 			$.ajax({
 				type : 'POST',
-				url : '/www/userinfo/login',
+				url : '/userinfo/login',
 				contentType : 'application/json',
 				data : JSON.stringify(param),
 				success : function(response) {
 					/* ID NULL =>-1
 					   PW 틀리면  =>-2
 					       성공 => 1
-					   */
-					  if(response==-1){
-						  alert('해당되는 ID가 없습니다.');
-					  }
-					  else if(response==-2){
-						  alert('비밀번호가 틀렸습니다.');
-					  }
-					  else if(response==1){
-						  alert('로그인 완료');
-					  }
-					  
+					 */
+					if (response == -1) {
+						alert('해당되는 ID가 없습니다.');
+					} else if (response == -2) {
+						alert('비밀번호가 틀렸습니다.');
+					} else if (response == 1) {
+						alert('로그인 완료');
+					}
+
 				},
 				error : function(e) {
 					alert("ERROR : " + e.statusText);

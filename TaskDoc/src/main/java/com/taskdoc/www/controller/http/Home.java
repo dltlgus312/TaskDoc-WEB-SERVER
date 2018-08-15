@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class Home {
+	@RequestMapping(value = "/ajaxTest", method = RequestMethod.GET)
+	public String ajaxTest() {
+		return "ajaxTest";
+	}
+	
 	//header side footer 고정
 	//body change
 	

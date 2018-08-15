@@ -14,13 +14,13 @@
 /*프로젝트 생성  */
 var param = {
 		'userinfo' : {
-			'uid' : $("#example"),
+			'uid' : $("#example").val(),
 		},
 		'project' : {
-			'ptitle' : $("#example"),
-			'psubtitle' : $("#example"),
-			'psdate' : $("#example"),
-			'pedate' : $("#example")
+			'ptitle' : $("#example").val(),
+			'psubtitle' : $("#example").val(),
+			'psdate' : $("#example").val(),
+			'pedate' : $("#example").val()
 		}
 	};
 	$.ajax({

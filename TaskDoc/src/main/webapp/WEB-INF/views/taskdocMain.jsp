@@ -11,11 +11,11 @@
 <meta name="author" content="Codrops" />
 <link rel="shortcut icon" href="../favicon.ico">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/resources/css/taskdocMain/normalize.css?ver=42" />
+	href="${pageContext.request.contextPath }/resources/css/taskdocMain/normalize.css?ver=422" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/resources/css/taskdocMain/demo.css?ver=42" />
+	href="${pageContext.request.contextPath }/resources/css/taskdocMain/demo.css?ver=422" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/resources/css/taskdocMain/component.css?ver=223" />
+	href="${pageContext.request.contextPath }/resources/css/taskdocMain/component.css?ver=2223" />
 <!-- csstransforms3d-shiv-cssclasses-prefixed-teststyles-testprop-testallprops-prefixes-domprefixes-load -->
 <script
 	src="${pageContext.request.contextPath }/resources/js/taskdocMain/modernizr.custom.25376.js"></script>
@@ -23,6 +23,7 @@
 
 <!-- /전체적인 Bootstrap resource -->
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+
 
 </head>
 <body>
@@ -60,7 +61,7 @@
 				</div>
 				
 				<header class="codrops-header">
-					<h1>
+					<h1 style="font-family: Title_Medium">
 						TaskDoc <span>Task(작업) + Document(기록)</span>
 					</h1>
 				</header>
@@ -68,7 +69,11 @@
 
 				<div class="main clearfix">
 					<div class="column">
-						<p>- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
+						<p style="font-family:Title_Light; font-size:20px;">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
+						<p style="font-family:Title_Light; font-size:20px;">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
+						<p style="font-family:Title_Light; font-size:20px;">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
+						<p style="font-family:Title_Light; font-size:20px;">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
+						<p style="font-family:Title_Light; font-size:20px;">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
 					</div>
 					<div class="column">
 						<nav class="codrops-demos">
@@ -93,12 +98,12 @@
 		</div>
 		<!-- /container -->
 		<nav class="outer-nav left vertical">
-			<a href="#" class="icon-home">Home</a> <a
-				href="http://localhost:8080/won/" class="icon-news">News</a> <a
+			<a href="/" class="icon-home">Home</a> <a
+				href="http://localhost:8080/won/" class="icon-news">Board</a> <a
 				href="#" class="icon-image">Images</a> <a href=""
 				class="icon-upload">Uploads</a> <a href="#" class="icon-star">Favorites</a>
 			<a href="#" class="icon-mail">Messages</a> <a href="#"
-				class="icon-lock">Security</a>
+				class="icon-lock">Edit Account</a>
 		</nav>
 	</div>
 	<!-- /perspective -->
@@ -112,25 +117,25 @@
 
 
 <script type="text/javascript">
-	var testHost = 'http://localhost:8080/';
+	var testHost = 'http://localhost:8080';
 	var serverHost = '';
 
 	$(function() {
 		$("#JoinButton").click(function() {
-			location.href = testHost + 'www/user/join';
+			location.href = testHost + '/user/join';
 		});
 		$("#LoginButton").click(function() {
-			location.href = testHost + 'www/user/login';
+			location.href = testHost + '/user/login';
 		});
 	});
 	
 	/* TEST  */
 	$(function() {
 		$("#proButton").click(function() {
-			location.href = testHost + 'www/project/main';
+			location.href = testHost + '/project/main';
 		});
 		$("#chatButton").click(function() {
-			location.href = testHost + 'www/chat/main';
+			location.href = testHost + '/chat/main';
 		});
 	});
 	

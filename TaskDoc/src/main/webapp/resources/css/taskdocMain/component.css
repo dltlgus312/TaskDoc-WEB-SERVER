@@ -9,6 +9,35 @@
 	font-style: normal;
 }
 
+/*Gyeongi Chungnen Font*/
+@font-face {
+	font-family: "Batang_Bold";
+	src:local(※), url(../fonts/Gyeongi/Batang_Bold.woff) format('woff')
+}
+@font-face {
+	font-family: "Batang_Regular";
+	src:local(※), url(../fonts/Gyeongi/Batang_Regular.woff) format('woff')
+}
+@font-face {
+	font-family: "Title_Bold";
+	src:local(※), url(../fonts/Gyeongi/Title_Bold.woff) format('woff')
+}
+@font-face {
+	font-family: "Title_Light";
+	src:local(※), url(../fonts/Gyeongi/Title_Light.woff) format('woff')
+}
+@font-face {
+	font-family: "Title_Medium";
+	src:local(※), url(../fonts/Gyeongi/Title_Medium.woff) format('woff')
+}
+@font-face {
+	font-family: "TitleV";
+	src:local(※), url(../fonts/Gyeongi/TitleV.woff) format('woff')
+}
+
+/* /Gyeongi Chungnen Font*/
+
+
 html, body, .perspective {
 	width: 100%;
 	height: 100%;

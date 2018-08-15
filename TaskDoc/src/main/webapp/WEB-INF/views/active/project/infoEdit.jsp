@@ -40,7 +40,7 @@ var param = {
 /*프로젝트 삭제  */
 	$.ajax({
 		type : 'DELETE',
-		url : '/www/project/'+ '삭제하고자하는 프로젝트의 PID',
+		url : '/project/'+ '삭제하고자하는 프로젝트의 PID',
 		success : function(response) {
 			if (response == 1) {
 				alert('프로젝트 삭제 완료!');
@@ -58,7 +58,7 @@ var param = {
 /* 프로젝트에 소속된 유저 리스트불러오기*/
  $.ajax({
 		type : 'GET',
-		url : '/www/projectjoin/collaboration/'+ '현재 프로젝트 PID',
+		url : '/projectjoin/collaboration/'+ '현재 프로젝트 PID',
 		success : function(response) {
 			/*
 			 프로젝트에 참가하는 모든 회원을 검색
@@ -95,7 +95,7 @@ var param = {
 	};
 	$.ajax({
 		type : 'DELETE',
-		url : '/www/projectjoin',
+		url : '/projectjoin',
 		contentType : 'application/json',
 		data : JSON.stringify(param),
 		success : function(response) {

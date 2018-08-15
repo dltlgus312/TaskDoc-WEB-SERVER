@@ -49,8 +49,8 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	@Transactional
 	public int chatRoomInsert(ChatRoomVO chatRoomVo, UserInfoVO userInfoVo, ProjectVO projectVo) throws Exception {
 		// TODO Auto-generated method stub
-		ObjectMapper ob = new ObjectMapper();
-		System.out.println(ob.writeValueAsString(chatRoomVo));
+		/*ObjectMapper ob = new ObjectMapper();
+		System.out.println(ob.writeValueAsString(chatRoomVo));*/
 		roomDao.chatRoomInsert(chatRoomVo);
 
 		ChatRoomJoinVO chatRoomJoinVo = new ChatRoomJoinVO();

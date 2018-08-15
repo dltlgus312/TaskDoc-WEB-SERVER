@@ -34,7 +34,45 @@
 		/*/회원 정보 수정을위해 정보를 불러오기*/
 	}
 	
-	
+	/* 회원 정보 수정 처리*/
+	$.ajax({
+		type : 'PUT',
+		url : '/www/userinfo/',
+		contentType : 'application/json',
+		data : JSON.stringify(param),
+		success : function(response) {
+			/* response 1 or -1
+			 */
+			if (response == 1) {
+				alert('회원 정보 수정 완료');
+			} else {
+				alert('Server or Client ERROR, 회원정보 수정 실패');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+	/*/회원 정보 수정 처리*/
+
+	/* 회원 탈퇴*/
+	$.ajax({
+		type : 'DELETE',
+		url : '/www/userinfo/' + '로그인한 ID',
+		success : function(response) {
+			/* response 1 or -1
+			 */
+			if (response == 1) {
+				alert('회원  탈퇴 완료');
+			} else {
+				alert('Server or Client ERROR, 회원 탈퇴 실패');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+	/*/회원 탈퇴*/
 	
 </script>
 </html>

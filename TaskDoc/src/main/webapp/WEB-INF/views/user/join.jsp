@@ -29,15 +29,20 @@
 	href="${pageContext.request.contextPath }/resources/css/taskdocMain/demo.css?ver=42" />
 <!--/TaskDocMain css -> For button use  -->
 
-<link href="${pageContext.request.contextPath }/resources/css/join.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/user/join.css" />
 </head>
+<style type="text/css">
+h4, label, span,#uid,#upasswd,#uname,#ustate,#uphone {
+	font-family: Title_Light;
+}
+</style>
 <body>
 	<div>
-		<div class="container" style="width: 600px; margin-top: 20px;">
+		<div class="container" style="width: 600px; margin-top: 10px;">
 			<div class="row">
 				<div class="modal-content">
 
-					<div class="modal-header">
+					<div class="modal-header" style="background:white; border-bottom: 1px solid gainsboro ">
 						<h4 class="modal-title">회원가입을 환영합니다!</h4>
 					</div>
 					<div class="modal-body">
@@ -104,7 +109,7 @@
 	var serverHost = '';
 	/*Cancel시 Main으로*/
 	function goMain() {
-		location.href = testHost + 'www';
+		location.href = testHost;
 	}
 
 	$(function() {
@@ -120,7 +125,7 @@
 			} else {
 				$.ajax({
 					type : 'GET',
-					url : '/www/userinfo/' + uid,
+					url : '/userinfo/' + uid,
 					success : function(response) {
 						if (uid == response.uid) {
 							/* DB검색 후 uid와 내가 입력한 uid가 같다면
@@ -166,7 +171,7 @@
 						} else if (jbFlag == false) {
 							$.ajax({
 								type : 'POST',
-								url : '/www/userinfo/',
+								url : '/userinfo/',
 								contentType : 'application/json',
 								data : JSON.stringify(param),
 								success : function(response) {

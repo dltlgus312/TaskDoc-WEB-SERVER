@@ -30,7 +30,7 @@ public class PublicTaskServiceImpl implements PublicTaskService{
 		
 		tcode = dao.publicTaskInsert(publicTaskVo);
 		if(publicTaskVo.getTrefference() == 0) {
-			// referrence
+			// refference
 			publicTaskVo.setTrefference(tcode);
 			sequenceMax = dao.selfRefMax(publicTaskVo.getPcode());
 		}else {

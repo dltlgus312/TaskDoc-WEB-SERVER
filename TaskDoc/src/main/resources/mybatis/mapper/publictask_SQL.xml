@@ -19,7 +19,8 @@
 	</select>
 	
 	<insert id="insert" parameterType="publictask" useGeneratedKeys="true" keyProperty="tcode">
-		INSERT INTO publictask VALUES(null, #{ttitle}, #{tcolor}, #{tsdate}, #{tedate}, 0, 0, <choose>
+		INSERT INTO publictask VALUES(null, #{ttitle}, #{tcolor}, #{tsdate}, #{tedate}, 0, 0, 
+		<choose>
 			<when test="trefference != 0">
 				#{trefference}
 			</when>
