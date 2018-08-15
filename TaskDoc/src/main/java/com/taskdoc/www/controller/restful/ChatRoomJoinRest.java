@@ -21,25 +21,21 @@ public class ChatRoomJoinRest {
 	
 	@RequestMapping(value = "/room", method = RequestMethod.GET)
 	public List<ChatRoomVO> projectList(@RequestBody ChatRoomJoinVO chatRoomJoinVo) {
-		// TODO Auto-generated method stub
 		return service.roomList(chatRoomJoinVo);
 	}
 	
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public List<String> userList(@RequestBody ChatRoomJoinVO chatRoomJoinVo) {
-		// TODO Auto-generated method stub
 		return service.userList(chatRoomJoinVo);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public int insert(@RequestBody ChatRoomJoinVO chatRoomJoinVo) {
-		// TODO Auto-generated method stub
 		return service.chatRoomJoinInsert(chatRoomJoinVo);
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.DELETE)
 	public int delete(@RequestBody ChatRoomJoinVO chatRoomJoinVo) {
-		// TODO Auto-generated method stub
 		return service.chatRoomJoinDelete(chatRoomJoinVo);
 	}
 }

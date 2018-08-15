@@ -39,24 +39,22 @@
 </body>
 <script type="text/javascript">
 	function ajaxTest() {
-		
-		// 개인업무 내 메모 삭제
+		/* 채팅 내용 조회 해보자.*/
 		$.ajax({
-			type : 'DELETE',
-			url : 'memo/'+'삭제할 메모의 MCODE',
+			type : 'GET',
+			url : 'chatcontents/'+'5',
 			success : function(response) {
-				if (response == 1) {
-					alert('메모 삭제 완료!');
-				} else if (response == -1) {
-					alert('Server or Client ERROR, 메모 삭제 실패');
+				if (response.length != -1) {
+					alert('채팅 내용 조회 성공!' + response);
+				} else if (response.length == 0) {
+					alert('Server or Client ERROR, 채팅방 내용 조회 실패');
 				}
 			},
 			error : function(e) {
 				alert("ERROR : " + e.statusText);
 			}
 		});
-		// /개인업무 내 메모 삭제
-		
+		/*/채팅 내용 조회 해보자.*/
 	}
 </script>
 

@@ -21,7 +21,6 @@ public class ChatRoomJoinServiceImpl implements ChatRoomJoinService{
 
 	@Override
 	public List<ChatRoomVO> roomList(ChatRoomJoinVO chatRoomJoinVo) {
-		// TODO Auto-generated method stub
 		
 		List<ChatRoomVO> roomList = new ArrayList<>();
 		
@@ -42,19 +41,16 @@ public class ChatRoomJoinServiceImpl implements ChatRoomJoinService{
 
 	@Override
 	public List<String> userList(ChatRoomJoinVO chatRoomJoinVo) {
-		// TODO Auto-generated method stub
 		return joinDao.userList(chatRoomJoinVo);
 	}
 
 	@Override
 	public int chatRoomJoinInsert(ChatRoomJoinVO chatRoomJoinVo) {
-		// TODO Auto-generated method stub
 		return joinDao.chatRoomJoinInsert(chatRoomJoinVo);
 	}
 
 	@Override
 	public int chatRoomJoinDelete(ChatRoomJoinVO chatRoomJoinVo) {
-		// TODO Auto-generated method stub
 		return joinDao.chatRoomJoinDelete(chatRoomJoinVo);
 	}
 

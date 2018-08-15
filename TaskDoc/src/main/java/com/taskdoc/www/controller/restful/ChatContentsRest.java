@@ -21,14 +21,12 @@ public class ChatContentsRest {
 	
 	@RequestMapping(value="/{crcode}", method = RequestMethod.GET)
 	public List<ChatContentsVO> list(@PathVariable int crcode) {
-		// TODO Auto-generated method stub
 		return service.chatContentsList(crcode);
 	}
 	
 
 	@RequestMapping(value="", method = RequestMethod.POST)
 	public int Insert(@RequestBody ChatContentsVO chatContentsVo) {
-		// TODO Auto-generated method stub
 		return service.chatContentsInsert(chatContentsVo);
 	}
 }

@@ -23,13 +23,11 @@ public class MethodServiceImpl implements MethodService{
 
 	@Override
 	public List<MethodVO> methodList() {
-		// TODO Auto-generated method stub
 		return methodDao.methodList();
 	}
 
 	@Override
 	public Map<String, Object> methodView(int mcode) {
-		// TODO Auto-generated method stub
 		MethodVO methodVo = methodDao.methodView(mcode);
 		List<MethodItemVO> itemList = itemDao.methodItemList(mcode);
 		

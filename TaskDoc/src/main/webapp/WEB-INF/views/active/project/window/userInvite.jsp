@@ -13,7 +13,7 @@
 <script type="text/javascript">
 /*프로젝트 유저 초대  */
 var param = {
-		'userinfo' : {
+		'userInfo' : {
 			'uid' : $("#example"),
 		},
 		'project' : {

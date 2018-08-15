@@ -119,22 +119,39 @@
 		}
 	});
 	/*/공용업무 수정. */
-	
+
 	/* 공용업무 삭제. */
-			$.ajax({
-				type : 'DELETE',
-				url : 'publictask/'+'삭제하고싶은 공용업무 TCODE',
-				success : function(response) {
-					if (response == 1) {
-						alert('공용업무 삭제 성공!');
-					} else if (response == -1) {
-						alert('Server or Client ERROR, 공용업무 삭제 실패');
-					}
-				},
-				error : function(e) {
-					alert("ERROR : " + e.statusText);
-				}
-			});
-		/*/공용업무 삭제. */
+	$.ajax({
+		type : 'DELETE',
+		url : 'publictask/' + '삭제하고싶은 공용업무 TCODE',
+		success : function(response) {
+			if (response == 1) {
+				alert('공용업무 삭제 성공!');
+			} else if (response == -1) {
+				alert('Server or Client ERROR, 공용업무 삭제 실패');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+	/*/공용업무 삭제. */
+
+	/* 공용업무내의 모든 회의록 리스트를 가져온다 */
+	$.ajax({
+		type : 'GET',
+		url : 'chatroom/task/' + '해당 공용업무의  tcode',
+		success : function(response) {
+			if (response.length != 0) {
+				alert('회의록 리스트 불러오기 성공!');
+			} else if (response.length == 0) {
+				alert('Server or Client ERROR, 회의록 리스트 불러오기 실패');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+	/*/공용업무내의 모든 회의록 리스트를 가져온다 */
 </script>
 </html>

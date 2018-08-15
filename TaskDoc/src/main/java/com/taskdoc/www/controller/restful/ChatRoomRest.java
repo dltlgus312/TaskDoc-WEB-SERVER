@@ -23,22 +23,21 @@ public class ChatRoomRest {
 	@Autowired
 	ChatRoomService service;
 	
-	
+	//업무에 대한 포커스 모드 리스트를 가져오기
 	@RequestMapping(value = "/task/{tcode}", method = RequestMethod.GET)
 	public List<ChatRoomVO> taskList(@PathVariable int tcode) {
-		// TODO Auto-generated method stub
 		return service.taskList(tcode);
 	}
 
+	//채팅방 코드로 모든  포커스 모드리스트 가져오기
 	@RequestMapping(value = "/room/{crcode}", method = RequestMethod.GET)
 	public List<ChatRoomVO> roomList(@PathVariable int crcode) {
-		// TODO Auto-generated method stub
 		return service.roomList(crcode);
 	}
 
+	//채팅방 생성
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public int insert(@RequestBody Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		ChatRoomVO chatRoomVo = JsonMapper.mapToJson(map.get("chatRoom"), ChatRoomVO.class);
 		UserInfoVO userInfoVo = JsonMapper.mapToJson(map.get("userInfo"), UserInfoVO.class);
 		ProjectVO projectVo = JsonMapper.mapToJson(map.get("project"), ProjectVO.class);
@@ -53,13 +52,11 @@ public class ChatRoomRest {
 	
 	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public int update(@RequestBody ChatRoomVO chatRoomVo) {
-		// TODO Auto-generated method stub
 		return service.chatRoomUpdate(chatRoomVo);
 	}
 	
 	@RequestMapping(value = "/{crcode}", method = RequestMethod.DELETE)
 	public int delete(@PathVariable int crcode) {
-		// TODO Auto-generated method stub
 		return service.chatRoomDelete(crcode);
 	}
 }

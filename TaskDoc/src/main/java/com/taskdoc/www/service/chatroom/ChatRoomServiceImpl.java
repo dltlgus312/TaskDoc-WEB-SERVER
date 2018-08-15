@@ -26,8 +26,6 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
 	@Override
 	public List<ChatRoomVO> taskList(int tcode) {
-		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
 		List<ChatRoomVO> focusList = new ArrayList<>();
 		List<ChatRoomVO> roomList = roomDao.taskList(tcode);
 
@@ -41,14 +39,12 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
 	@Override
 	public List<ChatRoomVO> roomList(int crcode) {
-		// TODO Auto-generated method stub
 		return roomDao.roomList(crcode);
 	}
 
 	@Override
 	@Transactional
 	public int chatRoomInsert(ChatRoomVO chatRoomVo, UserInfoVO userInfoVo, ProjectVO projectVo) throws Exception {
-		// TODO Auto-generated method stub
 		/*ObjectMapper ob = new ObjectMapper();
 		System.out.println(ob.writeValueAsString(chatRoomVo));*/
 		roomDao.chatRoomInsert(chatRoomVo);

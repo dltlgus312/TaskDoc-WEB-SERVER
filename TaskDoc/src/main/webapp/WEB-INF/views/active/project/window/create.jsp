@@ -13,7 +13,7 @@
 <script type="text/javascript">
 /*프로젝트 생성  */
 var param = {
-		'userinfo' : {
+		'userInfo' : {
 			'uid' : $("#example").val(),
 		},
 		'project' : {
