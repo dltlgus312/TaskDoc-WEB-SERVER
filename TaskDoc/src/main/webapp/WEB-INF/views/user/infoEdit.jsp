@@ -18,11 +18,11 @@
 	function testBtn() {
 		$.ajax({
 			type : 'GET',
-			url : '/www/userinfo/' + 'a',
+			url : 'userinfo/' + '회원ID',
 			success : function(response) {
-				if (response == null) {
+				if (response.length==0) {
 					alert('Server or Client ERROR, 회원정보 불러오기 실패');
-				} else {
+				} else if(response.length!=0) {
 					alert('Server or Client ERROR, 회원정보 불러오기 성공');
 
 				}
@@ -37,7 +37,7 @@
 	/* 회원 정보 수정 처리*/
 	$.ajax({
 		type : 'PUT',
-		url : '/www/userinfo/',
+		url : 'userinfo/',
 		contentType : 'application/json',
 		data : JSON.stringify(param),
 		success : function(response) {
@@ -58,7 +58,7 @@
 	/* 회원 탈퇴*/
 	$.ajax({
 		type : 'DELETE',
-		url : '/www/userinfo/' + '로그인한 ID',
+		url : 'userinfo/' + '로그인한 ID',
 		success : function(response) {
 			/* response 1 or -1
 			 */

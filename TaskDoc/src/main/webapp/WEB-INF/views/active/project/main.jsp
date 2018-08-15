@@ -14,7 +14,7 @@
 /* 내가 참가하는 모든 프로젝트를 검색*/
 $.ajax({
 		type : 'GET',
-		url : '/projectjoin/'+'현재 접속한 ID',
+		url : 'projectjoin/'+'현재 접속한 ID',
 		success : function(response) {
 			/*
 			response는 map 형태로 날라옴
@@ -56,7 +56,7 @@ var param={
 };
 $.ajax({
 		type : 'POST',
-		url : '/projectjoin',
+		url : 'projectjoin',
 		contentType : 'application/json',
 		data : JSON.stringify(param),
 		success : function(response) {
@@ -86,7 +86,7 @@ var param={
 };
 $.ajax({
 		type : 'PUT',
-		url : '/projectjoin',
+		url : 'projectjoin',
 		contentType : 'application/json',
 		data : JSON.stringify(param),
 		success : function(response) {

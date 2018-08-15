@@ -29,20 +29,26 @@
 	href="${pageContext.request.contextPath }/resources/css/taskdocMain/demo.css?ver=42" />
 <!--/TaskDocMain css -> For button use  -->
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/user/join.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/resources/css/user/join.css" />
 </head>
+
+<!-- font 지정 -->
 <style type="text/css">
-h4, label, span,#uid,#upasswd,#uname,#ustate,#uphone {
+h4, label, span, #uid, #upasswd, #uname, #ustate, #uphone {
 	font-family: Title_Light;
 }
 </style>
+<!-- font 지정 -->
+
 <body>
 	<div>
 		<div class="container" style="width: 600px; margin-top: 10px;">
 			<div class="row">
 				<div class="modal-content">
 
-					<div class="modal-header" style="background:white; border-bottom: 1px solid gainsboro ">
+					<div class="modal-header"
+						style="background: white; border-bottom: 1px solid gainsboro">
 						<h4 class="modal-title">회원가입을 환영합니다!</h4>
 					</div>
 					<div class="modal-body">

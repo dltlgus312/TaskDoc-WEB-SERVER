@@ -20,7 +20,7 @@ var param = {
 	};
 	$.ajax({
 		type : 'PUT',
-		url : '/www/project',
+		url : 'project',
 		contentType : 'application/json',
 		data : JSON.stringify(param),
 		success : function(response) {
@@ -40,7 +40,7 @@ var param = {
 /*프로젝트 삭제  */
 	$.ajax({
 		type : 'DELETE',
-		url : '/project/'+ '삭제하고자하는 프로젝트의 PID',
+		url : 'project/'+ '삭제하고자하는 프로젝트의 PID',
 		success : function(response) {
 			if (response == 1) {
 				alert('프로젝트 삭제 완료!');

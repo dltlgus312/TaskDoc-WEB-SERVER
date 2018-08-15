@@ -14,7 +14,7 @@
 /* 현재 프로젝트의 모든 공지사항 리스트*/
 $.ajax({
 	type : 'GET',
-	url : '/www/notice/project/'+'현재 프로젝트 ID',
+	url : 'notice/project/'+'현재 프로젝트 ID',
 	success : function(response) {
 		/*
 		response는 List 형태로 날라옴
@@ -31,7 +31,7 @@ $.ajax({
 /* 내가클릭한 공지사항의 상세내용  */
 $.ajax({
 	type : 'GET',
-	url : '/www/notice/'+'내가 클릭한 공지사항 ID',
+	url : 'notice/'+'내가 클릭한 공지사항 ID',
 	success : function(response) {
 		/*
 		response는 List 형태로 날라옴
@@ -52,7 +52,7 @@ var param={
 };
 $.ajax({
 	type : 'POST',
-	url : '/www/notice/',
+	url : 'notice',
 	contentType : 'application/json',
 	data : JSON.stringify(param),
 	success : function(response) {
@@ -80,7 +80,7 @@ var param={
 };
 $.ajax({
 	type : 'PUT',
-	url : '/www/notice/',
+	url : 'notice',
 	contentType : 'application/json',
 	data : JSON.stringify(param),
 	success : function(response) {
@@ -103,7 +103,7 @@ $.ajax({
 /* 공지사항 삭제 */
 $.ajax({
 	type : 'DELETE',
-	url : '/www/notice/'+'내가 클릭한 공지사항 ID',
+	url : 'notice/'+'내가 클릭한 공지사항 ID',
 	success : function(response) {
 		/*
 		response는 1 or -1

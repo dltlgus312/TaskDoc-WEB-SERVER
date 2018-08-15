@@ -25,7 +25,7 @@ var param = {
 	};
 	$.ajax({
 		type : 'POST',
-		url : '/www/project/',
+		url : 'project',
 		contentType : 'application/json',
 		data : JSON.stringify(param),
 		success : function(response) {

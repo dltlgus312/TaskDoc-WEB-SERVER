@@ -39,33 +39,28 @@
 </body>
 <script type="text/javascript">
 	function ajaxTest() {
-		/*공용 업무 생성 */
+		/* 공용업무내 개인업무 생성. */
 		var param = {
-			'ttitle' :'publicTASK 1',
-			'tcolor' : 'RED',
-			'tsdate' :'20180606',
-			'tedate' : '20180707',
-			 /* 'trefference' : '11',  */
-			'pcode' :'5'
+
 		};
 		$.ajax({
 			type : 'POST',
-			url : '/www/publictask',
+			url : 'privatetask',
 			contentType : 'application/json',
 			data : JSON.stringify(param),
 			success : function(response) {
 				if (response != -1) {
-					alert('공용업무 생성 완료! 프로젝트의 공용업무의 id값은' + response);
+					alert('개인업무 생성 완료' + response);
 				} else if (response == -1) {
-					alert('Server or Client ERROR, 공용업무 생성 실패');
+					alert('Server or Client ERROR, 개인업무 생성 실패');
 				}
 			},
 			error : function(e) {
 				alert("ERROR : " + e.statusText);
 			}
 		});
+		/*/공용업무내 개인업무 생성.  */
 	}
-		/*/공용 업무 생성 */
 </script>
 
 </html>

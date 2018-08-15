@@ -99,10 +99,10 @@
 		<!-- /container -->
 		<nav class="outer-nav left vertical">
 			<a href="/" class="icon-home">Home</a> <a
-				href="http://localhost:8080/won/" class="icon-news">Board</a> <a
-				href="#" class="icon-image">Images</a> <a href=""
-				class="icon-upload">Uploads</a> <a href="#" class="icon-star">Favorites</a>
-			<a href="#" class="icon-mail">Messages</a> <a href="#"
+				href="/" class="icon-news">Board</a> <a
+				href="/" class="icon-image">Images</a> <a href=""
+				class="icon-upload">Uploads</a> <a href="/" class="icon-star">Favorites</a>
+			<a href="/" class="icon-mail">Messages</a> <a href="#"
 				class="icon-lock">Edit Account</a>
 		</nav>
 	</div>
