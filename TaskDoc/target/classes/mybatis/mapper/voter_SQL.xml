@@ -11,7 +11,7 @@
 	</select>
 
 	<insert id="insert" parameterType="voter">
-		INSERT INTO voter VALUES(#{dsicode}, #{uid})
+		INSERT INTO voter VALUES(#{uid},#{dsicode})
 	</insert>
 
 	<delete id="delete" parameterType="voter">

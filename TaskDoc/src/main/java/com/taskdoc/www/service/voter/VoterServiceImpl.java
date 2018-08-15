@@ -17,20 +17,17 @@ public class VoterServiceImpl implements VoterService{
 
 	@Override
 	public List<VoterVO> voterList(int dsicode) {
-		// TODO Auto-generated method stub
 		return dao.voterList(dsicode);
 	}
 
 	@Override
 	public int voterInsert(VoterVO voterVo) {
-		// TODO Auto-generated method stub
 		return dao.voterInsert(voterVo);
 	}
 	
 	@Override
 	@Transactional
 	public int voterUpdate(VoterVO oldVo, VoterVO newVo) throws Exception{
-		// TODO Auto-generated method stub
 		dao.voterDelete(oldVo);
 		dao.voterInsert(newVo);
 		return 1;
@@ -39,7 +36,6 @@ public class VoterServiceImpl implements VoterService{
 
 	@Override
 	public int voterDelete(VoterVO voterVo) {
-		// TODO Auto-generated method stub
 		return dao.voterDelete(voterVo);
 	}
 
