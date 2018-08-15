@@ -39,22 +39,20 @@
 </body>
 <script type="text/javascript">
 	function ajaxTest() {
-		/* 채팅 내용 조회 해보자.*/
 		$.ajax({
-			type : 'GET',
-			url : 'chatcontents/'+'5',
+			type : 'DELETE',
+			url : 'decisionitem/' + '2',
 			success : function(response) {
-				if (response.length != -1) {
-					alert('채팅 내용 조회 성공!' + response);
-				} else if (response.length == 0) {
-					alert('Server or Client ERROR, 채팅방 내용 조회 실패');
+				if (response == 1) {
+					alert('의사결정 아이템 삭제 완료! ' + response);
+				} else if (response == -1) {
+					alert('Server or Client ERROR, 의사결정 아이템 삭제 실패');
 				}
 			},
 			error : function(e) {
 				alert("ERROR : " + e.statusText);
 			}
 		});
-		/*/채팅 내용 조회 해보자.*/
 	}
 </script>
 

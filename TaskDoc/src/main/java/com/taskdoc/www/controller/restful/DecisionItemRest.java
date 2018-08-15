@@ -21,26 +21,22 @@ public class DecisionItemRest {
 	
 	@RequestMapping(value="/{dscode}", method = RequestMethod.GET)
 	public List<DecisionItemVO> list(@PathVariable int dscode) {
-		// TODO Auto-generated method stub
 		return service.decisionItemList(dscode);
 	}
 	
 
 	@RequestMapping(value="", method = RequestMethod.POST)
 	public List<DecisionItemVO> insert(@RequestBody List<DecisionItemVO> itemList) {
-		// TODO Auto-generated method stub
 		return service.decisionItemInsert(itemList);
 	}
 
 	@RequestMapping(value="", method = RequestMethod.PUT)
 	public int update(@RequestBody DecisionItemVO decisionItemVo) {
-		// TODO Auto-generated method stub
 		return service.decisionItemUpdate(decisionItemVo);
 	}
 
 	@RequestMapping(value="/{dsicode}", method = RequestMethod.DELETE)
 	public int delete(@PathVariable int dsicode) {
-		// TODO Auto-generated method stub
 		return service.decisionItemDelete(dsicode);
 	}
 }

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,9 +12,9 @@
 <script type="text/javascript">
 	/* 의사결정 생성*/
 	var param = {
-		'dstitle' :'의사결정 제목',
-		'crcode' :'의사결정만들 채팅방 CRCODE',
-		'tcode' :'어떤 공용업무에 대한 의사결정을 만들것인지 TCODE'
+		'dstitle' : '의사결정 제목',
+		'crcode' : '의사결정만들 채팅방 CRCODE',
+		'tcode' : '어떤 공용업무에 대한 의사결정을 만들것인지 TCODE'
 	};
 	$.ajax({
 		type : 'POST',
@@ -33,11 +33,11 @@
 		}
 	});
 	/*/의사결정 생성 */
-	
+
 	/* 의사결정 삭제*/
 	$.ajax({
 		type : 'DELETE',
-		url : 'decision/'+'삭제할 의사결정코드 DSCODE',
+		url : 'decision/' + '삭제할 의사결정코드 DSCODE',
 		success : function(response) {
 			if (response == 1) {
 				alert('의사결정 삭제 완료! ' + response);
@@ -50,13 +50,13 @@
 		}
 	});
 	/*/의사결정 삭제 */
-	
+
 	/* 의사결정 수정*/
 	var param = {
-		'tcode' :'어떤 공용업무로  의사결정을 이동할것인지 TCODE',
-		'dstitle' :'의사결정 제목',
-		'dsclose' :'0이면아직안끝남 1이면 끝남',
-		'dscode' :'어떤의사결정 코드 수정할것인지'
+		'tcode' : '어떤 공용업무로  의사결정을 이동할것인지 TCODE',
+		'dstitle' : '의사결정 제목',
+		'dsclose' : '0이면아직안끝남 1이면 끝남',
+		'dscode' : '어떤의사결정 코드 수정할것인지'
 	};
 	$.ajax({
 		type : 'PUT',
@@ -75,7 +75,7 @@
 		}
 	});
 	/*/의사결정 수정 */
-	
+
 	/* 해당 채팅방 내의 모든 의사결정 리스트를 가져온다 */
 	$.ajax({
 		type : 'GET',
@@ -92,7 +92,88 @@
 		}
 	});
 	/*/해당 채팅방 내의 모든 의사결정 리스트를 가져온다 */
-	
-	
+
+	/* 의사결정 아이템 생성
+	항목이 하나일수도, 여러개일수도있기때문에 [{}] 형식으로 list형식으로 서버에 보내야된다
+	*/
+	var param = [{
+		'dsilist' : '의사결정 항목 이름',
+		'dsisequence' : '의사결정 항목 순서',
+		'dscode' : '의사결정 항목을 생성할 의사결정 DSCODE'
+	}];
+	$.ajax({
+		type : 'POST',
+		url : 'decisionitem',
+		contentType : 'application/json',
+		data : JSON.stringify(param),
+		success : function(response) {
+			if (response != -1) {
+				alert('의사결정 아이템 생성 완료! ' + response);
+			} else if (response == -1) {
+				alert('Server or Client ERROR, 의사결정 아이템 생성 실패');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+	/*/의사결정 아이템 생성*/
+
+	/* 의사결정 아이템 수정*/
+	var param = {
+		'dsilist' : '의사결정 항목 이름을 변경할 새로운 이름',
+		'dsicode' : '의사결정 항목을 변경할 의사결정 항목 DSICODE'
+	};
+	$.ajax({
+		type : 'PUT',
+		url : 'decisionitem',
+		contentType : 'application/json',
+		data : JSON.stringify(param),
+		success : function(response) {
+			if (response == 1) {
+				alert('의사결정 아이템 수정 완료! ' + response);
+			} else if (response == -1) {
+				alert('Server or Client ERROR, 의사결정 아이템 수정 실패');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+	/* /의사결정 아이템 수정*/
+
+	/* 의사결정 아이템 삭제*/
+	$.ajax({
+		type : 'DELETE',
+		url : 'decisionitem/' + '의사결정 항목을 삭제할 의사결정 항목 DSICODE',
+		success : function(response) {
+			if (response == 1) {
+				alert('의사결정 아이템 삭제 완료! ' + response);
+			} else if (response == -1) {
+				alert('Server or Client ERROR, 의사결정 아이템 삭제 실패');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+	/* /의사결정 아이템 삭제*/
+
+	/* 의사결정의 항목 조회*/
+	$.ajax({
+		type : 'GET',
+		url : 'decisionitem/' + '의사결정 항목을 삭제할 의사결정  DSCODE',
+		success : function(response) {
+			if (response.length != 1) {
+				alert('의사결정 항목 조회 완료! ' + response);
+			} else if (response == -1) {
+				alert('Server or Client ERROR, 의사결정 항목 조회 실패');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+	/*  /의사결정의 항목 조회*/
 </script>
 </html>

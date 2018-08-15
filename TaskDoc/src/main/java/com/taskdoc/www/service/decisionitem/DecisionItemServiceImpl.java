@@ -16,25 +16,21 @@ public class DecisionItemServiceImpl implements DecisionItemService{
 
 	@Override
 	public List<DecisionItemVO> decisionItemList(int dscode) {
-		// TODO Auto-generated method stub
 		return dao.decisionItemList(dscode);
 	}
 
 	@Override
 	public List<DecisionItemVO> decisionItemInsert(List<DecisionItemVO> itemList) {
-		// TODO Auto-generated method stub
 		return dao.decisionItemInsert(itemList);
 	}
 
 	@Override
 	public int decisionItemUpdate(DecisionItemVO decisionItemVo) {
-		// TODO Auto-generated method stub
 		return dao.decisionItemUpdate(decisionItemVo);
 	}
 
 	@Override
 	public int decisionItemDelete(int dsicode) {
-		// TODO Auto-generated method stub
 		return dao.decisionItemDelete(dsicode);
 	}
 }
