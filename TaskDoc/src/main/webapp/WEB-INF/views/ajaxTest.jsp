@@ -39,27 +39,24 @@
 </body>
 <script type="text/javascript">
 	function ajaxTest() {
-		/* 공용업무내 개인업무 생성. */
-		var param = {
-
-		};
+		
+		// 개인업무 내 메모 삭제
 		$.ajax({
-			type : 'POST',
-			url : 'privatetask',
-			contentType : 'application/json',
-			data : JSON.stringify(param),
+			type : 'DELETE',
+			url : 'memo/'+'삭제할 메모의 MCODE',
 			success : function(response) {
-				if (response != -1) {
-					alert('개인업무 생성 완료' + response);
+				if (response == 1) {
+					alert('메모 삭제 완료!');
 				} else if (response == -1) {
-					alert('Server or Client ERROR, 개인업무 생성 실패');
+					alert('Server or Client ERROR, 메모 삭제 실패');
 				}
 			},
 			error : function(e) {
 				alert("ERROR : " + e.statusText);
 			}
 		});
-		/*/공용업무내 개인업무 생성.  */
+		// /개인업무 내 메모 삭제
+		
 	}
 </script>
 

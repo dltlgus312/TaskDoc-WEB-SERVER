@@ -21,31 +21,26 @@ public class PrivateTaskRest {
 	
 	@RequestMapping(value = "/task/{tcode}", method = RequestMethod.GET)
 	public List<PrivateTaskVO> list(@PathVariable int tcode) {
-		// TODO Auto-generated method stub
 		return service.privateTaskList(tcode);
 	}
 	
 	@RequestMapping(value = "/user/{uid}", method = RequestMethod.GET)
 	public List<PrivateTaskVO> list(@PathVariable String uid) {
-		// TODO Auto-generated method stub
 		return service.privateTaskList(uid);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public int insert(@RequestBody PrivateTaskVO privateTaskVo) {
-		// TODO Auto-generated method stub
 		return service.privateTaskInsert(privateTaskVo);
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public int update(@RequestBody PrivateTaskVO privateTaskVo) {
-		// TODO Auto-generated method stub
 		return service.privateTaskupdate(privateTaskVo);
 	}
 	
 	@RequestMapping(value = "/{ptcode}", method = RequestMethod.DELETE)
 	public int delete(@PathVariable int ptcode) {
-		// TODO Auto-generated method stub
 		return service.privateTaskDelete(ptcode);
 	}
 }
