@@ -27,7 +27,12 @@ public class UserInfoDAOImpl implements UserInfoDAO {
 	@Override
 	public int insertUserInfo(UserInfoVO userInfoVo) {
 		// TODO Auto-generated method stub
-		return sql.insert(NAMESPACE + INSERT, userInfoVo);
+		try {
+			return sql.insert(NAMESPACE + INSERT, userInfoVo);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	@Override
