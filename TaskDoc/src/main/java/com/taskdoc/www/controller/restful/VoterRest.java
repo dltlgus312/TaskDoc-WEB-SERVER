@@ -23,13 +23,11 @@ public class VoterRest {
 	
 	@RequestMapping(value="/{dsicode}", method = RequestMethod.GET)
 	public List<VoterVO> list(@PathVariable int dsicode) {
-		// TODO Auto-generated method stub
 		return service.voterList(dsicode);
 	}
 	
 	@RequestMapping(value="", method = RequestMethod.POST)
 	public int insert(@RequestBody VoterVO voterVo) {
-		// TODO Auto-generated method stub
 		return service.voterInsert(voterVo);
 	}
 	
@@ -42,7 +40,6 @@ public class VoterRest {
 		try {
 			return service.voterUpdate(oldVo, newVo);
 		}catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			return -1;
 		}

@@ -137,7 +137,7 @@
 	});
 	/*/공용업무 삭제. */
 
-	/* 공용업무내의 모든 회의록 리스트를 가져온다 */
+	/* 해당 공용업무내의 모든 회의록 리스트를 가져온다 */
 	$.ajax({
 		type : 'GET',
 		url : 'chatroom/task/' + '해당 공용업무의  tcode',
@@ -152,6 +152,23 @@
 			alert("ERROR : " + e.statusText);
 		}
 	});
-	/*/공용업무내의 모든 회의록 리스트를 가져온다 */
+	/*/해당 공용업무내의 모든 회의록 리스트를 가져온다 */
+	
+	/* 해당 공용업무내의 모든 의사결정 리스트를 가져온다 */
+	$.ajax({
+		type : 'GET',
+		url : 'decision/task/' + '해당 공용업무의  tcode',
+		success : function(response) {
+			if (response.length != 0) {
+				alert('의사결정 리스트 불러오기 성공!');
+			} else if (response.length == 0) {
+				alert('Server or Client ERROR, 의사결정 리스트 불러오기  실패');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+	/*/해당 공용업무내의 모든 의사결정 리스트를 가져온다  */
 </script>
 </html>

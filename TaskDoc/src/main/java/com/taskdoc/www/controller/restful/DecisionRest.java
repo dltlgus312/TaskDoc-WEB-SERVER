@@ -19,34 +19,34 @@ public class DecisionRest {
 	@Autowired
 	DecisionService service;
 	
+	//공용업무에서 불러올 의사결정 리스트들.
 	@RequestMapping(value="/task/{tcode}", method = RequestMethod.GET)
 	public List<DecisionVO> taskList(@PathVariable int tcode) {
-		// TODO Auto-generated method stub
 		return service.taskList(tcode);
 	}
-
+	
+	//채팅방에서 불러올 의사결정 리스트들
 	@RequestMapping(value="/room/{crcode}", method = RequestMethod.GET)
 	public List<DecisionVO> roomList(@PathVariable int crcode) {
-		// TODO Auto-generated method stub
 		return service.roomList(crcode);
 	}
 	
-
+	
+	//의사결정 생성
 	@RequestMapping(value="", method = RequestMethod.POST)
 	public int insert(@RequestBody DecisionVO decisionVo) {
-		// TODO Auto-generated method stub
 		return service.decisionInsert(decisionVo);
 	}
-
+	
+	//의사결정 수정
 	@RequestMapping(value="", method = RequestMethod.PUT)
 	public int update(@RequestBody DecisionVO decision) {
-		// TODO Auto-generated method stub
 		return service.decisionUpdate(decision);
 	}
-
+	
+	//의사결정 삭제
 	@RequestMapping(value="/{dscode}", method = RequestMethod.DELETE)
 	public int delete(@PathVariable int dscode) {
-		// TODO Auto-generated method stub
 		return service.decisionDelete(dscode);
 	}
 }
