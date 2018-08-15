@@ -20,7 +20,7 @@
 	</insert>
 	
 	<update id="update" parameterType="projectjoin">
-		UPDATE projectjoin SET ppermission=#{ppermission} pinvite=#{pinvite} WHERE pcode=#{pcode} AND uid=#{uid}
+		UPDATE projectjoin SET ppermission=#{ppermission}, pinvite=#{pinvite} WHERE pcode=#{pcode} AND uid=#{uid}
 	</update>
 	
 	<delete id="delete" parameterType="projectjoin">
