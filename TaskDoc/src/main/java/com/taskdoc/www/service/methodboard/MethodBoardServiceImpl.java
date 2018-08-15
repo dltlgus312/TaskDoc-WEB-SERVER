@@ -16,31 +16,26 @@ public class MethodBoardServiceImpl implements MethodBoardService{
 
 	@Override
 	public List<MethodBoardVO> methodBoardList() {
-		// TODO Auto-generated method stub
 		return dao.methodBoardList();
 	}
 
 	@Override
 	public MethodBoardVO methodBoardView(int mbcode) {
-		// TODO Auto-generated method stub
 		return dao.methodBoardView(mbcode);
 	}
 
 	@Override
 	public int methodBoardInsert(MethodBoardVO methodBoard) {
-		// TODO Auto-generated method stub
 		return dao.methodBoardInsert(methodBoard);
 	}
 
 	@Override
 	public int methodBoardUpdate(MethodBoardVO methodBoard) {
-		// TODO Auto-generated method stub
 		return dao.methodBoardUpdate(methodBoard);
 	}
 
 	@Override
 	public int methodBoardDelete(int mbcode) {
-		// TODO Auto-generated method stub
 		return dao.methodBoardDelete(mbcode);
 	}
 }

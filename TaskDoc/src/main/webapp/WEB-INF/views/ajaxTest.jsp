@@ -40,26 +40,20 @@
 <script type="text/javascript">
 	function ajaxTest() {
 		var param = {
-			'oldVo' : {
-				'dsicode' : '1',
-				'uid' : 'a'
-			},
-			'newVo' : {
-				'dsicode' : '3',
-				'uid' : 'a'
-			}
-
+			'uid' : 'a',
+			'mbcode' : '1',
+			'mltitle' : '나ㅣ만의 방법론list명 수정하기'
 		};
 		$.ajax({
 			type : 'PUT',
-			url : 'voter',
+			url : 'methodlist',
 			contentType : 'application/json',
 			data : JSON.stringify(param),
 			success : function(response) {
 				if (response == 1) {
-					alert('의사결정 항목 선택 한거 다른걸로 수정 완료! ' + response);
+					alert('방법론 list mltitle 변경 완료! ' + response);
 				} else if (response == -1) {
-					alert('Server or Client ERROR, 의사결정 항목 선택 한거 다른걸로 수정 실패');
+					alert('Server or Client ERROR, 방법론 list mltitle 변경실패');
 				}
 			},
 			error : function(e) {

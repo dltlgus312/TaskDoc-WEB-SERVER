@@ -14,9 +14,9 @@
 			type : 'GET',
 			url : 'method/all',
 			success : function(response) {
-				if (response.length != -1) {
+				if (response.length != 0) {
 					alert('모든 방법론 조회 완료! ' + response);
-				} else if (response == -1) {
+				} else if (response.length == 0) {
 					alert('Server or Client ERROR, 모든 방법론 조회 실패!');
 				}
 			},
@@ -33,9 +33,9 @@
 			type : 'GET',
 			url : 'method/' + '해당 방법론의 코드 mcode',
 			success : function(response) {
-				if (response.length != -1) {
+				if (response.length != 0) {
 					alert('모든 방법론 조회 완료! ' + response);
-				} else if (response == -1) {
+				} else if (response.length == 0) {
 					alert('Server or Client ERROR, 모든 방법론 조회 실패!');
 				}
 			},
@@ -50,9 +50,9 @@
 			type : 'GET',
 			url : 'methodlist/' + '내아이디',
 			success : function(response) {
-				if (response.length != -1) {
+				if (response.length != 0) {
 					alert('내가 추가한 방법론 리스트 조회 완료! ' + response);
-				} else if (response == -1) {
+				} else if (response.length == 0) {
 					alert('Server or Client ERROR, 내가 추가한 방법론 리스트 조회 실패!');
 				}
 			},
@@ -132,6 +132,106 @@
 			}
 		});
 		/* /방법론 list를 추가했던거 삭제하기 */
+
+		/*방법론 게시판 목록 전체 불러오기*/
+		$.ajax({
+			type : 'GET',
+			url : 'methodboard/all',
+			success : function(response) {
+				if (response.length != 0) {
+					alert('방법론 게시판 목록 전체 불러오기 완료! ' + response);
+				} else if (response.length == 0) {
+					alert('Server or Client ERROR, 방법론 게시판 목록 전체 불러오기  실패!');
+				}
+			},
+			error : function(e) {
+				alert("ERROR : " + e.statusText);
+			}
+		});
+		/*방법론 게시판 목록 전체 불러오기*/
+
+		/*방법론 게시판클릭시 올린 글 상세보기 */
+		$.ajax({
+			type : 'GET',
+			url : 'methodboard/' + '게시판 글의 번호 MBCODE(primary key)',
+			success : function(response) {
+				if (response.length != 0) {
+					alert('글 상세보기 조회 완료! ' + response);
+				} else if (response.length == 0) {
+					alert('Server or Client ERROR, 글 상세보기 조회   실패!');
+				}
+			},
+			error : function(e) {
+				alert("ERROR : " + e.statusText);
+			}
+		});
+		/*/방법론 게시판클릭시 올린 글 상세보기 */
+
+		/* 게시글 작성하기*/
+		var param = {
+			'mbtitle' : '게시글 제목',
+			'mbcontents' : '게시글 내용',
+			'pcode' : '프로젝트코드',
+			'uid' : '내아이디'
+		};
+		$.ajax({
+			type : 'POST',
+			url : 'methodboard',
+			contentType : 'application/json',
+			data : JSON.stringify(param),
+			success : function(response) {
+				if (response == 1) {
+					alert('게시글 작성하기 완료! ' + response);
+				} else if (response == -1) {
+					alert('Server or Client ERROR, 게시글 작성하기 실패');
+				}
+			},
+			error : function(e) {
+				alert("ERROR : " + e.statusText);
+			}
+		});
+		/*/게시글 작성하기*/
+
+		/* 게시글 수정하기*/
+		var param = {
+			'mbtitle' : '변경할 게시글 제목',
+			'mbcontents' : '변경할 게시글 내용',
+			'mbcode' : '변경할 게시글 mbcode (primary key)'
+		};
+		$.ajax({
+			type : 'PUT',
+			url : 'methodboard',
+			contentType : 'application/json',
+			data : JSON.stringify(param),
+			success : function(response) {
+				if (response == 1) {
+					alert('게시글 수정하기 완료! ' + response);
+				} else if (response == -1) {
+					alert('Server or Client ERROR, 게시글 수정하기 실패');
+				}
+			},
+			error : function(e) {
+				alert("ERROR : " + e.statusText);
+			}
+		});
+		/*/게시글 수정하기*/
+
+		/*게시글 삭제하기 */
+		$.ajax({
+			type : 'DELETE',
+			url : 'methodboard/' + '삭제할 게시판 글의 번호 MBCODE(primary key)',
+			success : function(response) {
+				if (response == 1) {
+					alert('게시글 삭제 완료! ' + response);
+				} else if (response==-1) {
+					alert('Server or Client ERROR, 게시글 삭제   실패!');
+				}
+			},
+			error : function(e) {
+				alert("ERROR : " + e.statusText);
+			}
+		});
+		/*/게시글 삭제하기 */
 	</script>
 </body>
 </html>

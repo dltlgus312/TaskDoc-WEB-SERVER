@@ -22,31 +22,28 @@ public class MethodBoardRest {
 	// 게시판 목록 전체를 받아온다. ( mbcode, mbtitle, mbdate )
 	@RequestMapping(value="/all", method=RequestMethod.GET)
 	public List<MethodBoardVO> list() {
-		// TODO Auto-generated method stub
 		return service.methodBoardList();
 	}
 
+	// 게시판의 글 상세보기
 	@RequestMapping(value="/{mbcode}", method=RequestMethod.GET)
 	public MethodBoardVO view(@PathVariable int mbcode) {
-		// TODO Auto-generated method stub
 		return service.methodBoardView(mbcode);
 	}
 	
+	//게시글 작성하기
 	@RequestMapping(value="", method=RequestMethod.POST)
 	public int insert(@RequestBody MethodBoardVO methodBoard) {
-		// TODO Auto-generated method stub
 		return service.methodBoardInsert(methodBoard);
 	}
 
 	@RequestMapping(value="", method=RequestMethod.PUT)
 	public int update(@RequestBody MethodBoardVO methodBoard) {
-		// TODO Auto-generated method stub
 		return service.methodBoardUpdate(methodBoard);
 	}
 
 	@RequestMapping(value="/{mbcode}", method=RequestMethod.DELETE)
 	public int delete(int mbcode) {
-		// TODO Auto-generated method stub
 		return service.methodBoardDelete(mbcode);
 	}
 }
