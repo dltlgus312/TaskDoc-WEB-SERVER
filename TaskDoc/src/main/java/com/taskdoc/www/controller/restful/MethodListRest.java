@@ -22,25 +22,21 @@ public class MethodListRest {
 	// 내목록에 추가한 게시판을 보여준다.
 	@RequestMapping(value = "/{uid}", method = RequestMethod.GET)
 	public List<MethodListVO> list(@PathVariable String uid) {
-		// TODO Auto-generated method stub
 		return service.methodListList(uid);
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.POST)
 	public int insert(@RequestBody MethodListVO methodListVo) {
-		// TODO Auto-generated method stub
 		return service.methodListInsert(methodListVo);
 	}
 
 	@RequestMapping(value="", method=RequestMethod.PUT)
 	public int update(@RequestBody MethodListVO methodListVo) {
-		// TODO Auto-generated method stub
 		return service.methodListUpdate(methodListVo);
 	}
 
 	@RequestMapping(value="", method=RequestMethod.DELETE)
 	public int delete(@RequestBody MethodListVO methodListVo) {
-		// TODO Auto-generated method stub
 		return service.methodListDelete(methodListVo);
 	}
 }

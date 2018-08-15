@@ -17,25 +17,21 @@ public class MethodListServiceImpl implements MethodListService{
 
 	@Override
 	public List<MethodListVO> methodListList(String uid) {
-		// TODO Auto-generated method stub
 		return dao.methodListList(uid);
 	}
 
 	@Override
 	public int methodListInsert(MethodListVO methodListVo) {
-		// TODO Auto-generated method stub
 		return dao.methodListInsert(methodListVo);
 	}
 
 	@Override
 	public int methodListUpdate(MethodListVO methodListVo) {
-		// TODO Auto-generated method stub
 		return dao.methodListUpdate(methodListVo);
 	}
 
 	@Override
 	public int methodListDelete(MethodListVO methodListVo) {
-		// TODO Auto-generated method stub
 		return dao.methodListDelete(methodListVo);
 	}
 }
