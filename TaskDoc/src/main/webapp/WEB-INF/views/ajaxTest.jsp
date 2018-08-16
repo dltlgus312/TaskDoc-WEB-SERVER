@@ -41,19 +41,18 @@
 	function ajaxTest() {
 		var param = {
 			'uid' : 'a',
-			'mbcode' : '1',
-			'mltitle' : '나ㅣ만의 방법론list명 수정하기'
+			'pcode' : '5'
 		};
 		$.ajax({
-			type : 'PUT',
-			url : 'methodlist',
-			contentType : 'application/json',
-			data : JSON.stringify(param),
+			type : 'GET',
+			url : 'chatroomjoin/room?' + JSON.stringify(param),
+			contentType : 'application/json;charset=utf-8',
+			dataType : 'json',
 			success : function(response) {
 				if (response == 1) {
-					alert('방법론 list mltitle 변경 완료! ' + response);
+					alert('나의 채팅방 리스트 조회성공 ' + response);
 				} else if (response == -1) {
-					alert('Server or Client ERROR, 방법론 list mltitle 변경실패');
+					alert('Server or Client ERROR, 나의 채팅방 리스트 조회 실패');
 				}
 			},
 			error : function(e) {
