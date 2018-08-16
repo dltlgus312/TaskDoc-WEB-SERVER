@@ -4,36 +4,96 @@
 <html>
 
 <!-- sidebar js -->
+<!-- <script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script
 	src="${pageContext.request.contextPath }/resources/js/sidebar/jquery-ui-1.11.4.custom.min.js"></script>
 <script
-	src="${pageContext.request.contextPath }/resources/js/sidebar/sidebar.js"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/sidebar/sidebar.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/sidebar/normalize.css">
+	src="${pageContext.request.contextPath }/resources/js/sidebar/sidebar.js?ver=162"></script>
 <!-- sidebar js -->
 
+<!-- sidebar css  -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/sidebar/sidebar.css?ver=132">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/sidebar/normalize.css">
+<!-- sidebar css  -->
+
+<!-- test -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/sidebar/menu/styles.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/sidebar/menu/slinky.min.css">
+<!-- test -->
 <body>
-	<aside class="sidebar">
+	<!-- sidebar wrap -->
+	<aside class="sidebar" style="left:-320px;"> <!-- sidebar content wrap div -->
 	<div class="sidebar-content">
-		<div style="background: linear-gradient(to right, #ff7f00, #aa4a00); 
-		width: 198px; height: 117px; margin-left: -18px; margin-top: -19.7px;">
-		<h3>Task Doc</h3>
-		<h1>프로젝트 통합 관리 시스템</h1>
+		<!-- 상단 그라데이션 로고 div -->
+		<div
+			style="background: linear-gradient(to right, #ff7f00, #aa4a00); width: 249.9px; height: 117px; margin-left: -19.85px; margin-top: -20px; margin-bottom: 20px;">
+			<div style="padding-top: 60px;">
+				<span
+					style="font-size: 25px; font-family: Title_Medium; margin-left: 15px; text-transform: none">Task
+					Doc</span>
+			</div>
+			<div>
+				<span style="font-family: Title_Light; margin-left: 15px;">프로젝트
+					통합 관리 시스템</span>
+			</div>
 		</div>
-		<div>ddd</div>
-		<div>ddd</div>
-		<div>ddd</div>
-		<div>ddd</div>
-		<div>ddd</div>
+		<!-- /상단 그라데이션 로고 div -->
+		<div id="menu">
+			<ul>
+				<li><a href="/"> <img
+						src="${pageContext.request.contextPath }/resources/img/img_describe.png"
+						style="width: 25px;"> <span
+						style="margin-left: 15px; font-size: 16px;">프로젝트</span>
+				</a></li>
+
+				<li><a href="#"> <img
+						src="${pageContext.request.contextPath }/resources/img/img_task.png"
+						style="width: 25px;"> <span
+						style="margin-left: 15px; font-size: 16px;">개인업무</span>
+				</a></li>
+				<li><a href="#"> <img
+						src="${pageContext.request.contextPath }/resources/img/img_describe.png"
+						style="width: 25px;"> <span
+						style="margin-left: 15px; font-size: 16px;">내정보</span>
+				</a></li>
+				<li><a href="#"> <img
+						src="${pageContext.request.contextPath }/resources/img/img_homepage.png"
+						style="width: 25px;"> <span
+						style="margin-left: 15px; font-size: 16px;">홈페이지</span>
+				</a></li>
+				<li><a href="#"> <img
+						src="${pageContext.request.contextPath }/resources/img/img_settings.png"
+						style="width: 25px;"> <span
+						style="margin-left: 15px; font-size: 16px;">설정</span>
+				</a></li>
+				<li><span style="margin-left: 15px; font-size: 16px;color:black;text-transform: none">QUIT</span></li>
+				<li><a href="#"> <img
+						src="${pageContext.request.contextPath }/resources/img/img_logout.png"
+						style="width: 25px;"> <span
+						style="margin-left: 15px; font-size: 16px;">로그아웃</span>
+				</a></li>
+			</ul>
+		</div>
+
 	</div>
+	<!-- /sidebar content wrap div --> <!-- 열고닫는 button -->
 	<button>
 		<span class="sidebar-btn">MENU</span>
 	</button>
-	</aside>
+	<!-- /열고닫는 button --> </aside>
+	<!-- /sidebar wrap -->
 </body>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
+<script
+	src="${pageContext.request.contextPath }/resources/js/sidebar/menu/slinky.min.js"></script>
+<script>
+	const slinky = $('#menu').slinky()
+</script>
 </html>

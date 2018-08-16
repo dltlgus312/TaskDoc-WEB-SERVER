@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class Home {
+	//test
 	@RequestMapping(value = "/ajaxTest", method = RequestMethod.GET)
 	public String ajaxTest() {
 		return "ajaxTest";
@@ -15,6 +16,11 @@ public class Home {
 	public String sidetest() {
 		return "/fix/sidebar";
 	}
+	@RequestMapping(value = "/tetete", method = RequestMethod.GET)
+	public String tetete() {
+		return "tetete";
+	}
+	//test
 	
 	//header side footer 고정
 	//body change

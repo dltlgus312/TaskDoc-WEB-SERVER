@@ -11,9 +11,9 @@ $(function() {
 			$sidebarButton.find('span').text('CLOSE');
 		} else {
 			$sidebar.stop(true).animate({
-				left : '-270px'
+				left : '-320px'
 			}, duration, 'easeInBack');
-			$sidebarButton.find('span').text('OPEN');
+			$sidebarButton.find('span').text('MENU');
 		}
 		;
 	});

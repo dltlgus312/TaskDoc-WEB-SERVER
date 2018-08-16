@@ -38,7 +38,7 @@
 <body>
 	<div class="container">
 		<form class="form-signin">
-			<h2 class="form-signin-heading">Please sign in</h2>
+			<h2 class="form-signin-heading" style="font-family: Title_Light">Please sign in</h2>
 			<input type="text" id=uid class="form-control" placeholder="ID"
 				required autofocus> <input type="password" id="upasswd"
 				class="form-control" placeholder="PASSWD">
