@@ -15,7 +15,7 @@
 <!-- Jquery -->
 <!-- Custom styles for this template -->
 <link
-	href="${pageContext.request.contextPath }/resources/css/user/login.css"
+	href="${pageContext.request.contextPath }/resources/css/user/login.css?ver=4552"
 	rel="stylesheet">
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
@@ -34,11 +34,6 @@
 <!--/TaskDocMain css -> For button use  -->
 </head>
 
-<style>
-#uid, #upasswd,h2, label {
-	font-family: Title_Light;
-}
-</style>
 
 <body>
 	<div class="container">
@@ -58,9 +53,41 @@
 				<button type="button" class="goMain" style="font-size: 13px;">Cancel</button>
 			</div>
 		</form>
+
+		<!-- progressbar div -->
+		<div id="myProgress">
+			<div id="myBar">10%</div>
+		</div>
+		<!-- /progressbar div -->
+
 	</div>
 </body>
 <script type="text/javascript">
+	//login창 load시 progress bar 숨기자.
+	$(document).ready(function() {
+		$("#myBar").hide();
+	});
+	//login창 load시 progress bar 숨기자.
+
+	//progress bar function
+	function move() {
+		var elem = document.getElementById("myBar");
+		var width = 10;
+		var id = setInterval(frame, 10);
+		function frame() {
+			if (width >= 100) {
+				clearInterval(id);
+			} else {
+				width++;
+				elem.style.width = width + '%';
+				elem.innerHTML = width * 1 + '%';
+				if (width == 100)
+					location.href = '/';
+			}
+		}
+	}
+	//progress bar function
+
 	var testHost = 'http://localhost:8080/';
 	var serverHost = '';
 	$(function() {
@@ -93,6 +120,9 @@
 						alert('비밀번호가 틀렸습니다.');
 					} else if (response == 1) {
 						alert('로그인 완료');
+						$('.form-signin').css('opacity', 0.3);
+						$("#myBar").show();
+						move();
 					}
 
 				},

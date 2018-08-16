@@ -30,16 +30,8 @@
 <!--/TaskDocMain css -> For button use  -->
 
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/resources/css/user/join.css" />
+	href="${pageContext.request.contextPath }/resources/css/user/join.css?ver=54" />
 </head>
-
-<!-- font 지정 -->
-<style type="text/css">
-h4, label, span, #uid, #upasswd, #uname, #ustate, #uphone {
-	font-family: Title_Light;
-}
-</style>
-<!-- font 지정 -->
 
 <body>
 	<div>
