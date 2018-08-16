@@ -43,15 +43,18 @@ result = int >> success = 1, fail = -1
 		/project
 		data = map  >  ( KEY = "project" : ProjectVO, "userInfo" : UserInfoVO )
 		result = int ( Generate Key )
+		method = POST
 		
 	수정 
 		/project
 		data = ProjectVO
 		result = int
+		method = PUT
 	
 	삭제
 		/project/{pcode}
 		result = int
+		method = DELETE
 		
 프로젝트 조인
 	받기
@@ -89,67 +92,81 @@ result = int >> success = 1, fail = -1
 		1. 프로젝트의 모든 공지 리스트
 			/notice/project/{pcode}
 			result = List<NoticeVO>	 >  ( ncode, ntitle, ndate )
+			method = GET
 		
 		2. 공지사항 한개의 내용
 			/notice/{ncode}
 			result = NoticeVo	>  ( ALL )
-	
-	생성
+			method = GET
+			
+	생성	
 		/notice
 		data = NoticeVO
 		result = int
+		method = POST
 		
 	수정
 		/notice
 		data = NoticeVO
 		result = int
+		method = PUT
 	
 	삭제
 		/notice/{ncode}
 		result = int
+		method = DELETE
 			
 공유 업무
 	받기
 		/publictask/{pcode}
 		result = List<ProjectVO>
+		method = GET
 	
 	생성
 		/publictask
 		data = PublicTaskVO
 		result = int ( Generate Key )
+		method = POST
 		
 	수정
 		/publictask
 		data = PublicTaskVO
 		result = int
+		method = PUT
 	
 	삭제
 		/publictask/{tcode}
 		result = int
+		method = DELETE
 		
 개인 업무
 	받기
 		1. 유저의 모든 개인업무
 			/privatetask/user/{uid}
 			result = List<PrivateTaskVO>
+			method = GET
 			
 		2. 공용 업무 한개의 모든 개인 업무
 			/privatetask/task/{tcode}
 			result = List<PrivateTaskVO>
+			method = GET
 	
 	생성
 		/privatetask
 		data = PrivateTaskVO
 		result = int ( Generate Key )
+		method = POST
 		
 	수정
 		/privatetask
 		data = PrivateTaskVO
 		result = int
+		method = PUT
 		
 	삭제
 		/privatetask/{ptcode}
 		result = int
+		method = DELETE
 		
 개인 업무 메모
 	받기
@@ -219,24 +236,29 @@ result = int >> success = 1, fail = -1
 		1. 업무 코드로 받아오기
 			/chatroom/task/{tcode}
 			result = List<ChatRoomVO>
+			method = POST
 		
 		2. 채팅방 코드로 받아오기
 			/chatroom/room/{crcode}
 			result = List<ChatRoomVO>
+			method = POST
 		
 	생성
 		/chatroom
 		data = map  >  ( KEY = "project" : ProjectVO, "userInfo" : UserInfoVO, "chatRoom" : ChatRoomVO )
 		result = int ( Generate Key )
+		method = POST
 		
 	수정
 		/chatroom
 		data = ChatRoomVO
 		result = int
+		method = PUT
 		
 	삭제 
 		/chatroom/{crcode}
 		result = int
+		method = DELETE
 
 채팅방 참여
 	받기
