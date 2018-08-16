@@ -11,6 +11,10 @@ public class Home {
 	public String ajaxTest() {
 		return "ajaxTest";
 	}
+	@RequestMapping(value = "/sidebar", method = RequestMethod.GET)
+	public String sidetest() {
+		return "/fix/sidebar";
+	}
 	
 	//header side footer 고정
 	//body change

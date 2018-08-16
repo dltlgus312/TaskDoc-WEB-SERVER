@@ -26,4 +26,6 @@ public class User {
 	public String infoEdit() {
 		return "/user/infoEdit";
 	}
+	
+	
 }
