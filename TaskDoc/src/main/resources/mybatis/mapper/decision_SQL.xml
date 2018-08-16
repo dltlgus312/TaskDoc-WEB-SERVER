@@ -15,7 +15,7 @@
 	</select>
 	
 	<select id="view" resultType="decision" parameterType="Integer">
-		SELECT * FROM decision WHERE dsicode=#{dsicode}
+		SELECT * FROM decision WHERE dscode=#{dscode}
 	</select>
 
 	<insert id="insert" parameterType="decision" useGeneratedKeys="true" keyProperty="dscode">
