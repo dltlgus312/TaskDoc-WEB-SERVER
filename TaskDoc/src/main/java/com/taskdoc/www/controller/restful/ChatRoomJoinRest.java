@@ -19,12 +19,12 @@ public class ChatRoomJoinRest {
 	@Autowired
 	ChatRoomJoinService service;
 	
-	@RequestMapping(value = "/room", method = RequestMethod.GET)
+	@RequestMapping(value = "/room", method = RequestMethod.POST)
 	public List<ChatRoomVO> projectList(@RequestBody ChatRoomJoinVO chatRoomJoinVo) {
 		return service.roomList(chatRoomJoinVo);
 	}
 	
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public List<String> userList(@RequestBody ChatRoomJoinVO chatRoomJoinVo) {
 		return service.userList(chatRoomJoinVo);
 	}

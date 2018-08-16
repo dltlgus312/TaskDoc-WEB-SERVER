@@ -23,7 +23,11 @@
 	</insert>
 
 	<update id="update" parameterType="decision">
+<<<<<<< HEAD
 		UPDATE decision SET tcode=#{tcode}, dstitle=#{dstitle}, close=#{close} WHERE dscode=#{dscode}
+=======
+		UPDATE decision SET tcode=#{tcode}, dstitle=#{dstitle}, dsclose=#{dsclose} WHERE dscode=#{dscode}
+>>>>>>> refs/heads/SQL_DTO
 	</update>
 	
 	<delete id="delete">
