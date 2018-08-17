@@ -19,15 +19,15 @@ public class Project {
 	}
 
 	//session
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	@RequestMapping(value = "/create")
 	public String create() {
-		return "/active/project/create";
+		return "/active/project/window/create";
 	}
 
 	//session
 	@RequestMapping(value = "/userInvite", method = RequestMethod.GET)
 	public String userInvite() {
-		return "/active/project/userInvite";
+		return "/active/project/window/userInvite";
 	}
 
 	//session
@@ -39,6 +39,6 @@ public class Project {
 	//session
 	@RequestMapping(value = "/notice", method = RequestMethod.GET)
 	public String notice() {
-		return "/active/project/notice";
+		return "/active/project/window/notice";
 	}
 }

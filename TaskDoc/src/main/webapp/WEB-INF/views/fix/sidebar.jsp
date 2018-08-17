@@ -47,7 +47,7 @@
 		<!-- /상단 그라데이션 로고 div -->
 		<div id="menu">
 			<ul>
-				<li><a href="/"> <img
+				<li><a href="/ajaxTest"> <img
 						src="${pageContext.request.contextPath }/resources/img/img_describe.png"
 						style="width: 25px;"> <span
 						style="margin-left: 15px; font-size: 16px;">프로젝트</span>
@@ -73,7 +73,11 @@
 						style="width: 25px;"> <span
 						style="margin-left: 15px; font-size: 16px;">설정</span>
 				</a></li>
-				<li><span style="margin-left: 15px; font-size: 16px;color:black;text-transform: none">QUIT</span></li>
+				<li>
+				<hr width="227px" color="darkgray" noshade style="margin-bottom:10px;"/>
+				</li>
+				<li><span style="margin-left: 15px; font-size: 16px;color:darkgray;text-transform: none;">QUIT</span></li>
+				
 				<li><a href="#"> <img
 						src="${pageContext.request.contextPath }/resources/img/img_logout.png"
 						style="width: 25px;"> <span
@@ -87,8 +91,10 @@
 	<button>
 		<span class="sidebar-btn">MENU</span>
 	</button>
-	<!-- /열고닫는 button --> </aside>
+	<!-- /열고닫는 button --> 
+	</aside>
 	<!-- /sidebar wrap -->
+
 </body>
 <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
 <script
