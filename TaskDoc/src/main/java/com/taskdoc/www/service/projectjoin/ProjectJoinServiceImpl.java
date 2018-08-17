@@ -70,6 +70,8 @@ public class ProjectJoinServiceImpl implements ProjectJoinService{
 	@Override
 	public int projectJoinInsert(ProjectJoinVO projectJoinVo) {
 		// TODO Auto-generated method stub
+		projectJoinVo.setPinvite(0);
+		projectJoinVo.setPpermission("MEMBER");
 		return joinDao.projectJoinInsert(projectJoinVo);
 	}
 
