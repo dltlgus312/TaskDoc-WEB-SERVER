@@ -29,7 +29,7 @@ $("#project_create").click(function(){
 });
 
 $("#project_userinvite").click(function(){
-	 window.open("/project/userInvite?pcode="+"5","", "height=400, width=500, left="+ popupX + ", top="+ popupY + ", screenX="+ popupX + ", screenY= "+ popupY); 
+	 window.open("/project/userInvite?pcode="+"1","", "height=400, width=500, left="+ popupX + ", top="+ popupY + ", screenX="+ popupX + ", screenY= "+ popupY); 
 });
 	 /* 
 	//window.open post방식으로 값넘기기

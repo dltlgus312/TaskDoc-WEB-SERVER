@@ -22,7 +22,7 @@ function chatroom(){
 				'uid' : 'a',
 			},
 			'project' : {
-				'pcode' : '5',
+				'pcode' : '1',
 			}
 		};
 		$.ajax({

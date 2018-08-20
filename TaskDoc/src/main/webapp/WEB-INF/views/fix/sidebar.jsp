@@ -59,14 +59,14 @@
 						style="margin-left: 15px; font-size: 16px;">개인업무</span>
 				</a></li>
 				<li><a href="#"> <img
-						src="${pageContext.request.contextPath }/resources/img/img_describe.png"
+						src="${pageContext.request.contextPath }/resources/img/img_user.png"
 						style="width: 25px;"> <span
 						style="margin-left: 15px; font-size: 16px;">내정보</span>
 				</a></li>
 				<li><a href="#"> <img
-						src="${pageContext.request.contextPath }/resources/img/img_homepage.png"
+						src="${pageContext.request.contextPath }/resources/img/img_method.png"
 						style="width: 25px;"> <span
-						style="margin-left: 15px; font-size: 16px;">홈페이지</span>
+						style="margin-left: 15px; font-size: 16px;">게시판</span>
 				</a></li>
 				<li><a href="#"> <img
 						src="${pageContext.request.contextPath }/resources/img/img_settings.png"
@@ -76,7 +76,7 @@
 				<li>
 				<hr width="227px" color="darkgray" noshade style="margin-bottom:10px;"/>
 				</li>
-				<li><span style="margin-left: 15px; font-size: 16px;color:darkgray;text-transform: none;">QUIT</span></li>
+				<li><span style="margin-left: 15px; font-size: 16px;color:darkgray;text-transform: none;">SIGN OUT</span></li>
 				
 				<li><a href="#"> <img
 						src="${pageContext.request.contextPath }/resources/img/img_logout.png"
