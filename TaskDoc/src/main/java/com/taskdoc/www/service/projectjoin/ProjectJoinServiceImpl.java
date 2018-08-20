@@ -7,10 +7,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.taskdoc.www.database.dao.chatroomjoin.ChatRoomJoinDAO;
 import com.taskdoc.www.database.dao.project.ProjectDAO;
 import com.taskdoc.www.database.dao.projectjoin.ProjectJoinDAO;
 import com.taskdoc.www.database.dao.userinfo.UserInfoDAO;
+import com.taskdoc.www.database.dto.ChatRoomJoinVO;
 import com.taskdoc.www.database.dto.ProjectJoinVO;
 import com.taskdoc.www.database.dto.ProjectVO;
 import com.taskdoc.www.database.dto.UserInfoVO;
@@ -26,6 +29,9 @@ public class ProjectJoinServiceImpl implements ProjectJoinService{
 	
 	@Autowired
 	ProjectDAO projectDao;
+	
+	@Autowired
+	ChatRoomJoinDAO chatRoomJoinDao;
 	
 	@Override
 	public Map<String, Object> projectJoinList(String uid) {
@@ -73,8 +79,18 @@ public class ProjectJoinServiceImpl implements ProjectJoinService{
 	}
 
 	@Override
+	@Transactional
 	public int projectJoinUpdate(ProjectJoinVO projectJoinVo) {
-		return joinDao.projectJoinUpdate(projectJoinVo);
+		int result = joinDao.projectJoinUpdate(projectJoinVo);
+		
+		int crcode = chatRoomJoinDao.crcodeMin(projectJoinVo.getPcode());
+		ChatRoomJoinVO chatRoomJoinVo = new ChatRoomJoinVO();
+		chatRoomJoinVo.setCrcode(crcode);
+		chatRoomJoinVo.setPcode(projectJoinVo.getPcode());
+		chatRoomJoinVo.setUid(projectJoinVo.getUid());
+		chatRoomJoinDao.chatRoomJoinInsert(chatRoomJoinVo);
+		
+		return result;
 	}
 
 	@Override

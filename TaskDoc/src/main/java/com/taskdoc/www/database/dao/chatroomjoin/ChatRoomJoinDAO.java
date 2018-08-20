@@ -9,4 +9,5 @@ public interface ChatRoomJoinDAO {
 	public List<String> userList(ChatRoomJoinVO chatRoomJoinVo);
 	public int chatRoomJoinInsert(ChatRoomJoinVO chatRoomJoinVo);
 	public int chatRoomJoinDelete(ChatRoomJoinVO chatRoomJoinVo);
+	public int crcodeMin(int pcode);
 }
