@@ -384,6 +384,7 @@ result = int >> success = 1, fail = -1
 		
 	삭제 
 		/methodboard/{mbcode}
+		result = int
 		
 방법론 리스트 ( 내가 추가한 방법론 )
 	받기	>  내 방법론 모든 리스트
