@@ -42,7 +42,6 @@ public class ProjectServiceImpl implements ProjectService{
 		
 		ChatRoomVO chatRoomVo = new ChatRoomVO();
 		chatRoomVo.setCrmode(1);
-		chatRoomVo.setTcode(publicTaskVo.getTcode());
 		try {
 			chatRoomService.chatRoomInsert(chatRoomVo, userInfoVo, projectVo);
 		}catch(Exception e) {

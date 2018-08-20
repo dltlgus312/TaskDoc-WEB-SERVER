@@ -29,6 +29,7 @@
 
 		UPDATE userinfo SET
 		upasswd=#{upasswd},
+		uname=#{uname},
 		ustate=#{ustate},
 		uphone=#{uphone} WHERE
 		uid=#{uid}
