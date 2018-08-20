@@ -32,9 +32,11 @@ public class ChatRoomJoinDAOImpl implements ChatRoomJoinDAO {
 	}
 
 	@Override
-	public int chatRoomJoinInsert(ChatRoomJoinVO chatRoomJoinVo) {
-		// TODO Auto-generated method stub
-		return sqlSession.insert(NAMESPACE + INSERT, chatRoomJoinVo);
+	public List<ChatRoomJoinVO> chatRoomJoinInsert(List<ChatRoomJoinVO> chatRoomuser) {
+		for(ChatRoomJoinVO vo : chatRoomuser){
+			sqlSession.insert(NAMESPACE + INSERT, vo);
+		}
+		return chatRoomuser;
 	}
 
 	@Override

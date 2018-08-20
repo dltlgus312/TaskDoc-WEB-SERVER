@@ -39,20 +39,32 @@
 </body>
 <script type="text/javascript">
 	function ajaxTest() {
-		var param = {
-			'uid' : 'a',
-			'pcode' : '5'
-		};
+		var param = [ {
+			'dsilist' : '테스트2',
+			'dsisequence' : '2',
+			'dscode' : '1'
+		}, 
+		{
+			'dsilist' : '테스트3',
+			'dsisequence' : '3',
+			'dscode' : '1'
+		}, 
+		{
+			'dsilist' : '테스트4',
+			'dsisequence' : '4',
+			'dscode' : '1'
+		} ];
+		param.push({'dsilist':'pushtest','dsisequence':'55','dscode':1});
 		$.ajax({
 			type : 'POST',
-			url : 'chatroomjoin/room',
-			contentType : 'application/json;',
+			url : 'decisionitem',
+			contentType : 'application/json',
 			data : JSON.stringify(param),
 			success : function(response) {
-				if (response.length!= 0) {
-					alert('나의 채팅방 리스트 조회성공 ' + response);
-				} else if (response.length == 0) {
-					alert('Server or Client ERROR, 나의 채팅방 리스트 조회 실패');
+				if (response != -1) {
+					alert('의사결정 아이템 생성 완료! ' + response);
+				} else if (response == -1) {
+					alert('Server or Client ERROR, 의사결정 아이템 생성 실패');
 				}
 			},
 			error : function(e) {

@@ -30,8 +30,8 @@ public class ChatRoomJoinRest {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public int insert(@RequestBody ChatRoomJoinVO chatRoomJoinVo) {
-		return service.chatRoomJoinInsert(chatRoomJoinVo);
+	public List<ChatRoomJoinVO> insert(@RequestBody List<ChatRoomJoinVO> chatRoomuser) {
+		return service.chatRoomJoinInsert(chatRoomuser);
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.DELETE)

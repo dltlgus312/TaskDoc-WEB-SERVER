@@ -7,6 +7,6 @@ import com.taskdoc.www.database.dto.ChatRoomJoinVO;
 public interface ChatRoomJoinDAO {
 	public List<Integer> roomList(ChatRoomJoinVO chatRoomJoinVo);
 	public List<String> userList(ChatRoomJoinVO chatRoomJoinVo);
-	public int chatRoomJoinInsert(ChatRoomJoinVO chatRoomJoinVo);
+	public List<ChatRoomJoinVO> chatRoomJoinInsert(List<ChatRoomJoinVO> chatRoomuser);
 	public int chatRoomJoinDelete(ChatRoomJoinVO chatRoomJoinVo);
 }

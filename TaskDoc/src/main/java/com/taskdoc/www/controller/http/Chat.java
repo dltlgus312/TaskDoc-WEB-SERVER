@@ -22,6 +22,11 @@ public class Chat {
 	public String create() {
 		return "/active/chat/window/create";
 	}
+	//session
+	@RequestMapping(value = "/userInvite", method = RequestMethod.GET)
+	public String userinvite() {
+		return "/active/chat/window/userInvite";
+	}
 	
 	//session
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.GET)

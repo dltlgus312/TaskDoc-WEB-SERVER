@@ -54,7 +54,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 		chatRoomJoinVo.setPcode(projectVo.getPcode());
 		chatRoomJoinVo.setCrcode(chatRoomVo.getCrcode());
 		chatRoomJoinVo.setUid(userInfoVo.getUid());
-
+		//에러어어어어어어어어
 		return joinDao.chatRoomJoinInsert(chatRoomJoinVo);
 	}
 
