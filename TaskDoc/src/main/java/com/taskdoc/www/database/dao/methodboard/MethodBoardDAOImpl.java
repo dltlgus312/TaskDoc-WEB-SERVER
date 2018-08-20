@@ -13,6 +13,7 @@ public class MethodBoardDAOImpl implements MethodBoardDAO {
 	
 	private final String NAMESPACE="methodboard_SQL.";
 	private final String LIST="list";
+	private final String USERLIST="mylist";
 	private final String VIEW="view";
 	private final String INSERT="insert";
 	private final String UPDATE="update";
@@ -27,6 +28,12 @@ public class MethodBoardDAOImpl implements MethodBoardDAO {
 		return sql.selectList(NAMESPACE + LIST);
 	}
 
+	@Override
+	public List<MethodBoardVO> methodBoardMyList(String uid) {
+		// TODO Auto-generated method stub
+		return sql.selectList(NAMESPACE + USERLIST, uid);
+	}
+	
 	@Override
 	public MethodBoardVO methodBoardView(int mbcode) {
 		// TODO Auto-generated method stub
@@ -50,4 +57,5 @@ public class MethodBoardDAOImpl implements MethodBoardDAO {
 		// TODO Auto-generated method stub
 		return sql.delete(NAMESPACE + DELETE, mbcode);
 	}
+
 }
