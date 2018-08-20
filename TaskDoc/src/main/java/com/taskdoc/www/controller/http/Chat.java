@@ -20,25 +20,25 @@ public class Chat {
 	//session
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create() {
-		return "/active/chat/create";
+		return "/active/chat/window/create";
 	}
 	
 	//session
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.GET)
 	public String fileUpload() {
-		return "/active/chat/fileUpload";
+		return "/active/chat/window/fileUpload";
 	}
 
 	//session
 	@RequestMapping(value = "/decision", method = RequestMethod.GET)
 	public String decision() {
-		return "/active/chat/decision";
+		return "/active/chat/window/decision";
 	}
 
 	//session
 	@RequestMapping(value = "/focus", method = RequestMethod.GET)
 	public String focus() {
-		return "/active/chat/focus";
+		return "/active/chat/window/focus";
 	}
 
 	//session

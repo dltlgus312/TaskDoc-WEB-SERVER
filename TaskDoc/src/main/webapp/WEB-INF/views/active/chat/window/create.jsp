@@ -3,39 +3,48 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+<button type="button" onclick="chatroom()">버튼</button>
+
 <script type="text/javascript">
+//채팅방 생성
+function chatroom(){
 	var param = {
-			'userinfo' : {
-				'uid' : $("#example").val(),
+			'chatRoom' : {
+				//개인톡 형식이므로 crmode 2번
+				'crmode' : '2',
+			},
+			'userInfo' : {
+				'uid' : 'a',
 			},
 			'project' : {
-				'ptitle' : $("#example").val(),
-				'psubtitle' : $("#example").val(),
-				'psdate' : $("#example").val(),
-				'pedate' : $("#example").val()
+				'pcode' : '5',
 			}
 		};
 		$.ajax({
 			type : 'POST',
-			url : 'project',
+			url : '/chatroom',
 			contentType : 'application/json',
 			data : JSON.stringify(param),
 			success : function(response) {
-				if (response != -1) {
-					alert('프로젝트 생성 완료! 프로젝트의 pid값은'+response);
+				if (response>0) {
+					alert('채팅방 생성 완료! 채팅방 crcode값은'+response);
 				}
-				else if(response==-1){
-					alert('Server or Client ERROR, 프로젝트 생성 실패');
+				else if(response<0){
+					alert('Server or Client ERROR, 채팅방 생성 실패');
 				}
 			},
 			error : function(e) {
 				alert("ERROR : " + e.statusText);
 			}
 		});
-	</script>
+ }
+//채팅방 생성
+</script>
+	
 </body>
 </html>

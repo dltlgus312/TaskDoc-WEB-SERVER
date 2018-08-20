@@ -21,14 +21,14 @@
 	</div>
 </body>
 <script type="text/javascript">
+var popupX = (window.screen.width / 2) - (500 / 2);
+var popupY= (window.screen.height /2) - (400 / 2);
+
 $("#project_create").click(function(){
-	var popupX = (window.screen.width / 2) - (500 / 2);
-	var popupY= (window.screen.height /2) - (400 / 2);
 	 window.open("/project/create?id="+"a","", "height=400, width=500, left="+ popupX + ", top="+ popupY + ", screenX="+ popupX + ", screenY= "+ popupY); 
 });
+
 $("#project_userinvite").click(function(){
-	var popupX = (window.screen.width / 2) - (500 / 2);
-	var popupY= (window.screen.height /2) - (400 / 2);
 	 window.open("/project/userInvite?pcode="+"5","", "height=400, width=500, left="+ popupX + ", top="+ popupY + ", screenX="+ popupX + ", screenY= "+ popupY); 
 });
 	 /* 
@@ -44,8 +44,7 @@ $("#project_userinvite").click(function(){
     insert.setAttribute("value","ddddzz");             // value 속성을 삽입
     form.appendChild(insert);                       // form 엘리멘트에 input 엘리멘트 추가
     form.submit();   
- 	
- */
+ 	*/
 </script>
 <!-- 
 <script type="text/javascript">
@@ -64,7 +63,6 @@ $("#project_userinvite").click(function(){
 			 	ppermission;
 			 	pinvite;
 			}
-			
 			프로젝트들의 정보
 			projectList{
 				pcode;
@@ -73,10 +71,8 @@ $("#project_userinvite").click(function(){
 				psdate;
 				pedate;	
 			}
-			
 			pcode별로 프로젝트 list 나열하고, 프로젝트별 title, subtitle, psdate, pedate 설정하기
 			 */
-
 		},
 		error : function(e) {
 			alert("ERROR : " + e.statusText);
@@ -84,33 +80,6 @@ $("#project_userinvite").click(function(){
 	});
 
 	/* /내가 참가하는 모든 프로젝트를 검색*/
-
-	/* 프로젝트에 사람 초대 */
-	var param = {
-		'pcode' : '현재 PCODE',
-		'uid' : '초대할 ID',
-		'ppermission' : 'MEMBER',
-		'pinvite' : 0
-	};
-	$.ajax({
-		type : 'POST',
-		url : 'projectjoin',
-		contentType : 'application/json',
-		data : JSON.stringify(param),
-		success : function(response) {
-			if (response == 1) {
-				alert('프로젝트에 사람 초대 완료!');
-			} else {
-				alert('Server or Client ERROR, 프로젝트에 사람 초대  실패!');
-			}
-		},
-		error : function(e) {
-			alert("ERROR : " + e.statusText);
-		}
-	});
-
-	/*/프로젝트에 사람 초대 */
-
 	/* 프로젝트에 초대받은사람 수락할때  
 	 * projectjoin_SQL 다시알아보기★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	 */

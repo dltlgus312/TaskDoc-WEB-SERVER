@@ -1,5 +1,6 @@
 package com.taskdoc.www.controller.restful;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,12 @@ public class ProjectJoinRest {
 	@RequestMapping(value = "/collaboration/{pcode}", method = RequestMethod.GET)
 	public Map<String, Object> listUser(@PathVariable int pcode) {
 		return service.projectJoinListUser(pcode);
+	}
+	
+	//회원 초대시 회원이 프로젝트에 존재하는지 pcode와 uid를 이용해서 검색.
+	@RequestMapping(value = "/projectSelectid", method = RequestMethod.POST)
+	public List<ProjectJoinVO> listUser(@RequestBody ProjectJoinVO projectJoinVo) {
+		return service.projectSelectid(projectJoinVo);
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)

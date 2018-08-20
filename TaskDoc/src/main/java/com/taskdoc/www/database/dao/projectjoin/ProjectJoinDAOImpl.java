@@ -25,33 +25,33 @@ public class ProjectJoinDAOImpl implements ProjectJoinDAO {
 	// uid > Project list
 	@Override
 	public List<ProjectJoinVO> projectJoinList(String uid) {
-		// TODO Auto-generated method stub
 		return sql.selectList(NAMESPACE + LISTPROJECT, uid);
 	}
 	
 	// pcode > users list
 	@Override 
 	public List<ProjectJoinVO> projectJoinListUser(int pcode) {
-		// TODO Auto-generated method stub
 		return sql.selectList(NAMESPACE + LISTUSER, pcode);
 	}
 
 	@Override
 	public int projectJoinInsert(ProjectJoinVO projectJoinVo) {
-		// TODO Auto-generated method stub
 		return sql.insert(NAMESPACE + INSERT, projectJoinVo);
 	}
 
 	@Override
 	public int projectJoinUpdate(ProjectJoinVO projectJoinVo) {
-		// TODO Auto-generated method stub
 		return sql.update(NAMESPACE + UPDATE, projectJoinVo);
 	}
 
 	@Override
 	public int projectJoinDelete(ProjectJoinVO projectJoinVo) {
-		// TODO Auto-generated method stub
 		return sql.delete(NAMESPACE + DELETE, projectJoinVo);
+	}
+
+	@Override
+	public List<ProjectJoinVO> projectSelectid(ProjectJoinVO projectJoinVo) {
+		return sql.selectList(NAMESPACE+"projectSelectid", projectJoinVo);
 	}
 
 }

@@ -42,6 +42,8 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 		return roomDao.roomList(crcode);
 	}
 
+	
+	//채팅방생성
 	@Override
 	@Transactional
 	public int chatRoomInsert(ChatRoomVO chatRoomVo, UserInfoVO userInfoVo, ProjectVO projectVo) throws Exception {

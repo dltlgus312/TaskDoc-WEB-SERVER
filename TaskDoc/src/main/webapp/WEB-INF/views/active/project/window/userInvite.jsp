@@ -16,7 +16,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <%
-String pcode=request.getParameter("pcode");
+	String pcode = request.getParameter("pcode");
 %>
 <body>
 	<div class="container">
@@ -35,8 +35,8 @@ String pcode=request.getParameter("pcode");
 								style="VISIBILITY: hidden; WIDTH: 0px">
 
 
-							<button type="button"
-								class="btn btn-success btn-icon" onclick="userselect()">
+							<button type="button" class="btn btn-success btn-icon"
+								onclick="userselect()">
 								<i class="fa fa-check"></i> 검색하기
 							</button>
 						</div>
@@ -60,10 +60,12 @@ String pcode=request.getParameter("pcode");
 									<tbody>
 										<tr>
 											<th scope="row" id="num">1</th>
-											<td id="uid"></td>
+											<td id="uids"></td>
 											<td id="uname"></td>
-											<td><button type="button"
-													class="btn btn-default btn-icon" onclick="addProuser()">추가</button></td>
+											<td>
+												<button type="button" class="btn btn-default btn-icon"
+													onclick="addProuser()">추가</button>
+											</td>
 										</tr>
 									</tbody>
 									<!--Table body-->
@@ -86,46 +88,72 @@ String pcode=request.getParameter("pcode");
 </body>
 
 <script type="text/javascript">
-
+	var saveid = "";
+	var pcode =<%=pcode%>;
 	//프로젝트에 초대하기 위해 아이디 검색
-	function userselect(){
+	function userselect() {
+		//검색할때 projectjoin select해서 uid, pid 같으면 
+		// 이미 초대된 아이디 , 없으면 아래ajax호출
+		var param = {
+			'pcode' : pcode,
+			'uid' : $("#selectuid").val()
+		};
 		$.ajax({
 			type : 'GET',
 			url : '/userinfo/' + $("#selectuid").val(),
 			success : function(response) {
 				if ($("#selectuid").val() == response.uid) {
-					alert('아이디 검색 완료.');
+					$.ajax({
+						type : 'POST',
+						url : '/projectjoin/projectSelectid',
+						contentType : 'application/json',
+						data : JSON.stringify(param),
+						success : function(abc) {
+							if (abc.length <= 0) {
+								alert('초대 가능');
+								$("#tableDiv").show();
+								$("#uids").html(response.uid);
+								$("#uname").html(response.uname);
+								saveid = response.uid;
+							} else {
+								alert('이미 초대된 회원입니다.')
+							}
+						},
+						error : function(e) {
+							alert("ERROR : " + e.statusText);
+						}
+					});
 				} else {
-					alert('없는 아이디 입니다.');
+					alert('해당하는 아이디가 없습니다.');
+					$("#tableDiv").css('display', 'none');
 				}
 			},
 			error : function(e) {
 				alert("ERROR : " + e.statusText);
 			}
 		});
-		
+
 	}
 	//프로젝트에 초대하기 위해 아이디 검색
-
 
 	//아이디 검색후 프로젝트에 회원 초대, 이미 프로젝트에 추가되었는지 확인 해야함.  
 	function addProuser() {
 		var param = {
-			'pcode' : '<%=pcode%>',
-			'uid' : '초대할 ID',
-			'ppermission' : 'MEMBER',
-			'pinvite' : 0
+			'pcode' : pcode,
+			'uid' : saveid
 		};
 		$.ajax({
 			type : 'POST',
-			url : 'projectjoin',
+			url : '/projectjoin',
 			contentType : 'application/json',
 			data : JSON.stringify(param),
 			success : function(response) {
 				if (response == 1) {
 					alert('프로젝트에 사람 초대 완료!');
-				} else {
-					alert('Server or Client ERROR, 프로젝트에 사람 초대  실패!');
+					$("#tableDiv").css('display', 'none');
+					$("#selectuid").val("");
+				} else if (response == -1) {
+					alert('이미 초대된 회원입니다.!');
 				}
 			},
 			error : function(e) {

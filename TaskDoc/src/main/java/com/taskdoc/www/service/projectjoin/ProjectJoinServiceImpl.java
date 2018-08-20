@@ -29,7 +29,6 @@ public class ProjectJoinServiceImpl implements ProjectJoinService{
 	
 	@Override
 	public Map<String, Object> projectJoinList(String uid) {
-		// TODO Auto-generated method stub
 		 Map<String, Object> map = new HashMap<>();
 		List<ProjectVO> projectList = new ArrayList<>();
 		
@@ -47,7 +46,6 @@ public class ProjectJoinServiceImpl implements ProjectJoinService{
 
 	@Override
 	public Map<String, Object> projectJoinListUser(int pcode) {
-		// TODO Auto-generated method stub
 		List<ProjectJoinVO> userJoinListAll = joinDao.projectJoinListUser(pcode);
 		
 		List<ProjectJoinVO> joinList = new ArrayList<>();
@@ -69,7 +67,6 @@ public class ProjectJoinServiceImpl implements ProjectJoinService{
 
 	@Override
 	public int projectJoinInsert(ProjectJoinVO projectJoinVo) {
-		// TODO Auto-generated method stub
 		projectJoinVo.setPinvite(0);
 		projectJoinVo.setPpermission("MEMBER");
 		return joinDao.projectJoinInsert(projectJoinVo);
@@ -77,14 +74,17 @@ public class ProjectJoinServiceImpl implements ProjectJoinService{
 
 	@Override
 	public int projectJoinUpdate(ProjectJoinVO projectJoinVo) {
-		// TODO Auto-generated method stub
 		return joinDao.projectJoinUpdate(projectJoinVo);
 	}
 
 	@Override
 	public int projectJoinDelete(ProjectJoinVO projectJoinVo) {
-		// TODO Auto-generated method stub
 		return joinDao.projectJoinDelete(projectJoinVo);
+	}
+
+	@Override
+	public List<ProjectJoinVO> projectSelectid(ProjectJoinVO projectJoinVo) {
+		return joinDao.projectSelectid(projectJoinVo);
 	}
 
 }

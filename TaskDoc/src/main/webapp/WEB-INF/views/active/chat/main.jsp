@@ -10,13 +10,12 @@
 
 	<script type="text/javascript">
 		/* 프로젝트내에서 내가 참여하고 있는 채팅방 리스트 ( focus 제외 )*/
-		// --> 400 ERROR 발생
 		var param = {
 			'uid' : '현재 UID',
 			'pcode' : '내 프로젝트 PCODE'
 		};
 		$.ajax({
-			type : 'GET',
+			type : 'POST',
 			url : 'chatroomjoin/room',
 			contentType : 'application/json',
 			data : JSON.stringify(param),
@@ -34,13 +33,12 @@
 		/*/프로젝트내에서 내가 참여하고 있는 채팅방 리스트 ( focus 제외 ) */
 
 		/* 채팅방에 참여 중인 유저 리스트 */
-		// --> 400 ERROR 발생
 		var param = {
 			'crcode' : '현재 채팅방  CROCODE',
 			'pcode' : '내 프로젝트  PCODE'
 		};
 		$.ajax({
-			type : 'GET',
+			type : 'POST',
 			url : 'chatroomjoin/user',
 			contentType : 'application/json',
 			data : JSON.stringify(param),
