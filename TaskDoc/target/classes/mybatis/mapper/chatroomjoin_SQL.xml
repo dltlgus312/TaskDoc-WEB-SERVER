@@ -14,6 +14,10 @@
 		SELECT uid FROM chatroomjoin WHERE crcode=#{crcode} AND pcode=#{pcode}
 	</select>
 	
+	<select id="crcodemin" resultType="Integer" parameterType="Integer">
+		SELECT MIN(crcode) FROM chatroomjoin WHERE pcode=#{pcode}
+	</select>
+	
 	<insert id="insert" parameterType="chatroomjoin">
 		INSERT INTO chatroomjoin VALUES(#{pcode}, #{crcode}, #{uid})
 	</insert>

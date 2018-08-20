@@ -72,7 +72,7 @@ result = int >> success = 1, fail = -1
 	생성
 		/projectjoin
 		data = ProjectJoinVO
-		result = int
+		result = int (-1 = 등록되어있는 회원)
 		method = POST
 	
 	수정 
