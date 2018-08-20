@@ -58,13 +58,17 @@
 						style="width: 25px;"> <span
 						style="margin-left: 15px; font-size: 16px;">개인업무</span>
 				</a></li>
-				<li><a href="#"> <img
+				
+				<li>
+				<a href="/user/infoEdit?id=a"> 
+				<img
 						src="${pageContext.request.contextPath }/resources/img/img_user.png"
-						style="width: 25px;"> <span
+						style="width: 25px;"> 
+						<span
 						style="margin-left: 15px; font-size: 16px;">내정보</span>
 				</a></li>
 				<li><a href="#"> <img
-						src="${pageContext.request.contextPath }/resources/img/img_method.png"
+						src="${pageContext.request.contextPath }/resources/img/img_board.png"
 						style="width: 25px;"> <span
 						style="margin-left: 15px; font-size: 16px;">게시판</span>
 				</a></li>
@@ -78,7 +82,7 @@
 				</li>
 				<li><span style="margin-left: 15px; font-size: 16px;color:darkgray;text-transform: none;">SIGN OUT</span></li>
 				
-				<li><a href="#"> <img
+				<li><a href="/user/logout"> <img
 						src="${pageContext.request.contextPath }/resources/img/img_logout.png"
 						style="width: 25px;"> <span
 						style="margin-left: 15px; font-size: 16px;">로그아웃</span>
@@ -96,10 +100,15 @@
 	<!-- /sidebar wrap -->
 
 </body>
+
+
+<!-- 아래는 sidebar의 menu css임. -->
 <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
 <script
 	src="${pageContext.request.contextPath }/resources/js/sidebar/menu/slinky.min.js"></script>
 <script>
 	const slinky = $('#menu').slinky()
 </script>
+
+
 </html>

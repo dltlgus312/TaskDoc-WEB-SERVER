@@ -5,8 +5,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<%
+String loginid="";
+loginid=(String)session.getAttribute("loginid");
+%>
+<script type="text/javascript">
+var id='<%=loginid%>';
+if(id=="null"){
+	alert('로그인이 필요한 페이지입니다.');
+	window.location.href='/';
+}
+history.replaceState({}, null, location.pathname);
+</script>
 </head>
-<jsp:include page="/WEB-INF/views/fix/sidebar.jsp" />
+<jsp:include page="/WEB-INF/views/fix/sidebar.jsp" flush="false">
+	<jsp:param value="<%=loginid%>" name="loginid"/>
+</jsp:include>
 <body style="display: -webkit-inline-box; overflow-x: hidden;">
 	<div style="display: -webkit-inline-box; width: 1500px; height: 100%;">
 		<button id="project_create">프로젝트생성</button>

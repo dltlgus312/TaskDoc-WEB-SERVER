@@ -63,6 +63,7 @@
 	</div>
 </body>
 <script type="text/javascript">
+var goserveruid="";
 	//login창 load시 progress bar 숨기자.
 	$(document).ready(function() {
 		$("#myBar").hide();
@@ -82,14 +83,13 @@
 				elem.style.width = width + '%';
 				elem.innerHTML = width * 1 + '%';
 				if (width == 100)
-					location.href = '/';
+					location.href = '/user/loginComplete?uid='+goserveruid;
 			}
 		}
 	}
 	//progress bar function
 
 	var testHost = 'http://localhost:8080/';
-	var serverHost = '';
 	$(function() {
 
 		/*Cancel시 Main으로*/
@@ -120,6 +120,7 @@
 						alert('비밀번호가 틀렸습니다.');
 					} else if (response == 1) {
 						alert('로그인 완료');
+						goserveruid=$("#uid").val();
 						$('.form-signin').css('opacity', 0.3);
 						$("#myBar").show();
 						move();

@@ -18,8 +18,16 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <%
-	String id = request.getParameter("id");
+String loginid="";
+loginid=(String)session.getAttribute("loginid");
 %>
+<script type="text/javascript">
+var id='<%=loginid%>';
+if(id=="null"){
+	alert('로그인이 필요한 페이지입니다.');
+	window.location.href='/';
+}
+</script>
 </head>
 <body>
 	<div class="container">
@@ -76,7 +84,7 @@
 function create(){
 	var param = {
 			'userInfo' : {
-				'uid' : '<%=id%>',
+				'uid' : '<%=loginid%>',
 			},
 			'project' : {
 				'ptitle' : $("#ptitle").val(),

@@ -14,10 +14,23 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-</head>
 <%
-	String pcode = request.getParameter("pcode");
+String loginid="";
+loginid=(String)session.getAttribute("loginid");
+String pcode = request.getParameter("pcode");
+
 %>
+<script type="text/javascript">
+var id='<%=loginid%>';
+if(id=="null"){
+	alert('로그인이 필요한 페이지입니다.');
+	window.location.href='/';
+}
+</script>
+
+
+
+</head>
 <body>
 	<div class="container">
 		<div class="row">
