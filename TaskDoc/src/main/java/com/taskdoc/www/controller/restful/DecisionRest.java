@@ -31,7 +31,7 @@ public class DecisionRest {
 		return service.roomList(crcode);
 	}
 	
-	//의사결정 정보 조회
+	//web용 의사결정 정보 조회
 	@RequestMapping(value="",method =RequestMethod.GET)
 	public DecisionVO info(@PathVariable int dscode){
 		return service.view(dscode);
