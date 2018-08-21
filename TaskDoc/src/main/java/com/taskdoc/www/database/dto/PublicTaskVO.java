@@ -30,14 +30,6 @@ public class PublicTaskVO {
 		this.ttitle = ttitle;
 	}
 
-	public String getTcolor() {
-		return tcolor;
-	}
-
-	public void setTcolor(String tcolor) {
-		this.tcolor = tcolor;
-	}
-
 	public String getTsdate() {
 		return tsdate;
 	}
@@ -52,6 +44,14 @@ public class PublicTaskVO {
 
 	public void setTedate(String tedate) {
 		this.tedate = tedate;
+	}
+
+	public String getTcolor() {
+		return tcolor;
+	}
+
+	public void setTcolor(String tcolor) {
+		this.tcolor = tcolor;
 	}
 
 	public int getTpercent() {

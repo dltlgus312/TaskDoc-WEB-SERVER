@@ -23,7 +23,7 @@
 	</insert>
 	
 	<update id="update" parameterType="methodboard">
-		UPDATE methodboard SET mbtitle=#{mbtitle}, mbcontents=#{mbcontents} WHERE mbcode=#{mbcode}
+		UPDATE methodboard SET mbtitle=#{mbtitle}, mbcontents=#{mbcontents}, pcode=#{pcode} WHERE mbcode=#{mbcode}
 	</update>
 	
 	<delete id="delete" parameterType="Integer">

@@ -266,21 +266,25 @@ result = int >> success = 1, fail = -1
 			/chatroomjoin/room
 			data = ChatRoomJoinVO  >  (pcode, uid)
 			result = List<ChatRoomVO>
+			method = POST
 		
 		2. 채팅방에 참여 중인 유저 리스트
 			/chatroomjoin/user
 			data = ChatRoomJoinVO	>  (pcode, crcode)
 			result = List<UserInfoVO>
+			method = POST
 	
 	생성
 		/chatroomjoin
 		data = ChatRoomJoinVO
 		result = int
+		method = POST
 		
 	삭제
 		/chatroomjoin
 		data = ChatRoomJoinVO
 		result = int
+		method = DELETE
 		
 채팅 내용
 	받기

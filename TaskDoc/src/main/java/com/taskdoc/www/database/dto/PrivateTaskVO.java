@@ -26,6 +26,7 @@ public class PrivateTaskVO {
 	public void setPttitle(String pttitle) {
 		this.pttitle = pttitle;
 	}
+	
 	public String getPtcolor() {
 		return ptcolor;
 	}

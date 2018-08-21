@@ -29,7 +29,12 @@ public class MethodListDAOImpl implements MethodListDAO {
 	@Override
 	public int methodListInsert(MethodListVO methodListVo) {
 		// TODO Auto-generated method stub
-		return sql.insert(NAMESPACE + INSERT, methodListVo);
+		try {
+			return sql.insert(NAMESPACE + INSERT, methodListVo);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	@Override

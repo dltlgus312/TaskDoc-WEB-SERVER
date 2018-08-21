@@ -37,6 +37,7 @@ public class ProjectServiceImpl implements ProjectService{
 		
 		PublicTaskVO publicTaskVo = new PublicTaskVO();
 		publicTaskVo.setTtitle("OUTPUT");
+		publicTaskVo.setTcolor("f0f0ff");
 		publicTaskVo.setPcode(pcode);
 		publicTaskService.publicTaskInsert(publicTaskVo);
 		
