@@ -13,15 +13,41 @@
 
 <script type="text/javascript">
 var id='<%=loginid%>';
-if(id=="null"){
-	alert('로그인이 필요한 페이지입니다.');
-	window.location.href='/';
-}
+	if (id == "null") {
+		alert('로그인이 필요한 페이지입니다.');
+		window.location.href = '/';
+	}
 </script>
 </head>
 
 <body>
-<script type="text/javascript">
+	<table>
+      <thead>
+        <tr>
+          <th>Lorem</th><th>Ipsum</th><th>Dolor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Lorem</td><td>Ipsum</td><td>Dolor</td>
+        </tr>
+        <tr>
+          <td>Lorem</td><td>Ipsum</td><td>Dolor</td>
+        </tr>
+        <tr>
+          <td>Lorem</td><td>Ipsum</td><td>Dolor</td>
+        </tr>
+        <tr>
+          <td>Lorem</td><td>Ipsum</td><td>Dolor</td>
+        </tr>
+        <tr>
+          <td>Lorem</td><td>Ipsum</td><td>Dolor</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+	<%-- <script type="text/javascript">
 
 //게시글 작성하기
 
@@ -125,6 +151,6 @@ $.ajax({
 		});
 //게시글 삭제하기
 	</script>
-	 
+	  --%>
 </body>
 </html>

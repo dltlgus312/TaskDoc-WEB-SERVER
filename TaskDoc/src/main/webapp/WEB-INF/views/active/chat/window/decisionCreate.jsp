@@ -4,7 +4,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<%
+	String loginid = "";
+	loginid = (String) session.getAttribute("loginid");
+%>
+<script type="text/javascript">
+var id='<%=loginid%>';
+if(id=="null"){
+	alert('로그인이 필요한 페이지입니다.');
+	window.location.href='/';
+}
+</script>
+
 </head>
 <body>
 

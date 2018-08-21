@@ -6,8 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <%
-String loginid="";
-loginid=(String)session.getAttribute("loginid");
+	String loginid = "";
+	loginid = (String) session.getAttribute("loginid");
 %>
 <script type="text/javascript">
 var id='<%=loginid%>';
@@ -18,12 +18,14 @@ if(id=="null"){
 </script>
 </head>
 <jsp:include page="/WEB-INF/views/fix/sidebar.jsp" flush="false">
-	<jsp:param value="<%=loginid%>" name="loginid"/>
+	<jsp:param value="<%=loginid%>" name="loginid" />
 </jsp:include>
 <body style="display: -webkit-inline-box; overflow-x: hidden;">
 	<div style="display: -webkit-inline-box; width: 1500px; height: 100%;">
 		<button id="project_create">프로젝트생성</button>
 		<button id="project_userinvite">프로젝트유저초대</button>
+		<button id="decisionCreate">의사결정생성</button>
+		<button id="decisionSelect">의사결정조회</button>
 		<div style="width: 300px; height: 300px; background-color: red"></div>
 		<div style="width: 300px; height: 300px; background-color: black"></div>
 		<div style="width: 300px; height: 300px; background-color: blue"></div>
@@ -37,13 +39,24 @@ if(id=="null"){
 var popupX = (window.screen.width / 2) - (500 / 2);
 var popupY= (window.screen.height /2) - (400 / 2);
 
+//프로젝트 생성
 $("#project_create").click(function(){
 	 window.open("/project/create?id="+"a","", "height=400, width=500, left="+ popupX + ", top="+ popupY + ", screenX="+ popupX + ", screenY= "+ popupY); 
 });
-
+//프로젝트 조회
 $("#project_userinvite").click(function(){
 	 window.open("/project/userInvite?pcode="+"1","", "height=400, width=500, left="+ popupX + ", top="+ popupY + ", screenX="+ popupX + ", screenY= "+ popupY); 
 });
+//의사결정 생성
+$("#decisionCreate").click(function(){
+	location.href='/chat/decisionCreate';
+});
+//의사결정 조회
+$("#decisionSelect").click(function(){
+	location.href='/chat/decisionSelect';
+});
+
+
 	 /* 
 	//window.open post방식으로 값넘기기
 	var form = document.createElement("form");      // form 엘리멘트 생성

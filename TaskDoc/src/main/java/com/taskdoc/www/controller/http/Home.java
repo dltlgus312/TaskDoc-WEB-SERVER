@@ -90,13 +90,13 @@ public class Home {
 	//session
 	@RequestMapping(value = "/methodBoard", method = RequestMethod.GET)
 	public String methodBoard() {
-		return "methodBoard";
+		return "/active/methodboard/methodBoard";
 	}
 	
 	//session
 	@RequestMapping(value = "/methodBoardEdit", method = RequestMethod.GET)
 	public String methodBoardEdit() {
-		return "methodBoardEdit";
+		return "/active/methodboard/methodBoardEdit";
 	}
 	
 	

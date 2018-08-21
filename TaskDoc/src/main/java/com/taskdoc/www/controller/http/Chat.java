@@ -35,9 +35,14 @@ public class Chat {
 	}
 
 	//session
-	@RequestMapping(value = "/decision", method = RequestMethod.GET)
-	public String decision() {
-		return "/active/chat/window/decision";
+	@RequestMapping(value = "/decisionCreate", method = RequestMethod.GET)
+	public String decisionCreate() {
+		return "/active/chat/window/decisionCreate";
+	}
+	//session
+	@RequestMapping(value = "/decisionSelect", method = RequestMethod.GET)
+	public String decisionSelect() {
+		return "/active/chat/window/decisionSelect";
 	}
 
 	//session
