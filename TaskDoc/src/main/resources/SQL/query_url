@@ -72,7 +72,7 @@ result = int >> success = 1, fail = -1
 	생성
 		/projectjoin
 		data = ProjectJoinVO
-		result = int
+		result = int (-1 = 등록되어있는 회원)
 		method = POST
 	
 	수정 
@@ -366,16 +366,20 @@ result = int >> success = 1, fail = -1
 	받기
 		1. 모든 방법론 리스트
 			/methodboard/all
-			result = List<MethodBoardVO>  >  ( mbcode, mbtitle, mbdate, uid )
+			result = List<MethodBoardVO>  >  ( mbcode, mbtitle, mbdate, uid, pcode )
 		
 		2. 방법론 하나에 대한 리스트 ( 내용 포함 )
 			/methodboard/{mbcode}
 			result = MethodBoardVO >  ( ALL )
 			
+		3. 내가 등록한 방법론 리스트
+			/methodboard/{uid}
+			result = List<MethodBoardVO>  >  ( mbcode, mbtitle, mbdate, uid, pcode )
+			
 	생성
 		/methodboard
 		data = MethodBoardVO
-		result = int
+		result = int ( Generate Key )
 	
 	수정
 		/methodboard

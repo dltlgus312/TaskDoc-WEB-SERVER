@@ -25,6 +25,11 @@ public class MethodBoardRest {
 		return service.methodBoardList();
 	}
 
+	@RequestMapping(value="/mylist/{uid}", method=RequestMethod.GET)
+	public List<MethodBoardVO> myList(@PathVariable String uid) {
+		return service.methodBoardMyList(uid);
+	}
+
 	// 게시판의 글 상세보기
 	@RequestMapping(value="/{mbcode}", method=RequestMethod.GET)
 	public MethodBoardVO view(@PathVariable int mbcode) {
@@ -39,11 +44,12 @@ public class MethodBoardRest {
 
 	@RequestMapping(value="", method=RequestMethod.PUT)
 	public int update(@RequestBody MethodBoardVO methodBoard) {
-		return service.methodBoardUpdate(methodBoard);
+		int i = service.methodBoardUpdate(methodBoard);
+		return i;
 	}
 
 	@RequestMapping(value="/{mbcode}", method=RequestMethod.DELETE)
-	public int delete(int mbcode) {
+	public int delete(@PathVariable int mbcode) {
 		return service.methodBoardDelete(mbcode);
 	}
 }

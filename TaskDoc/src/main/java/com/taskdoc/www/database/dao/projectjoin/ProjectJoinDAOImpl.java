@@ -36,7 +36,12 @@ public class ProjectJoinDAOImpl implements ProjectJoinDAO {
 
 	@Override
 	public int projectJoinInsert(ProjectJoinVO projectJoinVo) {
-		return sql.insert(NAMESPACE + INSERT, projectJoinVo);
+		try {
+			return sql.insert(NAMESPACE + INSERT, projectJoinVo);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	@Override
