@@ -20,6 +20,12 @@ public class MethodBoardServiceImpl implements MethodBoardService{
 	}
 
 	@Override
+	public List<MethodBoardVO> methodBoardMyList(String uid) {
+		// TODO Auto-generated method stub
+		return dao.methodBoardMyList(uid);
+	}
+	
+	@Override
 	public MethodBoardVO methodBoardView(int mbcode) {
 		return dao.methodBoardView(mbcode);
 	}
@@ -38,4 +44,5 @@ public class MethodBoardServiceImpl implements MethodBoardService{
 	public int methodBoardDelete(int mbcode) {
 		return dao.methodBoardDelete(mbcode);
 	}
+
 }
