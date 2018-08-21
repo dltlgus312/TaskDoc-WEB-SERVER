@@ -7,7 +7,7 @@ public class DecisionVO {
 	private int dscode;
 	private String dstitle;
 	private String dsdate;
-	private int close;
+	private int dsclose;
 	private int crcode;
 	private int tcode;
 	
@@ -30,11 +30,11 @@ public class DecisionVO {
 	public void setDsdate(String dsdate) {
 		this.dsdate = dsdate;
 	}
-	public int getClose() {
-		return close;
+	public int getDsclose() {
+		return dsclose;
 	}
-	public void setClose(int close) {
-		this.close = close;
+	public void setDsclose(int close) {
+		this.dsclose = close;
 	}
 	public int getCrcode() {
 		return crcode;
