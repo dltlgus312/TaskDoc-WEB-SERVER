@@ -24,8 +24,7 @@
 	loginid = (String) session.getAttribute("loginid");
 %>
 <script type="text/javascript">
-var id='<%=loginid%>
-	';
+var id='<%=loginid%>';
 	if (id == "null") {
 		alert('로그인이 필요한 페이지입니다.');
 		window.location.href = '/';
@@ -92,9 +91,9 @@ var id='<%=loginid%>
 
 	$(document).ready(function() {
 		/* 	종료는  type이 OWNER일 경우에만 가능
-		 *   1. if(의사결정의 항목 조회) 
-		 * 		if( 1-1 의사결정이 끝낫는지 안끝낫는지 체크)
-		 *				else(1-3 종료되지않았다면, 의사결정 항목 조회 -> 본인이 투표를 했는지 안했는지 체크)
+		 *   1. if(의사결정이 끝낫는지 안끝낫는지 체크) 
+		 * 		else( 1-1 의사결정항목 조회)
+		 *				if(1-3 본인이 투표를 했는지 안했는지 체크)
 		 *						if(1-3-1 본인이 투표를했다면 -> 체크리스트, 투표하기버튼 잠금)
 		 *							if(1-3-1-1 본인이 투표를했지만 수정하고싶은경우 체크리스트, 투표하기버튼을 활성화한후 ajax PUT으로 보내자.)
 		 *						else(1-3-2 본인이 투표를하지않았다면 -> 체크리스트, 투표하기버튼 활성화)
@@ -106,10 +105,8 @@ var id='<%=loginid%>
 			success : function(response) {
 				if (Object.keys(response).length > 0) {
 					alert('의사결정 정보 조회 완료! ' + response);
-					if (response.dsclose == 1) {
-						//종료된 투표.
-					} else {
-						//종료되지 않은 투표
+					if (response.dsclose == 0) {
+						//종료되지 않은 투표면 항목조회
 						$.ajax({
 							type : 'GET',
 							url : '/decisionitem/' + 16,
@@ -119,7 +116,50 @@ var id='<%=loginid%>
 									for (var i = 0; i < response.length; i++) {
 										decisionitemlist.push(response[i].dsilist);
 									}
+									$("#tableDiv").show();
 									alert(decisionitemlist);
+									for (var i = 0; i < decisionitemlist.length; i++) {
+									$('.modal-title').text(response[i].dname);
+
+										var ttag = document.createElement("tr");
+										
+										/* didx 번호 */
+										var thidx = document.createElement("th");
+										var idxele = document.createTextNode(response[i].didx);
+										ttag.appendChild(thidx);
+										thidx.appendChild(idxele);
+
+										/*dcontent 문항*/
+										var thcon=document.createElement("th");
+										var conele=document.createTextNode(response[i].dcontent);
+										ttag.appendChild(thcon);
+										thcon.appendChild(conele);
+										
+										
+										/* 체크버튼 */
+										var thck = document.createElement("th");
+										var ckbox = document.createElement("input");
+										ckbox.setAttribute('type', 'checkbox');
+										ckbox.setAttribute('value', response[i].dcode);
+										ckbox.setAttribute('name', 'chkbox');
+										ckbox.setAttribute('onclick', 'check_only(this)');
+										if(trueorfalse=="true" || yesorno=="yes") {
+											ckbox.setAttribute('disabled', true);
+											$("#Okbtn").attr('disabled', true);
+										}
+										
+										ttag.appendChild(thck);
+										thck.appendChild(ckbox);
+										
+										/*선택한 문항 count*/
+										var thcnt = document.createElement("th");
+										var cntele = document.createTextNode(response[i].selectCount);
+										ttag.appendChild(thcnt);
+										thcnt.appendChild(cntele);
+
+										document.getElementById('thead').appendChild(ttag);
+
+									}
 								} else {
 									alert('Server or Client ERROR, 의사결정 항목 조회 실패');
 								}
@@ -128,7 +168,12 @@ var id='<%=loginid%>
 								alert("ERROR : " + e.statusText);
 							}
 						});
+					} else {
+						//종료된 투표라도 항목조회후 button , checklist 잠금
 					}
+				}
+				else{
+					alert('Server or Client ERROR, 의사결정 정보 조회 실패');
 				}
 			},
 			error : function(e) {
