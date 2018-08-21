@@ -28,10 +28,16 @@ public class ChatRoomJoinRest {
 	public List<String> userList(@RequestBody ChatRoomJoinVO chatRoomJoinVo) {
 		return service.userList(chatRoomJoinVo);
 	}
-
+	
 	@RequestMapping(value = "", method = RequestMethod.POST)
+	public int insert(@RequestBody ChatRoomJoinVO chatRoomJoinVo) {
+		return service.chatRoomJoinInsert(chatRoomJoinVo);
+	}
+
+	//web용 채팅방에 유저추가하는것
+	@RequestMapping(value = "/web", method = RequestMethod.POST)
 	public List<ChatRoomJoinVO> insert(@RequestBody List<ChatRoomJoinVO> chatRoomuser) {
-		return service.chatRoomJoinInsert(chatRoomuser);
+		return service.WebchatRoomJoinInsert(chatRoomuser);
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.DELETE)

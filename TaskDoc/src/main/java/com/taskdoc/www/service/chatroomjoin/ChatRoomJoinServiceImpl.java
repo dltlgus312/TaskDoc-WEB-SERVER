@@ -45,8 +45,8 @@ public class ChatRoomJoinServiceImpl implements ChatRoomJoinService{
 	}
 
 	@Override
-	public List<ChatRoomJoinVO> chatRoomJoinInsert(List<ChatRoomJoinVO> chatRoomuser) {
-		return joinDao.WebchatRoomJoinInsert(chatRoomuser);
+	public int chatRoomJoinInsert(ChatRoomJoinVO chatRoomJoinVo) {
+		return joinDao.chatRoomJoinInsert(chatRoomJoinVo);
 	}
 
 	@Override

@@ -74,7 +74,7 @@ if(id=="null"){
 						onclick="chatCancel()">
 						<i class="fa fa-times-circle"></i> Cancel
 					</button>
-					
+
 				</div>
 			</div>
 		</div>
@@ -91,19 +91,14 @@ if(id=="null"){
 	var chkarray=new Array();
 	
 	$(document).ready(function() {
-	//채팅방에 초대하려고 채팅방 유저리스트들 조회	
-	var param = {
-			'crcode' : %%%%%%%%%%%%%,
-			'pcode' : %%%%%%%%%%%%%%%%
-		}; 
+	//채팅방에 초대하려고 프로젝트 유저리스트들 조회	
 		$.ajax({
-			type : 'POST',
-			url : '/chatroomjoin/user',
-			contentType : 'application/json',
-			data : JSON.stringify(param),
+			type : 'GET',
+			url : '/projectjoin/collaboration/'+1,
 			success : function(response) {
-				if (response.length >0) {
-					array=response;
+			 if (response.projectJoinList.length >0) {
+				for(var i=0;i<response.projectJoinList.length;i++)
+					array[i]=response.projectJoinList[i].uid;
 					//채팅방을 생성한사람은 이미 채팅방에초대되어있기때문에 현재 세션아이디는 제거하고 뿌려줘야함
 					array.splice(array.indexOf("<%=loginid%>"), 1);
 					$("#tableDiv").show();
@@ -140,8 +135,9 @@ if(id=="null"){
 			}
 		});
 	});
-	// /채팅방에 초대하려고 채팅방 유저리스트들 조회	
-
+	//채팅방에 초대하려고 프로젝트 유저리스트들 조회	
+	
+	//채팅방에 초대할 프로젝트 유저 조회 후 체크 하게되면 chkarray에 값이 쌓임
 	function checkEvt(chk) {
 		if (chk.checked) {
 			chkarray.push(chk.value);
@@ -149,20 +145,23 @@ if(id=="null"){
 			chkarray.splice(chkarray.indexOf(chkarray.value), 1);
 		}
 	}
+	//채팅방에 초대할 프로젝트 유저 조회 후 체크 하게되면 chkarray에 값이 쌓임
 
+	
+	//채팅 생성 logic
 	function chatCreate() {
 		//서버에 전송할 list들
 		var listparam = [];
 		for (var i = 0; i < chkarray.length; i++) {
 			listparam.push({
-				'crcode' : '%%%%%%%%%%%%%%%%%',
-				'pcode' : '1',
+				'crcode' : '10',
+				'pcode' : '4',
 				'uid' : chkarray[i]
 			});
 		}
 		$.ajax({
 			type : 'POST',
-			url : '/chatroomjoin',
+			url : '/chatroomjoin/web',
 			contentType : 'application/json',
 			data : JSON.stringify(listparam),
 			success : function(response) {
@@ -177,6 +176,9 @@ if(id=="null"){
 			}
 		});
 	}
+	//채팅 생성 logic
+
+	
 	//취소시
 	function chatCancel() {
 		window.close();

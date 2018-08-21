@@ -10,6 +10,7 @@
 	loginid = (String) session.getAttribute("loginid");
 	String pcode = request.getParameter("pcode");
 %>
+
 <script type="text/javascript">
 var id='<%=loginid%>';
 if(id=="null"){
@@ -20,7 +21,7 @@ if(id=="null"){
 </head>
 
 <body>
-<%-- 	<script type="text/javascript">
+<script type="text/javascript">
 
 //게시글 작성하기
 
@@ -124,6 +125,6 @@ $.ajax({
 		});
 //게시글 삭제하기
 	</script>
-	 --%>
+	 
 </body>
 </html>
