@@ -39,4 +39,9 @@ public class DecisionServiceImpl implements DecisionService{
 		return dao.decisionDelete(dscode);
 	}
 
+	@Override
+	public DecisionVO view(int dscode) {
+		return dao.view(dscode);
+	}
+
 }
