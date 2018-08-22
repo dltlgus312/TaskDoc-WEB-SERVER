@@ -17,6 +17,7 @@ public class DocumentDAOImpl implements DocumentDAO {
 	private final String NAMESPACE = "document_SQL.";
 	private final String TASKLIST = "tasklist";
 	private final String ROOMLIST = "roomlist";
+	private final String VIEW = "view";
 	private final String INSERT = "insert";
 	private final String UPDATE = "update";
 	private final String DELETE = "delete";
@@ -50,5 +51,11 @@ public class DocumentDAOImpl implements DocumentDAO {
 	public int documentDelete(int dmcode) {
 		// TODO Auto-generated method stub
 		return sql.delete(NAMESPACE + DELETE, dmcode);
+	}
+
+	@Override
+	public DocumentVO documentView(int dmcode) {
+		// TODO Auto-generated method stub
+		return sql.selectOne(NAMESPACE + VIEW, dmcode);
 	}
 }

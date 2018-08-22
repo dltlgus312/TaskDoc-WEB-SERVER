@@ -17,6 +17,7 @@ public class ChatRoomJoinDAOImpl implements ChatRoomJoinDAO {
 	private final String NAMESPACE = "chatroomjoin_SQL.";
 	private final String ROOMLIST = "roomlist";
 	private final String USERLIST = "userlist";
+	private final String VIEW = "view";
 	private final String CRCODEMIN = "crcodemin";
 	private final String INSERT = "insert";
 	private final String DELETE = "delete";
@@ -54,6 +55,12 @@ public class ChatRoomJoinDAOImpl implements ChatRoomJoinDAO {
 	public int crcodeMin(int pcode) {
 		// TODO Auto-generated method stub
 		return sql.selectOne(NAMESPACE + CRCODEMIN, pcode);
+	}
+
+	@Override
+	public int chatRoomJoinView(int crcode) {
+		// TODO Auto-generated method stub
+		return sql.selectOne(NAMESPACE + VIEW, crcode);
 	}
 
 }

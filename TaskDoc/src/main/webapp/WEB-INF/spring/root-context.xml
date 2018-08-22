@@ -19,7 +19,8 @@
 
 	<context:component-scan
 		base-package="com.taskdoc.www">
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
 
@@ -61,11 +62,17 @@
 		<property name="uploadTempDir" value="uploadTempDir" />
 	</bean>
 
-	<!-- Base Upload Directory -->
+	<!-- Base Upload Directory ${updir.url} -->
 	<bean id="uploadTempDir"
 		class="org.springframework.core.io.FileSystemResource">
-		<constructor-arg value="${updir.url}" />
+		<constructor-arg>
+			<value>C:/Temp/</value>
+		</constructor-arg>
 	</bean>
+	
+	<bean id="baseUrl" class="com.taskdoc.www.system.FileUploadBaseUrl">
+    	<property name="URL" value="${updir.url}" />
+ 	</bean>
 
 
 	<!-- Transaction -->

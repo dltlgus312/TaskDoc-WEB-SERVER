@@ -15,6 +15,7 @@ public class PublicTaskDAOImpl implements PublicTaskDAO {
 	
 	private final String NAMESPACE = "publictask_SQL.";
 	private final String LIST = "list";
+	private final String VIEW = "view";
 	private final String INSERT = "insert";
 	private final String UPDATE = "update";
 	private final String DELETE = "delete";
@@ -56,6 +57,13 @@ public class PublicTaskDAOImpl implements PublicTaskDAO {
 	public Integer sameRefMax(int trefference) {
 		// TODO Auto-generated method stub
 		return sql.selectOne(NAMESPACE + SAMEREFMAX, trefference);
+	}
+	
+	
+	@Override
+	public PublicTaskVO publicTaskView(int tcode) {
+		// TODO Auto-generated method stub
+		return sql.selectOne(NAMESPACE + VIEW, tcode);
 	}
 	
 }

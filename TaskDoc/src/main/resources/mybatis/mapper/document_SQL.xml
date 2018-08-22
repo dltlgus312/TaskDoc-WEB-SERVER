@@ -14,13 +14,25 @@
 		SELECT * FROM document WHERE crcode=#{crcode} ORDER BY dmdate ASC
 	</select>
 
+	<select id="view" resultType="document">
+		SELECT * FROM document WHERE dmcode=#{dmcode}
+	</select>
+
 	<insert id="insert" parameterType="document"
 		useGeneratedKeys="true" keyProperty="dmcode">
-		INSERT INTO document VALUES(null, #{dmtitle}, #{dmcontents}, #{dmdate}, #{dmposition}, #{crcode}, #{tcode}, #{uid})
+		INSERT INTO document VALUES(null, #{dmtitle}, #{dmcontents}, NOW(), #{crcode}, 
+		<choose>
+			<when test="tcode != 0">
+				#{tcode},
+			</when>
+			<otherwise>
+				null,
+			</otherwise>
+		</choose> #{uid})
 	</insert>
 
 	<update id="update" parameterType="document">
-		UPDATE document SET dmtitle=#{dmtitle}, dmcontents=#{dmcontents}, dmposition=#{dmposition}, tcode=#{tcode} WHERE dmcode=#{dmcode}
+		UPDATE document SET dmtitle=#{dmtitle}, dmcontents=#{dmcontents}, tcode=#{tcode} WHERE dmcode=#{dmcode}
 	</update>
 
 	<delete id="delete">

@@ -192,24 +192,60 @@ result = int >> success = 1, fail = -1
 		1. 공용업무 코드로 받기
 			/document/task/{tcode}
 			result = List<DocumentVO>
+			method = GET
 			
 		2. 채팅방 코드로 받기
 			/document/room/{crcode}
 			result = List<DocumentVO>
+			method = GET
 	
-	생성
-		/document
-		data = DocumentVO
-		result = int ( Generate Key )
+	업로드  >>  데이터 전송시 필요한 데이터 ( dmtitle, crcode, uid, [tcode] ), name 태그 = "file"
+		/document/upload
+		data = MultipartFile, DocumentVO  >  enctype=multipartfile/form-data
+		result = int ( DocumentVO < Generate Key )
+		method = POST
 		
-	수정
-		/document
-		data = DocumentVO
-		result = int
+	수정	
+		1. MOVE >> 게시자의 정보를 그대로 두고 tcode(다른업무 밑으로 이동) 만 수정 하여 전송.
+				>> 파일또한 이동된다.
+			/document/move
+			data = DocumentVO
+			result = int
+			method = PUT
+			
+		2. COPY >> 게시자의 정보를 그대로 두고 tcode(다른업무 밑으로 이동) 와  uid(복사를 원하는자의id) 를 수정 하여 전송.
+				>> 기존의 파일은 그대로 두고 (테이블역시 그대로존재) 복사. (같은경로에 복사 가능)
+			/document/copy
+			data = DocumentVO
+			result = int
+			method = PUT
 		
-	삭제
+		3. update >> 해당 document 의 제목이나 내용 변경시.
+			/document
+			data = DocumentVO
+			result = int
+			method = PUT
+		
+	삭제	>> 파일까지 같이 삭제 된다.
 		/document/{dmcode}
 		result = int
+		method = DELETE
+		
+파일
+	받기
+		/file/{dmcode}
+		result = List<FileVO>
+		method = GET
+		
+	삭제 
+		/file/{fcode}
+		result = int
+		method = DELETE
+	
+	다운로드  >> 파일이 없을 시 null 리턴......
+		/file/download/{fcode}
+		result = [data]
+		method = POST
 		
 피드백
 	받기

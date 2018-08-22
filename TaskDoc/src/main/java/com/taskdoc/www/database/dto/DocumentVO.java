@@ -8,11 +8,9 @@ public class DocumentVO {
 	private String dmtitle;
 	private String dmcontents;
 	private String dmdate;
-	private String dmposition;
-	private String crcode;
-	private String tcode;
+	private int crcode;
+	private int tcode;
 	private String uid;
-	
 	
 	public int getDmcode() {
 		return dmcode;
@@ -38,22 +36,16 @@ public class DocumentVO {
 	public void setDmdate(String dmdate) {
 		this.dmdate = dmdate;
 	}
-	public String getDmposition() {
-		return dmposition;
-	}
-	public void setDmposition(String dmposition) {
-		this.dmposition = dmposition;
-	}
-	public String getCrcode() {
+	public int getCrcode() {
 		return crcode;
 	}
-	public void setCrcode(String crcode) {
+	public void setCrcode(int crcode) {
 		this.crcode = crcode;
 	}
-	public String getTcode() {
+	public int getTcode() {
 		return tcode;
 	}
-	public void setTcode(String tcode) {
+	public void setTcode(int tcode) {
 		this.tcode = tcode;
 	}
 	public String getUid() {
@@ -62,4 +54,6 @@ public class DocumentVO {
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
+	
+	
 }

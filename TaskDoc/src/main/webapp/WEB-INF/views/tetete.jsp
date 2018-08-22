@@ -31,5 +31,30 @@
 	<script>
 		const slinky = $('#menu').slinky()
 	</script>
+	
+		
+	
+	<form action="/document/upload" enctype="multipart/form-data" method="POST">
+		<input name="dmtitle" value="test"/>
+		<input name="dmcontents" value="testtest"/>
+		<input name="crcode" value="1"/>
+		<input name="tcode" value="12"/>
+		<input name="uid" value="d"/>
+		
+		<input type="file" name="file"/>
+		<input type="file" name="file"/>
+		<input type="file" name="file"/>
+		<input type="file" name="file"/>
+
+		<input type="submit">
+	</form>
+	
+		
+	<form action="/document/download/6" method="POST">
+		<input type="submit" value="다운로드">
+	</form>
+		
+	
+	
 </body>
 </html>
