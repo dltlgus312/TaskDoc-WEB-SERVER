@@ -103,6 +103,11 @@ public class Home {
 	public String methodBoardView() {
 		return "/active/methodboard/methodBoardView";
 	}
+	//session
+	@RequestMapping(value = "/BoardSelectProject", method = RequestMethod.GET)
+	public String BoardSelectProject() {
+		return "/active/methodboard/selectProject";
+	}
 	
 	
 	

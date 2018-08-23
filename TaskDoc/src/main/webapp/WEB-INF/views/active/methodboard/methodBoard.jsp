@@ -21,9 +21,7 @@ var id='<%=loginid%>';
 		window.location.href = '/';
 	}
 </script>
-
 </head>
-
 <body>
 	<div class="container">
 		<div style="margin-top: 20px;">
@@ -34,7 +32,6 @@ var id='<%=loginid%>';
 
 			<div style="float: right">
 				<a href='/methodBoardCreate' class="btn btn-success">글쓰기</a>
-				<button type="button" class="btn btn-success" onclick="test()">글쓰기테스트</button>
 			</div>
 		</div>
 		<table class="table table-striped table-hover">
@@ -85,10 +82,11 @@ var id='<%=loginid%>';
 						trtag.appendChild(td_uid);
 						td_uid.appendChild(uidele);
 						
-						 var td_date=document.createElement("td");
+						var td_date=document.createElement("td");
 						var dateele=document.createTextNode(response[i].mbdate);
 						trtag.appendChild(td_date);
 						td_date.appendChild(dateele);  
+						
 						$("#tbodys").append(trtag);
 						}
 					} else {
@@ -102,33 +100,6 @@ var id='<%=loginid%>';
 		});
 		// 게시판 목록 전체 받아오기
 		
-		function test(){
-			//게시글 작성하기
-			var param = {
-						'mbtitle' : '이것은테스트',
-						'mbcontents' : '이것은테스트',
-						'pcode' : 4,
-						'uid' : '<%=loginid%>'
-					};
-					$.ajax({
-						type : 'POST',
-						url : '/methodboard',
-						contentType : 'application/json',
-						data : JSON.stringify(param),
-						success : function(response) {
-							if (response>0) {
-								alert('게시판 생성 완료! 게시판의 mbcode값은' + response);
-							} else{
-								alert('Server or Client ERROR, 게시판 생성 실패');
-							}
-						},
-						error : function(e) {
-							alert("ERROR : " + e.statusText);
-						}
-					});
-				//게시판 생성시 프로젝트 리스트 받아와서 프로젝트를 추가후 게시판 등록해야함
-			//게시글 작성하기
-		}
 		function boardcon(code){
 			location.href='/methodBoardView?mbcode='+code;
 		}

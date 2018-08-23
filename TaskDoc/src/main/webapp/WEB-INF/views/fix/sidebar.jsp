@@ -67,7 +67,7 @@
 						<span
 						style="margin-left: 15px; font-size: 16px;">내정보</span>
 				</a></li>
-				<li><a href="#"> <img
+				<li><a href="/methodBoard"> <img
 						src="${pageContext.request.contextPath }/resources/img/img_board.png"
 						style="width: 25px;"> <span
 						style="margin-left: 15px; font-size: 16px;">게시판</span>

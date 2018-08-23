@@ -28,7 +28,7 @@ var id='<%=loginid%>';
 	mbcode :
 	<input type="text" id=mbcode readonly>
 	<br /> mbcontents :
-	<input type="text" id=mbcontents readonly>
+	<textarea  id="mbcontents" readonly></textarea>
 	<br /> mbdate :
 	<input type="text" id=mbdate readonly>
 	<br /> mbtitle :
