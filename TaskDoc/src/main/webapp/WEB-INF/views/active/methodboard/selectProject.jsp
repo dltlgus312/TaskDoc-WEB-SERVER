@@ -44,11 +44,11 @@ var id='<%=loginid%>';
 									<!--Table head-->
 								<thead id="thead">
 									<tr>
-										<th>제목</th>
+										<th style="width:200px;">제목</th>
 										<th>부제목</th>
-										<th>시작날짜</th>
-										<th>종료날짜</th>
-										<th>나의 권한</th>
+										<th style="width:103px;">시작날짜</th>
+										<th style="width:103px;">종료날짜</th>
+										<th style="width:88px;">나의 권한</th>
 									</tr>
 								</thead>
 								<!--Table head-->
@@ -68,7 +68,7 @@ var id='<%=loginid%>';
 				<div class="modal-footer" style="margin-top:-30px;">
 					<!-- <input type="hidden" name="isEmpty" value=""> -->
 					<button type="button" class="btn btn-default btn-icon"
-						onclick="proCancel()">
+						onclick="selectproCancel()">
 						<i class="fa fa-times-circle"></i> Cancel
 					</button>
 				</div>
@@ -160,9 +160,18 @@ $(document).ready(function() {
 
 //부모창인 projectCreate.jsp로 값을 넘겨준다.
 function proselection(pcode){
+	if(confirm("※프로젝트를 선택 하시겠습니까?")==true){
 		opener.alert(pcode);
 		opener.completeProject(pcode);
 		window.close();
 	}
+	else{
+		return;
+	}
+}
+
+function selectproCancel(){
+	window.close();
+}
 </script>
 </html>

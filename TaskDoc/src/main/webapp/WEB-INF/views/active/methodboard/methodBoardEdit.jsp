@@ -65,9 +65,9 @@ var id='<%=loginid%>';
 					<!--제목 , 내용 div  -->
 					<div class="form-group">
 						<label>제목</label> <input id="mbtitle" type="text"
-							class="form-control" maxlength="20" readonly style="background-color: white"> <label
+							class="form-control" maxlength="20"> <label
 							style="padding-top: 5px;">내용</label>
-						<textarea class="form-control" rows="8" id="mbcontents" readonly style="background-color: white"></textarea>
+						<textarea class="form-control" rows="8" id="mbcontents"></textarea>
 					</div>
 					<!--제목 , 내용 div  -->
 
@@ -80,8 +80,12 @@ var id='<%=loginid%>';
 					</div>
 					
 					<div class="modal-footer" style="margin-bottom:30px;">
+					<button type="button" class="btn btn-success btn-icon"
+							onclick="boardEdit()">
+							<i class="fa fa-check"></i> Edit
+						</button>
 						<button type="button" class="btn btn-default btn-icon"
-							onclick="boardViewCancel()">
+							onclick="boardEditCancel()">
 							<i class="fa fa-times-circle"></i> Back
 						</button>
 					</div>
@@ -123,8 +127,35 @@ $(document).ready(function() {
 	//게시판 글 상세보기
 });
 
+function boardEdit(){
+	//게시글 수정하기
+	var param = {
+				'mbtitle' : $('#mbtitle').val(),
+				'mbcontents' : $('#mbcontents').val(),
+				'mbcode' : '<%=mbcode%>',
+		};
+		$.ajax({
+			type : 'PUT',
+			url : '/methodboard',
+			contentType : 'application/json',
+			data : JSON.stringify(param),
+			success : function(response) {
+				if (response > 0) {
+					alert('게시판 수정 완료' + response);
+					location.href = '/methodBoard';
+				} else {
+					alert('Server or Client ERROR, 게시판 수정 실패');
+				}
+			},
+			error : function(e) {
+				alert("ERROR : " + e.statusText);
+			}
+		});
+		// 게시글 수정하기
+	}
+	
 	//돌아가기
-	function boardViewCancel() {
+	function boardEditCancel() {
 		location.href = '/methodBoard';
 	}
 	

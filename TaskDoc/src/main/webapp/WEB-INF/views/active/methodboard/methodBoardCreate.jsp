@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- BOOTSTRAP CSS, JS -->
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
@@ -18,10 +20,11 @@
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- BOOTSTRAP CSS, JS -->
+
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
-	String pcode = request.getParameter("pcode");
 %>
 
 <script type="text/javascript">
@@ -37,9 +40,6 @@ var id='<%=loginid%>';
 		<div class="row">
 			<div class="modal-content" style="width: 800px; margin: auto;">
 				<div class="modal-header">
-					<button type="button" class="close">
-						<i class="fa fa-times"></i>
-					</button>
 					<h4 class="modal-title">글 작성하기</h4>
 				</div>
 				<div class="modal-body">

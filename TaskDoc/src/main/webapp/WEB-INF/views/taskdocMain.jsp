@@ -10,16 +10,16 @@
 	content="3d page, menu, navigation, mobile, perspective, css transform, web development, web design" />
 <meta name="author" content="Codrops" />
 <link rel="shortcut icon" href="../favicon.ico">
+
+
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/resources/css/taskdocMain/normalize.css?ver=422" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/resources/css/taskdocMain/demo.css?ver=422" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/resources/css/taskdocMain/component.css?ver=2223" />
-<!-- csstransforms3d-shiv-cssclasses-prefixed-teststyles-testprop-testallprops-prefixes-domprefixes-load -->
 <script
 	src="${pageContext.request.contextPath }/resources/js/taskdocMain/modernizr.custom.25376.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <!-- /전체적인 Bootstrap resource -->
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -108,13 +108,12 @@
 	</div>
 	<!-- /perspective -->
 
-	<!-- 전체적인 Bootstrap resource -->
+	<!-- Main에서 SHOW MENU클릭시 나타나는 이벤트 js -->
 	<script
 		src="${pageContext.request.contextPath }/resources/js/taskdocMain/classie.js"></script>
 	<script
 		src="${pageContext.request.contextPath }/resources/js/taskdocMain/menu.js"></script>
-	<!-- /전체적인 Bootstrap resource -->
-
+	<!-- Main에서 SHOW MENU클릭시 나타나는 이벤트 js -->
 
 <script type="text/javascript">
 	var testHost = 'http://localhost:8080';
