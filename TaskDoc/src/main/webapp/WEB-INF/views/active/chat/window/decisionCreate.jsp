@@ -143,10 +143,13 @@ var id='<%=loginid%>';
 		//의사결정 생성용 param
 		var param = {
 			'dstitle' : $("#decisionName").val(),
-			'crcode' : '1',
-			'tcode' : '1'
+			'crcode' : '2',
+			'tcode' : '8'
 		};
-		
+		if($("#decisionName").val()=="" || tlist.length<=0){
+			alert('제목또는 항목을 하나 이상 입력해주세요.');
+		}
+		else{
 		$.ajax({
 			type : 'POST',
 			url : '/decision',
@@ -190,6 +193,7 @@ var id='<%=loginid%>';
 			}
 		});
 		/*/의사결정 생성 */
+	}
 	}
 </script>
 

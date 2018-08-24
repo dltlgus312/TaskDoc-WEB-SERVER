@@ -23,6 +23,9 @@ var id='<%=loginid%>';
 </script>
 </head>
 <body>
+	<div>
+		<%@include file="/WEB-INF/views/fix/sidebar.jsp" %>
+	</div>
 	<div class="container">
 		<div style="margin-top: 20px;">
 			<div style="float: left; display: -webkit-inline-box;">

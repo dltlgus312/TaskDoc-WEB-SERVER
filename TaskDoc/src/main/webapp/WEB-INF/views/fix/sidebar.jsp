@@ -27,7 +27,6 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/sidebar/menu/slinky.min.css">
 <!-- test -->
-<body>
 	<!-- sidebar wrap -->
 	<aside class="sidebar" style="left:-320px;"> <!-- sidebar content wrap div -->
 	<div class="sidebar-content">
@@ -99,7 +98,6 @@
 	</aside>
 	<!-- /sidebar wrap -->
 
-</body>
 
 
 <!-- 아래는 sidebar의 menu css임. -->
