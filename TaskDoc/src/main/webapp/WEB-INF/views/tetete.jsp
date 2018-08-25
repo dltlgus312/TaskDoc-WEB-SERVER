@@ -3,209 +3,69 @@
 <!--HTML5임을 명시  -->
 <!DOCTYPE html>
 <html>
+
 <head>
-<!--HTML charset 명시  -->
-<meta charset="UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/method/bootstrap.css">
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
-
 <!-- header.jsp css,js include할것   -->
 <%@include file="/WEB-INF/views/fix/header.jsp"%>
 </head>
 
 <body>
 	<div id="frame"
-		style="width: 100%; height: 100%; margin: 0px; position: absolute; top: 0; left: 0; overflow:hidden;">
-
-		<div id="main_header">
+		style="width: 100%; height: 100%; margin: 0px; position: absolute; top: 0; left: 0; overflow: hidden;">
+		
+		<header id="main_header">
 			<!-- main_header.jsp 탑 메뉴 고정   -->
-			<nav style="background-color: red; width: 100%; height: 50px;"></nav>
-		</div>
+			<nav style="background-color: red; width: 100%; height: 50px;">TaskDoc 프로젝트 통합 관리 시스템</nav>
+		</header>
 
 		<div id="wrapper" style="width: 100%; height: calc(100% - 100px);">
-			<div id="sidebar"
-				style="background-color: yellow; width: 10%; height: 100%; float: left;">
-			</div>
+
+			<aside id="sidebar"
+				style="background-color: yellow; width: 5%; height: 100%; float: left;">
+				<ul style="list-style: none; padding-left: 25px;">
+					<li data-toggle="tootlip" data-placement="right" title="프로젝트" style="margin-top: 40px;"><a href="/ajaxTest"> <img
+							src="${pageContext.request.contextPath }/resources/img/img_describe.png"
+							style="width: 25px;">
+					</a></li>
+
+					<li data-toggle="tootlip" data-placement="right" title="개인업무" style="margin-top: 40px;"><a href="#"> <img
+							src="${pageContext.request.contextPath }/resources/img/img_task.png"
+							style="width: 25px;">
+					</a></li>
+
+					<li data-toggle="tootlip" data-placement="right" title="내정보" style="margin-top: 40px;"><a href="/user/infoEdit?id=a">
+							<img
+							src="${pageContext.request.contextPath }/resources/img/img_user.png"
+							style="width: 25px;">
+
+					</a></li>
+					<li data-toggle="tootlip" data-placement="right" title="방법론게시판" style="margin-top: 40px;"><a href="/methodBoard"> <img
+							src="${pageContext.request.contextPath }/resources/img/img_board.png"
+							style="width: 25px;">
+					</a></li>
+					<li data-toggle="tootlip" data-placement="right" title="설정" style="margin-top: 40px;"><a href="#"> <img
+							src="${pageContext.request.contextPath }/resources/img/img_settings.png"
+							style="width: 25px;">
+					</a></li>
+
+					<li data-toggle=tootlip data-placement="right" title="로그아웃" style="margin-top: 40px;"><a href="/user/logout"> <img
+							src="${pageContext.request.contextPath }/resources/img/img_logout.png"
+							style="width: 25px;">
+					</a></li>
+				</ul>
+			</aside>
+
 			<div id="contentwrap"
-				style=" width: 90%; height: 100%; float: left; overflow:auto;">
-				
-				<!--test  -->
-				<div class="container">
-					<div style="margin-top: 20px;">
-						<div style="float: left; display: -webkit-inline-box;">
-							<input type="text" class="form-control"
-								style="margin-right: 10px;"> <a class="btn btn-success"
-								onclick="wefw">검색</a>
-						</div>
-
-						<div style="float: right">
-							<a href='/methodBoardCreate' class="btn btn-success">글쓰기</a>
-						</div>
-					</div>
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th style="width: 50px;">번호</th>
-								<th style="width: 400px;">제목</th>
-								<th style="width: 150px;">작성자</th>
-								<th style="width: 200px;">날짜</th>
-								<th style="width: 100px;">관리</th>
-							</tr>
-						</thead>
-						<tbody id="tbodys">
-
-						</tbody>
-					</table>
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th style="width: 50px;">번호</th>
-								<th style="width: 400px;">제목</th>
-								<th style="width: 150px;">작성자</th>
-								<th style="width: 200px;">날짜</th>
-								<th style="width: 100px;">관리</th>
-							</tr>
-						</thead>
-						<tbody id="tbodys">
-
-						</tbody>
-					</table>
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th style="width: 50px;">번호</th>
-								<th style="width: 400px;">제목</th>
-								<th style="width: 150px;">작성자</th>
-								<th style="width: 200px;">날짜</th>
-								<th style="width: 100px;">관리</th>
-							</tr>
-						</thead>
-						<tbody id="tbodys">
-
-						</tbody>
-					</table>
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th style="width: 50px;">번호</th>
-								<th style="width: 400px;">제목</th>
-								<th style="width: 150px;">작성자</th>
-								<th style="width: 200px;">날짜</th>
-								<th style="width: 100px;">관리</th>
-							</tr>
-						</thead>
-						<tbody id="tbodys">
-
-						</tbody>
-					</table>
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th style="width: 50px;">번호</th>
-								<th style="width: 400px;">제목</th>
-								<th style="width: 150px;">작성자</th>
-								<th style="width: 200px;">날짜</th>
-								<th style="width: 100px;">관리</th>
-							</tr>
-						</thead>
-						<tbody id="tbodys">
-
-						</tbody>
-					</table>
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th style="width: 50px;">번호</th>
-								<th style="width: 400px;">제목</th>
-								<th style="width: 150px;">작성자</th>
-								<th style="width: 200px;">날짜</th>
-								<th style="width: 100px;">관리</th>
-							</tr>
-						</thead>
-						<tbody id="tbodys">
-
-						</tbody>
-					</table>
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th style="width: 50px;">번호</th>
-								<th style="width: 400px;">제목</th>
-								<th style="width: 150px;">작성자</th>
-								<th style="width: 200px;">날짜</th>
-								<th style="width: 100px;">관리</th>
-							</tr>
-						</thead>
-						<tbody id="tbodys">
-
-						</tbody>
-					</table>
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th style="width: 50px;">번호</th>
-								<th style="width: 400px;">제목</th>
-								<th style="width: 150px;">작성자</th>
-								<th style="width: 200px;">날짜</th>
-								<th style="width: 100px;">관리</th>
-							</tr>
-						</thead>
-						<tbody id="tbodys">
-
-						</tbody>
-					</table>
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th style="width: 50px;">번호</th>
-								<th style="width: 400px;">제목</th>
-								<th style="width: 150px;">작성자</th>
-								<th style="width: 200px;">날짜</th>
-								<th style="width: 100px;">관리</th>
-							</tr>
-						</thead>
-						<tbody id="tbodys">
-
-						</tbody>
-					</table>
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th style="width: 50px;">번호</th>
-								<th style="width: 400px;">제목</th>
-								<th style="width: 150px;">작성자</th>
-								<th style="width: 200px;">날짜</th>
-								<th style="width: 100px;">관리</th>
-							</tr>
-						</thead>
-						<tbody id="tbodys">
-
-						</tbody>
-					</table>
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th style="width: 50px;">번호</th>
-								<th style="width: 400px;">제목</th>
-								<th style="width: 150px;">작성자</th>
-								<th style="width: 200px;">날짜</th>
-								<th style="width: 100px;">관리</th>
-							</tr>
-						</thead>
-						<tbody id="tbodys">
-
-						</tbody>
-					</table>
-				</div>
-				<!--test  -->
+				style="width: 95%; height: 100%; float: left; overflow: auto;">
 			</div>
 
 		</div>
-		<div style="width: 100%; height: 50px; background-color: black;"></div>
+		<footer style="width: 100%; height: 50px; background-color: black;"></footer>
 	</div>
 </body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('[data-toggle="tootlip"]').tooltip();
+	});
+</script>
 </html>

@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/method/bootstrap.css">
+	href="${pageContext.request.contextPath }/resources/css/bootstrap/css/bootstrap.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <%
@@ -23,10 +23,61 @@ var id='<%=loginid%>';
 </script>
 </head>
 <body>
-	<div>
-		<%@include file="/WEB-INF/views/fix/sidebar.jsp" %>
-	</div>
-	<div class="container">
+	<div id="frame"
+		style="width: 100%; height: 100%; margin: 0px; position: absolute; top: 0; left: 0; overflow: hidden;">
+
+		<header id="main_header">
+			<!-- main_header.jsp 탑 메뉴 고정   -->
+			<nav style="background-color: red; width: 100%; height: 50px;">TaskDoc
+				프로젝트 통합 관리 시스템</nav>
+		</header>
+
+		<div id="wrapper" style="width: 100%; height: calc(100% - 100px);">
+
+			<aside id="sidebar"
+				style="background-color: yellow; width: 5%; height: 100%; float: left;">
+				<ul style="list-style: none; padding-left: 25px;">
+					<li data-toggle="tootlip" data-placement="right" title="프로젝트"
+						style="margin-top: 40px;"><a href="/project/main"> <img
+							src="${pageContext.request.contextPath }/resources/img/img_describe.png"
+							style="width: 25px;">
+					</a></li>
+
+					<li data-toggle="tootlip" data-placement="right" title="개인업무"
+						style="margin-top: 40px;"><a href="#"> <img
+							src="${pageContext.request.contextPath }/resources/img/img_task.png"
+							style="width: 25px;">
+					</a></li>
+
+					<li data-toggle="tootlip" data-placement="right" title="내정보"
+						style="margin-top: 40px;"><a href="/user/infoEdit?id=a">
+							<img
+							src="${pageContext.request.contextPath }/resources/img/img_user.png"
+							style="width: 25px;">
+
+					</a></li>
+					<li data-toggle="tootlip" data-placement="right" title="방법론게시판"
+						style="margin-top: 40px;"><a href="/methodBoard"> <img
+							src="${pageContext.request.contextPath }/resources/img/img_board.png"
+							style="width: 25px;">
+					</a></li>
+					<li data-toggle="tootlip" data-placement="right" title="설정"
+						style="margin-top: 40px;"><a href="#"> <img
+							src="${pageContext.request.contextPath }/resources/img/img_settings.png"
+							style="width: 25px;">
+					</a></li>
+
+					<li data-toggle=tootlip data-placement="right" title="로그아웃"
+						style="margin-top: 40px;"><a href="/user/logout"> <img
+							src="${pageContext.request.contextPath }/resources/img/img_logout.png"
+							style="width: 25px;">
+					</a></li>
+				</ul>
+			</aside>
+
+			<div id="contentwrap"
+				style="width: 95%; height: 100%; float: left; overflow: auto;">
+				<div class="container">
 		<div style="margin-top: 20px;">
 			<div style="float: left; display: -webkit-inline-box;">
 				<input type="text" class="form-control" style="margin-right: 10px;">
@@ -53,7 +104,13 @@ var id='<%=loginid%>';
 		</table>
 
 	</div>
-	<script type="text/javascript">
+			</div>
+
+		</div>
+		<footer style="width: 100%; height: 50px; background-color: black;"></footer>
+	</div>
+</body>
+<script type="text/javascript">
 		//게시판 목록 전체 받아오기
 		$(document).ready(function() {
 			$.ajax({
@@ -160,5 +217,4 @@ var id='<%=loginid%>';
 			else return;
 		}
 	</script>
-</body>
 </html>

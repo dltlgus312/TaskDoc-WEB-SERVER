@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<meta name="description" content="">
-<meta name="author" content="">
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
@@ -20,13 +15,6 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-<!--TaskDocMain css -> For button use  -->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/resources/css/taskdocMain/normalize.css?ver=42" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/resources/css/taskdocMain/demo.css?ver=42" />
-<!--/TaskDocMain css -> For button use  -->
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/resources/css/user/join.css?ver=54" />
@@ -44,7 +32,7 @@ if(id=="null"){
 }
 </script>
 
-<body style="overflow-x: hidden; overflow-y: hidden;">
+<body>
 	<div>
 		<div class="container" style="width: 600px; margin-top: 10px;">
 			<div class="row">
@@ -98,13 +86,13 @@ if(id=="null"){
 						<span class="help-block">TASKDOC (은)는 개인정보 방침을 준수합니다.</span>
 						<div style="float: left">
 							<button type="button" style="font-size: 13px; background:"
-								class="current-demo" onclick="userdel()">회원탈퇴</button>
+								class="btn btn-success" onclick="userdel()">회원탈퇴</button>
 						</div>
 						<div>
-							<button class="userJoin" onclick="edit()"
+							<button type="button" class="btn btn-success" onclick="edit()"
 								style="font-size: 13px; margin: auto 0; margin-left: 6px;">Edit</button>
 							<button type="button" style="font-size: 13px;"
-								class="current-demo" onclick="cancel()">Cancel</button>
+								class="btn btn-success" onclick="cancel()">Cancel</button>
 						</div>
 					</div>
 				</div>
