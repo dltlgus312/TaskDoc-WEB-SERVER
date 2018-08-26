@@ -20,60 +20,77 @@ var id='<%=loginid%>';
 	<div id="frame"
 		style="width: 100%; height: 100%; margin: 0px; position: absolute; top: 0; left: 0; overflow: hidden;">
 
+		<!--MAIN HEADER  -->
 		<header id="main_header">
 			<!-- main_header.jsp 탑 메뉴 고정   -->
-			<nav style="background-color: red; width: 100%; height: 50px;">TaskDoc
-				프로젝트 통합 관리 시스템</nav>
+			<nav
+				style="width: 100%; height: 50px; background-color: #333; display: inline-flex;">
+				<!--이미지중앙정렬 text-align  -->
+				<div
+					style="width: 76.8px; height: 50px; text-align: center; background-color: white">
+					<img
+						src="${pageContext.request.contextPath }/resources/img/img_taskdoclogo.png">
+				</div>
+				<div
+					style="width: 100px; background-color: #ed8151; text-align: center;">
+					<!--line-height : element 요소의 세로크기만큼 지정해주면 세로로 중앙정렬이됨  -->
+					<a class="active" href="/project/main"
+						style="color: white; font-size: 20px; line-height: 50px; text-decoration: none;">TaskDoc</a>
+				</div>
+				<div class="dropdown" style="right:0px; position:absolute; height:50px;">
+					<button class="btn btn-default dropdown-toggle" type="button"
+						data-toggle="dropdown"
+						style="color: white; background-color: #333; border-color: #333; width: 100%; height: 100%; font-size:17px;">
+						<%=loginid%> <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a href="#">나의 정보</a></li>
+						<li><a href="/user/logout">로그아웃</a></li>
+					</ul>
+				</div>
+
+			</nav>
 		</header>
+		<!--MAIN HEADER  -->
 
 		<div id="wrapper" style="width: 100%; height: calc(100% - 100px);">
 
+			<!--SIDE BAR  -->
 			<aside id="sidebar"
-				style="background-color: yellow; width: 5%; height: 100%; float: left;">
-				<ul style="list-style: none; padding-left: 25px;">
-					<li data-toggle="tootlip" data-placement="right" title="프로젝트"
-						style="margin-top: 40px;"><a href="/project/main"> <img
-							src="${pageContext.request.contextPath }/resources/img/img_describe.png"
-							style="width: 25px;">
-					</a></li>
-
-					<li data-toggle="tootlip" data-placement="right" title="개인업무"
-						style="margin-top: 40px;"><a href="#"> <img
-							src="${pageContext.request.contextPath }/resources/img/img_task.png"
-							style="width: 25px;">
-					</a></li>
-
-					<li data-toggle="tootlip" data-placement="right" title="내정보"
-						style="margin-top: 40px;"><a href="/user/infoEdit?id=a">
-							<img
-							src="${pageContext.request.contextPath }/resources/img/img_user.png"
-							style="width: 25px;">
-
-					</a></li>
-					<li data-toggle="tootlip" data-placement="right" title="방법론게시판"
-						style="margin-top: 40px;"><a href="/methodBoard"> <img
-							src="${pageContext.request.contextPath }/resources/img/img_board.png"
-							style="width: 25px;">
-					</a></li>
-					<li data-toggle="tootlip" data-placement="right" title="설정"
-						style="margin-top: 40px;"><a href="#"> <img
-							src="${pageContext.request.contextPath }/resources/img/img_settings.png"
-							style="width: 25px;">
-					</a></li>
-
-					<li data-toggle=tootlip data-placement="right" title="로그아웃"
-						style="margin-top: 40px;"><a href="/user/logout"> <img
-							src="${pageContext.request.contextPath }/resources/img/img_logout.png"
-							style="width: 25px;">
-					</a></li>
-				</ul>
+				style="background-color: white; width: 50px; height: 100%; float: left;">
+				
+				<div class="h-describe" data-toggle="tootlip"
+				data-placement="right" title="프로젝트" style="width:100%;height:70px;background-color: white; text-align: center; line-height:70px;">
+				<img id="describe" src="${pageContext.request.contextPath }/resources/img/img_describe.png" style="width:25px;height:25px;">
+				</div>
+				<div class="h-task" data-toggle="tootlip"
+				data-placement="right" title="개인 업무" style="width:100%;height:70px;background-color: white; text-align: center; line-height:70px;">
+				<img id="task" src="${pageContext.request.contextPath }/resources/img/img_task.png" style="width:25px;height:25px;">
+				</div>
+				<div class="sidebar-button" data-toggle="tootlip"
+				data-placement="right" title="나의 정보" style="width:100%;height:70px;background-color: white; text-align: center; line-height:70px;">
+				<img id="user" src="${pageContext.request.contextPath }/resources/img/img_user.png" style="width:25px;height:25px;">
+				</div>
+				<div class="sidebar-button" data-toggle="tootlip"
+				data-placement="right" title="방법론 게시판" style="width:100%;height:70px;background-color: white; text-align: center; line-height:70px;">
+				<img id="board" src="${pageContext.request.contextPath }/resources/img/img_board.png" style="width:25px;height:25px;">
+				</div>
+				<div class="sidebar-button" data-toggle="tootlip"
+				data-placement="right" title="설정" style="width:100%;height:70px;background-color: white; text-align: center; line-height:70px;">
+				<img id="settings" src="${pageContext.request.contextPath }/resources/img/img_settings.png" style="width:25px;height:25px;">
+				</div>
+				<div class="sidebar-button" data-toggle="tootlip"
+				data-placement="right" title="로그아웃" style="width:100%;height:70px;background-color: white; text-align: center; line-height:70px;">
+				<img id="logout" src="${pageContext.request.contextPath }/resources/img/img_logout.png" style="width:25px;height:25px;">
+				</div>
 			</aside>
 
-			<div id="contentwrap"
-				style="width: 95%; height: 100%; float: left; overflow: auto;">
-			<button type="button">프로젝트 생성~</button>
-			</div>
+			<!--SIDE BAR  -->
 
+			<div id="contentwrap"
+				style="width: calc(100% - 50px); height: 100%; float: left; overflow: auto;">
+				
+			</div>
 		</div>
 		<footer style="width: 100%; height: 50px; background-color: black;"></footer>
 	</div>
@@ -83,9 +100,22 @@ var id='<%=loginid%>';
 	/*TOOLTIP JS  */
 	$(document).ready(function() {
 		$('[data-toggle="tootlip"]').tooltip();
+		$(".h-describe").hover(function(){
+	        $(this).css("background-color", "#ed8151");
+	        $("#describe").attr("src","${pageContext.request.contextPath }/resources/img/hover_describe.png");
+	        }, function(){
+		    $(this).css("background-color", "white");
+		    $("#describe").attr("src","${pageContext.request.contextPath }/resources/img/img_describe.png");
+	    });
+		$(".h-task").hover(function(){
+	        $(this).css("background-color", "#ed8151");
+	        $("#task").attr("src","${pageContext.request.contextPath }/resources/img/hover_task.png");
+	        }, function(){
+		    $(this).css("background-color", "white");
+		    $("#task").attr("src","${pageContext.request.contextPath }/resources/img/img_task.png");
+	    });
 	});
-	
-	
+
 	/* 
 	//window.open post방식으로 값넘기기
 	var form = document.createElement("form");      // form 엘리멘트 생성

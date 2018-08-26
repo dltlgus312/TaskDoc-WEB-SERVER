@@ -8,6 +8,6 @@
 
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/method/bootstrap.css">
+	href="${pageContext.request.contextPath }/resources/css/bootstrap/css/bootstrap.css">
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
