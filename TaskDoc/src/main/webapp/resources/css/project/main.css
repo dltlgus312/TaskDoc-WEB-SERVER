@@ -1,0 +1,80 @@
+@CHARSET "UTF-8";
+
+#frame {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+}
+
+.header_nav {
+	width: 100%;
+	height: 50px;
+	background-color: #333;
+	display: inline-flex;
+}
+
+/*이미지중앙정렬 text-align */
+#mainlogowrap {
+	width: 76.8px;
+	height: 50px;
+	text-align: center;
+	background-color: white;
+	line-height:50px;
+}
+
+#projectnamewrap {
+	width: 100px;
+	background-color: #ed8151;
+	text-align: center;
+}
+
+/*line-height : element 요소의 세로크기만큼 지정해주면 세로로 중앙정렬이됨  */
+#projectname {
+	color: white;
+	font-size: 20px;
+	line-height: 50px;
+	text-decoration: none;
+}
+
+#wrapper {
+	width: 100%;
+	height: calc(100% - 100px);
+}
+
+#sidebar {
+	background-color: white;
+	width: 50px;
+	height: 100%;
+	float: left;
+}
+
+.h-describe, .h-task, .h-user, .h-board, .h-settings, .h-logout {
+	width: 100%;
+	height: 70px;
+	background-color: white;
+	text-align: center;
+	line-height: 70px;
+	cursor: pointer;
+}
+
+#describe, #task, #user, #board, #settings, #logout {
+	width: 25px;
+	height: 25px;
+}
+
+#contentwrap {
+	width: calc(100% - 50px);
+	height: 100%;
+	float: left;
+	overflow: auto;
+}
+
+#footer {
+	width: 100%;
+	height: 50px;
+	background-color: black;
+}

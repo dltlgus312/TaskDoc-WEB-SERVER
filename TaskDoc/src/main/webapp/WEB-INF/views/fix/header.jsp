@@ -5,9 +5,21 @@
 <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<!--STOMP, SOCKJS, AJAX  -->
 
 
+<!--BOOTSTRAP CSS, JS  -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/bootstrap/css/bootstrap.css">
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--BOOTSTRAP CSS, JS  -->
+
+
+<!-- MY CSS -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/project/main.css?ver=23">
+
+<!-- MY CSS -->
+
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/project/main.js"></script>
