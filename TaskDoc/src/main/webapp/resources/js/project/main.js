@@ -101,8 +101,7 @@ $(document).ready(function() {
 			}
 			pcode별로 프로젝트 list 나열하고, 프로젝트별 title, subtitle, psdate, pedate 설정하기
 			 */
-			
-			
+			/*ㅇㅇ*/
 			/*가입된 프로젝트와 초대 받은 프로젝트 갯수구하기*/
 			for(var i=0;i<response.projectJoinList.length;i++){
 				if(response.projectJoinList[i].pinvite>0){
@@ -121,10 +120,10 @@ $(document).ready(function() {
 				}
 			}
 			for(var i=0;i<proOkLine;i++){
-				var $div=$('<div class="project_listdiv_wrap"'+'id=list'+i+'>'+'</div>');
+				/*var $div=$('<div class="project_listdiv_wrap"'+'id=list'+i+'>'+'</div>');
 				$("#project_list_wrap_top").append($div);
 				var $div2=$('<div class="project_list"><div class="project_list_content_wrap"><div class="project_list_content_header"><div class="project_list_content_header_left"></div> <div class="project_list_content_header_right"></div></div><div class="project_list_content_bottom"><div class="project_list_subtitle"><span> 하이 </span></div><div class="project_list_start">START</div><div class="project_list_end">END</div><div class="project_list_position">직책</div></div></div></div></div>');
-				$("#list"+i).append($div2);
+				$("#list"+i).append($div2);*/
 				
 			}
 		},
