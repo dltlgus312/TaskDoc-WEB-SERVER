@@ -37,7 +37,7 @@ var id='<%=loginid%>';
 				<!--PROJECT_WRAP -->				
 				<div id="project_wrap">
 				
-					<!--PROJECT_LIST_WRAP -->
+					<!--PROJECT_LIST_WRAP / TOP(pinvite=1인 프로젝트)-->
 					<div class="project_list_wrap">
 					
 						<!--PROJECT_LISTDIV_WRAP  -->
@@ -45,66 +45,69 @@ var id='<%=loginid%>';
 							
 							<!--PROJECT_LIST  -->
 							<div class="project_list">
+							
 								<!--PROJECT_LIST_CONTENT_WRAP  -->
 								<div class="project_list_content_wrap">
-									<div class="projectheader"
-										style="width: 100%; height: 50px; background-color: orange;">
-										<div class="projectheaderleft"
-											style="width: 300px; height: 100%; background-color: red; float: left;"></div>
-										<div class="projectheaderright"
-											style="width: 50px; height: 100%; background-color: grey; float: right;"></div>
+								
+									<!--PROJECT_LIST_CONTENT_HEADER  -->
+									<div class="project_list_content_header">
+
+										<!--PROJECT_LIST_CONTENT_HEADER_LEFT  -->
+										<div class="project_list_content_header_left">
+										</div>
+										
+										<!--PROJECT_LIST_CONTENT_HEADER_RIGHT  -->
+										<div class="project_list_content_header_right">
+										</div>
 									</div>
-									<div class="projectbottom"
-										style="width: 100%; height: 200px; background-color: green;">
-										<div
-											style="width: 100%; background-color: white; height: 50px; overflow: auto;">
+									<!--PROJECT_LIST_CONTENT_HEADER  -->
+									
+									<!--PROJECT_LIST_CONTENT_BOTTOM  -->
+									<div class="project_list_content_bottom">
+									
+										<!--PROJECT_LIST_SUBTITLE  -->
+										<div class="project_list_subtitle">
 											<span> 하이 </span>
 										</div>
-										<div
-											style="width: 100%; height: 50px; background-color: orange;">START</div>
-										<div
-											style="width: 100%; height: 50px; background-color: grey;">END</div>
-										<div
-											style="width: 100%; height: 50px; background-color: aqua;">직책</div>
+										<!--PROJECT_LIST_SUBTITLE  -->
+										
+										<!--PROJECT_LIST_START  -->
+										<div class="project_list_start">START</div>
+										<!--PROJECT_LIST_START  -->
+
+										<!--PROJECT_LIST_END  -->
+										<div class="project_list_end">END</div>
+										<!--PROJECT_LIST_END  -->
+
+										<!--PROJECT_LIST_POSITION  -->		
+										<div class="project_list_position">직책</div>
+										<!--PROJECT_LIST_POSITION  -->		
+
 									</div>
+									<!--PROJECT_LIST_CONTENT_BOTTOM  -->
+									
 								</div>
+								<!--PROJECT_LIST_CONTENT_WRAP  -->
 
 							</div>
+							<!--PROJECT_LIST  -->
+							
 						</div>
+						<!--PROJECT_LISTDIV_WRAP  -->
+						
 					</div>
+					<!--PROJECT_LIST_WRAP / TOP(pinvite=1인 프로젝트)-->
+					
+					<!--PROJECT_LIST_WRAP / BOTTOM(pinvite=0인 프로젝트)-->
+					<div class="project_list_wrap">
+					
 
-					<div style="width: 100%; height: 50%; display: contents;">
-						<div style="width: 100%; height: 300px; display: -webkit-box;">
-							<div class="tessssst"
-								style="margin-right: 10px; width: 350px; height: 250px; cursor: pointer; box-shadow: 4px 4px 7px grey">
-								<div class="projectwrap"
-									style="background-color: white; width: 100%; height: 100%;">
-									<div class="projectheader"
-										style="width: 100%; height: 50px; background-color: orange;">
-										<div class="projectheaderleft"
-											style="width: 300px; height: 100%; background-color: red; float: left;"></div>
-										<div class="projectheaderright"
-											style="width: 50px; height: 100%; background-color: grey; float: right;"></div>
-									</div>
-									<div class="projectbottom"
-										style="width: 100%; height: 200px; background-color: green;">
-										<div
-											style="width: 100%; background-color: white; height: 50px; overflow: auto;">
-											<span id="spantest">하이</span>
-										</div>
-										<div
-											style="width: 100%; height: 50px; background-color: orange;">START</div>
-										<div
-											style="width: 100%; height: 50px; background-color: grey;">END</div>
-										<div
-											style="width: 100%; height: 50px; background-color: aqua;">직책</div>
-									</div>
-								</div>
-
-							</div>
-
-						</div>
 					</div>
+					<!--PROJECT_LIST_WRAP / BOTTOM(pinvite=0인 프로젝트)-->
+					
+					</div>
+					<!--PROJECT_WRAP -->
+					
 				</div>
 				<!--PROJECT_WRAP -->				
 
@@ -117,6 +120,6 @@ var id='<%=loginid%>';
 		<!-- FOOTER -->
 		<%@include file="/WEB-INF/views/fix/footer.jsp"%>
 		<!-- FOOTER -->
-	</div>
+	
 </body>
 </html>

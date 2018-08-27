@@ -125,6 +125,57 @@
 	height: 100%;
 }
 
+.project_list_content_header {
+	width: 100%;
+	height: 50px;
+	background-color: orange;
+}
+
+.project_list_content_header_left {
+	width: 300px;
+	height: 100%;
+	background-color: red;
+	float: left;
+}
+
+.project_list_content_header_right {
+	width: 50px;
+	height: 100%;
+	background-color: grey;
+	float: right;
+}
+
+.project_list_content_bottom {
+	width: 100%;
+	height: 200px;
+	background-color: green;
+}
+
+.project_list_subtitle {
+	width: 100%;
+	background-color: white;
+	height: 50px;
+	overflow: auto;
+}
+
+.project_list_start {
+	width: 100%;
+	height: 50px;
+	background-color: orange;
+}
+
+.project_list_end {
+	width: 100%;
+	height: 50px;
+	background-color: grey;
+}
+
+.project_list_position {
+	width: 100%;
+	height: 50px;
+	background-color: aqua;
+}
+
 #footer {
 	width: 100%;
 	height: 50px;
