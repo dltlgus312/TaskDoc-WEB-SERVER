@@ -99,7 +99,12 @@
 	height: 100%;
 }
 
-.project_list_wrap {
+#project_list_wrap_top {
+	width: 100%;
+	height: 50%;
+	display: contents;
+}
+#project_list_wrap_bottom {
 	width: 100%;
 	height: 50%;
 	display: contents;
