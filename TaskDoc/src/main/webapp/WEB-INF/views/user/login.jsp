@@ -84,12 +84,11 @@ var goserveruid="";
 	}
 	//progress bar function
 
-	var testHost = 'http://localhost:8080/';
 	$(function() {
 
 		/*Cancel시 Main으로*/
 		$(".goMain").click(function() {
-			location.href = testHost;
+			location.href = '/';
 		});
 		/*/Cancel시 Main으로*/
 

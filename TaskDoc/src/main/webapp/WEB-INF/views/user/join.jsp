@@ -99,11 +99,9 @@
 </body>
 
 <script type="text/javascript">
-	var testHost = 'http://localhost:8080/';
-	var serverHost = '';
 	/*Cancel시 Main으로*/
 	function goMain() {
-		location.href = testHost;
+		location.href = '/';
 	}
 
 	$(function() {

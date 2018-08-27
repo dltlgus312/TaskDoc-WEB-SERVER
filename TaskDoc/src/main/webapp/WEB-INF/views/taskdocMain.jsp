@@ -116,25 +116,23 @@
 	<!-- Main에서 SHOW MENU클릭시 나타나는 이벤트 js -->
 
 <script type="text/javascript">
-	var testHost = 'http://localhost:8080';
-	var serverHost = '';
 
 	$(function() {
 		$("#JoinButton").click(function() {
-			location.href = testHost + '/user/join';
+			location.href = '/user/join';
 		});
 		$("#LoginButton").click(function() {
-			location.href = testHost + '/user/login';
+			location.href = '/user/login';
 		});
 	});
 	
 	/* TEST  */
 	$(function() {
 		$("#proButton").click(function() {
-			location.href = testHost + '/project/main';
+			location.href ='/project/main';
 		});
 		$("#chatButton").click(function() {
-			location.href = testHost + '/chat/main';
+			location.href = '/chat/main';
 		});
 	});
 	

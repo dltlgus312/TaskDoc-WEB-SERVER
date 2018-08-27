@@ -22,4 +22,4 @@
 
 <!-- MY CSS -->
 
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/project/main.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/project/main.js?ver=54"></script>
