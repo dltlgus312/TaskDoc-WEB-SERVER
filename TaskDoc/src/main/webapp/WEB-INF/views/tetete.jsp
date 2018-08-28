@@ -20,7 +20,7 @@
 			<li><a href="#">Artists</a></li>
 			<li><a href="#">Albums</a></li>
 			<li><a href="#">Songs</a></li>
-			<li><a href="#">Genres</a></li>
+			<li><a href="#">Genres</a></li>aaaa
 			<li><a href="#">Settings</a></li>
 		</ul>
 	</div>
