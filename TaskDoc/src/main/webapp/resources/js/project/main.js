@@ -16,66 +16,6 @@ var proOkLine=0;
 var proNoLine=0;
 
 $(document).ready(function() {
-	$("#buttonloginid").html('ID : '+id);
-	
-	$('[data-toggle="tootlip"]').tooltip();
-
-	$(".project_list").hover(function() {
-		$(this).css("box-shadow", "4px 8px 20px grey");
-	}, function() {
-		$(this).css("box-shadow", "4px 4px 7px grey");
-	});
-	
-	$(".h-describe").hover(function() {
-		$(this).css("background-color", "#ed8151");
-		$("#describe").attr("src", "/resources/img/hover_describe.png");
-	}, function() {
-		$(this).css("background-color", "white");
-		$("#describe").attr("src", "/resources/img/img_describe.png");
-	});
-	$(".h-task").hover(function() {
-		$(this).css("background-color", "#ed8151");
-		$("#task").attr("src", " /resources/img/hover_task.png");
-	}, function() {
-		$(this).css("background-color", "white");
-		$("#task").attr("src", " /resources/img/img_task.png");
-	});
-	$(".h-user").hover(function() {
-		$(this).css("background-color", "#ed8151");
-		$("#user").attr("src", " /resources/img/hover_user.png");
-	}, function() {
-		$(this).css("background-color", "white");
-		$("#user").attr("src", " /resources/img/img_user.png");
-	});
-	$(".h-board").hover(function() {
-		$(this).css("background-color", "#ed8151");
-		$("#board").attr("src", " /resources/img/hover_board.png");
-	}, function() {
-		$(this).css("background-color", "white");
-		$("#board").attr("src", " /resources/img/img_board.png");
-	});
-	$(".h-settings").hover(function() {
-		$(this).css("background-color", "#ed8151");
-		$("#settings").attr("src", " /resources/img/hover_settings.png");
-	}, function() {
-		$(this).css("background-color", "white");
-		$("#settings").attr("src", " /resources/img/img_settings.png");
-	});
-	$(".h-logout").hover(function() {
-		$(this).css("background-color", "#ed8151");
-		$("#logout").attr("src", " /resources/img/hover_logout.png");
-	}, function() {
-		$(this).css("background-color", "white");
-		$("#logout").attr("src", " /resources/img/img_logout.png");
-	});
-	$(".h-projectadd").hover(function() {
-		$(this).css("background-color", "#ed8151");
-		$("#projectadd").attr("src", " /resources/img/hover_projectadd.png");
-	}, function() {
-		$(this).css("background-color", "white");
-		$("#projectadd").attr("src", " /resources/img/img_projectadd.png");
-	});
-	
 	/* 내가 참가하는 모든 프로젝트를 검색*/
 	$.ajax({
 		type : 'GET',
@@ -132,21 +72,7 @@ $(document).ready(function() {
 		}
 	});
 	/* /내가 참가하는 모든 프로젝트를 검색*/
-});
-
-$(function() {
-	$("#newproject").click(function() {
-		window.open("/project/create","", "height=400, width=600, left="+ popupX + ", top="+ popupY + ", screenX="+ popupX + ", screenY= "+ popupY); 
-	});
-	$("#newtask").click(function() {
-		location.href = '/privatetask/create';
-	});
-});
-
-
-
-
-
+	
 	/* 프로젝트에 초대받은사람 수락할때  
 	 * projectjoin_SQL 다시알아보기★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	 */
@@ -173,3 +99,18 @@ $(function() {
 		}
 	});*/
 	/*/프로젝트에 초대받은사람 수락할때 */
+});
+
+//프로젝트별 setting 이미지 누르면 세팅으로 윈도우창띄어라
+function prosettingopen(pcode){
+	window.open("/project/infoEdit?pcode="+pcode,"", "height=400, width=600, left="+ popupX + ", top="+ popupY + ", screenX="+ popupX + ", screenY= "+ popupY); 
+}
+
+//프로젝트별 초대 이미지 누르면 초대로 윈도우창띄어라
+function proinviteopne(id){
+	window.open("/project/userInvite?pcode="+pcode,"", "height=400, width=600, left="+ popupX + ", top="+ popupY + ", screenX="+ popupX + ", screenY= "+ popupY); 
+}
+
+
+
+

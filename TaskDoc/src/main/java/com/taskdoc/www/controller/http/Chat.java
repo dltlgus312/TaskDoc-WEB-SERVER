@@ -4,6 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/*
+ * @ResponseBody --> JSON RETURN {"ds" : "SD"}
+ * Controller + Responsebody
+ * */
+
 @Controller
 @RequestMapping("/chat")
 public class Chat {

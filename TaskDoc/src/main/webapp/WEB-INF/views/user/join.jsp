@@ -48,7 +48,7 @@
 								<input id="uid" style="width: 80%;" type="text"
 									class="form-control">
 								<button class="userDuplicate"
-									style="font-size: 13px; margin: auto 0; margin-left: 6px;">중복확인</button>
+									style="font-size: 13px; font-family:Title_Light;margin: auto 0; margin-left: 6px;">중복확인</button>
 							</div>
 							<span class="help-block">아이디는 로그인 하는데 사용됩니다.</span>
 						</div>
@@ -87,9 +87,9 @@
 
 					<div class="modal-footer">
 						<button class="userJoin"
-							style="font-size: 13px; margin: auto 0; margin-left: 6px;">CREATE
+							style="font-size: 13px; margin: auto 0; margin-left: 6px;font-family:Title_Light;">CREATE
 							NEW ACCOUNT</button>
-						<button type="button" style="font-size: 13px;"
+						<button type="button" style="font-size: 13px;font-family:Title_Light;"
 							class="current-demo" onclick="goMain()">Cancel</button>
 					</div>
 				</div>

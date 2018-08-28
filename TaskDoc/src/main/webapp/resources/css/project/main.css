@@ -1,5 +1,34 @@
 @CHARSET "UTF-8";
 
+/*Gyeongi Chungnen Font*/
+@font-face {
+	font-family: "Batang_Bold";
+	src:local(※), url(../fonts/Gyeongi/Batang_Bold.woff) format('woff')
+}
+@font-face {
+	font-family: "Batang_Regular";
+	src:local(※), url(../fonts/Gyeongi/Batang_Regular.woff) format('woff')
+}
+@font-face {
+	font-family: "Title_Bold";
+	src:local(※), url(../fonts/Gyeongi/Title_Bold.woff) format('woff')
+}
+@font-face {
+	font-family: "Title_Light";
+	src:local(※), url(../fonts/Gyeongi/Title_Light.woff) format('woff')
+}
+@font-face {
+	font-family: "Title_Medium";
+	src:local(※), url(../fonts/Gyeongi/Title_Medium.woff) format('woff')
+}
+@font-face {
+	font-family: "TitleV";
+	src:local(※), url(../fonts/Gyeongi/TitleV.woff) format('woff')
+}
+
+/* /Gyeongi Chungnen Font*/
+
+
 /*SCROLL BAR STYLE  */
 ::-webkit-scrollbar {
 	width: 10px;
@@ -20,6 +49,14 @@
 	background: #555;
 }
 /*SCROLL BAR STYLE  */
+
+/*element fontew 지정  */
+span{
+	font-family:Title_Light;
+}
+/*element dsfont 지정  */
+
+
 #frame {
 	width: 100%;
 	height: 100%;
@@ -133,32 +170,28 @@
 .project_list_content_header {
 	width: 100%;
 	height: 50px;
-	background-color: orange;
 }
 
 .project_list_content_header_left {
 	width: 300px;
 	height: 100%;
-	background-color: red;
+	background-color: #ed8151;
 	float: left;
 }
 
 .project_list_content_header_right {
 	width: 50px;
 	height: 100%;
-	background-color: grey;
 	float: right;
 }
 
 .project_list_content_bottom {
 	width: 100%;
 	height: 200px;
-	background-color: green;
 }
 
 .project_list_subtitle {
 	width: 100%;
-	background-color: white;
 	height: 50px;
 	overflow: auto;
 }
@@ -166,19 +199,16 @@
 .project_list_start {
 	width: 100%;
 	height: 50px;
-	background-color: orange;
 }
 
 .project_list_end {
 	width: 100%;
 	height: 50px;
-	background-color: grey;
 }
 
 .project_list_position {
 	width: 100%;
 	height: 50px;
-	background-color: aqua;
 }
 
 #footer {

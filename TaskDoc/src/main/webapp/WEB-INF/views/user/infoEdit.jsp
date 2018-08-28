@@ -23,6 +23,7 @@
 <%
 String loginid="";
 loginid=(String)session.getAttribute("loginid");
+String paramId=request.getParameter("id");
 %>
 <script type="text/javascript">
 var id='<%=loginid%>';
@@ -107,7 +108,7 @@ $(document).ready(function(){
 	/*회원 정보 수정을위해 정보를 불러오기*/
 		$.ajax({
 			type : 'GET',
-			url : '/userinfo/' + '<%=loginid%>',
+			url : '/userinfo/' + '<%=paramId%>',
 			success : function(response) {
 				//Object.keys(response).length --> 자바리턴값이 Object일때 Object 의 크기 구하는법
 				if (Object.keys(response).length > 0) {

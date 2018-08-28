@@ -43,9 +43,9 @@
 				</label>
 			</div>
 			<div style="display: grid">
-				<button type="button" class="sign" style="font-size: 13px;">Sign
+				<button type="button" class="sign" style="font-size: 13px;font-family:Title_Light;">Sign
 					in</button>
-				<button type="button" class="goMain" style="font-size: 13px;">Cancel</button>
+				<button type="button" class="goMain" style="font-size: 13px;font-family:Title_Light;">Cancel</button>
 			</div>
 		</form>
 

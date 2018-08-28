@@ -13,11 +13,11 @@
 
 
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/resources/css/taskdocMain/normalize.css?ver=422" />
+	href="${pageContext.request.contextPath }/resources/css/taskdocMain/normalize.css?ver=4262" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/resources/css/taskdocMain/demo.css?ver=422" />
+	href="${pageContext.request.contextPath }/resources/css/taskdocMain/demo.css?ver=4262" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/resources/css/taskdocMain/component.css?ver=2223" />
+	href="${pageContext.request.contextPath }/resources/css/taskdocMain/component.css?ver=22263" />
 <script
 	src="${pageContext.request.contextPath }/resources/js/taskdocMain/modernizr.custom.25376.js"></script>
 
@@ -31,64 +31,60 @@
 		<div class="container">
 			<div class="wrapper">
 				<div class="codrops-top clearfix">
-					<a class="codrops-icon codrops-icon-prev"><span>TaskDoc</span></a>
-					<button id="showMenu" style="font-size: 11px;">Show Menu</button>
+					<a><span style="font-size:14px;font-family:Title_Light;">TaskDoc</span></a>
+					<button id="showMenu" style="font-family:Title_Light;font-size: 14px;">Show Menu</button>
 
 					<!-- LOGIN BUTTON -->
 					<span class="right">
-						<button id="LoginButton" class="codrops-icon codrops-icon-drop">
-							<span style="font-size: 11px;">LOGIN</span>
+						<button id="LoginButton">
+							<span style="font-size: 14px;font-family:Title_Light;">LOGIN</span>
 						</button> <!-- /LOGIN BUTTON --> <!-- JOIN BUTTON -->
 					</span>
 					 <span class="right">
-						<button id="JoinButton" class="codrops-icon codrops-icon-drop">
-							<span style="font-size: 11px;">JOIN</span>
+						<button id="JoinButton">
+							<span style="font-size: 14px;font-family:Title_Light;">JOIN</span>
 						</button> <!-- /JOIN BUTTON -->
 					</span>
 					
-					<!-- TEST -->
-					 <span class="right">
-						<button id="proButton" class="codrops-icon codrops-icon-drop">
-							<span style="font-size: 11px;">PROJECT</span>
-						</button> <!-- /JOIN BUTTON -->
+					<!--  <span class="right">
+						<button id="proButton">
+							<span style="font-size: 14px;">PROJECT</span>
+						</button> /JOIN BUTTON
 					</span>
 					 <span class="right">
-						<button id="chatButton" class="codrops-icon codrops-icon-drop">
-							<span style="font-size: 11px;">CHAT</span>
-						</button> <!-- /JOIN BUTTON -->
-					</span>
-					<!-- /TEST -->
+						<button id="chatButton">
+							<span style="font-size: 14px;">CHAT</span>
+						</button> /JOIN BUTTON
+					</span> -->
 				</div>
 				
-				<header class="codrops-header">
-					<h1 style="font-family: Title_Medium">
-						TaskDoc <span>Task(작업) + Document(기록)</span>
-					</h1>
+				<header class="codrops-header" style="margin-bottom:-48px;">
+					<span style="font-family: Title_Medium;font-size:55px;color:#ed8151;">
+						TaskDoc <span style="font-size:30px;">Task(작업) + Document(기록)</span>
+					</span>
 				</header>
 
 
-				<div class="main clearfix">
-					<div class="column">
-						<p style="font-family:Title_Light; font-size:20px;">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
-						<p style="font-family:Title_Light; font-size:20px;">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
-						<p style="font-family:Title_Light; font-size:20px;">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
-						<p style="font-family:Title_Light; font-size:20px;">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
-						<p style="font-family:Title_Light; font-size:20px;">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
+				<div class="main clearfix" style="margin-top:50px;">
+					<div class="column" style="display:grid;text-align:center;">
+						<p style="font-family:Title_Light; font-size:20px;color:#aca89a">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
+						<p style="font-family:Title_Light; font-size:20px;color:#aca89a">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
+						<p style="font-family:Title_Light; font-size:20px;color:#aca89a">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
+						<p style="font-family:Title_Light; font-size:20px;color:#aca89a">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
+						<p style="font-family:Title_Light; font-size:20px;color:#aca89a">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
 					</div>
 					<div class="column">
 						<nav class="codrops-demos">
-							<a href="" class="current-demo">TEST</a> <a href="">TEST</a> <a
-								href="">TEST</a> <a href="">TEST</a> <a href="">TEST</a> <a
-								href="">TEST</a>
+						<!--여기사진넣기  -->
 						</nav>
 					</div>
 					<div class="related">
-						<p>If you enjoyed this demo you might also like:</p>
+						<p style="font-family:Title_Light;">Copyright 2018. TaskDoc all rights reserved.</p>
 						<p>
-							<a href="">Animated Border Menus</a>
+							<a href="" style="font-family:Title_Light;">WELCOME TO</a>
 						</p>
 						<p>
-							<a href="">Transitions for Off-Canvas Navigations</a>
+							<a href=""style="font-family:Title_Light;">TaskDoc</a>
 						</p>
 					</div>
 				</div>
@@ -98,12 +94,11 @@
 		</div>
 		<!-- /container -->
 		<nav class="outer-nav left vertical">
-			<a href="/" class="icon-home">Home</a> <a
-				href="/" class="icon-news">Board</a> <a
-				href="/" class="icon-image">Images</a> <a href=""
-				class="icon-upload">Uploads</a> <a href="/" class="icon-star">Favorites</a>
-			<a href="/" class="icon-mail">Messages</a> <a href="#"
-				class="icon-lock">Edit Account</a>
+			<a href="/" >Home</a> <a
+				href="/" >Board</a> <a
+				href="/" >Images</a> <a href="">Uploads</a> <a href="/"></a>
+			<a href="/" >Messages</a> <a href="#"
+				>Edit Account</a>
 		</nav>
 	</div>
 	<!-- /perspective -->
