@@ -71,7 +71,7 @@ $(function() {
 	
 	//left_side project모양클릭시 board 로이동
 	$("#board").click(function() {
-		location.href = '/';
+		location.href = '/methodBoard';
 	});
 	
 	//left_side logout 모양클릭시 settings 로이동

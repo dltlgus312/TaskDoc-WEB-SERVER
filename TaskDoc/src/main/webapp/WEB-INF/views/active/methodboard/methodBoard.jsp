@@ -3,11 +3,24 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+
+.container
+{
+    height: 100%;
+    display: table;
+    vertical-align: middle;
+}
+
+.main
+{
+	display:table-cell;
+}
+</style>
+
+<%@include file="/WEB-INF/views/fix/header.jsp"%>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/bootstrap/css/bootstrap.css">
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
@@ -20,95 +33,69 @@ var id='<%=loginid%>';
 		alert('로그인이 필요한 페이지입니다.');
 		window.location.href = '/';
 	}
+	$(".main").css('width',$("#contentwrap").width()/1.1);
+	$(".main").css('height',$("#contentwrap").height());
 </script>
 </head>
 <body>
-	<div id="frame"
-		style="width: 100%; height: 100%; margin: 0px; position: absolute; top: 0; left: 0; overflow: hidden;">
+		<!--FRAME  -->
+	<div id="frame">
 
-		<header id="main_header">
-			<!-- main_header.jsp 탑 메뉴 고정   -->
-			<nav style="background-color: red; width: 100%; height: 50px;">TaskDoc
-				프로젝트 통합 관리 시스템</nav>
-		</header>
+		<!--MAIN HEADER  -->
+		<%@include file="/WEB-INF/views/fix/main_header.jsp"%>
+		<!--MAIN HEADER  -->
+		
+		<!--WRAPPER  -->
+		<div id="wrapper">
 
-		<div id="wrapper" style="width: 100%; height: calc(100% - 100px);">
+			<!--SIDE BAR  -->
+			<%@include file="/WEB-INF/views/fix/left_side.jsp"%>
+			<!--SIDE BAR  -->
 
-			<aside id="sidebar"
-				style="background-color: yellow; width: 5%; height: 100%; float: left;">
-				<ul style="list-style: none; padding-left: 25px;">
-					<li data-toggle="tootlip" data-placement="right" title="프로젝트"
-						style="margin-top: 40px;"><a href="/project/main"> <img
-							src="${pageContext.request.contextPath }/resources/img/img_describe.png"
-							style="width: 25px;">
-					</a></li>
-
-					<li data-toggle="tootlip" data-placement="right" title="개인업무"
-						style="margin-top: 40px;"><a href="#"> <img
-							src="${pageContext.request.contextPath }/resources/img/img_task.png"
-							style="width: 25px;">
-					</a></li>
-
-					<li data-toggle="tootlip" data-placement="right" title="내정보"
-						style="margin-top: 40px;"><a href="/user/infoEdit?id=a">
-							<img
-							src="${pageContext.request.contextPath }/resources/img/img_user.png"
-							style="width: 25px;">
-
-					</a></li>
-					<li data-toggle="tootlip" data-placement="right" title="방법론게시판"
-						style="margin-top: 40px;"><a href="/methodBoard"> <img
-							src="${pageContext.request.contextPath }/resources/img/img_board.png"
-							style="width: 25px;">
-					</a></li>
-					<li data-toggle="tootlip" data-placement="right" title="설정"
-						style="margin-top: 40px;"><a href="#"> <img
-							src="${pageContext.request.contextPath }/resources/img/img_settings.png"
-							style="width: 25px;">
-					</a></li>
-
-					<li data-toggle=tootlip data-placement="right" title="로그아웃"
-						style="margin-top: 40px;"><a href="/user/logout"> <img
-							src="${pageContext.request.contextPath }/resources/img/img_logout.png"
-							style="width: 25px;">
-					</a></li>
-				</ul>
-			</aside>
-
-			<div id="contentwrap"
-				style="width: 95%; height: 100%; float: left; overflow: auto;">
+			<!--CONTENTWRAP  -->
+			<div id="contentwrap" style="background-color: #fdfdfd;">
 				<div class="container">
-		<div style="margin-top: 20px;">
-			<div style="float: left; display: -webkit-inline-box;">
-				<input type="text" class="form-control" style="margin-right: 10px;">
-				<a class="btn btn-success" onclick="wefw">검색</a>
-			</div>
+    				<div class="main">
+    				<div class="containers">
+					<div style="margin-top: 20px;">
+						<div style="float: left; display: -webkit-inline-box;">
+							<input type="text" class="form-control" style="margin-right: 10px;">
+								<a class="btn btn-success" onclick="wefw" style="background-color:#ed8151;border-color: #ed8151">검색</a>
+						</div>
 
-			<div style="float: right">
-				<a href='/methodBoardCreate' class="btn btn-success">글쓰기</a>
+						<div style="float: right">
+								<a href='/methodBoardCreate' class="btn btn-success" style="background-color:#ed8151;border-color: #ed8151">글쓰기</a>
+						</div>
+										</div>
+							<table class="table table-striped table-hover">
+								<thead>
+									<tr>
+										<th style="width: 50px;">번호</th>
+										<th style="width: 400px;">제목</th>
+										<th style="width: 150px;">작성자</th>
+										<th style="width: 200px;">날짜</th>
+										<th style="width: 100px;">관리</th>
+									</tr>
+								</thead>
+								<tbody id="tbodys">
+					
+								</tbody>
+							</table>
+				</div> 
+    				</div>
+				</div>
 			</div>
+			<!--PROJECT_WRAP -->
+
 		</div>
-		<table class="table table-striped table-hover">
-			<thead>
-				<tr>
-					<th style="width: 50px;">번호</th>
-					<th style="width: 400px;">제목</th>
-					<th style="width: 150px;">작성자</th>
-					<th style="width: 200px;">날짜</th>
-					<th style="width: 100px;">관리</th>
-				</tr>
-			</thead>
-			<tbody id="tbodys">
+		<!--CONTENTWRAP  -->
 
-			</tbody>
-		</table>
-
+		<!-- FOOTER -->
+		<%@include file="/WEB-INF/views/fix/footer.jsp"%>
+		<!-- FOOTER -->
 	</div>
-			</div>
-
-		</div>
-		<footer style="width: 100%; height: 50px; background-color: black;"></footer>
-	</div>
+	<!--FRAME  -->
+	
 </body>
 <script type="text/javascript">
 		//게시판 목록 전체 받아오기

@@ -51,7 +51,7 @@
 /*SCROLL BAR STYLE  */
 
 /*element fontew 지정  */
-span{
+span, a, button, td, th{
 	font-family:Title_Light;
 }
 /*element dsfont 지정  */

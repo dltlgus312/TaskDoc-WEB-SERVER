@@ -1,7 +1,5 @@
 package com.taskdoc.www.controller.http;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
