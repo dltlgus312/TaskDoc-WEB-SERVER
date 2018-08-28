@@ -7,7 +7,7 @@
 <mapper namespace="feedback_SQL">
 
 	<select id="list" resultType="feedback" parameterType="Integer">
-		SELECT * FROM feedback WHERE dmcode=#{dmcode} ORDER BY fbdate ASC
+		SELECT * FROM feedback WHERE dmcode=#{dmcode} ORDER BY fbcode ASC
 	</select>
 
 	<insert id="insert" parameterType="feedback" useGeneratedKeys="true" keyProperty="fbcode">
@@ -23,4 +23,3 @@
 	</delete>
 	
 </mapper>
-	

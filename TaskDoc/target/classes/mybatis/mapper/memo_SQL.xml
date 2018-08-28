@@ -7,7 +7,7 @@
 <mapper namespace="memo_SQL">
 
 	<select id="list" resultType="memo">
-		SELECT * FROM memo WHERE ptcode=#{ptcode} ORDER BY mdate ASC
+		SELECT * FROM memo WHERE ptcode=#{ptcode} ORDER BY mcode ASC
 	</select>
 	
 	<insert id="insert" parameterType="memo" useGeneratedKeys="true" keyProperty="mcode">

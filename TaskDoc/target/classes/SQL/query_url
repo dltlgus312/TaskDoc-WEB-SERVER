@@ -118,9 +118,15 @@ result = int >> success = 1, fail = -1
 			
 공유 업무
 	받기
-		/publictask/{pcode}
-		result = List<ProjectVO>
-		method = GET
+		1. 공용 업무만 받기
+			/publictask/{pcode}
+			result = List<ProjectVO>
+			method = GET
+		
+		2. 공용업무와 개인업무 한버에 받기
+			/publictask/all/{pcode}
+			result = map  > ( KEY = "publicVos" : List<PublicTaskVO>, "privateVos" : List<PrivateTaskVO> )
+			method = GET
 	
 	생성
 		/publictask
