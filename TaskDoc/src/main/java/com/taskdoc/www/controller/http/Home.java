@@ -90,13 +90,34 @@ public class Home {
 	//session
 	@RequestMapping(value = "/methodBoard", method = RequestMethod.GET)
 	public String methodBoard() {
-		return "methodBoard";
+		return "/active/methodboard/methodBoard";
 	}
 	
 	//session
+	@RequestMapping(value = "/methodBoardCreate", method = RequestMethod.GET)
+	public String methodBoardCreate() {
+		return "/active/methodboard/methodBoardCreate";
+	}
+	//session
+	@RequestMapping(value = "/methodBoardView", method = RequestMethod.GET)
+	public String methodBoardView() {
+		return "/active/methodboard/methodBoardView";
+	}
+	//session
 	@RequestMapping(value = "/methodBoardEdit", method = RequestMethod.GET)
 	public String methodBoardEdit() {
-		return "methodBoardEdit";
+		return "/active/methodboard/methodBoardEdit";
+	}
+	//session
+	@RequestMapping(value = "/BoardSelectProject", method = RequestMethod.GET)
+	public String BoardSelectProject() {
+		return "/active/methodboard/selectProject";
+	}
+	
+	//session
+	@RequestMapping(value = "/setting", method = RequestMethod.GET)
+	public String setting() {
+		return "/active/setting/setting";
 	}
 	
 	

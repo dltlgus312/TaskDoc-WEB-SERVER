@@ -2,11 +2,6 @@
 	pageEncoding="UTF-8"%>
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="../../favicon.ico">
-
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -48,9 +43,9 @@
 				</label>
 			</div>
 			<div style="display: grid">
-				<button type="button" class="sign" style="font-size: 13px;">Sign
+				<button type="button" class="sign" style="font-size: 13px;font-family:Title_Light;">Sign
 					in</button>
-				<button type="button" class="goMain" style="font-size: 13px;">Cancel</button>
+				<button type="button" class="goMain" style="font-size: 13px;font-family:Title_Light;">Cancel</button>
 			</div>
 		</form>
 
@@ -63,6 +58,7 @@
 	</div>
 </body>
 <script type="text/javascript">
+var goserveruid="";
 	//login창 load시 progress bar 숨기자.
 	$(document).ready(function() {
 		$("#myBar").hide();
@@ -82,19 +78,17 @@
 				elem.style.width = width + '%';
 				elem.innerHTML = width * 1 + '%';
 				if (width == 100)
-					location.href = '/';
+					location.href = '/user/loginComplete?uid='+goserveruid;
 			}
 		}
 	}
 	//progress bar function
 
-	var testHost = 'http://localhost:8080/';
-	var serverHost = '';
 	$(function() {
 
 		/*Cancel시 Main으로*/
 		$(".goMain").click(function() {
-			location.href = testHost;
+			location.href = '/';
 		});
 		/*/Cancel시 Main으로*/
 
@@ -120,6 +114,7 @@
 						alert('비밀번호가 틀렸습니다.');
 					} else if (response == 1) {
 						alert('로그인 완료');
+						goserveruid=$("#uid").val();
 						$('.form-signin').css('opacity', 0.3);
 						$("#myBar").show();
 						move();

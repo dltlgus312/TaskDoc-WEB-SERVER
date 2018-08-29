@@ -31,8 +31,8 @@
 		upasswd=#{upasswd},
 		uname=#{uname},
 		ustate=#{ustate},
-		uphone=#{uphone} WHERE
-		uid=#{uid}
+		uphone=#{uphone} 
+		WHERE uid=#{uid}
 
 	</update>
 	

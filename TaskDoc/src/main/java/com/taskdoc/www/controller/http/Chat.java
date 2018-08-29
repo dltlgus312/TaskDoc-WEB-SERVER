@@ -4,6 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/*
+ * @ResponseBody --> JSON RETURN {"ds" : "SD"}
+ * Controller + Responsebody
+ * */
+
 @Controller
 @RequestMapping("/chat")
 public class Chat {
@@ -22,6 +27,11 @@ public class Chat {
 	public String create() {
 		return "/active/chat/window/create";
 	}
+	//session
+	@RequestMapping(value = "/userInvite", method = RequestMethod.GET)
+	public String userinvite() {
+		return "/active/chat/window/userInvite";
+	}
 	
 	//session
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.GET)
@@ -30,9 +40,14 @@ public class Chat {
 	}
 
 	//session
-	@RequestMapping(value = "/decision", method = RequestMethod.GET)
-	public String decision() {
-		return "/active/chat/window/decision";
+	@RequestMapping(value = "/decisionCreate", method = RequestMethod.GET)
+	public String decisionCreate() {
+		return "/active/chat/window/decisionCreate";
+	}
+	//session
+	@RequestMapping(value = "/decisionSelect", method = RequestMethod.GET)
+	public String decisionSelect() {
+		return "/active/chat/window/decisionSelect";
 	}
 
 	//session
