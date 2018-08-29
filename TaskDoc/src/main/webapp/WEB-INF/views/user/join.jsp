@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<meta name="description" content="">
-<meta name="author" content="">
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
@@ -52,7 +48,7 @@
 								<input id="uid" style="width: 80%;" type="text"
 									class="form-control">
 								<button class="userDuplicate"
-									style="font-size: 13px; margin: auto 0; margin-left: 6px;">중복확인</button>
+									style="font-size: 13px; font-family:Title_Light;margin: auto 0; margin-left: 6px;">중복확인</button>
 							</div>
 							<span class="help-block">아이디는 로그인 하는데 사용됩니다.</span>
 						</div>
@@ -91,9 +87,9 @@
 
 					<div class="modal-footer">
 						<button class="userJoin"
-							style="font-size: 13px; margin: auto 0; margin-left: 6px;">CREATE
+							style="font-size: 13px; margin: auto 0; margin-left: 6px;font-family:Title_Light;">CREATE
 							NEW ACCOUNT</button>
-						<button type="button" style="font-size: 13px;"
+						<button type="button" style="font-size: 13px;font-family:Title_Light;"
 							class="current-demo" onclick="goMain()">Cancel</button>
 					</div>
 				</div>
@@ -103,11 +99,9 @@
 </body>
 
 <script type="text/javascript">
-	var testHost = 'http://localhost:8080/';
-	var serverHost = '';
 	/*Cancel시 Main으로*/
 	function goMain() {
-		location.href = testHost;
+		location.href = '/';
 	}
 
 	$(function() {

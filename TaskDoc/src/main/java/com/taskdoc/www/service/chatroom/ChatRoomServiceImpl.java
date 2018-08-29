@@ -53,13 +53,11 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 		chatRoomJoinVo.setPcode(projectVo.getPcode());
 		chatRoomJoinVo.setCrcode(chatRoomVo.getCrcode());
 		chatRoomJoinVo.setUid(userInfoVo.getUid());
-
 		return joinDao.chatRoomJoinInsert(chatRoomJoinVo);
 	}
 
 	@Override
 	public int chatRoomUpdate(ChatRoomVO chatRoomVo) {
-		// TODO Auto-generated method stub
 		return roomDao.chatRoomUpdate(chatRoomVo);
 	}
 

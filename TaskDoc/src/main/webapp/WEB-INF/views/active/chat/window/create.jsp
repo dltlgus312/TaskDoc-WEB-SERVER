@@ -11,7 +11,7 @@
 <button type="button" onclick="chatroom()">버튼</button>
 
 <script type="text/javascript">
-//채팅방 생성
+//프로젝트 채팅방말고 일반채팅방 생성
 function chatroom(){
 	var param = {
 			'chatRoom' : {
@@ -22,7 +22,7 @@ function chatroom(){
 				'uid' : 'a',
 			},
 			'project' : {
-				'pcode' : '5',
+				'pcode' : '4',
 			}
 		};
 		$.ajax({
