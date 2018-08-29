@@ -38,20 +38,35 @@ public class PrivateTaskDAOImpl implements PrivateTaskDAO {
 	@Override
 	public int privateTaskInsert(PrivateTaskVO privateTaskVo) {
 		// TODO Auto-generated method stub
-		sql.insert(NAMESPACE + INSERT, privateTaskVo);
-		return privateTaskVo.getPtcode();
+		try {
+			sql.insert(NAMESPACE + INSERT, privateTaskVo);
+			return privateTaskVo.getPtcode();
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	@Override
 	public int privateTaskUpdate(PrivateTaskVO privateTaskVo) {
 		// TODO Auto-generated method stub
-		return sql.update(NAMESPACE + UPDATE, privateTaskVo);
+		try {
+			return sql.update(NAMESPACE + UPDATE, privateTaskVo);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	@Override
 	public int privateTaskDelete(int ptcode) {
 		// TODO Auto-generated method stub
-		return sql.delete(NAMESPACE + DELETE, ptcode);
+		try {
+			return sql.delete(NAMESPACE + DELETE, ptcode);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	@Override

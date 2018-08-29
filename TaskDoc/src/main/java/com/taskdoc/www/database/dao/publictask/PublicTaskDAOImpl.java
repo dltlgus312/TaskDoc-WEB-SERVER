@@ -31,20 +31,35 @@ public class PublicTaskDAOImpl implements PublicTaskDAO {
 	@Override
 	public int publicTaskInsert(PublicTaskVO publicTaskVo) {
 		// TODO Auto-generated method stub
-		sql.insert(NAMESPACE + INSERT, publicTaskVo);
-		return publicTaskVo.getTcode();
+		try {
+			sql.insert(NAMESPACE + INSERT, publicTaskVo);
+			return publicTaskVo.getTcode();			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	@Override
 	public int publicTaskUpdate(PublicTaskVO publicTaskVo) {
 		// TODO Auto-generated method stub
-		return sql.update(NAMESPACE + UPDATE, publicTaskVo);
+		try {
+			return sql.update(NAMESPACE + UPDATE, publicTaskVo);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	@Override
 	public int publicTaskDelete(int tcode) {
 		// TODO Auto-generated method stub
-		return sql.delete(NAMESPACE + DELETE, tcode);
+		try {			
+			return sql.delete(NAMESPACE + DELETE, tcode);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	@Override

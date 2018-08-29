@@ -23,18 +23,34 @@ public class MemoServiceImpl implements MemoService {
 	@Override
 	public int memoInsert(MemoVO memoVo) {
 		// TODO Auto-generated method stub
-		return dao.memoInsert(memoVo);
+		try {
+			return dao.memoInsert(memoVo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	@Override
 	public int memoUpdate(MemoVO memoVo) {
 		// TODO Auto-generated method stub
-		return dao.memoUpdate(memoVo);
+		try {
+			return dao.memoUpdate(memoVo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	@Override
 	public int memoDelete(int mcode) {
 		// TODO Auto-generated method stub
-		return dao.memoDelete(mcode);
+		try {
+			return dao.memoDelete(mcode);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 }
