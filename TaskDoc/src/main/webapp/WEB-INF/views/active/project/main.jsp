@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
+
 <%@include file="/WEB-INF/views/fix/header.jsp"%>
+
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
+	String paramId = request.getParameter("id");
 %>
+
 <script type="text/javascript">
 var id='<%=loginid%>';
 	if (id == "null") {
@@ -17,9 +21,8 @@ var id='<%=loginid%>';
 </script>
 </head>
 <body>
-	<!--FRAME  -->
+	<!--FRAME fwefdsd -->
 	<div id="frame">
-
 		<!--MAIN HEADER  -->
 		<%@include file="/WEB-INF/views/fix/main_header.jsp"%>
 		<!--MAIN HEADER  -->
@@ -32,109 +35,98 @@ var id='<%=loginid%>';
 			<!--SIDE BAR  -->
 
 			<!--CONTENTWRAP  -->
-			<div id="contentwrap">
+			<div id="contentwrap" style="background-color: #e0e0e0;">
+				
+				<!--PROJECT 가입 O  -->
+				<div class="containers"
+					style="margin-top: 20px;">
+					<div class="projectlists">
 
-				<!--PROJECT_WRAP -->
-				<div id="project_wrap">
-					<!--PROJECT_LIST_WRAP / TOP(pinvite=1인 프로젝트)-->
-					<div id="project_list_wrap_top">
+						<div class="projectheader" style="width: 100%;">
 
-						<!--append1개당 project 4개씩  -->
-						<div class="project_listdiv_wrap">
-								
-							<!--위 div에 append할것 , PROJECT_LIST  -->
-							<div class="project_list">
-
-								<!--PROJECT_LIST_CONTENT_WRAP  -->
-								<div class="project_list_content_wrap">
-
-									<!--PROJECT_LIST_CONTENT_HEADER  -->
-									<div class="project_list_content_header">
-
-										<!--PROJECT_LIST_CONTENT_HEADER_LEFT  -->
-										<div class="project_list_content_header_left">
-											<span>여기는 프로젝트명이적힐곳</span>
-										</div>
-										<!--PROJECT_LIST_CONTENT_HEADER_LEFT  -->
-
-										<!--PROJECT_LIST_CONTENT_HEADER_RIGHT  -->
-										<div class="project_list_content_header_right">
-											<!--직책이 OWNER일 경우에만 아래 두 이미지 생성하기  -->
-											<button id="prosettingbtn" style="width:50px;height:25px; text-align:center;border: 0;outline: 0;background-color: white;">
-												<img alt="" src="${pageContext.request.contextPath }/resources/img/img_boardsetting.png" style="width:22px;height:22px;">
-											</button>
-											<button id="proinvitebtn" style="width:50px;height:25px;text-align:center;border: 0;outline: 0;background-color: white;">
-												<img alt="" src="${pageContext.request.contextPath }/resources/img/img_proinvite.png"style="width:22px;height:22px;">
-											</button>
-										</div>
-										<!--PROJECT_LIST_CONTENT_HEADER_RIGHT  -->
-
-									</div>
-									<!--PROJECT_LIST_CONTENT_HEADER  -->
-
-									<!--PROJECT_LIST_CONTENT_BOTTOM  -->
-									<div class="project_list_content_bottom">
-
-										<!--PROJECT_LIST_SUBTITLE  -->
-										<div class="project_list_subtitle">
-											<span>여기는 프로젝트 부제목명이 적힐곳</span>
-										</div>
-										<!--PROJECT_LIST_SUBTITLE  -->
-
-										<!--PROJECT_LIST_START  -->
-										<div class="project_list_start">
-										<span style="line-height:50px;">START 여기는 시작 날짜가 적힐곳</span>
-										</div>
-										<!--PROJECT_LIST_START  -->
-
-										<!--PROJECT_LIST_END  -->
-										<div class="project_list_end">
-										<span style="line-height:50px;">END 여기는 끝나는 날짜가 적힐곳</span>
-										</div>
-										<!--PROJECT_LIST_END  -->
-
-										<!--PROJECT_LIST_POSITION  -->
-										<div class="project_list_position">
-										<span style="line-height: 50px; float: right;">직책이 적힐곳</span>
-										</div>
-										<!--PROJECT_LIST_POSITION  -->
-
-									</div>
-									<!--PROJECT_LIST_CONTENT_BOTTOM  -->
-
-								</div>
-								<!--PROJECT_LIST_CONTENT_WRAP  -->
-
+							<div class="headername">
+								<span id="pro_titlename" style="color: black"></span>
 							</div>
-							<!--PROJECT_LIST  -->
+
+							<div class="headerimg">
+								<button type="button" class="prosetinviteimg">
+									<img alt=""
+										src="${pageContext.request.contextPath }/resources/img/img_boardsetting.png"
+										style="width: 18px; height: 18px;">
+
+								</button>
+								<button type="button" class="prosetinviteimg">
+									<img alt=""
+										src="${pageContext.request.contextPath }/resources/img/img_proinvite.png"
+										style="width: 18px; height: 18px;">
+
+								</button>
+							</div>
 
 						</div>
-						<!-- 이거 div당 project 4개씩  -->
 
+						<div class="projectbottom"
+							style="width: 100%; height:; display: table; overflow: auto;">
+
+							<div id="pro_subdiv" style="width: 100%; height: 60%; overflow: auto;">
+								<span id="pro_subtitlename" style="color: black"></span>
+							</div>
+							<div id="pro_sdatediv"
+								style="width: 100%; height: calc(40%/ 3);">
+								<span id="pro_sdate" style="color: black; "></span>
+							</div>
+							<div id="pro_edatediv" style="width: 100%; height: calc(40%/ 3);">
+								<span id="pro_edate" style="color: black; "></span>
+							</div>
+							<div id="pro_posidiv" style="width: 100%; height: calc(40%/ 3)">
+								<span id="pro_position" style="color: black;  margin-right:3px;float:right;"></span>
+							</div>
+						</div>
 					</div>
-					<!--PROJECT_LIST_WRAP / TOP(pinvite=1인 프로젝트)-->
-
-					<!--PROJECT_LIST_WRAP_BOTTOM / BOTTOM(pinvite=0인 프로젝트)-->
-					<div id="project_list_wrap_bottom"></div>
-					<!--PROJECT_LIST_WRAP / BOTTOM(pinvite=0인 프로젝트)-->
-				
+					
 				</div>
-				<!--PROJECT_WRAP -->
-
+				<!--PROJECT 초대 O  -->
+				<div class="containers"
+					style="margin-top: 50px;">
+					<div class="projectlists" style="background-color: black"></div>
+				</div>
 			</div>
-			<!--PROJECT_WRAP -->
-
 		</div>
-		<!--CONTENTWRAP  -->
-
 		<!-- FOOTER -->
 		<%@include file="/WEB-INF/views/fix/footer.jsp"%>
 		<!-- FOOTER -->
+
 	</div>
 	<!--FRAME  -->
-
-
 </body>
+
+
+<script>
+	$(document).ready(function() {
+		var contentWidth = $("#contentwrap").width();
+		var contentHeight = $("#contentwrap").height();
+		//$(".container").css('width',contentWidth + "px")
+		$(".containers").css('width', $('#contentwrap').width() / 1.3).css('margin-left', $('#contentwrap').width() / 6 + "px");
+		$(".projectlists").css('width', $('.containers').width() / 5 + "px").css('height', $('#contentwrap').height() / 4 + "px");
+		$(".projectheader").css('height',$('.projectlists').height() * 0.25);
+		$(".projectbottom").css('height',$('.projectlists').height() * 0.75);
+
+		/*
+		$("#1").css('width', $('.main').width() / 5);
+		$("#1").css('height', $('.main').height() / 5);
+
+		$("#2").css('width', $('.main').width() / 5);
+		$("#3").css('height', $('.main').height() / 5);
+
+		$("#3").css('width', $('.main').width() / 5);
+		$("#3").css('height', $('.main').height() / 5);
+
+		$("#4").css('width', $('.main').width() / 5);
+		$("#4").css('height', $('.main').height() / 5);
+
+		$("#5").css('width', $('.main').width() / 5);
+		$("#5").css('height', $('.main').height() / 5); */
+
+	});
+</script>
 </html>
-
-

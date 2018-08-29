@@ -122,7 +122,7 @@ var id='<%=loginid%>';
 		var contentWidth = $("#contentwrap").width();
 		var contentHeight = $("#contentwrap").height();
 		//$(".container").css('width',contentWidth + "px")
-		$(".containers").css('width', $('#contentwrap').width() / 1.3).css('margin-left', $('#contentwrap').width() / 6);
+		$(".containers").css('width', $('#contentwrap').width() / 1.3).css('margin-left', $('#contentwrap').width() / 6 + "px");
 		$(".box2").css('width', $('.containers').width() / 5 + "px").css('height', $('#contentwrap').height() / 4 + "px");
 		$(".projectheader").css('height',$('.box2').height() * 0.25);
 		$(".projectbottom").css('height',$('.box2').height() * 0.75);

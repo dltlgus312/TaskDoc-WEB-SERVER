@@ -3,7 +3,7 @@ $(document).ready(function() {
 	$('[data-toggle="tootlip"]').tooltip();
 
 	//HOVER IMAGE
-	$(".project_list").hover(function() {
+	$(".projectlists").hover(function() {
 		$(this).css("box-shadow", "4px 8px 20px grey");
 	}, function() {
 		$(this).css("box-shadow", "4px 4px 7px grey");
