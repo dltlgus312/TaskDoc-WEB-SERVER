@@ -40,7 +40,7 @@ var id='<%=loginid%>';
 			<!--CONTENTWRAP  -->
 			<div id="contentwrap" style="background-color: #e0e0e0;">
 				<div class="container"
-					style="display: table; vertical-align: middle; margin-top:60px;">
+					style="display: table; vertical-align: middle; margin-top:70px;">
 					<div class="main"
 						style="border: 1px solid rgba(0, 0, 0, 0.2); box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5); background-color: white; display: table-cell;">
 						<div id="1"
@@ -52,19 +52,19 @@ var id='<%=loginid%>';
 							<label >게시 코드 : </label>
 							<label id="mbcode"> </label>
 						</div>
-						<div id="4" class="bts" style="width: 100%;">
+						<div id="4" class="bts" style="width: 100%;margin-top: -10px;">
 							<label >프로젝트코코드 : </label>
 							<label id="pcode"> </label>
 						</div>
-						<div id="5" class="bts" style="width: 100%;">
+						<div id="5" class="bts" style="width: 100%;margin-top: -10px;">
 							<label>게시 시간 : </label>
 							<label id="mbdate"> </label>
 						</div>
-						<div id="6" class="bts" style="width: 100%;">
+						<div id="6" class="bts" style="width: 100%;margin-top: -10px;">
 							<label>작성자 : </label>
 							<label id="uid"></label>
 						</div>
-						<div id="7" class="bts" style="width: 100%; margin-left: 20px;">
+						<div id="7" class="bts" style="width: 100%; margin-left: 20px;margin-top: -10px;">
 							<label>제목</label> <input id="mbtitle"
 								style="width: 80%; margin-top: 5px;" type="text" maxlength="20"
 								class="form-control">
@@ -78,7 +78,7 @@ var id='<%=loginid%>';
 							style="width: 100%; border-top: 1px solid rgba(0, 0, 0, 0.2); margin-top: 10px;">
 							<button type="button" class="btn btn-success"
 								onclick="boardEditCancel()"
-								style="margin: auto 0; margin-left: 6px; float: right; margin-right: 7px; background-color: #ed8151; border: 0; outline: none;">Back</button>
+								style="margin-left: 6px; float: right; margin-right: 7px; background-color: #ed8151; border: 0; outline: none;">Back</button>
 							<button type="button"
 								style="float: right; margin-right: 7px; background-color: #ed8151; border: 0; outline: none;"
 								class="btn btn-success" onclick="boardEdit()">Edit</button>
@@ -121,6 +121,7 @@ var pcode;
 		$("#7").css('height', $("#3").height() * 1.7 + "px");
 		$("#9").css('height', $("#3").height() * 5.5 + "px");
 		$("#14").css('height', $("#3").height() * 1.3 + "px").css('padding',$("#14").height() / 3);
+		$("#u").css('line-height',$("#1").height() + "px");
 		//게시판 글 상세보기
 		$.ajax({
 			type : 'GET',
@@ -160,7 +161,7 @@ var pcode;
 				success : function(response) {
 					if (response > 0) {
 						alert('게시판 수정 완료' + response);
-						location.href = '/methodBoard';
+						history.back();
 					} else {
 						alert('Server or Client ERROR, 게시판 수정 실패');
 					}

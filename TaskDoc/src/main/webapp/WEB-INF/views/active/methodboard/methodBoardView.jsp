@@ -1,27 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<!-- BOOTSTRAP CSS, JS -->
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<!-- BOOTSTRAP CSS, JS -->
 
+<%@include file="/WEB-INF/views/fix/header.jsp"%>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/bootstrap/css/bootstrap.css">
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
@@ -36,103 +22,148 @@ var id='<%=loginid%>';
 	}
 </script>
 </head>
-
 <body>
+	<!--FRAME  -->
+	<div id="frame">
 
-	<div class="container">
-		<div class="row">
-			<div class="modal-content" style="width: 800px; margin: auto;">
-				<div class="modal-header">
-					<h4 class="modal-title">글 상세보기</h4>
-				</div>
-				<div class="modal-body">
-					<div>
-						<label >게시 코드 : </label>
-						<label id="mbcode"> </label>
-					</div>
-					<div>
-						<label >프로젝트코코드 : </label>
-						<label id="pcode"> </label>
-					</div>
-					<div>
-						<label>게시 시간 : </label>
-						<label id="mbdate"> </label>
-					</div>
-					<div>
-						<label>작성자 : </label>
-						<label id="uid"></label>
-					</div>
-					<!--제목 , 내용 div  -->
-					<div class="form-group">
-						<label>제목</label> <input id="mbtitle" type="text"
-							class="form-control" maxlength="20" readonly style="background-color: white"> <label
-							style="padding-top: 5px;">내용</label>
-						<textarea class="form-control" rows="8" id="mbcontents" readonly style="background-color: white"></textarea>
-					</div>
-					<!--제목 , 내용 div  -->
+		<!--MAIN HEADER  -->
+		<%@include file="/WEB-INF/views/fix/main_header.jsp"%>
+		<!--MAIN HEADER  -->
 
-					<!-- button div  -->
-					<div>
-						<button type="button" class="btn btn-default btn-icon"
-							onclick="promethodInfo()">
-							<i class="fa fa-times-circle"></i> 프로젝트의 방법론보기
-						</button>
-					</div>
-					
-					<div class="modal-footer" style="margin-bottom:30px;">
-						<button type="button" class="btn btn-default btn-icon"
-							onclick="boardViewCancel()">
-							<i class="fa fa-times-circle"></i> Back
-						</button>
-					</div>
-					<!-- button div  -->
+		<!--WRAPPER  -->
+		<div id="wrapper">
 
+			<!--SIDE BAR  -->
+			<%@include file="/WEB-INF/views/fix/left_side.jsp"%>
+			<!--SIDE BAR  -->
+
+			<!--CONTENTWRAP  -->
+			<div id="contentwrap" style="background-color: #e0e0e0;">
+				<div class="container"
+					style="display: table; vertical-align: middle; margin-top: 70px;">
+					<div class="main"
+						style="border: 1px solid rgba(0, 0, 0, 0.2); box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5); background-color: white; display: table-cell;">
+						<div id="1"
+							style="width: 100%; border-bottom: 1px solid rgba(0, 0, 0, 0.2);">
+							<span id="u" style="margin-left: 20px; font-size: 20px;">게시판
+								상세보기</span>
+						</div>
+						<div id="3" class="bts" style="width: 100%; margin-top: 10px;">
+							<label>게시 코드 : </label> <label id="mbcode"> </label>
+						</div>
+						<div id="4" class="bts" style="width: 100%; margin-top: -10px;">
+							<label>프로젝트코코드 : </label> <label id="pcode"> </label>
+						</div>
+						<div id="5" class="bts" style="width: 100%; margin-top: -10px;">
+							<label>게시 시간 : </label> <label id="mbdate"> </label>
+						</div>
+						<div id="6" class="bts" style="width: 100%; margin-top: -10px;">
+							<label>작성자 : </label> <label id="uid"></label>
+						</div>
+						<div id="7" class="bts"
+							style="width: 100%; margin-left: 20px; margin-top: -10px;">
+							<label>제목</label> <input id="mbtitle"
+								style="width: 80%; margin-top: 5px; background-color: white;"
+								type="text" maxlength="20" class="form-control"
+								readonly="readonly">
+						</div>
+						<div id="9" class="bts"
+							style="width: 100%; margin-left: 20px; margin-top: 10px;">
+							<label>내용</label>
+							<textarea id="mbcontents"
+								style="width: 80%; height: 85%; background-color: white;"
+								class="form-control" readonly="readonly"></textarea>
+
+						</div>
+
+						<div id="viewmethod" class="bts" style="width: 100%;" class="bts">
+							<button type="button" class="btn btn-success"
+								onclick="promethodInfo()"
+								style="margin-left: 6px; float: left; margin-right: 7px; background-color: #ed8151; border: 0; outline: none; margin-top: 5px;">방법론
+								상세보기</button>
+
+						</div>
+
+						<div id="14" class="bts"
+							style="width: 100%; border-top: 1px solid rgba(0, 0, 0, 0.2); margin-top: 10px;">
+							<button type="button" class="btn btn-success"
+								onclick="boardViewCancel()"
+								style="margin-left: 6px; float: right; margin-right: 7px; background-color: #ed8151; border: 0; outline: none;">Back</button>
+						</div>
+					</div>
 				</div>
 			</div>
+			<!--PROJECT_WRAP -->
+
 		</div>
+		<!--CONTENTWRAP  -->
+
+		<!-- FOOTER -->
+		<%@include file="/WEB-INF/views/fix/footer.jsp"%>
+		<!-- FOOTER -->
 	</div>
+	<!--FRAME  -->
+
 </body>
-<script type="text/javascript">
+
+
+<script>
 var pcode;
-$(document).ready(function() {
-	//버튼 숨기기
-	$("#okbutton").hide();
-	
-	//게시판 글 상세보기
-	$.ajax({
-		type : 'GET',
-		url : '/methodboard/'+'<%=mbcode%>',
-		success : function(response) {
-			if (Object.keys(response).length > 0) {
-				pcode=response.pcode;
-				alert('게시판 글 상세보기 완료! ' + response);
-				$("#mbcode").text(response.mbcode);
-				$("#mbcontents").val(response.mbcontents);
-				$("#mbdate").text(response.mbdate);
-				$("#mbtitle").val(response.mbtitle);
-				$("#pcode").text(response.pcode);
-				$("#uid").text(response.uid);
-			} else{
-				alert('Server or Client ERROR, 게시판 글 상세보기 실패');
-			}
-		},
-		error : function(e) {
-			alert("ERROR : " + e.statusText);
+	$(document).ready(function() {
+		var contentwWidth = $("#contentwrap").width();
+		var contentHeight = $("#contentwrap").height();
+
+		var mainwidth = parseFloat(contentwWidth / 2);
+		$(".main").css('width', mainwidth);
+
+		var mainheight = parseFloat(contentHeight / 1.3);
+
+		$(".main").css('height', mainheight);
+
+		for (var i = 3; i < 7; i++) {
+			$("#" + i).css('height', mainheight / 14 + "px");
+			$("#" + i).css('margin-left', "20px");
 		}
-	});
-	//게시판 글 상세보기
-});
+		$("#viewmethod").css('height', mainheight / 14 + "px");
+		$("#viewmethod").css('margin-left', "20px");
+		$("#1").css('height', $("#3").height() * 1.5 + "px");
+		$("#7").css('height', $("#3").height() * 1.7 + "px");
+		$("#9").css('height', $("#3").height() * 5.5 + "px");
+		$("#14").css('height', $("#3").height() * 1.3 + "px").css('padding',$("#14").height() / 3);
+		$("#u").css('line-height',$("#1").height() + "px");
+		//게시판 글 상세보기
+		$.ajax({
+			type : 'GET',
+			url : '/methodboard/'+'<%=mbcode%>',
+					success : function(response) {
+						if (Object.keys(response).length > 0) {
+							pcode = response.pcode;
+							alert('게시판 글 상세보기 완료! ' + response);
+							$("#mbcode").text(response.mbcode);
+							$("#mbcontents").val(response.mbcontents);
+							$("#mbdate").text(response.mbdate);
+							$("#mbtitle").val(response.mbtitle);
+							$("#pcode").text(response.pcode);
+							$("#uid").text(response.uid);
+						} else {
+							alert('Server or Client ERROR, 게시판 글 상세보기 실패');
+						}
+					},
+					error : function(e) {
+						alert("ERROR : " + e.statusText);
+					}
+				});
+				//게시판 글 상세보기
+			});
 
 	//돌아가기
 	function boardViewCancel() {
-		location.href = '/methodBoard';
+		history.back();
 	}
-	
+
 	//프로젝트의 방법론보기
-	function promethodInfo(){
-		
-	}	
+	function promethodInfo() {
 
+	}
 </script>
-
 </html>

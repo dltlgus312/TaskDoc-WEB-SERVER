@@ -19,7 +19,7 @@
 				<img id="board" src="${pageContext.request.contextPath }/resources/img/img_board.png">
 				</div>
 				<div class="h-settings" data-toggle="tootlip"
-				data-placement="right" title="설정">
+				data-placement="right" title="관리">
 				<img id="settings" src="${pageContext.request.contextPath }/resources/img/img_settings.png">
 				</div>
 				<div class="h-logout" data-toggle="tootlip"

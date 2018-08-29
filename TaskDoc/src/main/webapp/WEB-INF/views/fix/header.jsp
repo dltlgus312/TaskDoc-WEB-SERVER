@@ -23,5 +23,5 @@
 <!-- MY CSS -->
 
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/project/main.js?ver=33"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/fix/left_side.js?ver=534449"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/fix/left_side.js?ver=5344449"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/fix/main_header.js?ver=534449"></script>

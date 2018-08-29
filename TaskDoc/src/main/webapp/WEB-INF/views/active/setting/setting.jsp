@@ -3,20 +3,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<style>
 
-.container
-{
-    height: 100%;
-    display: table;
-    vertical-align: middle;
-}
-
-.main
-{
-	display:table-cell;
-}
-</style>
 
 <%@include file="/WEB-INF/views/fix/header.jsp"%>
 <link rel="stylesheet"
@@ -24,7 +11,7 @@
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
-	String pcode = request.getParameter("pcode");
+	String mbcode = request.getParameter("mbcode");
 %>
 
 <script type="text/javascript">
@@ -33,18 +20,16 @@ var id='<%=loginid%>';
 		alert('로그인이 필요한 페이지입니다.');
 		window.location.href = '/';
 	}
-	$(".main").css('width',$("#contentwrap").width()/1.1);
-	$(".main").css('height',$("#contentwrap").height());
 </script>
 </head>
 <body>
-		<!--FRAME  -->
+	<!--FRAME  -->
 	<div id="frame">
 
 		<!--MAIN HEADER  -->
 		<%@include file="/WEB-INF/views/fix/main_header.jsp"%>
 		<!--MAIN HEADER  -->
-		
+
 		<!--WRAPPER  -->
 		<div id="wrapper">
 
@@ -53,36 +38,51 @@ var id='<%=loginid%>';
 			<!--SIDE BAR  -->
 
 			<!--CONTENTWRAP  -->
-			<div id="contentwrap" style="background-color: #fdfdfd;">
-				<div class="container">
-    				<div class="main">
-    				<div class="containers">
-					<div style="margin-top: 20px;">
-						<div style="float: left; display: -webkit-inline-box;">
-							<input type="text" class="form-control" style="margin-right: 10px;">
-								<a class="btn btn-success" onclick="wefw" style="background-color:#ed8151;border-color: #ed8151">검색</a>
+			<div id="contentwrap" style="background-color: #e0e0e0;">
+				<div class="container"
+					style="display: table; vertical-align: middle; height: 100%;">
+					<div class="main"
+						style="border: 1px solid rgba(0, 0, 0, 0.2); box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5); background-color: white; display: table-cell;">
+
+						<div class="container">
+							<h2>관 리</h2>
+							<p>자네가 올린 게시물과 자료를 관리할 수 있습니다.</p>
+
+							<ul class="nav nav-tabs">
+								<li class="active"><a data-toggle="tab" href="#myboard">내가 올린 게시물</a></li>
+								<li><a data-toggle="tab" href="#mydocument">내가 올린 자료</a></li>
+							</ul>
+
+							<div class="tab-content">
+								<div id="myboard" class="tab-pane fade in active">
+									<div class="containers">
+										<table class="table table-striped table-hover">
+											<thead>
+												<tr>
+													<th style="width: 50px;">번호</th>
+													<th style="width: 400px;">제목</th>
+													<th style="width: 150px;">작성자</th>
+													<th style="width: 200px;">날짜</th>
+													<th style="width: 100px;">관리</th>
+												</tr>
+											</thead>
+											<tbody id="tbodys">
+
+											</tbody>
+										</table>
+									</div>
+
+								</div>
+								<div id="mydocument" class="tab-pane fade">
+									<h3>내가올린자료</h3>
+									<p>내가올린자료</p>
+								</div>
+							</div>
 						</div>
 
-						<div style="float: right">
-								<a href='/methodBoardCreate' class="btn btn-success" style="background-color:#ed8151;border-color: #ed8151">글쓰기</a>
-						</div>
+
+
 					</div>
-							<table class="table table-striped table-hover">
-								<thead>
-									<tr>
-										<th style="width: 50px;">번호</th>
-										<th style="width: 400px;">제목</th>
-										<th style="width: 150px;">작성자</th>
-										<th style="width: 200px;">날짜</th>
-										<th style="width: 100px;">관리</th>
-									</tr>
-								</thead>
-								<tbody id="tbodys">
-					
-								</tbody>
-							</table>
-					</div> 
-    				</div>
 				</div>
 			</div>
 			<!--PROJECT_WRAP -->
@@ -95,11 +95,13 @@ var id='<%=loginid%>';
 		<!-- FOOTER -->
 	</div>
 	<!--FRAME  -->
-	
+
 </body>
-<script type="text/javascript">
-		//게시판 목록 전체 받아오기
-		$(document).ready(function() {
+
+
+<script>
+	$(document).ready(function() {
+		//게시판 목록 전체 받아오기 dddsdfew
 			$.ajax({
 				type : 'GET',
 				url : '/methodboard/all',
@@ -107,6 +109,7 @@ var id='<%=loginid%>';
 						if (response.length > 0) {
 							alert('게시판 목록 전체 받아오기 성공! ' + response);
 							for(var i=0;i<response.length;i++){
+							if(response[i].uid=='<%=loginid%>'){
 								var trtag = document.createElement("tr");
 								var td_idx=document.createElement("td");
 								var idxele=document.createTextNode(i+1);
@@ -136,7 +139,6 @@ var id='<%=loginid%>';
 								trtag.appendChild(td_date);
 								td_date.appendChild(dateele);
 						
-									if(response[i].uid=='<%=loginid%>') {
 										var td_setting=document.createElement("td");
 										var editiconele=document.createElement("img");
 										editiconele.setAttribute('src','${pageContext.request.contextPath }/resources/img/img_boardsetting.png');
@@ -151,11 +153,7 @@ var id='<%=loginid%>';
 										td_setting.appendChild(editiconele);
 										td_setting.appendChild(deliconele);
 										trtag.appendChild(td_setting);
-									}
-									else{
-										var td_setting=document.createElement("td");
-										trtag.appendChild(td_setting);
-									}
+							}
 						
 							$("#tbodys").append(trtag);
 							}
@@ -183,7 +181,7 @@ var id='<%=loginid%>';
 			success : function(response) {
 				if (response > 0) {
 					alert('게시글 삭제 완료! ' + response);
-					location.href="/methodBoard";
+					location.reload();
 				} else {
 					alert('Server or Client ERROR, 게시글 삭제 실패');
 				}
@@ -203,5 +201,5 @@ var id='<%=loginid%>';
 			}
 			else return;
 		}
-	</script>
+</script>
 </html>

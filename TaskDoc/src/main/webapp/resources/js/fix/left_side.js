@@ -76,7 +76,7 @@ $(function() {
 	
 	//left_side logout 모양클릭시 settings 로이동
 	$("#settings").click(function() {
-		location.href = '/';
+		location.href = '/setting';
 	});
 	
 	//left_side logout 모양클릭시 logout로이동

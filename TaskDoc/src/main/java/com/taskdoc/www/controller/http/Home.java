@@ -114,6 +114,12 @@ public class Home {
 		return "/active/methodboard/selectProject";
 	}
 	
+	//session
+	@RequestMapping(value = "/setting", method = RequestMethod.GET)
+	public String setting() {
+		return "/active/setting/setting";
+	}
+	
 	
 	
 	
