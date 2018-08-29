@@ -28,40 +28,8 @@ var id='<%=loginid%>';
 </style>
 </head>
 <body>
-	<!--FRAME fwef -->
+	<!--FRAME fwefdsd -->
 	<div id="frame">
-
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/js/sidebar/menu/slinky.min.js"></script>
-	<script>
-		const slinky = $('#menu').slinky()
-	</script>
-	
-		
-	
-	<form action="/document/upload" enctype="multipart/form-data" method="POST">
-		<input name="dmtitle" value="test"/>
-		<input name="dmcontents" value="testtest"/>
-		<input name="crcode" value="1"/>
-		<input name="tcode" value="12"/>
-		<input name="uid" value="d"/>
-		
-		<input type="file" name="file"/>
-		<input type="file" name="file"/>
-		<input type="file" name="file"/>
-		<input type="file" name="file"/>
-
-		<input type="submit">
-	</form>
-	
-		
-	<form action="/document/download/6" method="POST">
-		<input type="submit" value="다운로드">
-	</form>
-		
-	
-	
 		<!--MAIN HEADER  -->
 		<%@include file="/WEB-INF/views/fix/main_header.jsp"%>
 		<!--MAIN HEADER  -->
@@ -76,47 +44,68 @@ var id='<%=loginid%>';
 			<!--CONTENTWRAP  -->
 			<div id="contentwrap" style="background-color: #e0e0e0;">
 				<!--PROJECT 가입 O  -->
-				<div class="containers" style="text-align: center;margin-top: 20px;">
-						<div class="box2" style="background-color: white">
-							
-							<div class="projectheader" style="width:100%;height:25%; background-color:orange;">
-								
-								<div id="headername"style="width:80%; height:100%; background-color:black;float:left;">
-									<span id="headernames" style="color:white">여기는 프로젝트이름이야여기는 프로젝트이름이야</span>
-								</div>
-								
-								<div id="headerimg" style="width:20%; height:100%;background-color:white; float:right;">
-									<button type="button" style="height:50%;">버튼1</button>
-									<button type="button" style="height:50%;">버튼2</button>
-								</div>
-								
+				<div class="containers"
+					style="margin-top: 20px;">
+					<div class="box2"
+						style="background-color: white; box-shadow: 4px 4px 7px grey">
+
+						<div class="projectheader" style="width: 100%;">
+
+							<div id="headername"
+								style="width: 80%; height: 100%; float: left; background-color: #ed8151;">
+								<span id="headernames" style="color: black">안녕하세요안녕하세요안녕하세요안녕하세요</span>
 							</div>
-							
-							<div class="projectbottom"style="width:100%;height:75%; background-color:red;">
-							
+
+							<div id="headerimg"
+								style="width: 20%; height: 100%; float: right; background-color: white;">
+								<button type="button"
+									style="width: 100%; height: 50%; outline: none; border: 0; background-color: white;">
+									<img alt=""
+										src="${pageContext.request.contextPath }/resources/img/img_boardsetting.png"
+										style="width: 18px; height: 18px;">
+
+								</button>
+								<button type="button"
+									style="width: 100%; height: 50%; outline: none; border: 0; background-color: white;">
+									<img alt=""
+										src="${pageContext.request.contextPath }/resources/img/img_proinvite.png"
+										style="width: 18px; height: 18px;">
+
+								</button>
+							</div>
+
+						</div>
+
+						<div class="projectbottom"
+							style="width: 100%; height:; display: table; overflow: auto;">
+
+							<div id="10" style="width: 100%; height: 60%; overflow: auto;">
+								<span id="fd" style="color: black">여기는 프로젝트의 부제목이 적힐
+									곳입니다.</span>
+							</div>
+							<div id="20"
+								style="width: 100%; height: calc(40%/ 3);">
+								<span id="fd" style="color: black; ">2018-08-30</span>
+							</div>
+							<div id="30" style="width: 100%; height: calc(40%/ 3);">
+								<span id="fd" style="color: black; ">2018-08-42</span>
+							</div>
+							<div id="40" style="width: 100%; height: calc(40%/ 3)">
+								<span id="fd" style="color: black;  margin-right:3px;float:right;">OWNER</span>
 							</div>
 						</div>
-						
-						<div class="box2" style="background-color: white">
-						
-						</div>
-						<div class="box2" style="background-color: white"></div>
-						<div class="box2" style="background-color: white"></div>
-						<div class="box2" style="background-color: white"></div>
-						<div class="box2" style="background-color: white"></div>
-						<div class="box2" style="background-color: white"></div>
-						<div class="box2" style="background-color: white"></div>
-						<div class="box2" style="background-color: white"></div>
+					</div>
+					<div class="box2" style="background-color: black"></div>
+					<div class="box2" style="background-color: black"></div>
+					<div class="box2" style="background-color: black"></div>
+					<div class="box2" style="background-color: black"></div>
+					<div class="box2" style="background-color: black"></div>
 				</div>
 				<!--PROJECT 초대 O  -->
-				<div class="containers" style="text-align: center;">
-						<div class="box2" style="background-color: black"></div>
-						<div class="box2" style="background-color: black"></div>
-						<div class="box2" style="background-color: black"></div>
-						<div class="box2" style="background-color: black"></div>
-						<div class="box2" style="background-color: black"></div>
-						<div class="box2" style="background-color: black"></div>
-					</div>
+				<div class="containers"
+					style="margin-top: 50px;">
+					<div class="box2" style="background-color: black"></div>
+				</div>
 			</div>
 		</div>
 		<!-- FOOTER -->
@@ -133,14 +122,10 @@ var id='<%=loginid%>';
 		var contentWidth = $("#contentwrap").width();
 		var contentHeight = $("#contentwrap").height();
 		//$(".container").css('width',contentWidth + "px")
-		$(".containers").css('width', $('#contentwrap').width() / 1.3);
-		$(".containers").css('margin-left', $('#contentwrap').width() / 9);
-		$(".box2").css('width', $('.containers').width() / 4 + "px");
-		$(".box2").css('height', $('#contentwrap').height() / 3 + "px");
-		
-		if(contentWidth>1500){
-			
-		}
+		$(".containers").css('width', $('#contentwrap').width() / 1.3).css('margin-left', $('#contentwrap').width() / 6);
+		$(".box2").css('width', $('.containers').width() / 5 + "px").css('height', $('#contentwrap').height() / 4 + "px");
+		$(".projectheader").css('height',$('.box2').height() * 0.25);
+		$(".projectbottom").css('height',$('.box2').height() * 0.75);
 
 		/*
 		$("#1").css('width', $('.main').width() / 5);
