@@ -21,7 +21,7 @@ var id='<%=loginid%>';
 </script>
 </head>
 <body>
-	<!--FRAME fwefdsd -->
+	<!--FRAME  -->
 	<div id="frame">
 		<!--MAIN HEADER  -->
 		<%@include file="/WEB-INF/views/fix/main_header.jsp"%>
@@ -38,7 +38,7 @@ var id='<%=loginid%>';
 			<div id="contentwrap" style="background-color: #e0e0e0;">
 				
 				<!--PROJECT 가입 O  -->
-				<div class="containers"
+				<div id="containersTOP"
 					style="margin-top: 20px;">
 					<div class="projectlists">
 
@@ -83,10 +83,14 @@ var id='<%=loginid%>';
 							</div>
 						</div>
 					</div>
+					<div class="projectlists" style="background-color: black"></div>
+					<div class="projectlists" style="background-color: black"></div>
+					<div class="projectlists" style="background-color: black"></div>
+					
 					
 				</div>
 				<!--PROJECT 초대 O  -->
-				<div class="containers"
+				<div id="containersBOTTOM"
 					style="margin-top: 50px;">
 					<div class="projectlists" style="background-color: black"></div>
 				</div>
@@ -106,8 +110,9 @@ var id='<%=loginid%>';
 		var contentWidth = $("#contentwrap").width();
 		var contentHeight = $("#contentwrap").height();
 		//$(".container").css('width',contentWidth + "px")
-		$(".containers").css('width', $('#contentwrap').width() / 1.3).css('margin-left', $('#contentwrap').width() / 6 + "px");
-		$(".projectlists").css('width', $('.containers').width() / 5 + "px").css('height', $('#contentwrap').height() / 4 + "px");
+		$("#containersTOP").css('width', $('#contentwrap').width() / 1.3).css('margin-left', $('#contentwrap').width() / 6 + "px");
+		$("#containersBOTTOM").css('width', $('#contentwrap').width() / 1.3).css('margin-left', $('#contentwrap').width() / 6 + "px");
+		$(".projectlists").css('width', $('#containersTOP').width() / 5 + "px").css('height', $('#contentwrap').height() / 4 + "px");
 		$(".projectheader").css('height',$('.projectlists').height() * 0.25);
 		$(".projectbottom").css('height',$('.projectlists').height() * 0.75);
 
