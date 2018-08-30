@@ -137,7 +137,7 @@ span, a, button, td, th {
 	overflow: auto;
 }
 
-.projectlists {
+.projectlists{
 	display: inline-block;
 	height: 100px;
 	margin: 1em;
@@ -160,10 +160,10 @@ span, a, button, td, th {
 	background-color: white;
 }
 
-.prosetinviteimg {
+.prosetinviteimg, .prosetsettingimg, .prookimg, .pronoimg {
 	width: 100%;
 	height: 50%;
-	outline: none;
+	outline: aqua;
 	border: 0;
 	background-color: white;
 }

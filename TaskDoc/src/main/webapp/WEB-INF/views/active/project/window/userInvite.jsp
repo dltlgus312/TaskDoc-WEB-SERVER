@@ -33,7 +33,7 @@ if(id=="null"){
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="modal-content">
+			<div class="modal-content" style="height:350px;">
 				<div class="modal-header">
 					<h4 class="modal-title">회원찾기</h4>
 				</div>
@@ -128,7 +128,8 @@ if(id=="null"){
 								$("#uname").html(response.uname);
 								saveid = response.uid;
 							} else {
-								alert('이미 초대된 회원입니다.')
+								alert('이미 초대된 회원입니다.');
+								$("#selectuid").val("");
 							}
 						},
 						error : function(e) {
@@ -138,6 +139,7 @@ if(id=="null"){
 				} else {
 					alert('해당하는 아이디가 없습니다.');
 					$("#tableDiv").css('display', 'none');
+					$("#selectuid").val("");
 				}
 			},
 			error : function(e) {

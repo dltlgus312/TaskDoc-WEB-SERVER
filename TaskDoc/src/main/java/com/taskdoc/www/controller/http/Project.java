@@ -34,6 +34,11 @@ public class Project {
 	public String userInvite() {
 		return "/active/project/window/userInvite";
 	}
+	//session
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
+	public String info() {
+		return "/active/project/info";
+	}
 
 	//session
 	@RequestMapping(value = "/infoEdit", method = RequestMethod.GET)

@@ -1,116 +1,181 @@
-/*TOOLTIP JS , HOVER JS */
-var popupX = (window.screen.width / 2) - (500 / 2);
-var popupY= (window.screen.height /2) - (400 / 2);
 var id='<%=loginid%>';
-
-//가입된 프로젝트수
-var proOk=0;
-
-//초대받은 프로젝트수, 가입x
-var proNo=0;
-
-//가입된 프로젝트 표시할 div수
-var proOkLine=0;
-
-//초대받은 프로젝트 표시할 div수
-var proNoLine=0;
-
+var contentWidth = $("#contentwrap").width();
+var contentHeight = $("#contentwrap").height();
 $(document).ready(function() {
-	/* 내가 참가하는 모든 프로젝트를 검색*/
+	/*DIV TOP , BOTTOM , MIDDLE 범위나누기  */
+	var contentWidth = $("#contentwrap").width();
+	var contentHeight = $("#contentwrap").height();
+	//$(".container").css('width',contentWidth + "px")
+	$("#containersTOP").css('width', $('#contentwrap').width() / 1.3).css('margin-left', $('#contentwrap').width() / 6 + "px").css('height',contentHeight / 3);
+	$("#containersBOTTOM").css('width', $('#contentwrap').width() / 1.3).css('margin-left', $('#contentwrap').width() / 6 + "px").css('height',contentHeight / 3);
+	$("#containersMIDDLE").css('width', $('#contentwrap').width() / 1.3).css('margin-left', $('#contentwrap').width() / 6 + "px").css('height',contentHeight / 3);
 	$.ajax({
 		type : 'GET',
-		url : '/projectjoin/' + id,
+		url : '/projectjoin/'+id,
 		success : function(response) {
-			/*
-			response는 map 형태로 날라옴
-			프로젝트 결과 값 = map ( KEY = "projectList", "projectJoinList" )
-			프로젝트에 소속되어있는 정보들
-			projectJoinList{
-				pcode;
-			 	uid;
-			 	ppermission;
-			 	pinvite;
-			}
-			프로젝트들의 정보
-			projectList{
-				pcode;
-				ptitle;
-				psubtitle;
-				psdate;
-				pedate;	
-			}
-			pcode별로 프로젝트 list 나열하고, 프로젝트별 title, subtitle, psdate, pedate 설정하기
-			 */
-			/*ㅇㅇ*/
-			/*가입된 프로젝트와 초대 받은 프로젝트 갯수구하기*/
-			for(var i=0;i<response.projectJoinList.length;i++){
-				if(response.projectJoinList[i].pinvite>0){
-					proOk++;
-					if(proOk%4!=0){proOkLine=parseInt(proOk/4)+1;}
-					else{proOkLine=parseInt(proOk/4);}
-				}
-				else{
-					proNo++;
-					if(proNo%4!=0){
-						proNoLine=parseInt(proNo/4)+1;
-					}
-					else{
-						proNoLine=parseInt(proNo/4);
-					}
-				}
-			}
-			for(var i=0;i<proOkLine;i++){
-				/*var $div=$('<div class="project_listdiv_wrap"'+'id=list'+i+'>'+'</div>');
-				$("#project_list_wrap_top").append($div);
-				var $div2=$('<div class="project_list"><div class="project_list_content_wrap"><div class="project_list_content_header"><div class="project_list_content_header_left"></div> <div class="project_list_content_header_right"></div></div><div class="project_list_content_bottom"><div class="project_list_subtitle"><span> 하이 </span></div><div class="project_list_start">START</div><div class="project_list_end">END</div><div class="project_list_position">직책</div></div></div></div></div>');
-				$("#list"+i).append($div2);*/
+			if (response.projectJoinList.length>0) {
+				/* projectList , projectJoinList */
+				alert('개인별 프로젝트 조회 완료!');
 				
+				for(var i=0;i<response.projectJoinList.length;i++){
+					/*프로젝트에 가입된 현황 pinvite==1 , 권한 OWNER  */
+					if(response.projectJoinList[i].pinvite==1 && response.projectJoinList[i].ppermission=='OWNER'){
+						var $div = $('<div class="projectlists" id="'+response.projectJoinList[i].pcode+',1"> <div class="projectheader" style="width: 100%;"><div class="headername"><span id="pro_titlename" style="color: black">'+response.projectList[i].ptitle+'</span>'
+						+'</div><div class="headerimg"><button type="button" class="prosetsettingimg" id="'+response.projectJoinList[i].pcode+','+response.projectList[i].ptitle+','+response.projectList[i].psubtitle+','+response.projectList[i].psdate+','+response.projectList[i].pedate+'"><img alt=""src=" /resources/img/img_boardsetting.png"style="width: 18px; height: 18px;">'
+						+'</button><button type="button" class="prosetinviteimg"id="'+response.projectJoinList[i].pcode+'"><img alt=""src=" /resources/img/img_proinvite.png"style="width: 18px; height: 18px;">'
+						+'</button></div></div><div class="projectbottom" style="width: 100%; height:; display: block;">'
+						+'<div id="pro_subdiv" style="width: 100%; height: 60%; overflow: auto;"><span id="pro_subtitlename" style="color: black">'+response.projectList[i].psubtitle+'</span></div><div id="pro_sdatediv" style="width: 100%; height: calc(40%/ 3);">'
+						+'<span id="pro_sdate" style="color: black;">'+response.projectList[i].psdate+'</span></div><div id="pro_edatediv" style="width: 100%; height: calc(40%/ 3);"><span id="pro_edate" style="color: black;">'+response.projectList[i].pedate+'</span>'
+						+'</div><div id="pro_posidiv" style="width: 100%; height: calc(40%/ 3)"><span id="pro_position"style="color: black; margin-right: 3px; float: right;">'+response.projectJoinList[i].ppermission+'</span>'
+						+'</div></div></div>');
+						$("#containersTOP").append($div);
+						
+					}
+					
+					/*프로젝트에 가입된 현황 pinvite==1 , 권한 MEMBER */
+					else if(response.projectJoinList[i].pinvite==1 && response.projectJoinList[i].ppermission=='MEMBER')
+					{
+						var $dsiv = $('<div class="projectlists" id="'+response.projectJoinList[i].pcode+',1"> <div class="projectheader" style="width: 100%;"><div class="headername" style="background-color: #5b66e8"><span id="pro_titlename" style="color: black">'+response.projectList[i].ptitle+'</span>'
+								+'</div>'
+								+'</div><div class="projectbottom" style="width: 100%; height:; display: block;">'
+								+'<div id="pro_subdiv" style="width: 100%; height: 60%; overflow: auto;"><span id="pro_subtitlename" style="color: black">'+response.projectList[i].psubtitle+'</span></div><div id="pro_sdatediv" style="width: 100%; height: calc(40%/ 3);">'
+								+'<span id="pro_sdate" style="color: black;">'+response.projectList[i].psdate+'</span></div><div id="pro_edatediv" style="width: 100%; height: calc(40%/ 3);"><span id="pro_edate" style="color: black;">'+response.projectList[i].pedate+'</span>'
+								+'</div><div id="pro_posidiv" style="width: 100%; height: calc(40%/ 3)"><span id="pro_position"style="color: black; margin-right: 3px; float: right;">'+response.projectJoinList[i].ppermission+'</span>'
+								+'</div></div></div>');
+								$("#containersTOP").append($dsiv);
+								
+					}
+						
+					/*프로젝트에 초대된 현황  pinvite==0 */
+					else if(response.projectJoinList[i].pinvite==0 && response.projectJoinList[i].ppermission=='MEMBER'){
+						var $dseiv = $('<div class="projectlists" id="'+response.projectJoinList[i].pcode+',0"> <div class="projectheader" style="width: 100%;"><div class="headername" style="background-color:gray;"><span id="pro_titlename" style="color: black">'+response.projectList[i].ptitle+'</span>'
+								+'</div>'
+								+'</div><div class="projectbottom" style="width: 100%; height:; display: block;">'
+								+'<div id="pro_subdiv" style="width: 100%; height: 60%; overflow: auto;"><span id="pro_subtitlename" style="color: black">'+response.projectList[i].psubtitle+'</span></div><div id="pro_sdatediv" style="width: 100%; height: calc(40%/ 3);">'
+								+'<span id="pro_sdate" style="color: black;">'+response.projectList[i].psdate+'</span></div><div id="pro_edatediv" style="width: 100%; height: calc(40%/ 3);"><span id="pro_edate" style="color: black;">'+response.projectList[i].pedate+'</span>'
+								+'</div><div id="pro_posidiv" style="width: 100%; height: calc(40%/ 3)"><span id="pro_position"style="color: black; margin-right: 3px; float: right;">'+response.projectJoinList[i].ppermission+'</span>'
+								+'</div></div></div>');
+								$("#containersTOP").append($dseiv);
+					}
 			}
+			    $(".projectlists").css('width', $('#containersTOP').width() / 5 + "px").css('height', $('#contentwrap').height() / 4 + "px");
+				$(".projectheader").css('height',$('.projectlists').height() * 0.25);
+				$(".projectbottom").css('height',$('.projectlists').height() * 0.75); 
+				
+				$(".projectlists").hover(function() {
+					$(this).css("box-shadow", "4px 8px 20px grey");
+				}, function() {
+					$(this).css("box-shadow", "4px 4px 7px grey");
+				});
+		
+		}
 		},
 		error : function(e) {
 			alert("ERROR : " + e.statusText);
 		}
 	});
-	/* /내가 참가하는 모든 프로젝트를 검색*/
 	
-	/* 프로젝트에 초대받은사람 수락할때  
-	 * projectjoin_SQL 다시알아보기★★★★★★★★★★★★★★★★★★★★★★★★★★★★
-	 */
-	/*var param = {
-		'pcode' : '현재 PCODE',
-		'uid' : '현재 수락할 ID',
-		'ppermission' : 'MEMBER',
-		'pinvite' : 1
-	};
-	$.ajax({
-		type : 'PUT',
-		url : 'projectjoin',
-		contentType : 'application/json',
-		data : JSON.stringify(param),
-		success : function(response) {
-			if (response == 1) {
-				alert('초대 수락 완료!');
-			} else {
-				alert('Server or Client ERROR, 초대 수락  실패!');
-			}
-		},
-		error : function(e) {
-			alert("ERROR : " + e.statusText);
-		}
-	});*/
-	/*/프로젝트에 초대받은사람 수락할때 */
+	
+
 });
 
-//프로젝트별 setting 이미지 누르면 세팅으로 윈도우창띄어라
-function prosettingopen(pcode){
-	window.open("/project/infoEdit?pcode="+pcode,"", "height=400, width=600, left="+ popupX + ", top="+ popupY + ", screenX="+ popupX + ", screenY= "+ popupY); 
-}
+/*PROJECT 진입  */
+$(document).on('click','.projectlists',function(){
+	var pcode=$(this).attr('id');
+	var list=pcode.split(',');
 
-//프로젝트별 초대 이미지 누르면 초대로 윈도우창띄어라
-function proinviteopne(id){
-	window.open("/project/userInvite?pcode="+pcode,"", "height=400, width=600, left="+ popupX + ", top="+ popupY + ", screenX="+ popupX + ", screenY= "+ popupY); 
-}
+	if(list[1]==0){
+		if(window.confirm('프로젝트 초대를 수락하시겠습니까? 취소 할 시 거절되고 초대 내역이사라집니다.')==true){
+				var param={
+						'uid' : id,
+						'pcode' : list[0],
+						'ppermission' : 'MEMBER',
+						'pinvite' : 1
+				}
+				$.ajax({
+					type : 'PUT',
+					url : '/projectjoin',
+					contentType : 'application/json',
+					data : JSON.stringify(param),
+					success : function(response) {
+						if (response == 1) {
+							alert('초대 수락 완료!');
+							location.reload();
+						} else {
+							alert('Server or Client ERROR, 초대 수락  실패!');
+						}
+					},
+					error : function(e) {
+						alert("ERROR : " + e.statusText);
+					}
+			});
+		}
+		else{
+			var param={
+					'uid' : id,
+					'pcode' : list[0],
+			}
+			$.ajax({
+				type : 'DELETE',
+				url : '/projectjoin',
+				contentType : 'application/json',
+				data : JSON.stringify(param),
+				success : function(response) {
+					if (response == 1) {
+						alert('초대 거절 완료!');
+						location.reload();
+					} else {
+						alert('Server or Client ERROR, 초대 거절  실패!');
+					}
+				},
+				error : function(e) {
+					alert("ERROR : " + e.statusText);
+				}
+		});
+		}
+	}
+	else if(list[1]>0){
+	if(window.confirm('프로젝트로 진입하시겠습니까?')==true){
+		location.href='/project/info?pcode='+list[0];
+	}else
+		return;
+	}
+});
 
+/*초대 window.open */
+$(document).on('click','.prosetinviteimg' ,function(e) {
+    e.stopPropagation();
+    var pcode=$(this).attr('id');
+    if(window.confirm('프로젝트 유저 초대 페이지를 띄우시겠습니까?')==true){
+    	 var screenW = screen.availWidth;  // 스크린 가로사이즈
+    	  var screenH = screen.availHeight; // 스크린 세로사이즈
+    	  var popW = 600; // 띄울창의 가로사이즈
+    	  var popH = 350; // 띄울창의 세로사이즈
+    	  var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
+    	  var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
+    	 window.open("/project/userInvite?pcode="+pcode,"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no');
+	}
+	else
+		return;
+});
+
+
+$(document).on('click','.prosetsettingimg' ,function(e) {
+    e.stopPropagation();
+    var list=$(this).attr('id').split(',');
+    alert(list);
+    if(window.confirm('프로젝트 정보 수정  페이지를 띄우시겠습니까?')==true){
+    	 var screenW = screen.availWidth;  // 스크린 가로사이즈
+    	  var screenH = screen.availHeight; // 스크린 세로사이즈
+    	  var popW = 800; // 띄울창의 가로사이즈
+    	  var popH = 800 // 띄울창의 세로사이즈
+    	  var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
+    	  var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
+    	 window.open("/project/infoEdit?pcode="+list[0]+"&ptitle="+list[1]+"&psubtitle="+list[2]+"&psdate="+list[3]+"&pedate="+list[4],"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no');
+	}
+	else
+		return;
+});
 
 
 

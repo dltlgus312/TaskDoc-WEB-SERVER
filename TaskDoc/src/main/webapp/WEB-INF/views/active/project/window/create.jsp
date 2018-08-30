@@ -52,15 +52,6 @@ if(id=="null"){
 							type="text" class="form-control" maxlength="255">
 					</div>
 					<div class="btn-group">
-						<!-- <div>
-								<label for="proid">방법론을선택해주세요</label>
-							<select name="job">
-								<option value="">방법론선택</option>
-								<option value="학생">방법론1</option>
-								<option value="회사원">방법론2</option>
-								<option value="기타">방법론3</option>
-							</select>
-							</div> -->
 					</div>
 					<p>
 						시작날짜: <input type="text" id="psdate">
@@ -111,7 +102,8 @@ function create(){
 					if (response > 0) {
 						alert('프로젝트 생성 완료! 프로젝트의 pid값은' + response);
 						window.close();
-					} else {
+						opener.parent.location='/project/main';
+						} else {
 						alert('Server or Client ERROR, 프로젝트 생성 실패');
 					}
 				},
