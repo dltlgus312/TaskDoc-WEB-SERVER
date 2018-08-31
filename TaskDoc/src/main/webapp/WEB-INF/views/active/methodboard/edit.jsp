@@ -13,14 +13,8 @@
 	loginid = (String) session.getAttribute("loginid");
 	String mbcode = request.getParameter("mbcode");
 %>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/fix/session.js"></script>
 
-<script type="text/javascript">
-var id='<%=loginid%>';
-	if (id == "null") {
-		alert('로그인이 필요한 페이지입니다.');
-		window.location.href = '/';
-	}
-</script>
 </head>
 <body>
 	<!--FRAME  -->

@@ -5,7 +5,7 @@
 <head>
 
 <%@include file="/WEB-INF/views/fix/header.jsp"%>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/project/main.js?ver=19"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/project/main.js"></script>
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");

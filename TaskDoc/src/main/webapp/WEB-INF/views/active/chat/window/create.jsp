@@ -1,14 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<%
+	String loginid = "";
+	loginid = (String) session.getAttribute("loginid");
+%>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/fix/session.js"></script>
+
 </head>
 <body>
 <button type="button" onclick="chatroom()">버튼</button>
+
 
 <script type="text/javascript">
 //프로젝트 채팅방말고 일반채팅방 생성

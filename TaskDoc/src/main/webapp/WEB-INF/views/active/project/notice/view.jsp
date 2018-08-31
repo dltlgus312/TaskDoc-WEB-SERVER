@@ -1,136 +1,81 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <%
-String loginid="";
-loginid=(String)session.getAttribute("loginid");
+	String loginid = "";
+	loginid = (String) session.getAttribute("loginid");
+	String nc=request.getParameter("ncode");
 %>
 <script type="text/javascript">
 var id='<%=loginid%>';
-if(id=="null"){
-	alert('로그인이 필요한 페이지입니다.');
-	window.location.href='/';
-}
+	if (id == "null") {
+		alert('로그인이 필요한 페이지입니다.');
+		window.location.href = '/';
+	}
 </script>
 </head>
 <body>
-
+	<div class="container">
+		<div class="row">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close">
+						<i class="fa fa-times"></i>
+					</button>
+					<h4 class="modal-title">공지사항을 상세보기</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label>제목</label> <input id="noticetitle" type="text"
+							class="form-control"readonly="readonly" style="background-color:white;"> 
+						<div>
+						<label style="margin-top:5px;">게시 시간 : </label><label class="asdf"></label>
+						</div>	
+							<label
+							style="padding-top: 5px;">내용</label> <textarea id="noticecontents"
+							class="form-control" readonly="readonly" style="height:100px; background-color:white;"></textarea>
+					</div>
+					<div class="modal-footer">
+						<input type="hidden" name="isEmpty">
+						<button type="button" class="btn btn-default btn-icon"
+							onclick="noticeCancel()" style="background-color: #ed8151; outline: none; border: 0; color: white;">Cancel
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 
 <script type="text/javascript">
-/* 현재 프로젝트의 모든 공지사항 리스트*/
-$.ajax({
-	type : 'GET',
-	url : 'notice/project/'+'현재 프로젝트 ID',
-	success : function(response) {
-		/*
-		response는 List 형태로 날라옴
-		ncode : ? ,  , ntitle : ?, ndate : ?
-		JSON.parser 이용해서 js 변수에 담아서 뿌려보자.
-		*/
-	},
-	error : function(e) {
-		alert("ERROR : " + e.statusText);
-	}
+$(document).ready(function(){
+	$.ajax({
+		type : 'GET',
+		url : '/notice/'+<%=nc%>,
+		success : function(response) {
+			if(Object.keys(response).length>0){
+				alert('불러오기성공');
+				$("#noticetitle").val(response.ntitle);
+				$(".asdf").text(response.ndate);
+				$("#noticecontents").val(response.ncontents);
+			}
+			else{
+				alert('실패')
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
 });
-/* /현재 프로젝트의 모든 공지사항 리스트*/
-
-/* 내가클릭한 공지사항의 상세내용  */
-$.ajax({
-	type : 'GET',
-	url : 'notice/'+'내가 클릭한 공지사항 ID',
-	success : function(response) {
-		/*
-		response는 List 형태로 날라옴
-		NoticeVO의 모든 변수들의 내용이 response로 넘어온다.
-		*/
-	},
-	error : function(e) {
-		alert("ERROR : " + e.statusText);
-	}
-});
-/*/내가클릭한 공지사항의 상세내용  */
-
-/* 공지사항 생성 */
-var param={
-		'pcode':$("#example").val(),
-		'ntitle':$("#example").val(),
-		'ncontents':$("#example").val(),
-};
-$.ajax({
-	type : 'POST',
-	url : 'notice',
-	contentType : 'application/json',
-	data : JSON.stringify(param),
-	success : function(response) {
-		/*
-		response는 1 or -1
-		*/
-		if(response==1){
-			alert('공지사항 생성 완료')
-		}
-		else{
-			alert('Server or Client ERROR, 공지사항 생성 실패');
-		}
-	},
-	error : function(e) {
-		alert("ERROR : " + e.statusText);
-	}
-});
-/* /공지사항 생성  */
-
-/* 공지사항 수정 */
-var param={
-		'ncode':$("#example").val(),
-		'ntitle':$("#example").val(),
-		'ncontents':$("#example").val(),
-};
-$.ajax({
-	type : 'PUT',
-	url : 'notice',
-	contentType : 'application/json',
-	data : JSON.stringify(param),
-	success : function(response) {
-		/*
-		response는 1 or -1
-		*/
-		if(response==1){
-			alert('공지사항 수정 완료')
-		}
-		else{
-			alert('Server or Client ERROR, 공지사항 수정 실패');
-		}
-	},
-	error : function(e) {
-		alert("ERROR : " + e.statusText);
-	}
-});
-/* /공지사항 수정  */
-
-/* 공지사항 삭제 */
-$.ajax({
-	type : 'DELETE',
-	url : 'notice/'+'내가 클릭한 공지사항 ID',
-	success : function(response) {
-		/*
-		response는 1 or -1
-		*/
-		if(response==1){
-			alert('공지사항 삭제 완료')
-		}
-		else{
-			alert('Server or Client ERROR, 공지사항 삭제 실패');
-		}
-	},
-	error : function(e) {
-		alert("ERROR : " + e.statusText);
-	}
-});
-/* /공지사항 삭제  */
-
+function noticeCancel(){
+	window.close();
+}
 </script>
+
 </html>

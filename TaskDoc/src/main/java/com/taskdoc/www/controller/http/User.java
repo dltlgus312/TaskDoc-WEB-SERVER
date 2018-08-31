@@ -18,10 +18,6 @@ public class User {
 	 * 1.로그인 , 로그아웃, 회원가입, 회원정보수정
 	 *
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String TaskDocMain() {
-		return "taskdocMain";
-	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String userLogin() {
@@ -57,7 +53,7 @@ public class User {
 
 	@RequestMapping(value = "/setting", method = RequestMethod.GET)
 	public String setting() {
-		return "/active/setting/setting";
+		return "/user/setting";
 	}
 
 }

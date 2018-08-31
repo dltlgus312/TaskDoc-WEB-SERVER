@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
-
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <%
@@ -15,10 +13,10 @@
 %>
 <script type="text/javascript">
 var id='<%=loginid%>';
-if(id=="null"){
-	alert('로그인이 필요한 페이지입니다.');
-	window.location.href='/';
-}
+	if (id == "null") {
+		alert('로그인이 필요한 페이지입니다.');
+		window.location.href = '/';
+	}
 </script>
 </head>
 <body>
@@ -59,7 +57,7 @@ if(id=="null"){
 function noticeCreate(){
 	/* 공지사항 생성 */
 	var param={
-			'pcode': '<%=pc%>',
+			'pcode': <%=pc%>,
 			'ntitle':$("#noticetitle").val(),
 			'ncontents':$("#noticecontents").val(),
 	};
@@ -69,11 +67,10 @@ function noticeCreate(){
 		contentType : 'application/json',
 		data : JSON.stringify(param),
 		success : function(response) {
-			/*
-			response는 1 or -1
-			*/
-			if(response>0){
-				alert('공지사항 생성 완료')
+			if(Object.keys(response).length>0){
+				alert('공지사항 생성 완료');
+				opener.parent.location.reload();
+				window.close();
 			}
 			else{
 				alert('Server or Client ERROR, 공지사항 생성 실패');

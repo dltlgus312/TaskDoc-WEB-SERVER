@@ -23,16 +23,13 @@
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
 %>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/fix/session.js"></script>
 
 <script type="text/javascript">
-var id='<%=loginid%>';
-	if (id == "null") {
-		alert('로그인이 필요한 페이지입니다.');
-		window.location.href = '/';
-	}
 	$(".main").css('width',$("#contentwrap").width()/1.1);
 	$(".main").css('height',$("#contentwrap").height());
 </script>
+
 </head>
 <body>
 		<!--FRAME  -->

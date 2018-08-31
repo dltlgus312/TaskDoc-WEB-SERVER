@@ -18,13 +18,7 @@
 	loginid = (String) session.getAttribute("loginid");
 	String pc = request.getParameter("pcode");
 %>
-<script type="text/javascript">
-var id='<%=loginid%>';
-if(id=="null"){
-	alert('로그인이 필요한 페이지입니다.');
-	window.location.href='/';
-}
-</script>
+
 
 </head>
 <body>
@@ -90,26 +84,32 @@ if(id=="null"){
 					</table>
 				</div>
 				<div class="bts">
-					<button type="button" onclick="byeproject()" class="btn btn-success" style="background-color:#ed8151;outline: none;border: 0">회원 추방</button>
+					<button type="button" onclick="byeproject()"
+						class="btn btn-success"
+						style="background-color: #ed8151; outline: none; border: 0">회원
+						추방</button>
 				</div>
 			</div>
+			
 			<div id="menu2" class="tab-pane fade">
 				<div class="containers">
 					<div class="bts">
-						<button type="button" onclick="makenotice()" class="btn btn-success" style="background-color:#ed8151;outline: none;border: 0">생성</button>
+						<button type="button" onclick="makenotice()"
+							class="btn btn-success"
+							style="background-color: #ed8151; outline: none; border: 0">생성</button>
 					</div>
 					<table class="table table-striped table-hover">
 						<thead id="theady2">
 							<tr>
-								<th style="width: calc(100% / 4); text-align: center;">번호</th>
-								<th style="width: calc(100% / 4); text-align: center;">제목</th>
-								<th style="width: calc(100% / 4); text-align: center;">날짜</th>
-								<th style="width: calc(100% / 4); text-align: center;">관리</th>
+								<th style="width: 5%; text-align: center;">번호</th>
+								<th style="width: 15%; text-align: center;">제목</th>
+								<th style="width: 15%; text-align: center;">날짜</th>
+								<th style="width: 15%; text-align: center;">관리</th>
 							</tr>
 						</thead>
 					</table>
 				</div>
-				
+
 			</div>
 			<div id="menu3" class="tab-pane fade">
 				<h3>Menu 3</h3>
@@ -124,10 +124,147 @@ var screenH = screen.availHeight; // 스크린 세로사이즈
 var popW = 600; // 띄울창의 가로사이즈
 var popH = 350; // 띄울창의 세로사이즈
 var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
-var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 d
-/*공지사항생성  */
+var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
+
+ 
+//프로젝트 수정시 datepicker api사용
+$(function() {
+	$.datepicker.regional['ko'] = {
+		closeText : '닫기',
+		prevText : '이전달',
+		nextText : '다음달',
+		currentText : '오늘',
+		monthNames : [ '1월(JAN)', '2월(FEB)', '3월(MAR)', '4월(APR)',
+				'5월(MAY)', '6월(JUN)', '7월(JUL)', '8월(AUG)', '9월(SEP)',
+				'10월(OCT)', '11월(NOV)', '12월(DEC)' ],
+		monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월',
+				'9월', '10월', '11월', '12월' ],
+		dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
+		dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
+		dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+		weekHeader : 'Wk',
+		dateFormat : 'yy-mm-dd',
+		firstDay : 0,
+		isRTL : false,
+		showMonthAfterYear : true,
+		yearSuffix : '',
+		changeMonth : true,
+		changeYear : true,
+		showButtonPanel : false,
+		yearRange : 'c-99:c+99',
+	};
+	$.datepicker.setDefaults($.datepicker.regional['ko']);
+
+	$('#psdate').datepicker();
+	$("#psdate").datepicker("option", "minDate", 0);
+	$('#psdate').datepicker("option", "maxDate", $("#toDate").val());
+	$('#psdate').datepicker("option", "onClose", function(selectedDate) {
+		$("#pedate").datepicker("option", "minDate", selectedDate);
+	});
+
+	$('#pedate').datepicker();
+	$("#pedate").datepicker("option", "minDate", 0);
+	$('#pedate').datepicker("option", "minDate", $("#psdate").val());
+	$('#pedate').datepicker("option", "onClose", function(selectedDate) {
+		$("#psdate").datepicker("option", "maxDate", selectedDate);
+	});
+});
+
+//돌아가기
+function cancel() {
+	window.close();
+}
+
+//프로젝트 수정
+function edit(){
+	var param = {
+				'pcode' : <%=pc%>,
+				'ptitle' : $("#ptitle").val(),
+				'psubtitle' : $("#psubtitle").val(),
+				'psdate' : $("#psdate").val(),
+				'pedate' : $("#pedate").val()
+		};
+		$.ajax({
+			type : 'PUT',
+			url : '/project',
+			contentType : 'application/json',
+			data : JSON.stringify(param),
+			success : function(response) {
+				if (response == 1) {
+					alert('프로젝트 수정 완료!');
+				}
+				else{
+					alert('Server or Client ERROR, 프로젝트 수정 실패');
+				}
+			},
+			error : function(e) {
+				alert("ERROR : " + e.statusText);
+			}
+		});
+}
+
+//프로젝트삭제
+function prodeldel(){
+	if(window.confirm('프로젝트를 삭제하시겠습니까?')==true){
+	$.ajax({
+		type : 'DELETE',
+		url : '/project/'+ <%=pc%>,
+		success : function(response) {
+			if (response == 1) {
+				alert('프로젝트 삭제 완료!');
+				opener.parent.location.reload();
+				window.close();
+			}
+			else{
+				alert('Server or Client ERROR, 프로젝트 삭제 실패');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+	}else{
+		return;
+	}
+}
+
+
+//공지사항생성  
 function makenotice(){
-	 window.open("/project/noticecreate?pcode="+<%=pc%>,"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no');
+	 window.open("/project/noticeCreate?pcode="+<%=pc%>,"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no');
+}
+
+//공지사항 보기
+function viewNotice(ncode)
+{
+	window.open("/project/noticeView?ncode="+ncode,"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no');
+}
+
+//공지사항 수정
+function editNotice(ncode){
+	window.open("/project/noticeEdit?ncode="+ncode,"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no');
+}
+
+//공지사항 삭제
+function delNotice(ncode){
+	//공지사항 삭제 
+	$.ajax({
+		type : 'DELETE',
+		url : '/notice/'+ncode,
+		success : function(response) {
+			if(response>0){
+				alert('공지사항 삭제 완료')
+				location.reload();
+			}
+			else{
+				alert('Server or Client ERROR, 공지사항 삭제 실패');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+	
 }
 /*회원추방하기  */
 function byeproject(){
@@ -161,8 +298,8 @@ function byeproject(){
 	}
 	
 }
-/*회원추방하기  */
  $(document).ready(function() {
+	 //프로젝트에 존재하는 회원 정보 받아오기
 	 $.ajax({
 			type : 'GET',
 			url : '/projectjoin/'+'<%=loginid%>',
@@ -183,7 +320,7 @@ function byeproject(){
 		});
 	 
 	 
-	 /*현재 프로젝트에 존재하는 모든 멤버 정보 조회  */
+	 //현재 프로젝트에 존재하는 모든 멤버 정보 조회  
 	 $.ajax({
 			type : 'GET',
 			url : '/projectjoin/collaboration/'+<%=pc%>,
@@ -236,17 +373,40 @@ function byeproject(){
 				alert("ERROR : " + e.statusText);
 			}
 		});
-	 /*현재 프로젝트에 존재하는 모든 멤버 정보 조회  */
 	 
+	 //현재 프로젝트의 모든 공지사항
+	 $.ajax({
+	 	type : 'GET',
+	 	url : '/notice/project/'+<%=pc%>,
+	 	success : function(response) {
+	 		/*
+	 		response는 List 형태로 날라옴
+	 		ncode : ? ,  , ntitle : ?, ndate : ?'+response[i].ntitle+'
+	 		JSON.parser 이용해서 js 변수에 담아서 뿌려보자.
+	 		*/
+	 		for(var i=0;i<response.length;i++){
+	 			var $trtags='<tr class="bts"><td style="width: 5%; text-align: center;">'+ (i+1) +'</td>'
+	 			+'<td style="width: 5%; text-align: center;"><a style="cursor:pointer;" onclick="viewNotice('+response[i].ncode+')">'+response[i].ntitle+'</a></td>'
+	 			+'<td style="width: 5%; text-align: center;">'+response[i].ndate+'</td>'
+	 			+'<td style="width: 5%; text-align: center;"><button type="button" style="background-color: #ed8151; outline: none; border: 0;margin-right:5px;" class="btn btn-success" onclick="editNotice('+response[i].ncode+')">수정</button>'
+	 			+'<button type="button" style="background-color: #ed8151; outline: none; border: 0" class="btn btn-success" onclick="delNotice('+response[i].ncode+')">삭제</button></td></tr>';
+	 			$("#theady2").append($trtags);
+	 		}
+	 	},
+	 	error : function(e) {
+	 		alert("ERROR : " + e.statusText);
+	 	}
+	 });
+
+ });
 	 
-	 /*탭 새로고침시 현재 탭 유지 */
+	 //탭 새로고침시 현재 탭 유지 
 		if (location.hash) {
 			$("a[href='" + location.hash + "']").tab("show");
 		}
 		$(document.body).on("click", "a[data-toggle]", function(event) {
 			location.hash = this.getAttribute("href");
 		});
-	});
 	$(window).on(
 			"popstate",
 			function() {
@@ -254,108 +414,6 @@ function byeproject(){
 						|| $("a[data-toggle='tab']").first().attr("href");
 				$("a[href='" + anchor + "']").tab("show");
 			}); 
-	 /*탭 새로고침시 현재 탭 유지 */
-
-	$(function() {
-		$.datepicker.regional['ko'] = {
-			closeText : '닫기',
-			prevText : '이전달',
-			nextText : '다음달',
-			currentText : '오늘',
-			monthNames : [ '1월(JAN)', '2월(FEB)', '3월(MAR)', '4월(APR)',
-					'5월(MAY)', '6월(JUN)', '7월(JUL)', '8월(AUG)', '9월(SEP)',
-					'10월(OCT)', '11월(NOV)', '12월(DEC)' ],
-			monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월',
-					'9월', '10월', '11월', '12월' ],
-			dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
-			dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
-			dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
-			weekHeader : 'Wk',
-			dateFormat : 'yy-mm-dd',
-			firstDay : 0,
-			isRTL : false,
-			showMonthAfterYear : true,
-			yearSuffix : '',
-			changeMonth : true,
-			changeYear : true,
-			showButtonPanel : false,
-			yearRange : 'c-99:c+99',
-		};
-		$.datepicker.setDefaults($.datepicker.regional['ko']);
-
-		$('#psdate').datepicker();
-		$("#psdate").datepicker("option", "minDate", 0);
-		$('#psdate').datepicker("option", "maxDate", $("#toDate").val());
-		$('#psdate').datepicker("option", "onClose", function(selectedDate) {
-			$("#pedate").datepicker("option", "minDate", selectedDate);
-		});
-
-		$('#pedate').datepicker();
-		$("#pedate").datepicker("option", "minDate", 0);
-		$('#pedate').datepicker("option", "minDate", $("#psdate").val());
-		$('#pedate').datepicker("option", "onClose", function(selectedDate) {
-			$("#psdate").datepicker("option", "maxDate", selectedDate);
-		});
-	});
-
-	function cancel() {
-		window.close();
-	}
-	
-		/*프로젝트 수정  */
-	function edit(){
-		var param = {
-					'pcode' : <%=pc%>,
-					'ptitle' : $("#ptitle").val(),
-					'psubtitle' : $("#psubtitle").val(),
-					'psdate' : $("#psdate").val(),
-					'pedate' : $("#pedate").val()
-			};
-			$.ajax({
-				type : 'PUT',
-				url : '/project',
-				contentType : 'application/json',
-				data : JSON.stringify(param),
-				success : function(response) {
-					if (response == 1) {
-						alert('프로젝트 수정 완료!');
-					}
-					else{
-						alert('Server or Client ERROR, 프로젝트 수정 실패');
-					}
-				},
-				error : function(e) {
-					alert("ERROR : " + e.statusText);
-				}
-			});
-		/*/프로젝트 수정*/
-	}
-	function prodeldel(){
-		if(window.confirm('프로젝트를 삭제하시겠습니까?')==true){
-		/*프로젝트 삭제  */
-		$.ajax({
-			type : 'DELETE',
-			url : '/project/'+ <%=pc%>,
-			success : function(response) {
-				if (response == 1) {
-					alert('프로젝트 삭제 완료!');
-					window.close();
-					opener.location.reload();
-				}
-				else{
-					alert('Server or Client ERROR, 프로젝트 삭제 실패');
-				}
-			},
-			error : function(e) {
-				alert("ERROR : " + e.statusText);
-			}
-		});
-		}else{
-			return;
-		}
-	/* /프로젝트 삭제  */
-		
-	}
 
 </script>
 </html>
