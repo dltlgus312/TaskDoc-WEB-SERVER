@@ -34,6 +34,11 @@ public class ChatRoomRest {
 	public List<ChatRoomVO> roomList(@PathVariable int crcode) {
 		return service.roomList(crcode);
 	}
+	
+	@RequestMapping(value = "/{crcode}", method = RequestMethod.GET)
+	public ChatRoomVO view(@PathVariable("crcode") int crcode) {
+		return service.chatRoomView(crcode);
+	}
 
 	//채팅방 생성
 	@RequestMapping(value = "", method = RequestMethod.POST)

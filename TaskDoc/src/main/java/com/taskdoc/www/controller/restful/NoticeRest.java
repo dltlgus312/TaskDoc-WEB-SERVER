@@ -32,7 +32,7 @@ public class NoticeRest {
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public int insert(@RequestBody NoticeVO noticeVo) {
+	public NoticeVO insert(@RequestBody NoticeVO noticeVo) {
 		return service.noticeInsert(noticeVo);
 	}
 

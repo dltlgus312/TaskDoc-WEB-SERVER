@@ -1,6 +1,7 @@
 package com.taskdoc.www.controller.restful;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.taskdoc.www.database.dto.ChatRoomJoinVO;
-import com.taskdoc.www.database.dto.ChatRoomVO;
+import com.taskdoc.www.database.dto.UserInfoVO;
 import com.taskdoc.www.service.chatroomjoin.ChatRoomJoinService;
 
 @RestController
@@ -20,12 +21,12 @@ public class ChatRoomJoinRest {
 	ChatRoomJoinService service;
 	
 	@RequestMapping(value = "/room", method = RequestMethod.POST)
-	public List<ChatRoomVO> projectList(@RequestBody ChatRoomJoinVO chatRoomJoinVo) {
+	public Map<String, Object> projectList(@RequestBody ChatRoomJoinVO chatRoomJoinVo) {
 		return service.roomList(chatRoomJoinVo);
 	}
 	
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public List<String> userList(@RequestBody ChatRoomJoinVO chatRoomJoinVo) {
+	public List<UserInfoVO> userList(@RequestBody ChatRoomJoinVO chatRoomJoinVo) {
 		return service.userList(chatRoomJoinVo);
 	}
 	
@@ -35,7 +36,7 @@ public class ChatRoomJoinRest {
 	}
 
 	//web용 채팅방에 유저추가하는것
-	@RequestMapping(value = "/web", method = RequestMethod.POST)
+	@RequestMapping(value = "/multiple", method = RequestMethod.POST)
 	public List<ChatRoomJoinVO> insert(@RequestBody List<ChatRoomJoinVO> chatRoomuser) {
 		return service.WebchatRoomJoinInsert(chatRoomuser);
 	}
