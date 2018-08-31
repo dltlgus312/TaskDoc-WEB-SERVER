@@ -18,10 +18,10 @@
 
 <!-- MY CSS -->
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/project/main.css?ver=214">
+	href="${pageContext.request.contextPath }/resources/css/project/main.css?ver=4">
 
 <!-- MY CSS -->
 
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/project/main.js?ver=5"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/fix/left_side.js?ver=9"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/fix/main_header.js?ver=9"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/project/main.js?ver=19"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/fix/left_side.js?ver=91"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/fix/main_header.js?ver=91"></script>

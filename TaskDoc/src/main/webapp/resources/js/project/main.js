@@ -21,7 +21,7 @@ $(document).ready(function() {
 					/*프로젝트에 가입된 현황 pinvite==1 , 권한 OWNER  */
 					if(response.projectJoinList[i].pinvite==1 && response.projectJoinList[i].ppermission=='OWNER'){
 						var $div = $('<div class="projectlists" id="'+response.projectJoinList[i].pcode+',1"> <div class="projectheader" style="width: 100%;"><div class="headername"><span id="pro_titlename" style="color: black">'+response.projectList[i].ptitle+'</span>'
-						+'</div><div class="headerimg"><button type="button" class="prosetsettingimg" id="'+response.projectJoinList[i].pcode+','+response.projectList[i].ptitle+','+response.projectList[i].psubtitle+','+response.projectList[i].psdate+','+response.projectList[i].pedate+'"><img alt=""src=" /resources/img/img_boardsetting.png"style="width: 18px; height: 18px;">'
+						+'</div><div class="headerimg"><button type="button" class="prosetsettingimg" id="'+response.projectJoinList[i].pcode+'"><img alt=""src=" /resources/img/img_boardsetting.png"style="width: 18px; height: 18px;">'
 						+'</button><button type="button" class="prosetinviteimg"id="'+response.projectJoinList[i].pcode+'"><img alt=""src=" /resources/img/img_proinvite.png"style="width: 18px; height: 18px;">'
 						+'</button></div></div><div class="projectbottom" style="width: 100%; height:; display: block;">'
 						+'<div id="pro_subdiv" style="width: 100%; height: 60%; overflow: auto;"><span id="pro_subtitlename" style="color: black">'+response.projectList[i].psubtitle+'</span></div><div id="pro_sdatediv" style="width: 100%; height: calc(40%/ 3);">'
@@ -162,16 +162,15 @@ $(document).on('click','.prosetinviteimg' ,function(e) {
 
 $(document).on('click','.prosetsettingimg' ,function(e) {
     e.stopPropagation();
-    var list=$(this).attr('id').split(',');
-    alert(list);
+    var list=$(this).attr('id');
     if(window.confirm('프로젝트 정보 수정  페이지를 띄우시겠습니까?')==true){
     	 var screenW = screen.availWidth;  // 스크린 가로사이즈
     	  var screenH = screen.availHeight; // 스크린 세로사이즈
-    	  var popW = 800; // 띄울창의 가로사이즈
+    	  var popW = 1000; // 띄울창의 가로사이즈
     	  var popH = 800 // 띄울창의 세로사이즈
     	  var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
     	  var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
-    	 window.open("/project/infoEdit?pcode="+list[0]+"&ptitle="+list[1]+"&psubtitle="+list[2]+"&psdate="+list[3]+"&pedate="+list[4],"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no');
+    	 window.open("/project/infoEdit?pcode="+list,"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no');
 	}
 	else
 		return;
