@@ -123,9 +123,9 @@ result = int >> success = 1, fail = -1
 			result = List<ProjectVO>
 			method = GET
 		
-		2. 공용업무와 개인업무 한버에 받기
+		2. 공용업무와 개인업무 한번에 받기
 			/publictask/all/{pcode}
-			result = map  > ( KEY = "publicVos" : List<PublicTaskVO>, "privateVos" : List<PrivateTaskVO> )
+			result = map  > ( KEY = "publicTaskList" : List<PublicTaskVO>, "privateTaskList" : List<List<PrivateTaskVO>> )
 			method = GET
 	
 	생성
@@ -274,16 +274,21 @@ result = int >> success = 1, fail = -1
 		result = int
 		
 채팅방
-	받기	>  포커스 모드 리스트
-		1. 업무 코드로 받아오기
+	받기
+		1. 업무 코드로 받아오기 > 포커스 모드 리스트
 			/chatroom/task/{tcode}
 			result = List<ChatRoomVO>
-			method = POST
+			method = GET
 		
-		2. 채팅방 코드로 받아오기
+		2. 채팅방 코드로 받아오기 > 포커스 모드 리스트
 			/chatroom/room/{crcode}
 			result = List<ChatRoomVO>
-			method = POST
+			method = GET
+			
+		2. 채팅방 받아오기
+			/chatroom/room/{crcode}
+			result = ChatRoomVO
+			method = GET
 		
 	생성
 		/chatroom
@@ -307,7 +312,7 @@ result = int >> success = 1, fail = -1
 		1. 프로젝트내에서 내가 참여하고 있는 채팅방 리스트 ( focus 제외 )
 			/chatroomjoin/room
 			data = ChatRoomJoinVO  >  (pcode, uid)
-			result = List<ChatRoomVO>
+			result = map  >  ( KEY = "chatRoomList" : List<ChatRoomVO>, "userInfoList" : List<List<UserInfoVO>>)
 			method = POST
 		
 		2. 채팅방에 참여 중인 유저 리스트
@@ -317,10 +322,17 @@ result = int >> success = 1, fail = -1
 			method = POST
 	
 	생성
-		/chatroomjoin
-		data = ChatRoomJoinVO
-		result = int
-		method = POST
+		1. 한명
+			/chatroomjoin
+			data = ChatRoomJoinVO
+			result = int
+			method = POST
+		
+		2. 여러명
+			/chatroomjoin/multiple
+			data = List<ChatRoomJoinVO>
+			result = List<ChatRoomJoinVO>
+			method = POST
 		
 	삭제
 		/chatroomjoin

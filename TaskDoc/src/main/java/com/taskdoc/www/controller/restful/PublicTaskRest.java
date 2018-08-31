@@ -1,6 +1,7 @@
 package com.taskdoc.www.controller.restful;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,11 @@ public class PublicTaskRest {
 	@RequestMapping(value = "/{pcode}", method = RequestMethod.GET)
 	public List<PublicTaskVO> list(@PathVariable int pcode) {
 		return service.publicTaskList(pcode);
+	}
+	
+	@RequestMapping(value = "/all/{pcode}", method = RequestMethod.GET)
+	public Map<String, Object> listAll(@PathVariable int pcode) {
+		return service.publicTaskAllList(pcode);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)

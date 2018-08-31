@@ -1,12 +1,17 @@
 package com.taskdoc.www.service.publictask;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.taskdoc.www.database.dao.privatetask.PrivateTaskDAO;
 import com.taskdoc.www.database.dao.publictask.PublicTaskDAO;
+import com.taskdoc.www.database.dto.PrivateTaskVO;
 import com.taskdoc.www.database.dto.PublicTaskVO;
 
 @Service("PublicTaskService")
@@ -14,11 +19,32 @@ public class PublicTaskServiceImpl implements PublicTaskService{
 
 	@Autowired
 	PublicTaskDAO dao;
+	
+	@Autowired
+	PrivateTaskDAO privateDao;
 
 	@Override
 	public List<PublicTaskVO> publicTaskList(int pcode) {
 		// TODO Auto-generated method stub
 		return dao.publicTaskList(pcode);
+	}
+	
+	@Override
+	@Transactional
+	public Map<String, Object> publicTaskAllList(int pcode) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		
+		List<PublicTaskVO> pVos = publicTaskList(pcode);
+		List<List<PrivateTaskVO>> ptVos = new ArrayList<>();
+		
+		for(PublicTaskVO vo : pVos) {
+			ptVos.add(privateDao.privateTaskList(vo.getTcode()));
+		}
+		
+		map.put("publicTaskList", pVos);
+		map.put("privateTaskList", ptVos);
+		return map;
 	}
 
 	@Override
@@ -55,4 +81,5 @@ public class PublicTaskServiceImpl implements PublicTaskService{
 		// TODO Auto-generated method stub
 		return dao.publicTaskDelete(tcode);
 	}
+
 }
