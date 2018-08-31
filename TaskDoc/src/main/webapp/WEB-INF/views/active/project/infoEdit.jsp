@@ -76,44 +76,28 @@ if(id=="null"){
 			</div>
 			<div id="menu1" class="tab-pane fade">
 				<div class="containers">
-							<table class="table table-striped table-hover">
-								<thead>
-									<tr>
-										<th style="width: 5%; text-align:center;">체크
-										</th>
-										<th style="width: 8%; text-align:center;">초대상태
-										</th>
-										<th style="width: 15%; text-align:center;">아이디
-										</th>
-										<th style="width: 15%; text-align:center;">닉네임
-										</th>
-										<th style="width: 47%; text-align:center;">상태메시지
-										</th>
-										<th style="width: 10%; text-align:center;">권한
-										</th>
-									</tr>
-									<tr>
-										<td>O</td>
-										<td>O</td>
-										<td>EHDGH6820</td>
-										<td>안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요</td>
-										<td>안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요</td>
-										<td style="text-align:center;">MEMBER</td>
-									</tr>
-									<tr>
-										<td>O</td>
-										<td>O</td>
-										<td>EHDGH6820</td>
-										<td>안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요</td>
-										<td>안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요</td>
-										<td style="text-align:center;">MEMBER</td>
-									</tr>
-								</thead>
-							</table>
-					</div> 
+					<table class="table table-striped table-hover">
+						<thead id="theady">
+							<tr>
+								<th style="width: 5%; text-align: center;">체크</th>
+								<th style="width: 8%; text-align: center;">초대상태</th>
+								<th style="width: 15%; text-align: center;">아이디</th>
+								<th style="width: 15%; text-align: center;">닉네임</th>
+								<th style="width: 47%; text-align: center;">상태메시지</th>
+								<th style="width: 10%; text-align: center;">권한</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="bts">
+					<button type="button" onclick="byeproject()" class="btn btn-success" style="background-color:#ed8151;outline: none;border: 0">회원 추방</button>
+				</div>
 			</div>
 			<div id="menu2" class="tab-pane fade">
-				<h3>Menu 2</h3>
+				<select>
+					<option value="sibar">MEMBER</option>
+					<option value="sibar2">OWNER</option>
+				</select>
 			</div>
 			<div id="menu3" class="tab-pane fade">
 				<h3>Menu 3</h3>
@@ -124,8 +108,39 @@ if(id=="null"){
 
 <script type="text/javascript">
 
-
-
+/*회원추방하기  */
+function byeproject(){
+	if( $(":radio[name='checks']:checked").length==0 ){
+	    alert("프로젝트에서 추방할 회원을 한명이상 선택하여주세요.");
+	  }
+	else if($(":radio[name='checks']:checked").length>0){
+		var radioVal = $('input[name="checks"]:checked').val();
+		var param = {
+				'pcode' : <%=pc%>,
+				'uid' : radioVal
+		};
+		$.ajax({
+			type : 'DELETE',
+			url : '/projectjoin',
+			contentType : 'application/json',
+			data : JSON.stringify(param),
+			success : function(response) {
+				if (response == 1) {
+					alert('회원 추방 완료!');
+					location.reload();
+				}
+				else{
+					alert('Server or Client ERROR, 회원 추방  실패');
+				}
+			},
+			error : function(e) {
+				alert("ERROR : " + e.statusText);
+			}
+		});
+	}
+	
+}
+/*회원추방하기  */
  $(document).ready(function() {
 	 $.ajax({
 			type : 'GET',
@@ -152,7 +167,49 @@ if(id=="null"){
 			type : 'GET',
 			url : '/projectjoin/collaboration/'+<%=pc%>,
 			success : function(response) {
-				alert(response);
+				var aJsonArray=new Array();
+				var bJsonArray=new Array();
+				
+				for(var i=0;i<response.projectJoinList.length;i++){
+					if(response.projectJoinList[i].ppermission=="OWNER"){
+						var list=new Object();
+						list.invite=response.projectJoinList[i].pinvite;
+						list.id=response.userInfoList[i].uid;
+						list.name=response.userInfoList[i].uname;
+						list.state=response.userInfoList[i].ustate;
+						list.permis=response.projectJoinList[i].ppermission;
+						aJsonArray.push(list);
+					}
+					else if(response.projectJoinList[i].ppermission="MEMBER"){
+						var list2=new Object();
+						list2.invite=response.projectJoinList[i].pinvite;
+						list2.id=response.userInfoList[i].uid;
+						list2.name=response.userInfoList[i].uname;
+						list2.state=response.userInfoList[i].ustate;
+						list2.permis=response.projectJoinList[i].ppermission;
+						bJsonArray.push(list2);
+					}
+				}
+				
+				
+				for(var j=0;j<aJsonArray.length;j++){
+				var $ttag ='<tr> <td id="inputcheck" style="width: 5%; text-align:center;"></td>'
+				+'<td id="invitestate" style="width: 8%; text-align:center;">'+aJsonArray[j].invite+'</td>'
+				+'<td id="ids" style="width: 15%; text-align:center;">'+aJsonArray[j].id+'</td>'
+				+'<td id="nickn" style="width: 15%; text-align:center;">'+aJsonArray[j].name+'</td>'
+				+'<td id="statemes" style="width: 47%; text-align:center;">'+aJsonArray[j].state+'</td>'
+				+'<td id="auth" style="width: 10%; text-align:center;">'+aJsonArray[j].permis+'</td>';
+				}
+				$("#theady").append($ttag);
+				for(var k=0;k<bJsonArray.length;k++){
+				var $ttags ='<tr> <td id="inputcheck" style="width: 5%; text-align:center;"><input type="radio" name="checks" value="'+bJsonArray[k].id+'"></td>'
+				+'<td id="invitestate" style="width: 8%; text-align:center;">'+bJsonArray[k].invite+'</td>'
+				+'<td id="ids" style="width: 15%; text-align:center;">'+bJsonArray[k].id+'</td>'
+				+'<td id="nickn" style="width: 15%; text-align:center;">'+bJsonArray[k].name+'</td>'
+				+'<td id="statemes" style="width: 47%; text-align:center;">'+bJsonArray[k].state+'</td>'
+				+'<td id="auth" style="width: 10%; text-align:center;">'+bJsonArray[k].permis+'</td>';
+				$("#theady").append($ttags); 
+				}
 			},
 			error : function(e) {
 				alert("ERROR : " + e.statusText);
