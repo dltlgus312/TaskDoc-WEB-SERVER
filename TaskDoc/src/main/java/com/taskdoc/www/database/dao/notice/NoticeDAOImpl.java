@@ -34,9 +34,11 @@ public class NoticeDAOImpl implements NoticeDAO {
 	}
 
 	@Override
-	public int noticeInsert(NoticeVO noticeVo) {
+	public NoticeVO noticeInsert(NoticeVO noticeVo) {
 		// TODO Auto-generated method stub
-		return sql.insert(NAMESPACE + INSERT, noticeVo);
+		sql.insert(NAMESPACE + INSERT, noticeVo);
+		NoticeVO vo = noticeView(noticeVo.getNcode());
+		return vo;
 	}
 
 	@Override

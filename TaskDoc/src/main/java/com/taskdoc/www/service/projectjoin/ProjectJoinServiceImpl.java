@@ -19,55 +19,53 @@ import com.taskdoc.www.database.dto.ProjectVO;
 import com.taskdoc.www.database.dto.UserInfoVO;
 
 @Service("ProjectJoinService")
-public class ProjectJoinServiceImpl implements ProjectJoinService{
+public class ProjectJoinServiceImpl implements ProjectJoinService {
 
 	@Autowired
 	ProjectJoinDAO joinDao;
-	
+
 	@Autowired
 	UserInfoDAO userDao;
-	
+
 	@Autowired
 	ProjectDAO projectDao;
-	
+
 	@Autowired
 	ChatRoomJoinDAO chatRoomJoinDao;
-	
+
 	@Override
 	public Map<String, Object> projectJoinList(String uid) {
-		 Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		List<ProjectVO> projectList = new ArrayList<>();
-		
+
 		List<ProjectJoinVO> projectJoinList = joinDao.projectJoinList(uid);
-		
-		for(ProjectJoinVO vo : projectJoinList) {
+
+		for (ProjectJoinVO vo : projectJoinList) {
 			projectList.add(projectDao.projectView(vo.getPcode()));
 		}
-		
+
 		map.put("projectList", projectList);
 		map.put("projectJoinList", projectJoinList);
-		
+
 		return map;
 	}
 
 	@Override
 	public Map<String, Object> projectJoinListUser(int pcode) {
 		List<ProjectJoinVO> userJoinListAll = joinDao.projectJoinListUser(pcode);
-		
+
 		List<ProjectJoinVO> joinList = new ArrayList<>();
 		List<UserInfoVO> userList = new ArrayList<>();
 		Map<String, Object> map = new HashMap<>();
-		
-		for(ProjectJoinVO vo : userJoinListAll) {
-			if(vo.getPinvite() == 1) {
-				userList.add(userDao.userInfoView(vo.getUid()));
-				joinList.add(vo);
-			}
+
+		for (ProjectJoinVO vo : userJoinListAll) {
+			userList.add(userDao.userInfoView(vo.getUid()));
+			joinList.add(vo);
 		}
-		
+
 		map.put("userInfoList", userList);
 		map.put("projectJoinList", joinList);
-		
+
 		return map;
 	}
 
@@ -82,14 +80,14 @@ public class ProjectJoinServiceImpl implements ProjectJoinService{
 	@Transactional
 	public int projectJoinUpdate(ProjectJoinVO projectJoinVo) {
 		int result = joinDao.projectJoinUpdate(projectJoinVo);
-		
+
 		int crcode = chatRoomJoinDao.crcodeMin(projectJoinVo.getPcode());
 		ChatRoomJoinVO chatRoomJoinVo = new ChatRoomJoinVO();
 		chatRoomJoinVo.setCrcode(crcode);
 		chatRoomJoinVo.setPcode(projectJoinVo.getPcode());
 		chatRoomJoinVo.setUid(projectJoinVo.getUid());
 		chatRoomJoinDao.chatRoomJoinInsert(chatRoomJoinVo);
-		
+
 		return result;
 	}
 

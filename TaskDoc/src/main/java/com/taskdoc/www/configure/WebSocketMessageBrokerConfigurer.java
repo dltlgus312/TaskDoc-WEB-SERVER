@@ -13,7 +13,10 @@ public class WebSocketMessageBrokerConfigurer extends AbstractWebSocketMessageBr
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {
 		// 메시지 브로커가 /topic/이 들어가는 구독자들에게 메시지를 전달해준다
-		config.enableSimpleBroker("/topic/");
+		config.enableSimpleBroker(
+				"/topic",
+				"/notice",
+				"/projectjoin");
 
 		// 클라이언트가 서버에게 /app 을 붙이고 메시지를 전달할 주소
 		config.setApplicationDestinationPrefixes("/app");

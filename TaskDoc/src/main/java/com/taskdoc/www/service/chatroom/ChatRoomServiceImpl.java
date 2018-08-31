@@ -40,7 +40,13 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	public List<ChatRoomVO> roomList(int crcode) {
 		return roomDao.roomList(crcode);
 	}
+	
 
+	@Override
+	public ChatRoomVO chatRoomView(int crcode) {
+		// TODO Auto-generated method stub
+		return roomDao.chatRoomView(crcode);
+	}
 	
 	//채팅방생성
 	@Override
@@ -66,5 +72,6 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 		// TODO Auto-generated method stub
 		return roomDao.chatRoomDelete(crcode);
 	}
+
 
 }
