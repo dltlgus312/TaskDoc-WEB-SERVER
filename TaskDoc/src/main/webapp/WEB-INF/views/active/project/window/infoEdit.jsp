@@ -94,10 +94,22 @@ if(id=="null"){
 				</div>
 			</div>
 			<div id="menu2" class="tab-pane fade">
-				<select>
-					<option value="sibar">MEMBER</option>
-					<option value="sibar2">OWNER</option>
-				</select>
+				<div class="containers">
+					<div class="bts">
+						<button type="button" onclick="makenotice()" class="btn btn-success" style="background-color:#ed8151;outline: none;border: 0">생성</button>
+					</div>
+					<table class="table table-striped table-hover">
+						<thead id="theady2">
+							<tr>
+								<th style="width: calc(100% / 4); text-align: center;">번호</th>
+								<th style="width: calc(100% / 4); text-align: center;">제목</th>
+								<th style="width: calc(100% / 4); text-align: center;">날짜</th>
+								<th style="width: calc(100% / 4); text-align: center;">관리</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				
 			</div>
 			<div id="menu3" class="tab-pane fade">
 				<h3>Menu 3</h3>
@@ -107,7 +119,16 @@ if(id=="null"){
 </body>
 
 <script type="text/javascript">
-
+var screenW = screen.availWidth;  // 스크린 가로사이즈
+var screenH = screen.availHeight; // 스크린 세로사이즈
+var popW = 600; // 띄울창의 가로사이즈
+var popH = 350; // 띄울창의 세로사이즈
+var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
+var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 d
+/*공지사항생성  */
+function makenotice(){
+	 window.open("/project/noticecreate?pcode="+<%=pc%>,"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no');
+}
 /*회원추방하기  */
 function byeproject(){
 	if( $(":radio[name='checks']:checked").length==0 ){

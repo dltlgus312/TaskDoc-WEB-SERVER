@@ -17,38 +17,49 @@ public class Project {
 	 * 
 	 */
 	
-	//session
+	//프로젝트 리스트들.
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main() {
 		return "/active/project/main";
 	}
 
-	//session
+	//프로젝트 생성하기
 	@RequestMapping(value = "/create")
 	public String create() {
 		return "/active/project/window/create";
 	}
 
-	//session
+	//프로젝트에 회원초대하기
 	@RequestMapping(value = "/userInvite", method = RequestMethod.GET)
 	public String userInvite() {
 		return "/active/project/window/userInvite";
 	}
-	//session
-	@RequestMapping(value = "/info", method = RequestMethod.GET)
+	
+	//프로젝트 상세보기
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String info() {
-		return "/active/project/info";
+		return "/active/project/view";
 	}
 
-	//session
+	//프로젝트 정보수정
 	@RequestMapping(value = "/infoEdit", method = RequestMethod.GET)
 	public String infoEdit() {
-		return "/active/project/infoEdit";
+		return "/active/project/window/infoEdit";
 	}
 
 	//session
-	@RequestMapping(value = "/notice", method = RequestMethod.GET)
-	public String notice() {
-		return "/active/project/window/notice";
+	@RequestMapping(value = "/noticeCreate", method = RequestMethod.GET)
+	public String noticecreate() {
+		return "/active/project/notice/create";
+	}
+	//session
+	@RequestMapping(value = "/noticeView", method = RequestMethod.GET)
+	public String noticeview() {
+		return "/active/project/notice/view";
+	}
+	//session
+	@RequestMapping(value = "/noticeEdit", method = RequestMethod.GET)
+	public String noticemodify() {
+		return "/active/project/notice/edit";
 	}
 }

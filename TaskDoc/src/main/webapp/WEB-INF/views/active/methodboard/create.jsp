@@ -3,15 +3,10 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-
-
 <%@include file="/WEB-INF/views/fix/header.jsp"%>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/bootstrap/css/bootstrap.css">
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
-	String paramId = request.getParameter("id");
 %>
 
 <script type="text/javascript">
@@ -153,7 +148,7 @@ var id='<%=loginid%>';
 				success : function(response) {
 					if (response > 0) {
 						alert('게시판 생성 완료! 게시판의 mbcode값은' + response);
-						location.href='/methodBoard';
+						location.href='/methodboard/main';
 					} else {
 						alert('Server or Client ERROR, 게시판 생성 실패');
 					}
@@ -171,12 +166,12 @@ var id='<%=loginid%>';
 	}
 		
 		function boardCancel(){
-			location.href='/methodBoard';
+			location.href='/methodboard/main';
 		}
 		
 		//프로젝트 선택할 window창 생성
 		function selectProject(){
-			window.open("BoardSelectProject?uid="+"<%=loginid%>","", "height=400, width=1000, left="+ popupX + ", top="+ popupY + ", screenX="+ popupX + ", screenY= "+ popupY); 
+			window.open("/methodboard/selectProject?uid="+"<%=loginid%>","", "height=400, width=1000, left="+ popupX + ", top="+ popupY + ", screenX="+ popupX + ", screenY= "+ popupY); 
 		}
 		
 		function completeProject(child_pcode){

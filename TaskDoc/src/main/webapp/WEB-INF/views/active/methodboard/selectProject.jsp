@@ -101,7 +101,7 @@ $(document).ready(function() {
 				 */
 	$.ajax({
 		type : 'GET',
-		url : 'projectjoin/' + '<%=uid%>',
+		url : '/projectjoin/' + '<%=uid%>',
 			success : function(response) {
 				for (var i = 0; i < response.projectJoinList.length; i++) {
 					if (response.projectJoinList[i].pinvite>0) {
@@ -161,7 +161,6 @@ $(document).ready(function() {
 //부모창인 projectCreate.jsp로 값을 넘겨준다.
 function proselection(pcode){
 	if(confirm("※프로젝트를 선택 하시겠습니까?")==true){
-		opener.alert(pcode);
 		opener.completeProject(pcode);
 		window.close();
 	}
