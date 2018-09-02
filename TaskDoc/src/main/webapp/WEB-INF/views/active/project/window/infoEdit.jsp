@@ -90,7 +90,7 @@
 						추방</button>
 				</div>
 			</div>
-			
+
 			<div id="menu2" class="tab-pane fade">
 				<div class="containers">
 					<div class="bts">
@@ -177,6 +177,12 @@ function cancel() {
 
 //프로젝트 수정
 function edit(){
+	//특수문자
+	re = /[~!@\#$%^&*\()\,-=+_']/gi;
+	if(re.test($("#ptitle").val())){
+		alert('프로젝트 제목에 특수문자를 넣을 수 없 습ㄴ ㅣ 다!');
+	}
+	else{
 	var param = {
 				'pcode' : <%=pc%>,
 				'ptitle' : $("#ptitle").val(),
@@ -201,6 +207,7 @@ function edit(){
 				alert("ERROR : " + e.statusText);
 			}
 		});
+	}
 }
 
 //프로젝트삭제

@@ -20,7 +20,7 @@ $(document).ready(function() {
 				for(var i=0;i<response.projectJoinList.length;i++){
 					/*프로젝트에 가입된 현황 pinvite==1 , 권한 OWNER  */
 					if(response.projectJoinList[i].pinvite==1 && response.projectJoinList[i].ppermission=='OWNER'){
-						var $div = $('<div class="projectlists" id="'+response.projectJoinList[i].pcode+',1"> <div class="projectheader" style="width: 100%;"><div class="headername"><span id="pro_titlename" style="color: black">'+response.projectList[i].ptitle+'</span>'
+						var $div = $('<div class="projectlists" id="'+response.projectJoinList[i].pcode+',1,'+response.projectList[i].ptitle+'"> <div class="projectheader" style="width: 100%;"><div class="headername"><span id="pro_titlename" style="color: black">'+response.projectList[i].ptitle+'</span>'
 						+'</div><div class="headerimg"><button type="button" class="prosetsettingimg" id="'+response.projectJoinList[i].pcode+'"><img alt=""src=" /resources/img/img_boardsetting.png"style="width: 18px; height: 18px;">'
 						+'</button><button type="button" class="prosetinviteimg"id="'+response.projectJoinList[i].pcode+'"><img alt=""src=" /resources/img/img_proinvite.png"style="width: 18px; height: 18px;">'
 						+'</button></div></div><div class="projectbottom" style="width: 100%; height:; display: block;">'
@@ -35,7 +35,7 @@ $(document).ready(function() {
 					/*프로젝트에 가입된 현황 pinvite==1 , 권한 MEMBER */
 					else if(response.projectJoinList[i].pinvite==1 && response.projectJoinList[i].ppermission=='MEMBER')
 					{
-						var $dsiv = $('<div class="projectlists" id="'+response.projectJoinList[i].pcode+',1"> <div class="projectheader" style="width: 100%;"><div class="headername" style="background-color: #5b66e8"><span id="pro_titlename" style="color: black">'+response.projectList[i].ptitle+'</span>'
+						var $dsiv = $('<div class="projectlists" id="'+response.projectJoinList[i].pcode+',1,'+response.projectList[i].ptitle+'"> <div class="projectheader" style="width: 100%;"><div class="headername" style="background-color: #5b66e8"><span id="pro_titlename" style="color: black">'+response.projectList[i].ptitle+'</span>'
 								+'</div>'
 								+'</div><div class="projectbottom" style="width: 100%; height:; display: block;">'
 								+'<div id="pro_subdiv" style="width: 100%; height: 60%; overflow: auto;"><span id="pro_subtitlename" style="color: black">'+response.projectList[i].psubtitle+'</span></div><div id="pro_sdatediv" style="width: 100%; height: calc(40%/ 3);">'
@@ -136,7 +136,7 @@ $(document).on('click','.projectlists',function(){
 	}
 	else if(list[1]>0){
 	if(window.confirm('프로젝트로 진입하시겠습니까?')==true){
-		location.href='/project/info?pcode='+list[0];
+		location.href='/project/view?pcode='+list[0]+'&ptitle='+list[2];
 	}else
 		return;
 	}

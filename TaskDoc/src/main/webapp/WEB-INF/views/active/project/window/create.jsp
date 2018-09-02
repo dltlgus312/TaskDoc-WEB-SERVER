@@ -24,7 +24,6 @@ var id='<%=loginid%>';
 		window.location.href = '/user/login';
 }
 </script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/project/create.js"></script>
 
 </head>
 <body>
@@ -71,9 +70,19 @@ var id='<%=loginid%>';
 <script type="text/javascript">
 //프로젝트생성
 function projectCreate(){
+	//특수문자
+	re = /[~!@\#$%^&*\()\,-=+_']/gi;
+	
 	if($("#ptitle").val()=="" || $("#psdate").val()=="" ||  $("#pedate").val()==""){
 		alert('정보를 모두 입력해 주시길 바랍니다.');
 	}
+
+	//특수문자 체크
+	else if(re.test($("#ptitle").val)){
+		alert("프로젝트 제목에 특수문자를 포함할수 없습니다.")
+	}
+
+	
 	else{
 	var param = {
 			'userInfo' : {
