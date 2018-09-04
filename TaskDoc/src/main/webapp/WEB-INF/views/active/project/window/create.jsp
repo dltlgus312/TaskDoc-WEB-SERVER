@@ -30,12 +30,14 @@ var id='<%=loginid%>';
 	<div class="container">
 		<div class="row">
 			<div class="modal-content">
+				
 				<div class="modal-header">
 					<button type="button" class="close">
 						<i class="fa fa-times"></i>
 					</button>
 					<h4 class="modal-title">프로젝트 개설을 환영합니다.</h4>
 				</div>
+				
 				<div class="modal-body">
 					<div class="form-group">
 						<label>프로젝트명</label> <input id="ptitle" type="text"
@@ -43,7 +45,9 @@ var id='<%=loginid%>';
 							style="padding-top: 5px;">부제목명</label> <input id="psubtitle"
 							type="text" class="form-control" maxlength="255">
 					</div>
+					
 					<div class="btn-group">
+					
 					</div>
 					<p>
 						시작날짜: <input type="text" id="psdate">
@@ -53,14 +57,17 @@ var id='<%=loginid%>';
 					</p>
 					<div class="modal-footer">
 						<input type="hidden" name="isEmpty">
+						
 						<button type="button" class="btn btn-success btn-icon"
 							onclick="projectCreate()">
 							<i class="fa fa-check"></i> Create Project
 						</button>
+						
 						<button type="button" class="btn btn-default btn-icon"
 							onclick="proCancel()">
 							<i class="fa fa-times-circle"></i> Cancel
 						</button>
+						
 					</div>
 				</div>
 			</div>
@@ -71,15 +78,15 @@ var id='<%=loginid%>';
 //프로젝트생성
 function projectCreate(){
 	//특수문자
-	re = /[~!@\#$%^&*\()\,-=+_']/gi;
+	re = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
 	
 	if($("#ptitle").val()=="" || $("#psdate").val()=="" ||  $("#pedate").val()==""){
 		alert('정보를 모두 입력해 주시길 바랍니다.');
 	}
 
 	//특수문자 체크
-	else if(re.test($("#ptitle").val)){
-		alert("프로젝트 제목에 특수문자를 포함할수 없습니다.")
+	else if(re.test($("#ptitle").val())){
+		alert("프로젝트 제목에 특수문자를 포함할수 없습니다.");
 	}
 
 	

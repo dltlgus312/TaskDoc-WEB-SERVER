@@ -47,6 +47,11 @@ public class Project {
 		return "/active/project/window/infoEdit";
 	}
 
+	//공지사항메인
+	@RequestMapping(value = "/noticeMain", method = RequestMethod.GET)
+	public String noticeMain() {
+		return "/active/project/notice/main";
+	}
 	//공지사항생성
 	@RequestMapping(value = "/noticeCreate", method = RequestMethod.GET)
 	public String noticecreate() {
