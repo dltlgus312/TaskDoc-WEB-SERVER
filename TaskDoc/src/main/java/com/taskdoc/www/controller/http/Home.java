@@ -13,6 +13,11 @@ public class Home {
 	public String tetete() {
 		return "tetete";
 	}
+	//test2
+	@RequestMapping(value = "/tetete2", method = RequestMethod.GET)
+	public String tetete2() {
+		return "tetete2";
+	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String TaskDocMain() {

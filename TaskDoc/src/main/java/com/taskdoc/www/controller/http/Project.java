@@ -76,37 +76,37 @@ public class Project {
 	 */
 	
 	//session
-	@RequestMapping(value = "/publicTaskMain", method = RequestMethod.GET)
+	@RequestMapping(value = "/publicTask/main", method = RequestMethod.GET)
 	public String publicTaskMain() {
 		return "publicTaskMain";
 	}
 	
 	//session
-	@RequestMapping(value = "/publicTaskCreate", method = RequestMethod.GET)
+	@RequestMapping(value = "/publicTask/create", method = RequestMethod.GET)
 	public String publicTaskCreate() {
-		return "publicTaskCreate";
+		return "/temp/publictaskcreate";
 	}
 	
 	//session
-	@RequestMapping(value = "/publicTaskEdit", method = RequestMethod.GET)
+	@RequestMapping(value = "/publicTask/edit", method = RequestMethod.GET)
 	public String publicTaskEdit() {
 		return "publicTaskEdit";
 	}
 	
 	//session
-	@RequestMapping(value = "/privateTaskMain", method = RequestMethod.GET)
+	@RequestMapping(value = "/privateTask/main", method = RequestMethod.GET)
 	public String privateTaskMain() {
 		return "privateTaskMain";
 	}
 	
 	//session
-	@RequestMapping(value = "/privateTaskCreate", method = RequestMethod.GET)
+	@RequestMapping(value = "/privateTask/create", method = RequestMethod.GET)
 	public String privateTaskCreate() {
-		return "privateTaskCreate";
+		return "/active/temp/publictaskcreate";
 	}
 	
 	//session
-	@RequestMapping(value = "/privateTaskEdit", method = RequestMethod.GET)
+	@RequestMapping(value = "/privateTask/edit", method = RequestMethod.GET)
 	public String privateTaskEdit() {
 		return "privateTaskEdit";
 	}

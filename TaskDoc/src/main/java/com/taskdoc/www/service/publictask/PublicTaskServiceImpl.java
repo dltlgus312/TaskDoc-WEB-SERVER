@@ -52,6 +52,7 @@ public class PublicTaskServiceImpl implements PublicTaskService{
 	public int publicTaskInsert(PublicTaskVO publicTaskVo) {
 		// TODO Auto-generated method stub
 		int tcode = 0;
+	
 		Integer sequenceMax = null;
 		
 		tcode = dao.publicTaskInsert(publicTaskVo);
