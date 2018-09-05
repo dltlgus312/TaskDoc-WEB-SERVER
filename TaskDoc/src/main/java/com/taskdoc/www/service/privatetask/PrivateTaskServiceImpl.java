@@ -17,12 +17,6 @@ public class PrivateTaskServiceImpl implements PrivateTaskService{
 	PrivateTaskDAO dao;
 
 	@Override
-	public List<PrivateTaskVO> privateTaskList(int tcode) {
-		// TODO Auto-generated method stub
-		return dao.privateTaskList(tcode);
-	}
-
-	@Override
 	public List<PrivateTaskVO> privateTaskList(String uid) {
 		// TODO Auto-generated method stub
 		return dao.privateTaskList(uid);

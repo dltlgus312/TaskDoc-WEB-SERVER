@@ -25,9 +25,9 @@ public class PublicTaskRest {
 		return service.publicTaskList(pcode);
 	}
 	
-	@RequestMapping(value = "/all/{pcode}", method = RequestMethod.GET)
-	public Map<String, Object> listAll(@PathVariable int pcode) {
-		return service.publicTaskAllList(pcode);
+	@RequestMapping(value = "/all/{pcode}/{uid}", method = RequestMethod.GET)
+	public Map<String, Object> listAll(@PathVariable int pcode, @PathVariable String uid) {
+		return service.publicTaskAllList(pcode, uid);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)

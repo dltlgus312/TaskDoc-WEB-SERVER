@@ -1,6 +1,8 @@
 package com.taskdoc.www.database.dao.privatetask;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +26,12 @@ public class PrivateTaskDAOImpl implements PrivateTaskDAO {
 	private final String SAMEREFMAX = "sameRefMax";
 
 	@Override
-	public List<PrivateTaskVO> privateTaskList(int tcode) {
+	public List<PrivateTaskVO> privateTaskList(int tcode, String uid) {
 		// TODO Auto-generated method stub
-		return sql.selectList(NAMESPACE + TCODELIST, tcode);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("tcode", tcode);
+		map.put("uid", uid);
+		return sql.selectList(NAMESPACE + TCODELIST, map);
 	}
 
 	@Override

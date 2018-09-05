@@ -19,11 +19,6 @@ public class PrivateTaskRest {
 	@Autowired
 	PrivateTaskService service;
 	
-	@RequestMapping(value = "/task/{tcode}", method = RequestMethod.GET)
-	public List<PrivateTaskVO> list(@PathVariable int tcode) {
-		return service.privateTaskList(tcode);
-	}
-	
 	@RequestMapping(value = "/user/{uid}", method = RequestMethod.GET)
 	public List<PrivateTaskVO> list(@PathVariable String uid) {
 		return service.privateTaskList(uid);

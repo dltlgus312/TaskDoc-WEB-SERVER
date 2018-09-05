@@ -5,7 +5,7 @@ import java.util.List;
 import com.taskdoc.www.database.dto.PrivateTaskVO;
 
 public interface PrivateTaskDAO {
-	public List<PrivateTaskVO> privateTaskList(int tcode);
+	public List<PrivateTaskVO> privateTaskList(int tcode, String uid);
 	public List<PrivateTaskVO> privateTaskList(String uid);
 	public int privateTaskInsert(PrivateTaskVO privateTaskVo);
 	public int privateTaskUpdate(PrivateTaskVO privateTaskVo);
