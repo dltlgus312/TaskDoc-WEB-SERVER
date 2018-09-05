@@ -50,7 +50,9 @@ $(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
 
 					<!-- CHAT CONTENTS  -->
 					<div  style="width: 100%; height: 93%;">
-					채팅
+					<textarea id="tests" rows="20" cols="40"></textarea>
+					<input id="chatcon" type="text">
+					<button type="button" onclick="go()">전송.</button>
 					</div>
 				</div>
 
@@ -63,6 +65,25 @@ $(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
 	</div>
 	<!--FRAME  -->
 </body>
-
+<script>
+/* $(function(){
+        var text="abc";
+        var text2="def";
+        var socket = new SockJS('/goStomp');  //websocket이아닌 SockJS로 접속한다.
+        stompClient = Stomp.over(socket); //stompClient에 socket을 넣어준다.
+        stompClient.connect({}, function() { //접속
+            stompClient.send('/app/in/tt', {}, JSON.stringify({'id':text, 'pw':text2}));
+             
+            stompClient.subscribe('/topic/in', function(msg) {
+                alert(msg);
+            });
+        });
+}); */
+function go(){
+	var con= $("#chatcon").val();
+	$("#tests").append(id+" : "+con+'\n');
+	$("#chatcon").val()=="";
+}
+</script>
 
 </html>

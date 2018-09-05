@@ -22,7 +22,7 @@
 	<div id="proheaderbtn" style="width: 25%; display: -webkit-box;">
 
 		<div style="width: calc(100%/ 3); height: 40px;">
-			<button id="prochatbtn1" type="button"
+			<button id="prochatbtn1" type="button" onclick="prochatbtn()"
 				style="height: 42px; float: right; outline: none; border: 0; background-color: white; width: 100%;">
 				<img
 					src="${pageContext.request.contextPath }/resources/img/img_chat.png"
@@ -49,4 +49,12 @@
 		</div>
 
 	</div>
+</div>
+<div id="chathwamun" style="width:300px; height:400px; background-color:#ed8151; display:none; position:absolute; right:100px;overflow:auto;">
+	<div style="width:300px;height:80px; background-color:yellow"></div>
+	<div style="width:300px;height:80px; background-color:red"></div>
+	<div style="width:300px;height:80px; background-color:black"></div>
+	<div style="width:300px;height:80px; background-color:green"></div>
+	<div style="width:300px;height:80px; background-color:white"></div>
+	<div style="width:300px;height:80px; background-color:black"></div>
 </div>
