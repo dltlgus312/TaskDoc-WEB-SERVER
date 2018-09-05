@@ -24,6 +24,7 @@
 	loginid = (String) session.getAttribute("loginid");
 %>
 <script type="text/javascript">
+	var id='<%=loginid%>';
 	$(".main").css('width',$("#contentwrap").width()/1.1);
 	$(".main").css('height',$("#contentwrap").height());
 </script>

@@ -18,11 +18,11 @@ var id='<%=loginid%>';
 //pro_header.jsp , pro_header.js 에서 <script>태그 안에서 변수 사용가능하다.	
 var pcode=<%=pcode%>;
 $(function(){
-$(".chat_hover").css('color','#ed8151').css('border-bottom','1px solid #ed8151');
-$(".ptask_hover").css('color','#6d6d6d').css('border-bottom','none');
-$(".gantt_hover").css('color','#6d6d6d').css('border-bottom','none');
-$(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
-});
+	$(".files_hover").css('color','#ed8151').css('border-bottom','1px solid #ed8151');
+	$(".chat_hover").css('color','#6d6d6d').css('border-bottom','none');
+	$(".ptask_hover").css('color','#6d6d6d').css('border-bottom','none');
+	$(".gantt_hover").css('color','#6d6d6d').css('border-bottom','none');
+	});
 </script>
 
 </head>
@@ -50,7 +50,9 @@ $(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
 
 					<!-- CHAT CONTENTS  -->
 					<div  style="width: 100%; height: 93%;">
-					채팅
+						<div>
+						
+						</div>
 					</div>
 				</div>
 

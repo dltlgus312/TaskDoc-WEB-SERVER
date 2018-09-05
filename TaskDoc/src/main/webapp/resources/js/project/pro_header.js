@@ -78,37 +78,6 @@ $(document).ready(function(){
 					alert("ERROR : " + e.statusText);
 				}
 			});
-		 
-		 
-		 
-		// TOP MENU 선택시 색깔변하게할려고
-		 $(".chat_hover").on("click",function(){
-			 $(this).css('color','#ed8151').css('border-bottom','1px solid #ed8151');
-			$(".ptask_hover").css('color','#6d6d6d').css('border-bottom','none');
-			$(".gantt_hover").css('color','#6d6d6d').css('border-bottom','none');
-			$(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
-		 });
-		 
-		 $(".ptask_hover").on("click",function(){
-			$(this).css('color','#ed8151').css('border-bottom','1px solid #ed8151');
-			$(".chat_hover").css('color','#6d6d6d').css('border-bottom','none');
-			$(".gantt_hover").css('color','#6d6d6d').css('border-bottom','none');
-			$(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
-		}); 
-		 
-		 $(".gantt_hover").on("click",function(){
-			$(this).css('color','#ed8151').css('border-bottom','1px solid #ed8151');
-			$(".chat_hover").css('color','#6d6d6d').css('border-bottom','none');
-			$(".ptask_hover").css('color','#6d6d6d').css('border-bottom','none');
-			$(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
-		}); 
-		 
-		 $(".files_hover").on("click",function(){
-			$(this).css('color','#ed8151').css('border-bottom','1px solid #ed8151');
-			$(".chat_hover").css('color','#6d6d6d').css('border-bottom','none');
-			$(".gantt_hover").css('color','#6d6d6d').css('border-bottom','none');
-			$(".ptask_hover").css('color','#6d6d6d').css('border-bottom','none');
-		}); 
 	});
 
 	//view page에서 설정 버튼 누를때 나오는 페이지(OWNER)
@@ -140,18 +109,23 @@ $(document).ready(function(){
 			return;
 	}
 	
-	//탭 새로고침시 현재 탭 유지  fewe
-	if (location.hash) {
-		$("a[href='" + location.hash + "']").tab("show");
+	//채팅으로
+	function gogoChat(){
+		 location.href='/project/view/?pcode='+pcode;
 	}
-	$(document.body).on("click", "a[data-toggle]", function(event) {
-		location.hash = this.getAttribute("href");
-	});
-	$(window).on(
-			"popstate",
-			function() {
-				var anchor = location.hash
-						|| $("a[data-toggle='tab']").first().attr("href");
-				$("a[href='" + anchor + "']").tab("show");
-			});
 	
+	//공용업무로
+	function gogoPt(){
+		location.href='/project/taskview/?pcode='+pcode;
+	}
+	
+	//간트차트로
+	function gogoGt(){
+		location.href='/project/gantview/?pcode='+pcode;
+	}
+	
+	//파일모아보기로
+	function gogofile(){
+		location.href='/project/fileview/?pcode='+pcode;
+	}
+	 

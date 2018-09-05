@@ -24,4 +24,18 @@ public class Home {
 		return "taskdocMain";
 	}
 	
+	//테스트용
+	@RequestMapping(value = "/project/taskview", method = RequestMethod.GET)
+	public String taskview() {
+		return "/active/project/taskview";
+	}
+	@RequestMapping(value = "/project/gantview", method = RequestMethod.GET)
+	public String gantview() {
+		return "/active/project/gantview";
+	}
+	@RequestMapping(value = "/project/fileview", method = RequestMethod.GET)
+	public String fileview() {
+		return "/active/project/fileview";
+	}
+	
 }

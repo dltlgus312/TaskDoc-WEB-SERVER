@@ -8,14 +8,14 @@
 	</div>
 
 	<div id="proheaderli" style="width: 50%; text-align: center;">
-		<a class="chat_hover" id="z" data-toggle="tab" href="#chats"
-			style="color: #6d6d6d; font-size: 20px; margin-right: 2%; text-decoration: none;">채팅</a>
-		<a class="ptask_hover" data-toggle="tab" href="#ptasks"
-			style="color: #6d6d6d; font-size: 20px; margin-right: 2%; text-decoration: none;">공용
-			업무</a> <a class="gantt_hover" data-toggle="tab" href="#gantts"
-			style="color: #6d6d6d; font-size: 20px; margin-right: 2%; text-decoration: none;">간트차트</a>
-		<a class="files_hover" data-toggle="tab" href="#files"
-			style="color: #6d6d6d; font-size: 20px; margin-right: 2%; text-decoration: none;">파일
+		<a class="chat_hover" 
+			style="color: #6d6d6d; font-size: 20px; margin-right: 2%; text-decoration: none; cursor:pointer;"onclick="gogoChat()">채팅</a>
+		<a class="ptask_hover" 
+			style="color: #6d6d6d; font-size: 20px; margin-right: 2%; text-decoration: none;cursor:pointer;"onclick="gogoPt()">공용
+			업무</a> <a class="gantt_hover" 
+			style="color: #6d6d6d; font-size: 20px; margin-right: 2%; text-decoration: none;cursor:pointer;"onclick="gogoGt()">간트차트</a>
+		<a class="files_hover" 
+			style="color: #6d6d6d; font-size: 20px; margin-right: 2%; text-decoration: none;cursor:pointer;"onclick="gogofile()">파일
 			모아보기</a>
 	</div>
 
