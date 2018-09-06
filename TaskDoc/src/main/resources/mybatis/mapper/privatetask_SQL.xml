@@ -7,7 +7,7 @@
 <mapper namespace="privatetask_SQL">
 
 	<select id="codelist" resultType="privatetask">
-		SELECT * FROM privatetask WHERE tcode=#{tcode} ORDER BY ptrefference ASC, ptsequence ASC;
+		SELECT * FROM privatetask WHERE tcode=#{tcode} AND uid=#{uid} ORDER BY ptrefference ASC, ptsequence ASC;
 	</select>
 	
 	<select id="idlist" resultType="privatetask">

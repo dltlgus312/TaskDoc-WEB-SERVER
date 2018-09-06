@@ -31,7 +31,7 @@ public class PublicTaskServiceImpl implements PublicTaskService{
 	
 	@Override
 	@Transactional
-	public Map<String, Object> publicTaskAllList(int pcode) {
+	public Map<String, Object> publicTaskAllList(int pcode, String uid) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<>();
 		
@@ -39,7 +39,7 @@ public class PublicTaskServiceImpl implements PublicTaskService{
 		List<List<PrivateTaskVO>> ptVos = new ArrayList<>();
 		
 		for(PublicTaskVO vo : pVos) {
-			ptVos.add(privateDao.privateTaskList(vo.getTcode()));
+			ptVos.add(privateDao.privateTaskList(vo.getTcode(), uid));
 		}
 		
 		map.put("publicTaskList", pVos);

@@ -26,10 +26,9 @@ public class PublicTaskRest {
 		return service.publicTaskList(pcode);
 	}
 	
-	//해당 프로젝트에대한 모든 공유업무와 개인업무를 받아옴
-	@RequestMapping(value = "/all/{pcode}", method = RequestMethod.GET)
-	public Map<String, Object> listAll(@PathVariable int pcode) {
-		return service.publicTaskAllList(pcode);
+	@RequestMapping(value = "/all/{pcode}/{uid}", method = RequestMethod.GET)
+	public Map<String, Object> listAll(@PathVariable int pcode, @PathVariable String uid) {
+		return service.publicTaskAllList(pcode, uid);
 	}
 	
 	//공용업무생성

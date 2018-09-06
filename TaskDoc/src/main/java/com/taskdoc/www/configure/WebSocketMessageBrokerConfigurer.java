@@ -15,6 +15,7 @@ public class WebSocketMessageBrokerConfigurer extends AbstractWebSocketMessageBr
 		// 메시지 브로커가 /topic/이 들어가는 구독자들에게 메시지를 전달해준다
 		config.enableSimpleBroker(
 				"/topic",
+				"/chat",
 				"/notice",
 				"/projectjoin");
 

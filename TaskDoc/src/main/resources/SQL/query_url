@@ -124,7 +124,7 @@ result = int >> success = 1, fail = -1
 			method = GET
 		
 		2. 공용업무와 개인업무 한번에 받기
-			/publictask/all/{pcode}
+			/publictask/all/{pcode}/{uid}
 			result = map  > ( KEY = "publicTaskList" : List<PublicTaskVO>, "privateTaskList" : List<List<PrivateTaskVO>> )
 			method = GET
 	
@@ -344,11 +344,13 @@ result = int >> success = 1, fail = -1
 	받기
 		/chatcontents/{crcode}
 		result = List<ChatContentsVO>
+		method = GET
 		
 	생성
 		/chatcontents
 		data = ChatContentsVO
 		result = int
+		method = POST
 			
 의사결정
 	받기
