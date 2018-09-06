@@ -26,7 +26,7 @@ public class ChatContentsRest {
 	
 
 	@RequestMapping(value="", method = RequestMethod.POST)
-	public int Insert(@RequestBody ChatContentsVO chatContentsVo) {
+	public ChatContentsVO Insert(@RequestBody ChatContentsVO chatContentsVo) {
 		return service.chatContentsInsert(chatContentsVo);
 	}
 }

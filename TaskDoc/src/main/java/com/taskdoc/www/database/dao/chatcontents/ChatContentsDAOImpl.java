@@ -14,6 +14,7 @@ public class ChatContentsDAOImpl implements ChatContentsDAO {
 	SqlSession sql;
 	
 	private final String NAMESPACE = "chatcontents_SQL.";
+	private final String VIEW = "view";
 	private final String LIST = "list";
 	private final String INSERT = "insert";
 
@@ -24,8 +25,15 @@ public class ChatContentsDAOImpl implements ChatContentsDAO {
 	}
 
 	@Override
-	public int chatContentsInsert(ChatContentsVO chatContentsVo) {
+	public ChatContentsVO chatContentsInsert(ChatContentsVO chatContentsVo) {
 		// TODO Auto-generated method stub
-		return sql.insert(NAMESPACE + INSERT, chatContentsVo);
+		sql.insert(NAMESPACE + INSERT, chatContentsVo);
+		return chatContentsView(chatContentsVo.getCccode());
+	}
+
+	@Override
+	public ChatContentsVO chatContentsView(int cccode) {
+		// TODO Auto-generated method stub
+		return sql.selectOne(NAMESPACE + VIEW, cccode);
 	}
 }

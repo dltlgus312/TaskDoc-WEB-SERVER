@@ -21,7 +21,7 @@ public class ChatContentsServiceImpl implements ChatContentsService {
 	}
 
 	@Override
-	public int chatContentsInsert(ChatContentsVO chatContentsVo) {
+	public ChatContentsVO chatContentsInsert(ChatContentsVO chatContentsVo) {
 		// TODO Auto-generated method stub
 		return dao.chatContentsInsert(chatContentsVo);
 	}

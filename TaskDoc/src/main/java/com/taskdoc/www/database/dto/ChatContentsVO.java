@@ -4,6 +4,7 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("chatcontents")
 public class ChatContentsVO {
+	private int cccode;
 	private int crcode;
 	private String uid;
 	private String ccontents;
@@ -13,6 +14,12 @@ public class ChatContentsVO {
 	private int crcoderef;
 	
 	
+	public int getCccode() {
+		return cccode;
+	}
+	public void setCccode(int cccode) {
+		this.cccode = cccode;
+	}
 	public int getCrcode() {
 		return crcode;
 	}
