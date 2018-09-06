@@ -5,16 +5,15 @@
 <head>
 </head>
 <body>
-
 	<script type="text/javascript">
-		/* 프로젝트내에서 내가 참여하고 있는 채팅방 리스트 ( focus 제외 )*/
+		/* 프로젝트내에서 내가 참여하고 있는 채팅방 리스트 ( focus 제외 )*/ss
 		var param = {
-			'uid' : '현재 UID',
-			'pcode' : '내 프로젝트 PCODE'
+			'uid' : id,
+			'pcode' : pcode
 		};
 		$.ajax({
 			type : 'POST',
-			url : 'chatroomjoin/room',
+			url : '/chatroomjoin/room',
 			contentType : 'application/json',
 			data : JSON.stringify(param),
 			success : function(response) {

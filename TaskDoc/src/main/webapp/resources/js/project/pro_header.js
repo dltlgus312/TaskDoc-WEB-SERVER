@@ -1,4 +1,21 @@
 $(document).ready(function(){
+	 
+	var socket = new SockJS('/goStomp');  //websocket이아닌 SockJS로 접속한다.
+     stompClient = Stomp.over(socket); //stompClient에 socket을 넣어준다.
+     stompClient.connect({}, function() { //접속
+         /*stompClient.send('/app/in/tt', {}, JSON.stringify({'uid':id, 'ccontents': $("#chatcon").val(),'crcode' : 67}));*/
+         stompClient.subscribe('/topic/in', function(msg) {
+        	 var test=msg.body;
+        	 var concat=JSON.parse(test);
+        	 $("#z").remove();
+        	 $("#croom"+concat.crcode).append('<span id="z">'+concat.uid+" : "+concat.ccontents+'</span>');
+         });
+     });
+	
+	
+	//채팅방리스트 리스트에담아라;
+	var cArray=new Array();
+	
 	// prouser Object list에 담을라고만듦sssfe
 	var prouserlist=new Array();
 	
@@ -79,6 +96,49 @@ $(document).ready(function(){
 					alert("ERROR : " + e.statusText);
 				}
 			});
+		 
+		 //내가 초대되어있는 채팅방리스트와, 그 채팅방리스트에 포함된 모든 인원들을 불러온다 Map형식임
+		 var param = {
+					'uid' : id,
+					'pcode' : pcode
+				};
+				$.ajax({
+					type : 'POST',
+					url : '/chatroomjoin/room',
+					contentType : 'application/json',
+					data : JSON.stringify(param),
+					success : function(response) {
+						var cObject=new Object();
+						if (response.length != -1) {
+							alert('채팅방 리스트 조회 성공!' + response);
+					
+							for(var i=0;i<response.chatRoomList.length;i++){
+								if(response.chatRoomList[i].crmode==1){
+									cObject.crcode=response.chatRoomList[i].crcode;
+									cObject.crname='프로젝트 채팅방';
+									cArray.push(cObject);
+									$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:300px;height:80px; background-color:yellow">'
+									+'<span>'+cArray[i].crcode+':'+ cArray[i].crname +'</span><span></span></div>';
+									$("#chathwamun").append($cdiv);
+								}
+								else if(response.chatRoomList[i].crmode==2){
+									cObject.crcode=response.chatRoomList[i].crcode;
+									cObject.crname='개인 채팅방';
+									cArray.push(cObject);
+									$cdiv='<div style="width:300px;height:80px; background-color:green">'
+										+'<span>'+cArray[i].crcode+':'+ cArray[i].crname +'</span><span></span></div>';
+									$("#chathwamun").append($cdiv);
+								}
+							}
+							
+						} else if (response.length == 0) {
+							alert('Server or Client ERROR, 채팅방 리스트 조회 실패');
+						}
+					},
+					error : function(e) {
+						alert("ERROR : " + e.statusText);
+					}
+				});
 	});
 
 	// view page에서 설정 버튼 누를때 나오는 페이지(OWNER)
@@ -130,7 +190,6 @@ $(document).ready(function(){
 		location.href='/project/fileview/?pcode='+pcode;
 	}
 	
-	
 	// 프로젝트 대화 누르면 absolute div 한개나옴
 	function prochatbtn(){
 		if($("#chathwamun").css("display") == "none"){
@@ -138,6 +197,4 @@ $(document).ready(function(){
 		}else{
 			$("#chathwamun").hide(1000);
 		}
-}
-	
-	 
+	}

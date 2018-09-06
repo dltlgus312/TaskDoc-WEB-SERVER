@@ -52,7 +52,7 @@ $(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
 					<div  style="width: 100%; height: 93%;">
 					<textarea id="tests" rows="20" cols="40"></textarea>
 					<input id="chatcon" type="text">
-					<button type="button" onclick="go()">전송.</button>
+					<button type="button" onclick="wow()">전송.</button>
 					</div>
 				</div>
 
@@ -79,10 +79,8 @@ $(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
             });
         });
 }); */
-function go(){
-	var con= $("#chatcon").val();
-	$("#tests").append(id+" : "+con+'\n');
-	$("#chatcon").val()=="";
+function wow(){
+	stompClient.send('/app/in/tt', {}, JSON.stringify({'uid':id, 'ccontents': $("#chatcon").val(),'crcode' : 67}));
 }
 </script>
 

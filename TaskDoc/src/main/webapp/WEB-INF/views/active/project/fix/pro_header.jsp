@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/project/pro_header.js?ver=616"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/project/pro_header.js?ver=99"></script>
 <div id="proheader"
 	style="display: -webkit-box; width: 100%; height: 7%; border-bottom: 1px solid gray;">
 	<div id="proheadername" style="width: 25%;">
@@ -51,10 +51,5 @@
 	</div>
 </div>
 <div id="chathwamun" style="width:300px; height:400px; background-color:#ed8151; display:none; position:absolute; right:100px;overflow:auto;">
-	<div style="width:300px;height:80px; background-color:yellow"></div>
-	<div style="width:300px;height:80px; background-color:red"></div>
-	<div style="width:300px;height:80px; background-color:black"></div>
-	<div style="width:300px;height:80px; background-color:green"></div>
-	<div style="width:300px;height:80px; background-color:white"></div>
-	<div style="width:300px;height:80px; background-color:black"></div>
 </div>
+
