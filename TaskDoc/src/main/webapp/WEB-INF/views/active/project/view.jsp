@@ -79,9 +79,20 @@ $(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
             });
         });
 }); */
-function wow(){
-	stompClient.send('/app/in/tt', {}, JSON.stringify({'uid':id, 'ccontents': $("#chatcon").val(),'crcode' : 67}));
-}
+function wow(){			
+/* 	stompClient.send('/app/in/tt', {}, JSON.stringify({'uid':id, 'ccontents': $("#chatcon").val(),'crcode' : 67}));
+ */
+ 	var param={
+		 'test' :{
+			 'uid' : id,
+			 'ccontents' : $("#chatcon").val()
+		 }
+ 		};
+	stompClient.send('/app/chat/'+67, {},JSON.stringify(param));
+ 	}
+
+
+
 </script>
 
 </html>

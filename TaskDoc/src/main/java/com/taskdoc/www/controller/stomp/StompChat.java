@@ -16,6 +16,7 @@ public class StompChat {
 	@MessageMapping("/chat/{crcode}")
 	@SendTo("/chat/{crcode}")
 	public Map<String, Object> test(Map<String, Object> map){
+		System.out.println(map);
 		return map;
 	}
 
