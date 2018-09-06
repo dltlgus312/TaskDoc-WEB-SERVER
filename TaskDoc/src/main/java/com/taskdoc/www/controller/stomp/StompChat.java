@@ -13,11 +13,10 @@ public class StompChat {
 	@Autowired
 	RestTemplate rest;
 	
-	
-	//Example)
 	@MessageMapping("/chat/{crcode}")
 	@SendTo("/chat/{crcode}")
 	public Map<String, Object> test(Map<String, Object> map){
+		System.out.println(map);
 		return map;
 	}
 

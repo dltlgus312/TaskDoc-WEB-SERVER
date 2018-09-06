@@ -13,14 +13,8 @@
 	loginid = (String) session.getAttribute("loginid");
 	String mbcode = request.getParameter("mbcode");
 %>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/fix/session.js"></script>
 
-<script type="text/javascript">
-var id='<%=loginid%>';
-	if (id == "null") {
-		alert('로그인이 필요한 페이지입니다.');
-		window.location.href = '/';
-	}
-</script>
 </head>
 <body>
 	<!--FRAME  -->
@@ -74,6 +68,15 @@ var id='<%=loginid%>';
 							<textarea id="mbcontents" style="width: 80%; height: 85%;" class="form-control"></textarea>
 
 						</div>
+						
+						<div id="editproject" class="bts" style="width: 100%;">
+							<button type="button"
+								style="margin-left: 7px; float: left; background-color: #ed8151; border: 0; outline: none; margin-top: 20px;"
+								class="btn btn-success" onclick="selectProject()"
+								id="selectProject">프로젝트 수정하기</button>
+						</div>
+						
+						
 						<div id="14" class="bts"
 							style="width: 100%; border-top: 1px solid rgba(0, 0, 0, 0.2); margin-top: 10px;">
 							<button type="button" class="btn btn-success"
@@ -83,6 +86,7 @@ var id='<%=loginid%>';
 								style="float: right; margin-right: 7px; background-color: #ed8151; border: 0; outline: none;"
 								class="btn btn-success" onclick="boardEdit()">Edit</button>
 						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -101,7 +105,9 @@ var id='<%=loginid%>';
 
 
 <script>
-var pcode;
+var popupX = (window.screen.width / 2) - (500 / 2);
+var popupY= (window.screen.height /2) - (400 / 2);
+	var pcode=0;
 	$(document).ready(function() {
 		var contentwWidth = $("#contentwrap").width();
 		var contentHeight = $("#contentwrap").height();
@@ -146,12 +152,31 @@ var pcode;
 		});
 		//게시판 글 상세보기
 	});
+	
+	//프로젝트 선택할 window창 생성
+	function selectProject(){
+		window.open("/methodboard/selectProject?uid="+"<%=loginid%>","", "height=400, width=1000, left="+ popupX + ", top="+ popupY + ", screenX="+ popupX + ", screenY= "+ popupY); 
+	}
+	
+	function completeProject(child_pcode){
+		pcode=child_pcode;
+		$("#selectProject").remove();
+		var h4tag=document.createElement("h4");
+		var h4ele=document.createTextNode("프로젝트 수정 완료!");
+		h4tag.appendChild(h4ele);
+		$("#editproject").append(h4tag);
+	}
+	
+	
+	
+	
 	function boardEdit(){
 		//게시글 수정하기
 		var param = {
 					'mbtitle' : $('#mbtitle').val(),
 					'mbcontents' : $('#mbcontents').val(),
 					'mbcode' : '<%=mbcode%>',
+					'pcode' : pcode
 			};
 			$.ajax({
 				type : 'PUT',
@@ -175,7 +200,7 @@ var pcode;
 		
 		//돌아가기
 		function boardEditCancel() {
-			location.href = '/methodBoard';
+			location.href = '/methodboard/main';
 		}
 </script>
 </html>

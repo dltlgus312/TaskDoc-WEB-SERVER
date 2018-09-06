@@ -3,24 +3,13 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-
-
 <%@include file="/WEB-INF/views/fix/header.jsp"%>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/bootstrap/css/bootstrap.css">
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
-	String paramId = request.getParameter("id");
 %>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/fix/session.js"></script>
 
-<script type="text/javascript">
-var id='<%=loginid%>';
-	if (id == "null") {
-		alert('로그인이 필요한 페이지입니다.');
-		window.location.href = '/';
-	}
-</script>
 </head>
 <body>
 	<!--FRAME  -->
@@ -137,7 +126,7 @@ var id='<%=loginid%>';
 
 	function boardCreate(){
 		
-		if(pcode!=0){
+	if(pcode!=0){
 	//게시글 작성하기
 	var param = {
 				'mbtitle' : $("#mtitle").val(),
@@ -153,7 +142,7 @@ var id='<%=loginid%>';
 				success : function(response) {
 					if (response > 0) {
 						alert('게시판 생성 완료! 게시판의 mbcode값은' + response);
-						location.href='/methodBoard';
+						location.href='/methodboard/main';
 					} else {
 						alert('Server or Client ERROR, 게시판 생성 실패');
 					}
@@ -166,17 +155,17 @@ var id='<%=loginid%>';
 			//게시글 작성하기
 		}
 		else{
-			alert('프로젝트');
+			alert('프로젝트를 선택해 주세요');
 		}
 	}
 		
 		function boardCancel(){
-			location.href='/methodBoard';
+			location.href='/methodboard/main';
 		}
 		
 		//프로젝트 선택할 window창 생성
 		function selectProject(){
-			window.open("BoardSelectProject?uid="+"<%=loginid%>","", "height=400, width=1000, left="+ popupX + ", top="+ popupY + ", screenX="+ popupX + ", screenY= "+ popupY); 
+			window.open("/methodboard/selectProject?uid="+"<%=loginid%>","", "height=400, width=1000, left="+ popupX + ", top="+ popupY + ", screenX="+ popupX + ", screenY= "+ popupY); 
 		}
 		
 		function completeProject(child_pcode){

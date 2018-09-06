@@ -26,4 +26,4 @@
 				data-placement="right" title="로그아웃">
 				<img id="logout" src="${pageContext.request.contextPath }/resources/img/img_logout.png" >
 				</div>
-			</aside>
+</aside>

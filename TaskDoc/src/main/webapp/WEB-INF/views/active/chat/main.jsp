@@ -1,22 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
-
 	<script type="text/javascript">
-		/* 프로젝트내에서 내가 참여하고 있는 채팅방 리스트 ( focus 제외 )*/
+		/* 프로젝트내에서 내가 참여하고 있는 채팅방 리스트 ( focus 제외 )*/ss
 		var param = {
-			'uid' : '현재 UID',
-			'pcode' : '내 프로젝트 PCODE'
+			'uid' : id,
+			'pcode' : pcode
 		};
 		$.ajax({
 			type : 'POST',
-			url : 'chatroomjoin/room',
+			url : '/chatroomjoin/room',
 			contentType : 'application/json',
 			data : JSON.stringify(param),
 			success : function(response) {

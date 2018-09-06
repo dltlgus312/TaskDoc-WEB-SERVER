@@ -3,161 +3,52 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-<%@include file="/WEB-INF/views/fix/header.jsp"%>
-
-<%
-	String loginid = "";
-	loginid = (String) session.getAttribute("loginid");
-	String paramId = request.getParameter("id");
-%>
-
-<script type="text/javascript">
-var id='<%=loginid%>';
-	if (id == "null") {
-		alert('로그인이 필요한 페이지입니다.');
-		window.location.href = '/';
-	}
-</script>
-<style>
-.box2 {
-	display: inline-block;
-	height: 100px;
-	margin: 1em;
-}
-</style>
 </head>
 <body>
-	<!--FRAME fwef -->
-	<div id="frame">
-
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/js/sidebar/menu/slinky.min.js"></script>
-	<script>
-		const slinky = $('#menu').slinky()
-	</script>
-	
-		
-	
-	<form action="/document/upload" enctype="multipart/form-data" method="POST">
-		<input name="dmtitle" value="test"/>
-		<input name="dmcontents" value="testtest"/>
-		<input name="crcode" value="1"/>
-		<input name="tcode" value="12"/>
-		<input name="uid" value="d"/>
-		
-		<input type="file" name="file"/>
-		<input type="file" name="file"/>
-		<input type="file" name="file"/>
-		<input type="file" name="file"/>
-
-		<input type="submit">
-	</form>
-	
-		
-	<form action="/document/download/6" method="POST">
-		<input type="submit" value="다운로드">
-	</form>
-		
-	
-	
-		<!--MAIN HEADER  -->
-		<%@include file="/WEB-INF/views/fix/main_header.jsp"%>
-		<!--MAIN HEADER  -->
-
-		<!--WRAPPER  -->
-		<div id="wrapper">
-
-			<!--SIDE BAR  -->
-			<%@include file="/WEB-INF/views/fix/left_side.jsp"%>
-			<!--SIDE BAR  -->
-
-			<!--CONTENTWRAP  -->
-			<div id="contentwrap" style="background-color: #e0e0e0;">
-				<!--PROJECT 가입 O  -->
-				<div class="containers" style="text-align: center;margin-top: 20px;">
-						<div class="box2" style="background-color: white">
-							
-							<div class="projectheader" style="width:100%;height:25%; background-color:orange;">
-								
-								<div id="headername"style="width:80%; height:100%; background-color:black;float:left;">
-									<span id="headernames" style="color:white">여기는 프로젝트이름이야여기는 프로젝트이름이야</span>
-								</div>
-								
-								<div id="headerimg" style="width:20%; height:100%;background-color:white; float:right;">
-									<button type="button" style="height:50%;">버튼1</button>
-									<button type="button" style="height:50%;">버튼2</button>
-								</div>
-								
-							</div>
-							
-							<div class="projectbottom"style="width:100%;height:75%; background-color:red;">
-							
-							</div>
-						</div>
-						
-						<div class="box2" style="background-color: white">
-						
-						</div>
-						<div class="box2" style="background-color: white"></div>
-						<div class="box2" style="background-color: white"></div>
-						<div class="box2" style="background-color: white"></div>
-						<div class="box2" style="background-color: white"></div>
-						<div class="box2" style="background-color: white"></div>
-						<div class="box2" style="background-color: white"></div>
-						<div class="box2" style="background-color: white"></div>
-				</div>
-				<!--PROJECT 초대 O  -->
-				<div class="containers" style="text-align: center;">
-						<div class="box2" style="background-color: black"></div>
-						<div class="box2" style="background-color: black"></div>
-						<div class="box2" style="background-color: black"></div>
-						<div class="box2" style="background-color: black"></div>
-						<div class="box2" style="background-color: black"></div>
-						<div class="box2" style="background-color: black"></div>
-					</div>
-			</div>
+	<div style="width: 100%; height: 1200px; display: -webkit-box;">
+		<div style="width: 25%; height: 100%; background-color: red;">
+			공용업무
+			<button type="button" id="task1">업무1</button>
 		</div>
-		<!-- FOOTER -->
-		<%@include file="/WEB-INF/views/fix/footer.jsp"%>
-		<!-- FOOTER -->
-
+		<div style="width: 25%; height: 100%; background-color: yellow;">
+			세부업무
+			<button type="button" id="sebu1" style="display: none;">세부업무1</button>
+			<button type="button" id="sebu2" style="display: none;">세부업무2</button>
+		</div>
+		<div style="width: 25%; height: 100%; background-color: green;">
+			개인업무
+			<button type="button" id="gein1" style="display: none;">개인업무1</button>
+		</div>
+		<div style="width: 25%; height: 100%; background-color: gray;">완료된업무
+		</div>
 	</div>
-	<!--FRAME  -->
 </body>
+<script type="text/javascript">
+$("#task1").on("click",function(){
+	var dp = document.getElementById("sebu1").style.display;
+	var dp2 = document.getElementById("sebu2").style.display;
+	if(dp=='none' && dp2=='none'){
+		$("#sebu1").show();
+		$("#sebu2").show();
+		document.getElementById("sebu1").style.display='block';
+		document.getElementById("sebu2").style.display='block';
+	}
+	else if(dp=='block' && dp=='block'){
+		$("#sebu1").hide();
+		$("#sebu2").hide();
+		$("#gein1").hide();
+		document.getElementById("sebu1").style.display='none';
+		document.getElementById("sebu2").style.display='none';
+	}
+});
 
-
-<script>
-	$(document).ready(function() {
-		var contentWidth = $("#contentwrap").width();
-		var contentHeight = $("#contentwrap").height();
-		//$(".container").css('width',contentWidth + "px")
-		$(".containers").css('width', $('#contentwrap').width() / 1.3);
-		$(".containers").css('margin-left', $('#contentwrap').width() / 9);
-		$(".box2").css('width', $('.containers').width() / 4 + "px");
-		$(".box2").css('height', $('#contentwrap').height() / 3 + "px");
-		
-		if(contentWidth>1500){
-			
+ $("#sebu1").on("click",function(){
+	 if( $("#sebu1").css("display") != "none" ) {
+		    $("#gein1").show();
+		    document.getElementById("gein").style.display='block';
 		}
-
-		/*
-		$("#1").css('width', $('.main').width() / 5);
-		$("#1").css('height', $('.main').height() / 5);
-
-		$("#2").css('width', $('.main').width() / 5);
-		$("#3").css('height', $('.main').height() / 5);
-
-		$("#3").css('width', $('.main').width() / 5);
-		$("#3").css('height', $('.main').height() / 5);
-
-		$("#4").css('width', $('.main').width() / 5);
-		$("#4").css('height', $('.main').height() / 5);
-
-		$("#5").css('width', $('.main').width() / 5);
-		$("#5").css('height', $('.main').height() / 5); */
-
-	});
+}); 
 </script>
 </html>

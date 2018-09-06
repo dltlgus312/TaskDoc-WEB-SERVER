@@ -4,61 +4,56 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/*
- * @ResponseBody --> JSON RETURN {"ds" : "SD"}
- * Controller + Responsebody
- * */
 
 @Controller
 @RequestMapping("/chat")
 public class Chat {
-	/*
-	 * 3.공용업무리스트메인, 공용업무 생성, 공용업무 수정 , 개인업무리스트, 개인업무리스트 생성, 개인업무리스트 수정 ,
-	 * 
-	 */
-
+	
+	//채팅메인
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main() {
 		return "/active/chat/main";
 	}
 
-	//session
+	//채팅생성
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create() {
 		return "/active/chat/window/create";
 	}
-	//session
+	
+	//채팅에 유저초대
 	@RequestMapping(value = "/userInvite", method = RequestMethod.GET)
 	public String userinvite() {
 		return "/active/chat/window/userInvite";
 	}
 	
-	//session
+	//채팅에서 파일업로드
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.GET)
 	public String fileUpload() {
 		return "/active/chat/window/fileUpload";
 	}
 
-	//session
+	//채팅에서 의사 결정 생성
 	@RequestMapping(value = "/decisionCreate", method = RequestMethod.GET)
 	public String decisionCreate() {
 		return "/active/chat/window/decisionCreate";
 	}
-	//session
+	
+	//채팅에서 의사 결정 생성 선택
 	@RequestMapping(value = "/decisionSelect", method = RequestMethod.GET)
 	public String decisionSelect() {
 		return "/active/chat/window/decisionSelect";
 	}
-
-	//session
-	@RequestMapping(value = "/focus", method = RequestMethod.GET)
-	public String focus() {
-		return "/active/chat/window/focus";
+	
+	//채팅에서 의사 결정 보기
+	@RequestMapping(value = "/decisionView", method = RequestMethod.GET)
+	public String decisionView() {
+		return "/active/chat/window/decisionView";
 	}
 
 	//session
-	@RequestMapping(value = "/documentFeedback", method = RequestMethod.GET)
-	public String documentFeedback() {
-		return "documentFeedback";
+	@RequestMapping(value = "/focusCreate", method = RequestMethod.GET)
+	public String focus() {
+		return "/active/chat/window/focusCreate";
 	}
 }

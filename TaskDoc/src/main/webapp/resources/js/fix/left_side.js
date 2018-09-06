@@ -2,12 +2,6 @@ $(document).ready(function() {
 	//TOOLTIP
 	$('[data-toggle="tootlip"]').tooltip();
 
-	//HOVER IMAGE
-	$(".project_list").hover(function() {
-		$(this).css("box-shadow", "4px 8px 20px grey");
-	}, function() {
-		$(this).css("box-shadow", "4px 4px 7px grey");
-	});
 	
 	$(".h-describe").hover(function() {
 		$(this).css("background-color", "#ed8151");
@@ -71,12 +65,12 @@ $(function() {
 	
 	//left_side project모양클릭시 board 로이동
 	$("#board").click(function() {
-		location.href = '/methodBoard';
+		location.href = '/methodboard/main';
 	});
 	
 	//left_side logout 모양클릭시 settings 로이동
 	$("#settings").click(function() {
-		location.href = '/setting';
+		location.href = '/user/setting';
 	});
 	
 	//left_side logout 모양클릭시 logout로이동

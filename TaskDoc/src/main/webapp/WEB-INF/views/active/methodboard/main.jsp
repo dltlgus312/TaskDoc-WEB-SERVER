@@ -19,23 +19,16 @@
 </style>
 
 <%@include file="/WEB-INF/views/fix/header.jsp"%>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/bootstrap/css/bootstrap.css">
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
-	String pcode = request.getParameter("pcode");
 %>
-
 <script type="text/javascript">
-var id='<%=loginid%>';
-	if (id == "null") {
-		alert('로그인이 필요한 페이지입니다.');
-		window.location.href = '/';
-	}
+	var id='<%=loginid%>';
 	$(".main").css('width',$("#contentwrap").width()/1.1);
 	$(".main").css('height',$("#contentwrap").height());
 </script>
+
 </head>
 <body>
 		<!--FRAME  -->
@@ -64,7 +57,7 @@ var id='<%=loginid%>';
 						</div>
 
 						<div style="float: right">
-								<a href='/methodBoardCreate' class="btn btn-success" style="background-color:#ed8151;border-color: #ed8151">글쓰기</a>
+								<a href='/methodboard/create' class="btn btn-success" style="background-color:#ed8151;border-color: #ed8151">글쓰기</a>
 						</div>
 					</div>
 							<table class="table table-striped table-hover">
@@ -171,7 +164,7 @@ var id='<%=loginid%>';
 		
 		// 게시판 목록 전체 받아오기
 		function boardcon(code){
-			location.href='/methodBoardView?mbcode='+code;
+			location.href='/methodboard/view?mbcode='+code;
 		}
 		
 		//게시판 삭제
@@ -183,7 +176,7 @@ var id='<%=loginid%>';
 			success : function(response) {
 				if (response > 0) {
 					alert('게시글 삭제 완료! ' + response);
-					location.href="/methodBoard";
+					location.href="/methodboard/main";
 				} else {
 					alert('Server or Client ERROR, 게시글 삭제 실패');
 				}
@@ -199,7 +192,7 @@ var id='<%=loginid%>';
 		//게시판 삭제
 		function boardEdit(code){
 			if(confirm('게시글을 수정 하시겠습니까?')==true){
-				location.href='/methodBoardEdit?mbcode='+code;
+				location.href='/methodboard/edit?mbcode='+code;
 			}
 			else return;
 		}

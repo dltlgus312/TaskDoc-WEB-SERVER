@@ -4,30 +4,17 @@
 <html>
 <head>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
 	String uid = request.getParameter("uid");
 %>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/fix/session.js"></script>
 
-<script type="text/javascript">
-var id='<%=loginid%>';
-	if (id == "null") {
-		alert('로그인이 필요한 페이지입니다.');
-		window.location.href = '/';
-	}
-</script>
 </head>
 <body>
 <div class="container">
@@ -78,30 +65,9 @@ var id='<%=loginid%>';
 </body>
 <script type="text/javascript">
 $(document).ready(function() {
-	/* 내가 참가하는 모든 프로젝트를 검색*/
-	/*
-				response는 map 형태로 날라옴
-				프로젝트 결과 값 = map ( KEY = "projectList", "projectJoinList" )
-				프로젝트에 소속되어있는 정보들
-				projectJoinList{
-					pcode;
-				 	uid;
-				 	ppermission;
-				 	pinvite;
-				}
-				프로젝트들의 정보
-				projectList{
-					pcode;
-					ptitle;
-					psubtitle;
-					psdate;
-					pedate;	
-				}
-				pcode별로 프로젝트 list 나열하고, 프로젝트별 title, subtitle, psdate, pedate 설정하기
-				 */
 	$.ajax({
 		type : 'GET',
-		url : 'projectjoin/' + '<%=uid%>',
+		url : '/projectjoin/' + '<%=uid%>',
 			success : function(response) {
 				for (var i = 0; i < response.projectJoinList.length; i++) {
 					if (response.projectJoinList[i].pinvite>0) {
@@ -161,7 +127,6 @@ $(document).ready(function() {
 //부모창인 projectCreate.jsp로 값을 넘겨준다.
 function proselection(pcode){
 	if(confirm("※프로젝트를 선택 하시겠습니까?")==true){
-		opener.alert(pcode);
 		opener.completeProject(pcode);
 		window.close();
 	}

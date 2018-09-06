@@ -6,8 +6,6 @@
 
 
 <%@include file="/WEB-INF/views/fix/header.jsp"%>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/bootstrap/css/bootstrap.css">
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
@@ -100,6 +98,21 @@ var id='<%=loginid%>';
 
 
 <script>
+if (location.hash) {
+	$("a[href='" + location.hash + "']").tab("show");
+}
+$(document.body).on("click", "a[data-toggle]", function(event) {
+	location.hash = this.getAttribute("href");
+});
+$(window).on(
+		"popstate",
+		function() {
+			var anchor = location.hash
+					|| $("a[data-toggle='tab']").first().attr("href");
+			$("a[href='" + anchor + "']").tab("show");
+		});
+
+
 	$(document).ready(function() {
 		//게시판 목록 전체 받아오기 dddsdfew
 			$.ajax({
@@ -169,7 +182,7 @@ var id='<%=loginid%>';
 		
 		// 게시판 목록 전체 받아오기
 		function boardcon(code){
-			location.href='/methodBoardView?mbcode='+code;
+			location.href='/methodboard/view?mbcode='+code;
 		}
 		
 		//게시판 삭제
@@ -197,7 +210,7 @@ var id='<%=loginid%>';
 		//게시판 삭제
 		function boardEdit(code){
 			if(confirm('게시글을 수정 하시겠습니까?')==true){
-				location.href='/methodBoardEdit?mbcode='+code;
+				location.href='/methodboard/edit?mbcode='+code;
 			}
 			else return;
 		}

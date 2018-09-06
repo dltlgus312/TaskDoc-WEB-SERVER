@@ -1,19 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <%
 String loginid="";
 loginid=(String)session.getAttribute("loginid");
@@ -22,18 +16,17 @@ String pcode = request.getParameter("pcode");
 %>
 <script type="text/javascript">
 var id='<%=loginid%>';
-if(id=="null"){
-	alert('로그인이 필요한 페이지입니다.');
-	window.location.href='/';
-}
+	if (id == "null") {
+		alert('로그인이 필요한 페이지입니다.');
+		window.location.href = '/';
+	}
 </script>
-
 
 </head>
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="modal-content">
+			<div class="modal-content" style="height:350px;">
 				<div class="modal-header">
 					<h4 class="modal-title">회원찾기</h4>
 				</div>
@@ -128,7 +121,8 @@ if(id=="null"){
 								$("#uname").html(response.uname);
 								saveid = response.uid;
 							} else {
-								alert('이미 초대된 회원입니다.')
+								alert('이미 초대된 회원입니다.');
+								$("#selectuid").val("");
 							}
 						},
 						error : function(e) {
@@ -138,6 +132,7 @@ if(id=="null"){
 				} else {
 					alert('해당하는 아이디가 없습니다.');
 					$("#tableDiv").css('display', 'none');
+					$("#selectuid").val("");
 				}
 			},
 			error : function(e) {

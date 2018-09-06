@@ -3,31 +3,35 @@
 /*Gyeongi Chungnen Font*/
 @font-face {
 	font-family: "Batang_Bold";
-	src:local(※), url(../fonts/Gyeongi/Batang_Bold.woff) format('woff')
+	src: local(※), url(../fonts/Gyeongi/Batang_Bold.woff) format('woff')
 }
+
 @font-face {
 	font-family: "Batang_Regular";
-	src:local(※), url(../fonts/Gyeongi/Batang_Regular.woff) format('woff')
+	src: local(※), url(../fonts/Gyeongi/Batang_Regular.woff) format('woff')
 }
+
 @font-face {
 	font-family: "Title_Bold";
-	src:local(※), url(../fonts/Gyeongi/Title_Bold.woff) format('woff')
+	src: local(※), url(../fonts/Gyeongi/Title_Bold.woff) format('woff')
 }
+
 @font-face {
 	font-family: "Title_Light";
-	src:local(※), url(../fonts/Gyeongi/Title_Light.woff) format('woff')
+	src: local(※), url(../fonts/Gyeongi/Title_Light.woff) format('woff')
 }
+
 @font-face {
 	font-family: "Title_Medium";
-	src:local(※), url(../fonts/Gyeongi/Title_Medium.woff) format('woff')
+	src: local(※), url(../fonts/Gyeongi/Title_Medium.woff) format('woff')
 }
+
 @font-face {
 	font-family: "TitleV";
-	src:local(※), url(../fonts/Gyeongi/TitleV.woff) format('woff')
+	src: local(※), url(../fonts/Gyeongi/TitleV.woff) format('woff')
 }
 
 /* /Gyeongi Chungnen Font*/
-
 
 /*SCROLL BAR STYLE  */
 ::-webkit-scrollbar {
@@ -50,23 +54,13 @@
 }
 /*SCROLL BAR STYLE  */
 
-/*element fontew 지정  */
-span, a, button, td, th{
-	font-family:Title_Light;
+/*element font 지정  */
+span, a, button, td, th {
+	font-family: Title_Light;
 }
-/*element dsfont 지정  */
+/*element font 지정  */
 
-
-#frame {
-	width: 100%;
-	height: 100%;
-	margin: 0px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	overflow: hidden;
-}
-
+/*main_header  */
 .header_nav {
 	width: 100%;
 	height: 50px;
@@ -74,7 +68,7 @@ span, a, button, td, th{
 	display: inline-flex;
 }
 
-/*이미지중앙정렬 text-align */
+/*main_header, 이미지중앙정렬 text-align */
 #mainlogowrap {
 	width: 76.8px;
 	height: 50px;
@@ -83,13 +77,14 @@ span, a, button, td, th{
 	line-height: 50px;
 }
 
+/*main_header  */
 #projectnamewrap {
 	width: 100px;
 	background-color: #ed8151;
 	text-align: center;
 }
 
-/*line-height : element 요소의 세로크기만큼 지정해주면 세로로 중앙정렬이됨  */
+/*line-height : element 요소의 세로크기만큼 지정해주면 세로로 중앙정렬이됨 ,main_header */
 #projectname {
 	color: white;
 	font-size: 20px;
@@ -97,11 +92,7 @@ span, a, button, td, th{
 	text-decoration: none;
 }
 
-#wrapper {
-	width: 100%;
-	height: calc(100% - 100px);
-}
-
+/* left_side */
 #sidebar {
 	background-color: white;
 	width: 50px;
@@ -123,6 +114,22 @@ span, a, button, td, th{
 	height: 25px;
 }
 
+/*project/main  */
+#frame {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+}
+
+#wrapper {
+	width: 100%;
+	height: calc(100% - 100px);
+}
+
 #contentwrap {
 	width: calc(100% - 50px);
 	height: 100%;
@@ -130,85 +137,35 @@ span, a, button, td, th{
 	overflow: auto;
 }
 
-#project_wrap {
-	padding: 20px;
-	width: 100%;
-	height: 100%;
-}
-
-#project_list_wrap_top {
-	width: 100%;
-	height: 50%;
-	display: contents;
-}
-#project_list_wrap_bottom {
-	width: 100%;
-	height: 50%;
-	display: contents;
-}
-
-.project_listdiv_wrap {
-	width: 100%;
-	height: 300px;
-	display: -webkit-box;
-}
-
-.project_list {
-	margin-right: 10px;
-	width: 350px;
-	height: 250px;
-	cursor: pointer;
-	box-shadow: 4px 4px 7px grey
-}
-
-.project_list_content_wrap {
+.projectlists{
+	display: inline-block;
+	height: 100px;
+	margin: 1em;
 	background-color: white;
-	width: 100%;
-	height: 100%;
+	box-shadow: 4px 4px 7px grey;
+	cursor: pointer;
 }
-
-.project_list_content_header {
-	width: 100%;
-	height: 50px;
-}
-
-.project_list_content_header_left {
-	width: 300px;
+/*pinvite==1, OWNER  */
+.headername {
+	width: 80%;
 	height: 100%;
-	background-color: #ed8151;
 	float: left;
+	background-color: #ed8151;
 }
 
-.project_list_content_header_right {
-	width: 50px;
+.headerimg {
+	width: 20%;
 	height: 100%;
 	float: right;
+	background-color: white;
 }
 
-.project_list_content_bottom {
+.prosetinviteimg, .prosetsettingimg, .prookimg, .pronoimg, .pronoticebtn {
 	width: 100%;
-	height: 200px;
-}
-
-.project_list_subtitle {
-	width: 100%;
-	height: 50px;
-	overflow: auto;
-}
-
-.project_list_start {
-	width: 100%;
-	height: 50px;
-}
-
-.project_list_end {
-	width: 100%;
-	height: 50px;
-}
-
-.project_list_position {
-	width: 100%;
-	height: 50px;
+	height: 50%;
+	outline: aqua;
+	border: 0;
+	background-color: white;
 }
 
 #footer {
