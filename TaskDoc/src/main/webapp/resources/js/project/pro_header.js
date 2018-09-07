@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	 
+	alert("pro_header.js");
 	var socket = new SockJS('/goStomp');  //websocket이아닌 SockJS로 접속한다.
      stompClient = Stomp.over(socket); //stompClient에 socket을 넣어준다.
      stompClient.connect({}, function() { //접속
@@ -7,9 +7,8 @@ $(document).ready(function(){
          stompClient.subscribe('/chat/'+67, function(msg) {
         	 var test=msg.body;
         	 var concat=JSON.parse(test);
-        	 alert(concat);
         	 $("#z").remove();
-        	 $("#croom"+67).append('<span id="z">'+concat.test.uid+" : "+concat.test.ccontents+'</span>');
+        	 $("#croomSpan"+67).append('<span id="z">'+concat.test.uid+" : "+concat.test.ccontents+'</span>');
          });
      });
 	
@@ -73,13 +72,15 @@ $(document).ready(function(){
 				success : function(response) {
 					for(var j=0; j<response.projectJoinList.length;j++){
 						if(response.projectJoinList[j].pcode==pcode &&response.projectJoinList[j].pinvite==1){
+							
 							if(response.projectJoinList[j].ppermission=="OWNER"){
-								
 								var $stag='<button id="prochatbtn3" onclick="goproset('+pcode+')" type="button"style="height: 42px; float: right; outline: none; border: 0; background-color: white; width: 100%;">'
 											+'<img src="/resources/img/img_boardsetting.png"alt="" style="width: 15px; height: 15px;"> <span>설정</span></button>';
 								$("#setornotice").append($stag);
 								$("#prochatbtn3").css('line-height',line_height+"px");
 								$("#pro_title").html("프로젝트 명 : "+response.projectList[j].ptitle);
+								
+								
 								
 							}else if(response.projectJoinList[j].ppermission=="MEMBER"){
 								var $ntag='<button id="prochatbtn3" onclick="gonotice('+pcode+')" type="button"style="height: 42px; float: right; outline: none; border: 0; background-color: white; width: 100%;">'
@@ -112,26 +113,35 @@ $(document).ready(function(){
 						var cObject=new Object();
 						if (response.length != -1) {
 							alert('채팅방 리스트 조회 성공!' + response);
-					
+							
+							//프로젝트 채팅방과, 개인채팅방을 구분하여 append한다. , 추후에 날짜랑, db 연동해서 제일 최근의 채팅방 내용을 불러오고, 날짜도 같이불러와보자.
 							for(var i=0;i<response.chatRoomList.length;i++){
+								
+								//프로젝트 채팅방 append
 								if(response.chatRoomList[i].crmode==1){
 									cObject.crcode=response.chatRoomList[i].crcode;
 									cObject.crname='프로젝트 채팅방';
 									cArray.push(cObject);
-									$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:300px;height:80px; background-color:yellow">'
-									+'<span>'+cArray[i].crcode+':'+ cArray[i].crname +'</span><span></span></div>';
+									$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:300px;height:80px; border:3px solid #ed8151;">'
+									+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+ cArray[i].crname +'</span></div>' 
+									+'<div style="width:100%;height:50%"><img src="/resources/img/img_prochat.png"alt="" style="width: 30px; height:30px;">'
+									+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
+									+'<div style="width:100%;height:25%"><span>2018-05-20</span></div>';
 									$("#chathwamun").append($cdiv);
 								}
+								//개인 채팅방 append
 								else if(response.chatRoomList[i].crmode==2){
 									cObject.crcode=response.chatRoomList[i].crcode;
 									cObject.crname='개인 채팅방';
 									cArray.push(cObject);
-									$cdiv='<div style="width:300px;height:80px; background-color:green">'
-										+'<span>'+cArray[i].crcode+':'+ cArray[i].crname +'</span><span></span></div>';
+									$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:300px;height:80px; border:3px solid #ed8151; border-top:none;">'
+									+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+ cArray[i].crname +'</span></div>'
+									+'<div style="width:100%;height:50%"><img src="/resources/img/img_prochat.png"alt="" style="width: 30px; height:30px;">'
+									+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
+									+'<div style="width:100%;height:25%"><span>2018-05-20</span></div';
 									$("#chathwamun").append($cdiv);
 								}
 							}
-							
 						} else if (response.length == 0) {
 							alert('Server or Client ERROR, 채팅방 리스트 조회 실패');
 						}
@@ -141,6 +151,8 @@ $(document).ready(function(){
 					}
 				});
 	});
+	//docuemnt.ready 끝 
+
 
 	// view page에서 설정 버튼 누를때 나오는 페이지(OWNER)
 	function goproset(pcode){
@@ -173,7 +185,7 @@ $(document).ready(function(){
 	
 	// 채팅으로
 	function gogoChat(){
-		 location.href='/project/view/?pcode='+pcode;
+		 location.href='/project/chat/main/?pcode='+pcode;
 	}
 	
 	// 공용업무로
@@ -194,7 +206,7 @@ $(document).ready(function(){
 	// 프로젝트 대화 누르면 absolute div 한개나옴
 	function prochatbtn(){
 		if($("#chathwamun").css("display") == "none"){
-			$("#chathwamun").show();
+			$("#chathwamun").show(1000);
 		}else{
 			$("#chathwamun").hide(1000);
 		}

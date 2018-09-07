@@ -30,7 +30,7 @@
 			<li><a data-toggle="tab" href="#home">프로젝트 관리</a></li>
 			<li><a data-toggle="tab" href="#menu1">회원 관리</a></li>
 			<li><a data-toggle="tab" href="#menu2">공지사항 관리</a></li>
-			<li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+			<!-- <li><a data-toggle="tab" href="#menu3">Menu 3</a></li> -->
 		</ul>
 		<div class="tab-content">
 			<div id="home" class="tab-pane fade in active">
@@ -111,9 +111,9 @@
 				</div>
 
 			</div>
-			<div id="menu3" class="tab-pane fade">
+			<!-- <div id="menu3" class="tab-pane fade">
 				<h3>Menu 3</h3>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </body>
