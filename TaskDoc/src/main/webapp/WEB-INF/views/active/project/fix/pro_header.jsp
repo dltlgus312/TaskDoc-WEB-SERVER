@@ -41,7 +41,7 @@
 					id="propeople" style="color: black;"></span>
 			</button>
 
-			<ul id="propeoplelist" class="dropdown-menu" style="right: 0;">
+			<ul id="propeoplelist" class="dropdown-menu" style="right: 0;width:250px;">
 			</ul>
 		</div>
 

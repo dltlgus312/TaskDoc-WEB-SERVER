@@ -51,36 +51,26 @@ $(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
 					<!-- CHAT CONTENTS  -->
 					<div  style="width: 100%; height: 93%; display:-webkit-box; ">
 						
-						<div id="leftchatlist" style="width:15%; height:100%; background-color:yellow;">
-							
-							<div id="chatlistTOP" style="width:100%;height:20%; border:solid 1px blue;">
-								<span id="prochatspan"></span>
+						<div id="leftchatlist" style="width:15%; height:100%;">
+							<div id="chatADD" style="width:100%;height:5%; border:solid 1px blue;">
+								<img id="chatadd" src="${pageContext.request.contextPath }/resources/img/img_chatadd.png" style="height:100%;cursor: pointer;">
 							</div>
-							
-							<div id="chatlistBOTTOM" style="width:100%;height:80%; border:solid 1px blue;">
-								
-							</div>
-							
+							<div id="chatlistTOP" style="width:100%;height:20%; border:solid 1px blue;"></div>
+							<div id="chatlistBOTTOM" style="width:100%;height:75%; border:solid 1px blue;overflow:auto;"></div>
 						</div>
 						
-						
-						<div id="rightchtcontent" style="width:85%; height:100%; background-color:green;">
-							
+						<!--채팅방 클릭시 나와야할 div들  -->
+						<div id="rightchtcontent" style="width:85%; height:100%;">
 							<div id="chatsetbtn" style="width:100%;height:5%; border:solid 1px blue;">
-								
-								<img src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" style="height:100%; float:right;">
-								
-								<div id="chatsetbtnmenu" style="width:300px;height:500px; position: absolute; display:none;border:solid 1px blue;background-color:white; right:0px; ">
-								</div>
-								
+								<div id="chatsetbtnmenu" style="width:300px;height:500px; position: absolute; display:none;border:solid 1px blue;background-color:white; right:0px; "></div>
 							</div>
 							
-							<div id="chatcontent" style="width:100%;height:75%;border:solid 1px blue;">내용</div>
+							<div id="chatcontent" style="width:100%;height:75%;border:solid 1px blue;"></div>
+							
 							<div id="chatconinput" class="bts" style="width:100%;height:20%; border:solid 1px blue;">
-								<textarea class="form-control" style="width:100%;height:100%;font-size:17px;"></textarea>
+								<textarea class="form-control" style="width:100%;height:100%;font-size:17px; resize: none;"></textarea>
 							</div>
 						</div>
-					
 					</div>
 				</div>
 			</div>
@@ -94,15 +84,8 @@ $(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
 </body>
 
 <script type="text/javascript">
-$("#chatsetbtn").on("click",function(){
-	if($("#chatsetbtnmenu").css("display") == "none"){
-		$("#chatsetbtnmenu").show(1000);
-	}
-	else
-		$("#chatsetbtnmenu").hide(1000);
-
-});
 $(function(){
+	
 	//pro_header.jsp의 프로젝트 대화 div(position=absolute)의 left값에  proheadername + proheaderli + prochatbtn1 값을 넣어준다.
 	//채팅 , 공용업무, 간트차트, 파일모아보기에 페이지별로 전부 넣어줘야한다.
 	var pronamewidth = $("#proheadername").css('width');
@@ -117,17 +100,8 @@ $(function(){
 	$("#chatsetbtnmenu").css('margin-top',parseInt(prochatsetbtn)).css('margin-right',parseInt(containermargin) + 15 + "px");
 	
 	
-});
-
- 	
-</script>
-</html>
-
-
-
-<!-- 	<script type="text/javascript">
-		/* 프로젝트내에서 내가 참여하고 있는 채팅방 리스트 ( focus 제외 )*/ss
-		var param = {
+	//leftchatlist에 채팅 리스트들 append
+	var param = {
 			'uid' : id,
 			'pcode' : pcode
 		};
@@ -137,8 +111,48 @@ $(function(){
 			contentType : 'application/json',
 			data : JSON.stringify(param),
 			success : function(response) {
+				var cObject=new Object();
 				if (response.length != -1) {
-					alert('채팅방 리스트 조회 성공!' + response);
+					var cArray=new Array();
+					//프로젝트 채팅방과, 개인채팅방을 구분하여 append한다. , 추후에 날짜랑, db 연동해서 제일 최근의 채팅방 내용을 불러오고, 날짜도 같이불러와보자.
+					for(var i=0;i<response.chatRoomList.length;i++){
+						
+						//프로젝트 채팅방 append, 맨밑의 span에는 사용자가 입력한 채팅의 시간을적어줌, 지금은 test용으로 채팅방만든시간을적엇음.
+						if(response.chatRoomList[i].crmode==1){
+							cObject.crcode=response.chatRoomList[i].crcode;
+							cObject.crname=proname;
+							cArray.push(cObject);
+							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:80px;" onclick="gochatCon('+cArray[i].crcode+')">'
+							+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+ cArray[i].crname +' 채팅방'+'</span></div>' 
+							+'<div style="width:100%;height:50%"><img src="/resources/img/img_prochat.png"alt="" style="width: 30px; height:30px;">'
+							+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
+							+'<div style="width:100%;height:25%"><span>'+'??????'+'</span></div>';
+							$("#chatlistTOP").append($cdiv);
+						}
+						
+						//개인 채팅방 append
+						else if(response.chatRoomList[i].crmode==2){
+							//ajax 데이터 받은거 멤버리스트 뽑아서 string으로만들자
+							var memberArray=new Array();
+							
+							//프로젝트 이름
+							var memname=[];
+							memberArray=response.userInfoList[i];
+							
+							for(var a=0;a<memberArray.length;a++){
+								memname.push(memberArray[a].uname+"님 ");
+							}
+							
+							cObject.crcode=response.chatRoomList[i].crcode;
+							cArray.push(cObject);
+							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:80px;" onclick="gochatCon('+cArray[i].crcode+')">'
+							+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+ memname +'의채팅방'+'</span></div>'
+							+'<div style="width:100%;height:50%"><img src="/resources/img/img_individualchat.png"alt="" style="width: 30px; height:30px;">'
+							+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
+							+'<div style="width:100%;height:25%"><span>'+'?????????'+'</span></div';
+							$("#chatlistBOTTOM").append($cdiv);
+						}
+					}
 				} else if (response.length == 0) {
 					alert('Server or Client ERROR, 채팅방 리스트 조회 실패');
 				}
@@ -147,7 +161,70 @@ $(function(){
 				alert("ERROR : " + e.statusText);
 			}
 		});
-		/*/프로젝트내에서 내가 참여하고 있는 채팅방 리스트 ( focus 제외 ) */
+});
+
+$("#menubtn").on("click",function(){
+	if($("#chatsetbtnmenu").css("display") == "none"){
+		$("#chatsetbtnmenu").show(1000);
+	}
+	else
+		$("#chatsetbtnmenu").hide(1000);
+});
+
+//채팅추가
+$("#chatadd").on("click",function(){
+	var param = {
+			'chatRoom' : {
+				//개인톡 형식이므로 crmode 2번
+				'crmode' : '2',
+			},
+			'userInfo' : {
+				'uid' : '<%=loginid%>',
+			},
+			'project' : {
+				'pcode' : <%=pcode%>,
+			}
+		};
+		$.ajax({
+			type : 'POST',
+			url : '/chatroom',
+			contentType : 'application/json',
+			data : JSON.stringify(param),
+			success : function(response) {
+				if (response>0) {
+					alert('채팅방 생성 완료! 채팅방 crcode값은'+response);
+					location.reload();
+				}
+				else if(response<0){
+					alert('Server or Client ERROR, 채팅방 생성 실패');
+				}
+			},
+			error : function(e) {
+				alert("ERROR : " + e.statusText);
+			}
+		});
+});
+
+
+function gochatCon(num){
+	/*프로젝트 채팅방이고 OWNER : 파일업로드, 회의록 생성, 의사결정 생성
+	*		       MEMBER : 파일업로드
+	*개인 채팅방이면 			파일업로드
+	*/
+	alert(num);
+	if(chatpermission=="OWNER"){
+	}
+	else if(chatpermission=="MEMBER"){
+		
+	}
+}
+
+</script>
+</html>
+
+
+
+<!-- 	<script type="text/javascript">
 
 		/* 채팅방에 참여 중인 유저 리스트 */
 		var param = {

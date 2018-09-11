@@ -39,12 +39,12 @@
 					<div id="2" class="bts" style="width: 100%; margin-top: 10px;">
 						<span>프로젝트 제목</span> <input id="ptitle"
 							style="width: 80%; margin-top: 5px;" type="text"
-							class="form-control">
+							class="form-control" maxlength="20">
 					</div>
 					<div id="3" class="bts" style="width: 100%; margin-top: 30px;">
 						<span>프로젝트 부제목</span> <input id="psubtitle"
 							style="width: 80%; margin-top: 5px;" type="text"
-							class="form-control">
+							class="form-control" maxlength="255">
 					</div>
 					<div id="4" class="bts" style="width: 100%; margin-top: 30px;">
 						<span>시작날짜</span> <input id="psdate" class="form-control"
@@ -178,7 +178,7 @@ function cancel() {
 //프로젝트 수정
 function edit(){
 	//특수문자
-	re = /[~!@\#$%^&*\()\,-=+_']/gi;
+	re = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
 	if(re.test($("#ptitle").val())){
 		alert('프로젝트 제목에 특수문자를 넣을 수 없 습ㄴ ㅣ 다!');
 	}
@@ -198,6 +198,7 @@ function edit(){
 			success : function(response) {
 				if (response == 1) {
 					alert('프로젝트 수정 완료!');
+					opener.parent.location.reload();
 				}
 				else{
 					alert('Server or Client ERROR, 프로젝트 수정 실패');
