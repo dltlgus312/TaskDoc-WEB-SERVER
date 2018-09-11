@@ -53,11 +53,11 @@ $(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
 						
 						<div id="leftchatlist" style="width:15%; height:100%; background-color:yellow;">
 							
-							<div id="chatlistTOP" style="width:100%;height:20%; background-color:red;">
+							<div id="chatlistTOP" style="width:100%;height:20%; border:solid 1px blue;">
 								<span id="prochatspan"></span>
 							</div>
 							
-							<div id="chatlistBOTTOM" style="width:100%;height:80%; background-color:gray;">
+							<div id="chatlistBOTTOM" style="width:100%;height:80%; border:solid 1px blue;">
 								
 							</div>
 							
@@ -66,17 +66,19 @@ $(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
 						
 						<div id="rightchtcontent" style="width:85%; height:100%; background-color:green;">
 							
-							<div id="chatsetbtn" style="width:100%;height:5%; background-color:red;">
-								버튼
+							<div id="chatsetbtn" style="width:100%;height:5%; border:solid 1px blue;">
 								
-								<div id="chatsetbtnmenu" style="width:300px;height:500px; position: absolute; display:none;background-color:white;right:0px;margin-top:10px;">
-									시발
+								<img src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" style="height:100%; float:right;">
+								
+								<div id="chatsetbtnmenu" style="width:300px;height:500px; position: absolute; display:none;border:solid 1px blue;background-color:white; right:0px; ">
 								</div>
 								
 							</div>
 							
-							<div id="chatcontent" style="width:100%;height:75%;background-color: lime;">내용</div>
-							<div id="chatconinput" style="width:100%;height:20%; background-color:orange;">내용 입력</div>
+							<div id="chatcontent" style="width:100%;height:75%;border:solid 1px blue;">내용</div>
+							<div id="chatconinput" class="bts" style="width:100%;height:20%; border:solid 1px blue;">
+								<textarea class="form-control" style="width:100%;height:100%;font-size:17px;"></textarea>
+							</div>
 						</div>
 					
 					</div>
@@ -101,8 +103,20 @@ $("#chatsetbtn").on("click",function(){
 
 });
 $(function(){
+	//pro_header.jsp의 프로젝트 대화 div(position=absolute)의 left값에  proheadername + proheaderli + prochatbtn1 값을 넣어준다.
+	//채팅 , 공용업무, 간트차트, 파일모아보기에 페이지별로 전부 넣어줘야한다.
+	var pronamewidth = $("#proheadername").css('width');
+	var proliwidth = $("#proheaderli").css('width');
+	var prochatbtn1 = $("#prochatbtn1").css('width');
+	$("#chathwamun").css('left',parseInt(pronamewidth) + parseInt(proliwidth) + parseInt(prochatbtn1));
 	
-alert("main.jsp")
+	//채팅메뉴 누르면 나올 div(position=absolute)의 margin-top과 margin-right값을 설정해줘야한다.
+	var prochatsetbtn=$("#chatsetbtn").css('height');
+	var containermargin=$(".container").css('margin-left');
+	
+	$("#chatsetbtnmenu").css('margin-top',parseInt(prochatsetbtn)).css('margin-right',parseInt(containermargin) + 15 + "px");
+	
+	
 });
 
  	

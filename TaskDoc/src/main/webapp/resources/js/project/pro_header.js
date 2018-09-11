@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	alert("pro_header.js");
 	var socket = new SockJS('/goStomp');  //websocket이아닌 SockJS로 접속한다.
      stompClient = Stomp.over(socket); //stompClient에 socket을 넣어준다.
      stompClient.connect({}, function() { //접속
@@ -128,6 +127,8 @@ $(document).ready(function(){
 									+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
 									+'<div style="width:100%;height:25%"><span>2018-05-20</span></div>';
 									$("#chathwamun").append($cdiv);
+									//TEST
+									$("#chatlistTOP").append($cdiv);
 								}
 								//개인 채팅방 append
 								else if(response.chatRoomList[i].crmode==2){
@@ -136,10 +137,12 @@ $(document).ready(function(){
 									cArray.push(cObject);
 									$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:300px;height:80px; border:3px solid #ed8151; border-top:none;">'
 									+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+ cArray[i].crname +'</span></div>'
-									+'<div style="width:100%;height:50%"><img src="/resources/img/img_prochat.png"alt="" style="width: 30px; height:30px;">'
+									+'<div style="width:100%;height:50%"><img src="/resources/img/img_individualchat.png"alt="" style="width: 30px; height:30px;">'
 									+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
 									+'<div style="width:100%;height:25%"><span>2018-05-20</span></div';
 									$("#chathwamun").append($cdiv);
+									//TEST
+									$("#chatlistBOTTOM").append($cdiv);
 								}
 							}
 						} else if (response.length == 0) {
