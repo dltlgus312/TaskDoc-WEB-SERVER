@@ -34,12 +34,6 @@ public class Project {
 	public String userInvite() {
 		return "/active/project/window/userInvite";
 	}
-	
-	//프로젝트 상세보기
-	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public String info() {
-		return "/active/project/view";
-	}
 
 	//프로젝트 정보수정
 	@RequestMapping(value = "/infoEdit", method = RequestMethod.GET)
@@ -68,6 +62,15 @@ public class Project {
 		return "/active/project/notice/edit";
 	}
 	
+	//프로젝트  -->채팅으로
+	@RequestMapping(value = "/chat/main", method = RequestMethod.GET)
+	public String info() {
+		return "/active/chat/main";
+	}
+	
+	//프로젝트 -->공용업무
+	//프로젝트 -->간트차트
+	//프로젝트 -->파일모아보기
 	
 	
 	/*

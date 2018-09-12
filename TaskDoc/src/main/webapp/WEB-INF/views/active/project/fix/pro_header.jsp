@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/project/pro_header.js?ver=99"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/project/pro_header.js?ver=996"></script>
 <div id="proheader"
 	style="display: -webkit-box; width: 100%; height: 7%; border-bottom: 1px solid gray;">
 	<div id="proheadername" style="width: 25%;">
@@ -41,7 +41,7 @@
 					id="propeople" style="color: black;"></span>
 			</button>
 
-			<ul id="propeoplelist" class="dropdown-menu" style="right: 0;">
+			<ul id="propeoplelist" class="dropdown-menu" style="right: 0;width:250px;">
 			</ul>
 		</div>
 
@@ -50,6 +50,7 @@
 
 	</div>
 </div>
-<div id="chathwamun" style="width:300px; height:400px; background-color:#ed8151; display:none; position:absolute; right:100px;overflow:auto;">
+<div id="chathwamun" style="width:300px; height:400px;display:none; position:absolute; right:0px;overflow:auto; box-shadow: 0 1px 8px 0 rgba(0,0,0,.5);background-color:white;">
+
 </div>
 
