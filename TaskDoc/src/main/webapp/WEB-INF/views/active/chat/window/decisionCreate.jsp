@@ -12,8 +12,9 @@
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
+	String crcode=request.getParameter("crcode");
+	String pcode=request.getParameter("pcode");
 %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/fix/session.js"></script>
 
 </head>
 <body>
@@ -36,11 +37,8 @@
 
 					<div class="btn-group">
 						<div>
-							<label>투표를 할 공용업무를 선택해주세요</label> <select name="job">
-								<option value="">1.설계</option>
-								<option value="학생">2.구현</option>
-								<option value="회사원">3.유지보수</option>
-								<option value="기타">4.등등</option>
+							<label>투표를 할 공용업무를 선택해주세요</label>
+							<select id="whattask">
 							</select>
 						</div>
 					</div>
@@ -81,7 +79,35 @@
 	//의사결정 아이템 생성용 param
 	var paramitem = [];
 	
-
+	//프로젝트의 모든 공용업무 리스트 불러오기
+	 $(function(){
+		$.ajax({
+			type : 'GET',
+			url : '/publictask/' + <%=pcode%>,
+			success : function(response) {
+				if (response.length != 0) {
+					/* select id="whattask">
+					<option value="">1.설계</option>
+					<option value="학생">2.구현</option>
+					<option value="회사원">3.유지보수</option>
+					<option value="기타">4.등등</option>
+				</select> */
+					for(var i=0;i<response.length;i++){
+						$whattask='<option value="">'+ (i+1 )+'.' +response[i].tcode+ response[i].ttitle + '</option>';
+						$("#whattask").append($whattask);
+					}
+					alert('공용업무 리스트 불러오기 성공!');
+				} else if (response.length == 0) {
+					alert('Server or Client ERROR, 공용업무 리스트 불러오기 실패');
+				}
+			},
+			error : function(e) {
+				alert("ERROR : " + e.statusText);
+			}
+		});
+	}); 
+	
+	//항목 div 추가
 	function addIndex() {
 		count++;
 		//div tag
@@ -112,7 +138,8 @@
 		tlist.push('t' + count);
 
 	}
-
+	
+	//항목 div 삭제
 	function objdelete(btn) {
 		var divid = btn.id.substring(1, btn.id.length);
 		document.getElementById("content" + divid).remove();
@@ -127,8 +154,8 @@
 		//의사결정 생성용 param
 		var param = {
 			'dstitle' : $("#decisionName").val(),
-			'crcode' : '2',
-			'tcode' : '8'
+			'crcode' : <%=crcode%>,
+			'tcode' : 60
 		};
 		if($("#decisionName").val()=="" || tlist.length<=0){
 			alert('제목또는 항목을 하나 이상 입력해주세요.');
@@ -160,6 +187,7 @@
 						success : function(response) {
 							if (response != -1) {
 								alert('의사결정 아이템 생성 완료! ' + response);
+								window.close();
 							} else if (response == -1) {
 								alert('Server or Client ERROR, 의사결정 아이템 생성 실패');
 							}

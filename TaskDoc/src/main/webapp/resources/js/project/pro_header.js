@@ -143,19 +143,16 @@ $(document).ready(function(){
 					success : function(response) {
 						var cObject=new Object();
 						if (response.length != -1) {
-							alert('채팅방 리스트 조회 성공!' + response);
-							
 							//프로젝트 채팅방과, 개인채팅방을 구분하여 append한다. , 추후에 날짜랑, db 연동해서 제일 최근의 채팅방 내용을 불러오고, 날짜도 같이불러와보자.
 							for(var i=0;i<response.chatRoomList.length;i++){
 								
 								//프로젝트 채팅방 append, 맨밑의 span에는 사용자가 입력한 채팅의 시간을적어줌, 지금은 test용으로 채팅방만든시간을적엇음.
 								if(response.chatRoomList[i].crmode==1){
 									cObject.crcode=response.chatRoomList[i].crcode;
-									cObject.crname=proname;
 									cObject.crdate=response.chatRoomList[i].crdate;
 									cArray.push(cObject);
 									$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:300px;height:80px; border:3px solid #ed8151;">'
-									+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+ cArray[i].crname +' 채팅방'+'</span></div>' 
+									+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+'프로젝트 채팅방'+'</span></div>' 
 									+'<div style="width:100%;height:50%"><img src="/resources/img/img_prochat.png"alt="" style="width: 30px; height:30px;">'
 									+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
 									+'<div style="width:100%;height:25%"><span>'+cArray[i].crdate+'</span></div>';

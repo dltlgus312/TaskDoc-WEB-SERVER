@@ -2,11 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%
 String crmode=request.getParameter("crmode");
+String crcode=request.getParameter("crcode");
 %>	
 <!--채팅방 클릭시 나와야할 div들  -->
 <div id="chatmenu" style="width:100%%; height:100%;">
 	<div id="chatsetbtn" style="width:100%;height:5%; border:solid 1px blue;">
-	<div id="chatsetbtnmenu" style="width:300px;height:500px; position: absolute; display:none;border:solid 1px blue;background-color:white; right:0px; "></div>
+	<div id="chatsetbtnmenu" style="width:300px;height:500px; position: absolute; display:none;border:3px solid #ed8151;background-color:white; right:0px;overflow:auto; ">
+		<div>업로드된 파일</div>
+		<div>의사결정</div>
+		<div>회의록</div>
+		<div>참여중인 회원</div>
+		<div>나가기</div>
+	</div>
 </div>
 								
 <div id="chatcontent" style="width:100%;height:75%;border:solid 1px blue;"></div>				
@@ -17,27 +24,73 @@ String crmode=request.getParameter("crmode");
 
 <script>
 $(function(){
+	//채팅메뉴 누르면 나올 div(position=absolute)의 margin-top과 margin-right값을 설정해줘야한다.
+	var prochatsetbtn=$("#chatsetbtn").css('height');
+	var containermargin=$(".container").css('margin-left');
+	
+	//chatsetbtnmenu제어
+	$("#chatsetbtnmenu").css('margin-top',parseInt(prochatsetbtn)).css('margin-right',parseInt(containermargin) + 15 + "px");
+
+	//프로젝트톡, OWNER
 	if(parseInt(<%=crmode%>)==1 &&chatpermission=="OWNER"){
-		$setdiv='<img src="${pageContext.request.contextPath }/resources/img/img_voter.png" style="height:100%;float:left;padding-right:30px;">'
-		+'<img src="${pageContext.request.contextPath }/resources/img/img_fileupload.png" style="height:100%;float:left;padding-right:30px;">'
-		+'<img src="${pageContext.request.contextPath }/resources/img/img_conference.png" style="height:100%;float:left;">'
-		+'<img src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" style="height:100%;float:right;">';
+		$setdiv='<img onclick="votercreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_voter.png" data-toggle="tootlip" data-placement="bottom" title="의사 결정 생성"  style="height:100%;float:left;padding-right:30px;cursor:pointer;">'
+		+'<img onclick="filecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_fileupload.png" data-toggle="tootlip" data-placement="bottom" title="파일 업로드" style="height:100%;float:left;padding-right:30px;cursor:pointer;">'
+		+'<img onclick="conferencecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_conference.png"data-toggle="tootlip" data-placement="bottom" title="회의록 생성" style="height:100%;float:left;cursor:pointer;">'
+		+'<img onclick="menubtn('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
 	}
 	
+	//프로젝트톡, MEMBER
 	else if(parseInt(<%=crmode%>)==1 && chatpermission=="MEMBER"){
-		$setdiv='<img src="${pageContext.request.contextPath }/resources/img/img_fileupload.png" style="height:100%;float:left;">'
-		+'<img src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" style="height:100%;float:right;">';
+		$setdiv='<img onclick="filecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_fileupload.png"data-toggle="tootlip" data-placement="bottom" title="파일 업로드" style="height:100%;float:left;cursor:pointer;">'
+		+'<img onclick="menubtn('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
 	}
 	
+	//개인톡
 	else if(parseInt(<%=crmode%>)==2){
-		$setdiv='<img src="${pageContext.request.contextPath }/resources/img/img_fileupload.png"style="height:100%;float:left;">'
-		+'<img src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" style="height:100%;float:right;">';
+		$setdiv='<img onclick="filecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_fileupload.png" data-toggle="tootlip" data-placement="bottom" title="파일 업로드" style="height:100%;float:left;cursor:pointer;">'
+		+'<img onclick="menubtn('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
 	}
-	
+	//툴팁제어
+	$('[data-toggle="tootlip"]').tooltip();
+
 });
+
+//메뉴버튼열기
+function menubtn(code){
+	if($("#chatsetbtnmenu").css("display") == "none"){
+			$("#chatsetbtnmenu").show(1000);
+		}
+	else $("#chatsetbtnmenu").hide(1000);
+} 
+
+//의사결정생성 
+function votercreate(code){
+	alert(code+"의사결정");
+	var screenW = screen.availWidth;  // 스크린 가로사이즈
+	var screenH = screen.availHeight; // 스크린 세로사이즈
+	var popW = 600; // 띄울창의 가로사이즈
+	var popH = 350; // 띄울창의 세로사이즈
+	var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
+	var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
+	if(confirm('투표를 생성하시겠습니까?')==true){
+		window.open("/chat/decisionCreate?crcode="+code+"&pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+		}
+	else return;
+	}
+
+//파일업로드
+function filecreate(code){
+	alert(code+"파일업로드");
+}
+
+//회의록생성
+function conferencecreate(code){
+	alert(code+"회의록");
+}
+
 </script>
 	
 	

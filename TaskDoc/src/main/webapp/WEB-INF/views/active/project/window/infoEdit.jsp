@@ -198,7 +198,17 @@ function edit(){
 			success : function(response) {
 				if (response == 1) {
 					alert('프로젝트 수정 완료!');
-					opener.location.reload();
+					
+					//자식창에서 부모창 제어하기
+					//chat/main
+					$("#pro_title",opener.document).text("프로젝트 명 : "+$("#ptitle").val());
+					//project/main
+					$("#pro_titlename",opener.document).text($("#ptitle").val());
+					$("#pro_subtitlename",opener.document).text($("#psubtitle").val());
+					$("#pro_sdate",opener.document).text($("#psdate").val());
+					$("#pro_edate",opener.document).text($("#pedate").val());
+
+					//opener.location.reload();
 				}
 				else{
 					alert('Server or Client ERROR, 프로젝트 수정 실패');
@@ -221,7 +231,7 @@ function prodeldel(){
 			if (response == 1) {
 				alert('프로젝트 삭제 완료!');
 				window.close();
-				opner.parent.location='project/main';
+				opener.parent.location='/project/main';
 			}
 			else{
 				alert('Server or Client ERROR, 프로젝트 삭제 실패');

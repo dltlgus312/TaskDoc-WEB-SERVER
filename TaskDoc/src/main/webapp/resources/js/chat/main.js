@@ -9,13 +9,6 @@ $(function(){
 	var prochatbtn1 = $("#prochatbtn1").css('width');
 	$("#chathwamun").css('left',parseInt(pronamewidth) + parseInt(proliwidth) + parseInt(prochatbtn1));
 	
-	//채팅메뉴 누르면 나올 div(position=absolute)의 margin-top과 margin-right값을 설정해줘야한다.
-	var prochatsetbtn=$("#chatsetbtn").css('height');
-	var containermargin=$(".container").css('margin-left');
-	
-	$("#chatsetbtnmenu").css('margin-top',parseInt(prochatsetbtn)).css('margin-right',parseInt(containermargin) + 15 + "px");
-	
-	
 	//leftchatlist에 채팅 리스트들 append
 	var param = {
 			'uid' : id,
@@ -37,10 +30,9 @@ $(function(){
 						if(response.chatRoomList[i].crmode==1){
 							cObject.crcode=response.chatRoomList[i].crcode;
 							cObject.crmode=response.chatRoomList[i].crmode;
-							cObject.crname=proname;
 							cArray.push(cObject);
 							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:80px;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +')">'
-							+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+ cArray[i].crname +' 채팅방'+'</span></div>' 
+							+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+'프로젝트 채팅방'+'</span></div>' 
 							+'<div style="width:100%;height:50%"><img src="/resources/img/img_prochat.png"alt="" style="width: 30px; height:30px;">'
 							+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
 							+'<div style="width:100%;height:25%"><span>'+'??????'+'</span></div>';
@@ -79,14 +71,6 @@ $(function(){
 				alert("ERROR : " + e.statusText);
 			}
 		});
-});
-
-$("#menubtn").on("click",function(){
-	if($("#chatsetbtnmenu").css("display") == "none"){
-		$("#chatsetbtnmenu").show(1000);
-	}
-	else
-		$("#chatsetbtnmenu").hide(1000);
 });
 
 //채팅방생성
@@ -137,10 +121,10 @@ function gochatCon(crcode,crmode){
 		if(confirm('프로젝트 채팅에 입장하시겠습니까?')==true){
 			if(chatpermission=="OWNER" &&crmode==1){
 				alert(crcode+","+crmode+", owner다");
-			 	$("#rightchatlist").load("/chat/content?crmode="+crmode);  
+			 	$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode);  
 			}
 			else if(chatpermission=="MEMBER" && crmode==1){
-				$("#rightchatlist").load("/chat/content?crmode="+crmode);  
+				$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode);  
 			}
 		}
 		else return;
@@ -148,7 +132,8 @@ function gochatCon(crcode,crmode){
 	
 	else{
 		if(confirm('개인 채팅에 입장하시겠습니까?')==true){
-			$("#rightchatlist").load("/chat/content?crmode="+crmode);  
+			alert(crcode+","+crmode+", owner다");
+			$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode);  
 		}
 	}
 }
