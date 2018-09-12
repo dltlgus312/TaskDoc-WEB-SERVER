@@ -262,7 +262,7 @@ function delNotice(ncode){
 		success : function(response) {
 			if(response>0){
 				alert('공지사항 삭제 완료')
-				location.reload();
+				location.href='/project/main';
 			}
 			else{
 				alert('Server or Client ERROR, 공지사항 삭제 실패');

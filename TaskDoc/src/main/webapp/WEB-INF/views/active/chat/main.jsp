@@ -55,8 +55,8 @@ $(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
 							<div id="chatADD" style="width:100%;height:5%; border:solid 1px blue;">
 								<img id="chatadd" src="${pageContext.request.contextPath }/resources/img/img_chatadd.png" style="height:100%;cursor: pointer;">
 							</div>
-							<div id="chatlistTOP" style="width:100%;height:20%; border:solid 1px blue;"></div>
-							<div id="chatlistBOTTOM" style="width:100%;height:75%; border:solid 1px blue;overflow:auto;"></div>
+							<div id="chatlistTOP" style="width:100%;height:15%; border:solid 1px blue;"></div>
+							<div id="chatlistBOTTOM" style="width:100%;height:80%; border:solid 1px blue;overflow:auto;"></div>
 						</div>
 						
 						<!--채팅방 클릭시 나와야할 div들  -->
@@ -120,9 +120,10 @@ $(function(){
 						//프로젝트 채팅방 append, 맨밑의 span에는 사용자가 입력한 채팅의 시간을적어줌, 지금은 test용으로 채팅방만든시간을적엇음.
 						if(response.chatRoomList[i].crmode==1){
 							cObject.crcode=response.chatRoomList[i].crcode;
+							cObject.crmode=response.chatRoomList[i].crmode;
 							cObject.crname=proname;
 							cArray.push(cObject);
-							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:80px;" onclick="gochatCon('+cArray[i].crcode+')">'
+							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:80px;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +')">'
 							+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+ cArray[i].crname +' 채팅방'+'</span></div>' 
 							+'<div style="width:100%;height:50%"><img src="/resources/img/img_prochat.png"alt="" style="width: 30px; height:30px;">'
 							+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
@@ -144,8 +145,9 @@ $(function(){
 							}
 							
 							cObject.crcode=response.chatRoomList[i].crcode;
+							cObject.crmode=response.chatRoomList[i].crmode;
 							cArray.push(cObject);
-							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:80px;" onclick="gochatCon('+cArray[i].crcode+')">'
+							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;border-bottom:1px solid black;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +')">'
 							+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+ memname +'의채팅방'+'</span></div>'
 							+'<div style="width:100%;height:50%"><img src="/resources/img/img_individualchat.png"alt="" style="width: 30px; height:30px;">'
 							+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
@@ -173,6 +175,7 @@ $("#menubtn").on("click",function(){
 
 //채팅추가
 $("#chatadd").on("click",function(){
+	if(confirm('채팅방을 만드시겠습니까?')==true){
 	var param = {
 			'chatRoom' : {
 				//개인톡 형식이므로 crmode 2번
@@ -203,19 +206,22 @@ $("#chatadd").on("click",function(){
 				alert("ERROR : " + e.statusText);
 			}
 		});
+	}else
+		return;
 });
 
 
-function gochatCon(num){
-	/*프로젝트 채팅방이고 OWNER : 파일업로드, 회의록 생성, 의사결정 생성
-	*		       MEMBER : 파일업로드
-	*개인 채팅방이면 			파일업로드
+//chat list append시 crcode와 cmode필요
+function gochatCon(crcode,cmode){
+	/*프로젝트 채팅방이고 ,cmode==1 // OWNER : 파일업로드, 회의록 생성, 의사결정 생성
+	*		        cmode==1 //MEMBER : 파일업로드
+	*개인 채팅방이면 		cmode==2 //OWNER , MEMBER관계없음. 파일업로드
 	*/
-	alert(num);
-	if(chatpermission=="OWNER"){
+	if(chatpermission=="OWNER" &&cmode==1){
+		alert(crcode+","+cmode+", owner다");
 	}
-	else if(chatpermission=="MEMBER"){
-		
+	else if(chatpermission=="MEMBER" && cmode==1){
+		alert(crcode+","+cmode+",member다");
 	}
 }
 
