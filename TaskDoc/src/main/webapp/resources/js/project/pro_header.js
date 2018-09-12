@@ -4,12 +4,12 @@ $(document).ready(function(){
      stompClient = Stomp.over(socket); //stompClient에 socket을 넣어준다.
      stompClient.connect({}, function() { //접속
          /*stompClient.send('/app/in/tt', {}, JSON.stringify({'uid':id, 'ccontents': $("#chatcon").val(),'crcode' : 67}));*/
-         stompClient.subscribe('/chat/'+67, function(msg) {
+         stompClient.subscribe('/chat/'+1, function(msg) {
         	 var test=msg.body;
         	 var concat=JSON.parse(test);
         	 alert(concat);
         	 $("#z").remove();
-        	 $("#croom"+67).append('<span id="z">'+concat.test.uid+" : "+concat.test.ccontents+'</span>');
+        	 $("#croom"+1).append('<span id="z">'+concat.object.uid+" : "+concat.object.ccontents+'</span>');
          });
      });
 	

@@ -83,12 +83,13 @@ function wow(){
 /* 	stompClient.send('/app/in/tt', {}, JSON.stringify({'uid':id, 'ccontents': $("#chatcon").val(),'crcode' : 67}));
  */
  	var param={
-		 'test' :{
+		 'message' : 'insert',
+		 'object' :{
 			 'uid' : id,
 			 'ccontents' : $("#chatcon").val()
 		 }
  		};
-	stompClient.send('/app/chat/'+67, {},JSON.stringify(param));
+	stompClient.send('/app/chat/'+1, {},JSON.stringify(param));
  	}
 
 
