@@ -30,7 +30,7 @@
 			<li><a data-toggle="tab" href="#home">프로젝트 관리</a></li>
 			<li><a data-toggle="tab" href="#menu1">회원 관리</a></li>
 			<li><a data-toggle="tab" href="#menu2">공지사항 관리</a></li>
-			<li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+			<!-- <li><a data-toggle="tab" href="#menu3">Menu 3</a></li> -->
 		</ul>
 		<div class="tab-content">
 			<div id="home" class="tab-pane fade in active">
@@ -39,12 +39,12 @@
 					<div id="2" class="bts" style="width: 100%; margin-top: 10px;">
 						<span>프로젝트 제목</span> <input id="ptitle"
 							style="width: 80%; margin-top: 5px;" type="text"
-							class="form-control">
+							class="form-control" maxlength="20">
 					</div>
 					<div id="3" class="bts" style="width: 100%; margin-top: 30px;">
 						<span>프로젝트 부제목</span> <input id="psubtitle"
 							style="width: 80%; margin-top: 5px;" type="text"
-							class="form-control">
+							class="form-control" maxlength="255">
 					</div>
 					<div id="4" class="bts" style="width: 100%; margin-top: 30px;">
 						<span>시작날짜</span> <input id="psdate" class="form-control"
@@ -111,9 +111,9 @@
 				</div>
 
 			</div>
-			<div id="menu3" class="tab-pane fade">
+			<!-- <div id="menu3" class="tab-pane fade">
 				<h3>Menu 3</h3>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </body>
@@ -178,7 +178,7 @@ function cancel() {
 //프로젝트 수정
 function edit(){
 	//특수문자
-	re = /[~!@\#$%^&*\()\,-=+_']/gi;
+	re = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
 	if(re.test($("#ptitle").val())){
 		alert('프로젝트 제목에 특수문자를 넣을 수 없 습ㄴ ㅣ 다!');
 	}
@@ -198,6 +198,7 @@ function edit(){
 			success : function(response) {
 				if (response == 1) {
 					alert('프로젝트 수정 완료!');
+					opener.parent.location.reload();
 				}
 				else{
 					alert('Server or Client ERROR, 프로젝트 수정 실패');
@@ -261,7 +262,7 @@ function delNotice(ncode){
 		success : function(response) {
 			if(response>0){
 				alert('공지사항 삭제 완료')
-				location.reload();
+				location.href='/project/main';
 			}
 			else{
 				alert('Server or Client ERROR, 공지사항 삭제 실패');

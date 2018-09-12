@@ -135,7 +135,7 @@ $(document).on('click','.projectlists',function(){
 	}
 	else if(list[1]>0){
 	if(window.confirm('프로젝트로 진입하시겠습니까?')==true){
-		location.href='/project/view?pcode='+list[0];
+		location.href='/project/chat/main?pcode='+list[0];
 	}else
 		return;
 	}

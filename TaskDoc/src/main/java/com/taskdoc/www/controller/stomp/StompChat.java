@@ -13,9 +13,11 @@ public class StompChat {
 	@Autowired
 	RestTemplate rest;
 	
-	@MessageMapping("/chat/{crcode}")
-	@SendTo("/chat/{crcode}")
+	@MessageMapping("/project/{pcode}")
+	@SendTo("/project/{pcode}")
 	public Map<String, Object> test(Map<String, Object> map){
+		
+		
 		System.out.println(map);
 		return map;
 	}

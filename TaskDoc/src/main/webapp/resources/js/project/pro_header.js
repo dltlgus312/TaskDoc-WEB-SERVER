@@ -1,5 +1,8 @@
+//프로젝트명
+var proname="";
+//채팅방권한
+var chatpermission="";
 $(document).ready(function(){
-	 
 	var socket = new SockJS('/goStomp');  //websocket이아닌 SockJS로 접속한다.
      stompClient = Stomp.over(socket); //stompClient에 socket을 넣어준다.
      stompClient.connect({}, function() { //접속
@@ -7,18 +10,20 @@ $(document).ready(function(){
          stompClient.subscribe('/chat/'+67, function(msg) {
         	 var test=msg.body;
         	 var concat=JSON.parse(test);
-        	 alert(concat);
         	 $("#z").remove();
-        	 $("#croom"+67).append('<span id="z">'+concat.test.uid+" : "+concat.test.ccontents+'</span>');
+        	 $("#croomSpan"+67).append('<span id="z">'+concat.test.uid+" : "+concat.test.ccontents+'</span>');
          });
      });
 	
 	
-	//채팅방리스트 리스트에담아라;
+	//채팅방리스트 리스트에담아라
 	var cArray=new Array();
 	
-	// prouser Object list에 담을라고만듦sssfe
+	// prouser Object list에 담을라고만듦(pinvite==1인경우)
 	var prouserlist=new Array();
+	
+	// prouser Object list에 담을라고만듦(pinvite==0인경우)
+	var pronouserlist=new Array();
 	
 	// display 화면 비율 조정
 		var contentheight = $("#contentwrap").height();
@@ -42,9 +47,10 @@ $(document).ready(function(){
 				url : '/projectjoin/collaboration/'+pcode,
 				success : function(response) {
 					if(response.projectJoinList.length>0){
-						$("#propeople").text(response.projectJoinList.length);
 						for(var i=0;i<response.projectJoinList.length;i++){
-							if(response.projectJoinList[i].pinvite==1){
+							
+							//pinvite==1
+							if(response.projectJoinList[i].pinvite>0){
 								// 0 : {'id' ='d' , .... } , Object 생성
 								var prouserObj=new Object();
 								prouserObj.uid=response.projectJoinList[i].uid;
@@ -52,11 +58,27 @@ $(document).ready(function(){
 								prouserObj.ppermission=response.projectJoinList[i].ppermission;
 								prouserlist.push(prouserObj);
 							}
+							
+							//pinvite==0
+							else{
+								var pronouserObj=new Object();
+								pronouserObj.uid=response.projectJoinList[i].uid;
+								pronouserObj.ppermission=response.projectJoinList[i].ppermission;
+								pronouserlist.push(pronouserObj);
+							}
 						}
+						//프로젝트에 몇명초대되어있는지 숫자체크
+						$("#propeople").text(prouserlist.length);
 					}
+					
 					for(var j=0;j<prouserlist.length;j++){
-							var $atag='<li><a href="#">'+prouserlist[j].ppermission+' : '+prouserlist[j].uid+'</a></li>';
-							$("#propeoplelist").append($atag);
+						var $atag='<li><a href="#">'+prouserlist[j].ppermission+' : '+prouserlist[j].uid+'</a></li>';
+						$("#propeoplelist").append($atag);
+					}
+					
+					for(var k=0;k<pronouserlist.length;k++){
+						var $atag='<li><a href="#">'+pronouserlist[k].ppermission+' : '+pronouserlist[k].uid+'(초대대기중) '+'</a></li>';
+						$("#propeoplelist").append($atag);
 					}
 				},
 				error : function(e) {
@@ -73,13 +95,15 @@ $(document).ready(function(){
 				success : function(response) {
 					for(var j=0; j<response.projectJoinList.length;j++){
 						if(response.projectJoinList[j].pcode==pcode &&response.projectJoinList[j].pinvite==1){
+							
 							if(response.projectJoinList[j].ppermission=="OWNER"){
-								
 								var $stag='<button id="prochatbtn3" onclick="goproset('+pcode+')" type="button"style="height: 42px; float: right; outline: none; border: 0; background-color: white; width: 100%;">'
 											+'<img src="/resources/img/img_boardsetting.png"alt="" style="width: 15px; height: 15px;"> <span>설정</span></button>';
 								$("#setornotice").append($stag);
 								$("#prochatbtn3").css('line-height',line_height+"px");
 								$("#pro_title").html("프로젝트 명 : "+response.projectList[j].ptitle);
+								proname=response.projectList[j].ptitle;
+								chatpermission=response.projectJoinList[j].ppermission;
 								
 							}else if(response.projectJoinList[j].ppermission=="MEMBER"){
 								var $ntag='<button id="prochatbtn3" onclick="gonotice('+pcode+')" type="button"style="height: 42px; float: right; outline: none; border: 0; background-color: white; width: 100%;">'
@@ -87,6 +111,8 @@ $(document).ready(function(){
 								$("#setornotice").append($ntag);
 								$("#prochatbtn3").css('line-height',line_height+"px");
 								$("#pro_title").html("프로젝트 명 : "+response.projectList[j].ptitle);
+								proname=response.projectList[j].ptitle;
+								chatpermission=response.projectJoinList[j].ppermission;
 
 							}
 						}
@@ -112,26 +138,48 @@ $(document).ready(function(){
 						var cObject=new Object();
 						if (response.length != -1) {
 							alert('채팅방 리스트 조회 성공!' + response);
-					
+							
+							//프로젝트 채팅방과, 개인채팅방을 구분하여 append한다. , 추후에 날짜랑, db 연동해서 제일 최근의 채팅방 내용을 불러오고, 날짜도 같이불러와보자.
 							for(var i=0;i<response.chatRoomList.length;i++){
+								
+								//프로젝트 채팅방 append, 맨밑의 span에는 사용자가 입력한 채팅의 시간을적어줌, 지금은 test용으로 채팅방만든시간을적엇음.
 								if(response.chatRoomList[i].crmode==1){
 									cObject.crcode=response.chatRoomList[i].crcode;
-									cObject.crname='프로젝트 채팅방';
+									cObject.crname=proname;
+									cObject.crdate=response.chatRoomList[i].crdate;
 									cArray.push(cObject);
-									$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:300px;height:80px; background-color:yellow">'
-									+'<span>'+cArray[i].crcode+':'+ cArray[i].crname +'</span><span></span></div>';
+									$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:300px;height:80px; border:3px solid #ed8151;">'
+									+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+ cArray[i].crname +' 채팅방'+'</span></div>' 
+									+'<div style="width:100%;height:50%"><img src="/resources/img/img_prochat.png"alt="" style="width: 30px; height:30px;">'
+									+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
+									+'<div style="width:100%;height:25%"><span>'+cArray[i].crdate+'</span></div>';
 									$("#chathwamun").append($cdiv);
 								}
+								
+								//개인 채팅방 append
 								else if(response.chatRoomList[i].crmode==2){
+									//ajax 데이터 받은거 멤버리스트 뽑아서 string으로만들자
+									var memberArray=new Array();
+									
+									//프로젝트 이름
+									var memname=[];
+									memberArray=response.userInfoList[i];
+									
+									for(var a=0;a<memberArray.length;a++){
+										memname.push(memberArray[a].uname+"님 ");
+									}
+									
 									cObject.crcode=response.chatRoomList[i].crcode;
-									cObject.crname='개인 채팅방';
+									cObject.crdate=response.chatRoomList[i].crdate;
 									cArray.push(cObject);
-									$cdiv='<div style="width:300px;height:80px; background-color:green">'
-										+'<span>'+cArray[i].crcode+':'+ cArray[i].crname +'</span><span></span></div>';
+									$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:300px;height:80px; border:3px solid #ed8151; border-top:none;">'
+									+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+ memname +'의채팅방'+'</span></div>'
+									+'<div style="width:100%;height:50%"><img src="/resources/img/img_individualchat.png"alt="" style="width: 30px; height:30px;">'
+									+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
+									+'<div style="width:100%;height:25%"><span>'+cArray[i].crdate+'</span></div';
 									$("#chathwamun").append($cdiv);
 								}
 							}
-							
 						} else if (response.length == 0) {
 							alert('Server or Client ERROR, 채팅방 리스트 조회 실패');
 						}
@@ -141,6 +189,8 @@ $(document).ready(function(){
 					}
 				});
 	});
+	//docuemnt.ready 끝 
+
 
 	// view page에서 설정 버튼 누를때 나오는 페이지(OWNER)
 	function goproset(pcode){
@@ -173,7 +223,7 @@ $(document).ready(function(){
 	
 	// 채팅으로
 	function gogoChat(){
-		 location.href='/project/view/?pcode='+pcode;
+		 location.href='/project/chat/main/?pcode='+pcode;
 	}
 	
 	// 공용업무로
@@ -194,7 +244,7 @@ $(document).ready(function(){
 	// 프로젝트 대화 누르면 absolute div 한개나옴
 	function prochatbtn(){
 		if($("#chathwamun").css("display") == "none"){
-			$("#chathwamun").show();
+			$("#chathwamun").show(1000);
 		}else{
 			$("#chathwamun").hide(1000);
 		}
