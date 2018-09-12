@@ -1,7 +1,13 @@
+//========전역변수로 사용할거==========
+
 //프로젝트명
 var proname="";
 //채팅방권한
 var chatpermission="";
+//시작날짜, 끝날짜도
+//=================
+
+
 $(document).ready(function(){
 	var socket = new SockJS('/goStomp');  //websocket이아닌 SockJS로 접속한다.
      stompClient = Stomp.over(socket); //stompClient에 socket을 넣어준다.

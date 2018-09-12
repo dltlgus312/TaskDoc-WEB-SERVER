@@ -14,6 +14,12 @@ public class Chat {
 	public String main() {
 		return "/active/chat/main";
 	}
+	
+	//채팅내용 and button들 불러오기
+	@RequestMapping(value = "/content", method = RequestMethod.GET)
+	public String content() {
+		return "/active/chat/window/content";
+	}
 
 	//채팅생성
 	@RequestMapping(value = "/create", method = RequestMethod.GET)

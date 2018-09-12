@@ -198,7 +198,7 @@ function edit(){
 			success : function(response) {
 				if (response == 1) {
 					alert('프로젝트 수정 완료!');
-					opener.parent.location.reload();
+					opener.location.reload();
 				}
 				else{
 					alert('Server or Client ERROR, 프로젝트 수정 실패');
@@ -220,8 +220,8 @@ function prodeldel(){
 		success : function(response) {
 			if (response == 1) {
 				alert('프로젝트 삭제 완료!');
-				opener.parent.location.reload();
 				window.close();
+				opner.parent.location='project/main';
 			}
 			else{
 				alert('Server or Client ERROR, 프로젝트 삭제 실패');
@@ -262,7 +262,7 @@ function delNotice(ncode){
 		success : function(response) {
 			if(response>0){
 				alert('공지사항 삭제 완료')
-				location.href='/project/main';
+				location.reload();
 			}
 			else{
 				alert('Server or Client ERROR, 공지사항 삭제 실패');
