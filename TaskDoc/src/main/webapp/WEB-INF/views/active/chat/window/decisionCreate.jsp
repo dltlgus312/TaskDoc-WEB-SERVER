@@ -30,37 +30,33 @@
 
 				<div class="modal-body">
 					<div class="form-group">
-						<label>의사결정 제목</label> <input id="decisionName" type="text"
-							class="form-control"> <span class="help-block">제목을
-							입력해주세요</span>
+						<label>의사결정 제목</label> <input id="decisionName" type="text" class="form-control">
 					</div>
 
 					<div class="btn-group">
 						<div>
 							<label>투표를 할 공용업무를 선택해주세요</label>
-							<select id="whattask">
+							<select class="form-control" id="whattask">
 							</select>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<br></br> <label>투표 항목</label>
-						<button type="button" class="btn btn-default btn-icon"
+						<button type="button" class="btn" style="background-color:#ed8151;color:white;""
 							onclick="addIndex()">
-							<i class="fa fa-times-circle"></i> 항목 추가하기
+							항목 추가하기
 						</button>
 						<div style="display: block" id="indexes"></div>
 					</div>
 
 					<div class="modal-footer">
-						<input type="hidden" name="isEmpty">
-						<button type="button" class="btn btn-success btn-icon"
-							onclick="decisionOK()">
-							<i class="fa fa-check"></i> 생성하기
+						<button type="button" class="btn" onclick="decisionOK()" style="background-color:#ed8151;color:white;">
+							생성하기
 						</button>
-						<button type="button" class="btn btn-default btn-icon"
-							onclick="decisionCancel()">
-							<i class="fa fa-times-circle"></i> Cancel
+						<button type="button" class="btn"
+							onclick="decisionCancel()" style="background-color:#ed8151;color:white;">
+							 Cancel
 						</button>
 					</div>
 				</div>
@@ -113,7 +109,7 @@
 		//div tag
 		var dtag = document.createElement("div");
 		dtag.setAttribute('id', 'content' + count);
-		dtag.setAttribute('style', 'display:flex');
+		dtag.setAttribute('style', 'display:flex; margin-bottom:5px;');
 	
 		//input tag
 		var itag = document.createElement("input");
@@ -125,7 +121,8 @@
 		var btag = document.createElement("button");
 		btag.setAttribute('type', 'button');
 		btag.setAttribute('id', 'b' + count);
-		btag.setAttribute('class', 'btn btn-default btn-icon');
+		btag.setAttribute('class', 'btn');
+		btag.setAttribute('style', 'background-color:#ed8151; color:white;');
 		btag.setAttribute('onclick', 'objdelete(this)');
 
 		var element = document.createTextNode("삭제");
@@ -146,7 +143,8 @@
 		tlist.splice(tlist.indexOf('t' + divid), 1);
 
 	}
-	
+
+	//의사결정 생성
 	function decisionOK(){
 		//의사결정 생성후 return 값으로 의사결정 pk값이 날라온것 저장하는 변수
 		var decisionCreatecode=null;
@@ -205,7 +203,11 @@
 			}
 		});
 		/*/의사결정 생성 */
+		}
 	}
+	
+	function decisionCancel(){
+		window.close();
 	}
 </script>
 

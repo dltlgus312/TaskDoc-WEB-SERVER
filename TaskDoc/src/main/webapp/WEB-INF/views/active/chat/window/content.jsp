@@ -8,11 +8,6 @@ String crcode=request.getParameter("crcode");
 <div id="chatmenu" style="width:100%%; height:100%;">
 	<div id="chatsetbtn" style="width:100%;height:5%; border:solid 1px blue;">
 	<div id="chatsetbtnmenu" style="width:300px;height:500px; position: absolute; display:none;border:3px solid #ed8151;background-color:white; right:0px;overflow:auto; ">
-		<div>업로드된 파일</div>
-		<div>의사결정</div>
-		<div>회의록</div>
-		<div>참여중인 회원</div>
-		<div>나가기</div>
 	</div>
 </div>
 								
@@ -38,6 +33,12 @@ $(function(){
 		+'<img onclick="conferencecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_conference.png"data-toggle="tootlip" data-placement="bottom" title="회의록 생성" style="height:100%;float:left;cursor:pointer;">'
 		+'<img onclick="menubtn('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
+		
+		$setmenudiv= '<div style="width:100%;height:25%; border-bottom: 3px solid #ed8151;">업로드된 파일</div>'
+		+'<div style="width:100%;height:25%; border-bottom: 3px solid #ed8151;">의사결정</div>'
+		+'<div style="width:100%;height:25%; border-bottom: 3px solid #ed8151;">회의록</div>'
+		+'<div style="width:100%;height:25%;">참여중인 회원</div>';
+		$("#chatsetbtnmenu").append($setmenudiv);
 	}
 	
 	//프로젝트톡, MEMBER
@@ -45,6 +46,14 @@ $(function(){
 		$setdiv='<img onclick="filecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_fileupload.png"data-toggle="tootlip" data-placement="bottom" title="파일 업로드" style="height:100%;float:left;cursor:pointer;">'
 		+'<img onclick="menubtn('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
+		
+		$setmenudiv= '<div style="width:100%;height:100px; border-bottom: 3px solid #ed8151;">업로드된 파일</div>'
+		+'<div style="width:100%;height:100px; border-bottom: 3px solid #ed8151;">의사결정</div>'
+		+'<div style="width:100%;height:100px; border-bottom: 3px solid #ed8151;">회의록</div>'
+		+'<div style="width:100%;height:100px;">참여중인 회원</div>'
+		+'<div class="bts"> <button type="button" class="btn" style="background-color:#ed8151; color:white;">초대</button> <button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatout('+<%=crcode%>+')">나가기</button> </div>';
+		$("#chatsetbtnmenu").append($setmenudiv);
+		
 	}
 	
 	//개인톡
@@ -52,6 +61,9 @@ $(function(){
 		$setdiv='<img onclick="filecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_fileupload.png" data-toggle="tootlip" data-placement="bottom" title="파일 업로드" style="height:100%;float:left;cursor:pointer;">'
 		+'<img onclick="menubtn('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
+		
+		$setmenudiv= '<div style="width:100%; height: calc(500 / 3)">업로드된 파일</div><div>참여중인 회원</div><div class="bts"> <button type="button" class="btn" style="background-color:#ed8151; color:white;">초대</button> <button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatout('+<%=crcode%>+')">나가기</button> </div>';
+		$("#chatsetbtnmenu").append($setmenudiv);
 	}
 	//툴팁제어
 	$('[data-toggle="tootlip"]').tooltip();
@@ -91,40 +103,38 @@ function conferencecreate(code){
 	alert(code+"회의록");
 }
 
+//채팅방나가기
+function chatout(crcode){
+	if(confirm('채팅방에서 나가시겠습니까?')==true){
+		var param = {
+			'pcode' : pcode,
+			'crcode' : crcode,
+			'uid' : id
+		};
+		$.ajax({
+			type : 'DELETE',
+			url : '/chatroomjoin',
+			contentType : 'application/json',
+			data : JSON.stringify(param),
+			success : function(response) {
+				if (response.length != -1) {
+					alert('채팅방 나가기 성공!' + response);
+					location.href="/project/chat/main?pcode="+ pcode;
+				} else if (response.length == 0) {
+					alert('Server or Client ERROR, 채팅방 나가기 실패');
+				}
+			},
+			error : function(e) {
+				alert("ERROR : " + e.statusText);
+			}
+		});
+	}else return;
+}
+
 </script>
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	
@@ -176,30 +186,6 @@ function conferencecreate(code){
 			}
 		});
 		/*/채팅방에 참여 중인 유저 리스트 */
-		
-		/* 채팅방에서 나가기 */
-		var param = {
-			'pcode' : '내 프로젝트  PCODE',
-			'crcode' : '현재 채팅방  CROCODE',
-			'uid' : '채팅방 나갈 회원의 UID'
-		};
-		$.ajax({
-			type : 'DELETE',
-			url : 'chatroomjoin',
-			contentType : 'application/json',
-			data : JSON.stringify(param),
-			success : function(response) {
-				if (response.length != -1) {
-					alert('채팅방 나가기 성공!' + response);
-				} else if (response.length == 0) {
-					alert('Server or Client ERROR, 채팅방 나가기 실패');
-				}
-			},
-			error : function(e) {
-				alert("ERROR : " + e.statusText);
-			}
-		});
-		/*/채팅방에서 나가기 */
 		
 		
 		/* 채팅 내용 DB저장 dmcode=null, dscode=null, crcoderef=null일경우
