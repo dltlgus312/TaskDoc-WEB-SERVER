@@ -37,7 +37,7 @@ $(function(){
 		$setmenudiv= '<div style="width:100%;height:25%; border-bottom: 3px solid #ed8151;">업로드된 파일</div>'
 		+'<div style="width:100%;height:25%; border-bottom: 3px solid #ed8151;">의사결정</div>'
 		+'<div style="width:100%;height:25%; border-bottom: 3px solid #ed8151;">회의록</div>'
-		+'<div style="width:100%;height:25%;">참여중인 회원</div>';
+		+'<div style="width:100%;height:25%;">참여중인 회원<div id="userlist"> </div></div>';
 		$("#chatsetbtnmenu").append($setmenudiv);
 	}
 	
@@ -50,8 +50,7 @@ $(function(){
 		$setmenudiv= '<div style="width:100%;height:100px; border-bottom: 3px solid #ed8151;">업로드된 파일</div>'
 		+'<div style="width:100%;height:100px; border-bottom: 3px solid #ed8151;">의사결정</div>'
 		+'<div style="width:100%;height:100px; border-bottom: 3px solid #ed8151;">회의록</div>'
-		+'<div style="width:100%;height:100px;">참여중인 회원</div>'
-		+'<div class="bts"> <button type="button" class="btn" style="background-color:#ed8151; color:white;">초대</button> <button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatout('+<%=crcode%>+')">나가기</button> </div>';
+		+'<div style="width:100%;height:100px;">참여중인 회원<div id="userlist"></div></div>';
 		$("#chatsetbtnmenu").append($setmenudiv);
 		
 	}
@@ -62,7 +61,8 @@ $(function(){
 		+'<img onclick="menubtn('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
 		
-		$setmenudiv= '<div style="width:100%; height: calc(500 / 3)">업로드된 파일</div><div>참여중인 회원</div><div class="bts"> <button type="button" class="btn" style="background-color:#ed8151; color:white;">초대</button> <button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatout('+<%=crcode%>+')">나가기</button> </div>';
+		$setmenudiv= '<div style="width:100%; height: calc(500 / 3)">업로드된 파일</div><div id="userlist" >참여중인 회원 <div id="userlist">'
+		+'</div></div><div class="bts"><button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatout('+<%=crcode%>+')">나가기</button> </div>';
 		$("#chatsetbtnmenu").append($setmenudiv);
 	}
 	//툴팁제어
@@ -70,10 +70,35 @@ $(function(){
 
 });
 
-//메뉴버튼열기
+//메뉴버튼열기, param - crcode
 function menubtn(code){
 	if($("#chatsetbtnmenu").css("display") == "none"){
 			$("#chatsetbtnmenu").show(1000);
+			// 채팅방에 참여 중인 유저 리스트 
+			var param = {
+				'crcode' : code,
+				'pcode' : pcode
+			};
+			$.ajax({
+				type : 'POST',
+				url : '/chatroomjoin/user',
+				contentType : 'application/json',
+				data : JSON.stringify(param),
+				success : function(response) {
+					if (response.length != -1) {
+						for(var i=0;i<response.length;i++){
+							$ulist='<div style="margin-bottom:3px;"><img src="${pageContext.request.contextPath }/resources/img/img_owner.png" style="width:32px;height:32px;">'
+							+'<span style="font-size:20px;">' +response[i].uname+'('+response[i].uid + ')'+ '</span></div>';
+							$("#userlist").append($ulist);
+						}
+					} else if (response.length == 0) {
+						alert('Server or Client ERROR, 채팅방 유저 리스트 조회 실패');
+					}
+				},
+				error : function(e) {
+					alert("ERROR : " + e.statusText);
+				}
+			});
 		}
 	else $("#chatsetbtnmenu").hide(1000);
 } 
@@ -140,28 +165,6 @@ function chatout(crcode){
 	
 <!-- 	<script type="text/javascript">
 
-		/* 채팅방에 참여 중인 유저 리스트 */
-		var param = {
-			'crcode' : '현재 채팅방  CROCODE',
-			'pcode' : '내 프로젝트  PCODE'
-		};
-		$.ajax({
-			type : 'POST',
-			url : 'chatroomjoin/user',
-			contentType : 'application/json',
-			data : JSON.stringify(param),
-			success : function(response) {
-				if (response.length != -1) {
-					alert('채팅방 유저 리스트 조회 성공!' + response);
-				} else if (response.length == 0) {
-					alert('Server or Client ERROR, 채팅방 유저 리스트 조회 실패');
-				}
-			},
-			error : function(e) {
-				alert("ERROR : " + e.statusText);
-			}
-		});
-		/*/채팅방에 참여 중인 유저 리스트 */
 		
 		/* 채팅방에 참여 중인 유저 리스트 */
 		var param = {

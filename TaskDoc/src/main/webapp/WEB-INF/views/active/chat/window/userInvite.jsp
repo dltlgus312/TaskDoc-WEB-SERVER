@@ -13,10 +13,8 @@
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
 	String pcode = request.getParameter("pcode");
+	String crcode = request.getParameter("crcode");
 %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/fix/session.js"></script>
-
-
 
 </head>
 <body>
@@ -75,7 +73,8 @@
 	
 	//채팅방을 생성한 회원을 제외한 프로젝트에 초대된 회원들을 조회한것을 담을 array
 	var array=new Array();
-	
+	var nrray=new Array();
+
 	//채팅방에초대할 유저들을 담는 array
 	var chkarray=new Array();
 	
@@ -83,37 +82,40 @@
 	//채팅방에 초대하려고 프로젝트 유저리스트들 조회	
 		$.ajax({
 			type : 'GET',
-			url : '/projectjoin/collaboration/'+1,
+			url : '/projectjoin/collaboration/'+<%=pcode%>,
 			success : function(response) {
 			 if (response.projectJoinList.length >0) {
-				for(var i=0;i<response.projectJoinList.length;i++)
-					array[i]=response.projectJoinList[i].uid;
-					//채팅방을 생성한사람은 이미 채팅방에초대되어있기때문에 현재 세션아이디는 제거하고 뿌려줘야함
-					array.splice(array.indexOf("<%=loginid%>"), 1);
-					$("#tableDiv").show();
+				for(var i=0;i<response.projectJoinList.length;i++){
+					if(response.projectJoinList[i].pinvite==1){
+						array.push(response.projectJoinList[i].uid);
+					}
+				}
+				array.splice(array.indexOf('<%=loginid%>'),1);
+				//채팅방을 생성한사람은 이미 채팅방에초대되어있기때문에 현재 세션아이디는 제거하고 뿌려줘야함s
+				$("#tableDiv").show();
 
-					for (var i = 0; i < array.length; i++) {
-						//tr tag create
-						var ttag = document.createElement("tr");
-						//uid th tag
-						var thuid = document.createElement("th");
-						//text element저장
-						var uidele = document.createTextNode(array[i]);
+				for (var i = 0; i < array.length; i++) {
+					//tr tag create
+					var ttag = document.createElement("tr");
+					//uid th tag
+					var thuid = document.createElement("th");
+					//text element저장
+					var uidele = document.createTextNode(array[i]);
 
-						ttag.appendChild(thuid);
-						thuid.appendChild(uidele);
+					ttag.appendChild(thuid);
+					thuid.appendChild(uidele);
 
-						//button th tag 
-						var thck = document.createElement("th");
+					//button th tag 
+					var thck = document.createElement("th");
 
-						var ckbox = document.createElement("input");
-						ckbox.setAttribute('type', 'checkbox');
-						ckbox.setAttribute('value', array[i]);
-						ckbox.setAttribute('onclick', 'checkEvt(this)');
+					var ckbox = document.createElement("input");
+					ckbox.setAttribute('type', 'checkbox');
+					ckbox.setAttribute('value', array[i]);
+					ckbox.setAttribute('onclick', 'checkEvt(this)');
 
-						ttag.appendChild(thck);
-						thck.appendChild(ckbox);
-						document.getElementById('thead').appendChild(ttag);
+					ttag.appendChild(thck);
+					thck.appendChild(ckbox);
+					document.getElementById('thead').appendChild(ttag);
 					}
 				} else {
 					alert('Server or Client ERROR, 채팅방 유저 리스트 조회 실패');
@@ -143,19 +145,21 @@
 		var listparam = [];
 		for (var i = 0; i < chkarray.length; i++) {
 			listparam.push({
-				'crcode' : '10',
-				'pcode' : '4',
+				'crcode' : <%=crcode%>,
+				'pcode' : <%=pcode%>,
 				'uid' : chkarray[i]
 			});
 		}
 		$.ajax({
 			type : 'POST',
-			url : '/chatroomjoin/web',
+			url : '/chatroomjoin/multiple',
 			contentType : 'application/json',
 			data : JSON.stringify(listparam),
 			success : function(response) {
 				if (response.length != -1) {
 					alert('채팅방 유저 초대 성공!' + response);
+					window.close();
+					opener.location.reload();
 				} else if (response.length == 0) {
 					alert('Server or Client ERROR, 채팅방 유저 초대 실패');
 				}

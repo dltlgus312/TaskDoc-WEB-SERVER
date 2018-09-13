@@ -55,12 +55,14 @@ $(function(){
 							cObject.crcode=response.chatRoomList[i].crcode;
 							cObject.crmode=response.chatRoomList[i].crmode;
 							cArray.push(cObject);
-							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;border-bottom:1px solid black;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +')">'
+							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;border-bottom:1px solid black;display:inline-block;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +')">'
 							+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+ memname +'의채팅방'+'</span></div>'
 							+'<div style="width:100%;height:50%"><img src="/resources/img/img_individualchat.png"alt="" style="width: 30px; height:30px;">'
 							+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
-							+'<div style="width:100%;height:25%"><span>'+'?????????'+'</span></div';
+							+'<div style="width:100%;height:25%"><span>'+'?????????'+'</span></div>'
+							+'<div><button type="button" class="btn" style="float:right; background-color:#ed8151; color:white;" onclick="chatinvite('+cArray[i].crcode+')">초대</button></div>';
 							$("#chatlistBOTTOM").append($cdiv);
+
 						}
 					}
 				} else if (response.length == 0) {
@@ -136,5 +138,17 @@ function gochatCon(crcode,crmode){
 			$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode);  
 		}
 	}
+}
+
+function chatinvite(crcode){
+	event.stopPropagation();
+	var screenW = screen.availWidth;  // 스크린 가로사이즈
+	var screenH = screen.availHeight; // 스크린 세로사이즈
+	var popW = 600; // 띄울창의 가로사이즈
+	var popH = 350; // 띄울창의 세로사이즈
+	var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
+	var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
+	window.open("/chat/userInvite?crcode="+crcode+"&pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+	
 }
 
