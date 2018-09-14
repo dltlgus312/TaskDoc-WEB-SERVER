@@ -14,11 +14,11 @@ $(document).ready(function(){
 	
 	//여기수정해야됨..
     stompClient.connect({}, function() { //접속
-         stompClient.subscribe('/project/'+1, function(msg) {
+         stompClient.subscribe('/project/'+pcode, function(msg) {
         	 var test=msg.body;
         	 var concat=JSON.parse(test);
         	 $("#z").remove();
-        	 $("#croomSpan"+67).append('<span id="z">'+concat.test.uid+" : "+concat.test.ccontents+'</span>');
+        	 $("#croomSpan"+67).append('<span id="z">'+concat.object.uid+" : "+concat.object.ccontents+'</span>');
          });
      });
 	
@@ -232,7 +232,7 @@ $(document).ready(function(){
 	
 	// 공용업무로
 	function gogoPt(){
-		location.href='/project/taskview/?pcode='+pcode;
+		location.href='/project/publicTask/main/?pcode='+pcode;
 	}
 	
 	// 간트차트로

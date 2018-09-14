@@ -78,37 +78,37 @@ public class Project {
 	 * 
 	 */
 	
-	//session
+	//메인
 	@RequestMapping(value = "/publicTask/main", method = RequestMethod.GET)
 	public String publicTaskMain() {
-		return "publicTaskMain";
+		return "/active/publictask/main";
 	}
 	
-	//session
+	//생성
 	@RequestMapping(value = "/publicTask/create", method = RequestMethod.GET)
 	public String publicTaskCreate() {
-		return "/temp/publictaskcreate";
+		return "/active/publictask/window/create";
 	}
 	
-	//session
+	//수정
 	@RequestMapping(value = "/publicTask/edit", method = RequestMethod.GET)
 	public String publicTaskEdit() {
 		return "publicTaskEdit";
 	}
 	
-	//session
+	//메인
 	@RequestMapping(value = "/privateTask/main", method = RequestMethod.GET)
 	public String privateTaskMain() {
 		return "privateTaskMain";
 	}
 	
-	//session
+	//생성
 	@RequestMapping(value = "/privateTask/create", method = RequestMethod.GET)
 	public String privateTaskCreate() {
 		return "/active/temp/publictaskcreate";
 	}
 	
-	//session
+	//수정
 	@RequestMapping(value = "/privateTask/edit", method = RequestMethod.GET)
 	public String privateTaskEdit() {
 		return "privateTaskEdit";

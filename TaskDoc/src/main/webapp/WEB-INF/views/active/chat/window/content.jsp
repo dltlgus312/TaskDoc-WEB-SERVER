@@ -79,7 +79,7 @@ $(function(){
 	}
 	//툴팁제어
 	$('[data-toggle="tootlip"]').tooltip();
-
+	
 });
 
 //메뉴버튼열기, param - crcode
@@ -183,15 +183,15 @@ function chattest(){
 	 };
 	stompClient.send('/app/project/'+pcode, {},JSON.stringify(param));
 }
-
-stompClient.subscribe('/project/'+pcode, function(msg) {
+/* stompClient.subscribe('/project/'+pcode, function(msg) {
 	 var test=msg.body;
 	 var concat=JSON.parse(test);
 	 if(concat.message=="insert"){
+		alert(concat);
 	 	$aaa='<div><span>'+concat.object.uid+' : '+ concat.object.ccontents +'</span></div>';
 	 	$("#chatcontentdiv").append($aaa);
-	 }
-});
+		 }
+	}); */
 </script>
 	
 	

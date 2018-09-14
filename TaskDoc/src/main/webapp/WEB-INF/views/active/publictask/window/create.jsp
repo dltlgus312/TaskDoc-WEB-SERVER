@@ -10,18 +10,7 @@
 
 </body>
 <script type="text/javascript">
-	/*공용 업무 생성 */
-	/* var param = {
-		'ttitle' :'publicTASK 1';
-		'tcolor' : 'RED';
-		'tsdate' :;
-		tedate;
-		tpercent;
-		tsequence;
-		trefference;
-		pcode;
-	}; */
-	/*공용 업무 생성 */
+	//공용 업무 생성 
 	var param = {
 		'ttitle' : ' ',
 		'tcolor' : ' ',
@@ -31,7 +20,7 @@
 	};
 	$.ajax({
 		type : 'POST',
-		url : 'publictask',
+		url : '/publictask',
 		contentType : 'application/json',
 		data : JSON.stringify(param),
 		success : function(response) {
@@ -45,9 +34,11 @@
 			alert("ERROR : " + e.statusText);
 		}
 	});
-	/*/공용 업무 생성 */
-
-	/*공용 업무안의 새로운 공용 업무 생성 */
+	
+	
+	/* 
+	
+	//공용 업무안의 새로운 공용 업무 생성 
 	var param = {
 		'ttitle' : ' ',
 		'tcolor' : ' ',
@@ -72,9 +63,8 @@
 			alert("ERROR : " + e.statusText);
 		}
 	});
-	/*/공용 업무 생성 */
 
-	/* 특정 프로젝트의 모든 공용업무를 보여준다. */
+	//특정 프로젝트의 모든 공용업무를 보여준다.
 	$.ajax({
 		type : 'GET',
 		url : 'publictask/' + '7',
@@ -89,9 +79,8 @@
 			alert("ERROR : " + e.statusText);
 		}
 	});
-	/*/특정 프로젝트의 모든 공용업무를 보여준다. */
 
-	/* 공용업무 수정. */
+	//공용업무 수정.
 	var param = {
 		'ttitle' : '바꿀제목',
 		'tcolor' : '바꿀색상',
@@ -118,9 +107,8 @@
 			alert("ERROR : " + e.statusText);
 		}
 	});
-	/*/공용업무 수정. */
 
-	/* 공용업무 삭제. */
+	// 공용업무 삭제
 	$.ajax({
 		type : 'DELETE',
 		url : 'publictask/' + '삭제하고싶은 공용업무 TCODE',
@@ -135,9 +123,8 @@
 			alert("ERROR : " + e.statusText);
 		}
 	});
-	/*/공용업무 삭제. */
 
-	/* 해당 공용업무내의 모든 회의록 리스트를 가져온다 */
+	// 해당 공용업무내의 모든 회의록 리스트를 가져온다 
 	$.ajax({
 		type : 'GET',
 		url : 'chatroom/task/' + '해당 공용업무의  tcode',
@@ -152,9 +139,8 @@
 			alert("ERROR : " + e.statusText);
 		}
 	});
-	/*/해당 공용업무내의 모든 회의록 리스트를 가져온다 */
 	
-	/* 해당 공용업무내의 모든 의사결정 리스트를 가져온다 */
+	// 해당 공용업무내의 모든 의사결정 리스트를 가져온다 
 	$.ajax({
 		type : 'GET',
 		url : 'decision/task/' + '해당 공용업무의  tcode',
@@ -169,6 +155,9 @@
 			alert("ERROR : " + e.statusText);
 		}
 	});
-	/*/해당 공용업무내의 모든 의사결정 리스트를 가져온다  */
+	
+	
+	 */
+	
 </script>
 </html>
