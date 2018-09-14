@@ -28,6 +28,7 @@ public class WebSocketMessageBrokerConfigurer extends AbstractWebSocketMessageBr
 		// 클라이언트(javascript)가 서버에 접속할 Endpoint를설정한다.엔드포인트는 여러개 추가가능하다 .
 		// client에서 Websocket대신 향상된 SockJS로 접속하려면 .withSockJS.()를 붙여준다.!
 		registry.addEndpoint("/goStomp").withSockJS();
+		System.out.println("websocket 접속");
 	}
 
 }

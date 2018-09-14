@@ -66,33 +66,6 @@ $(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
 	<!--FRAME  -->
 </body>
 <script>
-/* $(function(){
-        var text="abc";
-        var text2="def";
-        var socket = new SockJS('/goStomp');  //websocket이아닌 SockJS로 접속한다.
-        stompClient = Stomp.over(socket); //stompClient에 socket을 넣어준다.
-        stompClient.connect({}, function() { //접속
-            stompClient.send('/app/in/tt', {}, JSON.stringify({'id':text, 'pw':text2}));
-             
-            stompClient.subscribe('/topic/in', function(msg) {
-                alert(msg);
-            });
-        });
-}); */
-function wow(){			
-/* 	stompClient.send('/app/in/tt', {}, JSON.stringify({'uid':id, 'ccontents': $("#chatcon").val(),'crcode' : 67}));
- */
- 	var param={
-		 'message' : 'insert',
-		 'object' :{
-			 'uid' : id,
-			 'ccontents' : $("#chatcon").val()
-		 }
- 		};
-	stompClient.send('/app/chat/'+1, {},JSON.stringify(param));
- 	}
-
-
 
 </script>
 

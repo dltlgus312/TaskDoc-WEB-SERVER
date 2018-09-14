@@ -1,3 +1,5 @@
+//채팅방에 들어갔는지안들어갔는지 체크
+pageopen=false;
 $(function(){
 	//채팅방추가하기 이미지에 툴팁씌우기
 	$('[data-toggle="tootlip"]').tooltip();
@@ -142,6 +144,10 @@ function gochatCon(crcode,crmode){
 
 function chatinvite(crcode){
 	event.stopPropagation();
+	if(pageopen==true){
+		alert('채팅방을 나간 후 회원을 초대해주세요.');
+	}
+	else{
 	var screenW = screen.availWidth;  // 스크린 가로사이즈
 	var screenH = screen.availHeight; // 스크린 세로사이즈
 	var popW = 600; // 띄울창의 가로사이즈
@@ -149,6 +155,6 @@ function chatinvite(crcode){
 	var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
 	var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
 	window.open("/chat/userInvite?crcode="+crcode+"&pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
-	
+	}
 }
 

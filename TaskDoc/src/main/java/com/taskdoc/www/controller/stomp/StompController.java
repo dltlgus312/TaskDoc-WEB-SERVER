@@ -17,6 +17,7 @@ public class StompController {
 	@SendTo("/project/{pcode}")
 	public Map<String, Object> test(Map<String, Object> map){
 		System.out.println(map);
+		
 		return map;
 	}
 

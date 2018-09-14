@@ -11,13 +11,25 @@ String crcode=request.getParameter("crcode");
 	</div>
 </div>
 								
-<div id="chatcontent" style="width:100%;height:75%;border:solid 1px blue;"></div>				
+<div id="chatcontentdiv" style="width:100%;height:75%;border:solid 1px blue;"></div>				
 	<div id="chatconinput" class="bts" style="width:100%;height:20%; border:solid 1px blue;">
-		<textarea class="form-control" style="width:100%;height:100%;font-size:17px; resize: none;"></textarea>
+		<textarea id="chatcontent" class="form-control" style="width:100%;height:100%;font-size:17px; resize: none;"></textarea>
+	</div>
+	<div>
+		<button type="button" onclick="chattest()">테스트</button>
 	</div>
 </div>	
 
 <script>
+//채팅방에 들어갔는지 안들어갔는지 체크
+    <%-- stompClient.subscribe('/chat/'+<%=crcode%>, function(msg) {
+   	 var test=msg.body;
+   	 var concat=JSON.parse(test);
+   	alert(concat);
+    }); --%>
+    
+    
+var pageopen=true;
 $(function(){
 	//채팅메뉴 누르면 나올 div(position=absolute)의 margin-top과 margin-right값을 설정해줘야한다.
 	var prochatsetbtn=$("#chatsetbtn").css('height');
@@ -156,6 +168,30 @@ function chatout(crcode){
 	}else return;
 }
 
+
+
+//message : insert, type : chatcontents, object : ChatContentsVO
+function chattest(){
+	var param={
+		 'message' : 'insert',
+		 'type' : 'chatcontentsvo',
+		 'object' :{
+				 'uid' : id,
+				 'crcode' : <%=crcode%>,
+				 'ccontents' : $("#chatcontent").val()
+			 }
+	 };
+	stompClient.send('/app/project/'+pcode, {},JSON.stringify(param));
+}
+
+stompClient.subscribe('/project/'+pcode, function(msg) {
+	 var test=msg.body;
+	 var concat=JSON.parse(test);
+	 if(concat.message=="insert"){
+	 	$aaa='<div><span>'+concat.object.uid+' : '+ concat.object.ccontents +'</span></div>';
+	 	$("#chatcontentdiv").append($aaa);
+	 }
+});
 </script>
 	
 	

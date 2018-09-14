@@ -7,13 +7,14 @@ var chatpermission="";
 //시작날짜, 끝날짜도
 //=================
 
+var socket = new SockJS('/goStomp');  //websocket이아닌 SockJS로 접속한다.
+stompClient = Stomp.over(socket); //stompClient에 socket을 넣어준다.
 
 $(document).ready(function(){
-	var socket = new SockJS('/goStomp');  //websocket이아닌 SockJS로 접속한다.
-     stompClient = Stomp.over(socket); //stompClient에 socket을 넣어준다.
-     stompClient.connect({}, function() { //접속
-         /*stompClient.send('/app/in/tt', {}, JSON.stringify({'uid':id, 'ccontents': $("#chatcon").val(),'crcode' : 67}));*/
-         stompClient.subscribe('/chat/'+1, function(msg) {
+	
+	//여기수정해야됨..
+    stompClient.connect({}, function() { //접속
+         stompClient.subscribe('/project/'+1, function(msg) {
         	 var test=msg.body;
         	 var concat=JSON.parse(test);
         	 $("#z").remove();
