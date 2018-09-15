@@ -84,6 +84,12 @@ public class Project {
 		return "/active/publictask/main";
 	}
 	
+	//하위업머
+	@RequestMapping(value = "/publicTask/downTask", method = RequestMethod.GET)
+	public String downTask() {
+		return "/active/publictask/window/downtask";
+	}
+	
 	//생성
 	@RequestMapping(value = "/publicTask/create", method = RequestMethod.GET)
 	public String publicTaskCreate() {

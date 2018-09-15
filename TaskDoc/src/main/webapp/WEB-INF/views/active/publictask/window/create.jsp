@@ -47,7 +47,7 @@ var pcode=<%=pcode%>;
 					<div class="form-group">
 						<label>공용업무명</label> 
 						<input id="pttitle" type="text"	class="form-control" maxlength="20">
-						<p style="margin-top:20px;"> 공용업무 색상: <input class="jscolor" onchange="update(this.jscolor)" value="cc66ff" style="width:60px;"> </p>	
+						<p style="margin-top:20px;"> 공용업무 색상: <input class="jscolor" onchange="update(this.jscolor)" value="" style="width:60px;"> </p>	
 					</div>
 					
 					<div>
@@ -140,6 +140,7 @@ function ptCreate(){
 		'tcolor' : mycolor,
 		'tsdate' : $("#psdate").val(),
 		'tedate' : $("#pedate").val(),
+		'trefference' : 0,
 		'pcode' : pcode
 	};
 	$.ajax({
@@ -219,21 +220,6 @@ function ptCreate(){
 		}
 	});
 
-	// 공용업무 삭제
-	$.ajax({
-		type : 'DELETE',
-		url : 'publictask/' + '삭제하고싶은 공용업무 TCODE',
-		success : function(response) {
-			if (response == 1) {
-				alert('공용업무 삭제 성공!');
-			} else if (response == -1) {
-				alert('Server or Client ERROR, 공용업무 삭제 실패');
-			}
-		},
-		error : function(e) {
-			alert("ERROR : " + e.statusText);
-		}
-	});
 
 	// 해당 공용업무내의 모든 회의록 리스트를 가져온다 
 	$.ajax({

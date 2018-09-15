@@ -53,11 +53,11 @@ $(function(){
 					<%@include file="/WEB-INF/views/active/project/fix/pro_header.jsp"%>
 
 					<!-- TASK CONTENTS  -->
-					<div style="width: 100%; height: 93%;overflow:auto;">
+					<div style="width: 100%; /* height: 93%; */ padding-left:15px;">
 						<div class="bts" style="margin-bottom:30px;">
 							<button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="ptcreate(<%=pcode%>)">공용업무 생성하기</button>
 						</div>	
-						<div id="publictaskBOTTOM" style="display: -webkit-inline-box;">
+						<div id="publictaskBOTTOM" style="display: inline-block; width:100%;height:100%">
 						
 						</div>
 					</div>
@@ -82,15 +82,27 @@ $(document).ready(function() {
 			if (response.length != 0) {
 				for(var i=0;i<response.length;i++){
 					if(response[i].tsdate!=null && !response[i].tedate!=null){
-						var $append = '<div id="publictask'+i+'" style="width: 350px; height: 200px; background-color: white;">'
-						+'<div style="width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>제목 : '+response[i].ttitle+'</span></div>'
-						+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
-						+'<div id="chart'+i+'" class="progress-pie-chart" data-percent="51" onclick="test('+i+')">'
-						+'<div class="ppc-progress">'
-						+'<div class="ppc-progress-fill" id="fill'+i+'"></div></div>'
-						+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+i+'">%</span></div></div></div>'
-						+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span></div><div><button type="button">수정</button></div><div><button type="button">삭제</button></div></div></div></div>';
-					
+						if(chatpermission=="OWNER"){
+							var $append = '<div onclick="godowntask('+response[i].tcode+')" id="publictask'+i+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
+							+'<div style="width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+i+'. : '+response[i].ttitle+'</span></div>'
+							+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
+							+'<div id="chart'+i+'" class="progress-pie-chart" data-percent="51" onclick="test('+i+')">'
+							+'<div class="ppc-progress">'
+							+'<div class="ppc-progress-fill" id="fill'+i+'"></div></div>'
+							+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+i+'">%</span></div></div></div>'
+							+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span></div><div><button type="button">수정</button><button type="button" onclick="ptdel('+response[i].tcode+')">삭제</button></div></div></div></div>';
+						}
+						else if(chatpermission=="MEMBER"){
+							var $append = '<div onclick="godowntask('+response[i].tcode+')" id="publictask'+i+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
+							+'<div style="width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+i+'. : '+response[i].ttitle+'</span></div>'
+							+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
+							+'<div id="chart'+i+'" class="progress-pie-chart" data-percent="51" onclick="test('+i+')">'
+							+'<div class="ppc-progress">'
+							+'<div class="ppc-progress-fill" id="fill'+i+'"></div></div>'
+							+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+i+'">%</span></div></div></div>'
+							+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span></div></div></div></div>';
+						}
+						
 						$("#publictaskBOTTOM").append($append);
 						
 						var a = $("#chart"+i.toString());
@@ -118,10 +130,14 @@ $(document).ready(function() {
 
  function test(i) {
 	var b = $("#chart"+i.toString());
-	var test = prompt("z", "z");
-	if (test > 100) {
-		alert('100이상은 입력할수없습니다.');
-	} else {
+	
+	// 숫자만인지 체크하는 정규식
+	var regNumber = /^[0-9]*$/;
+	
+	var test = prompt("퍼센트를 입력해주세요", "숫자만 입력해주세요");
+	if (test > 100 || !regNumber.test(test)) {
+		alert('100을넘거나 숫자 이외의 문자는 사용할 수 없습니다.');
+	} else if(test<=100){
 		percent = parseInt(test);
 		deg = 360 * percent / 100;
 		if (percent > 50) {
@@ -148,6 +164,33 @@ $(document).ready(function() {
 		var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
 		window.open("/project/publicTask/create?pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
  }
+ 
+ function ptdel(tcode){
+	 if(confirm('업무를 삭제하시겠습니까?')=true){
+	// 공용업무 삭제
+		$.ajax({
+			type : 'DELETE',
+			url : '/publictask/' + tcode,
+			success : function(response) {
+				if (response == 1) {
+					alert('공용업무 삭제 성공!');
+					location.reload();
+				} else if (response == -1) {
+					alert('Server or Client ERROR, 공용업무 삭제 실패');
+				}
+			},
+			error : function(e) {
+				alert("ERROR : " + e.statusText);
+			}
+		});
+	 }
+	 else return;
+ }
+ 
+ function godowntask(tcode){
+	$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode);  
+ }
+ 
 </script>
 
 </html>
