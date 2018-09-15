@@ -11,7 +11,7 @@ String crcode=request.getParameter("crcode");
 	</div>
 </div>
 								
-<div id="chatcontentdiv" style="width:100%;height:75%;border:solid 1px blue;"></div>				
+<div id="chatcontentdiv" style="width:100%;height:75%;border:solid 1px blue; overflow:auto;"></div>				
 	<div id="chatconinput" class="bts" style="width:100%;height:20%; border:solid 1px blue;">
 		<textarea id="chatcontent" class="form-control" style="width:100%;height:100%;font-size:17px; resize: none;"></textarea>
 	</div>
@@ -176,22 +176,13 @@ function chattest(){
 		 'message' : 'insert',
 		 'type' : 'chatcontentsvo',
 		 'object' :{
-				 'uid' : id,
 				 'crcode' : <%=crcode%>,
+			 	 'uid' : id,
 				 'ccontents' : $("#chatcontent").val()
 			 }
 	 };
 	stompClient.send('/app/project/'+pcode, {},JSON.stringify(param));
 }
-/* stompClient.subscribe('/project/'+pcode, function(msg) {
-	 var test=msg.body;
-	 var concat=JSON.parse(test);
-	 if(concat.message=="insert"){
-		alert(concat);
-	 	$aaa='<div><span>'+concat.object.uid+' : '+ concat.object.ccontents +'</span></div>';
-	 	$("#chatcontentdiv").append($aaa);
-		 }
-	}); */
 </script>
 	
 	

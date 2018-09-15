@@ -1,5 +1,6 @@
 //채팅방에 들어갔는지안들어갔는지 체크
 pageopen=false;
+
 $(function(){
 	//채팅방추가하기 이미지에 툴팁씌우기
 	$('[data-toggle="tootlip"]').tooltip();
@@ -79,39 +80,45 @@ $(function(){
 
 //채팅방생성
 $("#chatadd").on("click",function(){
-	if(confirm('채팅방을 만드시겠습니까?')==true){
-	var param = {
-			'chatRoom' : {
-				//개인톡 형식이므로 crmode 2번
-				'crmode' : '2',
-			},
-			'userInfo' : {
-				'uid' : id,
-			},
-			'project' : {
-				'pcode' : pcode,
-			}
-		};
-		$.ajax({
-			type : 'POST',
-			url : '/chatroom',
-			contentType : 'application/json',
-			data : JSON.stringify(param),
-			success : function(response) {
-				if (response>0) {
-					alert('채팅방 생성 완료! 채팅방 crcode값은'+response);
-					location.reload();
+	
+	if(pageopen==true)
+		alert('채팅방을 나간 후 생성해 주세요');
+	
+	else{
+		if(confirm('채팅방을 만드시겠습니까?')==true){
+			var param = {
+					'chatRoom' : {
+						//개인톡 형식이므로 crmode 2번
+						'crmode' : '2',
+					},
+					'userInfo' : {
+						'uid' : id,
+					},
+					'project' : {
+						'pcode' : pcode,
+					}
+			};
+			$.ajax({
+				type : 'POST',
+				url : '/chatroom',
+				contentType : 'application/json',
+				data : JSON.stringify(param),
+				success : function(response) {
+					if (response>0) {
+						alert('채팅방 생성 완료! 채팅방 crcode값은'+response);
+						location.reload();
+					}
+					else if(response<0){
+						alert('Server or Client ERROR, 채팅방 생성 실패');
+					}
+				},
+				error : function(e) {
+					alert("ERROR : " + e.statusText);
 				}
-				else if(response<0){
-					alert('Server or Client ERROR, 채팅방 생성 실패');
-				}
-			},
-			error : function(e) {
-				alert("ERROR : " + e.statusText);
-			}
-		});
-	}else
-		return;
+			});
+		}else
+			return;
+	}
 });
 
 //chat list append시 crcode와 cmode필요

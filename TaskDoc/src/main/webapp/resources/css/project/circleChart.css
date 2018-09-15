@@ -11,6 +11,7 @@
 	float: left;
 }
 
+/*차트   */
 .progress-pie-chart.gt-50 {
 	background-color: #81CE97;
 }

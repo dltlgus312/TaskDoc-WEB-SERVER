@@ -82,14 +82,8 @@
 			url : '/publictask/' + <%=pcode%>,
 			success : function(response) {
 				if (response.length != 0) {
-					/* select id="whattask">
-					<option value="">1.설계</option>
-					<option value="학생">2.구현</option>
-					<option value="회사원">3.유지보수</option>
-					<option value="기타">4.등등</option>
-				</select> */
 					for(var i=0;i<response.length;i++){
-						$whattask='<option value="">'+ (i+1 )+'.' +response[i].tcode+ response[i].ttitle + '</option>';
+						$whattask='<option value="'+response[i].tcode+'">'+ (i+1 )+'.' +response[i].tcode+ response[i].ttitle + '</option>';
 						$("#whattask").append($whattask);
 					}
 					alert('공용업무 리스트 불러오기 성공!');
@@ -153,7 +147,7 @@
 		var param = {
 			'dstitle' : $("#decisionName").val(),
 			'crcode' : <%=crcode%>,
-			'tcode' : 60
+			'tcode' : $("#whattask option:selected").val()
 		};
 		if($("#decisionName").val()=="" || tlist.length<=0){
 			alert('제목또는 항목을 하나 이상 입력해주세요.');

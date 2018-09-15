@@ -17,8 +17,14 @@ $(document).ready(function(){
          stompClient.subscribe('/project/'+pcode, function(msg) {
         	 var test=msg.body;
         	 var concat=JSON.parse(test);
-        	 $("#z").remove();
-        	 $("#croomSpan"+67).append('<span id="z">'+concat.object.uid+" : "+concat.object.ccontents+'</span>');
+        	 if(concat.message=="insert"){
+        		 $("#chat"+concat.object.crcode).remove();
+        		 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'</span>');
+        	 
+        		 //content.jsp에 append할것
+        		 $aaa='<div><span>'+concat.object.uid+' : '+ concat.object.ccontents +'</span></div>';
+        	 	 $("#chatcontentdiv").append($aaa);
+        	 }
          });
      });
 	
@@ -154,7 +160,7 @@ $(document).ready(function(){
 									cArray.push(cObject);
 									$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:300px;height:80px; border:3px solid #ed8151;">'
 									+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+'프로젝트 채팅방'+'</span></div>' 
-									+'<div style="width:100%;height:50%"><img src="/resources/img/img_prochat.png"alt="" style="width: 30px; height:30px;">'
+									+'<div style="width:100%;height:50%; overflow:auto;"><img src="/resources/img/img_prochat.png"alt="" style="width: 30px; height:30px;">'
 									+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
 									+'<div style="width:100%;height:25%"><span>'+cArray[i].crdate+'</span></div>';
 									$("#chathwamun").append($cdiv);
