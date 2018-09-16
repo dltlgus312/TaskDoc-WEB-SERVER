@@ -1,11 +1,15 @@
 //========전역변수로 사용할거==========
 
 //프로젝트명
+
 var proname="";
+
 //채팅방권한
 var chatpermission="";
+
 //시작날짜, 끝날짜도
-//=================
+var fixpsdate="";
+var fixpedate=""
 
 var socket = new SockJS('/goStomp');  //websocket이아닌 SockJS로 접속한다.
 stompClient = Stomp.over(socket); //stompClient에 socket을 넣어준다.
@@ -99,8 +103,6 @@ $(document).ready(function(){
 				}
 			});
 		 
-		// 해당 id에 대한 모든 프로젝트 정보와, 해당프로젝트에 가입된 나의정보, 권한으로 setting버튼놔둘지, 공지사항버튼놔둘지
-		// .. 추후에
 		 // psdate와 pedate저장해서 . 업무 생성시 mindate와 maxdate설정할것
 		 $.ajax({
 				type : 'GET',
@@ -108,7 +110,8 @@ $(document).ready(function(){
 				success : function(response) {
 					for(var j=0; j<response.projectJoinList.length;j++){
 						if(response.projectJoinList[j].pcode==pcode &&response.projectJoinList[j].pinvite==1){
-							
+							fixpsdate=response.projectList[j].psdate;
+							fixpedate=response.projectList[j].pedate;
 							if(response.projectJoinList[j].ppermission=="OWNER"){
 								var $stag='<button id="prochatbtn3" onclick="goproset('+pcode+')" type="button"style="height: 42px; float: right; outline: none; border: 0; background-color: white; width: 100%;">'
 											+'<img src="/resources/img/img_boardsetting.png"alt="" style="width: 15px; height: 15px;"> <span>설정</span></button>';

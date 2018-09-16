@@ -17,6 +17,8 @@
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
 	String pcode=request.getParameter("pcode");
+	String psdate=request.getParameter("psdate");
+	String pedate=request.getParameter("pedate");
 %>
 
 <script type="text/javascript">
@@ -79,6 +81,8 @@ var pcode=<%=pcode%>;
 
 <script type="text/javascript">
 var mycolor="";
+var fixpsdate='<%=psdate%>';
+var fixpedate='<%=pedate%>';
 $(function() {
 	$.datepicker.regional['ko'] = {
 		closeText : '닫기',
@@ -105,19 +109,19 @@ $(function() {
 		yearRange : 'c-99:c+99',
 	};
 	$.datepicker.setDefaults($.datepicker.regional['ko']);
-
+	
 	$('#psdate').datepicker();
-	$("#psdate").datepicker("option", "minDate", 0);
-	$('#psdate').datepicker("option", "maxDate", $("#toDate").val());
-	$('#psdate').datepicker("option", "onClose", function(selectedDate) {
-		$("#pedate").datepicker("option", "minDate", selectedDate);
+	$("#psdate").datepicker("option", "minDate", fixpsdate);
+	$('#psdate').datepicker("option", "maxDate", fixpedate);
+	$('#psdate').datepicker("option", "onClose", function(selectDate) {
+	$("#pedate").datepicker("option", "minDate", selectDate);
 	});
 
 	$('#pedate').datepicker();
-	$("#pedate").datepicker("option", "minDate", 0);
-	$('#pedate').datepicker("option", "minDate", $("#psdate").val());
-	$('#pedate').datepicker("option", "onClose", function(selectedDate) {
-		$("#psdate").datepicker("option", "maxDate", selectedDate);
+	$("#pedate").datepicker("option", "minDate", fixpsdate);
+	$("#pedate").datepicker("option", "maxDate", fixpedate);
+	$('#pedate').datepicker("option", "onClose", function(selectDate) {
+	$("#psdate").datepicker("option", "maxDate", selectDate);
 	});
 });
 
@@ -191,34 +195,6 @@ function ptCreate(){
 		}
 	});
 
-
-	//공용업무 수정.
-	var param = {
-		'ttitle' : '바꿀제목',
-		'tcolor' : '바꿀색상',
-		'tsdate' : '바꿀시작날짜',
-		'tedate' : '바꿀끝날날짜',
-		'tpercent' : '바꿀 퍼센터',
-		'trefference' : '어느 업무를 참조하여 하위 공용업무로 바꿀것인가',
-		'tsequence' : '바꿀 순서',
-		'tcode' : '바꾸려고하는 업무의 TCODE'
-	};
-	$.ajax({
-		type : 'PUT',
-		url : 'publictask',
-		contentType : 'application/json',
-		data : JSON.stringify(param),
-		success : function(response) {
-			if (response == 1) {
-				alert('공용업무 수정 완료!');
-			} else if (response == -1) {
-				alert('Server or Client ERROR, 공용업무 수정 실패');
-			}
-		},
-		error : function(e) {
-			alert("ERROR : " + e.statusText);
-		}
-	});
 
 
 	// 해당 공용업무내의 모든 회의록 리스트를 가져온다 
