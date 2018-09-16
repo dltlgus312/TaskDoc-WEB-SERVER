@@ -21,16 +21,16 @@ public class PublicTaskDAOImpl implements PublicTaskDAO {
 	private final String DELETE = "delete";
 	private final String SELFREFMAX = "selfRefMax";
 	private final String SAMEREFMAX = "sameRefMax";
+	private final String ROOTTASK = "roottask";
+	private final String DOWNTASK = "downtask";
 
 	@Override
 	public List<PublicTaskVO> publicTaskList(int pcode) {
-		// TODO Auto-generated method stub
 		return sql.selectList(NAMESPACE + LIST, pcode);
 	}
 	
 	@Override
 	public int publicTaskInsert(PublicTaskVO publicTaskVo) {
-		// TODO Auto-generated method stub
 		try {
 			sql.insert(NAMESPACE + INSERT, publicTaskVo);
 			return publicTaskVo.getTcode();			
@@ -42,7 +42,6 @@ public class PublicTaskDAOImpl implements PublicTaskDAO {
 
 	@Override
 	public int publicTaskUpdate(PublicTaskVO publicTaskVo) {
-		// TODO Auto-generated method stub
 		try {
 			return sql.update(NAMESPACE + UPDATE, publicTaskVo);
 		}catch(Exception e) {
@@ -53,7 +52,6 @@ public class PublicTaskDAOImpl implements PublicTaskDAO {
 
 	@Override
 	public int publicTaskDelete(int tcode) {
-		// TODO Auto-generated method stub
 		try {			
 			return sql.delete(NAMESPACE + DELETE, tcode);
 		}catch(Exception e) {
@@ -64,21 +62,30 @@ public class PublicTaskDAOImpl implements PublicTaskDAO {
 
 	@Override
 	public Integer selfRefMax(int pcode) {
-		// TODO Auto-generated method stub
 		return sql.selectOne(NAMESPACE + SELFREFMAX, pcode);
 	}
 
 	@Override
 	public Integer sameRefMax(int trefference) {
-		// TODO Auto-generated method stub
 		return sql.selectOne(NAMESPACE + SAMEREFMAX, trefference);
 	}
 	
 	
 	@Override
 	public PublicTaskVO publicTaskView(int tcode) {
-		// TODO Auto-generated method stub
 		return sql.selectOne(NAMESPACE + VIEW, tcode);
 	}
+
+	@Override
+	public List<PublicTaskVO> publicRootTask(int pcode) {
+		return sql.selectList(NAMESPACE+ROOTTASK, pcode);
+	}
+
+	@Override
+	public List<PublicTaskVO> publicDownTask(int trefference) {
+		return sql.selectList(NAMESPACE+DOWNTASK, trefference);
+	}
+
+
 	
 }

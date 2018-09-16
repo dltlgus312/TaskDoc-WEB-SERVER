@@ -12,4 +12,7 @@ public interface PublicTaskDAO {
 	public int publicTaskDelete(int tcode);
 	public Integer selfRefMax(int pcode);
 	public Integer sameRefMax(int trefference);
+	
+	public List<PublicTaskVO> publicRootTask(int pcode);
+	public List<PublicTaskVO> publicDownTask(int trefference);
 }

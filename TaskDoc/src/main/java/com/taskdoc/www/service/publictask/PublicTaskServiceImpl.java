@@ -25,14 +25,12 @@ public class PublicTaskServiceImpl implements PublicTaskService{
 
 	@Override
 	public List<PublicTaskVO> publicTaskList(int pcode) {
-		// TODO Auto-generated method stub
 		return dao.publicTaskList(pcode);
 	}
 	
 	@Override
 	@Transactional
 	public Map<String, Object> publicTaskAllList(int pcode, String uid) {
-		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<>();
 		
 		List<PublicTaskVO> pVos = publicTaskList(pcode);
@@ -73,14 +71,24 @@ public class PublicTaskServiceImpl implements PublicTaskService{
 
 	@Override
 	public int publicTaskUpdate(PublicTaskVO publicTaskVo) {
-		// TODO Auto-generated method stub
 		return dao.publicTaskUpdate(publicTaskVo);
 	}
 
 	@Override
 	public int publicTaskDelete(int tcode) {
-		// TODO Auto-generated method stub
 		return dao.publicTaskDelete(tcode);
 	}
+
+	@Override
+	public List<PublicTaskVO> publicRootTask(int pcode) {
+		return dao.publicRootTask(pcode);
+	}
+
+	@Override
+	public List<PublicTaskVO> publicDownTask(int trefference) {
+		return dao.publicDownTask(trefference);
+	}
+
+
 
 }
