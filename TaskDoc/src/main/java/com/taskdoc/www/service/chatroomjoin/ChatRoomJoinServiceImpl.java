@@ -13,6 +13,7 @@ import com.taskdoc.www.database.dao.chatroomjoin.ChatRoomJoinDAO;
 import com.taskdoc.www.database.dao.userinfo.UserInfoDAO;
 import com.taskdoc.www.database.dto.ChatRoomJoinVO;
 import com.taskdoc.www.database.dto.ChatRoomVO;
+import com.taskdoc.www.database.dto.ProjectJoinVO;
 import com.taskdoc.www.database.dto.UserInfoVO;
 
 @Service("ChatRoomJoinService")
@@ -84,6 +85,12 @@ public class ChatRoomJoinServiceImpl implements ChatRoomJoinService{
 	@Override
 	public List<ChatRoomJoinVO> WebchatRoomJoinInsert(List<ChatRoomJoinVO> chatRoomuser) {
 		return joinDao.WebchatRoomJoinInsert(chatRoomuser);
+	}
+
+	@Override
+	public List<ChatRoomJoinVO> userlookup(ChatRoomJoinVO chatRoomJoinVo, ProjectJoinVO projectJoinVo) {
+		chatRoomJoinVo.setPcode(projectJoinVo.getPcode());
+		return joinDao.userlookup(chatRoomJoinVo);
 	}
 
 

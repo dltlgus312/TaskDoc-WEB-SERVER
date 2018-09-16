@@ -1,6 +1,7 @@
 package com.taskdoc.www.database.dao.chatroomjoin;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class ChatRoomJoinDAOImpl implements ChatRoomJoinDAO {
 	private final String CRCODEMIN = "crcodemin";
 	private final String INSERT = "insert";
 	private final String DELETE = "delete";
+	private final String USERLOOKUP="userlookup";
 
 	@Override
 	public List<Integer> roomList(ChatRoomJoinVO chatRoomJoinVo) {
@@ -68,6 +70,11 @@ public class ChatRoomJoinDAOImpl implements ChatRoomJoinDAO {
 			sql.insert(NAMESPACE + INSERT, vo);
 		}
 		return chatRoomuser;
+	}
+
+	@Override
+	public List<ChatRoomJoinVO> userlookup(ChatRoomJoinVO chatRoomJoinVo) {
+		return sql.selectList(NAMESPACE + USERLOOKUP, chatRoomJoinVo);
 	}
 
 }

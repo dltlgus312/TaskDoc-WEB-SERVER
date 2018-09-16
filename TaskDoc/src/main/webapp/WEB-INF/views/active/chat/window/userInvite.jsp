@@ -70,6 +70,7 @@
 
 <script type="text/javascript">
 	var pcode ="<%=pcode%>";
+	var crcode="<%=crcode%>";
 	
 	//채팅방을 생성한 회원을 제외한 프로젝트에 초대된 회원들을 조회한것을 담을 array
 	var array=new Array();
@@ -80,17 +81,24 @@
 	
 	$(document).ready(function() {
 	//채팅방에 초대하려고 프로젝트 유저리스트들 조회	
-		$.ajax({
-			type : 'GET',
-			url : '/projectjoin/collaboration/'+<%=pcode%>,
-			success : function(response) {
-			 if (response.projectJoinList.length >0) {
-				for(var i=0;i<response.projectJoinList.length;i++){
-					if(response.projectJoinList[i].pinvite==1){
-						array.push(response.projectJoinList[i].uid);
+	
+		var param = {
+					'project': {
+						'pcode' : parseInt(pcode),
+					},
+					'chatRoom' : {
+						'crcode' : parseInt(crcode)	
 					}
-				}
-				array.splice(array.indexOf('<%=loginid%>'),1);
+				};
+		$.ajax({
+			type : 'POST',
+			url : '/chatroomjoin/userlookup',
+			contentType : 'application/json',
+			data : JSON.stringify(param),
+			success : function(response) {
+			 if (response.length >0) {
+				for(var i=0;i<response.length;i++)
+				 	array.push(response[i]);
 				//채팅방을 생성한사람은 이미 채팅방에초대되어있기때문에 현재 세션아이디는 제거하고 뿌려줘야함s
 				$("#tableDiv").show();
 

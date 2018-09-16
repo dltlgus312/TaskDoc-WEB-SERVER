@@ -140,7 +140,7 @@ function ptCreate(){
 		'tcolor' : mycolor,
 		'tsdate' : $("#psdate").val(),
 		'tedate' : $("#pedate").val(),
-		'trefference' : 0,
+		'trefference' : null,
 		'pcode' : pcode
 	};
 	$.ajax({

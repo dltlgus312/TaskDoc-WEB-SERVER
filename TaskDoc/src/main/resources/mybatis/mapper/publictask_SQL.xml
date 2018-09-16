@@ -12,10 +12,12 @@
 	
 	<select id="selfRefMax" resultType="Integer">
 	 	SELECT MAX(tsequence) FROM publictask WHERE pcode=#{pcode} AND tcode=trefference;
+																	   <!--trefference IS NULL  -->
 	</select>
 	
-	<select id="sameRefMax" resultType="Integer">
+	<select id="sameRefMax" resultType="Integer">	
 	 	SELECT MAX(tsequence) FROM publictask WHERE  trefference=#{trefference} AND NOT tcode=trefference;
+																				<!--treffe null이면 필요없음  -->
 	</select>
 	
 	<insert id="insert" parameterType="publictask" useGeneratedKeys="true" keyProperty="tcode">

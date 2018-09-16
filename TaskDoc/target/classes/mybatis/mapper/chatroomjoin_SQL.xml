@@ -29,5 +29,12 @@
 	<delete id="delete" parameterType="chatroomjoin">
 		DELETE FROM chatroomjoin WHERE crcode=#{crcode} AND uid=#{uid} AND pcode=#{pcode}
 	</delete>
+	
+	<select id="userlookup" parameterType="chatroomjoin" resultType="String">
+		SELECT uid
+		FROM projectjoin pj
+		WHERE pj.pcode = #{pcode}
+		AND NOT EXISTS ( SELECT cj.uid AS uid FROM chatroomjoin cj WHERE cj.crcode = #{crcode} and cj.uid = pj.uid);
+	</select>
 </mapper>
 	
