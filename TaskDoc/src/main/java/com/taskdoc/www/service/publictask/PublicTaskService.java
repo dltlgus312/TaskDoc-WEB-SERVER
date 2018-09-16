@@ -13,4 +13,5 @@ public interface PublicTaskService {
 	public int publicTaskDelete(int tcode);
 	public List<PublicTaskVO> publicRootTask(int pcode);
 	public List<PublicTaskVO> publicDownTask(int trefference);
+	public PublicTaskVO publicTaskView(int tcode);
 }

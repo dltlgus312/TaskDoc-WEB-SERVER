@@ -99,7 +99,7 @@ public class Project {
 	//수정
 	@RequestMapping(value = "/publicTask/edit", method = RequestMethod.GET)
 	public String publicTaskEdit() {
-		return "publicTaskEdit";
+		return "/active/publictask/window/edit";
 	}
 	
 	//메인

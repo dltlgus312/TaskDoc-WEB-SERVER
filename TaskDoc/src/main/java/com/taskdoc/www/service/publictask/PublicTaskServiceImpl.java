@@ -89,6 +89,11 @@ public class PublicTaskServiceImpl implements PublicTaskService{
 		return dao.publicDownTask(trefference);
 	}
 
+	@Override
+	public PublicTaskVO publicTaskView(int tcode) {
+		return dao.publicTaskView(tcode);
+	}
+
 
 
 }

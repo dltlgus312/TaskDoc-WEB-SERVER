@@ -44,6 +44,12 @@ public class PublicTaskRest {
 		return service.publicDownTask(trefference);
 	}
 	
+	//업무 하나 조회
+	@RequestMapping(value="/publicTaskView/{tcode}", method=RequestMethod.GET)
+	public PublicTaskVO publicTaskView(@PathVariable int tcode){
+		return service.publicTaskView(tcode);
+	}
+	
 	
 	//공용업무생성
 	@RequestMapping(value = "", method = RequestMethod.POST)
