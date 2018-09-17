@@ -34,52 +34,14 @@ var pcode=<%=pcode%>;
 </head>
 
 <body>
-<div class="container">
-		<div class="row">
-			<div class="modal-content">
-				
-				<div class="modal-header">
-					<button type="button" class="close">
-						<i class="fa fa-times"></i>
-					</button>
-					<h4 class="modal-title">공용 업무 생성을 환영합니다.</h4>
-				</div>
-				
-				<div class="modal-body">
-					
-					<div class="form-group">
-						<label>공용업무명</label> 
-						<input id="pttitle" type="text"	class="form-control" maxlength="20">
-						<p style="margin-top:20px;"> 공용업무 색상: <input class="jscolor" onchange="update(this.jscolor)" value="" style="width:60px;"> </p>	
-					</div>
-					
-					<div>
-						시작날짜: <input class="form-control" type="text" id="psdate">
-					</div>
-					
-					<div>
-						종료날짜: <input class="form-control" type="text" id="pedate">
-					</div>
-					
-					<div class="modal-footer">
-						
-						<button type="button" class="btn btn-success btn-icon"
-							onclick="ptCreate()">
-							<i class="fa fa-check"></i> Create PublicTask
-						</button>
-						
-						<button type="button" class="btn btn-default btn-icon"
-							onclick="Cancel()">
-							<i class="fa fa-times-circle"></i> Cancel
-						</button>
-						
-					</div>
-				</div>
-			</div>
-		</div>
+	<div style="background-color:black; width:1000px;height:200px;">
+		<div style="width:200px;height:200px;background-color:white;">MENU1</div>
+		<div style="width:200px;height:200px;background-color:yellow;">MENU2</div>
+		<div style="width:200px;height:200px;background-color:green;">MENU3</div>
+		<div style="width:200px;height:200px;background-color:red;">MENU4</div>
+		<div style="width:200px;height:200px;background-color:blue;">MENU5</div>
 	</div>
 </body>
-
 <script type="text/javascript">
 var mycolor="";
 var fixpsdate='<%=psdate%>';
