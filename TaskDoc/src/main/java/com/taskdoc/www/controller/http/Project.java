@@ -90,6 +90,12 @@ public class Project {
 		return "/active/publictask/window/downtask";
 	}
 	
+	//하위업머
+	@RequestMapping(value = "/publicTask/downTaskCreate", method = RequestMethod.GET)
+	public String downTaskCreate() {
+		return "/active/publictask/window/downtaskcreate";
+	}
+	
 	//생성
 	@RequestMapping(value = "/publicTask/create", method = RequestMethod.GET)
 	public String publicTaskCreate() {

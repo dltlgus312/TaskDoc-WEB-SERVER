@@ -88,6 +88,7 @@ $(document).ready(function() {
 		success : function(response) {
 			if (response.length != 0) {
 				for(var i=0;i<response.length;i++){
+					
 					if(response[i].tsdate!=null && !response[i].tedate!=null){
 						if(chatpermission=="OWNER"){
 							var $append = '<div id="publictask'+response[i].tcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
