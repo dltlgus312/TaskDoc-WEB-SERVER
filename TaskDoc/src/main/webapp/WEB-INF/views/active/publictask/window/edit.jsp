@@ -13,6 +13,8 @@
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script  src="${pageContext.request.contextPath }/resources/js/task/jscolor.js"></script>
+
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
@@ -37,9 +39,7 @@
 					</div>
 					
 					<div  class="bts" style="width: 100%; margin-top: 10px;">
-						<span>색상</span> <input id="ptcolor"
-							style="width: 80%; margin-top: 5px;" type="text"
-							class="form-control" maxlength="255">
+						<p style="margin-top:20px;"> 공용업무 색상: <input class="jscolor" onchange="update(this.jscolor)" value="" style="width:60px;"> </p>
 					</div>
 					
 					<div class="bts" style="width: 100%; margin-top: 10px;">
@@ -111,7 +111,17 @@ $(document).ready(function() {
 	});
 	
 });
+
+
+var mycolor="";
 	 
+function update(jscolor) {
+    // 'jscolor' instance can be used as a string
+    $("#rect").css('background-color','#'+jscolor);
+    var removeData='#'+jscolor;
+    //#제거
+    mycolor=removeData.replace("#","");
+}	 
 
 
 //프로젝트 수정시 datepicker api사용
@@ -171,7 +181,7 @@ function edit(){
 	}else{ */
 		var param = {
 			'ttitle' : $("#pttitle").val(),
-			'tcolor' : $("#ptcolor").val(),
+			'tcolor' : mycolor,
 			'tsdate' : $("#ptsdate").val(),
 			'tedate' : $("#ptedate").val(),
 			'tpercent' : $("#ptpercent").val(),
@@ -187,7 +197,7 @@ function edit(){
 			success : function(response) {
 				if (response == 1) {
 					alert('공용업무 수정 완료!');
- 					opener.location.reload(); 
+ 					//opener.location.reload(); 
 				} else if (response == -1) {
 					alert('Server or Client ERROR, 공용업무 수정 실패');
 				}

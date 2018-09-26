@@ -32,19 +32,19 @@ public class PublicTaskRest {
 		return service.publicTaskAllList(pcode, uid);
 	}
 	
-	//최상위 공용업무 조회
+	//최상위 공용업무 조회, WEB
 	@RequestMapping(value="/root/{pcode}", method=RequestMethod.GET)
 	public List<PublicTaskVO> rootTask(@PathVariable int pcode){
 		return service.publicRootTask(pcode);
 	}
 
-	//하위 공용업무 조회
+	//하위 공용업무 조회 , WEB
 	@RequestMapping(value="/down/{trefference}", method=RequestMethod.GET)
 	public List<PublicTaskVO> downTask(@PathVariable int trefference){
 		return service.publicDownTask(trefference);
 	}
 	
-	//업무 하나 조회
+	//업무 하나 조회 , WEB
 	@RequestMapping(value="/publicTaskView/{tcode}", method=RequestMethod.GET)
 	public PublicTaskVO publicTaskView(@PathVariable int tcode){
 		return service.publicTaskView(tcode);

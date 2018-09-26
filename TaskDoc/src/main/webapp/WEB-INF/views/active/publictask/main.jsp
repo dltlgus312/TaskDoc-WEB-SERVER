@@ -56,7 +56,7 @@ $(function(){
 					<!-- TASK CONTENTS  -->
 					<div id="publictaskWRAP" style="width: 100%; /* height: 93%; */ padding-left:15px;">
 						<div id="publictaskTOP" class="bts" style="margin-bottom:30px;">
-							<button id="ptcreatebtn" class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="ptcreate(<%=pcode%>)">공용업무 생성하기</button>
+							<button id="ptcreatebtn"  class="btn" type="button" style="display:none; background-color:#ed8151; color:white;" onclick="ptcreate(<%=pcode%>)">공용업무 생성하기</button>
 						</div>	
 						<div id="publictaskBOTTOM">
 						
@@ -76,11 +76,6 @@ $(function(){
 <script type="text/javascript">
 
 $(document).ready(function() {
-	if(chatpermission=="MEMBER")
-		$("#ptcreatebtn").hide();
-	else if(chatpermission=="OWNER")
-		$("#ptcreatebtn").show();
-	
 	//특정 프로젝트의 모든 공용업무를 보여준다.
 	$.ajax({
 		type : 'GET',
@@ -88,7 +83,6 @@ $(document).ready(function() {
 		success : function(response) {
 			if (response.length != 0) {
 				for(var i=0;i<response.length;i++){
-					
 					if(response[i].tsdate!=null && !response[i].tedate!=null){
 						if(chatpermission=="OWNER"){
 							var $append = '<div id="publictask'+response[i].tcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
@@ -99,18 +93,19 @@ $(document).ready(function() {
 							+'<div class="ppc-progress-fill" id="fill'+response[i].tcode+'"></div></div>'
 							+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].tcode +'">%</span></div></div></div>'
 							+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span></div><div><button onclick= "ptedit('+response[i].tcode+')" type="button">수정</button><button type="button" onclick="ptdel('+response[i].tcode+')">삭제</button></div></div></div></div>';
+							
+							$("#ptcreatebtn").show();
 						}
 						else if(chatpermission=="MEMBER"){
-							var $append = '<div onclick="godowntask('+response[i].tcode+')" id="publictask'+i+'" style="cursor:pointer; float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
-							+'<div style="width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : '+response[i].ttitle+'</span></div>'
+							var $append = '<div id="publictask'+response[i].tcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
+							+'<div onclick="godowntask('+response[i].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : '+response[i].ttitle+','+response[i].tcode+'</span></div>'
 							+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
-							+'<div style="margin-left:20px;" id="chart'+i+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'" >'
+							+'<div style="margin-left:20px;" id="chart'+response[i].tcode+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'">'
 							+'<div class="ppc-progress">'
 							+'<div class="ppc-progress-fill" id="fill'+response[i].tcode+'"></div></div>'
 							+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].tcode +'">%</span></div></div></div>'
-							+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span></div></div></div></div>';
+							+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span></div><div></div></div></div></div>';
 						}
-						
 						$("#publictaskBOTTOM").append($append);
 						
 						var a = $("#chart"+response[i].tcode.toString());
@@ -132,7 +127,6 @@ $(document).ready(function() {
 			alert("ERROR : " + e.statusText);
 		}
 	});
-
 	
 });
 
@@ -178,6 +172,7 @@ $(document).ready(function() {
  
 // 공용업무 삭제
  function ptdel(tcode){
+	 event.stopPropagation();
 	 if(confirm('업무를 삭제하시겠습니까?')==true){
 		$.ajax({
 			type : 'DELETE',
@@ -200,6 +195,7 @@ $(document).ready(function() {
  
  //공용업무 수정
  function ptedit(tcode){
+	 event.stopPropagation();
 	 var screenW = screen.availWidth;  // 스크린 가로사이즈
 	 var screenH = screen.availHeight; // 스크린 세로사이즈
 	 var popW = 400; // 띄울창의 가로사이즈
@@ -218,12 +214,13 @@ $(document).ready(function() {
 	 if(confirm('하위 업무로 이동하시겠습니까?')==true){
 		 $("#ptcreatebtn").hide();
 		 $("#publictaskBOTTOM").load("/project/publicTask/downTask?tcode="+tcode); 
-		 $btntag='<button class="btn" type="button" onclick="goroottask('+pcode+')" style="background-color:#ed8151; border:0;outline:none; color:white;">최상위 공용업무로 이동</button>';
+		 $btntag='<button class="btn" type="button" onclick="goroottask('+pcode+')" style="background-color:#ed8151; border:0;outline:none; color:white;margin-right:5px;">최상위 공용업무로 이동</button>'
+		 +'<button class="btn" type="button" onclick="gotasklist('+pcode+')" style="background-color:#ed8151; border:0;outline:none; color:white;">공용업무 리스트로 이동</button>';
 		 $("#publictaskTOP").append($btntag);
-		 
 	 }else return;
  } 
  
+  
 </script>
 
 </html>
