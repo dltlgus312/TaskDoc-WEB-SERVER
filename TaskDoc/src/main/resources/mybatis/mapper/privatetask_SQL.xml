@@ -11,7 +11,7 @@
 	</select>
 	
 	<select id="idlist" resultType="privatetask">
-		SELECT * FROM privatetask WHERE uid=#{uid}ORDER BY ptrefference ASC, ptsequence ASC;
+		SELECT * FROM privatetask WHERE uid=#{uid} ORDER BY ptrefference ASC, ptsequence ASC;
 	</select>
 	
 	<select id="selfRefMax" resultType="Integer">
