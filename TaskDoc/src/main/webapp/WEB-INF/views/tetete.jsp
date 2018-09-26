@@ -5,16 +5,9 @@
 
 <head>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script  src="${pageContext.request.contextPath }/resources/js/task/jscolor.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
+
 	
-<%
+<%-- <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
 	String pcode=request.getParameter("pcode");
@@ -32,18 +25,38 @@ var id='<%=loginid%>';
 var pcode=<%=pcode%>;
 </script>
 </head>
-
+ --%>
 <body>
-	<div style="background-color:black; width:1000px;height:200px;">
+	<button type="button" onclick="gosetInterval()">실행</button>
+	<button type="button" onclick="stopsetInterval()">중지</button>
+	<input type="text" id="num">
+	<!-- <div style="background-color:black; width:1000px;height:200px;">
 		<div style="width:200px;height:200px;background-color:white;">MENU1</div>
 		<div style="width:200px;height:200px;background-color:yellow;">MENU2</div>
 		<div style="width:200px;height:200px;background-color:green;">MENU3</div>
 		<div style="width:200px;height:200px;background-color:red;">MENU4</div>
 		<div style="width:200px;height:200px;background-color:blue;">MENU5</div>
-	</div>
+	</div> -->
 </body>
 <script type="text/javascript">
-var mycolor="";
+var a;
+function gosetInterval(){
+	var i=0;
+	a=setInterval(function() {
+		$.ajax ({
+			url : "/user/test/longpolling",  
+			cache : false,
+			success : function (html){ 
+			alert(html);
+			}
+		});
+	}, 2000);
+}
+
+function stopsetInterval(){
+	clearInterval(a);
+}
+<%-- var mycolor="";
 var fixpsdate='<%=psdate%>';
 var fixpedate='<%=pedate%>';
 $(function() {
@@ -187,6 +200,6 @@ function ptCreate(){
 	
 	
 	 */
-	
+	 --%>
 </script>
 </html>

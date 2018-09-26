@@ -12,11 +12,9 @@ String crcode=request.getParameter("crcode");
 </div>
 								
 <div id="chatcontentdiv" style="width:100%;height:75%;border:solid 1px blue; overflow:auto;"></div>				
-	<div id="chatconinput" class="bts" style="width:100%;height:20%; border:solid 1px blue;">
-		<textarea id="chatcontent" class="form-control" style="width:100%;height:100%;font-size:17px; resize: none;"></textarea>
-	</div>
-	<div>
-		<button type="button" onclick="chattest()">테스트</button>
+	<div id="chatconinput" class="bts" style="width:100%;height:20%; border:solid 1px blue; display:-webkit-box;">
+		<textarea id="chatcontent" class="form-control" style="width:95%;height:100%;font-size:17px; resize: none;"></textarea>
+		<button type="button" onclick="chattest()" style="font-size:18px;">테스트</button>
 	</div>
 </div>	
 

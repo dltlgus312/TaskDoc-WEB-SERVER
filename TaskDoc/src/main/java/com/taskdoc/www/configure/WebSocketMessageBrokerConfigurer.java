@@ -23,6 +23,7 @@ public class WebSocketMessageBrokerConfigurer extends AbstractWebSocketMessageBr
 		config.setApplicationDestinationPrefixes("/app");
 	}
 
+	
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		// 클라이언트(javascript)가 서버에 접속할 Endpoint를설정한다.엔드포인트는 여러개 추가가능하다 .

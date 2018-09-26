@@ -155,8 +155,8 @@ function ptCreate(){
 		success : function(response) {
 			if (response != -1) {
 				alert('공용업무 생성 완료! 프로젝트의 공용업무의 id값은' + response);
-				window.close();
 				opener.location.reload();
+				window.close();
 			} else if (response == -1) {
 				alert('Server or Client ERROR, 공용업무 생성 실패');
 			}

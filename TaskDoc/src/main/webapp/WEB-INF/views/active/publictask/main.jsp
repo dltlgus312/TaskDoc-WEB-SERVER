@@ -92,9 +92,9 @@ $(document).ready(function() {
 					if(response[i].tsdate!=null && !response[i].tedate!=null){
 						if(chatpermission=="OWNER"){
 							var $append = '<div id="publictask'+response[i].tcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
-							+'<div onclick="godowntask('+response[i].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : '+response[i].ttitle+'</span></div>'
+							+'<div onclick="godowntask('+response[i].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : '+response[i].ttitle+','+response[i].tcode+'</span></div>'
 							+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
-							+'<div style="margin-left:20px;" id="chart'+response[i].tcode+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'" onclick="test('+i+')">'
+							+'<div style="margin-left:20px;" id="chart'+response[i].tcode+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'">'
 							+'<div class="ppc-progress">'
 							+'<div class="ppc-progress-fill" id="fill'+response[i].tcode+'"></div></div>'
 							+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].tcode +'">%</span></div></div></div>'
@@ -104,7 +104,7 @@ $(document).ready(function() {
 							var $append = '<div onclick="godowntask('+response[i].tcode+')" id="publictask'+i+'" style="cursor:pointer; float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
 							+'<div style="width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : '+response[i].ttitle+'</span></div>'
 							+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
-							+'<div style="margin-left:20px;" id="chart'+i+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'" onclick="test('+i+')">'
+							+'<div style="margin-left:20px;" id="chart'+i+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'" >'
 							+'<div class="ppc-progress">'
 							+'<div class="ppc-progress-fill" id="fill'+response[i].tcode+'"></div></div>'
 							+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].tcode +'">%</span></div></div></div>'
@@ -136,6 +136,8 @@ $(document).ready(function() {
 	
 });
 
+//차트 클릭시 숫자바꿀수있는 function
+/* 
  function test(i) {
 	var b = $("#chart"+i.toString());
 	
@@ -150,19 +152,19 @@ $(document).ready(function() {
 		deg = 360 * percent / 100;
 		if (percent > 50) {
 			b.addClass("gt-50");
-			/* $("#chart"+i.toString()).css("background-color","#ed8151");
-			$("#fill"+i.toString()).css('background','#e5e5e5'); */
+			 $("#chart"+i.toString()).css("background-color","#ed8151");
+			$("#fill"+i.toString()).css('background','#e5e5e5'); 
 		}
 		else{
 			b.removeClass("gt-50");
-			/* $("#chart"+i.toString()).css("background-color",'#e5e5e5');
-			$("#fill"+i.toString()).css('background','#ed8151'); */
+			 $("#chart"+i.toString()).css("background-color",'#e5e5e5');
+			$("#fill"+i.toString()).css('background','#ed8151'); 
 		}
 		$('#fill'+i.toString()).css('transform', 'rotate(' + deg + 'deg)');
 		$('#num'+i.toString()).html(percent + '%');
 	} 
 }
- 
+  */
  //공용업무 생성하기
  function ptcreate(pcode){
 	 var screenW = screen.availWidth;  // 스크린 가로사이즈
