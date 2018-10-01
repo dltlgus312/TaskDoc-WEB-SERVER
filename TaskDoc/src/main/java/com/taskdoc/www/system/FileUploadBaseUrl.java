@@ -21,6 +21,7 @@ public class FileUploadBaseUrl {
 		for(String s : split) {
 			url += s + File.separator ;
 		}
+		System.out.println(url);
 		return url;
 	}
 

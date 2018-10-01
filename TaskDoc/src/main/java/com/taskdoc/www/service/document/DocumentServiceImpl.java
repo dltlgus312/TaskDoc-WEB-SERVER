@@ -62,9 +62,9 @@ public class DocumentServiceImpl implements DocumentService {
 		// TODO Auto-generated method stub
 
 		int dmcode = dao.documentInsert(documentVo);
-
+		
 		String url = getPath(documentVo);
-
+		System.out.println(url);
 		for (MultipartFile f : multipartFile) {
 
 			try {

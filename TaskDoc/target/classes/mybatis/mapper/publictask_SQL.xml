@@ -23,19 +23,15 @@
 		SELECT * FROM publictask WHERE tcode=trefference AND pcode=#{pcode};
 	</select>
 	
-	<!-- 하위 공용업무 조회 
-	 <select id="downtask" resultType="publictask">
-		SELECT * FROM publictask WHERE trefference=#{trefference} AND tcode!=trefference;	
-	</select> -->
-
 	<!-- 하위 공용업무 조회 -->
 	 <select id="downtask" resultType="publictask">		
-		SELECT a.tcode, a.ttitle, a.tcolor, a.tsdate, a.tedate, a.tpercent, a.tsequence, a.trefference, a.pcode,
+		<!-- SELECT a.tcode, a.ttitle, a.tcolor, a.tsdate, a.tedate, a.tpercent, a.tsequence, a.trefference, a.pcode,
 			( SELECT count(*) 
 			  FROM publictask b 
 			  WHERE b.trefference = a.tcode) as count
 		FROM publictask a
-		WHERE trefference=#{trefference} AND tcode !=trefference;
+		WHERE trefference=#{trefference} AND tcode !=trefference; -->
+		SELECT * FROM publictask WHERE trefference=#{trefference} AND tcode!=trefference;	
 	</select> 
 	
 	<insert id="insert" parameterType="publictask" useGeneratedKeys="true" keyProperty="tcode">
