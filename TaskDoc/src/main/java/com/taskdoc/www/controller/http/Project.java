@@ -126,16 +126,28 @@ public class Project {
 		return "privateTaskEdit";
 	}
 	
-	//파일뷰
-	@RequestMapping(value = "/fileView", method = RequestMethod.GET)
-	public String fileView() {
-		return "active/file/fileView";
+	//공용업무의 파일
+	@RequestMapping(value = "/file/main", method = RequestMethod.GET)
+	public String fileMain() {
+		return "/active/file/main";
+	}
+
+	//공용업무의 파일
+	@RequestMapping(value = "/file/downloadForm", method = RequestMethod.GET)
+	public String downloadForm() {
+		return "/active/file/downloadForm";
 	}
 	
-	//파일뷰
-	@RequestMapping(value = "/gantView", method = RequestMethod.GET)
+	//공용업무의 하위업무 파일
+	@RequestMapping(value = "/file/downview", method = RequestMethod.GET)
+	public String fileView() {
+		return "/active/file/downview";
+	}
+	
+	//간트
+	@RequestMapping(value = "/gantt/main", method = RequestMethod.GET)
 	public String gantView() {
-		return "active/gantt/gantView";
+		return "/active/gantt/main";
 	}
 	
 	
