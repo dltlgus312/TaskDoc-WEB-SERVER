@@ -13,6 +13,10 @@
 	<select id="roomlist" resultType="document">
 		SELECT * FROM document WHERE crcode=#{crcode} ORDER BY dmdate ASC
 	</select>
+	
+	<select id="userlist" resultType="document">
+		SELECT * FROM document WHERE uid=#{uid} ORDER BY dmdate ASC
+	</select>
 
 	<select id="view" resultType="document">
 		SELECT * FROM document WHERE dmcode=#{dmcode}

@@ -50,5 +50,20 @@ $("#task1").on("click",function(){
 		    document.getElementById("gein").style.display='block';
 		}
 }); 
+
 </script>
+  <form action="/document/upload" enctype="multipart/form-data" method="POST">
+      <input name="dmtitle" value="test"/>
+      <input name="dmcontents" value="testtest"/>
+      <input name="crcode" value="1"/>
+      <input name="tcode" value="2"/>
+      <input name="uid" value="d"/>
+      
+      <input type="file" name="file"/>
+      <input type="file" name="file"/>
+      <input type="file" name="file"/>
+      <input type="file" name="file"/>
+
+      <input type="submit">
+   </form>
 </html>

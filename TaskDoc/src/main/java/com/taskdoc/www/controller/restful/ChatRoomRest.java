@@ -1,5 +1,6 @@
 package com.taskdoc.www.controller.restful;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taskdoc.www.database.dto.ChatRoomVO;
 import com.taskdoc.www.database.dto.ProjectVO;
 import com.taskdoc.www.database.dto.UserInfoVO;
@@ -45,6 +48,31 @@ public class ChatRoomRest {
 	public int insert(@RequestBody Map<String, Object> map) {
 		ChatRoomVO chatRoomVo = JsonMapper.mapToJson(map.get("chatRoom"), ChatRoomVO.class);
 		UserInfoVO userInfoVo = JsonMapper.mapToJson(map.get("userInfo"), UserInfoVO.class);
+		ProjectVO projectVo = JsonMapper.mapToJson(map.get("project"), ProjectVO.class);
+		
+		try {
+			return service.chatRoomInsert(chatRoomVo, userInfoVo, projectVo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+	@RequestMapping(value = "/multi", method = RequestMethod.POST)
+	public int insertMulti(@RequestBody Map<String, Object> map) {
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		List<UserInfoVO> userInfoVo = null;
+		try {
+			String json = mapper.writeValueAsString(map.get("userInfo"));
+			userInfoVo = mapper.readValue(json, new TypeReference<List<UserInfoVO>>() {});
+		} catch(IOException e){
+			e.printStackTrace();
+			return -1;
+		}
+		
+		ChatRoomVO chatRoomVo = JsonMapper.mapToJson(map.get("chatRoom"), ChatRoomVO.class);
 		ProjectVO projectVo = JsonMapper.mapToJson(map.get("project"), ProjectVO.class);
 		
 		try {

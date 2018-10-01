@@ -55,6 +55,13 @@ public class DocumentServiceImpl implements DocumentService {
 		// TODO Auto-generated method stub
 		return dao.roomList(crcode);
 	}
+	
+
+	@Override
+	public List<DocumentVO> userList(String uid) {
+		// TODO Auto-generated method stub
+		return dao.userList(uid);
+	}
 
 	@Override
 	@Transactional
@@ -128,6 +135,9 @@ public class DocumentServiceImpl implements DocumentService {
 		return dao.documentDelete(dmcode);
 	}
 
+	
+	
+	
 	public String getPath(DocumentVO documentVo) {
 
 		String url = this.url.getURL();

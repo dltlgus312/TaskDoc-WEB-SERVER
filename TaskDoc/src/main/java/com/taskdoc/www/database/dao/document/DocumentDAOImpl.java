@@ -17,6 +17,7 @@ public class DocumentDAOImpl implements DocumentDAO {
 	private final String NAMESPACE = "document_SQL.";
 	private final String TASKLIST = "tasklist";
 	private final String ROOMLIST = "roomlist";
+	private final String USERLIST = "userlist";
 	private final String VIEW = "view";
 	private final String INSERT = "insert";
 	private final String UPDATE = "update";
@@ -32,6 +33,13 @@ public class DocumentDAOImpl implements DocumentDAO {
 	public List<DocumentVO> roomList(int crcode) {
 		// TODO Auto-generated method stub
 		return sql.selectList(NAMESPACE + ROOMLIST, crcode);
+	}
+	
+
+	@Override
+	public List<DocumentVO> userList(String uid) {
+		// TODO Auto-generated method stub
+		return sql.selectList(NAMESPACE + USERLIST, uid);
 	}
 
 	@Override
@@ -58,4 +66,5 @@ public class DocumentDAOImpl implements DocumentDAO {
 		// TODO Auto-generated method stub
 		return sql.selectOne(NAMESPACE + VIEW, dmcode);
 	}
+
 }

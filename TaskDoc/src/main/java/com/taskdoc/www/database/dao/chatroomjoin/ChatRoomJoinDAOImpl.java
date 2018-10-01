@@ -59,7 +59,10 @@ public class ChatRoomJoinDAOImpl implements ChatRoomJoinDAO {
 	@Override
 	public int chatRoomJoinView(int crcode) {
 		// TODO Auto-generated method stub
-		return sql.selectOne(NAMESPACE + VIEW, crcode);
+		int pcode = 0;
+		List<Integer> list = sql.selectList(NAMESPACE + VIEW, crcode);
+		pcode = list.get(0);
+		return pcode;
 	}
 	
 	@Override
