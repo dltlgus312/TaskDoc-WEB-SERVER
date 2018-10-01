@@ -7,11 +7,11 @@
 <mapper namespace="privatetask_SQL">
 
 	<select id="codelist" resultType="privatetask">
-		SELECT * FROM privatetask WHERE tcode=#{tcode} AND uid=#{uid} ORDER BY ptrefference ASC, ptsequence ASC;
+		SELECT * FROM privatetask WHERE tcode=#{tcode} AND uid=#{uid} ORDER BY ptrefference ASC, ptcode ASC;
 	</select>
 	
 	<select id="idlist" resultType="privatetask">
-		SELECT * FROM privatetask WHERE uid=#{uid} ORDER BY ptrefference ASC, ptsequence ASC;
+		SELECT * FROM privatetask WHERE uid=#{uid}ORDER BY ptrefference ASC, ptcode ASC;
 	</select>
 	
 	<select id="selfRefMax" resultType="Integer">

@@ -18,9 +18,9 @@ public class UserInfoRest {
 	UserInfoService service;
 	
 	//중복검사 , 유저정보 수정시 보여줄 정보
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public UserInfoVO view(@PathVariable String id) {
-		return service.userInfoView(id);
+	@RequestMapping(value = "/{uid}", method = RequestMethod.GET)
+	public UserInfoVO view(@PathVariable String uid) {
+		return service.userInfoView(uid);
 	}
 	
 	//로그인
@@ -42,8 +42,8 @@ public class UserInfoRest {
 	}
 	
 	//회원 탈퇴
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public int delete(@PathVariable String id) {
-		return service.deleteUserInfo(id);
+	@RequestMapping(value = "/{uid}", method = RequestMethod.DELETE)
+	public int delete(@PathVariable String uid) {
+		return service.deleteUserInfo(uid);
 	}
 }

@@ -11,6 +11,7 @@ public interface ChatRoomService {
 	public List<ChatRoomVO> roomList(int crcode);
 	public ChatRoomVO chatRoomView(int crcode);
 	public int chatRoomInsert(ChatRoomVO chatRoomVo, UserInfoVO userInfoVo, ProjectVO projectVo) throws Exception;
+	public int chatRoomInsert(ChatRoomVO chatRoomVo, List<UserInfoVO> userInfoVo, ProjectVO projectVo) throws Exception;
 	public int chatRoomUpdate(ChatRoomVO chatRoomVo);
 	public int chatRoomDelete(int crcode);
 }

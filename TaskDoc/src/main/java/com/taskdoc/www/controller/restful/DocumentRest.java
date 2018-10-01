@@ -36,6 +36,12 @@ public class DocumentRest {
 	public List<DocumentVO> roomList(@PathVariable int crcode) {
 		return service.roomList(crcode);
 	}
+	
+
+	@RequestMapping(value = "/user/{uid}", method = RequestMethod.GET)
+	public List<DocumentVO> userList(@PathVariable String uid) {
+		return service.userList(uid);
+	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public int upload(@RequestParam("file") MultipartFile[] multipartFile, DocumentVO documentVo) {

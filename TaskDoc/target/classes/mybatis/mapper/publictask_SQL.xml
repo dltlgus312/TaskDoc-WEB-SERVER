@@ -7,7 +7,7 @@
 <mapper namespace="publictask_SQL">
 	
 	<select id="list" resultType="publictask">
-		SELECT * FROM publictask WHERE pcode=#{pcode} ORDER BY trefference ASC, tsequence ASC
+		SELECT * FROM publictask WHERE pcode=#{pcode} ORDER BY trefference ASC, tcode ASC
 	</select>
 	
 	<select id="selfRefMax" resultType="Integer">
