@@ -78,51 +78,65 @@ public class Project {
 	 * 
 	 */
 	
-	//메인
+	//공용업무 메인
 	@RequestMapping(value = "/publicTask/main", method = RequestMethod.GET)
 	public String publicTaskMain() {
 		return "/active/publictask/main";
 	}
 	
-	//하위업머
+	//공용업무 의 하위 업무
 	@RequestMapping(value = "/publicTask/downTask", method = RequestMethod.GET)
 	public String downTask() {
 		return "/active/publictask/window/downtask";
 	}
 	
-	//하위업머
+	//공용업무의 하위 업무 생성
 	@RequestMapping(value = "/publicTask/downTaskCreate", method = RequestMethod.GET)
 	public String downTaskCreate() {
 		return "/active/publictask/window/downtaskcreate";
 	}
 	
-	//생성
+	//공용업무 생성
 	@RequestMapping(value = "/publicTask/create", method = RequestMethod.GET)
 	public String publicTaskCreate() {
 		return "/active/publictask/window/create";
 	}
 	
-	//수정
+	//공용업무 수정
 	@RequestMapping(value = "/publicTask/edit", method = RequestMethod.GET)
 	public String publicTaskEdit() {
 		return "/active/publictask/window/edit";
 	}
 	
-	//메인
+	//개인업무 메인
 	@RequestMapping(value = "/privateTask/main", method = RequestMethod.GET)
 	public String privateTaskMain() {
 		return "privateTaskMain";
 	}
 	
-	//생성
+	//개인 업무 생성
 	@RequestMapping(value = "/privateTask/create", method = RequestMethod.GET)
 	public String privateTaskCreate() {
-		return "/active/temp/publictaskcreate";
+		return "/active/temp/privatetaskcreate";
 	}
 	
-	//수정
+	//개인 업무 수정
 	@RequestMapping(value = "/privateTask/edit", method = RequestMethod.GET)
 	public String privateTaskEdit() {
 		return "privateTaskEdit";
 	}
+	
+	//파일뷰
+	@RequestMapping(value = "/fileView", method = RequestMethod.GET)
+	public String fileView() {
+		return "active/file/fileView";
+	}
+	
+	//파일뷰
+	@RequestMapping(value = "/gantView", method = RequestMethod.GET)
+	public String gantView() {
+		return "active/gantt/gantView";
+	}
+	
+	
 }

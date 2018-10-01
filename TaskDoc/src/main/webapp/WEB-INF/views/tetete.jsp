@@ -14,15 +14,21 @@
  <!-- dmtitle, crcode, uid, [tcode]  --> 
 	<!-- <div style="position:relative" class="gantt" id="GanttChartDIV"></div> -->
 
-<form action="/document/upload" method="post" enctype="multipart/form-data">
-	파일 : <input type="file" name="file"><br />
-	제목 : <input type="text" name="dmtitle"><br />
-	채팅방 코드 : <input type="text" name="crcode"><br />
-	아이디 : <input type="text" name="uid"><br />
-	업무 코드 : <input type="text" name="tcode"><br />
-	<input type="submit" value="파일 업로드테스트">
+ <form action="/document/upload" enctype="multipart/form-data" method="POST">
+      <input name="dmtitle" value="테스트1"/>
+      <input name="dmcontents" value="테스트 자료입니다."/>
+      <input name="crcode" value="1"/>
+      <input name="tcode" value="33"/>
+      <input name="uid" value="a"/>
+      <input type="file" name="file"/>
+      <input type="submit">
+</form>	 
+
+<form action="/file/download/4" method="POST">
+		<input type="submit" value="다운로드">
 </form>
-	
+
+
 </body>
 
 <script type="text/javascript">
@@ -46,18 +52,4 @@
   } */
 
 </script>
-<!--   <form action="/document/upload" enctype="multipart/form-data" method="POST">
-      <input name="dmtitle" value="test"/>
-      <input name="dmcontents" value="testtest"/>
-      <input name="crcode" value="1"/>
-      <input name="tcode" value="2"/>
-      <input name="uid" value="d"/>
-      
-      <input type="file" name="file"/>
-      <input type="file" name="file"/>
-      <input type="file" name="file"/>
-      <input type="file" name="file"/>
-
-      <input type="submit">
-   </form> -->
 </html>

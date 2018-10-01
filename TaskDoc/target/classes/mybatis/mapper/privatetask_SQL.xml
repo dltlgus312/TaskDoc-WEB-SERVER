@@ -11,11 +11,7 @@
 	</select>
 	
 	<select id="idlist" resultType="privatetask">
-<<<<<<< HEAD
-		SELECT * FROM privatetask WHERE uid=#{uid} ORDER BY ptrefference ASC, ptsequence ASC;
-=======
 		SELECT * FROM privatetask WHERE uid=#{uid}ORDER BY ptrefference ASC, ptcode ASC;
->>>>>>> refs/heads/SQL_DTO
 	</select>
 	
 	<select id="selfRefMax" resultType="Integer">

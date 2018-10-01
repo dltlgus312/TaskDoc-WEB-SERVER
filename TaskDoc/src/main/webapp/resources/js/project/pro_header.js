@@ -246,12 +246,12 @@ $(document).ready(function(){
 	
 	// 간트차트로
 	function gogoGt(){
-		location.href='/project/gantview/?pcode='+pcode;
+		location.href='/project/gantView/?pcode='+pcode;
 	}
 	
 	// 파일모아보기로
 	function gogofile(){
-		location.href='/project/fileview/?pcode='+pcode;
+		location.href='/project/fileView/?pcode='+pcode;
 	}
 	
 	// 프로젝트 대화 누르면 absolute div 한개나옴
