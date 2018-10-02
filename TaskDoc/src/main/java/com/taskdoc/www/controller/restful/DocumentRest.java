@@ -31,7 +31,15 @@ public class DocumentRest {
 	public List<DocumentVO> taskList(@PathVariable int tcode) {
 		return service.taskList(tcode);
 	}
-
+	
+	//tcode 로 documentVO랑, fileVo 정보가져오기
+	@RequestMapping(value = "/taskView/{tcode}", method = RequestMethod.GET)
+	public Map<String,Object> taskView(@PathVariable int tcode) {
+		return service.taskView(tcode);
+	}
+	
+	
+	
 	@RequestMapping(value = "/room/{crcode}", method = RequestMethod.GET)
 	public List<DocumentVO> roomList(@PathVariable int crcode) {
 		return service.roomList(crcode);

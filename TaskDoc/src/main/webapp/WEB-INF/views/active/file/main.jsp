@@ -44,21 +44,19 @@ $(function(){
 
 			<!--CONTENTWRAP  -->
 			<div id="contentwrap" style="background-color: #e0e0e0;">
-				<div class="container"
-					style="background-color: white; overflow: auto;">
-
-					<!-- PROJECT_FIX_HEADER  -->
+				<div class="container" style="background-color: white; overflow: auto;">
 					<%@include file="/WEB-INF/views/active/project/fix/pro_header.jsp"%>
-
-					<!-- CHAT CONTENTS  -->
-					<div  style="width: 100%; height: 93%;">
-						<div id="publictaskList">
-						
+					<div style="width: 100%; height: 93%;">
+						<div id="rootbtn" class="bts">
+							
 						</div>
+						
+						<div id="publictaskList">
+					
+						</div>
+						
 					</div>
 				</div>
-
-			</div>
 		</div>
 		<!-- FOOTER -->
 		<%@include file="/WEB-INF/views/fix/footer.jsp"%>
@@ -70,7 +68,7 @@ $(function(){
 
 <script type="text/javascript">
 $(document).ready(function() {
-	//특정 프로젝트의 모든 공용업무를 보여준다.dszz
+	//특정 프로젝트의 모든 공용업무를 보여준다.
 	$.ajax({
 		type : 'GET',
 		url : '/publictask/root/' + pcode,
@@ -78,7 +76,7 @@ $(document).ready(function() {
 			if (response.length != 0) {
 				for(var i=0;i<response.length;i++){
 					var $plist='<div id="plist ' + (i+1) + ' " style="width:10%;height:120px; border: 1px solid #ed8151; margin-right:20px; margin-top:20px; float:left;">'
-					+'<div style="width:100%;height:80%;"></div><div style="width:100%;height:20%; text-align:center;cursor:pointer;" onclick="gofileView('+response[i].tcode+')">'+response[i].ttitle+'</div></div>';
+					+'<div style="width:100%;height:80%; cursor:pointer;" onclick="downtaskView('+response[i].tcode+')"></div><div style="width:100%;height:20%; text-align:center;cursor:pointer; border-top:1px solid #ed8151;" onclick="gofileView('+response[i].tcode+')">'+response[i].ttitle+'</div></div>';
 					$("#publictaskList").append($plist);
 				}
 			} else if (response.length == 0) {
@@ -92,6 +90,7 @@ $(document).ready(function() {
 	
 });
 
+//해당 업무에 대한 다운받을 수 있는 자료를 띄우는 페이지 window.open
 function gofileView(tcode){
 	var screenW = screen.availWidth;  // 스크린 가로사이즈
 	var screenH = screen.availHeight; // 스크린 세로사이즈
@@ -101,6 +100,15 @@ function gofileView(tcode){
 	var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
 	window.open("/project/file/downloadForm?tcode="+tcode,"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 }
+
+//하위 업무 띄우려고 page load
+function downtaskView(tcode){
+	 $("#publictaskList").load("/project/file/downview?tcode="+tcode);
+	 $btntag=' <button class="btn" type="button" onclick="goroot('+pcode+')" style="outline:none;border:0px; background-color:#ed8151;color:white;">최상위 업무로 이동</button>';
+	 $("#rootbtn").append($btntag);
+}
+
+
 </script>
 
 </html>

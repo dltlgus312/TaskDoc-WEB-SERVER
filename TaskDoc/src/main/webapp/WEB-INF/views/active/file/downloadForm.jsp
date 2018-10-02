@@ -37,6 +37,7 @@ $.ajax({
 			}
 		}else{
 			alert('다운받을 자료가 없습니다.');
+			window.close();
 		}
 	},
 	error : function(e) {

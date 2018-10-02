@@ -24,16 +24,18 @@
       <input type="submit">
 </form>	 
 
-<form action="/file/download/4" method="POST">
-		<input type="submit" value="다운로드">
-</form>
-
+<div id="aa"></div>
 
 </body>
 
 <script type="text/javascript">
-
-  /* var g = new JSGantt.GanttChart('g',document.getElementById('GanttChartDIV'), 'day');
+$(document).ready(function(){
+	var $a='<form action="file/download/'+6+'" method="POST"><input type="submit" value="다운로드"></form> ';
+	$("#aa").append($a);
+	
+});
+  /* 
+  var g = new JSGantt.GanttChart('g',document.getElementById('GanttChartDIV'), 'day');
   g.setShowRes(1); // Show/Hide Responsible (0/1)
   g.setShowDur(1); // Show/Hide Duration (0/1)
   g.setShowComp(1); // Show/Hide % Complete(0/1)
