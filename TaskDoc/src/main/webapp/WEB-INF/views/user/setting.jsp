@@ -72,8 +72,23 @@ var id='<%=loginid%>';
 
 								</div>
 								<div id="mydocument" class="tab-pane fade">
-									<h3>내가올린자료</h3>
-									<p>내가올린자료</p>
+									<div class="containers">
+										<table class="table table-striped table-hover">
+											<thead>
+												<tr>
+													<th style="width: 50px;">번호</th>
+													<th style="width: 150px;">자료제목</th>
+													<th style="width: 300px;">자료내용</th>
+													<th style="width: 150px;">작성자</th>
+													<th style="width: 150px;">날짜</th>
+													<th style="width: 100px;">관리</th>
+												</tr>
+											</thead>
+											<tbody id="tbodyss">
+
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -114,7 +129,7 @@ $(window).on(
 
 
 	$(document).ready(function() {
-		//게시판 목록 전체 받아오기 dddsdfew
+		//게시판 목록 전체 받아오기 
 			$.ajax({
 				type : 'GET',
 				url : '/methodboard/all',
@@ -178,7 +193,33 @@ $(window).on(
 					alert("ERROR : " + e.statusText);
 				}
 			});
+			
+			//파일 받아오기
+			$.ajax({
+				type : 'GET',
+				url : '/document/user/'+id,
+				success : function(response) {
+						if (response.length > 0) {
+							alert('파일 목록 전체 받아오기 성공! ' + response);
+							for(var i=0;i<response.length;i++){
+								var $div='<tr><td>'+ (i+1) +'</td><td>'+response[i].dmtitle+'</td><td>'
+								+response[i].dmcontents+'</td><td>'+response[i].uid+'</td><td>'+response[i].dmdate+'</td>'
+								+'<td><img src="${pageContext.request.contextPath }/resources/img/img_boardsetting.png" style="width:20px;height:20px; cursor:pointer" onclick="documentEdit('+response[i].dmcode+')">'
+								+'<img src="${pageContext.request.contextPath }/resources/img/img_boarddelete.png" style="margin-left:20px;width:20px;height:20px;cursor:pointer"'
+								+'onclick="documentDelete('+response[i].dmcode+')"></td></tr>';
+								$("#tbodyss").append($div);
+							}
+					} else {
+						alert('Server or Client ERROR, 파일 목록 전체 받아오기 실패');
+					}
+					},
+				error : function(e) {
+					alert("ERROR : " + e.statusText);
+				}
+			});
 		});
+	
+	
 		
 		// 게시판 목록 전체 받아오기
 		function boardcon(code){
@@ -207,12 +248,40 @@ $(window).on(
 			else return;
 		}
 		
-		//게시판 삭제
+		//게시판 수정
 		function boardEdit(code){
 			if(confirm('게시글을 수정 하시겠습니까?')==true){
 				location.href='/methodboard/edit?mbcode='+code;
 			}
 			else return;
+		}
+		
+		//자료 삭제
+		function documentDelete(dmcode){
+			if(confirm('자료를 삭제 하시겠습니까?')==true){
+				$.ajax({
+					type : 'DELETE',
+					url : '/document/'+dmcode,
+				success : function(response) {
+					if (response > 0) {
+						alert('자료 삭제 완료! ' + response);
+						location.reload();
+					} else {
+						alert('Server or Client ERROR, 자료 삭제 실패');
+					}
+				},
+				error : function(e) {
+					alert("ERROR : " + e.statusText);
+				}
+			});
+				}
+				else return;
+		}
+		
+		function documentEdit(dmcode){
+			if(confirm('자료를 수정 하시겠습니까?')==true){
+				}
+				else return;
 		}
 </script>
 </html>

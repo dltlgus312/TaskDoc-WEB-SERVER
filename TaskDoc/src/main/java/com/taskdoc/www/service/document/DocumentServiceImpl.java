@@ -169,14 +169,16 @@ public class DocumentServiceImpl implements DocumentService {
 	@Transactional
 	public Map<String, Object> taskView(int tcode) {
 		List<DocumentVO> dvo = documentDao.taskList(tcode);
-		List<FileVO> fvo = new ArrayList<>();
+		List<FileVO> fvo=new ArrayList<>();
 		
-		//수정
-		System.out.println("");
-
+		for(int i=0;i<dvo.size();i++){
+			fvo.addAll(fileDao.fileList(dvo.get(i).getDmcode()));
+		}
+		
 		Map<String, Object> a=new HashMap<>();
 		a.put("document", dvo);
 		a.put("file", fvo);
+		
 		return a;
 	}
 

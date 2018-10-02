@@ -15,8 +15,8 @@ String tcode=request.getParameter("tcode");
 		<tr style="width:100%;">
 			<th style="width: 15%;">자료제목</th>
 			<th style="width: 30%;">자료내용</th>
-			<th style="width: 15%;">파일이름</th>
-			<th style="width: 20%;">아이디</th>
+			<th style="width: 25%;">파일이름</th>
+			<th style="width: 10%;">아이디</th>
 			<th style="width: 20%;">날짜</th>
 		</tr>
 	</thead>
@@ -27,16 +27,17 @@ String tcode=request.getParameter("tcode");
 <script type="text/javascript">
 $.ajax({
 	type : 'GET',
-	url : '/document/task/' + <%=tcode%>,
+	url : '/document/taskView/' + <%=tcode%>,
 	success : function(response) {
-		if(response.length>0){
-			for(var i=0;i<response.length;i++){
-				var $div='<tr><td>'+response[i].dmtitle+'</td><td>'+response[i].dmcontents+'</td>'
-				+'<td>파일이름</td><td>'+response[i].uid+'</td><td>'+response[i].dmdate+'</td></tr>';
+		if(response.document.length>0){
+			for(var i=0;i<response.document.length;i++){
+				var $div='<tr><td>'+response.document[i].dmtitle+'</td><td>'+response.document[i].dmcontents+'</td>'
+				+'<td>'+response.file[i].fname+'<form action="/file/download/'+response.file[i].fcode+'" method="POST"><input type="submit" value="다운로드"></form>'
+				+'</td><td>'+response.document[i].uid+'</td><td>'+response.document[i].dmdate+'</td></tr>';
 				$("#tbodys").append($div);
 			}
 		}else{
-			alert('다운받을 자료가 없습니다.');
+			alert('다운 받을 자료가 없습니다.');
 			window.close();
 		}
 	},

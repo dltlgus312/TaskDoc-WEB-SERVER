@@ -24,15 +24,14 @@
       <input type="submit">
 </form>	 
 
-<div id="aa"></div>
+<div id="aa">zz</div>
 
 </body>
 
 <script type="text/javascript">
-$(document).ready(function(){
+$("#aa").click(function(){
 	var $a='<form action="file/download/'+6+'" method="POST"><input type="submit" value="다운로드"></form> ';
 	$("#aa").append($a);
-	
 });
   /* 
   var g = new JSGantt.GanttChart('g',document.getElementById('GanttChartDIV'), 'day');

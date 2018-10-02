@@ -76,7 +76,9 @@ $(document).ready(function() {
 			if (response.length != 0) {
 				for(var i=0;i<response.length;i++){
 					var $plist='<div id="plist ' + (i+1) + ' " style="width:10%;height:120px; border: 1px solid #ed8151; margin-right:20px; margin-top:20px; float:left;">'
-					+'<div style="width:100%;height:80%; cursor:pointer;" onclick="downtaskView('+response[i].tcode+')"></div><div style="width:100%;height:20%; text-align:center;cursor:pointer; border-top:1px solid #ed8151;" onclick="gofileView('+response[i].tcode+')">'+response[i].ttitle+'</div></div>';
+					+'<div style="width:100%;height:80%; cursor:pointer;" onclick="downtaskView('+response[i].tcode+')">'
+					+'<img src="${pageContext.request.contextPath }/resources/img/img_filetask.png"style="width:100%;height:100%;"></div>'
+					+'<div style="width:100%;height:20%; text-align:center;cursor:pointer; border-top:1px solid #ed8151;" onclick="gofileView('+response[i].tcode+')">'+response[i].ttitle+'</div></div>';
 					$("#publictaskList").append($plist);
 				}
 			} else if (response.length == 0) {
@@ -92,6 +94,7 @@ $(document).ready(function() {
 
 //해당 업무에 대한 다운받을 수 있는 자료를 띄우는 페이지 window.open
 function gofileView(tcode){
+	event.stopPropagation();
 	var screenW = screen.availWidth;  // 스크린 가로사이즈
 	var screenH = screen.availHeight; // 스크린 세로사이즈
 	var popW = 600; // 띄울창의 가로사이즈
@@ -103,9 +106,12 @@ function gofileView(tcode){
 
 //하위 업무 띄우려고 page load
 function downtaskView(tcode){
+	if(confirm('하위 업무의 파일을 보시겠습니까?')==true){
 	 $("#publictaskList").load("/project/file/downview?tcode="+tcode);
 	 $btntag=' <button class="btn" type="button" onclick="goroot('+pcode+')" style="outline:none;border:0px; background-color:#ed8151;color:white;">최상위 업무로 이동</button>';
 	 $("#rootbtn").append($btntag);
+	 }
+	else return;
 }
 
 
