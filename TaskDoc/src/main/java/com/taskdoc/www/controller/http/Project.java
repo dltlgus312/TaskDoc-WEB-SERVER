@@ -111,19 +111,19 @@ public class Project {
 	//개인업무 메인
 	@RequestMapping(value = "/privateTask/main", method = RequestMethod.GET)
 	public String privateTaskMain() {
-		return "privateTaskMain";
+		return "/active/privatetask/main";
 	}
 	
 	//개인 업무 생성
 	@RequestMapping(value = "/privateTask/create", method = RequestMethod.GET)
 	public String privateTaskCreate() {
-		return "/active/temp/privatetaskcreate";
+		return "/active/privatetask/window/create";
 	}
 	
 	//개인 업무 수정
 	@RequestMapping(value = "/privateTask/edit", method = RequestMethod.GET)
 	public String privateTaskEdit() {
-		return "privateTaskEdit";
+		return "/active/privatetask/window/edit";
 	}
 	
 	//공용업무의 파일
@@ -147,7 +147,7 @@ public class Project {
 	//간트
 	@RequestMapping(value = "/gantt/main", method = RequestMethod.GET)
 	public String gantView() {
-		return "/active/gantt/main";
+		return "/active/gantt/view";
 	}
 	
 	

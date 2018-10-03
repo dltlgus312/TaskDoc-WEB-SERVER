@@ -57,5 +57,10 @@ public class User {
 		return "/user/setting";
 	}
 	
+	@RequestMapping(value = "/downloadForm", method = RequestMethod.GET)
+	public String downloadForm() {
+		return "/user/downloadForm";
+	}
+	
 
 }

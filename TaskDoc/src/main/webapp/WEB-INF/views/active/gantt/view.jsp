@@ -4,6 +4,8 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/fix/header.jsp"%>
+<script src="${pageContext.request.contextPath }/resources/js/project/jsgantt.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/project/jsgantt.css" >
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
@@ -50,7 +52,7 @@ $(function(){
 
 					<!-- CHAT CONTENTS  -->
 					<div  style="width: 100%; height: 93%;">
-					간트시발
+					<div style="position:relative" class="gantt" id="GanttChartDIV"></div>
 					</div>
 				</div>
 
@@ -64,5 +66,20 @@ $(function(){
 	<!--FRAME  -->
 </body>
 
+<script type="text/javascript">
+	var g = new JSGantt.GanttChart('g',document.getElementById('GanttChartDIV'), 'day');
+	g.setShowRes(1); // Show/Hide Responsible (0/1)
+	g.setShowDur(1); // Show/Hide Duration (0/1)
+	g.setShowComp(1); // Show/Hide % Complete(0/1)
+	g.setCaptionType('Resource');  // Set to Show Caption
+
+	if( g ) {
+	  g.AddTaskItem(new JSGantt.TaskItem(1,   '1',     '',          '',          'ff0000', 'http://help.com', 0, 'Brian',     0, 1, 0, 1));
+	  g.AddTaskItem(new JSGantt.TaskItem(11,  '1-1',         '9/10/2018', '9/27/2018', 'ff00ff', 'http://www.yahoo.com', 1, 'Shlomy',  100, 0, 1, 1));
+	  g.Draw();	
+	  g.DrawDependencies();
+	}
+	else{alert("not defined");}
+</script>
 
 </html>
