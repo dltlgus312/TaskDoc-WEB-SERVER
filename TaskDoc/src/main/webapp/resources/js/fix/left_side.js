@@ -55,7 +55,7 @@ $(function() {
 	
 	//left_side project모양클릭시 개인 task로이동
 	$("#task").click(function() {
-		location.href = '/';
+		location.href = '/project/privateTask/main';
 	});
 	
 	//left_side project모양클릭시 user information 으로이동

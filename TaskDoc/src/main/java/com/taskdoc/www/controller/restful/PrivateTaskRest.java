@@ -24,6 +24,11 @@ public class PrivateTaskRest {
 		return service.privateTaskList(uid);
 	}
 
+	@RequestMapping(value = "/{ptcode}", method = RequestMethod.GET)
+	public PrivateTaskVO view(@PathVariable int ptcode) {
+		return service.privateTaskView(ptcode);
+	}
+
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public int insert(@RequestBody PrivateTaskVO privateTaskVo) {
 		return service.privateTaskInsert(privateTaskVo);

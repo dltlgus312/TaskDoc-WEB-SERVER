@@ -10,6 +10,10 @@
 		SELECT * FROM privatetask WHERE tcode=#{tcode} AND uid=#{uid} ORDER BY ptrefference ASC, ptcode ASC;
 	</select>
 	
+	<select id ="view" resultType="privatetask">
+		SELECT ptcode,pttitle,ptcolor,ptsdate,ptedate,ptpercent,ptsequence,ptrefference,tcode,uid FROM privatetask where ptcode=#{ptcode};
+	</select>
+	
 	<select id="idlist" resultType="privatetask">
 		SELECT * FROM privatetask WHERE uid=#{uid}ORDER BY ptrefference ASC, ptcode ASC;
 	</select>

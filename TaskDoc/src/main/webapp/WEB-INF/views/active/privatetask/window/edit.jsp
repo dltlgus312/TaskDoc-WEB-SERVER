@@ -18,28 +18,28 @@
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
-	String tcode = request.getParameter("tcode");
+	String ptcode = request.getParameter("ptcode");
 %>
 
 
 </head>
 <body>
 	<div class="container">
-		<h2>공용업무 수정</h2>
-		<p>공용업무를 수정해보세요</p>
+		<h2>개인 업무 수정</h2>
+		<p>개인 업무를 수정해보세요</p>
 
 		<div class="tab-content">
 			<div id="home" class="tab-pane fade in active">
 				<div class="main"
 					style="border: 1px solid rgba(0, 0, 0, 0.2); box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5); background-color: white; display: contents;">
 					<div  class="bts" style="width: 100%; margin-top: 10px;">
-						<span>공용업무 제목</span> <input id="pttitle"
+						<span>개인 업무 제목</span> <input id="pttitle"
 							style="width: 80%; margin-top: 5px;" type="text"
 							class="form-control" maxlength="20">
 					</div>
 					
 					<div  class="bts" style="width: 100%; margin-top: 10px;">
-						<p style="margin-top:20px;"> 공용업무 색상: <input class="jscolor" onchange="update(this.jscolor)" value="" style="width:60px;"> </p>
+						<p style="margin-top:20px;"> 개인 업무 색상: <input class="jscolor" onchange="update(this.jscolor)" value="" style="width:60px;"> </p>
 					</div>
 					
 					<div class="bts" style="width: 100%; margin-top: 10px;">
@@ -69,9 +69,6 @@
 					
 					<div id="7" style="width: 100%; margin-top: 30px;">
 						<div class="bts" style="height: 70%; margin-top: 16px;">
-							<button type="button" onclick="prodeldel()"
-								style="margin-left: 7px; float: left; background-color: #ed8151; border: 0; outline: none;"
-								class="btn btn-success">프로젝트 삭제하기</button>
 							<button type="button"
 								style="float: right; margin-right: 7px; background-color: #ed8151; border: 0; outline: none;"
 								class="btn btn-success" onclick="cancel()">Cancel</button>
@@ -86,21 +83,21 @@
 </body>
 
 <script type="text/javascript">
-//공용업무 정보받아오기
+//개인 업무 정보받아오기
 $(document).ready(function() {
 	$.ajax({
 		type : 'GET',
-		url : '/publictask/publicTaskView/'+<%=tcode%>,
+		url : '/privatetask/'+<%=ptcode%>,
 		success : function(response) {
 			if (Object.keys(response).length>0) {
 				alert('공용업무 조회 완료!');
-				$("#pttitle").val(response.ttitle);
-				$("#ptcolor").val(response.tcolor);
-				$("#ptsdate").val(response.tsdate);
-				$("#ptedate").val(response.tedate);
-				$("#ptpercent").val(response.tpercent);
-				$("#ptsequence").val(response.tsequence);
-				$("#ptrefference").val(response.trefference);
+				$("#pttitle").val(response.pttitle);
+				$("#ptcolor").val(response.ptcolor);
+				$("#ptsdate").val(response.ptsdate);
+				$("#ptedate").val(response.ptedate);
+				$("#ptpercent").val(response.ptpercent);
+				$("#ptsequence").val(response.ptsequence);
+				$("#ptrefference").val(response.ptrefference);
 			} else {
 				alert('Server or Client ERROR, 공용업무 조회 실패');
 			}
@@ -124,7 +121,7 @@ function update(jscolor) {
 }	 
 
 
-//프로젝트 수정시 datepicker api사용
+//날짜 수정시 datepicker api사용
 $(function() {
 	$.datepicker.regional['ko'] = {
 		closeText : '닫기',
@@ -173,33 +170,33 @@ function cancel() {
 }
 
 
-//공용업무 수정.
+//개인 업무 수정.
 function edit(){
 /* re = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
 	if(re.test($("#pttitle").val())){
 		alert('프로젝트 제목에 특수문자를 넣을 수 없 습ㄴ ㅣ 다!');
 	}else{ */
 		var param = {
-			'ttitle' : $("#pttitle").val(),
-			'tcolor' : mycolor,
-			'tsdate' : $("#ptsdate").val(),
-			'tedate' : $("#ptedate").val(),
-			'tpercent' : $("#ptpercent").val(),
-			'trefference' : $("#ptrefference").val(),
-			'tsequence' : $("#ptsequence").val(),
-			'tcode' : <%=tcode%>
+			'pttitle' : $("#pttitle").val(),
+			'ptcolor' : mycolor,
+			'ptsdate' : $("#ptsdate").val(),
+			'ptedate' : $("#ptedate").val(),
+			'ptpercent' : $("#ptpercent").val(),
+			'ptrefference' : $("#ptrefference").val(),
+			'ptsequence' : $("#ptsequence").val(),
+			'ptcode' : <%=ptcode%>
 		};
 		$.ajax({
 			type : 'PUT',
-			url : '/publictask',
+			url : '/privatetask',
 			contentType : 'application/json',
 			data : JSON.stringify(param),
 			success : function(response) {
 				if (response == 1) {
-					alert('공용업무 수정 완료!');
+					alert('개인 업무 수정 완료!');
  					//opener.location.reload(); 
 				} else if (response == -1) {
-					alert('Server or Client ERROR, 공용업무 수정 실패');
+					alert('Server or Client ERROR, 개인 업무 수정 실패');
 				}
 			},
 			error : function(e) {

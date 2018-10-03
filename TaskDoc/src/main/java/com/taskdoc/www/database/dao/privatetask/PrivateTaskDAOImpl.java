@@ -18,6 +18,7 @@ public class PrivateTaskDAOImpl implements PrivateTaskDAO {
 	
 	private final String NAMESPACE = "privatetask_SQL.";
 	private final String UIDLIST = "idlist";
+	private final String VIEW="view";
 	private final String TCODELIST = "codelist";
 	private final String INSERT = "insert";
 	private final String UPDATE = "update";
@@ -84,6 +85,11 @@ public class PrivateTaskDAOImpl implements PrivateTaskDAO {
 	public Integer sameRefMax(int ptrefference) {
 		// TODO Auto-generated method stub
 		return sql.selectOne(NAMESPACE + SAMEREFMAX, ptrefference);
+	}
+
+	@Override
+	public PrivateTaskVO privateTaskView(int ptcode) {
+		return sql.selectOne(NAMESPACE + VIEW ,ptcode);
 	}
 	
 }

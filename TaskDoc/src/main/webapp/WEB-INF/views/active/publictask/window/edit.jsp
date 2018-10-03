@@ -69,9 +69,6 @@
 					
 					<div id="7" style="width: 100%; margin-top: 30px;">
 						<div class="bts" style="height: 70%; margin-top: 16px;">
-							<button type="button" onclick="prodeldel()"
-								style="margin-left: 7px; float: left; background-color: #ed8151; border: 0; outline: none;"
-								class="btn btn-success">프로젝트 삭제하기</button>
 							<button type="button"
 								style="float: right; margin-right: 7px; background-color: #ed8151; border: 0; outline: none;"
 								class="btn btn-success" onclick="cancel()">Cancel</button>
