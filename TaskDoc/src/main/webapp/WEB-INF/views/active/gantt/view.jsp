@@ -72,12 +72,32 @@ $(function(){
 	g.setShowDur(1); // Show/Hide Duration (0/1)
 	g.setShowComp(1); // Show/Hide % Complete(0/1)
 	g.setCaptionType('Resource');  // Set to Show Caption
-
-	if( g ) {
-	  g.AddTaskItem(new JSGantt.TaskItem(1,   '1',     '',          '',          'ff0000', 'http://help.com', 0, 'Brian',     0, 1, 0, 1));
-	  g.AddTaskItem(new JSGantt.TaskItem(11,  '1-1',         '9/10/2018', '9/27/2018', 'ff00ff', 'http://www.yahoo.com', 1, 'Shlomy',  100, 0, 1, 1));
-	  g.Draw();	
-	  g.DrawDependencies();
+/* 	g.setDateInputFormat ('yyyy-mm-dd');
+ */	if( g ) { 
+		
+		$.ajax({
+			type : 'GET',
+			url : '/publictask/' + pcode,
+			success : function(response) {
+				if (response.length>0) {
+					alert('공용 업무 조회 성공!');
+					for(var i=0;i<response.length;i++){
+						g.AddTaskItem(new JSGantt.TaskItem(i, response[i].ttitle,'3/18/2018', '5/18/2018',response[i].tcolor, '', 0, 'TaskDoc',response[i].tpercent, 0, 0, 1));
+					}
+				} else {
+					alert('Server or Client ERROR, 공용 업무 조회 실패');
+				}
+				g.Draw();	
+				g.DrawDependencies();
+			},
+			error : function(e) {
+				alert("ERROR : " + e.statusText);
+			}
+		});
+			//'pid' , '제목' , '시작날짜' , '끝나는날짜', '색상' , '링크(비워놔도됨)' ,'끝냈는여부 0->진행중 1->종료' , '이름' , '퍼센트','업무접을지여부(0->안접음 1->접음)','부모pid(내가부모면 0)',1,'화살표표시'
+		   /*  g.AddTaskItem(new JSGantt.TaskItem(1,  '테스트1','2/20/2018', '6/10/2018', 'ff00ff', '', 0, 'Dongho1','', 1, 0, 1));
+		    g.AddTaskItem(new JSGantt.TaskItem(11, '테스트1-1','2/25/2018', '2/31/2018','00ff00', '', 0, 'Dongho1-1',40, 0, 1, 1,1));
+		    g.AddTaskItem(new JSGantt.TaskItem(12,'테스트1-2','2/25/2018', '2/31/2018','00ff00', '', 0, 'Dongho1-2',40, 0, 1, 1,1)); */
 	}
 	else{alert("not defined");}
 </script>
