@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.taskdoc.www.database.dto.DecisionItemVO;
 import com.taskdoc.www.database.dto.VoterVO;
 import com.taskdoc.www.service.voter.VoterService;
 import com.taskdoc.www.system.JsonMapper;
@@ -24,6 +25,11 @@ public class VoterRest {
 	@RequestMapping(value="/{dsicode}", method = RequestMethod.GET)
 	public List<VoterVO> list(@PathVariable int dsicode) {
 		return service.voterList(dsicode);
+	}
+
+	@RequestMapping(value="/check/{dscode}", method = RequestMethod.GET)
+	public List<String> check(@PathVariable int dscode) {
+		return service.voterCheck(dscode);
 	}
 	
 	@RequestMapping(value="", method = RequestMethod.POST)

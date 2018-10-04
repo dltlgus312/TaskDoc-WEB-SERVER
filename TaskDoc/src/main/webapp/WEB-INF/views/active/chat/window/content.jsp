@@ -25,8 +25,13 @@ String crcode=request.getParameter("crcode");
    	 var concat=JSON.parse(test);
    	alert(concat);
     }); --%>
-    
-    
+var screenW = screen.availWidth;  // 스크린 가로사이즈
+var screenH = screen.availHeight; // 스크린 세로사이즈
+var popW = 600; // 띄울창의 가로사이즈
+var popH = 350; // 띄울창의 세로사이즈
+var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
+var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션     
+   
 var pageopen=true;
 $(function(){
 	//채팅메뉴 누르면 나올 div(position=absolute)의 margin-top과 margin-right값을 설정해줘야한다.
@@ -39,13 +44,13 @@ $(function(){
 	//프로젝트톡, OWNER
 	if(parseInt(<%=crmode%>)==1 &&chatpermission=="OWNER"){
 		$setdiv='<img onclick="votercreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_voter.png" data-toggle="tootlip" data-placement="bottom" title="의사 결정 생성"  style="height:100%;float:left;padding-right:30px;cursor:pointer;">'
-		+'<img onclick="filecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_fileupload.png" data-toggle="tootlip" data-placement="bottom" title="파일 업로드" style="height:100%;float:left;padding-right:30px;cursor:pointer;">'
+		+'<img onclick="filecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_fileupload.png" data-toggle="tootlip" data-placement="bottom" title="자료 업로드" style="height:100%;float:left;padding-right:30px;cursor:pointer;">'
 		+'<img onclick="conferencecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_conference.png"data-toggle="tootlip" data-placement="bottom" title="회의록 생성" style="height:100%;float:left;cursor:pointer;">'
 		+'<img onclick="menubtn('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
 		
-		$setmenudiv= '<div style="width:100%;height:24%; border-bottom: 3px solid #ed8151;">업로드된 파일</div>'
-		+'<div style="width:100%;height:24%; border-bottom: 3px solid #ed8151;">의사결정</div>'
+		$setmenudiv= '<div id="dlist" style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">자료</div>'
+		+'<div id="delist" style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">의사결정</div>'
 		+'<div style="width:100%;height:24%; border-bottom: 3px solid #ed8151;">회의록</div>'
 		+'<div style="width:100%;height:24%; overflow:auto;">참여중인 회원<div id="userlist"> </div></div>'
 		+'<div class="bts" style="width:100%;height:4%;"><button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatclose()">닫기</button></div>';
@@ -58,8 +63,8 @@ $(function(){
 		+'<img onclick="menubtn('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
 		
-		$setmenudiv= '<div style="width:100%;height:100px; border-bottom: 3px solid #ed8151;">업로드된 파일</div>'
-		+'<div style="width:100%;height:24%; border-bottom: 3px solid #ed8151;">의사결정</div>'
+		$setmenudiv= '<div id="dlist" style="overflow:auto; width:100%;height:100px; border-bottom: 3px solid #ed8151;">자료</div>'
+		+'<div id="delist" style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">의사결정</div>'
 		+'<div style="width:100%;height:24%; border-bottom: 3px solid #ed8151;">회의록</div>'
 		+'<div style="width:100%;height:24%; overflow:auto;">참여중인 회원<div id="userlist"></div></div>'
 		+'<div class="bts" style="width:100%;height:4%;"><button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatclose()">닫기</button></div>';
@@ -73,7 +78,7 @@ $(function(){
 		+'<img onclick="menubtn('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
 		
-		$setmenudiv= '<div style="width:100%; height: calc(500 / 3)">업로드된 파일</div><div id="userlist" >참여중인 회원 <div id="userlist">'
+		$setmenudiv= '<div id="dlist" style="overflow:auto; width:100%; height: calc(500 / 3)">자료</div><div id="userlist" >참여중인 회원 <div id="userlist">'
 		+'</div></div><div class="bts"><button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatout('+<%=crcode%>+')">나가기</button><button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatclose()">닫기</button> </div>';
 		$("#chatsetbtnmenu").append($setmenudiv);
 	}
@@ -111,6 +116,48 @@ function menubtn(code){
 					alert("ERROR : " + e.statusText);
 				}
 			});
+			
+			//자료를 조회해 보자
+			$.ajax({
+				type : 'GET',
+				url : '/document/room/'+<%=crcode%>,
+				success : function(response) {
+					if (response.length>0) {
+						alert('자료 조회 성공')
+						for(var i=0;i<response.length;i++){
+							$dlist='<div style="margin-bottom:3px;"><img src="${pageContext.request.contextPath }/resources/img/img_filetask.png" style="width:32px;height:32px;">'
+							+'<span style="font-size:20px;cursor:pointer;" onclick="fileDownload('+response[i].dmcode+')">' +response[i].dmtitle+'('+response[i].uid + ')'+ '</span></div>';
+							$("#dlist").append($dlist);
+						}
+					} else{
+						alert('Server or Client ERROR, 자료 조회 실패');
+					}
+				},
+				error : function(e) {
+					alert("ERROR : " + e.statusText);
+				}
+			});
+			
+			//의사결정을 조회해 보자
+			$.ajax({
+				type : 'GET',
+				url : '/decision/room/'+<%=crcode%>,
+				success : function(response) {
+					if (response.length>0) {
+						alert('의사 결정 조회 성공');
+						for(var i=0;i<response.length;i++){
+							$delist='<div style="margin-bottom:3px;"><img src="${pageContext.request.contextPath }/resources/img/img_vote.png" style="width:32px;height:32px;">'
+							+'<span style="font-size:20px;cursor:pointer;" onclick="selectDecision(\''+response[i].dstitle + ',' + response[i].dsdate +'\',' +response[i].dscode+','+response[i].dsclose+','+response[i].tcode+ ')">'+response[i].dstitle+ '</span></div>';
+							$("#delist").append($delist);
+						}
+					} else{
+						alert('Server or Client ERROR, 자료 조회 실패');
+					}
+				},
+				error : function(e) {
+					alert("ERROR : " + e.statusText);
+				}
+			});
 		}
 	else $("#chatsetbtnmenu").hide(1000);
 } 
@@ -118,22 +165,39 @@ function menubtn(code){
 //의사결정생성 
 function votercreate(code){
 	alert(code+"의사결정");
-	var screenW = screen.availWidth;  // 스크린 가로사이즈
-	var screenH = screen.availHeight; // 스크린 세로사이즈
-	var popW = 600; // 띄울창의 가로사이즈
-	var popH = 350; // 띄울창의 세로사이즈
-	var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
-	var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
 	if(confirm('투표를 생성하시겠습니까?')==true){
 		window.open("/chat/decisionCreate?crcode="+code+"&pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 		}
 	else return;
 	}
 
-//파일업로드
+//의사결정 조회
+function selectDecision(dstitle, dscode, dsclose,tcode)
+{
+	var list=[];
+	list=dstitle.split(",");
+	alert(list[0]);
+	alert(list[1]);
+	
+	//의사결정끝남
+	if(dsclose>0)
+		window.open("/chat/decisionView?dscode="+dscode+"&dstitle="+list[0] +"&dsdate="+list[1],"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+	else	
+		window.open("/chat/decisionSelect?dscode="+dscode+"&dstitle="+list[0] +"&dsdate="+list[1] +"&permission="+chatpermission +"&tcode="+tcode ,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+}	
+
+//자료 업로드
 function filecreate(code){
-	alert(code+"파일업로드");
+	alert(code+"자료 업로드");
+	if(confirm('자료를 업로드 하시겠습니까?')==true){
+		window.open("/chat/fileUpload?crcode="+code+"&pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+		}
+	else return;
 }
+
+//자료 다운할 window
+function fileDownload(code){
+	window.open("/chat/fileDownload?dmcode="+code,"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); }
 
 //회의록생성
 function conferencecreate(code){
@@ -168,6 +232,7 @@ function chatout(crcode){
 	}else return;
 }
 
+//채팅방 닫기
 function chatclose(){
 	pageopen=false;
 	$("#chatmenu").remove();

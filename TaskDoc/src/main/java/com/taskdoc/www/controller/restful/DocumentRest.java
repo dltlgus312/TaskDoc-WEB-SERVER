@@ -1,12 +1,7 @@
 package com.taskdoc.www.controller.restful;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +31,12 @@ public class DocumentRest {
 	@RequestMapping(value = "/taskView/{tcode}", method = RequestMethod.GET)
 	public Map<String,Object> taskView(@PathVariable int tcode) {
 		return service.taskView(tcode);
+	}
+	
+	//dmcode로 documentVO랑, fileVo 정보 가져오기
+	@RequestMapping(value = "/{dmcode}", method = RequestMethod.GET)
+	public Map<String,Object> fileView(@PathVariable int dmcode) {
+		return service.fileView(dmcode);
 	}
 	
 	

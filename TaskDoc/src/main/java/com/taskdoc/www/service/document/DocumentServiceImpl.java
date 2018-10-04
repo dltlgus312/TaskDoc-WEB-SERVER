@@ -182,4 +182,18 @@ public class DocumentServiceImpl implements DocumentService {
 		return a;
 	}
 
+	@Override
+	public Map<String, Object> fileView(int dmcode) {
+		DocumentVO dvo= documentDao.documentView(dmcode);
+		List<FileVO> fvo=new ArrayList<>();
+		
+		fvo.addAll(fileDao.fileList(dvo.getDmcode()));
+		
+		Map<String, Object> a=new HashMap<>();
+		a.put("document", dvo);
+		a.put("file", fvo);
+		
+		return a;
+	}
+
 }

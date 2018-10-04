@@ -2,6 +2,7 @@ package com.taskdoc.www.service.voter;
 
 import java.util.List;
 
+import com.taskdoc.www.database.dto.DecisionItemVO;
 import com.taskdoc.www.database.dto.VoterVO;
 
 public interface VoterService {
@@ -9,4 +10,7 @@ public interface VoterService {
 	public int voterInsert(VoterVO voterVo);
 	public int voterUpdate(VoterVO oldVo, VoterVO newVo)  throws Exception;
 	public int voterDelete(VoterVO voterVo);
+	public List<String> voterCheck(int dscode);
+	
+	
 }

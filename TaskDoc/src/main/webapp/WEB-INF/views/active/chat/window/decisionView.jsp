@@ -12,7 +12,6 @@
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
 %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/fix/session.js"></script>
 
 
 </head>

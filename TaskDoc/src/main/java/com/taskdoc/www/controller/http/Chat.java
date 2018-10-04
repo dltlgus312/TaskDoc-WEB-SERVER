@@ -33,10 +33,16 @@ public class Chat {
 		return "/active/chat/window/userInvite";
 	}
 	
-	//채팅에서 파일업로드
+	//채팅에서 파일 업로드
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.GET)
 	public String fileUpload() {
 		return "/active/chat/window/fileUpload";
+	}
+	
+	//채팅에서 파일 다운로드
+	@RequestMapping(value = "/fileDownload", method = RequestMethod.GET)
+	public String fileDownload() {
+		return "/active/chat/window/fileDownload";
 	}
 
 	//채팅에서 의사 결정 생성
