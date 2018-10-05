@@ -22,9 +22,6 @@
 		<div class="row">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close">
-						<i class="fa fa-times"></i>
-					</button>
 					<h4 class="modal-title">투표를 진행해주세요!</h4>
 				</div>
 
