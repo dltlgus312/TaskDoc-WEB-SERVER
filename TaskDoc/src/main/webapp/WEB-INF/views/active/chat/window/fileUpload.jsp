@@ -3,11 +3,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<style>
+	.progress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
+	.bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
+	.percent { position:absolute; display:inline-block; top:3px; left:48%; }
+</style>
+
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="http://malsup.github.com/jquery.form.js"></script>
+	
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
@@ -24,7 +33,7 @@ if (id == "null") {
 
 </head>
 <body>
-	<form method="POST" enctype="multipart/form-data" id="fileUploadForm">
+	<form method="POST" enctype="multipart/form-data" id="fileUploadForm" action="/document/upload">
 		<div class="container">
 			<div class="row">
 				<div class="modal-content">
@@ -48,29 +57,31 @@ if (id == "null") {
 									<label style="margin-top :10px;">파일을 업로드 해주세요</label>
 									<input type="file" name="file">
 								</div>
+								
+								<div class="progress" style="margin-top:10px;">
+									<div class="bar"></div>
+								    <div class="percent">0%</div>
+								</div>
+								
 							</div>
-		
-							
 							<div class="modal-footer">
 								<input id="btnSubmit" type="submit" class="btn" style="background-color:#ed8151;color:white;" value="생성">
 								<button type="button" class="btn"
-									onclick="decisionCancel()" style="background-color:#ed8151;color:white;">
+									onclick="fileCancel()" style="background-color:#ed8151;color:white;">
 									 Cancel
 								</button>
 							</div>
 						</div>
-					
+					</div>
 				</div>
 			</div>
-		</div>
-		
-		<!--hidden값   -->
-		<div style="display:none;">
-			<input type="text" name="crcode" id="crcode">
-			<input type="text" name="tcode" id="tcode">
-			<input type="text" name="uid" id="uid">
-		</div>
-	
+			
+			<!--hidden값   -->
+			<div style="display:none;">
+				<input type="text" name="crcode" id="crcode">
+				<input type="text" name="tcode" id="tcode">
+				<input type="text" name="uid" id="uid">
+			</div>
 	</form>
 </body>
 
@@ -94,40 +105,38 @@ $(function(){
 			alert("ERROR : " + e.statusText);
 		}
 	}); 
-	$("#btnSubmit").click(function (event) {
+ 
+		var bar = $('.bar');
+	    var percent = $('.percent');
+	    var status = $('#status');
 		$("#crcode").val(<%=crcode%>);
-		$("#tcode").val($("#whattask option:selected").val());
+		$("#tcode").val(33);
 		$("#uid").val(id);
-
-		event.preventDefault();
-        
-		var form = $('#fileUploadForm')[0];
-        var data = new FormData(form);
-
-        $("#btnSubmit").prop("disabled", true);
-
-        $.ajax({
-            type: "POST",
-            enctype: 'multipart/form-data',
-            url: "/document/upload",
-            data: data,
-            processData: false,
-            contentType: false,
-            cache: false,
-            timeout: 600000,
-            success: function (data) {
-            	alert("complete");
-                $("#btnSubmit").prop("disabled", false);
-            },
-            error: function (e) {
-                console.log("ERROR : ", e);
-                $("#btnSubmit").prop("disabled", false);
-                alert("fail");
-            }
-        });
-
+		
+		$('form').ajaxForm({
+	        beforeSend: function() {
+	            status.empty();
+	            var percentVal = '0%';
+	            bar.width(percentVal);
+	            percent.html(percentVal);
+	        },
+	        uploadProgress: function(event, position, total, percentComplete) {
+	            var percentVal = percentComplete + '%';
+	            bar.width(percentVal);
+	            percent.html(percentVal);
+	        },
+	        complete: function() {
+	        	alert('파일업로드 완료');
+	        },
+	        error : function(e) {
+				alert("파일 업로드 ERROR : " + e.statusText);
+			}
     });
 });
+
+function fileCancel(){
+	window.close();
+}
 </script>
 
 </html>

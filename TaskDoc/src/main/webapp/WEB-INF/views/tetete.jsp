@@ -4,9 +4,18 @@
 <html>
 
 <head>
+
+	<style>
+		.progress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
+		.bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
+		.percent { position:absolute; display:inline-block; top:3px; left:48%; }
+	</style>
+	
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/project/jsgantt.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/project/jsgantt.css" >
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
 </head>
 
 
@@ -14,25 +23,48 @@
  <!-- dmtitle, crcode, uid, [tcode]  --> 
 	<!-- <div style="position:relative" class="gantt" id="GanttChartDIV"></div> -->
 
- <form action="/document/upload" enctype="multipart/form-data" method="POST">
+<form action="/document/upload" enctype="multipart/form-data" method="POST">
       <input name="dmtitle" value="테스트1"/>
       <input name="dmcontents" value="테스트 자료입니다."/>
       <input name="crcode" value="1"/>
       <input name="tcode" value="33"/>
       <input name="uid" value="a"/>
       <input type="file" name="file"/>
-      <input type="submit">
+      <input type="submit" value="upload">
 </form>	 
 
-<div id="aa">zz</div>
+<div class="progress">
+    <div class="bar"></div>
+    <div class="percent">0%</div>
+</div>
+<div id="status"></div>
+
 
 </body>
 
 <script type="text/javascript">
-$("#aa").click(function(){
-	var $a='<form action="file/download/'+6+'" method="POST"><input type="submit" value="다운로드"></form> ';
-	$("#aa").append($a);
-});
+$(function() {
+    var bar = $('.bar');
+    var percent = $('.percent');
+    var status = $('#status');
+    $('form').ajaxForm({
+        beforeSend: function() {
+            status.empty();
+            var percentVal = '0%';
+            bar.width(percentVal);
+            percent.html(percentVal);
+        },
+        uploadProgress: function(event, position, total, percentComplete) {
+            var percentVal = percentComplete + '%';
+            bar.width(percentVal);
+            percent.html(percentVal);
+        },
+        complete: function(xhr) {
+            status.html(xhr.responseText);
+        }
+        
+    });
+}); 
   /* 
   var g = new JSGantt.GanttChart('g',document.getElementById('GanttChartDIV'), 'day');
   g.setShowRes(1); // Show/Hide Responsible (0/1)

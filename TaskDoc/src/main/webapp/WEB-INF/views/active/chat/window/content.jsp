@@ -52,7 +52,7 @@ $(function(){
 		$setmenudiv= '<div id="dlist" style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">자료</div>'
 		+'<div id="delist" style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">의사결정</div>'
 		+'<div style="width:100%;height:24%; border-bottom: 3px solid #ed8151;">회의록</div>'
-		+'<div style="width:100%;height:24%; overflow:auto;">참여중인 회원<div id="userlist"> </div></div>'
+		+'<div id="ulist"style="width:100%;height:24%; overflow:auto;">참여중인 회원<div id="userlist"> </div></div>'
 		+'<div class="bts" style="width:100%;height:4%;"><button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatclose()">닫기</button></div>';
 		$("#chatsetbtnmenu").append($setmenudiv);
 	}
@@ -66,7 +66,7 @@ $(function(){
 		$setmenudiv= '<div id="dlist" style="overflow:auto; width:100%;height:100px; border-bottom: 3px solid #ed8151;">자료</div>'
 		+'<div id="delist" style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">의사결정</div>'
 		+'<div style="width:100%;height:24%; border-bottom: 3px solid #ed8151;">회의록</div>'
-		+'<div style="width:100%;height:24%; overflow:auto;">참여중인 회원<div id="userlist"></div></div>'
+		+'<div id="ulist" style="width:100%;height:24%; overflow:auto;">참여중인 회원<div id="userlist"></div></div>'
 		+'<div class="bts" style="width:100%;height:4%;"><button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatclose()">닫기</button></div>';
 		$("#chatsetbtnmenu").append($setmenudiv);
 		
@@ -78,7 +78,7 @@ $(function(){
 		+'<img onclick="menubtn('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
 		
-		$setmenudiv= '<div id="dlist" style="overflow:auto; width:100%; height: calc(500 / 3)">자료</div><div id="userlist" >참여중인 회원 <div id="userlist">'
+		$setmenudiv= '<div id="dlist" style="overflow:auto; width:100%; height: calc(500 / 3)">자료</div><div id="ulist" >참여중인 회원 <div id="userlist">'
 		+'</div></div><div class="bts"><button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatout('+<%=crcode%>+')">나가기</button><button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatclose()">닫기</button> </div>';
 		$("#chatsetbtnmenu").append($setmenudiv);
 	}
@@ -91,6 +91,12 @@ $(function(){
 function menubtn(code){
 	if($("#chatsetbtnmenu").css("display") == "none"){
 			$("#chatsetbtnmenu").show(1000);
+			
+			//메뉴열 때 delist의 하위 요소 모두 삭제
+			$("#delist").empty();
+			$("#dlist").empty();
+			$("#userlist").empty();
+			
 			// 채팅방에 참여 중인 유저 리스트 
 			var param = {
 				'crcode' : code,
@@ -120,7 +126,7 @@ function menubtn(code){
 			//자료를 조회해 보자
 			$.ajax({
 				type : 'GET',
-				url : '/document/room/'+<%=crcode%>,
+				url : '/document/room/'+code,
 				success : function(response) {
 					if (response.length>0) {
 						alert('자료 조회 성공')
@@ -130,7 +136,7 @@ function menubtn(code){
 							$("#dlist").append($dlist);
 						}
 					} else{
-						alert('Server or Client ERROR, 자료 조회 실패');
+						alert('Server or Client ERROR, 자료가없습니다.');
 					}
 				},
 				error : function(e) {
@@ -141,7 +147,7 @@ function menubtn(code){
 			//의사결정을 조회해 보자
 			$.ajax({
 				type : 'GET',
-				url : '/decision/room/'+<%=crcode%>,
+				url : '/decision/room/'+code,
 				success : function(response) {
 					if (response.length>0) {
 						alert('의사 결정 조회 성공');
@@ -151,7 +157,7 @@ function menubtn(code){
 							$("#delist").append($delist);
 						}
 					} else{
-						alert('Server or Client ERROR, 자료 조회 실패');
+						alert('Server or Client ERROR, 의사 결정 조회 실패');
 					}
 				},
 				error : function(e) {
@@ -179,9 +185,11 @@ function selectDecision(dstitle, dscode, dsclose,tcode)
 	alert(list[0]);
 	alert(list[1]);
 	
-	//의사결정끝남
+	//의사결정 끝남
 	if(dsclose>0)
 		window.open("/chat/decisionView?dscode="+dscode+"&dstitle="+list[0] +"&dsdate="+list[1],"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+	
+	//의사결정 안끝남
 	else	
 		window.open("/chat/decisionSelect?dscode="+dscode+"&dstitle="+list[0] +"&dsdate="+list[1] +"&permission="+chatpermission +"&tcode="+tcode ,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 }	
@@ -189,6 +197,7 @@ function selectDecision(dstitle, dscode, dsclose,tcode)
 //자료 업로드
 function filecreate(code){
 	alert(code+"자료 업로드");
+	var popH = 450; // 띄울창의 세로사이즈
 	if(confirm('자료를 업로드 하시겠습니까?')==true){
 		window.open("/chat/fileUpload?crcode="+code+"&pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 		}

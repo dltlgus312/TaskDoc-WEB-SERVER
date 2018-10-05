@@ -290,47 +290,6 @@
 	});
 	/* /의사결정 아이템 수정*/
 
-	/* 의사결정 아이템 삭제*/
-	$.ajax({
-		type : 'DELETE',
-		url : 'decisionitem/'
-				+ '의사결정 항목을 삭제할 의사결정 항목 DSICODE(항목번호가아닌 primary key)',
-		success : function(response) {
-			if (response == 1) {
-				alert('의사결정 아이템 삭제 완료! ' + response);
-			} else if (response == -1) {
-				alert('Server or Client ERROR, 의사결정 아이템 삭제 실패');
-			}
-		},
-		error : function(e) {
-			alert("ERROR : " + e.statusText);
-		}
-	});
-	/* /의사결정 아이템 삭제*/
-
-
-	/* 의사결정 항목 선택하기*/
-	var param = {
-		'dsicode' : '의사결정 항목의 번호',
-		'uid' : '내아이디'
-	};
-	$.ajax({
-		type : 'POST',
-		url : 'voter',
-		contentType : 'application/json',
-		data : JSON.stringify(param),
-		success : function(response) {
-			if (response == 1) {
-				alert('의사결정 항목 선택 완료! ' + response);
-			} else if (response == -1) {
-				alert('Server or Client ERROR, 의사결정 항목 선택 실패');
-			}
-		},
-		error : function(e) {
-			alert("ERROR : " + e.statusText);
-		}
-	});
-	/*  / 의사결정 항목 선택하기*/
 
 	/* 유저가 어떤 의사결정 항목을 선택했는지 리스트로뿌려라
 	※헷갈리지말것※ 의사결정!코드!도 primary key,
