@@ -132,10 +132,10 @@ function gochatCon(crcode,crmode){
 		if(confirm('프로젝트 채팅에 입장하시겠습니까?')==true){
 			if(chatpermission=="OWNER" &&crmode==1){
 				alert(crcode+","+crmode+", owner다");
-			 	$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode);  
+			 	$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode+"&pcode="+pcode);  
 			}
 			else if(chatpermission=="MEMBER" && crmode==1){
-				$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode);  
+				$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode+"&pcode="+pcode);  
 			}
 		}
 		else return;
@@ -144,7 +144,7 @@ function gochatCon(crcode,crmode){
 	else{
 		if(confirm('개인 채팅에 입장하시겠습니까?')==true){
 			alert(crcode+","+crmode+", owner다");
-			$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode);  
+			$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode+"&pcode="+pcode);  
 		}
 	}
 }

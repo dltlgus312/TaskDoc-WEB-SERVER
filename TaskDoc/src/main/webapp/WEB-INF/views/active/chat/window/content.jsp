@@ -40,13 +40,13 @@ $(function(){
 	
 	//chatsetbtnmenu제어
 	$("#chatsetbtnmenu").css('margin-top',parseInt(prochatsetbtn)).css('margin-right',parseInt(containermargin) + 15 + "px");
-
+	
 	//프로젝트톡, OWNER
 	if(parseInt(<%=crmode%>)==1 &&chatpermission=="OWNER"){
 		$setdiv='<img onclick="votercreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_voter.png" data-toggle="tootlip" data-placement="bottom" title="의사 결정 생성"  style="height:100%;float:left;padding-right:30px;cursor:pointer;">'
 		+'<img onclick="filecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_fileupload.png" data-toggle="tootlip" data-placement="bottom" title="자료 업로드" style="height:100%;float:left;padding-right:30px;cursor:pointer;">'
 		+'<img onclick="conferencecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_conference.png"data-toggle="tootlip" data-placement="bottom" title="회의록 생성" style="height:100%;float:left;cursor:pointer;">'
-		+'<img onclick="menubtn('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
+		+'<img onclick="menubtn('+<%=crcode%>+','+ 1 +')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
 		
 		$setmenudiv= '<div id="dlist" style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">자료</div>'
@@ -60,7 +60,7 @@ $(function(){
 	//프로젝트톡, MEMBER
 	else if(parseInt(<%=crmode%>)==1 && chatpermission=="MEMBER"){
 		$setdiv='<img onclick="filecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_fileupload.png"data-toggle="tootlip" data-placement="bottom" title="파일 업로드" style="height:100%;float:left;cursor:pointer;">'
-		+'<img onclick="menubtn('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
+		+'<img onclick="menubtn('+<%=crcode%>+','+ 1 +')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
 		
 		$setmenudiv= '<div id="dlist" style="overflow:auto; width:100%;height:100px; border-bottom: 3px solid #ed8151;">자료</div>'
@@ -75,7 +75,7 @@ $(function(){
 	//개인톡
 	else if(parseInt(<%=crmode%>)==2){
 		$setdiv='<img onclick="filecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_fileupload.png" data-toggle="tootlip" data-placement="bottom" title="파일 업로드" style="height:100%;float:left;cursor:pointer;">'
-		+'<img onclick="menubtn('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
+		+'<img onclick="menubtn('+<%=crcode%>+','+ 2 +')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
 		
 		$setmenudiv= '<div id="dlist" style="overflow:auto; width:100%; height: calc(500 / 3)">자료</div><div id="ulist" >참여중인 회원 <div id="userlist">'
@@ -88,7 +88,7 @@ $(function(){
 });
 
 //메뉴버튼열기, param - crcode
-function menubtn(code){
+function menubtn(code, crmode){
 	if($("#chatsetbtnmenu").css("display") == "none"){
 			$("#chatsetbtnmenu").show(1000);
 			
@@ -102,6 +102,8 @@ function menubtn(code){
 				'crcode' : code,
 				'pcode' : pcode
 			};
+			
+			//채팅방에 초대되어있는 유저
 			$.ajax({
 				type : 'POST',
 				url : '/chatroomjoin/user',
@@ -144,6 +146,7 @@ function menubtn(code){
 				}
 			});
 			
+			if(crmode==1){
 			//의사결정을 조회해 보자
 			$.ajax({
 				type : 'GET',
@@ -165,6 +168,7 @@ function menubtn(code){
 				}
 			});
 		}
+	}
 	else $("#chatsetbtnmenu").hide(1000);
 } 
 
@@ -209,8 +213,11 @@ function fileDownload(code){
 	window.open("/chat/fileDownload?dmcode="+code,"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); }
 
 //회의록생성
-function conferencecreate(code){
-	alert(code+"회의록");
+function conferencecreate(crcode){
+	if(confirm('회의록을 만드시겠습니까?')==true){
+		window.open("/chat/focusCreate?crcode="+crcode+"&pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+		}
+	else return;
 }
 
 //채팅방나가기
