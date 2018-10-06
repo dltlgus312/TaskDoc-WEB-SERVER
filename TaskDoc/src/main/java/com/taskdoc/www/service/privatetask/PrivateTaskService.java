@@ -10,4 +10,5 @@ public interface PrivateTaskService {
 	public int privateTaskInsert(PrivateTaskVO privateTaskVo);
 	public int privateTaskupdate(PrivateTaskVO privateTaskVo);
 	public int privateTaskDelete(int ptcode);
+	public List<PrivateTaskVO> privateDownTask(int ptrefference);
 }

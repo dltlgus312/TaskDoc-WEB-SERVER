@@ -9,7 +9,12 @@ var chatpermission="";
 
 //시작날짜, 끝날짜도
 var fixpsdate="";
-var fixpedate=""
+var fixpedate="";
+
+var screenW = screen.availWidth;  // 스크린 가로사이즈
+var screenH = screen.availHeight; // 스크린 세로사이즈
+var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션
+var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션
 
 var socket = new SockJS('/goStomp');  //websocket이아닌 SockJS로 접속한다.
 stompClient = Stomp.over(socket); //stompClient에 socket을 넣어준다.
@@ -23,9 +28,12 @@ $(document).ready(function(){
         	 var concat=JSON.parse(test);
         	 if(concat.message=="insert"){
         		 $("#chat"+concat.object.crcode).remove();
+        		 //얘는 leftlist 에 뜨는거 , 날짜 뜨게행야되
         		 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'</span>');
+        		 //얘는 프로젝트대화 메뉴에뜨는거, 날짜 뜨게해야되
+        		 $("#croomsSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'</span>');
         	 
-        		 //content.jsp에 append할것
+        		 //content.jsp에 append할것, 얘도 날짜뜨게해야됨
         		 $aaa='<div><span>'+concat.object.uid+' : '+ concat.object.ccontents +'</span></div>';
         	 	 $("#chatcontentdiv").append($aaa);
         	 }
@@ -164,7 +172,7 @@ $(document).ready(function(){
 									$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:300px;height:80px; border:3px solid #ed8151;">'
 									+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+'프로젝트 채팅방'+'</span></div>' 
 									+'<div style="width:100%;height:50%; overflow:auto;"><img src="/resources/img/img_prochat.png"alt="" style="width: 30px; height:30px;">'
-									+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
+									+'<span id="croomsSpan'+cArray[i].crcode+'"></span></div>'
 									+'<div style="width:100%;height:25%"><span>'+cArray[i].crdate+'</span></div>';
 									$("#chathwamun").append($cdiv);
 								}
@@ -188,8 +196,8 @@ $(document).ready(function(){
 									$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:300px;height:80px; border:3px solid #ed8151; border-top:none;">'
 									+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+ memname +'의채팅방'+'</span></div>'
 									+'<div style="width:100%;height:50%"><img src="/resources/img/img_individualchat.png"alt="" style="width: 30px; height:30px;">'
-									+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
-									+'<div style="width:100%;height:25%"><span>'+cArray[i].crdate+'</span></div';
+									+'<span id="croomsSpan'+cArray[i].crcode+'"></span></div>'
+									+'<div style="width:100%;height:25%"><span id="croomdate'+cArray[i].crcode+'">'+cArray[i].crdate+'</span></div';
 									$("#chathwamun").append($cdiv);
 								}
 							}
@@ -202,18 +210,13 @@ $(document).ready(function(){
 					}
 				});
 	});
-	//docuemnt.ready 끝 
 
 
 	// view page에서 설정 버튼 누를때 나오는 페이지(OWNER)
 	function goproset(pcode){
 			 if(window.confirm('프로젝트 정보 수정  페이지를 띄우시겠습니까?')==true){
-		    	 var screenW = screen.availWidth;  // 스크린 가로사이즈
-		    	 var screenH = screen.availHeight; // 스크린 세로사이즈
 		    	 var popW = 1000; // 띄울창의 가로사이즈
 		    	 var popH = 800 // 띄울창의 세로사이즈
-		    	 var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션
-		    	 var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션
 		    	 window.open("/project/infoEdit?pcode="+pcode,"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no');
 			}
 			else
@@ -222,12 +225,8 @@ $(document).ready(function(){
 	// view page에서 공지사항누를때 나오는 페이지(MEMBER)
 	function gonotice(pcode){
 		if(window.confirm('공지사항  페이지를 띄우시겠습니까?')==true){
-			var screenW = screen.availWidth;  // 스크린 가로사이즈
-			var screenH = screen.availHeight; // 스크린 세로사이즈
 			var popW = 500; // 띄울창의 가로사이즈
 			var popH = 500 // 띄울창의 세로사이즈
-			var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션
-			var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션
 			window.open("/project/noticeMain?pcode="+pcode,"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no');
 		}
 		else

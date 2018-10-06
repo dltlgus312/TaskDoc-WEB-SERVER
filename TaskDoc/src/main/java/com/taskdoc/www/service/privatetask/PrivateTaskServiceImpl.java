@@ -64,4 +64,9 @@ public class PrivateTaskServiceImpl implements PrivateTaskService{
 		return dao.privateTaskView(ptcode);
 	}
 
+	@Override
+	public List<PrivateTaskVO> privateDownTask(int ptrefference) {
+		return dao.privateDownTask(ptrefference);
+	}
+
 }

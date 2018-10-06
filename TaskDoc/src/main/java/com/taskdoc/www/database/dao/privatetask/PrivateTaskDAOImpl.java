@@ -25,6 +25,7 @@ public class PrivateTaskDAOImpl implements PrivateTaskDAO {
 	private final String DELETE = "delete";
 	private final String SELFREFMAX = "selfRefMax";
 	private final String SAMEREFMAX = "sameRefMax";
+	private final String DOWNTASK="downtask";
 
 	@Override
 	public List<PrivateTaskVO> privateTaskList(int tcode, String uid) {
@@ -90,6 +91,11 @@ public class PrivateTaskDAOImpl implements PrivateTaskDAO {
 	@Override
 	public PrivateTaskVO privateTaskView(int ptcode) {
 		return sql.selectOne(NAMESPACE + VIEW ,ptcode);
+	}
+
+	@Override
+	public List<PrivateTaskVO> privateDownTask(int ptrefference) {
+		return sql.selectList(NAMESPACE+DOWNTASK,ptrefference);
 	}
 	
 }

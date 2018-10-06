@@ -40,7 +40,7 @@
 	</insert>
 	
 	<update id="update">
-		UPDATE chatroom SET fctitle=#{fctitle}, close=#{close}, tcode=#{tcode} WHERE crcode=#{crcode}
+		UPDATE chatroom SET fctitle=#{fctitle}, crclose=#{crclose}, tcode=#{tcode} WHERE crcode=#{crcode}
 	</update>
 	
 	<delete id="delete">

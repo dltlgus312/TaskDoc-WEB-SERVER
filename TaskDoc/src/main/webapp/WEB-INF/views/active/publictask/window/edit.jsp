@@ -194,7 +194,7 @@ function edit(){
 			success : function(response) {
 				if (response == 1) {
 					alert('공용업무 수정 완료!');
- 					//opener.location.reload(); 
+ 					opener.location.reload(); 
 				} else if (response == -1) {
 					alert('Server or Client ERROR, 공용업무 수정 실패');
 				}

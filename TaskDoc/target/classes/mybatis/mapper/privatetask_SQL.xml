@@ -26,6 +26,11 @@
 	 	SELECT MAX(ptsequence) FROM privatetask WHERE ptrefference=#{ptrefference} AND NOT ptcode=ptrefference;
 	</select>
 	
+	<!-- 하위 공용업무 조회 -->
+	 <select id="downtask" resultType="privatetask">		
+		SELECT * FROM privatetask WHERE ptrefference=#{ptrefference} AND ptcode!=ptrefference;	
+	</select> 
+	
 	<insert id="insert" parameterType="privatetask" useGeneratedKeys="true" keyProperty="ptcode">
 		INSERT INTO privatetask VALUES(null, #{pttitle}, #{ptcolor}, #{ptsdate}, #{ptedate}, 0, 0, 
 		<choose>

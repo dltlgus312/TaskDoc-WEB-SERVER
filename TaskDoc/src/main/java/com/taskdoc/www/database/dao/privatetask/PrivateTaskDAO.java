@@ -13,4 +13,6 @@ public interface PrivateTaskDAO {
 	public int privateTaskDelete(int ptcode);
 	public Integer selfRefMax(int tcode);
 	public Integer sameRefMax(int ptrefference);
+	public List<PrivateTaskVO> privateDownTask(int ptrefference);
+
 }

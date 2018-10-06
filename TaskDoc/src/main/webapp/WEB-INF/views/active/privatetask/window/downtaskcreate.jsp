@@ -13,13 +13,14 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
 	
+	
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
-	String pcode=request.getParameter("pcode");
+	String ptsdate=request.getParameter("ptsdate");
+	String ptedate=request.getParameter("ptedate");
+	String ptcode=request.getParameter("ptcode");
 	String tcode=request.getParameter("tcode");
-	String psdate=request.getParameter("psdate");
-	String pedate=request.getParameter("pedate");
 %>
 
 <script type="text/javascript">
@@ -29,7 +30,6 @@ var id='<%=loginid%>';
 		window.location.href = '/';
 	}
 	
-var pcode=<%=pcode%>;
 </script>
 </head>
 
@@ -39,26 +39,22 @@ var pcode=<%=pcode%>;
 			<div class="modal-content">
 				
 				<div class="modal-header">
-					<button type="button" class="close">
-						<i class="fa fa-times"></i>
-					</button>
-					<h4 class="modal-title">하위 공용 업무 생성을 환영합니다.</h4>
+					<h4 class="modal-title">하위 개인 업무 생성을 환영합니다.</h4>
 				</div>
 				
 				<div class="modal-body">
-					
 					<div class="form-group">
-						<label>하위 공용업무명</label> 
+						<label>하위 개인 업무명</label> 
 						<input id="pttitle" type="text"	class="form-control" maxlength="20">
-						<p style="margin-top:20px;"> 공용업무 색상: <input class="jscolor" onchange="update(this.jscolor)" value="" style="width:60px;"> </p>	
+						<p style="margin-top:20px;"> 개인 업무 색상: <input class="jscolor" onchange="update(this.jscolor)" value="" style="width:60px;"> </p>	
 					</div>
 					
 					<div>
-						시작날짜: <input class="form-control" type="text" id="psdate">
+						시작날짜: <input class="form-control" type="text" id="ptsdate">
 					</div>
 					
 					<div>
-						종료날짜: <input class="form-control" type="text" id="pedate">
+						종료날짜: <input class="form-control" type="text" id="ptedate">
 					</div>
 					
 					<div class="modal-footer">
@@ -82,8 +78,8 @@ var pcode=<%=pcode%>;
 
 <script type="text/javascript">
 var mycolor="";
-var fixpsdate='<%=psdate%>';
-var fixpedate='<%=pedate%>';
+var fixpsdate="<%=ptsdate%>";
+var fixpedate="<%=ptedate%>";
 $(function() {
 	$.datepicker.regional['ko'] = {
 		closeText : '닫기',
@@ -111,18 +107,18 @@ $(function() {
 	};
 	$.datepicker.setDefaults($.datepicker.regional['ko']);
 	
-	$('#psdate').datepicker();
-	$("#psdate").datepicker("option", "minDate", fixpsdate);
-	$('#psdate').datepicker("option", "maxDate", fixpedate);
-	$('#psdate').datepicker("option", "onClose", function(selectDate) {
-	$("#pedate").datepicker("option", "minDate", selectDate);
+	$('#ptsdate').datepicker();
+	$("#ptsdate").datepicker("option", "minDate", fixpsdate);
+	$('#ptsdate').datepicker("option", "maxDate", fixpedate);
+	$('#ptsdate').datepicker("option", "onClose", function(selectDate) {
+	$("#ptedate").datepicker("option", "minDate", selectDate);
 	});
 
-	$('#pedate').datepicker();
-	$("#pedate").datepicker("option", "minDate", fixpsdate);
-	$("#pedate").datepicker("option", "maxDate", fixpedate);
-	$('#pedate').datepicker("option", "onClose", function(selectDate) {
-	$("#psdate").datepicker("option", "maxDate", selectDate);
+	$('#ptedate').datepicker();
+	$("#ptedate").datepicker("option", "minDate", fixpsdate);
+	$("#ptedate").datepicker("option", "maxDate", fixpedate);
+	$('#ptedate').datepicker("option", "onClose", function(selectDate) {
+	$("#ptsdate").datepicker("option", "maxDate", selectDate);
 	});
 });
 
@@ -141,25 +137,26 @@ function Cancel(){
 function ptCreate(){
 	//하위 공용 업무 생성 
 	var param = {
-		'ttitle' : $("#pttitle").val(),
-		'tcolor' : mycolor,
-		'tsdate' : $("#psdate").val(),
-		'tedate' : $("#pedate").val(),
-		'trefference' : <%=tcode%>,
-		'pcode' : pcode
+		'pttitle' : $("#pttitle").val(),
+		'ptcolor' : mycolor,
+		'ptsdate' : $("#ptsdate").val(),
+		'ptedate' : $("#ptedate").val(),
+		'ptrefference' : <%=ptcode%>,
+		'tcode' : <%=tcode%>,
+		'uid' : '<%=loginid%>'
 	};
 	$.ajax({
 		type : 'POST',
-		url : '/publictask',
+		url : '/privatetask',
 		contentType : 'application/json',
 		data : JSON.stringify(param),
 		success : function(response) {
-			if (response != -1) {
-				alert('공용업무 생성 완료! 프로젝트의 공용업무의 id값은' + response);
+			if (response>0) {
+				alert('개인 업무 생성 완료! 개인 업무의 id값은' + response);
 				opener.location.reload();
 				window.close();
-			} else if (response == -1) {
-				alert('Server or Client ERROR, 공용업무 생성 실패');
+			} else{
+				alert('Server or Client ERROR, 개인업무 생성 실패');
 			}
 		},
 		error : function(e) {
@@ -167,71 +164,5 @@ function ptCreate(){
 		}
 	});
 }
-	
-	/* 
-	
-	//공용 업무안의 새로운 공용 업무 생성 
-	var param = {
-		'ttitle' : ' ',
-		'tcolor' : ' ',
-		'tsdate' : ' ',
-		'tedate' : ' ',
-		'trefference' : '공용업무안의 새로운공용업무를 생성하기위해 부모의 공용업무 값을넣어준다.',
-		'pcode' : '현재 프로젝트 PCODE'
-	};
-	$.ajax({
-		type : 'POST',
-		url : 'publictask',
-		contentType : 'application/json',
-		data : JSON.stringify(param),
-		success : function(response) {
-			if (response != -1) {
-				alert('공용업무 생성 완료! 프로젝트의 공용업무의 id값은' + response);
-			} else if (response == -1) {
-				alert('Server or Client ERROR, 공용업무 생성 실패');
-			}
-		},
-		error : function(e) {
-			alert("ERROR : " + e.statusText);
-		}
-	});
-
-
-
-	// 해당 공용업무내의 모든 회의록 리스트를 가져온다 
-	$.ajax({
-		type : 'GET',
-		url : 'chatroom/task/' + '해당 공용업무의  tcode',
-		success : function(response) {
-			if (response.length != 0) {
-				alert('회의록 리스트 불러오기 성공!');
-			} else if (response.length == 0) {
-				alert('Server or Client ERROR, 회의록 리스트 불러오기 실패');
-			}
-		},
-		error : function(e) {
-			alert("ERROR : " + e.statusText);
-		}
-	});
-	
-	// 해당 공용업무내의 모든 의사결정 리스트를 가져온다 
-	$.ajax({
-		type : 'GET',
-		url : 'decision/task/' + '해당 공용업무의  tcode',
-		success : function(response) {
-			if (response.length != 0) {
-				alert('의사결정 리스트 불러오기 성공!');
-			} else if (response.length == 0) {
-				alert('Server or Client ERROR, 의사결정 리스트 불러오기  실패');
-			}
-		},
-		error : function(e) {
-			alert("ERROR : " + e.statusText);
-		}
-	});
-	
-	
-	 */
-	
 </script>
 </html>

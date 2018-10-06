@@ -26,8 +26,10 @@ $(document).ready(function(){
 						+'<div class="ppc-progress">'
 						+'<div class="ppc-progress-fill" id="fill'+response.tcode+'"></div></div>'
 						+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response.tcode +'">%</span></div></div></div>'
-						+'<div><div><span>시작 날짜 : '+response.tsdate+'</span></div><div><span>종료 날짜 : '+response.tedate+'</span></div><div><button type="button" onclick="downtaskcreate('+response.tcode+')">하위업무생성</button>'
-						+'<button onclick= "ptedit('+response.tcode+')" type="button">수정</button><button type="button" onclick="ptdel('+response.tcode+')">삭제</button></div></div></div></div>';
+						+'<div><div><span>시작 날짜 : '+response.tsdate+'</span></div><div><span>종료 날짜 : '+response.tedate+'</span></div><div class="bts">'
+						+'<button style="border:0px;outline:none;color:white;background-color:#ed8151; font-size:12px; margin-right:5px;" class="btn" type="button" onclick="downtaskcreate('+response.tcode+')">하위업무생성</button>'
+						+'<button style="border:0px;outline:none;color:white;background-color:#ed8151; font-size:12px; margin-right:5px;" class="btn" onclick= "ptedit('+response.tcode+')" type="button">수정</button>'
+						+'<button style="border:0px;outline:none;color:white;background-color:#ed8151; font-size:12px;" class="btn" type="button" onclick="ptdel('+response.tcode+')">삭제</button></div></div></div></div>';
 					}
 					
 				  else if(chatpermission=="MEMBER"){
@@ -98,8 +100,10 @@ $(document).ready(function(){
 							+'<div class="ppc-progress">'
 							+'<div class="ppc-progress-fill" id="fill'+response[i].tcode+'"></div></div>'
 							+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].tcode +'">%</span></div></div></div>'
-							+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span></div><div><button type="button" onclick="downtaskcreate('+response[i].tcode+')">하위업무생성</button>'
-							+'<button onclick= "ptedit('+response[i].tcode+')" type="button">수정</button><button type="button" onclick="ptdel('+response[i].tcode+')">삭제</button></div></div></div></div>';
+							+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span></div><div class="bts">'
+							+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;font-size:12px; margin-right:5px;" class="btn" type="button" onclick="downtaskcreate('+response[i].tcode+')">하위업무생성</button>'
+							+'<button style="border:0px;outline:none;color:white;background-color:#ed8151; font-size:12px; margin-right:5px;" class="btn" onclick= "ptedit('+response[i].tcode+')" type="button">수정</button>'
+							+'<button style="border:0px;outline:none;color:white;background-color:#ed8151; font-size:12px;" class="btn" type="button" onclick="ptdel('+response[i].tcode+')">삭제</button></div></div></div></div>';
 						}
 						
 						else if(chatpermission=="MEMBER"){
@@ -111,7 +115,8 @@ $(document).ready(function(){
 							+'<div class="ppc-progress-fill" id="fill'+response[i].tcode+'"></div></div>'
 							+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].tcode +'">%</span></div></div></div>'
 							+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span>'
-							+'<div class="bts"><button style="border:0px;outline:none;color:white;background-color:#ed8151; margin-right:5px; font-size:12px;" class="btn" onclick= "privateCreate('+response[i].tcode+')" type="button">개인업무생성</button></div></div><div></div></div></div></div>';
+							+'<div class="bts"><button style="border:0px;outline:none;color:white;background-color:#ed8151; margin-right:5px; font-size:12px;" class="btn" onclick= "privateCreate('+response[i].tcode+')" type="button">개인업무생성</button>'
+							+'</div></div><div></div></div></div></div>';
 						}
 						
 						$("#LV"+downLv).append($bppend);

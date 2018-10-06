@@ -19,12 +19,6 @@ String crcode=request.getParameter("crcode");
 </div>	
 
 <script>
-//채팅방에 들어갔는지 안들어갔는지 체크
-    <%-- stompClient.subscribe('/chat/'+<%=crcode%>, function(msg) {
-   	 var test=msg.body;
-   	 var concat=JSON.parse(test);
-   	alert(concat);
-    }); --%>
 var screenW = screen.availWidth;  // 스크린 가로사이즈
 var screenH = screen.availHeight; // 스크린 세로사이즈
 var popW = 600; // 띄울창의 가로사이즈
@@ -49,9 +43,9 @@ $(function(){
 		+'<img onclick="menubtn('+<%=crcode%>+','+ 1 +')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
 		
-		$setmenudiv= '<div id="dlist" style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">자료</div>'
-		+'<div id="delist" style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">의사결정</div>'
-		+'<div style="width:100%;height:24%; border-bottom: 3px solid #ed8151;">회의록</div>'
+		$setmenudiv= '<div style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">자료<div id="dlist"></div></div>'
+		+'<div style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">의사결정<div id="delist"></div></div>'
+		+'<div style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">회의록<div id="clist"></div></div>'
 		+'<div id="ulist"style="width:100%;height:24%; overflow:auto;">참여중인 회원<div id="userlist"> </div></div>'
 		+'<div class="bts" style="width:100%;height:4%;"><button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatclose()">닫기</button></div>';
 		$("#chatsetbtnmenu").append($setmenudiv);
@@ -63,9 +57,9 @@ $(function(){
 		+'<img onclick="menubtn('+<%=crcode%>+','+ 1 +')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
 		
-		$setmenudiv= '<div id="dlist" style="overflow:auto; width:100%;height:100px; border-bottom: 3px solid #ed8151;">자료</div>'
-		+'<div id="delist" style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">의사결정</div>'
-		+'<div style="width:100%;height:24%; border-bottom: 3px solid #ed8151;">회의록</div>'
+		$setmenudiv= '<div style="overflow:auto; width:100%;height:100px; border-bottom: 3px solid #ed8151;">자료<div id="dlist"></div></div>'
+		+'<div style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">의사 결정<div id="delist"></div></div>'
+		+'<div style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">회의록<div id="clist"></div></div>'
 		+'<div id="ulist" style="width:100%;height:24%; overflow:auto;">참여중인 회원<div id="userlist"></div></div>'
 		+'<div class="bts" style="width:100%;height:4%;"><button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatclose()">닫기</button></div>';
 		$("#chatsetbtnmenu").append($setmenudiv);
@@ -78,9 +72,42 @@ $(function(){
 		+'<img onclick="menubtn('+<%=crcode%>+','+ 2 +')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
 		
-		$setmenudiv= '<div id="dlist" style="overflow:auto; width:100%; height: calc(500 / 3)">자료</div><div id="ulist" >참여중인 회원 <div id="userlist">'
+		$setmenudiv= '<div style="overflow:auto; width:100%; height: calc(500 / 3)px;border-bottom: 3px solid #ed8151;">자료<div id="dlist"></div></div><div id="ulist" >참여중인 회원 <div id="userlist">'
 		+'</div></div><div class="bts"><button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatout('+<%=crcode%>+')">나가기</button><button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatclose()">닫기</button> </div>';
 		$("#chatsetbtnmenu").append($setmenudiv);
+	}
+	
+	//회의록, OWNER
+	if(parseInt(<%=crmode%>)==3 &&chatpermission=="OWNER"){
+		<%
+			String crclose=request.getParameter("crclose");
+			String crcoderef=request.getParameter("crcoderef");
+		%>
+		$setdiv='<img onclick="votercreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_voter.png" data-toggle="tootlip" data-placement="bottom" title="의사 결정 생성"  style="height:100%;float:left;padding-right:30px;cursor:pointer;">'
+		+'<img onclick="filecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_fileupload.png" data-toggle="tootlip" data-placement="bottom" title="자료 업로드" style="height:100%;float:left;padding-right:30px;cursor:pointer;">'
+		+'<img onclick="menubtn('+<%=crcode%>+','+ 3 +')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
+		$("#chatsetbtn").append($setdiv);
+		
+		$setmenudiv= '<div style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">자료<div id="dlist"></div></div>'
+		+'<div style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">의사결정<div id="delist"></div></div>'
+		+'<div id="ulist"style="width:100%;height:24%; overflow:auto;">참여중인 회원<div id="userlist"> </div></div>'
+		+'<div class="bts" style="width:100%;height:4%;"><button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatclose()">닫기</button>'
+		+'<button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="confeclose('+<%=crcode%>+')">회의록종료</button></div>';
+		$("#chatsetbtnmenu").append($setmenudiv); 
+	}
+	
+	//회의록, MEMBER
+	else if(parseInt(<%=crmode%>)==3 && chatpermission=="MEMBER"){
+		$setdiv='<img onclick="filecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_fileupload.png"data-toggle="tootlip" data-placement="bottom" title="파일 업로드" style="height:100%;float:left;cursor:pointer;">'
+		+'<img onclick="menubtn('+<%=crcode%>+','+ 1 +')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
+		$("#chatsetbtn").append($setdiv);
+		
+		$setmenudiv= '<div style="overflow:auto; width:100%;height:100px; border-bottom: 3px solid #ed8151;">자료<div id="dlist"></div></div>'
+		+'<div style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">의사 결정<div id="delist"></div></div>'
+		+'<div id="ulist" style="width:100%;height:24%; overflow:auto;">참여중인 회원<div id="userlist"></div></div>'
+		+'<div class="bts" style="width:100%;height:4%;"><button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatclose()">닫기</button></div>';
+		$("#chatsetbtnmenu").append($setmenudiv); 
+		
 	}
 	//툴팁제어
 	$('[data-toggle="tootlip"]').tooltip();
@@ -167,7 +194,50 @@ function menubtn(code, crmode){
 					alert("ERROR : " + e.statusText);
 				}
 			});
+			
+			//회의록 조회
+			$.ajax({
+				type : 'GET',
+				url : '/chatroom/room/'+code,
+				success : function(response) {
+					if (response.length>0) {
+						alert('회의록 조회 성공');
+						for(var i=0;i<response.length;i++){
+							$delist='<div style="margin-bottom:3px;"><img src="${pageContext.request.contextPath }/resources/img/img_confe.png" style="width:32px;height:32px;">'
+							+'<span style="font-size:20px;cursor:pointer;" onclick="goconference('+response[i].crcode+','+response[i].crmode+','+response[i].crclose+','+response[i].crcoderef+')">'+response[i].fctitle+ '</span></div>';
+							$("#clist").append($delist);
+						}
+					} else{
+						alert('Server or Client ERROR, 회의록 조회 실패');
+					}
+				},
+				error : function(e) {
+					alert("ERROR : " + e.statusText);
+				}
+			});
 		}
+			else if(crmode==3){
+				//의사결정을 조회해 보자
+				$.ajax({
+					type : 'GET',
+					url : '/decision/room/'+code,
+					success : function(response) {
+						if (response.length>0) {
+							alert('의사 결정 조회 성공');
+							for(var i=0;i<response.length;i++){
+								$delist='<div style="margin-bottom:3px;"><img src="${pageContext.request.contextPath }/resources/img/img_vote.png" style="width:32px;height:32px;">'
+								+'<span style="font-size:20px;cursor:pointer;" onclick="selectDecision(\''+response[i].dstitle + ',' + response[i].dsdate +'\',' +response[i].dscode+','+response[i].dsclose+','+response[i].tcode+ ')">'+response[i].dstitle+ '</span></div>';
+								$("#delist").append($delist);
+							}
+						} else{
+							alert('Server or Client ERROR, 의사 결정 조회 실패');
+						}
+					},
+					error : function(e) {
+						alert("ERROR : " + e.statusText);
+					}
+				});
+			}
 	}
 	else $("#chatsetbtnmenu").hide(1000);
 } 
@@ -220,6 +290,21 @@ function conferencecreate(crcode){
 	else return;
 }
 
+//회의록 입성 
+function goconference(crcode,crmode,crclose,crcoderef)
+{
+	if(confirm('회의록에 입장하시겠습니까?')==true){
+		$("#rightchatlist").load("/chat/content?crcode="+crcode+"&crmode="+crmode+"&crclose="+crclose+"&crcoderef="+crcoderef+"&pcode="+pcode); 
+	}else return;
+
+}
+
+//회의록 종료
+function confeclose(crcode){
+	alert(crcode+"종료");
+}
+
+
 //채팅방나가기
 function chatout(crcode){
 	if(confirm('채팅방에서 나가시겠습니까?')==true){
@@ -270,86 +355,3 @@ function chattest(){
 	stompClient.send('/app/project/'+pcode, {},JSON.stringify(param));
 }
 </script>
-	
-	
-
-	
-	
-	
-<!-- 	<script type="text/javascript">
-
-		
-		/* 채팅방에 참여 중인 유저 리스트 */
-		var param = {
-			'pcode' : '내 프로젝트  PCODE',
-			'crcode' : '현재 채팅방  CROCODE',
-			'uid' : '초대할 회원의 UID'
-		};
-		$.ajax({
-			type : 'POST',
-			url : 'chatroomjoin',
-			contentType : 'application/json',
-			data : JSON.stringify(param),
-			success : function(response) {
-				if (response.length != -1) {
-					alert('채팅방 유저 초대 성공!' + response);
-				} else if (response.length == 0) {
-					alert('Server or Client ERROR, 채팅방 유저 초대 실패');
-				}
-			},
-			error : function(e) {
-				alert("ERROR : " + e.statusText);
-			}
-		});
-		/*/채팅방에 참여 중인 유저 리스트 */
-		
-		
-		/* 채팅 내용 DB저장 dmcode=null, dscode=null, crcoderef=null일경우
-		일반 채팅 내용이다.
-		*/
-		var param = {
-			'crcode' :'현재 채팅방 코드 CRCODE',
-			'uid' :'채팅입력하고있는 UID',
-			'ccontents' :'채팅내용저장',
-		 	'dmcode' :'자료(파일)일경우 채팅창에표시하기위한것(채팅창에는 자료이름표시)',
-			'dscode' :'의사결정일경우 채팅창에표시하기위한것(채팅창에는 의사결정제목표시)',
-			'crcoderef' :'회의록채팅내용일경우 코드가필요하다' 
-		};
-		$.ajax({
-			type : 'POST',
-			url : 'chatcontents',
-			contentType : 'application/json',
-			data : JSON.stringify(param),
-			success : function(response) {
-				if (response.length != -1) {
-					alert('채팅 내용 입력성공!' + response);
-				} else if (response.length == 0) {
-					alert('Server or Client ERROR, 채팅방 내용 실패');
-				}
-			},
-			error : function(e) {
-				alert("ERROR : " + e.statusText);
-			}
-		});
-		/*/채팅 내용 DB저장 dmcode=null, dscode=null, crcoderef=null일경우
-		일반 채팅 내용이다.
-		*/
-		
-		/* 채팅 내용 조회 해보자.*/
-		$.ajax({
-			type : 'GET',
-			url : 'chatcontents/'+'채팅내용을조회할 채팅방코드 crcode',
-			success : function(response) {
-				if (response.length != -1) {
-					alert('채팅 내용 조회 성공!' + response);
-				} else if (response.length == 0) {
-					alert('Server or Client ERROR, 채팅방 내용 조회 실패');
-				}
-			},
-			error : function(e) {
-				alert("ERROR : " + e.statusText);
-			}
-		});
-		/*/채팅 내용 조회 해보자.*/
-	</script>
- -->
