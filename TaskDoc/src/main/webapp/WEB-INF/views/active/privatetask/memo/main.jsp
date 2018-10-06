@@ -34,7 +34,7 @@
 </body>
 
 <script type="text/javascript">
-var ptcode=parseInt(<%=ptcode%>);
+ptcode=parseInt(<%=ptcode%>);
 	$(function(){
 		//메모 조회
 		$.ajax({
@@ -42,10 +42,10 @@ var ptcode=parseInt(<%=ptcode%>);
 			url : '/memo/' + <%=ptcode%>,
 			success : function(response) {
 				if (response.length>0) {
-					alert('메모 조회 완료!' + response);
+					alert('메모 조회 완료!' + response); 
 					for(var i=0;i<response.length;i++){
 						$div='<tr calss="bts"><td>'+ (i+1) +'</td> <td>'+response[i].mcontents+'</td><td>'+response[i].mdate+'</td>'
-						+'<td><img onclick="memoEdit('+response[i].mcode+')" src="${pageContext.request.contextPath }/resources/img/img_boardsetting.png" style="width:20px;height:20px;margin-right:20px;cursor:pointer;">'
+						+'<td><img onclick="memoEdit(\''+response[i].mcontents+'\','+response[i].mcode+')" src="${pageContext.request.contextPath }/resources/img/img_boardsetting.png" style="width:20px;height:20px;margin-right:20px;cursor:pointer;">'
 						+'<img onclick="memoDel('+response[i].mcode+')" src="${pageContext.request.contextPath }/resources/img/img_boarddelete.png" style="width:20px;height:20px;cursor:pointer;"></td></tr>';
 						$("#tbodys").append($div);
 					}
@@ -62,7 +62,10 @@ var ptcode=parseInt(<%=ptcode%>);
 	
 	//생성
 	function memocreate(){
+		if(confirm('새 메모를 작성하시겠습니까?')==true){
 		$("#loadtest").load('/project/memo/create?ptcode=' + ptcode);
+		}
+		else return;
 	}
 	
 	//삭제
@@ -85,10 +88,12 @@ var ptcode=parseInt(<%=ptcode%>);
 }
 	
 	//수정
-	function memoEdit(mcode){
-		alert('수정');
+	function memoEdit(mcontents,mcode){
+		if(confirm('메모를 수정하시겠습니까?')==true){
+		$("#loadtest").load('/project/memo/edit?'+'&mcontents='+mcontents+'&mcode='+mcode);
+			}
+		else return;
 	}
-	
 	
 </script>
 </html>

@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-String ptcode=request.getParameter("ptcode");
-%>    
 <body>
 <div class="container">
 		<div class="row">
@@ -39,7 +36,7 @@ String ptcode=request.getParameter("ptcode");
 function memocreate(){
 	//개인업무 내 메모 생성
 	var param = {
-			'ptcode': <%=ptcode%>,
+			'ptcode': ptcode,
 			'mcontents' : $("#mcontents").val()
 	};
 	$.ajax({
@@ -51,7 +48,7 @@ function memocreate(){
 			alert(response);
 			if (response>0) {
 				alert('메모 생성 완료! 메모의 mcode값은' + response);
-				location.href='/project/memo/main?ptcode='+<%=ptcode%>;
+				location.href='/project/memo/main?ptcode='+ptcode;
 			} else{
 				alert('Server or Client ERROR, 메모 생성 실패');
 			}
@@ -63,6 +60,6 @@ function memocreate(){
 }
 
 function memoCancel(){
-	location.href='/project/memo/main?ptcode='+<%=ptcode%>;
+	location.href='/project/memo/main?ptcode='+ptcode;
 }
 </script>
