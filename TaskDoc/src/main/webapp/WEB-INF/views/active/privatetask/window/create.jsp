@@ -17,6 +17,8 @@
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
 	String tcode=request.getParameter("tcode");
+	String tsdate=request.getParameter("tsdate");
+	String tedate=request.getParameter("tedate");
 %>
 
 <script type="text/javascript">
@@ -59,14 +61,14 @@ var id='<%=loginid%>';
 					
 					<div class="modal-footer">
 						
-						<button type="button" class="btn btn-success btn-icon"
+						<button type="button" class="btn btn-success btn-icon" style="outline: none;border:0px;background-color:#ed8151;color:white;"
 							onclick="ptCreate()">
-							<i class="fa fa-check"></i> Create PublicTask
+							Create PrivateTask
 						</button>
 						
-						<button type="button" class="btn btn-default btn-icon"
+						<button type="button" class="btn btn-default btn-icon" style="outline: none;border:0px;background-color:#ed8151;color:white;"
 							onclick="Cancel()">
-							<i class="fa fa-times-circle"></i> Cancel
+							Cancel
 						</button>
 						
 					</div>
@@ -78,6 +80,8 @@ var id='<%=loginid%>';
 
 <script type="text/javascript">
 var mycolor="";
+var fixpsdate='<%=tsdate%>';
+var fixpedate='<%=tedate%>';
 $(function() {
 	$.datepicker.regional['ko'] = {
 		closeText : '닫기',
@@ -106,15 +110,15 @@ $(function() {
 	$.datepicker.setDefaults($.datepicker.regional['ko']);
 	
 	$('#psdate').datepicker();
-	$("#psdate").datepicker("option", "minDate");
-	$('#psdate').datepicker("option", "maxDate");
+	$("#psdate").datepicker("option", "minDate",fixpsdate);
+	$('#psdate').datepicker("option", "maxDate",fixpedate);
 	$('#psdate').datepicker("option", "onClose", function(selectDate) {
 	$("#pedate").datepicker("option", "minDate", selectDate);
 	});
 
 	$('#pedate').datepicker();
-	$("#pedate").datepicker("option", "minDate");
-	$("#pedate").datepicker("option", "maxDate");
+	$("#pedate").datepicker("option", "minDate",fixpsdate);
+	$("#pedate").datepicker("option", "maxDate",fixpedate);
 	$('#pedate').datepicker("option", "onClose", function(selectDate) {
 	$("#psdate").datepicker("option", "maxDate", selectDate);
 	});

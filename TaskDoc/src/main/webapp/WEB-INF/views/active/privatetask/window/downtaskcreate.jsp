@@ -58,15 +58,14 @@ var id='<%=loginid%>';
 					</div>
 					
 					<div class="modal-footer">
-						
-						<button type="button" class="btn btn-success btn-icon"
+						<button type="button" class="btn btn-success btn-icon" style="outline: none;border:0px;background-color:#ed8151;color:white;"
 							onclick="ptCreate()">
-							<i class="fa fa-check"></i> Create PublicTask
+							Create PrivateTask
 						</button>
 						
-						<button type="button" class="btn btn-default btn-icon"
+						<button type="button" class="btn btn-default btn-icon" style="outline: none;border:0px;background-color:#ed8151;color:white;"
 							onclick="Cancel()">
-							<i class="fa fa-times-circle"></i> Cancel
+							Cancel
 						</button>
 						
 					</div>
