@@ -47,11 +47,9 @@ function downtasklist(tcode, curLv){
 					$("#publictaskList").append($cppend);
 					
 					for(var i=0;i<response.length;i++){
-						if(chatpermission=="OWNER"){
-							var $bppend = '<div onclick="downtasklist('+response[i].tcode+', $(this).parent()[0].id)" id="ptask'+response.tcode+'" style="width:120px;height:120px; border: 1px solid #ed8151; margin-right:20px; margin-top:20px; float:left;">'
-							+'<div style="width:100%;height:80%; cursor:pointer;"><img src="${pageContext.request.contextPath }/resources/img/img_filetask.png"style="width:100%;height:100%;"></div>'
-							+'<div style="width:100%;height:20%; text-align:center;cursor:pointer; border-top:1px solid #ed8151;" onclick="gofileView('+response[i].tcode+')">'+response[i].ttitle+'</div></div>';
-						}
+						var $bppend = '<div onclick="downtasklist('+response[i].tcode+', $(this).parent()[0].id)" id="ptask'+response.tcode+'" style="width:120px;height:120px; border: 1px solid #ed8151; margin-right:20px; margin-top:20px; float:left;">'
+						+'<div style="width:100%;height:80%; cursor:pointer;"><img src="${pageContext.request.contextPath }/resources/img/img_filetask.png"style="width:100%;height:100%;"></div>'
+						+'<div style="width:100%;height:20%; text-align:center;cursor:pointer; border-top:1px solid #ed8151;" onclick="gofileView('+response[i].tcode+')">'+response[i].ttitle+'</div></div>';
 						$("#LV"+downLv).append($bppend);
 						}
 				}else{

@@ -4,7 +4,7 @@
 <%
 String tcode=request.getParameter("tcode");
 %>
-<div id="LV1" style="width:400px;">
+<div id="LV1" style="width:24%; margin-right:1%;">
 LV1
 </div>
 
@@ -86,12 +86,12 @@ $(document).ready(function(){
 			url : '/publictask/down/'+ tcode,
 			success : function(response) {
 				if (response.length > 0) {
-					$cppend='<div style="width:400px;" id="LV'+downLv+'">LV'+downLv+'</div>';
+					$cppend='<div style="width:24%; margin-right:1%" id="LV'+downLv+'">LV'+downLv+'</div>';
 					$("#publictaskBOTTOM").append($cppend);
 					
 					for(var i=0;i<response.length;i++){
 						if(chatpermission=="OWNER"){
-							var $bppend = '<div id="publictask'+response[i].tcode+'" style="margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;" onclick="downtasklist('+response[i].tcode+', $(this).parent()[0].id)">'
+							var $bppend = '<div id="publictask'+response[i].tcode+'" style="margin-bottom:10px; height: 200px; background-color: white;" onclick="downtasklist('+response[i].tcode+', $(this).parent()[0].id)">'
 							+'<div onclick="" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : '+response[i].ttitle+','+response[i].tcode+'</span></div>'
 							+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 							+'<div style="margin-left:20px;" id="chart'+response[i].tcode+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'">'
@@ -103,14 +103,15 @@ $(document).ready(function(){
 						}
 						
 						else if(chatpermission=="MEMBER"){
-							var $bppend = '<div id="publictask'+response[i].tcode+'" style="margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;" onclick="downtasklist('+response[i].tcode+', $(this).parent()[0].id)">'
+							var $bppend = '<div id="publictask'+response[i].tcode+'" style="margin-bottom:10px; height: 200px; background-color: white;" onclick="downtasklist('+response[i].tcode+', $(this).parent()[0].id)">'
 							+'<div onclick="" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : '+response[i].ttitle+','+response[i].tcode+'</span></div>'
 							+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 							+'<div style="margin-left:20px;" id="chart'+response[i].tcode+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'">'
 							+'<div class="ppc-progress">'
 							+'<div class="ppc-progress-fill" id="fill'+response[i].tcode+'"></div></div>'
 							+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].tcode +'">%</span></div></div></div>'
-							+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span></div><div></div></div></div></div>';
+							+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span>'
+							+'<div class="bts"><button style="border:0px;outline:none;color:white;background-color:#ed8151; margin-right:5px; font-size:12px;" class="btn" onclick= "privateCreate('+response[i].tcode+')" type="button">개인업무생성</button></div></div><div></div></div></div></div>';
 						}
 						
 						$("#LV"+downLv).append($bppend);

@@ -58,12 +58,10 @@ $(function(){
 					</div>
 				</div>
 		</div>
-		<!-- FOOTER -->
-		<%@include file="/WEB-INF/views/fix/footer.jsp"%>
-		<!-- FOOTER -->
 
 	</div>
-	<!--FRAME  -->
+		<%@include file="/WEB-INF/views/fix/footer.jsp"%>
+	</div>
 </body>
 
 <script type="text/javascript">

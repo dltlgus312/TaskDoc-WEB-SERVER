@@ -114,6 +114,30 @@ public class Project {
 		return "/active/privatetask/main";
 	}
 	
+	//메모 메인
+	@RequestMapping(value = "/memo/main", method = RequestMethod.GET)
+	public String memoMain() {
+		return "/active/privatetask/memo/main";
+	}
+	
+	//메모 생성
+	@RequestMapping(value = "/memo/create", method = RequestMethod.GET)
+	public String memoCreate() {
+		return "/active/privatetask/memo/create";
+	}
+	
+	//메모 수정
+	@RequestMapping(value = "/memo/edit", method = RequestMethod.GET)
+	public String memoEdit() {
+		return "/active/privatetask/memo/edit";
+	}
+	
+	//메모 보기
+	@RequestMapping(value = "/memo/view", method = RequestMethod.GET)
+	public String memoView() {
+		return "/active/privatetask/memo/view";
+	}
+	
 	//개인 업무 생성
 	@RequestMapping(value = "/privateTask/create", method = RequestMethod.GET)
 	public String privateTaskCreate() {

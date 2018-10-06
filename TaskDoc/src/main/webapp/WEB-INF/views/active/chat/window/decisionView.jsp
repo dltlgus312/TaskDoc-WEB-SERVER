@@ -11,7 +11,25 @@
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
+	String dscode=request.getParameter("dscode");
+	String dstitle=request.getParameter("dstitle");
+	String dsdate=request.getParameter("dsdate");
+	String permission=request.getParameter("permission");
 %>
+
+<script type="text/javascript">
+
+var a='<%=permission%>';
+$(document).ready(function(){
+	if(a=='OWNER'){
+		$("#decisiondel").show();
+	
+	}
+	else if(a=='MEMBER'){
+		$("#decisiondel").hide();
+	}
+});
+</script>
 
 
 </head>
@@ -20,176 +38,94 @@
 		<div class="row">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close">
-						<i class="fa fa-times"></i>
-					</button>
-					<h4 class="modal-title">투표를 진행해주세요!</h4>
+					<h4 class="modal-title">종료된 투표 입ㅇ니다.</h4>
 				</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<div>
+								<label style="padding-top: 6px">제목 : <%=dstitle %></label>
+							</div>
+							
+							<div>
+								<label style="padding-top: 6px">날짜 : <%=dsdate %></label>
+							</div>
+							
+							<div>
+								<div id="tableDiv">
+									<table class="table">
+									
+										<thead id="thead">
+											<tr>
+												<th>번호</th>
+												<th>문항</th>
+												<th>체크</th>
+												<th>COUNT</th>
+											</tr>
+										</thead>
+										
+										<tbody id="tbody">
+																
+										</tbody>
+									</table>
+								</div>
 
-				<div class="modal-body">
-					<div class="form-group">
-						<label>의사결정 제목</label> <input id="decisionName" type="text"
-							class="form-control"> <span class="help-block">제목을
-							입력해주세요</span>
-					</div>
+							</div>
+							<h4 class="endhaha" style="color: red"></h4>
+							<div></div>
 
-					<div class="btn-group">
-						<div>
-							<label>투표를 할 공용업무를 선택해주세요</label> <select name="job">
-								<option value="">1.설계</option>
-								<option value="학생">2.구현</option>
-								<option value="회사원">3.유지보수</option>
-								<option value="기타">4.등등</option>
-							</select>
 						</div>
 					</div>
-
-					<div class="form-group">
-						<br></br> <label>투표 항목</label>
-						<button type="button" class="btn btn-default btn-icon"
-							onclick="addIndex()">
-							<i class="fa fa-times-circle"></i> 항목 추가하기
-						</button>
-						<div style="display: block" id="indexes"></div>
-					</div>
-
 					<div class="modal-footer">
-						<input type="hidden" name="isEmpty">
-						<button type="button" class="btn btn-success btn-icon"
-							onclick="decisionOK()">
-							<i class="fa fa-check"></i> 생성하기
+					
+						<button id="decisiondel" type="button" class="btn" style="display:none;outline:none;border:0px;background-color:#ed8151;color:white;"
+							onclick="decisionDel()">
+							삭제
 						</button>
-						<button type="button" class="btn btn-default btn-icon"
-							onclick="decisionCancel()">
-							<i class="fa fa-times-circle"></i> Cancel
+						
+						<button type="button" class="btn" style="outline:none;border:0px;background-color:#ed8151;color:white;"
+							onclick="proCancel()">
+							Cancel
 						</button>
 					</div>
-				</div>
 			</div>
 		</div>
 	</div>
-
 </body>
 
 <script type="text/javascript">
-	var count = 0;
-	
-	//의사결정 항목을 담은 리스트들.
-	var tlist = [];
-	
-	//의사결정 아이템 생성용 param
-	var paramitem = [];
-	
-
-	function addIndex() {
-		count++;
-		//div tag
-		var dtag = document.createElement("div");
-		dtag.setAttribute('id', 'content' + count);
-		dtag.setAttribute('style', 'display:flex');
-	
-		//input tag
-		var itag = document.createElement("input");
-		itag.setAttribute('type', 'text');
-		itag.setAttribute('class', 'form-control');
-		itag.setAttribute('id', 't' + count);
-
-		//button tag
-		var btag = document.createElement("button");
-		btag.setAttribute('type', 'button');
-		btag.setAttribute('id', 'b' + count);
-		btag.setAttribute('class', 'btn btn-default btn-icon');
-		btag.setAttribute('onclick', 'objdelete(this)');
-
-		var element = document.createTextNode("삭제");
-		btag.appendChild(element);
-
-		dtag.appendChild(itag);
-		dtag.appendChild(btag);
-
-		$("#indexes").append(dtag);
-		tlist.push('t' + count);
-
-	}
-
-	function objdelete(btn) {
-		var divid = btn.id.substring(1, btn.id.length);
-		document.getElementById("content" + divid).remove();
-		tlist.splice(tlist.indexOf('t' + divid), 1);
-
-	}
-	
-	function decisionOK(){
-		//의사결정 생성후 return 값으로 의사결정 pk값이 날라온것 저장하는 변수
-		var decisionCreatecode=null;
-		/* 의사결정 생성*/
-		//의사결정 생성용 param
-		var param = {
-			'dstitle' : $("#decisionName").val(),
-			'crcode' : '2',
-			'tcode' : '8'
-		};
-		if($("#decisionName").val()=="" || tlist.length<=0){
-			alert('제목또는 항목을 하나 이상 입력해주세요.');
-		}
-		else{
-		$.ajax({
-			type : 'POST',
-			url : '/decision',
-			contentType : 'application/json',
-			data : JSON.stringify(param),
-			success : function(response) {
-				if (response>0) {
-					alert('의사결정 생성 완료! ' + response);
-					for (var i = 0; i < tlist.length; i++) {
-						paramitem.push({
-								'dsilist' : document.getElementById(tlist[i]).value,
-								'dsisequence' : i,
-								'dscode' : response
-						});
-					}
-					/* 의사결정 아이템 생성
-					항목이 하나일수도, 여러개일수도있기때문에 [{}] 형식으로 list형식으로 서버에 보내야된다
-					 */
-					$.ajax({
-						type : 'POST',
-						url : '/decisionitem',
-						contentType : 'application/json',
-						data : JSON.stringify(paramitem),
-						success : function(response) {
-							if (response != -1) {
-								alert('의사결정 아이템 생성 완료! ' + response);
-							} else if (response == -1) {
-								alert('Server or Client ERROR, 의사결정 아이템 생성 실패');
-							}
-						},
-						error : function(e) {
-							alert("ERROR : " + e.statusText);
-						}
-					});
-				} else {
-					alert('Server or Client ERROR, 의사결정 생성 실패');
+$(function(){
+	$.ajax({
+		type : 'GET',
+		url : '/decisionitem/count/'+<%=dscode%>,
+		success : function(response) {
+			if (response.list.length > 0){
+				for(var i=0;i<response.list.length;i++) {
+					$tdiv='<tr><td>'+ (i+1) + '</td><td>' + response.list[i].dsilist + '</td>'
+					+'<td><input class="group" type="radio" name="radioTxt" value="' + response.list[i].dsicode + ',' + response.list[i].dsilist + '"></td><td>' + response.count[i] + '</td></tr>';
+					$("#tbody").append($tdiv);
 				}
-			},
-			error : function(e) {
-				alert("ERROR : " + e.statusText);
+				$("input[type=radio]").attr('disabled', true);
 			}
-		});
-		/*/의사결정 생성 */
-	}
-	}
-</script>
-
-
-<!-- <script type="text/javascript">
-	/* 의사결정 삭제*/
+			else{
+				alert('Server or Client ERROR, 의사결정 정보 조회 실패');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+});
+function decisionDel(){
 	$.ajax({
 		type : 'DELETE',
-		url : 'decision/' + '삭제할 의사결정코드 DSCODE',
+		url : '/decision/'+<%=dscode%>,
 		success : function(response) {
-			if (response == 1) {
-				alert('의사결정 삭제 완료! ' + response);
-			} else if (response == -1) {
+			if(response>0){
+				alert('의사결정 삭제 성공');
+				window.close();
+				opener.parent.menubtn();
+			}
+			else{
 				alert('Server or Client ERROR, 의사결정 삭제 실패');
 			}
 		},
@@ -197,7 +133,15 @@
 			alert("ERROR : " + e.statusText);
 		}
 	});
-	/*/의사결정 삭제 */
+}
+
+function proCancel(){
+	window.close();
+}
+</script>
+
+
+<!-- <script type="text/javascript">
 
 	/* 의사결정 수정*/
 	var param = {
@@ -223,24 +167,6 @@
 		}
 	});
 	/*/의사결정 수정 */
-
-	/* 해당 채팅방 내의 모든 의사결정 리스트를 가져온다 */
-	$.ajax({
-		type : 'GET',
-		url : 'decision/room/' + '해당 공용업무의  tcode',
-		success : function(response) {
-			if (response.length != 0) {
-				alert('의사결정 리스트 불러오기 성공!');
-			} else if (response.length == 0) {
-				alert('Server or Client ERROR, 의사결정 리스트 불러오기  실패');
-			}
-		},
-		error : function(e) {
-			alert("ERROR : " + e.statusText);
-		}
-	});
-	/*/해당 채팅방 내의 모든 의사결정 리스트를 가져온다 */
-
 
 	/* 의사결정 아이템 수정*/
 	var param = {
@@ -282,79 +208,5 @@
 		}
 	});
 	/* /의사결정 아이템 삭제*/
-
-
-	/* 의사결정 항목 선택하기*/
-	var param = {
-		'dsicode' : '의사결정 항목의 번호',
-		'uid' : '내아이디'
-	};
-	$.ajax({
-		type : 'POST',
-		url : 'voter',
-		contentType : 'application/json',
-		data : JSON.stringify(param),
-		success : function(response) {
-			if (response == 1) {
-				alert('의사결정 항목 선택 완료! ' + response);
-			} else if (response == -1) {
-				alert('Server or Client ERROR, 의사결정 항목 선택 실패');
-			}
-		},
-		error : function(e) {
-			alert("ERROR : " + e.statusText);
-		}
-	});
-	/*  / 의사결정 항목 선택하기*/
-
-	/* 유저가 어떤 의사결정 항목을 선택했는지 리스트로뿌려라
-	※헷갈리지말것※ 의사결정!코드!도 primary key,
-				의사결정!항목코드!도 primary key!!
-	 */
-	$.ajax({
-		type : 'GET',
-		url : 'voter/' + '의사결정 항목코드(primary key임)',
-		success : function(response) {
-			if (response.length != -1) {
-				alert('유저가 선택한 의사결정 항목 조회 완료! ' + response);
-			} else if (response == -1) {
-				alert('Server or Client ERROR, 유저가 선택한 의사결정 항목 조회 실패!');
-			}
-		},
-		error : function(e) {
-			alert("ERROR : " + e.statusText);
-		}
-	});
-	/* 유저가 어떤 의사결정 항목을 선택했는지 리스트로뿌려라*/
-
-	/* 의사결정 항목 선택한거 다른걸로 수정하기*/
-	var param = {
-		'oldVo' : {
-			'dsicode' : '원래의 선택했던 의사결정 항목의 번호',
-			'uid' : '내아이디'
-		},
-		'newVo' : {
-			'dsicode' : '새로 선택한 의사결정 항목의 번호',
-			'uid' : '내아이디'
-		}
-		
-	};
-	$.ajax({
-		type : 'PUT',
-		url : 'voter',
-		contentType : 'application/json',
-		data : JSON.stringify(param),
-		success : function(response) {
-			if (response == 1) {
-				alert('의사결정 항목 선택 한거 다른걸로 수정 완료! ' + response);
-			} else if (response == -1) {
-				alert('Server or Client ERROR, 의사결정 항목 선택 한거 다른걸로 수정 실패');
-			}
-		},
-		error : function(e) {
-			alert("ERROR : " + e.statusText);
-		}
-	});
-	/*  /의사결정 항목 선택한거 다른걸로 수정하기*/
 </script> -->
 </html>

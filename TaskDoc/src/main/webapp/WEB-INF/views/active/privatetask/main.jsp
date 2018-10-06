@@ -49,8 +49,8 @@ $(document).ready(function(){
 					<div id="publictaskWRAP" style="width: 100%; /* height: 93%; */ padding-left:15px;">
 						<div id="publictaskTOP" class="bts" style="margin-bottom:30px;">
 						</div>	
-						<div id="publictaskBOTTOM">
 						
+						<div id="publictaskBOTTOM">
 						</div>
 					</div>
 				</div>
@@ -81,9 +81,9 @@ $.ajax({
 				+'<div class="ppc-progress-fill" id="fill'+response[i].ptcode+'"></div></div>'
 				+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].ptcode +'">%</span></div></div></div>'
 				+'<div><div><span>시작 날짜 : '+response[i].ptsdate+'</span></div><div><span>종료 날짜 : '+response[i].ptedate+'</span></div>'
-				+'<div class="bts"><button style="border:0px;outline:none;color:white;background-color:#ed8151;margin-right:5px;" class="btn" onclick= "goMemo('+response[i].ptcode+')" type="button">메모</button>'
-				+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;margin-right:5px;" class="btn" onclick= "ptedit('+response[i].ptcode+')" type="button">수정</button>'
-				+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;" class="btn" type="button" onclick="ptdel('+response[i].ptcode+')">삭제</button></div></div></div></div>';
+				+'<div class="bts"><button style="border:0px;outline:none;color:white;background-color:#ed8151;margin-right:5px;font-size:12px;" class="btn" onclick= "goMemo('+response[i].ptcode+')" type="button">메모</button>'
+				+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;margin-right:5px;font-size:12px;" class="btn" onclick= "ptedit('+response[i].ptcode+')" type="button">수정</button>'
+				+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;font-size:12px;" class="btn" type="button" onclick="ptdel('+response[i].ptcode+')">삭제</button></div></div></div></div>';
 				
 				$("#publictaskBOTTOM").append($append);
 				
@@ -150,13 +150,13 @@ function ptedit(ptcode){
 function goMemo(ptcode){
 	 var screenW = screen.availWidth;  // 스크린 가로사이즈
 	 var screenH = screen.availHeight; // 스크린 세로사이즈
-	 var popW = 400; // 띄울창의 가로사이즈
-	 var popH = 560; // 띄울창의 세로사이즈
+	 var popW = 500; // 띄울창의 가로사이즈
+	 var popH = 450; // 띄울창의 세로사이즈
 	 var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
 	 var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
 	 
 	 if(confirm('메모를 확인하시겠습니까??')==true){
-			window.open("/project/privateTask/edit?ptcode="+ptcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+			window.open("/project/memo/main?ptcode="+ptcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 	 }
 	 else return;
 }

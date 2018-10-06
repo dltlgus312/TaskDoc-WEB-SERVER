@@ -189,11 +189,11 @@ function selectDecision(dstitle, dscode, dsclose,tcode)
 	alert(list[0]);
 	alert(list[1]);
 	
-	//의사결정 끝남
+	// 의사결정 종료
 	if(dsclose>0)
-		window.open("/chat/decisionView?dscode="+dscode+"&dstitle="+list[0] +"&dsdate="+list[1],"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+		window.open("/chat/decisionView?dscode="+dscode+"&dstitle="+list[0] +"&dsdate="+list[1] +"&permission="+chatpermission, "", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 	
-	//의사결정 안끝남
+	// 의사결정 종료X
 	else	
 		window.open("/chat/decisionSelect?dscode="+dscode+"&dstitle="+list[0] +"&dsdate="+list[1] +"&permission="+chatpermission +"&tcode="+tcode ,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 }	

@@ -17,8 +17,11 @@
 	String dsdate=request.getParameter("dsdate");
 	String permission=request.getParameter("permission");
 %>
+
 <script type="text/javascript">
+
 var a='<%=permission%>';
+
 $(document).ready(function(){
 	if(a=='OWNER'){
 		$("#decisionend").show();
@@ -31,6 +34,7 @@ $(document).ready(function(){
 	}
 });
 </script>
+
 </head>
 <body>
 	<div class="container">
@@ -50,7 +54,6 @@ $(document).ready(function(){
 							</div>
 							
 							<div>
-								<label style="padding-top: 6px">의사결정 문항</label>
 								<div id="tableDiv">
 									<table class="table">
 									
@@ -130,10 +133,15 @@ $(document).ready(function(){
 				$("#choiceDecision").attr('disabled','true');
 				$.ajax({
 					type : 'GET',
-					url : '/decisionitem/'+<%=dscode%>,
+					url : '/decisionitem/count/'+<%=dscode%>,
 					success : function(response) {
-						if (response.length > 0){
-							alert(response);
+						if (response.list.length > 0){
+							for(var i=0;i<response.list.length;i++) {
+								$tdiv='<tr><td>'+ (i+1) + '</td><td>' + response.list[i].dsilist + '</td>'
+								+'<td><input class="group" type="radio" name="radioTxt" value="' + response.list[i].dsicode + ',' + response.list[i].dsilist + '"></td><td>' + response.count[i] + '</td></tr>';
+								$("#tbody").append($tdiv);
+							}
+							$("input[type=radio]").attr('disabled', true);
 						}
 						else{
 							alert('Server or Client ERROR, 의사결정 정보 조회 실패');
@@ -147,12 +155,12 @@ $(document).ready(function(){
 				alert('투표 안했다');
 				$.ajax({
 					type : 'GET',
-					url : '/decisionitem/'+<%=dscode%>,
+					url : '/decisionitem/count/'+<%=dscode%>,
 					success : function(response) {
-						if (response.length > 0){
-							for(var i=0;i<response.length;i++) {
-								$tdiv='<tr><td>'+ (i+1) + '</td><td>' + response[i].dsilist + '</td>'
-								+'<td><input type="radio" name="radioTxt" value="'+response[i].dsicode + ',' + response[i].dsilist + '"></td></tr>';
+						if (response.list.length > 0){
+							for(var i=0;i<response.list.length;i++) {
+								$tdiv='<tr><td>'+ (i+1) + '</td><td>' + response.list[i].dsilist + '</td>'
+								+'<td><input type="radio" name="radioTxt" value="' + response.list[i].dsicode + ',' + response.list[i].dsilist + '"></td><td>' + response.count[i] + '</td></tr>';
 								$("#tbody").append($tdiv);
 							}
 						}
@@ -190,7 +198,7 @@ $(document).ready(function(){
 	     		success : function(response) {
 	     			if (response > 0) {
 	     				alert('의사결정 항목 선택 완료! ' + response);
-	     				window.close();
+	     			 	window.close();
 	     			} else{
 	     				alert('Server or Client ERROR, 의사결정 항목 선택 실패');
 	     			}

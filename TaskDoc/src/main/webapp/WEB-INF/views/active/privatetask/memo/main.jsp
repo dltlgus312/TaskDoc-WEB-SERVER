@@ -3,87 +3,78 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<%
+	String loginid = "";
+	loginid = (String) session.getAttribute("loginid");
+	String ptcode = request.getParameter("ptcode");
+%>	
 
+</head>
+<body id="loadtest">
+	<div class="bts">
+		<button class="btn" type="button" onclick="memocreate()"style="outline:none;color:white;border:0px;background-color:#ed8151;">생성</button>
+	</div>
+	
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th style="width: 50px;">번호</th>
+				<th style="width: 250px;">내용</th>
+				<th style="width: 100px;">날짜</th>
+				<th style="width: 100px;">관리</th>
+			</tr>
+		</thead>
+		<tbody id="tbodys">
+		
+		</tbody>
+	</table>
 </body>
 
 <script type="text/javascript">
-
-// 개인업무 내 모든 메모 조회
-$.ajax({
-	type : 'GET',
-	url : 'memo/' + '메모를 조회할 개인업무 PTCODE',
-	success : function(response) {
-		if (response.length != -1) {
-			alert('메모 조회 완료!' + response);
-		} else if (response.length == 0) {
-			alert('Server or Client ERROR, 메모 조회 실패');
-		}
-	},
-	error : function(e) {
-		alert("ERROR : " + e.statusText);
-	}
-});
-// /개인업무 내 모든 메모 조회
-
-
-// 개인업무 내 메모 생성
-var param = {
-		'ptcode': '메모를 생성할 개인업무 PTCODE',
-		'mcontents' : '메모 내용'
-};
-$.ajax({
-	type : 'POST',
-	url : 'memo',
-	contentType : 'application/json',
-	data : JSON.stringify(param),
-	success : function(response) {
-		if (response != -1) {
-			alert('메모 생성 완료! 메모의 mcode값은' + response);
-		} else if (response == -1) {
-			alert('Server or Client ERROR, 메모 생성 실패');
-		}
-	},
-	error : function(e) {
-		alert("ERROR : " + e.statusText);
-	}
-});
-// /개인업무 내 메모 생성
-
-// 개인업무 내 메모 수정
-	var param = {
-		'mcontents' : '수정할 메모 내용',
-		'mcode' : '수정할메모의 MCODE'
-	};
-	$.ajax({
-		type : 'PUT',
-		url : 'memo',
-		contentType : 'application/json',
-		data : JSON.stringify(param),
-		success : function(response) {
-			if (response == 1) {
-				alert('메모 수정 완료! 메모의 mcode값은' + response);
-			} else if (response == -1) {
-				alert('Server or Client ERROR, 메모 수정 실패');
+var ptcode=parseInt(<%=ptcode%>);
+	$(function(){
+		//메모 조회
+		$.ajax({
+			type : 'GET',
+			url : '/memo/' + <%=ptcode%>,
+			success : function(response) {
+				if (response.length>0) {
+					alert('메모 조회 완료!' + response);
+					for(var i=0;i<response.length;i++){
+						$div='<tr calss="bts"><td>'+ (i+1) +'</td> <td>'+response[i].mcontents+'</td><td>'+response[i].mdate+'</td>'
+						+'<td><img onclick="memoEdit('+response[i].mcode+')" src="${pageContext.request.contextPath }/resources/img/img_boardsetting.png" style="width:20px;height:20px;margin-right:20px;cursor:pointer;">'
+						+'<img onclick="memoDel('+response[i].mcode+')" src="${pageContext.request.contextPath }/resources/img/img_boarddelete.png" style="width:20px;height:20px;cursor:pointer;"></td></tr>';
+						$("#tbodys").append($div);
+					}
+					
+				} else{
+					alert('Server or Client ERROR, 메모 조회 실패');
+				}
+			},
+			error : function(e) {
+				alert("ERROR : " + e.statusText);
 			}
-		},
-		error : function(e) {
-			alert("ERROR : " + e.statusText);
-		}
-	});
-	// /개인업무 내 메모 수정
+		});
+	})
 	
-	// 개인업무 내 메모 삭제
-	$.ajax({
+	//생성
+	function memocreate(){
+		$("#loadtest").load('/project/memo/create?ptcode=' + ptcode);
+	}
+	
+	//삭제
+	function memoDel(mcode){
+	 $.ajax({
 		type : 'DELETE',
-		url : 'memo/'+'삭제할 메모의 MCODE',
+		url : '/memo/'+mcode,
 		success : function(response) {
-			if (response == 1) {
+			if (response>0) {
 				alert('메모 삭제 완료!');
-			} else if (response == -1) {
+				location.reload();
+			} else{
 				alert('Server or Client ERROR, 메모 삭제 실패');
 			}
 		},
@@ -91,7 +82,13 @@ $.ajax({
 			alert("ERROR : " + e.statusText);
 		}
 	});
-	// /개인업무 내 메모 삭제
+}
+	
+	//수정
+	function memoEdit(mcode){
+		alert('수정');
+	}
+	
 	
 </script>
 </html>

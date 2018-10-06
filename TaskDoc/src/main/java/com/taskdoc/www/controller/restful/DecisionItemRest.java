@@ -1,6 +1,7 @@
 package com.taskdoc.www.controller.restful;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,12 @@ public class DecisionItemRest {
 	@RequestMapping(value="/{dscode}", method = RequestMethod.GET)
 	public List<DecisionItemVO> list(@PathVariable int dscode) {
 		return service.decisionItemList(dscode);
+	}
+
+	//dscode로 몇명이 투표했는지 count집계
+	@RequestMapping(value="/count/{dscode}", method = RequestMethod.GET)
+	public Map<String,Object> count(@PathVariable int dscode) {
+		return service.decisionCountList(dscode);
 	}
 	
 
