@@ -3,11 +3,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-
-
 <%@include file="/WEB-INF/views/fix/header.jsp"%>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/bootstrap/css/bootstrap.css">
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");

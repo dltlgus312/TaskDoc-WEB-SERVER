@@ -1,32 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-<!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 부가적인 테마 -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
 <!--TaskDocMain css -> For button use  -->
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/resources/css/taskdocMain/normalize.css?ver=42" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/resources/css/taskdocMain/demo.css?ver=42" />
 <!--/TaskDocMain css -> For button use  -->
-
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/resources/css/user/join.css?ver=54" />
 </head>
 
 <body>
@@ -34,7 +21,6 @@
 		<div class="container" style="width: 600px; margin-top: 10px;">
 			<div class="row">
 				<div class="modal-content">
-
 					<div class="modal-header"
 						style="background: white; border-bottom: 1px solid gainsboro">
 						<h4 class="modal-title">회원가입을 환영합니다!</h4>

@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.taskdoc.www.database.dao.chatroomjoin.ChatRoomJoinDAO;
 import com.taskdoc.www.database.dao.document.DocumentDAO;
+import com.taskdoc.www.database.dao.file.FileDAO;
 import com.taskdoc.www.database.dao.project.ProjectDAO;
 import com.taskdoc.www.database.dao.publictask.PublicTaskDAO;
 import com.taskdoc.www.database.dto.DocumentVO;
@@ -40,6 +41,12 @@ public class DocumentServiceImpl implements DocumentService {
 
 	@Autowired
 	ProjectDAO projectDao;
+	
+	@Autowired
+	FileDAO fileDao;
+	
+	@Autowired
+	DocumentDAO documentDao;
 
 	@Autowired
 	FileService fileService;
@@ -183,6 +190,37 @@ public class DocumentServiceImpl implements DocumentService {
 	public int documentUpdate(DocumentVO documentVo) {
 		// TODO Auto-generated method stub
 		return dao.documentUpdate(documentVo);
+	}
+
+	@Override
+	@Transactional
+	public Map<String, Object> taskView(int tcode) {
+		List<DocumentVO> dvo = documentDao.taskList(tcode);
+		List<FileVO> fvo=new ArrayList<>();
+		
+		for(int i=0;i<dvo.size();i++){
+			fvo.addAll(fileDao.fileList(dvo.get(i).getDmcode()));
+		}
+		
+		Map<String, Object> a=new HashMap<>();
+		a.put("document", dvo);
+		a.put("file", fvo);
+		
+		return a;
+	}
+
+	@Override
+	public Map<String, Object> fileView(int dmcode) {
+		DocumentVO dvo= documentDao.documentView(dmcode);
+		List<FileVO> fvo=new ArrayList<>();
+		
+		fvo.addAll(fileDao.fileList(dvo.getDmcode()));
+		
+		Map<String, Object> a=new HashMap<>();
+		a.put("document", dvo);
+		a.put("file", fvo);
+		
+		return a;
 	}
 
 }

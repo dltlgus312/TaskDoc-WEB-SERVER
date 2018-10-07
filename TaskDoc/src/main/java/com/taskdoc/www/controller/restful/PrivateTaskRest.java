@@ -19,9 +19,21 @@ public class PrivateTaskRest {
 	@Autowired
 	PrivateTaskService service;
 	
+	//해당 ID에대한 모든 개인업무 받아옴
 	@RequestMapping(value = "/user/{uid}", method = RequestMethod.GET)
 	public List<PrivateTaskVO> list(@PathVariable String uid) {
 		return service.privateTaskList(uid);
+	}
+
+	@RequestMapping(value = "/{ptcode}", method = RequestMethod.GET)
+	public PrivateTaskVO view(@PathVariable int ptcode) {
+		return service.privateTaskView(ptcode);
+	}
+	
+	//하위 개인업무 조회
+	@RequestMapping(value = "/down/{ptrefference}", method = RequestMethod.GET)
+	public List<PrivateTaskVO> downTask(@PathVariable int ptrefference) {
+		return service.privateDownTask(ptrefference);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)

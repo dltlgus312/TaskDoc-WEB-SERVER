@@ -1,5 +1,12 @@
 var contentWidth = $("#contentwrap").width();
 var contentHeight = $("#contentwrap").height();
+
+var screenW = screen.availWidth;  // 스크린 가로사이즈
+var screenH = screen.availHeight; // 스크린 세로사이즈
+var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
+var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
+
+
 $(document).ready(function() {
 	/*DIV TOP , BOTTOM , MIDDLE 범위나누기  */
 	var contentWidth = $("#contentwrap").width();
@@ -67,7 +74,7 @@ $(document).ready(function() {
 					$(this).css("box-shadow", "4px 4px 7px grey");
 				});
 		
-		}
+			}
 		},
 		error : function(e) {
 			alert("ERROR : " + e.statusText);
@@ -146,12 +153,8 @@ $(document).on('click','.prosetinviteimg' ,function(e) {
     e.stopPropagation();
     var pcode=$(this).attr('id');
     if(window.confirm('프로젝트 유저 초대 페이지를 띄우시겠습니까?')==true){
-    	 var screenW = screen.availWidth;  // 스크린 가로사이즈
-    	  var screenH = screen.availHeight; // 스크린 세로사이즈
     	  var popW = 600; // 띄울창의 가로사이즈
     	  var popH = 350; // 띄울창의 세로사이즈
-    	  var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
-    	  var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
     	 window.open("/project/userInvite?pcode="+pcode,"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no');
 	}
 	else
@@ -163,12 +166,8 @@ $(document).on('click','.prosetsettingimg' ,function(e) {
     e.stopPropagation();
     var list=$(this).attr('id');
     if(window.confirm('프로젝트 정보 수정  페이지를 띄우시겠습니까?')==true){
-    	 var screenW = screen.availWidth;  // 스크린 가로사이즈
-    	  var screenH = screen.availHeight; // 스크린 세로사이즈
-    	  var popW = 1000; // 띄울창의 가로사이즈
-    	  var popH = 800 // 띄울창의 세로사이즈
-    	  var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
-    	  var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
+    	var popW = 1000; // 띄울창의 가로사이즈
+    	var popH = 800 // 띄울창의 세로사이즈
     	 window.open("/project/infoEdit?pcode="+list,"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no');
 	}
 	else
@@ -180,12 +179,8 @@ $(document).on('click','.pronoticebtn' ,function(e) {
 	e.stopPropagation();
 	var list=$(this).attr('id');
 	if(window.confirm('공지사항  페이지를 띄우시겠습니까?')==true){
-		var screenW = screen.availWidth;  // 스크린 가로사이즈
-		var screenH = screen.availHeight; // 스크린 세로사이즈
 		var popW = 500; // 띄울창의 가로사이즈
 		var popH = 500 // 띄울창의 세로사이즈
-		var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
-		var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
 		window.open("/project/noticeMain?pcode="+list,"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no');
 	}
 	else

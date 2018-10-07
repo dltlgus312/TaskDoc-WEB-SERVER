@@ -2,29 +2,24 @@
 	pageEncoding="UTF-8"%>
 <html>
 <head>
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<!-- Jquery -->
-<!-- Custom styles for this template -->
 <link
 	href="${pageContext.request.contextPath }/resources/css/user/login.css?ver=4552"
 	rel="stylesheet">
-<!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 부가적인 테마 -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<!--TaskDocMain css -> For button use  -->
+<script
+	src="${pageContext.request.contextPath }/resources/css/bootstrap/js/ie-emulation-modes-warning.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/resources/css/taskdocMain/normalize.css?ver=42" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/resources/css/taskdocMain/demo.css?ver=42" />
-<!--/TaskDocMain css -> For button use  -->
 </head>
 
 
@@ -117,7 +112,6 @@ var goserveruid="";
 						$("#myBar").show();
 						move();
 					}
-
 				},
 				error : function(e) {
 					alert("ERROR : " + e.statusText);
@@ -126,7 +120,6 @@ var goserveruid="";
 
 		});
 		/* /Login 처리*/
-
 	});
 </script>
 </html>

@@ -8,6 +8,15 @@
 	<select id="list" resultType="decisionitem" parameterType="Integer">
 		SELECT * FROM decisionitem WHERE dscode=#{dscode} ORDER BY dsisequence ASC
 	</select>
+	
+	<select id="count" resultType="Integer">
+	SELECT count(v.dsicode) as count 
+	FROM decisionitem d LEFT OUTER JOIN voter v 
+	ON d.dsicode=v.dsicode
+	WHERE d.dscode=#{dscode} 
+	GROUP BY d.dsicode;
+	
+	</select>
 
 	<insert id="insert" parameterType="decisionitem" useGeneratedKeys="true" keyProperty="dsicode">
 		INSERT INTO decisionitem VALUES(null, #{dsilist}, #{dsisequence}, #{dscode})

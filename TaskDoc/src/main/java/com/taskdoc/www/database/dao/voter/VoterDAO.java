@@ -8,4 +8,7 @@ public interface VoterDAO {
 	public List<VoterVO> voterList(int dsicode);
 	public int voterInsert(VoterVO voterVo);
 	public int voterDelete(VoterVO voterVo);
+	public List<String> voterCheck(int dscode);
+	
+
 }

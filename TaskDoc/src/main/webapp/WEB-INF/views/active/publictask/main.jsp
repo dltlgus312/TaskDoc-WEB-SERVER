@@ -74,6 +74,11 @@ $(function(){
 	<!--FRAME  -->
 </body>
 <script type="text/javascript">
+var screenW = screen.availWidth;  // 스크린 가로사이즈
+var screenH = screen.availHeight; // 스크린 세로사이즈
+var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
+var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션
+
 
 $(document).ready(function() {
 	//특정 프로젝트의 모든 공용업무를 보여준다.
@@ -92,8 +97,10 @@ $(document).ready(function() {
 							+'<div class="ppc-progress">'
 							+'<div class="ppc-progress-fill" id="fill'+response[i].tcode+'"></div></div>'
 							+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].tcode +'">%</span></div></div></div>'
-							+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span></div><div><button onclick= "ptedit('+response[i].tcode+')" type="button">수정</button><button type="button" onclick="ptdel('+response[i].tcode+')">삭제</button></div></div></div></div>';
-							
+							+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span></div>'
+							+'<div class="bts"><button onclick="downtaskcreate(\''+response[i].tsdate+ ',' +response[i].tedate+'\','+response[i].tcode+')" style="border:0px;outline:none;color:white;background-color:#ed8151; margin-right:5px; font-size:12px;" class="btn"type="button">하위 업무 생성</button>'
+							+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;margin-right:5px;font-size:12px;" class="btn" onclick= "ptedit(\''+response[i].tsdate+ ',' +response[i].tedate+'\','+response[i].tcode+')" type="button">수정</button>'
+							+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;font-size:12px;" class="btn" type="button" onclick="ptdel('+response[i].tcode+')">삭제</button></div></div></div></div>';
 							$("#ptcreatebtn").show();
 						}
 						else if(chatpermission=="MEMBER"){
@@ -104,7 +111,8 @@ $(document).ready(function() {
 							+'<div class="ppc-progress">'
 							+'<div class="ppc-progress-fill" id="fill'+response[i].tcode+'"></div></div>'
 							+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].tcode +'">%</span></div></div></div>'
-							+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span></div><div></div></div></div></div>';
+							+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span>'
+							+'<div class="bts"><button style="border:0px;outline:none;color:white;background-color:#ed8151; margin-right:5px; font-size:12px;" class="btn" onclick= "privateCreate(\''+response[i].tsdate+ ',' +response[i].tedate+'\','+response[i].tcode+')" type="button">개인업무생성</button></div><div></div></div></div></div>';
 						}
 						$("#publictaskBOTTOM").append($append);
 						
@@ -130,44 +138,12 @@ $(document).ready(function() {
 	
 });
 
-//차트 클릭시 숫자바꿀수있는 function
-/* 
- function test(i) {
-	var b = $("#chart"+i.toString());
-	
-	// 숫자만인지 체크하는 정규식
-	var regNumber = /^[0-9]*$/;
-	
-	var test = prompt("퍼센트를 입력해주세요", "숫자만 입력해주세요");
-	if (test > 100 || !regNumber.test(test)) {
-		alert('100을넘거나 숫자 이외의 문자는 사용할 수 없습니다.');
-	} else if(test<=100){
-		percent = parseInt(test);
-		deg = 360 * percent / 100;
-		if (percent > 50) {
-			b.addClass("gt-50");
-			 $("#chart"+i.toString()).css("background-color","#ed8151");
-			$("#fill"+i.toString()).css('background','#e5e5e5'); 
-		}
-		else{
-			b.removeClass("gt-50");
-			 $("#chart"+i.toString()).css("background-color",'#e5e5e5');
-			$("#fill"+i.toString()).css('background','#ed8151'); 
-		}
-		$('#fill'+i.toString()).css('transform', 'rotate(' + deg + 'deg)');
-		$('#num'+i.toString()).html(percent + '%');
-	} 
-}
-  */
+
  //공용업무 생성하기
  function ptcreate(pcode){
-	 var screenW = screen.availWidth;  // 스크린 가로사이즈
-	 var screenH = screen.availHeight; // 스크린 세로사이즈
 	 var popW = 500; // 띄울창의 가로사이즈
 	 var popH = 400; // 띄울창의 세로사이즈
-	 var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
-	 var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
-	 window.open("/project/publicTask/create?pcode="+pcode+"&psdate="+fixpsdate+"&pedate="+fixpedate,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+	 window.open("/project/publicTask/create?pcode="+pcode+"&tsdate="+fixpsdate+"&tedate="+fixpedate,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
  }
  
 // 공용업무 삭제
@@ -194,23 +170,23 @@ $(document).ready(function() {
  }
  
  //공용업무 수정
- function ptedit(tcode){
+ function ptedit(date, tcode){
 	 event.stopPropagation();
-	 var screenW = screen.availWidth;  // 스크린 가로사이즈
-	 var screenH = screen.availHeight; // 스크린 세로사이즈
 	 var popW = 400; // 띄울창의 가로사이즈
 	 var popH = 560; // 띄울창의 세로사이즈
-	 var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
-	 var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
+	 
+	 var list={};
+	 list = date.split(',');
 	 
 	 if(confirm('업무를 수정하시겠습니까?')==true){
-			window.open("/project/publicTask/edit?tcode="+tcode+"&psdate="+fixpsdate+"&pedate="+fixpedate,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+			window.open("/project/publicTask/edit?tsdate="+list[0]+"&tedate="+list[1]+"&tcode="+tcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 	 }
 	 else return;
  }
  
  //하위업무로 이동
   function godowntask(tcode){
+	event.stopPropagation();
 	 if(confirm('하위 업무로 이동하시겠습니까?')==true){
 		 $("#ptcreatebtn").hide();
 		 $("#publictaskBOTTOM").load("/project/publicTask/downTask?tcode="+tcode); 
@@ -220,6 +196,27 @@ $(document).ready(function() {
 	 }else return;
  } 
  
+ //개인 업무 생성
+ function privateCreate(date,tcode){
+	 event.stopPropagation();
+	 var popW = 500; // 띄울창의 가로사이즈
+	 var popH = 400; // 띄울창의 세로사이즈
+	 var list={};
+	 list = date.split(',');
+	 
+	 window.open("/project/privateTask/create?tsdate="+list[0]+"&tedate="+list[1]+"&tcode="+tcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+ }
+ 
+ //하위 업무 생성
+ function downtaskcreate(date,tcode){
+	 event.stopPropagation();
+	 var popW = 500; // 띄울창의 가로사이즈
+	 var popH = 400; // 띄울창의 세로사이즈
+	 var list={};
+	 list=date.split(',');
+	 alert(list);
+	 window.open("/project/publicTask/downTaskCreate?tsdate="+list[0]+"&tedate="+list[1]+"&tcode="+tcode+"&pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+ 	}
   
 </script>
 

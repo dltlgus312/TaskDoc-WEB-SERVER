@@ -78,51 +78,113 @@ public class Project {
 	 * 
 	 */
 	
-	//메인
+	//공용업무 메인
 	@RequestMapping(value = "/publicTask/main", method = RequestMethod.GET)
 	public String publicTaskMain() {
 		return "/active/publictask/main";
 	}
 	
-	//하위업머
+	//공용업무 의 하위 업무
 	@RequestMapping(value = "/publicTask/downTask", method = RequestMethod.GET)
 	public String downTask() {
 		return "/active/publictask/window/downtask";
 	}
 	
-	//하위업머
+	//공용업무의 하위 업무 생성
 	@RequestMapping(value = "/publicTask/downTaskCreate", method = RequestMethod.GET)
 	public String downTaskCreate() {
 		return "/active/publictask/window/downtaskcreate";
 	}
 	
-	//생성
+	//공용업무 생성
 	@RequestMapping(value = "/publicTask/create", method = RequestMethod.GET)
 	public String publicTaskCreate() {
 		return "/active/publictask/window/create";
 	}
 	
-	//수정
+	//공용업무 수정
 	@RequestMapping(value = "/publicTask/edit", method = RequestMethod.GET)
 	public String publicTaskEdit() {
 		return "/active/publictask/window/edit";
 	}
 	
-	//메인
+	//개인업무 메인
 	@RequestMapping(value = "/privateTask/main", method = RequestMethod.GET)
 	public String privateTaskMain() {
-		return "privateTaskMain";
+		return "/active/privatetask/main";
 	}
 	
-	//생성
+	//개인 업무 생성
 	@RequestMapping(value = "/privateTask/create", method = RequestMethod.GET)
 	public String privateTaskCreate() {
-		return "/active/temp/publictaskcreate";
+		return "/active/privatetask/window/create";
 	}
 	
-	//수정
+	//개인업무 의 하위 업무
+	@RequestMapping(value = "/privateTask/downTask", method = RequestMethod.GET)
+	public String privatedownTask() {
+		return "/active/privatetask/window/downtask";
+	}
+		
+	//개인업무의 하위 업무 생성
+	@RequestMapping(value = "/privateTask/downTaskCreate", method = RequestMethod.GET)
+	public String privatedownTaskCreate() {
+		return "/active/privatetask/window/downtaskcreate";
+	}
+		
+	//개인 업무 수정
 	@RequestMapping(value = "/privateTask/edit", method = RequestMethod.GET)
 	public String privateTaskEdit() {
-		return "privateTaskEdit";
+		return "/active/privatetask/window/edit";
 	}
+	
+	//메모 메인
+	@RequestMapping(value = "/memo/main", method = RequestMethod.GET)
+	public String memoMain() {
+		return "/active/privatetask/memo/main";
+	}
+	
+	//메모 생성
+	@RequestMapping(value = "/memo/create", method = RequestMethod.GET)
+	public String memoCreate() {
+		return "/active/privatetask/memo/create";
+	}
+	
+	//메모 수정
+	@RequestMapping(value = "/memo/edit", method = RequestMethod.GET)
+	public String memoEdit() {
+		return "/active/privatetask/memo/edit";
+	}
+	
+	//메모 보기
+	@RequestMapping(value = "/memo/view", method = RequestMethod.GET)
+	public String memoView() {
+		return "/active/privatetask/memo/view";
+	}
+	
+	//공용업무의 파일
+	@RequestMapping(value = "/file/main", method = RequestMethod.GET)
+	public String fileMain() {
+		return "/active/file/main";
+	}
+
+	//공용업무의 파일
+	@RequestMapping(value = "/file/downloadForm", method = RequestMethod.GET)
+	public String downloadForm() {
+		return "/active/file/downloadForm";
+	}
+	
+	//공용업무의 하위업무 파일
+	@RequestMapping(value = "/file/downview", method = RequestMethod.GET)
+	public String fileView() {
+		return "/active/file/downview";
+	}
+	
+	//간트
+	@RequestMapping(value = "/gantt/main", method = RequestMethod.GET)
+	public String gantView() {
+		return "/active/gantt/view";
+	}
+	
+	
 }

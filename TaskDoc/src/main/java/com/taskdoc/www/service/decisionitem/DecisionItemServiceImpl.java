@@ -1,6 +1,8 @@
 package com.taskdoc.www.service.decisionitem;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +34,19 @@ public class DecisionItemServiceImpl implements DecisionItemService{
 	@Override
 	public int decisionItemDelete(int dsicode) {
 		return dao.decisionItemDelete(dsicode);
+	}
+
+	@Override
+	public Map<String, Object> decisionCountList(int dscode) {
+		
+		Map<String, Object> a=new HashMap<>();
+
+		List<DecisionItemVO> list=dao.decisionItemList(dscode);
+		a.put("list", list);
+		
+		List<Integer> count=dao.countList(dscode);
+		a.put("count", count);
+		
+		return a;
 	}
 }

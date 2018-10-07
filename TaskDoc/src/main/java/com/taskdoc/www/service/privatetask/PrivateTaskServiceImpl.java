@@ -58,4 +58,15 @@ public class PrivateTaskServiceImpl implements PrivateTaskService{
 		// TODO Auto-generated method stub
 		return dao.privateTaskDelete(ptcode);
 	}
+
+	@Override
+	public PrivateTaskVO privateTaskView(int ptcode) {
+		return dao.privateTaskView(ptcode);
+	}
+
+	@Override
+	public List<PrivateTaskVO> privateDownTask(int ptrefference) {
+		return dao.privateDownTask(ptrefference);
+	}
+
 }

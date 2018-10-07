@@ -18,8 +18,8 @@
 	loginid = (String) session.getAttribute("loginid");
 	String pcode=request.getParameter("pcode");
 	String tcode=request.getParameter("tcode");
-	String psdate=request.getParameter("psdate");
-	String pedate=request.getParameter("pedate");
+	String tsdate=request.getParameter("tsdate");
+	String tedate=request.getParameter("tedate");
 %>
 
 <script type="text/javascript">
@@ -63,14 +63,14 @@ var pcode=<%=pcode%>;
 					
 					<div class="modal-footer">
 						
-						<button type="button" class="btn btn-success btn-icon"
+						<button type="button" class="btn btn-success btn-icon" style="outline: none;border:0px;background-color:#ed8151;color:white;"
 							onclick="ptCreate()">
-							<i class="fa fa-check"></i> Create PublicTask
+							Create PublicTask
 						</button>
 						
-						<button type="button" class="btn btn-default btn-icon"
+						<button type="button" class="btn btn-default btn-icon" style="outline: none;border:0px;background-color:#ed8151;color:white;"
 							onclick="Cancel()">
-							<i class="fa fa-times-circle"></i> Cancel
+							 Cancel
 						</button>
 						
 					</div>
@@ -82,8 +82,8 @@ var pcode=<%=pcode%>;
 
 <script type="text/javascript">
 var mycolor="";
-var fixpsdate='<%=psdate%>';
-var fixpedate='<%=pedate%>';
+var fixpsdate='<%=tsdate%>';
+var fixpedate='<%=tedate%>';
 $(function() {
 	$.datepicker.regional['ko'] = {
 		closeText : '닫기',

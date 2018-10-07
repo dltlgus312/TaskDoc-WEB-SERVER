@@ -12,7 +12,8 @@ $(function(){
 	var prochatbtn1 = $("#prochatbtn1").css('width');
 	$("#chathwamun").css('left',parseInt(pronamewidth) + parseInt(proliwidth) + parseInt(prochatbtn1));
 	
-	//leftchatlist에 채팅 리스트들 append
+	
+	//leftchatlist -> 프로젝트 채팅, 개인 채팅 리스트 append
 	var param = {
 			'uid' : id,
 			'pcode' : pcode
@@ -26,19 +27,19 @@ $(function(){
 				var cObject=new Object();
 				if (response.length != -1) {
 					var cArray=new Array();
-					//프로젝트 채팅방과, 개인채팅방을 구분하여 append한다. , 추후에 날짜랑, db 연동해서 제일 최근의 채팅방 내용을 불러오고, 날짜도 같이불러와보자.
+					//프로젝트 채팅방과, 개인채팅방을 구분하여 append한다.
 					for(var i=0;i<response.chatRoomList.length;i++){
-						
 						//프로젝트 채팅방 append, 맨밑의 span에는 사용자가 입력한 채팅의 시간을적어줌, 지금은 test용으로 채팅방만든시간을적엇음.
 						if(response.chatRoomList[i].crmode==1){
 							cObject.crcode=response.chatRoomList[i].crcode;
 							cObject.crmode=response.chatRoomList[i].crmode;
+							cObject.crdate=response.chatRoomList[i].crdate;
 							cArray.push(cObject);
 							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:80px;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +')">'
 							+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+'프로젝트 채팅방'+'</span></div>' 
-							+'<div style="width:100%;height:50%"><img src="/resources/img/img_prochat.png"alt="" style="width: 30px; height:30px;">'
+							+'<div style="width:100%;height:50%;overflow:auto;"><img src="/resources/img/img_prochat.png"alt="" style="width: 30px; height:30px;">'
 							+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
-							+'<div style="width:100%;height:25%"><span>'+'??????'+'</span></div>';
+							+'<div style="width:100%;height:25%"><span>'+cArray[i].crdate+'</span></div>';
 							$("#chatlistTOP").append($cdiv);
 						}
 						
@@ -57,13 +58,13 @@ $(function(){
 							
 							cObject.crcode=response.chatRoomList[i].crcode;
 							cObject.crmode=response.chatRoomList[i].crmode;
+							cObject.crdate=response.chatRoomList[i].crdate;
 							cArray.push(cObject);
-							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;border-bottom:1px solid black;display:inline-block;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +')">'
+							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:30%; border-bottom:1px solid black;display:inline-block;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +')">'
 							+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+ memname +'의채팅방'+'</span></div>'
-							+'<div style="width:100%;height:50%"><img src="/resources/img/img_individualchat.png"alt="" style="width: 30px; height:30px;">'
+							+'<div style="width:100%;height:50%; overflow : auto;"><img src="/resources/img/img_individualchat.png"alt="" style="width: 30px; height:30px;">'
 							+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
-							+'<div style="width:100%;height:25%"><span>'+'?????????'+'</span></div>'
-							+'<div><button type="button" class="btn" style="float:right; background-color:#ed8151; color:white;" onclick="chatinvite('+cArray[i].crcode+')">초대</button></div>';
+							+'<div><button type="button" class="btn" style="float:right; background-color:#ed8151; color:white;font-size:12px;" onclick="chatinvite('+cArray[i].crcode+')">초대</button></div>';
 							$("#chatlistBOTTOM").append($cdiv);
 
 						}
@@ -132,19 +133,20 @@ function gochatCon(crcode,crmode){
 		if(confirm('프로젝트 채팅에 입장하시겠습니까?')==true){
 			if(chatpermission=="OWNER" &&crmode==1){
 				alert(crcode+","+crmode+", owner다");
-			 	$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode);  
+			 	$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode+"&pcode="+pcode);  
 			}
 			else if(chatpermission=="MEMBER" && crmode==1){
-				$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode);  
+				alert(crcode+","+crmode+", member다");
+				$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode+"&pcode="+pcode);  
 			}
 		}
 		else return;
 	}
 	
-	else{
+	else if(crmode==2){
 		if(confirm('개인 채팅에 입장하시겠습니까?')==true){
 			alert(crcode+","+crmode+", owner다");
-			$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode);  
+			$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode+"&pcode="+pcode);  
 		}
 	}
 }

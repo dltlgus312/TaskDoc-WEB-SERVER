@@ -12,6 +12,10 @@ import com.taskdoc.www.database.dto.DocumentVO;
 
 public interface DocumentService {
 	public List<DocumentVO> taskList(int tcode);
+	
+	public Map<String,Object> taskView(int tcode);
+	public Map<String, Object> fileView(int dmcode);
+
 	public List<DocumentVO> roomList(int crcode);
 	public List<DocumentVO> userList(String uid);
 	public int fileUpload(MultipartFile[] multipartFile, DocumentVO documentVo);

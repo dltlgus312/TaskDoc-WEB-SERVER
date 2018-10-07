@@ -18,5 +18,11 @@
 		DELETE FROM voter WHERE dsicode=#{dsicode} AND uid=#{uid}
 	</delete>
 	
+	<select id="check" resultType="String">
+		SELECT voter.uid
+		FROM voter, decisionitem
+		WHERE decisionitem.dsicode = voter.dsicode and decisionitem.dscode=#{dscode};
+	</select>
+	
 </mapper>
 	

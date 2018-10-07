@@ -1,6 +1,7 @@
 package com.taskdoc.www.database.dao.decisionitem;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class DecisionItemDAOImpl implements DecisionItemDAO {
 	private final String INSERT = "insert";
 	private final String UPDATE = "update";
 	private final String DELETE = "delete";
+	private final String COUNT = "count";
 	
 	@Override
 	public List<DecisionItemVO> decisionItemList(int dscode) {
@@ -45,5 +47,11 @@ public class DecisionItemDAOImpl implements DecisionItemDAO {
 	public int decisionItemDelete(int dsicode) {
 		// TODO Auto-generated method stub
 		return sql.delete(NAMESPACE + DELETE, dsicode);
+	}
+
+
+	@Override
+	public List<Integer> countList(int dscode) {
+		return sql.selectList(NAMESPACE+COUNT,dscode);
 	}
 }

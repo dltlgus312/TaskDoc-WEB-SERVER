@@ -19,6 +19,8 @@
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
 	String tcode = request.getParameter("tcode");
+	String tsdate = request.getParameter("tsdate");
+	String tedate = request.getParameter("tedate");
 %>
 
 
@@ -69,9 +71,6 @@
 					
 					<div id="7" style="width: 100%; margin-top: 30px;">
 						<div class="bts" style="height: 70%; margin-top: 16px;">
-							<button type="button" onclick="prodeldel()"
-								style="margin-left: 7px; float: left; background-color: #ed8151; border: 0; outline: none;"
-								class="btn btn-success">프로젝트 삭제하기</button>
 							<button type="button"
 								style="float: right; margin-right: 7px; background-color: #ed8151; border: 0; outline: none;"
 								class="btn btn-success" onclick="cancel()">Cancel</button>
@@ -86,6 +85,7 @@
 </body>
 
 <script type="text/javascript">
+
 //공용업무 정보받아오기
 $(document).ready(function() {
 	$.ajax({
@@ -114,7 +114,6 @@ $(document).ready(function() {
 
 
 var mycolor="";
-	 
 function update(jscolor) {
     // 'jscolor' instance can be used as a string
     $("#rect").css('background-color','#'+jscolor);
@@ -123,6 +122,9 @@ function update(jscolor) {
     mycolor=removeData.replace("#","");
 }	 
 
+
+var fixpsdate='<%=tsdate%>';
+var fixpedate='<%=tedate%>';
 
 //프로젝트 수정시 datepicker api사용
 $(function() {
@@ -152,18 +154,18 @@ $(function() {
 	};
 	$.datepicker.setDefaults($.datepicker.regional['ko']);
 
-	$('#psdate').datepicker();
-	$("#psdate").datepicker("option", "minDate", 0);
-	$('#psdate').datepicker("option", "maxDate", $("#toDate").val());
-	$('#psdate').datepicker("option", "onClose", function(selectedDate) {
-		$("#pedate").datepicker("option", "minDate", selectedDate);
+	$('#ptsdate').datepicker();
+	$("#ptsdate").datepicker("option", "minDate",fixpsdate);
+	$('#ptsdate').datepicker("option", "maxDate",fixpedate);
+	$('#ptsdate').datepicker("option", "onClose", function(selectDate) {
+	$("#ptedate").datepicker("option", "minDate", selectDate);
 	});
 
-	$('#pedate').datepicker();
-	$("#pedate").datepicker("option", "minDate", 0);
-	$('#pedate').datepicker("option", "minDate", $("#psdate").val());
-	$('#pedate').datepicker("option", "onClose", function(selectedDate) {
-		$("#psdate").datepicker("option", "maxDate", selectedDate);
+	$('#ptedate').datepicker();
+	$("#ptedate").datepicker("option", "minDate",fixpsdate);
+	$("#ptedate").datepicker("option", "maxDate",fixpedate);
+	$('#ptedate').datepicker("option", "onClose", function(selectDate) {
+	$("#ptsdate").datepicker("option", "maxDate", selectDate);
 	});
 });
 
@@ -197,7 +199,7 @@ function edit(){
 			success : function(response) {
 				if (response == 1) {
 					alert('공용업무 수정 완료!');
- 					//opener.location.reload(); 
+ 					opener.location.reload(); 
 				} else if (response == -1) {
 					alert('Server or Client ERROR, 공용업무 수정 실패');
 				}
