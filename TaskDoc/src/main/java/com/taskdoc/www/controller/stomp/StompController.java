@@ -29,9 +29,6 @@ public class StompController {
 		Map<String, Object> test=new HashMap<>();
 		if (map.get("type").equals("chatcontentsvo")) {
 			ChatContentsVO chatcontentsvo = JsonMapper.mapToJson(map.get("object"), ChatContentsVO.class);
-			chatcontentsvo.setDmcode(0);
-			chatcontentsvo.setDscode(0);
-			chatcontentsvo.setCrcoderef(0);
 			try {
 				chatcontentsvo = rest.postForObject(uri, chatcontentsvo, chatcontentsvo.getClass());
 				test.put("chat", chatcontentsvo);

@@ -11,10 +11,10 @@ String crcode=request.getParameter("crcode");
 	</div>
 </div>
 								
-<div id="chatcontentdiv" style="width:100%;height:75%;border:solid 1px blue; overflow:auto;"></div>				
+<div id="chatcontentdiv" style="width:100%;height:75%;border:solid 1px blue; overflow:auto; background-color: #e0e0e0"></div>				
 	<div id="chatconinput" class="bts" style="width:100%;height:20%; border:solid 1px blue; display:-webkit-box;">
 		<textarea id="chatcontent" class="form-control" style="width:95%;height:100%;font-size:17px; resize: none;"></textarea>
-		<button type="button" onclick="chattest()" style="font-size:18px;">테스트</button>
+		<button type="button" onclick="chattest(0,0,0)" style="font-size:18px;">테스트</button>
 	</div>
 </div>	
 
@@ -342,16 +342,41 @@ function chatclose(){
 
 
 //message : insert, type : chatcontents, object : ChatContentsVO
-function chattest(){
-	var param={
-		 'message' : 'insert',
-		 'type' : 'chatcontentsvo',
-		 'object' :{
-				 'crcode' : <%=crcode%>,
-			 	 'uid' : id,
-				 'ccontents' : $("#chatcontent").val()
-			 }
-	 };
+function chattest(dmcode,dscode,crcoderef){
+	//프로젝트 채팅창의 기본채팅
+	if(dmcode==0 && dscode==0 && crcoderef==0){
+		var param={
+			 'message' : 'insert',
+			 'type' : 'chatcontentsvo',
+			 'object' :{
+					 'crcode' : <%=crcode%>,
+				 	 'uid' : id,
+					 'ccontents' : $("#chatcontent").val(),
+					 'dmcode' : dmcode,
+					 'dscode' : dscode,
+					 'crcoderef' : crcoderef
+				 }
+		 };
+	}
 	stompClient.send('/app/project/'+pcode, {},JSON.stringify(param));
+}
+
+function decitest(dscode,dmcode,crcoderef,ccontents){
+	//프로젝트채팅 창의 의사결정
+	if(dmcode==0 && dscode!=0 && crcoderef==0){
+		var param={
+			 'message' : 'insert',
+			 'type' : 'chatcontentsvo',
+			 'object' :{
+					 'crcode' : <%=crcode%>,
+				 	 'uid' : id,
+					 'ccontents' : ccontents,
+					 'dmcode' : dmcode,	
+					 'dscode' : dscode,
+					 'crcoderef' : crcoderef
+				}
+		 };
+		stompClient.send('/app/project/'+pcode, {},JSON.stringify(param));
+	}
 }
 </script>
