@@ -152,17 +152,17 @@
 		else{
 		$.ajax({
 			type : 'POST',
-			url : '/decision',
+			url : '/decision/dec',
 			contentType : 'application/json',
 			data : JSON.stringify(param),
-			success : function(responsedscode) {
-				if (responsedscode>0) {
-					alert('의사결정 생성 완료! ' + responsedscode);
+			success : function(response) {
+				if (Object.keys(response).length>0) {
+					alert('의사결정 생성 완료! ');
 					for (var i = 0; i < tlist.length; i++) {
 						paramitem.push({
 								'dsilist' : document.getElementById(tlist[i]).value,
 								'dsisequence' : i,
-								'dscode' : responsedscode
+								'dscode' : response.dscode
 						});
 					}
 					/* 의사결정 아이템 생성
@@ -173,12 +173,13 @@
 						url : '/decisionitem',
 						contentType : 'application/json',
 						data : JSON.stringify(paramitem),
-						success : function(response) {
-							if (response != -1) {
-								alert('의사결정 아이템 생성 완료! ' + response);
+						success : function(responseitem) {
+							if (responseitem.length>0) {
+								alert('의사결정 아이템 생성 완료! ' + responseitem);
+								opener.parent.decitest(response.dscode,response.dsdate,response.dstitle,response.dsclose,response.crcode,response.tcode);
+								opener.parent.chattest(0,response.dscode,0);
 								window.close();
-								opener.parent.decitest(responsedscode,0,0,$("#decisionName").val());
-							} else if (response == -1) {
+							} else {
 								alert('Server or Client ERROR, 의사결정 아이템 생성 실패');
 							}
 						},

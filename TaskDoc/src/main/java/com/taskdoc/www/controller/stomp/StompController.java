@@ -19,6 +19,7 @@ public class StompController {
 	@Autowired
 	RestTemplate rest;
 
+	private final String chat = "http://localhost:8080/chatcontents";
 	@MessageMapping("/project/{pcode}")
 	@SendTo("/project/{pcode}")
 	public Map<String, Object> test(Map<String, Object> map) throws URISyntaxException {
@@ -28,21 +29,27 @@ public class StompController {
 	@MessageMapping("/webproject/{pcode}")
 	@SendTo("/project/{pcode}")
 	public Map<String, Object> web(Map<String, Object> map) throws URISyntaxException {
-		String urlString = "http://localhost:8080/chatcontents";
-		URI uri = new URI(urlString);
 		Map<String, Object> test=new HashMap<>();
-		if (map.get("type").equals("chatcontentsvo")) {
-			ChatContentsVO chatcontentsvo = JsonMapper.mapToJson(map.get("object"), ChatContentsVO.class);
-			try {
-				chatcontentsvo = rest.postForObject(uri, chatcontentsvo, chatcontentsvo.getClass());
-				test.put("chat", chatcontentsvo);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			System.out.println("나는 chatcontentsvo가 아니얌.");
+
+		if(map.get("type").equals("chatcontentsvo")){
+			URI uri = new URI(chat);
+				ChatContentsVO chatcontentsvo = JsonMapper.mapToJson(map.get("object"), ChatContentsVO.class);
+				try {
+					chatcontentsvo = rest.postForObject(uri, chatcontentsvo, chatcontentsvo.getClass());
+					test.put("object", chatcontentsvo);
+					test.put("message","insert");
+					test.put("type","chatcontentsvo");
+					return test;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 		}
-		return test;
+		
+		else if(map.get("type").equals("decisionvo")){
+			return map;
+		}
+		
+		return map;
 	}
 
 }

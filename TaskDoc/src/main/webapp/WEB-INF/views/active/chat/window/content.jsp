@@ -344,7 +344,6 @@ function chatclose(){
 //message : insert, type : chatcontents, object : ChatContentsVO
 function chattest(dmcode,dscode,crcoderef){
 	//프로젝트 채팅창의 기본채팅
-	if(dmcode==0 && dscode==0 && crcoderef==0){
 		var param={
 			 'message' : 'insert',
 			 'type' : 'chatcontentsvo',
@@ -357,26 +356,23 @@ function chattest(dmcode,dscode,crcoderef){
 					 'crcoderef' : crcoderef
 				 }
 		 };
-	}
 	stompClient.send('/app/webproject/'+pcode, {},JSON.stringify(param));
 }
 
-function decitest(dscode,dmcode,crcoderef,ccontents){
+function decitest(dscode,dsdate,dstitle,dsclose,crcode,tcode){
 	//프로젝트채팅 창의 의사결정
-	if(dmcode==0 && dscode!=0 && crcoderef==0){
 		var param={
 			 'message' : 'insert',
-			 'type' : 'chatcontentsvo',
+			 'type' : 'decisionvo',
 			 'object' :{
-					 'crcode' : <%=crcode%>,
-				 	 'uid' : id,
-					 'ccontents' : '투표 제목: '+ccontents,
-					 'dmcode' : dmcode,	
 					 'dscode' : dscode,
-					 'crcoderef' : crcoderef
+				 	 'dsdate' : dsdate,
+					 'dstitle' : dstitle,
+					 'dsclose' : dsclose,	
+					 'crcode' : crcode,
+					 'tcode' : tcode
 				}
 		 };
 		stompClient.send('/app/webproject/'+pcode, {},JSON.stringify(param));
-	}
 }
 </script>

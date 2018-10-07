@@ -25,31 +25,35 @@ $(document).ready(function(){
     stompClient.connect({}, function() { //접속
          stompClient.subscribe('/project/'+pcode, function(msg) {
         	 alert(msg);
+        	 /*test.put("object", chatcontentsvo);
+			test.put("message","insert");
+			test.put("type","chatcontentsvo");*/
         	 var test=msg.body;
         	 var concat=JSON.parse(test);
-        		 $("#chat"+concat.chat.crcode).remove();
-        		 $("#chats"+concat.chat.crcode).remove();
+        	 alert(concat);
+        		 $("#chat"+concat.object.crcode).remove();
+        		 $("#chats"+concat.object.crcode).remove();
         		 
         		 //project chat
-        		 if(concat.chat.dmcode==0&&concat.chat.dscode==0&&concat.chat.crcoderef==0){
+        		 if(concat.object.dmcode==0&&concat.object.dscode==0&&concat.object.crcoderef==0){
         			 alert('나능 프로젝틍 일반대화');
 	        		 //얘는 leftlist 에 뜨는거 
-	        		 $("#croomSpan"+concat.chat.crcode).append('<span id="chat'+concat.chat.crcode+'">'+concat.chat.uid+" : "+concat.chat.ccontents+'('+concat.chat.cdate+')'+'</span>');
+	        		 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
 	        		 //얘는 프로젝트대화 메뉴에뜨는거
-	        		 $("#croomsSpan"+concat.chat.crcode).append('<span id="chats'+concat.chat.crcode+'">'+concat.chat.uid+" : "+concat.chat.ccontents+'('+concat.chat.cdate+')'+'</span>');
+	        		 $("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
 	        		 //얘는 chatcontent에 뜨는거임
-	        		 $aaa='<div><span>'+concat.chat.uid+' : '+ concat.chat.ccontents +'('+concat.chat.cdate+')'+'</span></div>';
+	        		 $aaa='<div><span>'+concat.object.uid+' : '+ concat.object.ccontents +'('+concat.object.cdate+')'+'</span></div>';
 	        	 	 $("#chatcontentdiv").append($aaa);
         		 }
         		 //project 의사결정
-        		 else if(concat.chat.dmcode==0&&concat.chat.dscode!=0&&concat.chat.crcoderef==0){
+        		 else if(concat.object.dmcode==0&&concat.object.dscode!=0&&concat.object.crcoderef==0){
         			 alert('나는야 프로젝트 의사결정');
         			 //얘는 leftlist 에 뜨는거 
-	        		 $("#croomSpan"+concat.chat.crcode).append('<span id="chat'+concat.chat.crcode+'">'+concat.chat.uid+" : "+concat.chat.ccontents+'('+concat.chat.cdate+')'+'</span>');
+	        		 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
 	        		 //얘는 프로젝트대화 메뉴에뜨는거
-	        		 $("#croomsSpan"+concat.chat.crcode).append('<span id="chats'+concat.chat.crcode+'">'+concat.chat.uid+" : "+concat.chat.ccontents+'('+concat.chat.cdate+')'+'</span>');
+	        		 $("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
 	        		 //얘는 chatcontent에 뜨는거임
-	        		 $aaa='<div><span>'+concat.chat.uid+' : '+ concat.chat.ccontents +'('+concat.chat.cdate+')'+'</span></div>';
+	        		 $aaa='<div><span>'+concat.object.uid+' : '+ concat.object.ccontents +'('+concat.object.cdate+')'+'</span></div>';
 	        	 	 $("#chatcontentdiv").append($aaa);
         		 }
          });
