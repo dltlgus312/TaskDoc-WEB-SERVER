@@ -2,6 +2,7 @@ package com.taskdoc.www.controller.stomp;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,22 +26,22 @@ public class StompController {
 		
 		String urlString = "http://localhost:8080/chatcontents";
 		URI uri = new URI(urlString);
-		
+		Map<String, Object> test=new HashMap<>();
 		if (map.get("type").equals("chatcontentsvo")) {
 			ChatContentsVO chatcontentsvo = JsonMapper.mapToJson(map.get("object"), ChatContentsVO.class);
 			chatcontentsvo.setDmcode(0);
 			chatcontentsvo.setDscode(0);
 			chatcontentsvo.setCrcoderef(0);
 			try {
-				rest.postForObject(uri, chatcontentsvo, chatcontentsvo.getClass());
-				System.out.println("DB저장 성공");
+				chatcontentsvo = rest.postForObject(uri, chatcontentsvo, chatcontentsvo.getClass());
+				test.put("chat", chatcontentsvo);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else {
 			System.out.println("나는 chatcontentsvo가 아니얌.");
 		}
-		return map;
+		return test;
 	}
 
 }

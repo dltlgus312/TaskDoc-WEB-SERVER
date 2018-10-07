@@ -7,16 +7,21 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link
+	href="${pageContext.request.contextPath }/resources/css/user/login.css?ver=4552"
+	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
+<script
+	src="${pageContext.request.contextPath }/resources/css/bootstrap/js/ie-emulation-modes-warning.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/resources/css/taskdocMain/normalize.css?ver=42" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/resources/css/taskdocMain/demo.css?ver=42" />
 </head>
+
 
 <body>
 	<div class="container">

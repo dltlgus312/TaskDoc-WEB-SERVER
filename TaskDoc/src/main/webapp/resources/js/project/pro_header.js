@@ -24,19 +24,21 @@ $(document).ready(function(){
 	//여기수정해야됨..
     stompClient.connect({}, function() { //접속
          stompClient.subscribe('/project/'+pcode, function(msg) {
+        	 alert(msg);
         	 var test=msg.body;
         	 var concat=JSON.parse(test);
-        	 if(concat.message=="insert"){
-        		 $("#chat"+concat.object.crcode).remove();
+        		 $("#chat"+concat.chat.crcode).remove();
+        		 $("#chats"+concat.chat.crcode).remove();
+        		 
         		 //얘는 leftlist 에 뜨는거 , 날짜 뜨게행야되
-        		 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'</span>');
+        		 $("#croomSpan"+concat.chat.crcode).append('<span id="chat'+concat.chat.crcode+'">'+concat.chat.uid+" : "+concat.chat.ccontents+'('+concat.chat.cdate+')'+'</span>');
+        		 
         		 //얘는 프로젝트대화 메뉴에뜨는거, 날짜 뜨게해야되
-        		 $("#croomsSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'</span>');
+        		 $("#croomsSpan"+concat.chat.crcode).append('<span id="chats'+concat.chat.crcode+'">'+concat.chat.uid+" : "+concat.chat.ccontents+'('+concat.chat.cdate+')'+'</span>');
         	 
-        		 //content.jsp에 append할것, 얘도 날짜뜨게해야됨
-        		 $aaa='<div><span>'+concat.object.uid+' : '+ concat.object.ccontents +'</span></div>';
+        		 $aaa='<div><span>'+concat.chat.uid+' : '+ concat.chat.ccontents +'('+concat.chat.cdate+')'+'</span></div>';
+        		 
         	 	 $("#chatcontentdiv").append($aaa);
-        	 }
          });
      });
 	
@@ -182,22 +184,19 @@ $(document).ready(function(){
 									//ajax 데이터 받은거 멤버리스트 뽑아서 string으로만들자
 									var memberArray=new Array();
 									
-									//프로젝트 이름
+									//개인채팅방 이름
 									var memname=[];
 									memberArray=response.userInfoList[i];
 									
 									for(var a=0;a<memberArray.length;a++){
 										memname.push(memberArray[a].uname+"님 ");
 									}
-									
 									cObject.crcode=response.chatRoomList[i].crcode;
-									cObject.crdate=response.chatRoomList[i].crdate;
 									cArray.push(cObject);
 									$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:300px;height:80px; border:3px solid #ed8151; border-top:none;">'
-									+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+ memname +'의채팅방'+'</span></div>'
-									+'<div style="width:100%;height:50%"><img src="/resources/img/img_individualchat.png"alt="" style="width: 30px; height:30px;">'
+									+'<div style="width:100%;height:28%;overflow:auto;"><span>'+cArray[i].crcode+':'+ memname +'의채팅방'+'</span></div>'
+									+'<div style="width:100%;height:72%; overflow:auto;"><img src="/resources/img/img_individualchat.png"alt="" style="width: 30px; height:30px;">'
 									+'<span id="croomsSpan'+cArray[i].crcode+'"></span></div>'
-									+'<div style="width:100%;height:25%"><span id="croomdate'+cArray[i].crcode+'">'+cArray[i].crdate+'</span></div';
 									$("#chathwamun").append($cdiv);
 								}
 							}

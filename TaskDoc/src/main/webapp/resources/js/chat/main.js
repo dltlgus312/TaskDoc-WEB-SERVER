@@ -29,17 +29,17 @@ $(function(){
 					var cArray=new Array();
 					//프로젝트 채팅방과, 개인채팅방을 구분하여 append한다.
 					for(var i=0;i<response.chatRoomList.length;i++){
-						
 						//프로젝트 채팅방 append, 맨밑의 span에는 사용자가 입력한 채팅의 시간을적어줌, 지금은 test용으로 채팅방만든시간을적엇음.
 						if(response.chatRoomList[i].crmode==1){
 							cObject.crcode=response.chatRoomList[i].crcode;
 							cObject.crmode=response.chatRoomList[i].crmode;
+							cObject.crdate=response.chatRoomList[i].crdate;
 							cArray.push(cObject);
 							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:80px;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +')">'
 							+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+'프로젝트 채팅방'+'</span></div>' 
-							+'<div style="width:100%;height:50%"><img src="/resources/img/img_prochat.png"alt="" style="width: 30px; height:30px;">'
+							+'<div style="width:100%;height:50%;overflow:auto;"><img src="/resources/img/img_prochat.png"alt="" style="width: 30px; height:30px;">'
 							+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
-							+'<div style="width:100%;height:25%"><span>'+'??????'+'</span></div>';
+							+'<div style="width:100%;height:25%"><span>'+cArray[i].crdate+'</span></div>';
 							$("#chatlistTOP").append($cdiv);
 						}
 						
@@ -58,13 +58,13 @@ $(function(){
 							
 							cObject.crcode=response.chatRoomList[i].crcode;
 							cObject.crmode=response.chatRoomList[i].crmode;
+							cObject.crdate=response.chatRoomList[i].crdate;
 							cArray.push(cObject);
-							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;border-bottom:1px solid black;display:inline-block;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +')">'
+							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:30%; border-bottom:1px solid black;display:inline-block;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +')">'
 							+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+ memname +'의채팅방'+'</span></div>'
-							+'<div style="width:100%;height:50%"><img src="/resources/img/img_individualchat.png"alt="" style="width: 30px; height:30px;">'
+							+'<div style="width:100%;height:50%; overflow : auto;"><img src="/resources/img/img_individualchat.png"alt="" style="width: 30px; height:30px;">'
 							+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
-							+'<div style="width:100%;height:25%"><span>'+'?????????'+'</span></div>'
-							+'<div><button type="button" class="btn" style="float:right; background-color:#ed8151; color:white;" onclick="chatinvite('+cArray[i].crcode+')">초대</button></div>';
+							+'<div><button type="button" class="btn" style="float:right; background-color:#ed8151; color:white;font-size:12px;" onclick="chatinvite('+cArray[i].crcode+')">초대</button></div>';
 							$("#chatlistBOTTOM").append($cdiv);
 
 						}
