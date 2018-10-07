@@ -21,7 +21,7 @@ stompClient = Stomp.over(socket); //stompClient에 socket을 넣어준다.
 
 $(document).ready(function(){
 	
-	//여기수정해야됨..
+	//채팅 append 여기서다함
     stompClient.connect({}, function() { //접속
          stompClient.subscribe('/project/'+pcode, function(msg) {
         	 alert(msg);
@@ -30,15 +30,28 @@ $(document).ready(function(){
         		 $("#chat"+concat.chat.crcode).remove();
         		 $("#chats"+concat.chat.crcode).remove();
         		 
-        		 //얘는 leftlist 에 뜨는거 , 날짜 뜨게행야되
-        		 $("#croomSpan"+concat.chat.crcode).append('<span id="chat'+concat.chat.crcode+'">'+concat.chat.uid+" : "+concat.chat.ccontents+'('+concat.chat.cdate+')'+'</span>');
-        		 
-        		 //얘는 프로젝트대화 메뉴에뜨는거, 날짜 뜨게해야되
-        		 $("#croomsSpan"+concat.chat.crcode).append('<span id="chats'+concat.chat.crcode+'">'+concat.chat.uid+" : "+concat.chat.ccontents+'('+concat.chat.cdate+')'+'</span>');
-        	 
-        		 $aaa='<div><span>'+concat.chat.uid+' : '+ concat.chat.ccontents +'('+concat.chat.cdate+')'+'</span></div>';
-        		 
-        	 	 $("#chatcontentdiv").append($aaa);
+        		 //project chat
+        		 if(concat.chat.dmcode==0&&concat.chat.dscode==0&&concat.chat.crcoderef==0){
+        			 alert('나능 프로젝틍 일반대화');
+	        		 //얘는 leftlist 에 뜨는거 
+	        		 $("#croomSpan"+concat.chat.crcode).append('<span id="chat'+concat.chat.crcode+'">'+concat.chat.uid+" : "+concat.chat.ccontents+'('+concat.chat.cdate+')'+'</span>');
+	        		 //얘는 프로젝트대화 메뉴에뜨는거
+	        		 $("#croomsSpan"+concat.chat.crcode).append('<span id="chats'+concat.chat.crcode+'">'+concat.chat.uid+" : "+concat.chat.ccontents+'('+concat.chat.cdate+')'+'</span>');
+	        		 //얘는 chatcontent에 뜨는거임
+	        		 $aaa='<div><span>'+concat.chat.uid+' : '+ concat.chat.ccontents +'('+concat.chat.cdate+')'+'</span></div>';
+	        	 	 $("#chatcontentdiv").append($aaa);
+        		 }
+        		 //project 의사결정
+        		 else if(concat.chat.dmcode==0&&concat.chat.dscode!=0&&concat.chat.crcoderef==0){
+        			 alert('나는야 프로젝트 의사결정');
+        			 //얘는 leftlist 에 뜨는거 
+	        		 $("#croomSpan"+concat.chat.crcode).append('<span id="chat'+concat.chat.crcode+'">'+concat.chat.uid+" : "+concat.chat.ccontents+'('+concat.chat.cdate+')'+'</span>');
+	        		 //얘는 프로젝트대화 메뉴에뜨는거
+	        		 $("#croomsSpan"+concat.chat.crcode).append('<span id="chats'+concat.chat.crcode+'">'+concat.chat.uid+" : "+concat.chat.ccontents+'('+concat.chat.cdate+')'+'</span>');
+	        		 //얘는 chatcontent에 뜨는거임
+	        		 $aaa='<div><span>'+concat.chat.uid+' : '+ concat.chat.ccontents +'('+concat.chat.cdate+')'+'</span></div>';
+	        	 	 $("#chatcontentdiv").append($aaa);
+        		 }
          });
      });
 	

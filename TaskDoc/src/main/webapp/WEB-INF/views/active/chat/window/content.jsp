@@ -358,7 +358,7 @@ function chattest(dmcode,dscode,crcoderef){
 				 }
 		 };
 	}
-	stompClient.send('/app/project/'+pcode, {},JSON.stringify(param));
+	stompClient.send('/app/webproject/'+pcode, {},JSON.stringify(param));
 }
 
 function decitest(dscode,dmcode,crcoderef,ccontents){
@@ -370,13 +370,13 @@ function decitest(dscode,dmcode,crcoderef,ccontents){
 			 'object' :{
 					 'crcode' : <%=crcode%>,
 				 	 'uid' : id,
-					 'ccontents' : ccontents,
+					 'ccontents' : '투표 제목: '+ccontents,
 					 'dmcode' : dmcode,	
 					 'dscode' : dscode,
 					 'crcoderef' : crcoderef
 				}
 		 };
-		stompClient.send('/app/project/'+pcode, {},JSON.stringify(param));
+		stompClient.send('/app/webproject/'+pcode, {},JSON.stringify(param));
 	}
 }
 </script>

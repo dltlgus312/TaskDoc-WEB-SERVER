@@ -23,7 +23,12 @@ public class StompController {
 	@MessageMapping("/project/{pcode}")
 	@SendTo("/project/{pcode}")
 	public Map<String, Object> test(Map<String, Object> map) throws URISyntaxException {
-		
+		return map;
+	}
+	
+	@MessageMapping("/webproject/{pcode}")
+	@SendTo("/project/{pcode}")
+	public Map<String, Object> web(Map<String, Object> map) throws URISyntaxException {
 		String urlString = "http://localhost:8080/chatcontents";
 		URI uri = new URI(urlString);
 		Map<String, Object> test=new HashMap<>();

@@ -17,7 +17,8 @@ public class WebSocketMessageBrokerConfigurer extends AbstractWebSocketMessageBr
 				"/topic",
 				"/chat",
 				"/notice",
-				"/project");
+				"/project",
+				"/webproject");
 
 		// 클라이언트가 서버에게 /app 을 붙이고 메시지를 전달할 주소
 		config.setApplicationDestinationPrefixes("/app");

@@ -56,7 +56,7 @@ $(function(){
 					<!-- TASK CONTENTS  -->
 					<div id="publictaskWRAP" style="width: 100%; /* height: 93%; */ padding-left:15px;">
 						<div id="publictaskTOP" class="bts" style="margin-bottom:30px;">
-							<button id="ptcreatebtn"  class="btn" type="button" style="display:none; background-color:#ed8151; color:white;" onclick="ptcreate(<%=pcode%>)">공용업무 생성하기</button>
+							<button id="ptcreatebtn"  class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="ptcreate(<%=pcode%>)">공용업무 생성하기</button>
 						</div>	
 						<div id="publictaskBOTTOM">
 						
@@ -113,6 +113,7 @@ $(document).ready(function() {
 							+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].tcode +'">%</span></div></div></div>'
 							+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span>'
 							+'<div class="bts"><button style="border:0px;outline:none;color:white;background-color:#ed8151; margin-right:5px; font-size:12px;" class="btn" onclick= "privateCreate(\''+response[i].tsdate+ ',' +response[i].tedate+'\','+response[i].tcode+')" type="button">개인업무생성</button></div><div></div></div></div></div>';
+							$("#ptcreatebtn").hide();
 						}
 						$("#publictaskBOTTOM").append($append);
 						
