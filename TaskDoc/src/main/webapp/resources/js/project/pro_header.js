@@ -53,6 +53,17 @@ $(document).ready(function(){
 	        		 $aaa='<div><span>'+concat.object.uid+' : <a onclick="goDecision(\''+chatpermission+'\','+concat.object.dscode+')">'+'<투표>'+ concat.object.ccontents +'('+concat.object.cdate+')'+'</a></span></div>';
 	        	 	 $("#chatcontentdiv").append($aaa);
         		 }
+        		 //project 회의록
+        		 else if(concat.object.dmcode==0&&concat.object.dscode==0&&concat.object.crcoderef!=0){
+        			 alert('나는야 프로젝트 회의록');
+        			 //얘는 leftlist 에 뜨는거 
+        			 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : <회의록>"+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+        			 //얘는 프로젝트대화 메뉴에뜨는거
+        			 $("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" :<회의록> "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+        			 //얘는 chatcontent에 뜨는거임
+        			 $aaa='<div><span>'+concat.object.uid+' : <a onclick="goDecision(\''+chatpermission+'\','+concat.object.crcoderef+')">'+'<회의록>'+ concat.object.ccontents +'('+concat.object.cdate+')'+'</a></span></div>';
+        			 $("#chatcontentdiv").append($aaa);
+        		 }
          });
      });
 	

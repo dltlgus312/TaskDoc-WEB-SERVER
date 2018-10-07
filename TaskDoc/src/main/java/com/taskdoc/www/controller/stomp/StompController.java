@@ -48,6 +48,9 @@ public class StompController {
 		else if(map.get("type").equals("decisionvo")){
 			return map;
 		}
+		else if(map.get("type").equals("chatroomvo")){
+			return map;
+		}
 		
 		return map;
 	}

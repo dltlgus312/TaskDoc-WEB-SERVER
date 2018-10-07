@@ -348,6 +348,7 @@ function chattest(dmcode,dscode,crcoderef,dstitle){
 				 }
 		 };
 	}
+	
 	//프로젝트채팅창의 의사결정 chacontents db로 쏘는거임	
 	else if(dmcode==0 && dscode!=0&& crcoderef==0){
 		var param={
@@ -363,6 +364,23 @@ function chattest(dmcode,dscode,crcoderef,dstitle){
 					 }
 			 };
 	}
+	
+	//프로젝트채팅방창의 회의록 chatcontents db로 쏘기
+	else if(dmcode==0 && dscode==0 && crcoderef!=0){
+		var param={
+				 'message' : 'insert',
+				 'type' : 'chatcontentsvo',
+				 'object' :{
+						 'crcode' : <%=crcode%>,
+					 	 'uid' : id,
+						 'ccontents' : dstitle,
+						 'dmcode' : dmcode,
+						 'dscode' : dscode,
+						 'crcoderef' : crcoderef
+					 }
+			 };
+	}
+	
 	stompClient.send('/app/webproject/'+pcode, {},JSON.stringify(param));
 }
 
@@ -382,5 +400,22 @@ function decitest(dscode,dsdate,dstitle,dsclose,crcode,tcode){
 				}
 		 };
 		stompClient.send('/app/webproject/'+pcode, {},JSON.stringify(param));
+}
+
+function focutest(crcode,crdate,crmode,fctitle,crclose,tcode,crcoderef){
+	var param={
+			 'message' : 'insert',
+			 'type' : 'chatroomvo',
+			 'object' :{
+					 'crcode' : crcode,
+				 	 'crdate' : crdate,
+					 'crmode' : crmode,
+					 'fctitle' : fctitle,	
+					 'crclose' : crclose,
+					 'tcode' : tcode,
+					 'crcoderef' : crcoderef
+				}
+		 };
+	stompClient.send('/app/webproject/'+pcode, {},JSON.stringify(param));
 }
 </script>

@@ -52,6 +52,8 @@
 	var aJsonArray=new Array();
 
 $(function(){
+	
+	//공용 업무 불러오기
 	$.ajax({
 		type : 'GET',
 		url : '/publictask/' + <%=pcode%>,
@@ -71,6 +73,7 @@ $(function(){
 		}
 	});
 	
+	//프로젝트에 가입되있는 회원들 불러서 array에 삽입
 	 $.ajax({
 			type : 'GET',
 			url : '/projectjoin/collaboration/'+<%=pcode%>,
@@ -87,6 +90,7 @@ $(function(){
 		});
 });
 
+//포커스 생성하기
 function focusOK(){
 	var ulist=[];
 	
@@ -106,12 +110,18 @@ function focusOK(){
 	};
 	$.ajax({
 		type : 'POST',
-		url : '/chatroom/multi',
+		url : '/chatroom/multicreate',
 		contentType : 'application/json',
 		data : JSON.stringify(param),
 		success : function(response) {
-			if (response>0) {
+			if (Object.keys(response).length>0) {
 				alert('채팅방 생성 완료! 채팅방 crcode값은'+response);
+
+				//화면에 보여줄것 -> server
+				opener.parent.focutest(response.crcode,response.crdate,response.crmode,response.fctitle,response.crclose,response.tcode,response.crcoderef);
+				
+				//채팅에 넣을것 -> chatcontents db 
+				opener.parent.chattest(0,0,response.crcoderef,response.fctitle);
 				location.reload();
 			}
 			else if(response<0){
