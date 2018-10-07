@@ -128,6 +128,7 @@ $(function(){
          stompClient.subscribe('/project/'+pcode, function(msg) {
         	 var test=msg.body;
         	 var concat=JSON.parse(test);
+        	 alert(test);
         	 $("#chat"+concat.object.crcode).remove();
         	 $("#chats"+concat.object.crcode).remove();
         		 //기본채팅
@@ -170,7 +171,7 @@ $(function(){
 	        		 }
 	        		 
 	        		//프로젝트 채팅방에 채팅방에 자료 링크 띄워줌
-		        	else if(concat.object.dmcode!=0 && concat.object.dscode==0 && concat.object.crcoderef==0){
+		        	else if(concat.object.dmcode>0 && concat.object.dscode==0 && concat.object.crcoderef==0){
 		        		 alert('나는야 프로젝트 파일');
 						 //얘는 leftlist 에 뜨는거 
 		        		 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : <회의록>"+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');

@@ -130,9 +130,9 @@ $(function(){
 		        complete: function(success) {
 		        	alert('파일업로드 완료');
 		        	var json=success.responseJSON; 
-		        	
-		        	opener.parent.docutest(json.dmcode,json.dmtitle,json.dmcontents,json.dmdate,json.crcode,json.tcode,json.uid);
-					opener.parent.chattest(json.dmcode,0,0,json.dmtitle+","+json.dmcontents);
+		        	alert(json);
+		        	opener.parent.docutest(json.dmcode,''json.dmtitle,json.dmcontents,json.dmdate,json.crcode,json.tcode,json.uid);
+					opener.parent.chattest(json.dmcode,0,0,json.dmtitle);
 					window.close();
 					
 		        },
