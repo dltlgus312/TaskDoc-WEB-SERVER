@@ -96,7 +96,7 @@ function focusOK(){
 	
 	var param = {
 			'chatRoom' : {
-				//회의록 형식이므로 crmode 2번
+				//회의록 형식이므로 crmode 3번
 				'crmode' : 3,
 				'crclose' : 0,
 				'fctitle' : $("#focusName").val(),
@@ -122,8 +122,8 @@ function focusOK(){
 				
 				//채팅에 넣을것 -> chatcontents db 
 				opener.parent.chattest(0,0,response.crcoderef,response.fctitle);
-				location.reload();
-			}
+				window.close();
+				}
 			else if(response<0){
 				alert('Server or Client ERROR, 채팅방 생성 실패');
 			}

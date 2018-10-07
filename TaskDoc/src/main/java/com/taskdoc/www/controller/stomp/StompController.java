@@ -35,6 +35,7 @@ public class StompController {
 			URI uri = new URI(chat);
 				ChatContentsVO chatcontentsvo = JsonMapper.mapToJson(map.get("object"), ChatContentsVO.class);
 				try {
+					
 					chatcontentsvo = rest.postForObject(uri, chatcontentsvo, chatcontentsvo.getClass());
 					test.put("object", chatcontentsvo);
 					test.put("message","insert");
@@ -51,7 +52,10 @@ public class StompController {
 		else if(map.get("type").equals("chatroomvo")){
 			return map;
 		}
-		
+		else if(map.get("type").equals("documentvo")){
+
+			return map;
+		}
 		return map;
 	}
 

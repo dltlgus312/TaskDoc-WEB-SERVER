@@ -2,6 +2,8 @@
 pageopen=false;
 
 $(function(){
+	var socket = new SockJS('/goStomp'); 
+	stompClient = Stomp.over(socket);
 	//채팅방추가하기 이미지에 툴팁씌우기
 	$('[data-toggle="tootlip"]').tooltip();
 	
@@ -34,8 +36,10 @@ $(function(){
 							cObject.crcode=response.chatRoomList[i].crcode;
 							cObject.crmode=response.chatRoomList[i].crmode;
 							cObject.crdate=response.chatRoomList[i].crdate;
+							cObject.crclose=response.chatRoomList[i].crclose;
+							cObject.crcoderef=response.chatRoomList[i].crcoderef;
 							cArray.push(cObject);
-							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:80px;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +')">'
+							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:80px;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +','+cArray[i].crclose+','+cArray[i].crcoderef+')">'
 							+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+'프로젝트 채팅방'+'</span></div>' 
 							+'<div style="width:100%;height:50%;overflow:auto;"><img src="/resources/img/img_prochat.png"alt="" style="width: 30px; height:30px;">'
 							+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
@@ -59,8 +63,10 @@ $(function(){
 							cObject.crcode=response.chatRoomList[i].crcode;
 							cObject.crmode=response.chatRoomList[i].crmode;
 							cObject.crdate=response.chatRoomList[i].crdate;
+							cObject.crclose=response.chatRoomList[i].crclose;
+							cObject.crcoderef=response.chatRoomList[i].crcoderef;
 							cArray.push(cObject);
-							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:30%; border-bottom:1px solid black;display:inline-block;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +')">'
+							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:30%; border-bottom:1px solid black;display:inline-block;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +','+cArray[i].crclose+','+cArray[i].crcoderef+')">'
 							+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+ memname +'의채팅방'+'</span></div>'
 							+'<div style="width:100%;height:50%; overflow : auto;"><img src="/resources/img/img_individualchat.png"alt="" style="width: 30px; height:30px;">'
 							+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
@@ -123,21 +129,21 @@ $("#chatadd").on("click",function(){
 });
 
 //chat list append시 crcode와 cmode필요
-function gochatCon(crcode,crmode){
+function gochatCon(crcode,crmode,crclose,crcoderef){
 	/*프로젝트 채팅방이고 ,cmode==1 // OWNER : 파일업로드, 회의록 생성, 의사결정 생성
 	*		        cmode==1 //MEMBER : 파일업로드
 	*개인 채팅방이면 		cmode==2 //OWNER , MEMBER관계없음. 파일업로드
 	*/
-	
+	stompClient.disconnect();
 	if(crmode==1){
 		if(confirm('프로젝트 채팅에 입장하시겠습니까?')==true){
 			if(chatpermission=="OWNER" &&crmode==1){
 				alert(crcode+","+crmode+", owner다");
-			 	$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode+"&pcode="+pcode);  
+			 	$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode+"&pcode="+pcode+"&crclose="+crclose+"&crcoderef="+crcoderef);  
 			}
 			else if(chatpermission=="MEMBER" && crmode==1){
 				alert(crcode+","+crmode+", member다");
-				$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode+"&pcode="+pcode);  
+				$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode+"&pcode="+pcode+"&crclose="+crclose+"&crcoderef="+crcoderef);  
 			}
 		}
 		else return;
@@ -146,7 +152,7 @@ function gochatCon(crcode,crmode){
 	else if(crmode==2){
 		if(confirm('개인 채팅에 입장하시겠습니까?')==true){
 			alert(crcode+","+crmode+", owner다");
-			$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode+"&pcode="+pcode);  
+			$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode+"&pcode="+pcode+"&crclose="+crclose+"&crcoderef="+crcoderef);  
 		}
 	}
 }

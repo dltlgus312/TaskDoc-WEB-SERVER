@@ -16,57 +16,6 @@ var screenH = screen.availHeight; // 스크린 세로사이즈
 var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션
 var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션
 
-var socket = new SockJS('/goStomp');  //websocket이아닌 SockJS로 접속한다.
-stompClient = Stomp.over(socket); //stompClient에 socket을 넣어준다.
-
-$(document).ready(function(){
-	
-	//채팅 append 여기서다함
-    stompClient.connect({}, function() { //접속
-         stompClient.subscribe('/project/'+pcode, function(msg) {
-        	 alert(msg);
-        	 var test=msg.body;
-        	 var concat=JSON.parse(test);
-        	 alert(concat);
-        		 $("#chat"+concat.object.crcode).remove();
-        		 $("#chats"+concat.object.crcode).remove();
-        		 
-        		 //project chat
-        		 if(concat.object.dmcode==0&&concat.object.dscode==0&&concat.object.crcoderef==0){
-        			 alert('나능 프로젝틍 일반대화');
-	        		 //얘는 leftlist 에 뜨는거 
-	        		 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
-	        		 //얘는 프로젝트대화 메뉴에뜨는거
-	        		 $("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
-	        		 //얘는 chatcontent에 뜨는거임
-	        		 $aaa='<div><span>'+concat.object.uid+' : '+ concat.object.ccontents +'('+concat.object.cdate+')'+'</span></div>';
-	        	 	 $("#chatcontentdiv").append($aaa);
-        		 }
-        		 //project 의사결정
-        		 else if(concat.object.dmcode==0&&concat.object.dscode!=0&&concat.object.crcoderef==0){
-        			 alert('나는야 프로젝트 의사결정');
-        			 //얘는 leftlist 에 뜨는거 
-	        		 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : <투표>"+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
-	        		 //얘는 프로젝트대화 메뉴에뜨는거
-	        		 $("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" :<투표> "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
-	        		 //얘는 chatcontent에 뜨는거임
-	        		 $aaa='<div><span>'+concat.object.uid+' : <a onclick="goDecision(\''+chatpermission+'\','+concat.object.dscode+')">'+'<투표>'+ concat.object.ccontents +'('+concat.object.cdate+')'+'</a></span></div>';
-	        	 	 $("#chatcontentdiv").append($aaa);
-        		 }
-        		 //project 회의록
-        		 else if(concat.object.dmcode==0&&concat.object.dscode==0&&concat.object.crcoderef!=0){
-        			 alert('나는야 프로젝트 회의록');
-        			 //얘는 leftlist 에 뜨는거 
-        			 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : <회의록>"+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
-        			 //얘는 프로젝트대화 메뉴에뜨는거
-        			 $("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" :<회의록> "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
-        			 //얘는 chatcontent에 뜨는거임
-        			 $aaa='<div><span>'+concat.object.uid+' : <a onclick="goDecision(\''+chatpermission+'\','+concat.object.crcoderef+')">'+'<회의록>'+ concat.object.ccontents +'('+concat.object.cdate+')'+'</a></span></div>';
-        			 $("#chatcontentdiv").append($aaa);
-        		 }
-         });
-     });
-	
 	
 	//채팅방리스트 리스트에담아라
 	var cArray=new Array();
@@ -233,7 +182,6 @@ $(document).ready(function(){
 						alert("ERROR : " + e.statusText);
 					}
 				});
-	});
 
 
 	// view page에서 설정 버튼 누를때 나오는 페이지(OWNER)
@@ -284,7 +232,4 @@ $(document).ready(function(){
 		}else{
 			$("#chathwamun").hide(1000);
 		}
-	}
-	function goDecision(chatpermission,dscode){
-		selectDecision(chatpermission,dscode);
 	}
