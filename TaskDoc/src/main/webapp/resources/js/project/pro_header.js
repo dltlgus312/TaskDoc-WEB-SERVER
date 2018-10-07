@@ -25,9 +25,6 @@ $(document).ready(function(){
     stompClient.connect({}, function() { //접속
          stompClient.subscribe('/project/'+pcode, function(msg) {
         	 alert(msg);
-        	 /*test.put("object", chatcontentsvo);
-			test.put("message","insert");
-			test.put("type","chatcontentsvo");*/
         	 var test=msg.body;
         	 var concat=JSON.parse(test);
         	 alert(concat);
@@ -49,11 +46,11 @@ $(document).ready(function(){
         		 else if(concat.object.dmcode==0&&concat.object.dscode!=0&&concat.object.crcoderef==0){
         			 alert('나는야 프로젝트 의사결정');
         			 //얘는 leftlist 에 뜨는거 
-	        		 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+	        		 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : <투표>"+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
 	        		 //얘는 프로젝트대화 메뉴에뜨는거
-	        		 $("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+	        		 $("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" :<투표> "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
 	        		 //얘는 chatcontent에 뜨는거임
-	        		 $aaa='<div><span>'+concat.object.uid+' : '+ concat.object.ccontents +'('+concat.object.cdate+')'+'</span></div>';
+	        		 $aaa='<div><span>'+concat.object.uid+' : <a onclick="goDecision(\''+chatpermission+'\','+concat.object.dscode+')">'+'<투표>'+ concat.object.ccontents +'('+concat.object.cdate+')'+'</a></span></div>';
 	        	 	 $("#chatcontentdiv").append($aaa);
         		 }
          });
@@ -276,4 +273,7 @@ $(document).ready(function(){
 		}else{
 			$("#chathwamun").hide(1000);
 		}
+	}
+	function goDecision(chatpermission,dscode){
+		selectDecision(chatpermission,dscode);
 	}

@@ -183,7 +183,7 @@ function menubtn(code, crmode){
 						alert('의사 결정 조회 성공');
 						for(var i=0;i<response.length;i++){
 							$delist='<div style="margin-bottom:3px;"><img src="${pageContext.request.contextPath }/resources/img/img_vote.png" style="width:32px;height:32px;">'
-							+'<span style="font-size:20px;cursor:pointer;" onclick="selectDecision(\''+response[i].dstitle + ',' + response[i].dsdate +'\',' +response[i].dscode+','+response[i].dsclose+','+response[i].tcode+ ')">'+response[i].dstitle+ '</span></div>';
+							+'<span style="font-size:20px;cursor:pointer;" onclick="selectDecision(\''+chatpermission+'\','+response[i].dscode+')">'+response[i].dstitle+ '</span></div>';
 							$("#delist").append($delist);
 						}
 					} else{
@@ -226,7 +226,7 @@ function menubtn(code, crmode){
 							alert('의사 결정 조회 성공');
 							for(var i=0;i<response.length;i++){
 								$delist='<div style="margin-bottom:3px;"><img src="${pageContext.request.contextPath }/resources/img/img_vote.png" style="width:32px;height:32px;">'
-								+'<span style="font-size:20px;cursor:pointer;" onclick="selectDecision(\''+response[i].dstitle + ',' + response[i].dsdate +'\',' +response[i].dscode+','+response[i].dsclose+','+response[i].tcode+ ')">'+response[i].dstitle+ '</span></div>';
+								+'<span style="font-size:20px;cursor:pointer;" onclick="selectDecision(\''+chatpermission+'\','+response[i].dscode +')'+'">'+response[i].dstitle+ '</span></div>';
 								$("#delist").append($delist);
 							}
 						} else{
@@ -252,20 +252,10 @@ function votercreate(code){
 	}
 
 //의사결정 조회
-function selectDecision(dstitle, dscode, dsclose,tcode)
+function selectDecision(chatpermission, dscode)
 {
-	var list=[];
-	list=dstitle.split(",");
-	alert(list[0]);
-	alert(list[1]);
-	
-	// 의사결정 종료
-	if(dsclose>0)
-		window.open("/chat/decisionView?dscode="+dscode+"&dstitle="+list[0] +"&dsdate="+list[1] +"&permission="+chatpermission, "", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
-	
-	// 의사결정 종료X
-	else	
-		window.open("/chat/decisionSelect?dscode="+dscode+"&dstitle="+list[0] +"&dsdate="+list[1] +"&permission="+chatpermission +"&tcode="+tcode ,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+	// 의사결정 고르기(종료 여부는 페이지 들어가서 확인)
+	window.open("/chat/decisionSelect?chatpermission="+chatpermission+"&dscode="+dscode, "", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 }	
 
 //자료 업로드
@@ -342,8 +332,9 @@ function chatclose(){
 
 
 //message : insert, type : chatcontents, object : ChatContentsVO
-function chattest(dmcode,dscode,crcoderef){
+function chattest(dmcode,dscode,crcoderef,dstitle){
 	//프로젝트 채팅창의 기본채팅
+	if(dmcode==0 &&dscode==0&&crcoderef==0){
 		var param={
 			 'message' : 'insert',
 			 'type' : 'chatcontentsvo',
@@ -356,10 +347,27 @@ function chattest(dmcode,dscode,crcoderef){
 					 'crcoderef' : crcoderef
 				 }
 		 };
+	}
+	//프로젝트채팅창의 의사결정 chacontents db로 쏘는거임	
+	else if(dmcode==0 && dscode!=0&& crcoderef==0){
+		var param={
+				 'message' : 'insert',
+				 'type' : 'chatcontentsvo',
+				 'object' :{
+						 'crcode' : <%=crcode%>,
+					 	 'uid' : id,
+						 'ccontents' : dstitle,
+						 'dmcode' : dmcode,
+						 'dscode' : dscode,
+						 'crcoderef' : crcoderef
+					 }
+			 };
+	}
 	stompClient.send('/app/webproject/'+pcode, {},JSON.stringify(param));
 }
 
 function decitest(dscode,dsdate,dstitle,dsclose,crcode,tcode){
+	//이거는 서버로 보내는거임
 	//프로젝트채팅 창의 의사결정
 		var param={
 			 'message' : 'insert',
