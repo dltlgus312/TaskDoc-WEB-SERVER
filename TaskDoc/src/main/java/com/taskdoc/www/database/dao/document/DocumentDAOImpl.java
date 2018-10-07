@@ -48,6 +48,7 @@ public class DocumentDAOImpl implements DocumentDAO {
 		sql.insert(NAMESPACE + INSERT, documentVo);
 		return documentVo.getDmcode();
 	}
+	
 
 	@Override
 	public int documentUpdate(DocumentVO documentVo) {

@@ -24,7 +24,6 @@ public class DecisionItemRest {
 		return service.decisionItemList(dscode);
 	}
 	
-
 	@RequestMapping(value="", method = RequestMethod.POST)
 	public List<DecisionItemVO> insert(@RequestBody List<DecisionItemVO> itemList) {
 		return service.decisionItemInsert(itemList);

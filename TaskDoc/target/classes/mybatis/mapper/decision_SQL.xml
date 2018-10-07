@@ -19,7 +19,14 @@
 	</select>
 
 	<insert id="insert" parameterType="decision" useGeneratedKeys="true" keyProperty="dscode">
-		INSERT INTO decision VALUES(null, #{dstitle}, NOW(), 0, #{crcode}, #{tcode})
+		INSERT INTO decision VALUES(null, #{dstitle}, NOW(), 0, #{crcode}, <choose>
+			<when test="tcode != 0">
+				#{tcode}
+			</when>
+			<otherwise>
+				null
+			</otherwise>
+		</choose>)
 	</insert>
 
 	<update id="update" parameterType="decision">

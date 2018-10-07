@@ -59,5 +59,13 @@
       <input type="file" name="file"/>
 
       <input type="submit">
+<<<<<<< HEAD
    </form> -->
+=======
+   </form>
+   
+   <form action="/file/download/1" method="POST">
+   	<input type="submit"/>
+   </form>
+>>>>>>> branch 'SQL_DTO' of https://github.com/dltlgus312/TaskDoc.git
 </html>

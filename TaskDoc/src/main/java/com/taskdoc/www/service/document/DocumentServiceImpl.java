@@ -87,6 +87,33 @@ public class DocumentServiceImpl implements DocumentService {
 		}
 		return dmcode;
 	}
+	
+	@Override
+	@Transactional
+	public DocumentVO fileUploadDoc(MultipartFile[] multipartFile, DocumentVO documentVo) {
+		// TODO Auto-generated method stub
+
+		int dmcode = dao.documentInsert(documentVo);
+		
+		DocumentVO vo = dao.documentView(dmcode);
+
+		String url = getPath(documentVo);
+
+		for (MultipartFile f : multipartFile) {
+
+			try {
+				fileService.fileInsert(f, url, dmcode);
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		return vo;
+	}
 
 	@Override
 	@Transactional

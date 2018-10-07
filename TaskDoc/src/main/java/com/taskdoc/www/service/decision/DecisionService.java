@@ -9,6 +9,7 @@ public interface DecisionService {
 	public List<DecisionVO> roomList(int crcode);
 	public DecisionVO view(int dscode);
 	public int decisionInsert(DecisionVO decisionVo);
+	public DecisionVO decisionInsertDec(DecisionVO decisionVo);
 	public int decisionUpdate(DecisionVO decisionVo);
 	public int decisionDelete(int dscode);
 }

@@ -10,6 +10,7 @@ import com.taskdoc.www.database.dto.PublicTaskVO;
 
 @Repository
 public class PublicTaskDAOImpl implements PublicTaskDAO {
+	
 	@Autowired
 	SqlSession sql;
 	

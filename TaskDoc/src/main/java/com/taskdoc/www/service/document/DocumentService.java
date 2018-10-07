@@ -15,6 +15,7 @@ public interface DocumentService {
 	public List<DocumentVO> roomList(int crcode);
 	public List<DocumentVO> userList(String uid);
 	public int fileUpload(MultipartFile[] multipartFile, DocumentVO documentVo);
+	public DocumentVO fileUploadDoc(MultipartFile[] multipartFile, DocumentVO documentVo);
 	public int documentMove(DocumentVO documentVo);
 	public int documentCopy(DocumentVO documentVo);
 	public int documentUpdate(DocumentVO documentVo);
