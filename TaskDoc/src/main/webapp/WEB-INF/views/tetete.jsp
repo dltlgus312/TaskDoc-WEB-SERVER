@@ -66,4 +66,8 @@ $("#task1").on("click",function(){
 
       <input type="submit">
    </form>
+   
+   <form action="/file/download/1" method="POST">
+   	<input type="submit"/>
+   </form>
 </html>

@@ -48,6 +48,11 @@ public class DocumentRest {
 		return service.fileUpload(multipartFile, documentVo);
 	}
 	
+	@RequestMapping(value = "/upload/doc", method = RequestMethod.POST)
+	public DocumentVO uploadDoc(@RequestParam("file") MultipartFile[] multipartFile, DocumentVO documentVo) {
+		return service.fileUploadDoc(multipartFile, documentVo);
+	}
+	
 	@RequestMapping(value = "/move", method = RequestMethod.PUT)
 	public int move(@RequestBody DocumentVO documentVo) {
 		return service.documentMove(documentVo);
@@ -67,5 +72,6 @@ public class DocumentRest {
 	public int delete(@PathVariable int dmcode) {
 		return service.documentDelete(dmcode);
 	}
+
 
 }

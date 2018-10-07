@@ -28,6 +28,13 @@ public class DecisionServiceImpl implements DecisionService{
 	public int decisionInsert(DecisionVO decisionVo) {
 		return dao.decisionInsert(decisionVo);
 	}
+	
+	@Override
+	public DecisionVO decisionInsertDec(DecisionVO decisionVo) {
+		dao.decisionInsert(decisionVo);
+		
+		return dao.view(decisionVo.getDscode());
+	}
 
 	@Override
 	public int decisionUpdate(DecisionVO decisionVo) {

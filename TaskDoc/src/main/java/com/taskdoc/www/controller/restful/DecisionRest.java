@@ -44,6 +44,11 @@ public class DecisionRest {
 		return service.decisionInsert(decisionVo);
 	}
 	
+	@RequestMapping(value="/dec", method = RequestMethod.POST)
+	public DecisionVO insertDec(@RequestBody DecisionVO decisionVo) {
+		return service.decisionInsertDec(decisionVo);
+	}
+	
 	//의사결정 수정
 	@RequestMapping(value="", method = RequestMethod.PUT)
 	public int update(@RequestBody DecisionVO decision) {
