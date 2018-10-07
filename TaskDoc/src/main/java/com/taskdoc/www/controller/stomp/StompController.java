@@ -20,6 +20,7 @@ public class StompController {
 	RestTemplate rest;
 
 	private final String chat = "http://localhost:8080/chatcontents";
+	
 	@MessageMapping("/project/{pcode}")
 	@SendTo("/project/{pcode}")
 	public Map<String, Object> test(Map<String, Object> map) throws URISyntaxException {
