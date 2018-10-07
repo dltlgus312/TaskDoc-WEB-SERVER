@@ -24,18 +24,20 @@ public class StompController {
 	public Map<String, Object> test(Map<String, Object> map) throws URISyntaxException {
 		return map;
 	}
-	
+
 	@MessageMapping("/webproject/{pcode}")
 	@SendTo("/project/{pcode}")
 	public Map<String, Object> web(Map<String, Object> map) throws URISyntaxException {
 		String urlString = "http://localhost:8080/chatcontents";
 		URI uri = new URI(urlString);
-		Map<String, Object> test=new HashMap<>();
+		Map<String, Object> test = new HashMap<>();
 		if (map.get("type").equals("chatcontentsvo")) {
 			ChatContentsVO chatcontentsvo = JsonMapper.mapToJson(map.get("object"), ChatContentsVO.class);
 			try {
 				chatcontentsvo = rest.postForObject(uri, chatcontentsvo, chatcontentsvo.getClass());
-				test.put("chat", chatcontentsvo);
+				test.put("object", chatcontentsvo);
+				test.put("message", "insert");
+				test.put("type", "chatcontentsvo");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
