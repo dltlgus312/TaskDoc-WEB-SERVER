@@ -11,7 +11,6 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.sun.jndi.toolkit.url.Uri;
 import com.taskdoc.www.database.dto.ChatContentsVO;
 import com.taskdoc.www.system.JsonMapper;
 
