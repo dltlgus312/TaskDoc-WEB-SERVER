@@ -121,7 +121,7 @@ function focusOK(){
 				opener.parent.focutest(response.crcode,response.crdate,response.crmode,response.fctitle,response.crclose,response.tcode,response.crcoderef);
 				
 				//채팅에 넣을것 -> chatcontents db 
-				opener.parent.chattest(0,0,response.crcoderef,response.fctitle);
+				opener.parent.chattest(0,0,response.crcoderef,response.crcode,response.fctitle);
 				window.close();
 				}
 			else if(response<0){

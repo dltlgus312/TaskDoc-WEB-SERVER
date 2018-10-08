@@ -36,7 +36,7 @@ $(function(){
 <div id="chatcontentdiv" style="width:100%;height:75%;border:solid 1px blue; overflow:auto; background-color: #e0e0e0"></div>				
 	<div id="chatconinput" class="bts" style="width:100%;height:20%; border:solid 1px blue; display:-webkit-box;">
 		<textarea id="chatcontent" class="form-control" style="width:95%;height:100%;font-size:17px; resize: none;"></textarea>
-		<button type="button" onclick="chattest(0,0,<%=crcoderef %>,<%=crcode %>)" style="font-size:18px;">테스트</button>
+		<button type="button" onclick="chattest(0,0,<%=crcoderef %>,<%=crcode %>)" styㅍle="font-size:18px;">테스트</button>
 	</div>
 </div>	 
 
@@ -133,8 +133,9 @@ $(function(){
         	 var concat=JSON.parse(test);
         	 $("#chat"+concat.object.crcode).remove();
         	 $("#chats"+concat.object.crcode).remove();
-        	
+        	 
         	 if(concat.type == "chatroomvo"){
+        	 alert(concat.type);
         		 chatObj.crcode= concat.object.crcode;
         		 chatObj.crmode= concat.object.crmode;
         		 chatObj.crclose= concat.object.crclose;
@@ -150,13 +151,23 @@ $(function(){
         		 deciObj.tcode=concat.object.tcode;
         	 }
         	 
+        	 alert(concat.type);
         	 if(concat.type=="documentvo"){
+        		 alert('자료올리고시포');
         		 docuObj.dmcode=concat.object.dmcode;
+        		 docuObj.dmtitle=concat.object.dmtitle;
+        		 docuObj.dmcontents=concat.object.dmcontents;
+        		 docuObj.dmdate=concat.object.dmdate;
+        		 docuObj.crcode=concat.object.crcode;
+        		 docuObj.tcode=concat.object.tcode;
+        		 docuObj.uid=concat.object.uid;
         	 }
         	 
         	 if(concat.type == "chatcontentsvo"){
+        		 alert('param crcode'+<%=crcode%>);
+        		 alert('concat.object.crcode'+concat.object.crcode);
         		 if(parseInt(<%=crcode%>)==concat.object.crcode){
-        			 if(Object.keys(chatObj).length<=0 && Object.keys(deciObj).length<=0){
+        			 if(Object.keys(chatObj).length<=0 && Object.keys(deciObj).length<=0 && Object.keys(docuObj).length<=0){
 	        			 alert('나능 프로젝틍 or 개인 일반대화 or 회의록 대화');
 		        		 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
 		        		 $("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
@@ -164,25 +175,28 @@ $(function(){
 		        	 	 $("#chatcontentdiv").append($aaa);
         		 	}
         			 //의사결정 링크
-        			 if(Object.keys(deciObj).length>0 && Object.keys(chatObj).length<=0){
+        			 if(Object.keys(deciObj).length>0 && Object.keys(chatObj).length<=0 && Object.keys(docuObj).length<=0){
         		 		 alert('나능 프로젝트 또는 회의록 의사결정 생성');
-		        		//얘는 leftlist 에 뜨는거 
-			        	 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : <프로젝트 투표>"+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
-			        	 //얘는 프로젝트대화 메뉴에뜨는거
-			        	 $("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" :<프로젝트 투표> "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
-			        	 //얘는 chatcontent에 뜨는거임
-			        	 $aaa='<div><span>'+concat.object.uid+' : <a onclick="selectDecision(\''+chatpermission+'\','+deciObj.dscode+')">'+'<프로젝트 투표>'+ concat.object.ccontents +'('+concat.object.cdate+')'+'</a></span></div>';
+			        	 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : <프로젝트 or 개인 투표>"+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+			        	 $("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" :<프로젝트 or 개인 투표> "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+			        	 $aaa='<div><span>'+concat.object.uid+' : <a onclick="selectDecision(\''+chatpermission+'\','+deciObj.dscode+')">'+'<프로젝트 or 개인 투표>'+ concat.object.ccontents +'('+concat.object.cdate+')'+'</a></span></div>';
 			        	 $("#chatcontentdiv").append($aaa);
         		 	}
         			 //회의록 링크
-        			 if(Object.keys(chatObj).length>0 && Object.keys(deciObj).length<=0){
+        			 if(Object.keys(chatObj).length>0 && Object.keys(deciObj).length<=0 && Object.keys(docuObj).length<=0){
         				 alert('나는 회의록 생성');
-        				//얘	는 leftlist 에 뜨는거 
  		        		$("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : <프로젝트 회의록>"+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
- 		        		//얘는 프로젝트대화 메뉴에뜨는거
  		        		$("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" :<프로젝트 회의록> "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
- 		        		//얘는 chatcontent에 뜨는거임
  		        		$aaa='<div><span>'+concat.object.uid+' : <a onclick="goconference('+chatObj.crcode+','+ chatObj.crmode+','+chatObj.crclose+','+chatObj.crcoderef+')">'+'<프로젝트 회의록>'+ concat.object.ccontents +'('+concat.object.cdate+')'+'</a></span></div>';
+ 		        		$("#chatcontentdiv").append($aaa);
+        			 }
+        			 
+        			 //자료 링크
+        			 if(Object.keys(chatObj).length<=0 && Object.keys(deciObj).length<=0 && Object.keys(docuObj).length>0){
+        				 alert('나는 자료 생성');
+ 		        		$("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : <프로젝태 or 개인 자료>"+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+ 		        		$("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" :<프로젝태 or 개인 자료> "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+ 		        		$aaa='<div><span>'+concat.object.uid+' : <a onclick="fileDownload('+ docuObj.dmcode +')">'+'<프로젝태 or 개인 자료>'+ concat.object.ccontents +'('+concat.object.cdate+')'+'</a></span></div>';
  		        		$("#chatcontentdiv").append($aaa);
         			 }
         		 }
@@ -364,7 +378,7 @@ function goconference(crcode,crmode,crclose,crcoderef)
 		alert(crmode);
 		alert(crclose);
 		alert(crcoderef);
-		$("#rightchatlist").load("/chat/content?crcode="+crcode+"&crmode="+crmode+"&crclose="+crclose+"&crcoderef="+crcoderef+"&pcode="+pcode); 
+		$("#rightchatlist").load("/chat/content?crcode="+crcode+"&crmode="+crmode+"&crclose="+crclose+"&crcoderef="+crcoderef+"&pcode="+pcode);
 	}else return;
 
 }
@@ -415,11 +429,11 @@ function chatclose(){
 
 //message : insert, type : chatcontents, object : ChatContentsVO
 function chattest(dmcode,dscode,crcoderef,crcode,dstitle){
-	alert('들ㅇ오냐?');
-	
 	if(crcode==parseInt(<%=crcode%>)){
 		//채팅
+		alert('몇번');
 		if(dmcode==0 && dscode==0){
+			alert('너는몇번이니');
 			var param={
 				 'message' : 'insert',
 				 'type' : 'chatcontentsvo',
@@ -436,6 +450,7 @@ function chattest(dmcode,dscode,crcoderef,crcode,dstitle){
 		
 		//의사결정
 		if(dscode!=0 && dmcode==0){
+			alert('의사결정');
 			var param={
 				 'message' : 'insert',
 				 'type' : 'chatcontentsvo',
@@ -449,9 +464,9 @@ function chattest(dmcode,dscode,crcoderef,crcode,dstitle){
 					 }
 				 };
 		}
-		
 		//자료 올리깅 
 		if(dscode==0 && dmcode!=0){
+			alert('자료올리깅');
 			var param={
 				 'message' : 'insert',
 				 'type' : 'chatcontentsvo',
@@ -468,112 +483,23 @@ function chattest(dmcode,dscode,crcoderef,crcode,dstitle){
 		
 		stompClient.send('/app/webproject/'+pcode, {},JSON.stringify(param));
 	}
-<%-- 
-		//프로젝트채팅창의 의사결정 chacontents db로 쏘는거임	
-		else if(dmcode==0 && dscode!=0&& crcoderef==0){
-			var param={
-					 'message' : 'insert',
-					 'type' : 'chatcontentsvo',
-					 'object' :{
-							 'crcode' : <%=crcode%>,
-						 	 'uid' : id,
-							 'ccontents' : dstitle,
-							 'dmcode' : dmcode,
-							 'dscode' : dscode,
-							 'crcoderef' : crcoderef
-						 }
-				 };
-			}
-		
-		//프로젝트채팅방창의 회의록 chatcontents db로 쏘기
-		else if(dmcode==0 && dscode==0 && crcoderef!=0){
-			var param={
-					 'message' : 'insert',
-					 'type' : 'chatcontentsvo',
-					 'object' :{
-							 'crcode' : <%=crcode%>,
-						 	 'uid' : id,
-							 'ccontents' : dstitle,
-							 'dmcode' : dmcode,
-							 'dscode' : dscode,
-							 'crcoderef' : crcoderef
-						 }
-					};
-				}
-		
-		//프로젝트채팅방의 자료 올려보리기
-		else if(dmcode!=0 && dscode==0 && crcoderef==0){
-			alert('자료');
-			var param={
-					 'message' : 'insert',
-					 'type' : 'chatcontentsvo',
-					 'object' :{
-							 'crcode' : <%=crcode%>,
-						 	 'uid' : id,
-							 'ccontents' : dstitle,
-							 'dmcode' : dmcode,
-							 'dscode' : dscode,
-							 'crcoderef' : crcoderef
-						 }
-					};
-				}
-			stompClient.send('/app/webproject/'+pcode, {},JSON.stringify(param));
+	//회의록
+	if(crcode!=<%=crcode%>){
+		alert('들어와죠');
+		var param={
+			 'message' : 'insert',
+			 'type' : 'chatcontentsvo',
+			 'object' :{
+					 'crcode' : <%=crcode%>,
+				 	 'uid' : id,
+					 'ccontents' : dstitle,
+					 'dmcode' : dmcode,
+					 'dscode' : dscode,
+					 'crcoderef' : crcoderef
+				 }
+			 };
+		stompClient.send('/app/webproject/'+pcode, {},JSON.stringify(param));
 		}
-		
-		//개인 채팅
-		else if(parseInt(<%=crmode%>)==2){
-			if(dmcode==0 && dscode==0 && crcoderef==0){
-					var param={
-							 'message' : 'insert',
-							 'type' : 'chatcontentsvo',
-							 'object' :{
-									 'crcode' : <%=crcode%>,
-								 	 'uid' : id,
-									 'ccontents' : $("#chatcontent").val(),
-									 'dmcode' : dmcode,
-									 'dscode' : dscode,
-									 'crcoderef' : crcoderef
-								 }
-							 };
-					}
-			
-			else if(dmcode!=0 && dscode==0 && crcoderef==0){
-				alert('개인 자료');
-				var param={
-						 'message' : 'insert',
-						 'type' : 'chatcontentsvo',
-						 'object' :{
-								 'crcode' : <%=crcode%>,
-							 	 'uid' : id,
-								 'ccontents' : dstitle,
-								 'dmcode' : dmcode,
-								 'dscode' : dscode,
-								 'crcoderef' : crcoderef
-							 }
-						};
-					}
-				stompClient.send('/app/webproject/'+pcode, {},JSON.stringify(param));
-		}
-	
-	//회의록 기본채팅
-	else if(parseInt(<%=crmode%>)==3){
-		if(dmcode==0 && dscode!=0 && parseInt(<%=crcoderef%>)>=0){
-			alert('회의록 의사결정');
-			var param={
-					 'message' : 'insert',
-					 'type' : 'chatcontentsvo',
-					 'object' :{
-							 'crcode' : <%=crcode%>,
-						 	 'uid' : id,
-							 'ccontents' : dstitle,
-							 'dmcode' : dmcode,
-							 'dscode' : dscode,
-							 'crcoderef' : <%=crcoderef%>
-						 }
-					};
-		}
-			stompClient.send('/app/webproject/'+pcode, {},JSON.stringify(param));
-		} --%>
 }
 
  //서버 전송
@@ -614,6 +540,7 @@ function chattest(dmcode,dscode,crcoderef,crcode,dstitle){
  
  //서버 전송
  function docutest(dmcode,dmtitle,dmcontents,dmdate,crcode,tcode,uid){
+	 alert('content.jsp docutest()');
 	 var param={
 			 'message' : 'insert',
 			 'type' : 'documentvo',
