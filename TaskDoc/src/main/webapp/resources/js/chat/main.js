@@ -65,6 +65,7 @@ $(function(){
 							cObject.crdate=response.chatRoomList[i].crdate;
 							cObject.crclose=response.chatRoomList[i].crclose;
 							cObject.crcoderef=response.chatRoomList[i].crcoderef;
+							
 							cArray.push(cObject);
 							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:30%; border-bottom:1px solid black;display:inline-block;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +','+cArray[i].crclose+','+cArray[i].crcoderef+')">'
 							+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+ memname +'의채팅방'+'</span></div>'
@@ -139,11 +140,11 @@ function gochatCon(crcode,crmode,crclose,crcoderef){
 		if(confirm('프로젝트 채팅에 입장하시겠습니까?')==true){
 			if(chatpermission=="OWNER" &&crmode==1){
 				alert(crcode+","+crmode+", owner다");
-			 	$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode+"&pcode="+pcode+"&crclose="+crclose+"&crcoderef="+crcoderef);  
+			 	$("#rightchatlist").load("/chat/content?crcode="+crcode+"&crmode="+crmode+"&crclose="+crclose+"&crcoderef="+crcoderef+"&pcode="+pcode);  
 			}
 			else if(chatpermission=="MEMBER" && crmode==1){
 				alert(crcode+","+crmode+", member다");
-				$("#rightchatlist").load("/chat/content?crmode="+crmode+"&crcode="+crcode+"&pcode="+pcode+"&crclose="+crclose+"&crcoderef="+crcoderef);  
+				$("#rightchatlist").load("/chat/content?crcode="+crcode+"&crmode="+crmode+"&crclose="+crclose+"&crcoderef="+crcoderef+"&pcode="+pcode);  
 			}
 		}
 		else return;

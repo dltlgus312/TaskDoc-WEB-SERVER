@@ -116,9 +116,8 @@ function focusOK(){
 		success : function(response) {
 			if (Object.keys(response).length>0) {
 				alert('채팅방 생성 완료! 채팅방 crcode값은'+response);
-
-				//화면에 보여줄것 -> server
-				opener.parent.focutest(response.crcode,response.crdate,response.crmode,response.fctitle,response.crclose,response.tcode,response.crcoderef);
+			
+				opener.parent.focutest(response.fctitle,response.crcode,response.crmode,response.crclose,response.crcoderef,response.tcode,response.crdate);
 				
 				//채팅에 넣을것 -> chatcontents db 
 				opener.parent.chattest(0,0,response.crcoderef,response.crcode,response.fctitle);

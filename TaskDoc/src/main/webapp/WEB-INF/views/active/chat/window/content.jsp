@@ -5,6 +5,9 @@
 	String crcode=request.getParameter("crcode");
 	String crclose=request.getParameter("crclose");
 	String crcoderef=request.getParameter("crcoderef");
+	
+	String loginid = "";
+	loginid = (String) session.getAttribute("loginid");
 %>	
 
 <script>
@@ -33,10 +36,13 @@ $(function(){
 	</div>
 </div>
 								
-<div id="chatcontentdiv" style="width:100%;height:75%;border:solid 1px blue; overflow:auto; background-color: #e0e0e0"></div>				
+<div id="chatcontentdiv" style="width:100%;height:75%;border:solid 1px blue; overflow:auto; background-color: #e0e0e0">
+	<div id="rightchatcontentdiv" style="width:50%;height:100%; float:left;"></div>
+	<div id="leftchatcontentdiv" style="width:50%;height:100%; float: left;"></div>
+</div>				
 	<div id="chatconinput" class="bts" style="width:100%;height:20%; border:solid 1px blue; display:-webkit-box;">
 		<textarea id="chatcontent" class="form-control" style="width:95%;height:100%;font-size:17px; resize: none;"></textarea>
-		<button type="button" onclick="chattest(0,0,<%=crcoderef %>,<%=crcode %>)" styㅍle="font-size:18px;">테스트</button>
+		<button id="chatbtn" type="button" onclick="chattest(0,0,<%=crcoderef %>,<%=crcode %>)" style="font-size:18px;">테스트</button>
 	</div>
 </div>	 
 
@@ -44,7 +50,46 @@ $(function(){
    
 var pageopen=true;
 $(function(){
-	
+	//대화조회
+	<%-- $.ajax({
+		type : 'GET',
+		url : '/chatcontents/'+<%=crcode%>,
+		success : function(response) {
+			if (response.length>0) {
+				alert('대화 조회 성공');
+				for(var i=0;i<response.length;i++){
+					if(response[i].uid=='<%=loginid%>'){
+						if(response[i].dmcode==0 && response[i].dscode ==0 && response[i].crcoderef==0){
+							$delist='<span>'+response[i].uid+': '+response[i].ccontents+'('+response[i].cdate+')'+'</span></br>';
+							$("#leftchatcontentdiv").append($delist);
+						}
+						
+						//자료
+						else if(response[i].dmcode!=0){
+							$delist='<a style="cursor:pointer" onclick="fileDownload('+response[i].dmcode+')">'+response[i].uid+': <파일>'+response[i].ccontents+'('+response[i].cdate+')'+'</a></br>';
+							$("#leftchatcontentdiv").append($delist);
+						}
+						//의사결정
+						else if(response[i].dscode!=0){
+							$delist='<a style="cursor:pointer" onclick="selectDecision(\''+chatpermission+'\','+response[i].dscode+')">'+response[i].uid+': <의사결정>'+response[i].ccontents+'('+response[i].cdate+')'+'</a></br>';
+							$("#leftchatcontentdiv").append($delist);
+						}
+						//회의록
+						else if(response[i].crcode)
+					}
+					else{
+						$delist='<span>'+response[i].uid+': '+response[i].ccontents+'('+response[i].cdate+')'+'</span></br>';
+						$("#rightchatcontentdiv").append($delist);
+					}
+				}
+			} else{
+				alert('Server or Client ERROR, 대화 조회 실패');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	}); --%>
 	//프로젝트톡, OWNER
 	if(parseInt(<%=crmode%>)==1 &&chatpermission=="OWNER"){
 		$setdiv='<img onclick="votercreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_voter.png" data-toggle="tootlip" data-placement="bottom" title="의사 결정 생성"  style="height:100%;float:left;padding-right:30px;cursor:pointer;">'
@@ -89,8 +134,8 @@ $(function(){
 	
 	//회의록, OWNER
 	else if(parseInt(<%=crmode%>)==3 &&chatpermission=="OWNER"){
-		$setdiv='<img onclick="votercreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_voter.png" data-toggle="tootlip" data-placement="bottom" title="의사 결정 생성"  style="height:100%;float:left;padding-right:30px;cursor:pointer;">'
-		+'<img onclick="filecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_fileupload.png" data-toggle="tootlip" data-placement="bottom" title="자료 업로드" style="height:100%;float:left;padding-right:30px;cursor:pointer;">'
+		$setdiv='<img id="votercr" onclick="votercreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_voter.png" data-toggle="tootlip" data-placement="bottom" title="의사 결정 생성"  style="height:100%;float:left;padding-right:30px;cursor:pointer;">'
+		+'<img id="filecr" onclick="filecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_fileupload.png" data-toggle="tootlip" data-placement="bottom" title="자료 업로드" style="height:100%;float:left;padding-right:30px;cursor:pointer;">'
 		+'<img onclick="menubtn('+<%=crcode%>+','+ 3 +')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
 		
@@ -98,13 +143,21 @@ $(function(){
 		+'<div style="overflow:auto; width:100%;height:24%; border-bottom: 3px solid #ed8151;">의사결정<div id="delist"></div></div>'
 		+'<div id="ulist"style="width:100%;height:24%; overflow:auto;">참여중인 회원<div id="userlist"> </div></div>'
 		+'<div class="bts" style="width:100%;height:4%;"><button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatclose()">닫기</button>'
-		+'<button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="confeclose('+<%=crcode%>+')">회의록종료</button></div>';
+		+'<button id="confecl" class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="confeclose('+<%=crcode%>+')">회의록종료</button></div>';
 		$("#chatsetbtnmenu").append($setmenudiv); 
+		if(parseInt(<%=crclose%>)==1){
+			alert('종료된 회의록입니다.');
+			$("#votercr").remove();
+			$("#filecr").remove();
+			$("#confecl").attr('disabled',true);
+			$("#chatsetbtnmenu").attr('disabled',true);
+			$("#chatcontent").attr('disabled',true);
+		}
 	}
 	
 	//회의록, MEMBER
 	else if(parseInt(<%=crmode%>)==3 && chatpermission=="MEMBER"){
-		$setdiv='<img onclick="filecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_fileupload.png"data-toggle="tootlip" data-placement="bottom" title="파일 업로드" style="height:100%;float:left;cursor:pointer;">'
+		$setdiv='<img id="filecr" onclick="filecreate('+<%=crcode%>+')" src="${pageContext.request.contextPath }/resources/img/img_fileupload.png"data-toggle="tootlip" data-placement="bottom" title="파일 업로드" style="height:100%;float:left;cursor:pointer;">'
 		+'<img onclick="menubtn('+<%=crcode%>+','+ 1 +')" src="${pageContext.request.contextPath }/resources/img/img_chatmenubtn.png" data-toggle="tootlip" data-placement="left" title="메뉴" style="height:100%;float:right;cursor:pointer;">';
 		$("#chatsetbtn").append($setdiv);
 		
@@ -113,6 +166,12 @@ $(function(){
 		+'<div id="ulist" style="width:100%;height:24%; overflow:auto;">참여중인 회원<div id="userlist"></div></div>'
 		+'<div class="bts" style="width:100%;height:4%;"><button class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="chatclose()">닫기</button></div>';
 		$("#chatsetbtnmenu").append($setmenudiv); 
+		if(parseInt(<%=crclose%>)==1){
+			alert('종료된 회의록입니다.');
+				$("#filecr").remove();
+				$("#chatsetbtnmenu").attr('disabled',true);
+				$("#chatcontent").attr('disabled',true);
+			}
 		
 	}
 	
@@ -134,34 +193,45 @@ $(function(){
         	 $("#chat"+concat.object.crcode).remove();
         	 $("#chats"+concat.object.crcode).remove();
         	 
-        	 if(concat.type == "chatroomvo"){
-        	 alert(concat.type);
-        		 chatObj.crcode= concat.object.crcode;
-        		 chatObj.crmode= concat.object.crmode;
-        		 chatObj.crclose= concat.object.crclose;
-        		 chatObj.crcoderef= concat.object.crcoderef;
-    		 }
-        	 
-        	 if(concat.type == "decisionvo"){
-        		 deciObj.dscode= concat.object.dscode;
-        		 deciObj.dsdate=concat.object.dsdate;
-        		 deciObj.dstitle=concat.object.dstitle;
-        		 deciObj.dsclose=concat.object.dsclose;
-        		 deciObj.crcode=concat.object.crcode;
-        		 deciObj.tcode=concat.object.tcode;
+        	 if(concat.message="insert"){
+        		 alert('insert?');
+	        	 if(concat.type == "chatroomvo"){
+	        	 alert(concat.type);
+	        		 chatObj.crcode= concat.object.crcode;
+	        		 chatObj.crmode= concat.object.crmode;
+	        		 chatObj.crclose= concat.object.crclose;
+	        		 chatObj.crcoderef= concat.object.crcoderef;
+	    		 }
+	        	 
+	        	 if(concat.type == "decisionvo"){
+	        		 deciObj.dscode= concat.object.dscode;
+	        		 deciObj.dsdate=concat.object.dsdate;
+	        		 deciObj.dstitle=concat.object.dstitle;
+	        		 deciObj.dsclose=concat.object.dsclose;
+	        		 deciObj.crcode=concat.object.crcode;
+	        		 deciObj.tcode=concat.object.tcode;
+	        	 }
+	        	 
+	        	 alert(concat.type);
+	        	 if(concat.type=="documentvo"){
+	        		 alert('자료올리고시포');
+	        		 docuObj.dmcode=concat.object.dmcode;
+	        		 docuObj.dmtitle=concat.object.dmtitle;
+	        		 docuObj.dmcontents=concat.object.dmcontents;
+	        		 docuObj.dmdate=concat.object.dmdate;
+	        		 docuObj.crcode=concat.object.crcode;
+	        		 docuObj.tcode=concat.object.tcode;
+	        		 docuObj.uid=concat.object.uid;
+	        	 }
         	 }
         	 
-        	 alert(concat.type);
-        	 if(concat.type=="documentvo"){
-        		 alert('자료올리고시포');
-        		 docuObj.dmcode=concat.object.dmcode;
-        		 docuObj.dmtitle=concat.object.dmtitle;
-        		 docuObj.dmcontents=concat.object.dmcontents;
-        		 docuObj.dmdate=concat.object.dmdate;
-        		 docuObj.crcode=concat.object.crcode;
-        		 docuObj.tcode=concat.object.tcode;
-        		 docuObj.uid=concat.object.uid;
-        	 }
+        	 /*	종료!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+        	 /* if(concat.type="update"){
+        		 alert('update?');
+        		 if(concat.type="chatroomvo"){
+        			 gosetInterval();
+        		 }
+        	 } */
         	 
         	 if(concat.type == "chatcontentsvo"){
         		 alert('param crcode'+<%=crcode%>);
@@ -331,7 +401,6 @@ function menubtn(code, crmode){
 	}
 	else $("#chatsetbtnmenu").hide(1000);
 } 
-
 //의사결정생성 
 function votercreate(code){
 	alert(code+"의사결정");
@@ -340,14 +409,12 @@ function votercreate(code){
 		}
 	else return;
 	}
-
 //의사결정 조회
 function selectDecision(chatpermission, dscode)
 {
 	// 의사결정 고르기(종료 여부는 페이지 들어가서 확인)
 	window.open("/chat/decisionSelect?chatpermission="+chatpermission+"&dscode="+dscode, "", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 }	
-
 //자료 업로드
 function filecreate(code){
 	alert(code+"자료 업로드");
@@ -357,11 +424,9 @@ function filecreate(code){
 		}
 	else return;
 }
-
 //자료 다운할 window
 function fileDownload(code){
 	window.open("/chat/fileDownload?dmcode="+code,"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); }
-
 //회의록생성
 function conferencecreate(crcode){
 	if(confirm('회의록을 만드시겠습니까?')==true){
@@ -369,26 +434,73 @@ function conferencecreate(crcode){
 		}
 	else return;
 }
-
 //회의록 입성 
 function goconference(crcode,crmode,crclose,crcoderef)
-{
-	if(confirm('회의록에 입장하시겠습니까?')==true){
-		alert(crcode);
-		alert(crmode);
-		alert(crclose);
-		alert(crcoderef);
-		$("#rightchatlist").load("/chat/content?crcode="+crcode+"&crmode="+crmode+"&crclose="+crclose+"&crcoderef="+crcoderef+"&pcode="+pcode);
-	}else return;
-
-}
-
+	{
+		if(confirm('회의록에 입장하시겠습니까?')==true){
+			alert(crcode);
+			alert(crmode);
+			alert(crclose);
+			alert(crcoderef);
+			$("#rightchatlist").load("/chat/content?crcode="+crcode+"&crmode="+crmode+"&crclose="+crclose+"&crcoderef="+crcoderef+"&pcode="+pcode);
+		}else return;
+	}
 //회의록 종료
 function confeclose(crcode){
-	alert(crcode+"종료");
-}
-
-
+		alert(crcode+"종료");
+		$.ajax({
+			type : 'GET',
+			url : '/chatroom/'+crcode,
+			success : function(confe) {
+				if (Object.keys(confe).length>0) {
+					var param = {
+							'fctitle' : confe.fctitle,
+							'crclose' : 1,
+							'tcode' : confe.tcode,
+							'crcode' : confe.crcode
+					};
+					//수정
+					$.ajax({
+						type : 'PUT',
+						url : '/chatroom',
+						contentType : 'application/json',
+						data : JSON.stringify(param),
+						success : function(response) {
+							if (response > 0) {
+								alert('회의록 종료' + response);
+								var closego={
+										 'message' : 'update',
+										 'type' : 'chatroomvo',
+										 'object' :{
+												 'fctitle' : confe.fctitle,
+												 'crdate' : confe.crdate,
+											 	 'crclose' : 1,
+												 'tcode' : confe.tcode,
+												 'crcoderef' : confe.crcoderef,
+												 'crcode' : confe.crcode,
+												 'crmode' : confe.crmode
+											}
+									 };
+									stompClient.send('/app/webproject/'+pcode, {},JSON.stringify(closego));
+							} else {
+								alert('Server or Client ERROR, 회의록 종료 실패');
+							}
+						},
+						error : function(e) {
+							alert("ERROR : " + e.statusText);
+						}
+					});	
+				}
+				else{
+					alert('Server or Client ERROR, 회의록 정보  조회 실패');
+				}
+			},
+			error : function(e) {
+				alert("ERROR : " + e.statusText);
+			}
+		});
+		
+	}
 //채팅방나가기
 function chatout(crcode){
 	if(confirm('채팅방에서 나가시겠습니까?')==true){
@@ -416,7 +528,6 @@ function chatout(crcode){
 		});
 	}else return;
 }
-
 //채팅방 닫기
 function chatclose(){
 	pageopen=false;
@@ -424,9 +535,6 @@ function chatclose(){
 	$("#chatmenu").remove();
 	
 }
-
-
-
 //message : insert, type : chatcontents, object : ChatContentsVO
 function chattest(dmcode,dscode,crcoderef,crcode,dstitle){
 	if(crcode==parseInt(<%=crcode%>)){
@@ -501,7 +609,6 @@ function chattest(dmcode,dscode,crcoderef,crcode,dstitle){
 		stompClient.send('/app/webproject/'+pcode, {},JSON.stringify(param));
 		}
 }
-
  //서버 전송
  function decitest(dscode,dsdate,dstitle,dsclose,crcode,tcode){
 	//이거는 서버로 보내는거임
@@ -556,4 +663,22 @@ function chattest(dmcode,dscode,crcoderef,crcode,dstitle){
 		 };
 	stompClient.send('/app/webproject/'+pcode, {},JSON.stringify(param)); 
  }
+ 
+ //회의록 종료 함수
+ var i=0;
+ function gosetInterval(){
+	 	alert('회의록이 5초뒤 종료 되니 준비 해주시길 바랍니다.');
+	 	a=setInterval(function() {
+	 		i++;
+	 		if(i==5){
+		 		$("#votercr").remove();
+				$("#filecr").remove();
+				$("#confecl").attr('disabled',true);
+				$("#chatbtn").attr('disabled',true);
+				$("#chatcontent").attr('disabled',true);
+			 	alert('회의록이 종료 됩니다.');
+				clearInterval(a);
+		 	}
+	 	}, 1000);
+}
 </script>
