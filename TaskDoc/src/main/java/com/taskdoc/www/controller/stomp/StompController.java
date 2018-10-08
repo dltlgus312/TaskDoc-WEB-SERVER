@@ -35,12 +35,11 @@ public class StompController {
 			URI uri = new URI(chat);
 				ChatContentsVO chatcontentsvo = JsonMapper.mapToJson(map.get("object"), ChatContentsVO.class);
 				try {
-					
+
 					chatcontentsvo = rest.postForObject(uri, chatcontentsvo, chatcontentsvo.getClass());
 					test.put("object", chatcontentsvo);
 					test.put("message","insert");
 					test.put("type","chatcontentsvo");
-					return test;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -53,10 +52,9 @@ public class StompController {
 			return map;
 		}
 		else if(map.get("type").equals("documentvo")){
-
 			return map;
 		}
-		return map;
+		return test;
 	}
 
 }

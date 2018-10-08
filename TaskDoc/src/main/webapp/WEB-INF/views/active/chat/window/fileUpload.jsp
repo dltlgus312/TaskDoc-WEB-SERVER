@@ -129,10 +129,18 @@ $(function(){
 		        },
 		        complete: function(success) {
 		        	alert('파일업로드 완료');
-		        	var json=success.responseJSON; 
-		        	alert(json);
-		        	opener.parent.docutest(json.dmcode,''json.dmtitle,json.dmcontents,json.dmdate,json.crcode,json.tcode,json.uid);
-					opener.parent.chattest(json.dmcode,0,0,json.dmtitle);
+		        	var json=success.responseJSON;
+		        	var obj=new Object();
+					obj.dmcode=json.dmcode;
+					obj.dmtitle=json.dmtitle;
+					obj.dmcontents=json.dmcontents;
+					obj.dmdate=json.dmdate;
+					obj.crcode=json.crcode;
+					obj.tcode=json.tcode;
+					obj.uid=json.uid;
+					
+		        	opener.parent.docutest(obj.dmcode,obj.dmtitle,obj.dmcontents,obj.dmdate,obj.crcode,obj.tcode,obj.uid);
+					opener.parent.chattest(obj.dmcode,0,0,obj.crcode,obj.dmtitle);
 					window.close();
 					
 		        },
