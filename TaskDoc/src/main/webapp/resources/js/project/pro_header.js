@@ -3,7 +3,6 @@
 //프로젝트명
 
 var proname="";
-
 //채팅방권한
 var chatpermission="";
 
@@ -233,3 +232,69 @@ var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션
 			$("#chathwamun").hide(1000);
 		}
 	}
+	
+	var chatObj=new Object();
+	var deciObj=new Object();
+	var docuObj=new Object();
+	$(function(){
+		var sockets = new SockJS('/goStomp'); 
+		stompClients = Stomp.over(sockets);
+		
+		stompClients.connect({}, function() { //접속
+         stompClients.subscribe('/project/'+pcode, function(msg) {
+        	 var test=msg.body;
+        	 var concat=JSON.parse(test);
+        	 $("#chats"+concat.object.crcode).remove(); 
+        	 if(concat.message=="insert"){
+        		 if(concat.type == "chatroomvo"){
+		        	 alert(concat.type);
+		        	 alert(concat.object);
+		        	 chatObj.crcode= concat.object.crcode;
+		        	 chatObj.crmode= concat.object.crmode;
+		        	 chatObj.crclose= concat.object.crclose;
+		        	 chatObj.crcoderef= concat.object.crcoderef;
+	    		 }
+	        	 if(concat.type == "decisionvo"){
+	        		 deciObj.dscode= concat.object.dscode;
+	        		 deciObj.dsdate=concat.object.dsdate;
+	        		 deciObj.dstitle=concat.object.dstitle;
+	        		 deciObj.dsclose=concat.object.dsclose;
+	        		 deciObj.crcode=concat.object.crcode;
+	        		 deciObj.tcode=concat.object.tcode;
+	        	 }
+	        	 if(concat.type=="documentvo"){
+	        		 docuObj.dmcode=concat.object.dmcode;
+	        		 docuObj.dmtitle=concat.object.dmtitle;
+	        		 docuObj.dmcontents=concat.object.dmcontents;
+	        		 docuObj.dmdate=concat.object.dmdate;
+	        		 docuObj.crcode=concat.object.crcode;
+	        		 docuObj.tcode=concat.object.tcode;
+	        		 docuObj.uid=concat.object.uid;
+	        	 }
+	        	 
+	        	 if(concat.type == "chatcontentsvo"){
+	        			 if(Object.keys(chatObj).length<=0 && Object.keys(deciObj).length<=0 && Object.keys(docuObj).length<=0){
+			        		 $("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+	        		 	}
+	        			 //의사결정 링크
+	        			 if(Object.keys(deciObj).length>0 && Object.keys(chatObj).length<=0 && Object.keys(docuObj).length<=0){
+				        	 $("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" :<프로젝트 or 개인 투표> "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+				        	 deciObj=new Object();
+	        		 	}
+	        			 //회의록 링크
+	        			 if(Object.keys(chatObj).length>0 && Object.keys(deciObj).length<=0 && Object.keys(docuObj).length<=0){
+	 		        		$("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" :<프로젝트 회의록> "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+	 		        		chatObj=new Object();
+	        			 }
+	        			 
+	        			 //자료 링크
+	        			 if(Object.keys(chatObj).length<=0 && Object.keys(deciObj).length<=0 && Object.keys(docuObj).length>0){
+	 		        		$("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" :<프로젝태 or 개인 자료> "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+	 		        		docuObj=new Object();
+	        			 }
+	    		 }
+        	 }
+
+         });
+	});
+});
