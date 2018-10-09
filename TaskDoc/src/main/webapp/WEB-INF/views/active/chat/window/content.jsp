@@ -26,62 +26,98 @@ $(function(){
 	//chatsetbtnmenu제어
 	$("#chatsetbtnmenu").css('margin-top',parseInt(prochatsetbtn)).css('margin-right',parseInt(containermargin) + 15 + "px");
 	stompClient.disconnect();
-});
-</script>
-
-<!--채팅방 클릭시 나와야할 div들  -->
-<div id="chatmenu" style="width:100%%; height:100%;">
-	<div id="chatsetbtn" style="width:100%;height:5%; border:solid 1px blue;">
-	<div id="chatsetbtnmenu" style="width:300px;height:500px; position: absolute; display:none;border:3px solid #ed8151;background-color:white; right:0px;overflow:auto; ">
-	</div>
-</div>
-								
-<div id="chatcontentdiv" style="width:100%;height:75%;border:solid 1px blue; overflow:auto; background-color: #e0e0e0">
-</div>				
-	<div id="chatconinput" class="bts" style="width:100%;height:20%; border:solid 1px blue; display:-webkit-box;">
-		<textarea id="chatcontent" class="form-control" style="width:95%;height:100%;font-size:17px; resize: none;"></textarea>
-		<button id="chatbtn" type="button" onclick="chattest(0,0,<%=crcoderef %>,<%=crcode %>)" style="font-size:18px;">테스트</button>
-	</div>
-</div>	 
-
-<script>
-   
-var pageopen=true;
-$(function(){
+	
 	//대화조회
 	 $.ajax({
 		type : 'GET',
-		url : '/chatcontents/'+<%=crcode%> ,
+		url : '/chatcontents/'+<%=crcode%>,
 		success : function(response) {
 			if (response.length>0) {
+
+				
 				alert('대화 조회 성공');
 				for(var i=0;i<response.length;i++){
 					if(response[i].crcode==<%=crcode%>){
+						
+						//채팅 내용 조회시 나는 오른쪾
 						if(response[i].uid=='<%=loginid%>'){
+							//일반 대화
 							if(response[i].dmcode == 0 && response[i].dscode == 0 && response[i].crcoderef==0){
-								$delist='<span>'+response[i].uid+': '+response[i].ccontents+'('+response[i].cdate+')'+'</span></br>';
+								$delist='<div style="background-color: yellow; width:100%;height:100px;">'
+									    +'<div style="float:right; background-color: cornsilk; width:50%;border-radius:20px;">'
+					   					+'<div><span>'+response[i].uid+'(이름,'+chatpermission+') : (상태메시지)</span></div>'
+					   					+'<div><span>'+response[i].ccontents+'</span></div><div><span>'+response[i].cdate+'</span></div></div></div>';
+								
 								$("#chatcontentdiv").append($delist);
 							}
-							
 							//자료
 							else if(response[i].dmcode!=0){
-								$delist='<a style="cursor:pointer" onclick="fileDownload('+response[i].dmcode+')">'+response[i].uid+': <파일>'+response[i].ccontents+'('+response[i].cdate+')'+'</a></br>';
+								$delist='<div style="background-color: yellow; width:100%;height:100px;">'
+								    +'<div style="float:right; background-color: cornsilk; width:50%;border-radius:20px;">'
+				   					+'<div><span>'+response[i].uid+'(이름,'+chatpermission+') : (상태메시지)</span></div>'
+				   					+'<div><span><a>[자료]</a></span></div><div><span><a style="cursor:pointer" onclick="fileDownload('+response[i].dmcode+')">제목 : '+response[i].ccontents+'</a></span></div><div><span>'+response[i].cdate+'</span></div></div></div>';
+					   			/* $delist='<a style="cursor:pointer" onclick="fileDownload('+response[i].dmcode+')">'+response[i].uid+': <파일>'+response[i].ccontents+'('+response[i].cdate+')'+'</a></br>'; */
 								$("#chatcontentdiv").append($delist);
-							}
+								}
 							//의사결정
 							else if(response[i].dscode!=0){
-								$delist='<a style="cursor:pointer" onclick="selectDecision(\''+chatpermission+'\','+response[i].dscode+')">'+response[i].uid+': <의사결정>'+response[i].ccontents+'('+response[i].cdate+')'+'</a></br>';
+								$delist='<div style="background-color: yellow; width:100%;height:100px;">'
+							    +'<div style="float:right; background-color: cornsilk; width:50%;border-radius:20px;">'
+			   					+'<div><span>'+response[i].uid+'(이름,'+chatpermission+') : (상태메시지)</span></div>'
+			   					+'<div><span><a>[투표]</a></span></div><div><span><a style="cursor:pointer"  onclick="selectDecision(\''+chatpermission+'\','+response[i].dscode+')">제목 : '+response[i].ccontents+'</a></span></div><div><span>'+response[i].cdate+'</span></div></div></div>';
+								/* $delist='<a style="cursor:pointer" onclick="selectDecision(\''+chatpermission+'\','+response[i].dscode+')">'+response[i].uid+': <의사결정>'+response[i].ccontents+'('+response[i].cdate+')'+'</a></br>'; */
 								$("#chatcontentdiv").append($delist);
 								}
 							//회의록
 							else if(response[i].crcoderef!=0){
-								$delist='<a style="cursor:pointer" onclick="goconference('+response[i].crcoderef+','+ 3 + ','+ 0 + ','+ <%=crcode%> + ')">'+response[i].uid+': <회의록>'+response[i].ccontents+'('+response[i].cdate+')'+'</a></br>';
+								$delist='<div style="background-color: yellow; width:100%;height:100px;">'
+							    +'<div style="float:right; background-color: cornsilk; width:50%;border-radius:20px;">'
+			  					+'<div><span>'+response[i].uid+'(이름,'+chatpermission+') : (상태메시지)</span></div>'
+			  					+'<div><span><a>[회의록]</a></span></div><div><span><a style="cursor:pointer"  onclick="goconference('+response[i].crcoderef+','+ 3 + ','+ 0 + ','+ <%=crcode%> + ')">제목 : '+response[i].ccontents+'</a></span></div><div><span>'+response[i].cdate+'</span></div></div></div>';
+								
+								<%-- $delist='<a style="cursor:pointer" onclick="goconference('+response[i].crcoderef+','+ 3 + ','+ 0 + ','+ <%=crcode%> + ')">'+response[i].uid+': <회의록>'+response[i].ccontents+'('+response[i].cdate+')'+'</a></br>'; --%>
 								$("#chatcontentdiv").append($delist);										
 								}
 							}
+						
+						//ID다를때
 						else{
-							$delist='<span>'+response[i].uid+': '+response[i].ccontents+'('+response[i].cdate+')'+'</span></br>';
-							$("#chatcontentdiv").append($delist);
+							if(response[i].dmcode == 0 && response[i].dscode == 0 && response[i].crcoderef==0){
+								$delist='<div style="background-color: yellow; width:100%;height:100px;">'
+									    +'<div style="float:left; background-color: aliceblue; width:50%;border-radius:20px;">'
+					   					+'<div><span>'+response[i].uid+'(이름,'+chatpermission+') : (상태메시지)</span></div>'
+					   					+'<div><span>'+response[i].ccontents+'</span></div><div><span>'+response[i].cdate+'</span></div></div></div>';
+								
+								$("#chatcontentdiv").append($delist);
+							}
+							//자료
+							else if(response[i].dmcode!=0){
+								$delist='<div style="background-color: yellow; width:100%;height:100px;">'
+								    +'<div style="float:left; background-color: aliceblue; width:50%;border-radius:20px;">'
+				   					+'<div><span>'+response[i].uid+'(이름,'+chatpermission+') : (상태메시지)</span></div>'
+				   					+'<div><span><a>[자료]</a></span></div><div><span><a style="cursor:pointer" onclick="fileDownload('+response[i].dmcode+')">제목 : '+response[i].ccontents+'</a></span></div><div><span>'+response[i].cdate+'</span></div></div></div>';
+					   			/* $delist='<a style="cursor:pointer" onclick="fileDownload('+response[i].dmcode+')">'+response[i].uid+': <파일>'+response[i].ccontents+'('+response[i].cdate+')'+'</a></br>'; */
+								$("#chatcontentdiv").append($delist);
+								}
+							//의사결정
+							else if(response[i].dscode!=0){
+								$delist='<div style="background-color: yellow; width:100%;height:100px;">'
+							    +'<div style="float:left; background-color: aliceblue; width:50%;border-radius:20px;">'
+			   					+'<div><span>'+response[i].uid+'(이름,'+chatpermission+') : (상태메시지)</span></div>'
+			   					+'<div><span><a>[투표]</a></span></div><div><span><a style="cursor:pointer"  onclick="selectDecision(\''+chatpermission+'\','+response[i].dscode+')">제목 : '+response[i].ccontents+'</a></span></div><div><span>'+response[i].cdate+'</span></div></div></div>';
+								/* $delist='<a style="cursor:pointer" onclick="selectDecision(\''+chatpermission+'\','+response[i].dscode+')">'+response[i].uid+': <의사결정>'+response[i].ccontents+'('+response[i].cdate+')'+'</a></br>'; */
+								$("#chatcontentdiv").append($delist);
+								}
+							//회의록
+							else if(response[i].crcoderef!=0){
+								$delist='<div style="background-color: yellow; width:100%;height:100px;">'
+							    +'<div style="float:left; background-color: aliceblue; width:50%;border-radius:20px;">'
+			  					+'<div><span>'+response[i].uid+'(이름,'+chatpermission+') : (상태메시지)</span></div>'
+			  					+'<div><span><a>[회의록]</a></span></div><div><span><a style="cursor:pointer"  onclick="goconference('+response[i].crcoderef+','+ 3 + ','+ 0 + ','+ <%=crcode%> + ')">제목 : '+response[i].ccontents+'</a></span></div><div><span>'+response[i].cdate+'</span></div></div></div>';
+								
+								<%-- $delist='<a style="cursor:pointer" onclick="goconference('+response[i].crcoderef+','+ 3 + ','+ 0 + ','+ <%=crcode%> + ')">'+response[i].uid+': <회의록>'+response[i].ccontents+'('+response[i].cdate+')'+'</a></br>'; --%>
+								$("#chatcontentdiv").append($delist);										
+								}
 						}
 					}else{
 						alert('실패');
@@ -96,6 +132,29 @@ $(function(){
 			alert("ERROR : " + e.statusText);
 		}
 	});
+	
+});
+</script>
+
+<!--채팅방 클릭시 나와야할 div들  -->
+<div id="chatmenu" style="width:100%%; height:100%;">
+	<div id="chatsetbtn" style="width:100%;height:5%; border:solid 1px blue;">
+	<div id="chatsetbtnmenu" style="width:300px;height:500px; position: absolute; display:none;border:3px solid #ed8151;background-color:white; right:0px;overflow:auto; ">
+	</div>
+</div>
+								
+<div id="chatcontentdiv" style="width:100%;height:75%;border:solid 1px blue; overflow-y:scroll; background-color: #e0e0e0">
+</div>				
+	<div id="chatconinput" class="bts" style="width:100%;height:20%; border:solid 1px blue; display:-webkit-box;">
+		<textarea id="chatcontent" class="form-control" style="width:95%;height:100%;font-size:17px; resize: none;"></textarea>
+		<button id="chatbtn" type="button" onclick="chattest(0,0,0,<%=crcode %>)" style="font-size:18px;">테스트</button>
+	</div>
+</div>	 
+
+<script>
+   
+var pageopen=true;
+$(function(){
 	
 	//프로젝트톡, OWNER
 	if(parseInt(<%=crmode%>)==1 &&chatpermission=="OWNER"){
@@ -178,6 +237,7 @@ $(function(){
 				$("#filecr").remove();
 				$("#chatsetbtnmenu").attr('disabled',true);
 				$("#chatcontent").attr('disabled',true);
+				$("#chatbtn").attr('disabled',true);
 			}
 		
 	}
@@ -237,14 +297,17 @@ $(function(){
 	        	 }
 	        	 
 	        	 if(concat.type == "chatcontentsvo"){
-	        		 alert('param crcode'+<%=crcode%>);
-	        		 alert('concat.object.crcode'+concat.object.crcode);
 	        		 if(parseInt(<%=crcode%>)==concat.object.crcode){
+	        			if(concat.object.uid=='<%=loginid%>'){
 	        			 if(Object.keys(chatObj).length<=0 && Object.keys(deciObj).length<=0 && Object.keys(docuObj).length<=0){
 		        			 alert('나능 프로젝틍 or 개인 일반대화 or 회의록 대화');
 			        		 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
 			        		 $("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
-			        		 $aaa='<div><span>'+concat.object.uid+' : '+ concat.object.ccontents +'('+concat.object.cdate+')'+'</span></div>';
+			        		 
+			        		 $aaa='<div style="background-color: yellow; width:100%;height:100px;">'
+						     +'<div style="float:right; background-color: cornsilk; width:50%;border-radius:20px;">'
+				   			 +'<div><span>'+concat.object.uid+'(이름,'+chatpermission+') : (상태메시지)</span></div>'
+				   			 +'<div><span>'+concat.object.ccontents+'</span></div><div><span>'+concat.object.cdate+'</span></div></div></div>';
 			        	 	 $("#chatcontentdiv").append($aaa);
 			        	 	 
 	        		 	}
@@ -253,17 +316,28 @@ $(function(){
 	        		 		 alert('나능 프로젝트 또는 회의록 의사결정 생성');
 				        	 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : <프로젝트 or 개인 투표>"+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
 				        	 $("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" :<프로젝트 or 개인 투표> "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
-				        	 $aaa='<div><span>'+concat.object.uid+' : <a onclick="selectDecision(\''+chatpermission+'\','+deciObj.dscode+')">'+'<프로젝트 or 개인 투표>'+ concat.object.ccontents +'('+concat.object.cdate+')'+'</a></span></div>';
+				        	 
+				        	 $aaa='<div style="background-color: yellow; width:100%;height:100px;">'
+							 +'<div style="float:right; background-color: cornsilk; width:50%;border-radius:20px;">'
+				   			 +'<div><span>'+concat.object.uid+'(이름,'+chatpermission+') : (상태메시지)</span></div>'
+				   			 +'<div><span><a>[투표]</a></span></div><div><span><a style="cursor:pointer"  onclick="selectDecision(\''+chatpermission+'\','+concat.object.dscode+')">제목 : '+concat.object.ccontents+'</a></span></div><div><span>'+concat.object.cdate+'</span></div></div></div>';
 				        	 $("#chatcontentdiv").append($aaa);
-				        		deciObj=new Object();
+				        	 deciObj=new Object();
 	        		 	}
 	        			 //회의록 링크
 	        			 if(Object.keys(chatObj).length>0 && Object.keys(deciObj).length<=0 && Object.keys(docuObj).length<=0){
 	        				 alert('나는 회의록 생성');
 	 		        		$("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : <프로젝트 회의록>"+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
 	 		        		$("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" :<프로젝트 회의록> "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
-	 		        		$aaa='<div><span>'+concat.object.uid+' : <a onclick="goconference('+chatObj.crcode+','+ chatObj.crmode+','+chatObj.crclose+','+chatObj.crcoderef+')">'+'<프로젝트 회의록>'+ concat.object.ccontents +'('+concat.object.cdate+')'+'</a></span></div>';
-	 		        		$("#chatcontentdiv").append($aaa);
+	 		        		/* $aaa='<div><span>'+concat.object.uid+' : <a onclick="goconference('+chatObj.crcode+','+ chatObj.crmode+','+chatObj.crclose+','+chatObj.crcoderef+')">'+'<프로젝트 회의록>'+ concat.object.ccontents +'('+concat.object.cdate+')'+'</a></span></div>';
+	 		        		$("#chatcontentdiv").append($aaa); */ 
+	 		        		
+	 		        		$delist='<div style="background-color: yellow; width:100%;height:100px;">'
+							+'<div style="float:right; background-color: cornsilk; width:50%;border-radius:20px;">'
+			  				+'<div><span>'+concat.object.uid+'(이름,'+chatpermission+') : (상태메시지)</span></div>'
+			  				+'<div><span><a>[회의록]</a></span></div><div><span><a style="cursor:pointer"  onclick="goconference('+chatObj.crcode+','+ chatObj.crmode + ','+ chatObj.crclose + ','+ chatObj.crcoderef + ')">제목 : '+concat.object.ccontents+'</a></span></div><div><span>'+concat.object.cdate+'</span></div></div></div>';
+							$("#chatcontentdiv").append($delist);										
+	 		        		
 	 		        		chatObj=new Object();
 	        			 }
 	        			 
@@ -272,17 +346,87 @@ $(function(){
 	        				 alert('나는 자료 생성');
 	 		        		$("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : <프로젝태 or 개인 자료>"+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
 	 		        		$("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" :<프로젝태 or 개인 자료> "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
-	 		        		$aaa='<div><span>'+concat.object.uid+' : <a onclick="fileDownload('+ docuObj.dmcode +')">'+'<프로젝태 or 개인 자료>'+ concat.object.ccontents +'('+concat.object.cdate+')'+'</a></span></div>';
-	 		        		$("#chatcontentdiv").append($aaa);
+	 		        		/* $aaa='<div><span>'+concat.object.uid+' : <a onclick="fileDownload('+ docuObj.dmcode +')">'+'<프로젝태 or 개인 자료>'+ concat.object.ccontents +'('+concat.object.cdate+')'+'</a></span></div>';
+	 		        		$("#chatcontentdiv").append($aaa); */
+	 		        		
+	 		        		$delist='<div style="background-color: yellow; width:100%;height:100px;">'
+							+'<div style="float:right; background-color: cornsilk; width:50%;border-radius:20px;">'
+			   				+'<div><span>'+concat.object.uid+'(이름,'+chatpermission+') : (상태메시지)</span></div>'
+			   				+'<div><span><a>[자료]</a></span></div><div><span><a style="cursor:pointer" onclick="fileDownload('+docuObj.dmcode+')">제목 : '+concat.object.ccontents+'</a></span></div><div><span>'+concat.object.cdate+'</span></div></div></div>';
+							$("#chatcontentdiv").append($delist);
+	 		        		
+	 		        		
 	 		        		docuObj=new Object();
-	        			 }
+	        				 }
+		        		 }else{
+		        			 //다른아이디
+		        			 if(Object.keys(chatObj).length<=0 && Object.keys(deciObj).length<=0 && Object.keys(docuObj).length<=0){
+			        			 alert('나능 프로젝틍 or 개인 일반대화 or 회의록 대화');
+				        		 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+				        		 $("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" : "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+				        		 
+				        		 $aaa='<div style="background-color: yellow; width:100%;height:100px;">'
+							     +'<div style="float:left; background-color: aliceblue; width:50%;border-radius:20px;">'
+					   			 +'<div><span>'+concat.object.uid+'(이름,'+chatpermission+') : (상태메시지)</span></div>'
+					   			 +'<div><span>'+concat.object.ccontents+'</span></div><div><span>'+concat.object.cdate+'</span></div></div></div>';
+				        	 	 $("#chatcontentdiv").append($aaa);
+				        	 	 
+		        		 	}
+		        			 //의사결정 링크
+		        			 if(Object.keys(deciObj).length>0 && Object.keys(chatObj).length<=0 && Object.keys(docuObj).length<=0){
+		        		 		 alert('나능 프로젝트 또는 회의록 의사결정 생성');
+					        	 $("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : <프로젝트 or 개인 투표>"+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+					        	 $("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" :<프로젝트 or 개인 투표> "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+					        	 
+					        	 $aaa='<div style="background-color: yellow; width:100%;height:100px;">'
+								 +'<div style="float:left; background-color: aliceblue; width:50%;border-radius:20px;">'
+					   			 +'<div><span>'+concat.object.uid+'(이름,'+chatpermission+') : (상태메시지)</span></div>'
+					   			 +'<div><span><a>[투표]</a></span></div><div><span><a style="cursor:pointer"  onclick="selectDecision(\''+chatpermission+'\','+concat.object.dscode+')">제목 : '+concat.object.ccontents+'</a></span></div><div><span>'+concat.object.cdate+'</span></div></div></div>';
+					        	 $("#chatcontentdiv").append($aaa);
+					        	 deciObj=new Object();
+		        		 	}
+		        			 //회의록 링크
+		        			 if(Object.keys(chatObj).length>0 && Object.keys(deciObj).length<=0 && Object.keys(docuObj).length<=0){
+		        				 alert('나는 회의록 생성');
+		 		        		$("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : <프로젝트 회의록>"+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+		 		        		$("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" :<프로젝트 회의록> "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+		 		        		/* $aaa='<div><span>'+concat.object.uid+' : <a onclick="goconference('+chatObj.crcode+','+ chatObj.crmode+','+chatObj.crclose+','+chatObj.crcoderef+')">'+'<프로젝트 회의록>'+ concat.object.ccontents +'('+concat.object.cdate+')'+'</a></span></div>';
+		 		        		$("#chatcontentdiv").append($aaa); */ 
+		 		        		
+		 		        		$delist='<div style="background-color: yellow; width:100%;height:100px;">'
+								+'<div style="float:left; background-color: aliceblue; width:50%;border-radius:20px;">'
+				  				+'<div><span>'+concat.object.uid+'(이름,'+chatpermission+') : (상태메시지)</span></div>'
+				  				+'<div><span><a>[회의록]</a></span></div><div><span><a style="cursor:pointer"  onclick="goconference('+chatObj.crcode+','+ chatObj.crmode + ','+ chatObj.crclose + ','+ chatObj.crcoderef + ')">제목 : '+concat.object.ccontents+'</a></span></div><div><span>'+concat.object.cdate+'</span></div></div></div>';
+								$("#chatcontentdiv").append($delist);										
+		 		        		
+		 		        		chatObj=new Object();
+		        			 }
+		        			 
+		        			 //자료 링크
+		        			 if(Object.keys(chatObj).length<=0 && Object.keys(deciObj).length<=0 && Object.keys(docuObj).length>0){
+		        				 alert('나는 자료 생성');
+		 		        		$("#croomSpan"+concat.object.crcode).append('<span id="chat'+concat.object.crcode+'">'+concat.object.uid+" : <프로젝태 or 개인 자료>"+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+		 		        		$("#croomsSpan"+concat.object.crcode).append('<span id="chats'+concat.object.crcode+'">'+concat.object.uid+" :<프로젝태 or 개인 자료> "+concat.object.ccontents+'('+concat.object.cdate+')'+'</span>');
+		 		        		/* $aaa='<div><span>'+concat.object.uid+' : <a onclick="fileDownload('+ docuObj.dmcode +')">'+'<프로젝태 or 개인 자료>'+ concat.object.ccontents +'('+concat.object.cdate+')'+'</a></span></div>';
+		 		        		$("#chatcontentdiv").append($aaa); */
+		 		        		
+		 		        		$delist='<div style="background-color: yellow; width:100%;height:100px;">'
+								+'<div style="float:left; background-color: aliceblue; width:50%;border-radius:20px;">'
+				   				+'<div><span>'+concat.object.uid+'(이름,'+chatpermission+') : (상태메시지)</span></div>'
+				   				+'<div><span><a>[자료]</a></span></div><div><span><a style="cursor:pointer" onclick="fileDownload('+docuObj.dmcode+')">제목 : '+concat.object.ccontents+'</a></span></div><div><span>'+concat.object.cdate+'</span></div></div></div>';
+								$("#chatcontentdiv").append($delist);
+		 		        		
+		 		        		
+		 		        		docuObj=new Object();
+		        				 }
+		        		 }
 	        		 }
 	        	 }
         	 }
         	 
         	 /*	종료!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
         	if(concat.message=="update"){
-        		 alert('update?');
+        		 alert('회의록종료');
         		 if(concat.type="chatroomvo"){
         			 gosetInterval();
         		 }
@@ -419,7 +563,6 @@ function menubtn(code, crmode){
 } 
 //의사결정생성 
 function votercreate(code){
-	alert(code+"의사결정");
 	if(confirm('투표를 생성하시겠습니까?')==true){
 		window.open("/chat/decisionCreate?crcode="+code+"&pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 		}
@@ -433,7 +576,6 @@ function selectDecision(chatpermission, dscode)
 }	
 //자료 업로드
 function filecreate(code){
-	alert(code+"자료 업로드");
 	var popH = 450; // 띄울창의 세로사이즈
 	if(confirm('자료를 업로드 하시겠습니까?')==true){
 		window.open("/chat/fileUpload?crcode="+code+"&pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
@@ -454,16 +596,15 @@ function conferencecreate(crcode){
 function goconference(crcode,crmode,crclose,crcoderef)
 	{
 		if(confirm('회의록에 입장하시겠습니까?')==true){
-			alert(crcode);
+			/* alert(crcode);
 			alert(crmode);
 			alert(crclose);
-			alert(crcoderef);
+			alert(crcoderef); */
 			$("#rightchatlist").load("/chat/content?crcode="+crcode+"&crmode="+crmode+"&crclose="+crclose+"&crcoderef="+crcoderef+"&pcode="+pcode);
 		}else return;
 	}
 //회의록 종료
 function confeclose(crcode){
-		alert(crcode+"종료");
 		$.ajax({
 			type : 'GET',
 			url : '/chatroom/'+crcode,
@@ -555,9 +696,7 @@ function chatclose(){
 function chattest(dmcode,dscode,crcoderef,crcode,dstitle){
 	if(crcode==parseInt(<%=crcode%>)){
 		//채팅
-		alert('몇번');
 		if(dmcode==0 && dscode==0){
-			alert('너는몇번이니');
 			var param={
 				 'message' : 'insert',
 				 'type' : 'chatcontentsvo',
@@ -567,14 +706,13 @@ function chattest(dmcode,dscode,crcoderef,crcode,dstitle){
 						 'ccontents' : $("#chatcontent").val(),
 						 'dmcode' : dmcode,
 						 'dscode' : dscode,
-						 'crcoderef' : <%=crcoderef%>
+						 'crcoderef' : crcoderef
 					 }
 				 };
 		}
 		
 		//의사결정
 		if(dscode!=0 && dmcode==0){
-			alert('의사결정');
 			var param={
 				 'message' : 'insert',
 				 'type' : 'chatcontentsvo',
@@ -584,13 +722,12 @@ function chattest(dmcode,dscode,crcoderef,crcode,dstitle){
 						 'ccontents' : dstitle,
 						 'dmcode' : dmcode,
 						 'dscode' : dscode,
-						 'crcoderef' : <%=crcoderef%>
+						 'crcoderef' : crcoderef
 					 }
 				 };
 		}
 		//자료 올리깅 
 		if(dscode==0 && dmcode!=0){
-			alert('자료올리깅');
 			var param={
 				 'message' : 'insert',
 				 'type' : 'chatcontentsvo',
@@ -600,16 +737,16 @@ function chattest(dmcode,dscode,crcoderef,crcode,dstitle){
 						 'ccontents' : dstitle,
 						 'dmcode' : dmcode,
 						 'dscode' : dscode,
-						 'crcoderef' : <%=crcoderef%>
+						 'crcoderef' : crcoderef
 					 }
 				 };
 		}
 		
 		stompClient.send('/app/webproject/'+pcode, {},JSON.stringify(param));
 	}
-	//회의록
-	if(crcode!=<%=crcode%>){
-		alert('들어와죠');
+	
+	//회의록 올리기
+	 if(crcode!=<%=crcode%>){
 		var param={
 			 'message' : 'insert',
 			 'type' : 'chatcontentsvo',
@@ -623,12 +760,11 @@ function chattest(dmcode,dscode,crcoderef,crcode,dstitle){
 				 }
 			 };
 		stompClient.send('/app/webproject/'+pcode, {},JSON.stringify(param));
-		}
+		} 
 }
+
  //서버 전송
  function decitest(dscode,dsdate,dstitle,dsclose,crcode,tcode){
-	//이거는 서버로 보내는거임
-	//프로젝트채팅 창의 의사결정
 		var param={
 			 'message' : 'insert',
 			 'type' : 'decisionvo',
@@ -663,7 +799,6 @@ function chattest(dmcode,dscode,crcoderef,crcode,dstitle){
  
  //서버 전송
  function docutest(dmcode,dmtitle,dmcontents,dmdate,crcode,tcode,uid){
-	 alert('content.jsp docutest()');
 	 var param={
 			 'message' : 'insert',
 			 'type' : 'documentvo',

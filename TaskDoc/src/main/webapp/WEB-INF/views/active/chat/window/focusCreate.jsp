@@ -119,7 +119,7 @@ function focusOK(){
 			
 				opener.parent.focutest(response.crcode,response.crdate,response.crmode,response.fctitle,response.crclose,response.tcode,response.crcoderef);
 				
-				//채팅에 넣을것 -> chatcontents db 
+				//채팅에 넣을것 -> chatcontents db  dmcode,dscode,crcoderef,crcode,dstitle
 				opener.parent.chattest(0,0,response.crcode,response.crcode,response.fctitle);
 				window.close();
 				}

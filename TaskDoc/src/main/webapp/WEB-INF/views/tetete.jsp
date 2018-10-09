@@ -38,7 +38,22 @@
     <div class="percent">0%</div>
 </div>
 <div id="status"></div>
-
+	
+	
+   <div style="background-color: yellow; width:1000px;height:100px;border-radius:20px;">
+	   <div style="background-color: red; width:500px;">
+   			<div>
+   				<span>아이디(이름,팀장) : (상태메시지)</span>
+   			</div>
+   			
+   			<div>
+   				<span>내용</span>
+   			</div>
+   			<div>
+	   			<span>날짜</span>
+   			</div>
+ 	   </div>
+   </div>
 
 </body>
 
@@ -85,7 +100,6 @@ $(function() {
   } */
 
 </script>
-<<<<<<< HEAD
 <!--   <form action="/document/upload" enctype="multipart/form-data" method="POST">
       <input name="dmtitle" value="test"/>
       <input name="dmcontents" value="testtest"/>
@@ -101,13 +115,9 @@ $(function() {
       <input type="submit">
 <<<<<<< HEAD
    </form> -->
-=======
-   </form>
    
    <form action="/file/download/1" method="POST">
    	<input type="submit"/>
    </form>
->>>>>>> branch 'SQL_DTO' of https://github.com/dltlgus312/TaskDoc.git
-=======
->>>>>>> refs/heads/sql_dongho
+   
 </html>
