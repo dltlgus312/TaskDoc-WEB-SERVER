@@ -117,10 +117,10 @@ function focusOK(){
 			if (Object.keys(response).length>0) {
 				alert('채팅방 생성 완료! 채팅방 crcode값은'+response);
 			
-				opener.parent.focutest(response.fctitle,response.crcode,response.crmode,response.crclose,response.crcoderef,response.tcode,response.crdate);
+				opener.parent.focutest(response.crcode,response.crdate,response.crmode,response.fctitle,response.crclose,response.tcode,response.crcoderef);
 				
 				//채팅에 넣을것 -> chatcontents db 
-				opener.parent.chattest(0,0,response.crcoderef,response.crcode,response.fctitle);
+				opener.parent.chattest(0,0,response.crcode,response.crcode,response.fctitle);
 				window.close();
 				}
 			else if(response<0){

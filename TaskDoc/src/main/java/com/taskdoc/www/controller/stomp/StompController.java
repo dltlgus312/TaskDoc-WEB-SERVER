@@ -26,6 +26,8 @@ public class StompController {
 		return map;
 	}
 	
+	
+	//채팅 대화, 의사결정 생성, 회의록 생성, 자료 생성
 	@MessageMapping("/webproject/{pcode}")
 	@SendTo("/project/{pcode}")
 	public Map<String, Object> web(Map<String, Object> map) throws URISyntaxException {
