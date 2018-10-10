@@ -82,6 +82,31 @@ public class ChatRoomRest {
 		}
 	}
 	
+	@RequestMapping(value = "/multicreate", method = RequestMethod.POST)
+	public ChatRoomVO multicreate(@RequestBody Map<String, Object> map) {
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		List<UserInfoVO> userInfoVo = null;
+		try {
+			String json = mapper.writeValueAsString(map.get("userInfo"));
+			userInfoVo = mapper.readValue(json, new TypeReference<List<UserInfoVO>>() {});
+		} catch(IOException e){
+			e.printStackTrace();
+			return null;
+		}
+		
+		ChatRoomVO chatRoomVo = JsonMapper.mapToJson(map.get("chatRoom"), ChatRoomVO.class);
+		ProjectVO projectVo = JsonMapper.mapToJson(map.get("project"), ProjectVO.class);
+		
+		try {
+			return service.multicreate(chatRoomVo, userInfoVo, projectVo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public int update(@RequestBody ChatRoomVO chatRoomVo) {
 		return service.chatRoomUpdate(chatRoomVo);

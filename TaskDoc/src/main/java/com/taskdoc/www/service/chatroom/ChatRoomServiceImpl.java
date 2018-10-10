@@ -81,6 +81,25 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 		return roomDao.chatRoomView(chatRoomVo.getCrcode());
 		
 	}
+	
+	//포커스
+	@Override
+	@Transactional
+	public ChatRoomVO multicreate(ChatRoomVO chatRoomVo, List<UserInfoVO> userInfoVo, ProjectVO projectVo) throws Exception {
+		
+		roomDao.chatRoomInsert(chatRoomVo);
+		
+		for(UserInfoVO vo : userInfoVo) {
+			ChatRoomJoinVO chatRoomJoinVo = new ChatRoomJoinVO();
+			chatRoomJoinVo.setPcode(projectVo.getPcode());
+			chatRoomJoinVo.setCrcode(chatRoomVo.getCrcode());
+			chatRoomJoinVo.setUid(vo.getUid());
+			if(joinDao.chatRoomJoinInsert(chatRoomJoinVo)<0) return null;
+		}
+		
+		return chatRoomVo;
+		
+	}
 
 	@Override
 	public int chatRoomUpdate(ChatRoomVO chatRoomVo) {

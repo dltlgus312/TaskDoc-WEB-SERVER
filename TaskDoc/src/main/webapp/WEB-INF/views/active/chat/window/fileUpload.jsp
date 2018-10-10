@@ -33,7 +33,7 @@ if (id == "null") {
 
 </head>
 <body>
-	<form method="POST" enctype="multipart/form-data" id="fileUploadForm" action="/document/upload">
+	<form method="POST" enctype="multipart/form-data" id="fileUploadForm" action="/document/upload/doc">
 		<div class="container">
 			<div class="row">
 				<div class="modal-content">
@@ -105,35 +105,50 @@ $(function(){
 			alert("ERROR : " + e.statusText);
 		}
 	}); 
- 
-		var bar = $('.bar');
-	    var percent = $('.percent');
-	    var status = $('#status');
-		$("#crcode").val(<%=crcode%>);
-		$("#tcode").val(33);
-		$("#uid").val(id);
-		
-		$('form').ajaxForm({
-	        beforeSend: function() {
-	            status.empty();
-	            var percentVal = '0%';
-	            bar.width(percentVal);
-	            percent.html(percentVal);
-	        },
-	        uploadProgress: function(event, position, total, percentComplete) {
-	            var percentVal = percentComplete + '%';
-	            bar.width(percentVal);
-	            percent.html(percentVal);
-	        },
-	        complete: function() {
-	        	alert('파일업로드 완료');
-	        },
-	        error : function(e) {
-				alert("파일 업로드 ERROR : " + e.statusText);
-			}
-    });
 });
 
+	$("#btnSubmit").on("click",function(){
+			$("#crcode").val(<%=crcode%>);
+			$("#tcode").val($("#whattask option:selected").val());
+			$("#uid").val('<%=loginid%>');
+			var bar = $('.bar');
+		    var percent = $('.percent');
+		    var status = $('#status');
+			
+			$('form').ajaxForm({
+		        beforeSend: function() {
+		            status.empty();
+		            var percentVal = '0%';
+		            bar.width(percentVal);
+		            percent.html(percentVal);
+		        },
+		        uploadProgress: function(event, position, total, percentComplete) {
+		            var percentVal = percentComplete + '%';
+		            bar.width(percentVal);
+		            percent.html(percentVal);
+		        },
+		        complete: function(success) {
+		        	alert('파일업로드 완료');
+		        	var json=success.responseJSON;
+		        	var obj=new Object();
+					obj.dmcode=json.dmcode;
+					obj.dmtitle=json.dmtitle;
+					obj.dmcontents=json.dmcontents;
+					obj.dmdate=json.dmdate;
+					obj.crcode=json.crcode;
+					obj.tcode=json.tcode;
+					obj.uid=json.uid;
+					
+		        	opener.parent.docutest(obj.dmcode,obj.dmtitle,obj.dmcontents,obj.dmdate,obj.crcode,obj.tcode,obj.uid);
+					opener.parent.chattest(obj.dmcode,0,0,obj.crcode,obj.dmtitle);
+					window.close();
+					
+		        },
+		        error : function(e) {
+					alert("파일 업로드 ERROR : " + e.statusText);
+			}
+	    });
+	});
 function fileCancel(){
 	window.close();
 }

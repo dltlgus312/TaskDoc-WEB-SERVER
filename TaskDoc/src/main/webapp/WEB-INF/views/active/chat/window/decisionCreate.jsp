@@ -176,8 +176,10 @@
 						success : function(responseitem) {
 							if (responseitem.length>0) {
 								alert('의사결정 아이템 생성 완료! ' + responseitem);
+								alert(response.dscode);
+								alert(response.dstitle);
 								opener.parent.decitest(response.dscode,response.dsdate,response.dstitle,response.dsclose,response.crcode,response.tcode);
-								opener.parent.chattest(0,response.dscode,0);
+								opener.parent.chattest(0,response.dscode,0,response.crcode,response.dstitle);
 								window.close();
 							} else {
 								alert('Server or Client ERROR, 의사결정 아이템 생성 실패');

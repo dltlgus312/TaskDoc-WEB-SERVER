@@ -26,7 +26,9 @@ public class StompController {
 	public Map<String, Object> test(Map<String, Object> map) throws URISyntaxException {
 		return map;
 	}
-
+	
+	
+	//채팅 대화, 의사결정 생성, 회의록 생성, 자료 생성
 	@MessageMapping("/webproject/{pcode}")
 	@SendTo("/project/{pcode}")
 	public Map<String, Object> web(Map<String, Object> map) throws URISyntaxException {
@@ -40,14 +42,21 @@ public class StompController {
 				test.put("object", chatcontentsvo);
 				test.put("message", "insert");
 				test.put("type", "chatcontentsvo");
-				return test;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (map.get("type").equals("decisionvo")) {
-			return map;
 		}
-		return map;
+			else if(map.get("type").equals("decisionvo")){
+				return map;
+			}
+			else if(map.get("type").equals("chatroomvo")){
+				return map;
+			}
+			else if(map.get("type").equals("documentvo")){
+				return map;
+			}
+		return test;
 	}
+	
 }
 // message : insert, type : chatcontents, object : ChatContentsVO

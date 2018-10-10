@@ -12,12 +12,8 @@
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
 	String dscode=request.getParameter("dscode");
-	String tcode=request.getParameter("tcode");
-	String dstitle=request.getParameter("dstitle");
-	String dsdate=request.getParameter("dsdate");
-	String permission=request.getParameter("permission");
+	String permission=request.getParameter("chatpermission");
 %>
-
 <script type="text/javascript">
 
 var a='<%=permission%>';
@@ -36,7 +32,7 @@ $(document).ready(function(){
 </script>
 
 </head>
-<body>
+<body id="endview">
 	<div class="container">
 		<div class="row">
 			<div class="modal-content">
@@ -46,11 +42,11 @@ $(document).ready(function(){
 					<div class="modal-body">
 						<div class="form-group">
 							<div>
-								<label style="padding-top: 6px">제목 : <%=dstitle %></label>
+								<label style="padding-top: 6px">제목 : <span id="dstitle"></span></label>
 							</div>
 							
 							<div>
-								<label style="padding-top: 6px">날짜 : <%=dsdate %></label>
+								<label style="padding-top: 6px">날짜 : <span id="dsdate"></span></label>
 							</div>
 							
 							<div>
@@ -102,9 +98,37 @@ $(document).ready(function(){
 </body>
 <script type="text/javascript">
 	var decisionitemlist = [];
-	
+	var tcode=0;
 	var voterOk=false;
 	$(document).ready(function() {
+		$.ajax({
+			type : 'GET',
+			url : '/decision/'+<%=dscode%>,
+			success : function(response) {
+				if (Object.keys(response).length> 0){
+						if(response.dsclose==0){
+							$("#dstitle").text(response.dstitle);
+							$("#dsdate").text(response.dsdate);
+							tcode=response.tcode;
+						}
+						else{
+							$("#dstitle").text(response.dstitle + "(종료된 투표 입니다.)");
+							$("#dsdate").text(response.dsdate);
+							$("input[type=radio]").attr('disabled', true);
+							$("#decisionend").attr('disabled', true);
+							$("#choiceDecision").attr('disabled', true);
+						}
+				}
+				else{
+					alert('Server or Client ERROR, 의사결정 정보 조회 실패');
+				}
+			},
+			error : function(e) {
+				alert("ERROR : " + e.statusText);
+			}
+		});
+		
+		
 		/* 	종료는  type이 OWNER일 경우에만 가능
 		 * 		if( 1-1 의사결정항목 조회)
 		 *				if(1-3 본인이 투표를 했는지 안했는지 체크)
@@ -199,6 +223,7 @@ $(document).ready(function(){
 	     			if (response > 0) {
 	     				alert('의사결정 항목 선택 완료! ' + response);
 	     			 	window.close();
+						opener.parent.menubtn();
 	     			} else{
 	     				alert('Server or Client ERROR, 의사결정 항목 선택 실패');
 	     			}
@@ -218,8 +243,8 @@ $(document).ready(function(){
 	//의사 결정 종료
 	function decisionEnd(){
 		var param={
-			'tcode' : <%=tcode%>,
-			'dstitle' : '<%=dstitle%>',
+			'tcode' : tcode,
+			'dstitle' : $("#dstitle").text(),
 			'dsclose' : 1,
 			'dscode' : <%=dscode%>	
 		};
@@ -233,6 +258,7 @@ $(document).ready(function(){
 				if (response >0) {
 					alert('의사결정 종료 완료!');
 					window.close();
+					opener.parent.menubtn();
 				} else {
 					alert('Server or Client ERROR, 의사결정 종료 실패');
 				}
