@@ -53,9 +53,12 @@ if (id == "null") {
 									</select>
 								</div>
 								
-								<div>
+								<div class="bts">
 									<label style="margin-top :10px;">파일을 업로드 해주세요</label>
-									<input type="file" name="file">
+									<button onclick="addfile()" type="button" class="btn" style="background-color:#ed8151;color:white;border:0px;outline:none;">파일추가하기</button>
+								
+									<div id="filelist">
+									</div>
 								</div>
 								
 								<div class="progress" style="margin-top:10px;">
@@ -151,6 +154,23 @@ $(function(){
 	});
 function fileCancel(){
 	window.close();
+}
+
+var count=0;
+
+function addfile(){
+	count++;
+	if(count<=4){
+		var $div='<input id="f'+count+'"type="file" name="file"><button id="b'+count+'"onclick="fileDel('+count+')"type="button" class="btn"'
+		+'style="color:white;background-color:#ed8151;outline:none;border:0px;">삭제</button>';
+		$("#filelist").append($div);
+	}else alert('파일은 4개까지 추가가 가능합니다.');
+}
+
+function fileDel(code){
+	$("#f"+code).remove();
+	$("#b"+code).remove();
+	count--;
 }
 </script>
 
