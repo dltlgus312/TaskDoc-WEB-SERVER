@@ -577,7 +577,7 @@ function votercreate(code){
 function selectDecision(chatpermission, dscode)
 {
 	// 의사결정 고르기(종료 여부는 페이지 들어가서 확인)
-	window.open("/chat/decisionSelect?chatpermission="+chatpermission+"&dscode="+dscode, "", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+	window.open("/chat/decisionSelect?chatpermission="+chatpermission+"&dscode="+dscode+"&pcode="+pcode, "", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 }	
 //자료 업로드
 function filecreate(code){

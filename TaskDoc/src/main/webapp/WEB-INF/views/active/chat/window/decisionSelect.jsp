@@ -8,10 +8,14 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
 	String dscode=request.getParameter("dscode");
+	String pcode=request.getParameter("pcode");
 	String permission=request.getParameter("chatpermission");
 %>
 <script type="text/javascript">
@@ -28,7 +32,25 @@ $(document).ready(function(){
 		$("#decisionend").hide();
 		$("#decisiondel").hide();
 	}
-});
+	
+	var socket = new SockJS('/goStomp'); 
+	
+	stompClient = Stomp.over(socket);
+	
+	//채팅 append 여기서다함
+    stompClient.connect({}, function() { //접속
+         stompClient.subscribe('/project/'+pcode, function(msg) {
+        	var test=msg.body;
+        	var concat=JSON.parse(test);
+        	if(concat.object.dscode==parseInt(<%=dscode%>)){
+	        	$("#dstitle").text(concat.object.dstitle + "(종료된 투표 입니다.)");
+				$("input[type=radio]").attr('disabled', true);
+				$("#decisionend").attr('disabled', true);
+				$("#choiceDecision").attr('disabled', true);
+        	}
+         });
+    });
+ });
 </script>
 
 </head>
@@ -97,6 +119,7 @@ $(document).ready(function(){
 	</div>
 </body>
 <script type="text/javascript">
+	var pcode=parseInt(<%=pcode%>);
 	var decisionitemlist = [];
 	var tcode=0;
 	var voterOk=false;
@@ -211,7 +234,7 @@ $(document).ready(function(){
 	        dsicode=radioVal.split(',');
 	         
 	     	var param = {
-	     		'dsicode' : dsicode[0],
+	     		'dsicode' : parseInt(dsicode[0]),
 	     		'uid' : '<%=loginid%>'
 	     	};
 	     	$.ajax({
@@ -223,13 +246,12 @@ $(document).ready(function(){
 	     			if (response > 0) {
 	     				alert('의사결정 항목 선택 완료! ' + response);
 	     			 	window.close();
-						opener.parent.menubtn();
 	     			} else{
 	     				alert('Server or Client ERROR, 의사결정 항목 선택 실패');
 	     			}
 	     		},
 	     		error : function(e) {
-	     			alert("ERROR : " + e.statusText);
+	     			alert("ERROR ?? : " + e.statusText);
 	     		}
 	     	});
 		});	
@@ -246,7 +268,7 @@ $(document).ready(function(){
 			'tcode' : tcode,
 			'dstitle' : $("#dstitle").text(),
 			'dsclose' : 1,
-			'dscode' : <%=dscode%>	
+			'dscode' : parseInt(<%=dscode%>)
 		};
 		
 		$.ajax({
@@ -256,9 +278,18 @@ $(document).ready(function(){
 			data : JSON.stringify(param),
 			success : function(response) {
 				if (response >0) {
-					alert('의사결정 종료 완료!');
-					window.close();
-					opener.parent.menubtn();
+					alert('의사결정 종료 완료!'); //stomp
+					var stompmsg={
+							 'message' : 'update',
+							 'type' : 'decisionvo',
+							 'object' :{
+									 'tcode' : tcode,
+								 	 'dstitle' : $("#dstitle").text(),
+									 'dsclose' : 1,
+									 'dscode' : parseInt(<%=dscode%>)
+								 }
+							 };
+					stompClient.send('/app/project/'+pcode, {},JSON.stringify(stompmsg));
 				} else {
 					alert('Server or Client ERROR, 의사결정 종료 실패');
 				}
