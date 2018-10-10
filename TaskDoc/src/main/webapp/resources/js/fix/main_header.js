@@ -1,4 +1,3 @@
-var id='<%=loginid%>';
 var screenW = screen.availWidth;  // 스크린 가로사이즈
 var screenH = screen.availHeight; // 스크린 세로사이즈
 var popW = 600; // 띄울창의 가로사이즈

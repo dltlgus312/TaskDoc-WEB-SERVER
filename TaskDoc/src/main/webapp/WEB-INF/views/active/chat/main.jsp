@@ -75,3 +75,4 @@ $(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/chat/main.js"></script>
 </html>
+
