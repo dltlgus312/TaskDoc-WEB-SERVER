@@ -40,15 +40,14 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	public List<ChatRoomVO> roomList(int crcode) {
 		return roomDao.roomList(crcode);
 	}
-	
 
 	@Override
 	public ChatRoomVO chatRoomView(int crcode) {
 		// TODO Auto-generated method stub
 		return roomDao.chatRoomView(crcode);
 	}
-	
-	//채팅방생성
+
+	// 채팅방생성
 	@Override
 	@Transactional
 	public int chatRoomInsert(ChatRoomVO chatRoomVo, UserInfoVO userInfoVo, ProjectVO projectVo) throws Exception {
@@ -61,15 +60,14 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 		chatRoomJoinVo.setUid(userInfoVo.getUid());
 		return joinDao.chatRoomJoinInsert(chatRoomJoinVo);
 	}
-	
-	//채팅방생성
+
 	@Override
-	@Transactional
-	public ChatRoomVO chatRoomInsert(ChatRoomVO chatRoomVo, List<UserInfoVO> userInfoVo, ProjectVO projectVo) throws Exception {
-		
+	public int chatRoomInsert(ChatRoomVO chatRoomVo, List<UserInfoVO> userInfoVo, ProjectVO projectVo)
+			throws Exception {
+		// TODO Auto-generated method stub
 		roomDao.chatRoomInsert(chatRoomVo);
 
-		for(UserInfoVO vo : userInfoVo) {
+		for (UserInfoVO vo : userInfoVo) {
 			ChatRoomJoinVO chatRoomJoinVo = new ChatRoomJoinVO();
 			chatRoomJoinVo.setPcode(projectVo.getPcode());
 			chatRoomJoinVo.setCrcode(chatRoomVo.getCrcode());
@@ -77,28 +75,29 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
 			joinDao.chatRoomJoinInsert(chatRoomJoinVo);
 		}
-		
-		return roomDao.chatRoomView(chatRoomVo.getCrcode());
-		
+
+		return chatRoomVo.getCrcode();
 	}
-	
-	//포커스
+
+	// 포커스
 	@Override
 	@Transactional
-	public ChatRoomVO multicreate(ChatRoomVO chatRoomVo, List<UserInfoVO> userInfoVo, ProjectVO projectVo) throws Exception {
-		
+	public ChatRoomVO multicreate(ChatRoomVO chatRoomVo, List<UserInfoVO> userInfoVo, ProjectVO projectVo)
+			throws Exception {
+
 		roomDao.chatRoomInsert(chatRoomVo);
-		
-		for(UserInfoVO vo : userInfoVo) {
+
+		for (UserInfoVO vo : userInfoVo) {
 			ChatRoomJoinVO chatRoomJoinVo = new ChatRoomJoinVO();
 			chatRoomJoinVo.setPcode(projectVo.getPcode());
 			chatRoomJoinVo.setCrcode(chatRoomVo.getCrcode());
 			chatRoomJoinVo.setUid(vo.getUid());
-			if(joinDao.chatRoomJoinInsert(chatRoomJoinVo)<0) return null;
+
+			joinDao.chatRoomJoinInsert(chatRoomJoinVo);
 		}
-		
+
 		return chatRoomVo;
-		
+
 	}
 
 	@Override
@@ -111,6 +110,5 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 		// TODO Auto-generated method stub
 		return roomDao.chatRoomDelete(crcode);
 	}
-
 
 }

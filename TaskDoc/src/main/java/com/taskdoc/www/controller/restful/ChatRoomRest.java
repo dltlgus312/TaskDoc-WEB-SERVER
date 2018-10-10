@@ -58,29 +58,6 @@ public class ChatRoomRest {
 		}
 	}
 	
-	@RequestMapping(value = "/multi", method = RequestMethod.POST)
-	public ChatRoomVO insertMulti(@RequestBody Map<String, Object> map) {
-		
-		ObjectMapper mapper = new ObjectMapper();
-		
-		List<UserInfoVO> userInfoVo = null;
-		try {
-			String json = mapper.writeValueAsString(map.get("userInfo"));
-			userInfoVo = mapper.readValue(json, new TypeReference<List<UserInfoVO>>() {});
-		} catch(IOException e){
-			e.printStackTrace();
-		}
-		
-		ChatRoomVO chatRoomVo = JsonMapper.mapToJson(map.get("chatRoom"), ChatRoomVO.class);
-		ProjectVO projectVo = JsonMapper.mapToJson(map.get("project"), ProjectVO.class);
-		
-		try {
-			return service.chatRoomInsert(chatRoomVo, userInfoVo, projectVo);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
 	
 	@RequestMapping(value = "/multicreate", method = RequestMethod.POST)
 	public ChatRoomVO multicreate(@RequestBody Map<String, Object> map) {
