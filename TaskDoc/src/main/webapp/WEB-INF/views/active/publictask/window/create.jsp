@@ -12,6 +12,9 @@
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
+<script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 	
 <%
 	String loginid = "";
@@ -117,6 +120,10 @@ $(function() {
 	$('#pedate').datepicker("option", "onClose", function(selectDate) {
 	$("#psdate").datepicker("option", "maxDate", selectDate);
 	});
+	
+	
+	var socket = new SockJS('/goStomp'); 
+	stompClient = Stomp.over(socket);
 });
 
 
@@ -149,8 +156,25 @@ function ptCreate(){
 		success : function(response) {
 			if (response != -1) {
 				alert('공용업무 생성 완료! 프로젝트의 공용업무의 id값은' + response);
-				opener.location.reload();
-				window.close();
+				
+				//stomp 서버전송
+				var peram={
+						 'message' : 'insert',
+						 'type' : 'publictaskvo',
+						 'object' :{
+								 'ttitle' : $("#pttitle").val(),
+								 'tcolor' :  mycolor,
+							 	 'tsdate' : $("#psdate").val(),
+								 'tedate' : $("#pedate").val(),
+								 'tpercent' : 0,
+								 'trefference' : response,
+								 'pcode' : pcode,
+								 'tcode' : response
+							}
+					 };
+					stompClient.send('/app/project/'+pcode, {},JSON.stringify(peram));
+					window.close();
+					
 			} else if (response == -1) {
 				alert('Server or Client ERROR, 공용업무 생성 실패');
 			}
