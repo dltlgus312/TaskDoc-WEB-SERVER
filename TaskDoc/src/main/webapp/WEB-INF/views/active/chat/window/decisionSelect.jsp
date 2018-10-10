@@ -309,7 +309,6 @@ $(document).ready(function(){
 				if(response>0){
 					alert('의사결정 삭제 성공');
 					window.close();
-					opener.parent.menubtn();
 				}
 				else{
 					alert('Server or Client ERROR, 의사결정 삭제 실패');

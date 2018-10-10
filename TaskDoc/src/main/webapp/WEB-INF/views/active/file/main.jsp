@@ -19,6 +19,7 @@ var id='<%=loginid%>';
 	}
 //pro_header.jsp , pro_header.js 에서 <script>태그 안에서 변수 사용가능하다.	
 var pcode=<%=pcode%>;
+alert(pcode);
 $(function(){
 	$(".files_hover").css('color','#ed8151').css('border-bottom','1px solid #ed8151');
 	$(".chat_hover").css('color','#6d6d6d').css('border-bottom','none');
@@ -93,21 +94,21 @@ $(document).ready(function() {
 //해당 업무에 대한 다운받을 수 있는 자료를 띄우는 페이지 window.open
 function gofileView(tcode){
 	event.stopPropagation();
-	var screenW = screen.availWidth;  // 스크린 가로사이즈
-	var screenH = screen.availHeight; // 스크린 세로사이즈
-	var popW = 600; // 띄울창의 가로사이즈
-	var popH = 350; // 띄울창의 세로사이즈
-	var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
-	var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
-	window.open("/project/file/downloadForm?tcode="+tcode,"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+	var screenW = screen.availWidth;  
+	var screenH = screen.availHeight;
+	var popW = 600; 
+	var popH = 350; 
+	var posL=( screenW-popW ) / 2;   
+	var posT=( screenH-popH ) / 2;  
+	window.open("/project/file/downloadForm?tcode="+tcode+"&pcode="+pcode,"",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 }
 
 //하위 업무 띄우려고 page load
 function downtaskView(tcode){
 	if(confirm('하위 업무의 파일을 보시겠습니까?')==true){
-	 $("#publictaskList").load("/project/file/downview?tcode="+tcode);
-	 $btntag=' <button class="btn" type="button" onclick="goroot('+pcode+')" style="outline:none;border:0px; background-color:#ed8151;color:white;">최상위 업무로 이동</button>';
-	 $("#rootbtn").append($btntag);
+		 $("#publictaskList").load("/project/file/downview?tcode="+tcode);
+		 $btntag=' <button class="btn" type="button" onclick="goroot('+pcode+')" style="outline:none;border:0px; background-color:#ed8151;color:white;">최상위 업무로 이동</button>';
+		 $("#rootbtn").append($btntag);
 	 }
 	else return;
 }
