@@ -136,13 +136,13 @@ public class DocumentServiceImpl implements DocumentService {
 
 	@Override
 	@Transactional
-	public int documentCopy(DocumentVO documentVo) {
+	public DocumentVO documentCopy(DocumentVO documentVo) {
 		// TODO Auto-generated method stub
 		int targetDmcode = documentVo.getDmcode();
 		
 		documentVo.setDmcode(0);
 		documentVo.setDmdate(null);
-		documentVo.setDmtitle(documentVo.getDmtitle() + "-COPY");
+		documentVo.setDmtitle(documentVo.getDmtitle() + "- OUTPUT");
 		
 		int dmcode = dao.documentInsert(documentVo);
 		
@@ -152,7 +152,7 @@ public class DocumentServiceImpl implements DocumentService {
 			vo.setDmcode(dmcode);
 			fileService.fileCopy(vo, url);
 		}
-		return dmcode;
+		return dao.documentView(dmcode);
 	}
 
 

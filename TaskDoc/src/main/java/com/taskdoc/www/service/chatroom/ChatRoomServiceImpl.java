@@ -65,7 +65,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	//채팅방생성
 	@Override
 	@Transactional
-	public int chatRoomInsert(ChatRoomVO chatRoomVo, List<UserInfoVO> userInfoVo, ProjectVO projectVo) throws Exception {
+	public ChatRoomVO chatRoomInsert(ChatRoomVO chatRoomVo, List<UserInfoVO> userInfoVo, ProjectVO projectVo) throws Exception {
 		
 		roomDao.chatRoomInsert(chatRoomVo);
 
@@ -74,10 +74,11 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 			chatRoomJoinVo.setPcode(projectVo.getPcode());
 			chatRoomJoinVo.setCrcode(chatRoomVo.getCrcode());
 			chatRoomJoinVo.setUid(vo.getUid());
-			if(joinDao.chatRoomJoinInsert(chatRoomJoinVo)<0) return -1;
+
+			joinDao.chatRoomJoinInsert(chatRoomJoinVo);
 		}
 		
-		return chatRoomVo.getCrcode();
+		return roomDao.chatRoomView(chatRoomVo.getCrcode());
 		
 	}
 

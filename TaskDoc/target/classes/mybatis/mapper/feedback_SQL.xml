@@ -10,16 +10,24 @@
 		SELECT * FROM feedback WHERE dmcode=#{dmcode} ORDER BY fbcode ASC
 	</select>
 
-	<insert id="insert" parameterType="feedback" useGeneratedKeys="true" keyProperty="fbcode">
-		INSERT INTO feedback VALUES(NULL, #{dmcode}, #{uid}, #{fbcontents}, NOW())
+	<select id="view" resultType="feedback" parameterType="Integer">
+		SELECT * FROM feedback WHERE fbcode=#{fbcode}
+	</select>
+
+	<insert id="insert" parameterType="feedback"
+		useGeneratedKeys="true" keyProperty="fbcode">
+		INSERT INTO feedback VALUES(NULL,
+		#{dmcode}, #{uid}, #{fbcontents}, NOW())
 	</insert>
 
 	<update id="update" parameterType="feedback">
-		UPDATE feedback SET fbcontents=#{fbcontents} WHERE fbcode=#{fbcode}
+		UPDATE feedback SET
+		fbcontents=#{fbcontents} WHERE fbcode=#{fbcode}
 	</update>
 
 	<delete id="delete" parameterType="Integer">
-		DELETE FROM feedback WHERE fbcode=#{fbcode}
+		DELETE FROM feedback WHERE
+		fbcode=#{fbcode}
 	</delete>
-	
+
 </mapper>

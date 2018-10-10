@@ -21,7 +21,7 @@ public interface DocumentService {
 	public int fileUpload(MultipartFile[] multipartFile, DocumentVO documentVo);
 	public DocumentVO fileUploadDoc(MultipartFile[] multipartFile, DocumentVO documentVo);
 	public int documentMove(DocumentVO documentVo);
-	public int documentCopy(DocumentVO documentVo);
+	public DocumentVO documentCopy(DocumentVO documentVo);
 	public int documentUpdate(DocumentVO documentVo);
 	public int documentDelete(int dmcode);
 }

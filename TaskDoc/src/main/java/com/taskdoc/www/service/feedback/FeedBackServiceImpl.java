@@ -21,9 +21,11 @@ public class FeedBackServiceImpl implements FeedBackService{
 	}
 
 	@Override
-	public int feedBackInsert(FeedBackVO feedBackVo) {
+	public FeedBackVO feedBackInsert(FeedBackVO feedBackVo) {
 		// TODO Auto-generated method stub
-		return dao.feedBackInsert(feedBackVo);
+		dao.feedBackInsert(feedBackVo);
+		
+		return dao.feedBackView(feedBackVo.getFbcode());
 	}
 
 	@Override

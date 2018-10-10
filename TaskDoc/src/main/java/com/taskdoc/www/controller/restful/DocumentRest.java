@@ -68,7 +68,7 @@ public class DocumentRest {
 	}
 	
 	@RequestMapping(value = "/copy", method = RequestMethod.PUT)
-	public int copy(@RequestBody DocumentVO documentVo) {
+	public DocumentVO copy(@RequestBody DocumentVO documentVo) {
 		return service.documentCopy(documentVo);
 	}
 	

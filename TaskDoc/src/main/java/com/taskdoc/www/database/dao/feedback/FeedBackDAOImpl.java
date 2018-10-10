@@ -15,6 +15,7 @@ public class FeedBackDAOImpl implements FeedBackDAO {
 
 	private final String NAMESPACE = "feedback_SQL.";
 	private final String LIST = "list";
+	private final String VIEW = "view";
 	private final String INSERT = "insert";
 	private final String UPDATE = "update";
 	private final String DELETE = "delete";
@@ -42,6 +43,12 @@ public class FeedBackDAOImpl implements FeedBackDAO {
 	public int feedBackDelete(int fbcode) {
 		// TODO Auto-generated method stub
 		return sqlSession.delete(NAMESPACE + DELETE, fbcode);
+	}
+
+	@Override
+	public FeedBackVO feedBackView(int fbcode) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAMESPACE + VIEW, fbcode);
 	}
 
 }

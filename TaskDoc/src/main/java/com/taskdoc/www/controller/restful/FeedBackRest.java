@@ -25,7 +25,7 @@ public class FeedBackRest {
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public int insert(@RequestBody FeedBackVO feedBackVo){
+	public FeedBackVO insert(@RequestBody FeedBackVO feedBackVo){
 		return service.feedBackInsert(feedBackVo);
 	}
 	

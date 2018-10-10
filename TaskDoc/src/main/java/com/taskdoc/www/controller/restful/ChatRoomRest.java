@@ -59,7 +59,7 @@ public class ChatRoomRest {
 	}
 	
 	@RequestMapping(value = "/multi", method = RequestMethod.POST)
-	public int insertMulti(@RequestBody Map<String, Object> map) {
+	public ChatRoomVO insertMulti(@RequestBody Map<String, Object> map) {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		
@@ -69,7 +69,6 @@ public class ChatRoomRest {
 			userInfoVo = mapper.readValue(json, new TypeReference<List<UserInfoVO>>() {});
 		} catch(IOException e){
 			e.printStackTrace();
-			return -1;
 		}
 		
 		ChatRoomVO chatRoomVo = JsonMapper.mapToJson(map.get("chatRoom"), ChatRoomVO.class);
@@ -79,7 +78,7 @@ public class ChatRoomRest {
 			return service.chatRoomInsert(chatRoomVo, userInfoVo, projectVo);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return -1;
+			return null;
 		}
 	}
 	
