@@ -60,7 +60,8 @@ $(function(){
 					<div id="publictaskWRAP" style="width: 100%; /* height: 93%; */ padding-left:15px;">
 						<div id="publictaskTOP" class="bts" style="margin-bottom:30px;">
 							<button id="ptcreatebtn"  class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="ptcreate(<%=pcode%>)">공용업무 생성하기</button>
-							<button id="ptcreatebtn"  class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="methodptcreate()">방법론으로 공용업무 생성하기</button>
+							<button id="methodptcreatebtn"class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="methodptcreate()">방법론으로 공용업무 생성하기</button>
+							<button id="mymethodptcreatebtn"class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="mymethodptcreate()">내 방법론으로 공용업무 생성하기</button>
 						</div>	
 						<div id="publictaskBOTTOM">
 						
@@ -179,6 +180,8 @@ $(document).ready(function() {
 								+'<div><div><span>시작 날짜 : '+concat.object.tsdate+'</span></div><div><span>종료 날짜 : '+concat.object.tedate+'</span>'
 								+'<div class="bts"><button style="border:0px;outline:none;color:white;background-color:#ed8151; margin-right:5px; font-size:12px;" class="btn" onclick= "privateCreate(\''+concat.object.tsdate+ ',' +concat.object.tedate+'\','+concat.object.tcode+')" type="button">개인업무생성</button></div><div></div></div></div></div>';
 								$("#ptcreatebtn").hide();
+								$("#methodptcreatebtn").hide();
+								$("#mymethodptcreatebtn").hide();
 	        			 }
 	        			 $("#publictaskBOTTOM").append($append);
 							
@@ -284,6 +287,8 @@ $(document).ready(function() {
 	event.stopPropagation();
 	 if(confirm('하위 업무로 이동하시겠습니까?')==true){
 		 $("#ptcreatebtn").hide();
+		 $("#methodptcreatebtn").hide();
+		 $("#mymethodptcreatebtn").hide();
 		 $("#publictaskBOTTOM").load("/project/publicTask/downTask?tcode="+tcode); 
 		 $btntag='<button class="btn" type="button" onclick="goroottask('+pcode+')" style="background-color:#ed8151; border:0;outline:none; color:white;margin-right:5px;">최상위 공용업무로 이동</button>'
 		 +'<button class="btn" type="button" onclick="gotasklist('+pcode+')" style="background-color:#ed8151; border:0;outline:none; color:white;">공용업무 리스트로 이동</button>';
