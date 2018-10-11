@@ -61,6 +61,10 @@ public class User {
 	public String downloadForm() {
 		return "/user/downloadForm";
 	}
+	@RequestMapping(value = "/methodlist", method = RequestMethod.GET)
+	public String methodlist() {
+		return "/user/methodlist";
+	}
 	
 
 }

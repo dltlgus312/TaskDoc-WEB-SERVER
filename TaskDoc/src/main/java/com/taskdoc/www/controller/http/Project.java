@@ -119,6 +119,18 @@ public class Project {
 		return "/active/publictask/window/edit";
 	}
 	
+	//METHOD로 공용 업무 생성하기
+	@RequestMapping(value = "/method/publicTask/create", method = RequestMethod.GET)
+	public String methodtaskcreate() {
+		return "/active/publictask/window/method/create";
+	}
+
+	//METHOD의 공용 업무 보기
+	@RequestMapping(value = "/method/publicTask/view", method = RequestMethod.GET)
+	public String methodtaskview() {
+		return "/active/publictask/window/method/view";
+	}
+	
 	//개인업무 메인
 	@RequestMapping(value = "/privateTask/main", method = RequestMethod.GET)
 	public String privateTaskMain() {

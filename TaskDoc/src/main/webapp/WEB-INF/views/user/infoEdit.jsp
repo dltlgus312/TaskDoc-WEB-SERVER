@@ -85,6 +85,8 @@ var id='<%=loginid%>';
 									class="btn btn-success" onclick="cancel()">Cancel</button>
 								<button type="button" class="btn btn-success" onclick="edit()"
 									style="margin: auto 0; margin-left: 6px; float: right; margin-right: 7px; background-color: #ed8151; border: 0; outline: none;">Edit</button>
+								<button type="button" class="btn btn-success" onclick="gomymethodlist()"
+									style="margin: auto 0; margin-left: 6px; float: right; margin-right: 7px; background-color: #ed8151; border: 0; outline: none;">내 방법론 리스트 보기</button>
 							</div>
 						</div>
 					</div>
@@ -213,6 +215,16 @@ function userdel(){
 }
 function cancel() {
 	location.href = '/project/main';
+}
+
+function gomymethodlist(){
+	var screenW = screen.availWidth;  
+	var screenH = screen.availHeight;
+	var popW = 600; 
+	var popH = 250; 
+	var posL=( screenW-popW ) / 2;   
+	var posT=( screenH-popH ) / 2;  
+	window.open("/user/methodlist","",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 }
 </script>
 </html>

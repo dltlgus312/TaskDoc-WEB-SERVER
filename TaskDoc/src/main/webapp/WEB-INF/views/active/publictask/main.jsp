@@ -60,6 +60,7 @@ $(function(){
 					<div id="publictaskWRAP" style="width: 100%; /* height: 93%; */ padding-left:15px;">
 						<div id="publictaskTOP" class="bts" style="margin-bottom:30px;">
 							<button id="ptcreatebtn"  class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="ptcreate(<%=pcode%>)">공용업무 생성하기</button>
+							<button id="ptcreatebtn"  class="btn" type="button" style="background-color:#ed8151; color:white;" onclick="methodptcreate()">방법론으로 공용업무 생성하기</button>
 						</div>	
 						<div id="publictaskBOTTOM">
 						
@@ -171,7 +172,7 @@ $(document).ready(function() {
 	        					var $append = '<div id="publictask'+concat.object.tcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
 								+'<div onclick="godowntask('+concat.object.tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+concat.object.tcolor+';"><span>'+ 11 +'. : '+concat.object.ttitle+','+concat.object.tcode+'</span></div>'
 								+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
-								+'<div style="margin-left:20px;" id="chart'+concat.object.tcode+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'">'
+								+'<div style="margin-left:20px;" id="chart'+concat.object.tcode+'" class="progress-pie-chart" data-percent="'+concat.object.tpercent+'">'
 								+'<div class="ppc-progress">'
 								+'<div class="ppc-progress-fill" id="fill'+concat.object.tcode+'"></div></div>'
 								+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ concat.object.tcode +'">%</span></div></div></div>'
@@ -293,8 +294,8 @@ $(document).ready(function() {
  //개인 업무 생성
  function privateCreate(date,tcode){
 	 event.stopPropagation();
-	 var popW = 500; // 띄울창의 가로사이즈
-	 var popH = 400; // 띄울창의 세로사이즈
+	 var popW = 500; 
+	 var popH = 400; 
 	 var list={};
 	 list = date.split(',');
 	 
@@ -304,13 +305,21 @@ $(document).ready(function() {
  //하위 업무 생성
  function downtaskcreate(date,tcode){
 	 event.stopPropagation();
-	 var popW = 500; // 띄울창의 가로사이즈
-	 var popH = 400; // 띄울창의 세로사이즈
+	 var popW = 500; 
+	 var popH = 400; 
 	 var list={};
 	 list=date.split(',');
 	 alert(list);
 	 window.open("/project/publicTask/downTaskCreate?tsdate="+list[0]+"&tedate="+list[1]+"&tcode="+tcode+"&pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
  	}
+ 
+ //저장된 방법론으로 공용업무 생성하기
+ function methodptcreate(){
+	 var popW = 500; 
+	 var popH = 400; 
+	 window.open("/project/method/publicTask/create?tsdate="+fixpsdate+"&tedate="+fixpedate+"&pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+	 
+ }
   
 </script>
 

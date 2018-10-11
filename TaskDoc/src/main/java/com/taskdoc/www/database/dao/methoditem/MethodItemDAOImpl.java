@@ -19,7 +19,6 @@ public class MethodItemDAOImpl implements MethodItemDAO {
 	
 	@Override
 	public List<MethodItemVO> methodItemList(int mcode) {
-		// TODO Auto-generated method stub
 		return sql.selectList(NAMESPACE + LIST, mcode);
 	}
 }

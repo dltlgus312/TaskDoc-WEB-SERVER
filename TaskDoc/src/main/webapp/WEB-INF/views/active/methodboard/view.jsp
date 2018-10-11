@@ -77,6 +77,9 @@ var id='<%=loginid%>';
 								onclick="promethodInfo()"
 								style="margin-left: 6px; float: left; margin-right: 7px; background-color: #ed8151; border: 0; outline: none; margin-top: 5px;">방법론
 								상세보기</button>
+							<button type="button" class="btn btn-success"
+								onclick="getmethod(<%=mbcode %>)"
+								style="margin-left: 6px; float: left; margin-right: 7px; background-color: #ed8151; border: 0; outline: none; margin-top: 5px;">방법론 저장하기</button>
 
 						</div>
 
@@ -160,6 +163,34 @@ var pcode;
 	//프로젝트의 방법론보기
 	function promethodInfo() {
 
+	}
+	
+	//중복 오류 잡기..
+	function getmethod(mbcode){
+		var mltitle=prompt('등록할 방법론리스트의 제목을 입력해주세요','')
+		var param={
+			'uid' : '<%=loginid%>',
+			'mbcode' : mbcode,
+			'mltitle' : 'mltitle'
+		};
+		
+		$.ajax({
+			type : 'POST',
+			url : '/methodlist',
+			contentType : 'application/json',
+			data : JSON.stringify(param),
+			success : function(response) {
+				if (response > 0) {
+					alert('방법론 등록하기 성공! id값은' + response);
+					window.close();
+				} else  {
+					alert('Server or Client ERROR, 방법론 등록하기 실패');
+				}
+			},
+			error : function(e) {
+				alert("ERROR : " + e.statusText);
+			}
+		});
 	}
 </script>
 </html>
