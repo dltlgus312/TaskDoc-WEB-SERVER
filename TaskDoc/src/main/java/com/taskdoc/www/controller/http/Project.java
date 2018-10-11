@@ -107,6 +107,11 @@ public class Project {
 	public String filecreate() {
 		return "/active/file/create";
 	}
+	//하위 폴더 생성
+	@RequestMapping(value = "/folder/downcreate", method = RequestMethod.GET)
+	public String downfoldercreate() {
+		return "/active/file/downfoldercreate";
+	}
 	
 	//공용업무 수정
 	@RequestMapping(value = "/publicTask/edit", method = RequestMethod.GET)

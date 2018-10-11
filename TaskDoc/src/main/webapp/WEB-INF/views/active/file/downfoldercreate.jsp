@@ -15,6 +15,7 @@
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
 	String pcode=request.getParameter("pcode");
+	String tcode=request.getParameter("tcode");
 %>
 
 <script type="text/javascript">
@@ -72,7 +73,7 @@ function ptCreate(){
 	//공용 업무 생성 
 	var param = {
 		'ttitle' : $("#pttitle").val(),
-		'trefference' : null,
+		'trefference' : <%=tcode%>,
 		'pcode' : pcode
 	};
 	$.ajax({
@@ -89,9 +90,9 @@ function ptCreate(){
 						 'type' : 'publictaskvo',
 						 'object' :{
 								 'ttitle' : $("#pttitle").val(),
-								 'trefference' : null,
+								 'trefference' : <%=tcode%>,
 								 'tcode' : response,
-								 'pcode' : parseInt(pcode)
+								 'pcode' : pcode
 							}
 					 };
 					stompClient.send('/app/project/'+pcode, {},JSON.stringify(peram));
