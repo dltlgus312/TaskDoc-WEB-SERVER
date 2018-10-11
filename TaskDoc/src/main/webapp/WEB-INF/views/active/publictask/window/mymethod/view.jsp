@@ -5,7 +5,7 @@
 
 <head>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script  src="${pageContext.request.contextPath }/resources/js/task/jscolor.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/task/jscolor.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -22,7 +22,7 @@
 	String pcode=request.getParameter("pcode");
 	String tsdate=request.getParameter("tsdate");
 	String tedate=request.getParameter("tedate");
-	String mcode=request.getParameter("mcode");
+	String mbcode=request.getParameter("tedate");
 %>
 
 <script type="text/javascript">
@@ -33,7 +33,7 @@ var id='<%=loginid%>';
 	}
 	
 var pcode=<%=pcode%>;
-var mcode=<%=mcode%>;
+var mbcode=<%=pcode%>;
 </script>
 </head>
 
@@ -42,8 +42,8 @@ var mcode=<%=mcode%>;
 		<div class="row">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">방법론을 이용한 공용 업무 생성을 환영합니다.</h4>
-					<button onclick="gomethodlists()" type="button" class="btn" style="outline:none;color:white;background-color:#ed8151;border:0px;">방법론 리스트로 이동하기</button>
+					<h4 class="modal-title">나의 방법론을 이용한 공용 업무 생성을 환영합니다.</h4>
+					<button onclick="gomymethodlist()" type="button" class="btn" style="outline:none;color:white;background-color:#ed8151;border:0px;">내 방법론 리스트로 이동하기</button>
 				</div>
 				<div class="modal-body">
 				 	<div class="form-group">
@@ -51,16 +51,6 @@ var mcode=<%=mcode%>;
 					</div>
 					
 					<div id="methodlistss">
-						<input id="pttitle" type="text"	class="form-control" maxlength="20">
-						<p style="margin-top:20px;"> 공용업무 색상: <input class="jscolor" onchange="update(this.jscolor)" value="" style="width:60px;"> </p>	 
-							
-						<div>
-								시작날짜: <input class="form-control" type="text" id="psdate">
-						</div>
-							
-						<div>
-								종료날짜: <input class="form-control" type="text" id="pedate">
-						</div>
 					</div>  
 					
 					<div class="modal-footer">
@@ -86,19 +76,107 @@ var mcode=<%=mcode%>;
 var mycolor="";
 var fixpsdate='<%=tsdate%>';
 var fixpedate='<%=tedate%>';
+//misequence를 담을 배열생성
+var siquence=[];
+
 $(function() {
+	$.datepicker.regional['ko'] = {
+			closeText : '닫기',
+			prevText : '이전달',
+			nextText : '다음달',
+			currentText : '오늘',
+			monthNames : [ '1월(JAN)', '2월(FEB)', '3월(MAR)', '4월(APR)',
+					'5월(MAY)', '6월(JUN)', '7월(JUL)', '8월(AUG)', '9월(SEP)',
+					'10월(OCT)', '11월(NOV)', '12월(DEC)' ],
+			monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월',
+					'9월', '10월', '11월', '12월' ],
+			dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
+			dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
+			dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+			weekHeader : 'Wk',
+			dateFormat : 'yy-mm-dd',
+			firstDay : 0,
+			isRTL : false,
+			showMonthAfterYear : true,
+			yearSuffix : '',
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : false,
+			yearRange : 'c-99:c+99',
+			minDate : fixpsdate,
+			maxDate : fixpedate 
+			};
+	$.datepicker.setDefaults($.datepicker.regional['ko']);
+	
+	
 	// method item list 불러오기
 	$.ajax({
 		type : 'GET',
-		url : '/methoditem/'+mcode,
+		url : '/publictask/'+pcode,
 		success : function(response) {
 			if (response.length > 0) {
-				alert('method item list 조회 완료');
+				alert('public list 조회 완료');
 				for(var i=0;i<response.length;i++){
-					$div='<button type="button" class="btn" style="outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+response[i].misequence+'. '+response[i].mititle+'</button>';
-					$(".form-group").append($div);
+					if(response[i].tsdate!=null && response[i].tedate!=null){
+						$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+response[i].tcode+'. '+response[i].ttitle+'</button>'
+						+'<input placeholder="공용 업무 제목을 입력해주세요." id="pttitle'+response[i].tcode+'" type="text"	class="form-control" maxlength="20">'
+						+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+response[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+response[i].misequence+')" value="" style="width:60px;"> </p>'
+						+'<div>시작날짜: <input class="hasDatepicker" type="text" name="cAcqDate" id="psdate'+response[i].tcode+'"><div>'
+						+'<div>종료날짜: <input class="hasDatepicker" type="text" name="cAceDate" id="pedate'+response[i].tcode+'"></div>';
+						$("#methodlistss").append($div);
+						$("#psdate"+response[i].tcode).removeClass('hasDatepicker').datepicker();
+						$("#pedate"+response[i].tcode).removeClass('hasDatepicker').datepicker();
+						$("#psdate"+response[i].tcode).datepicker();
+						
+						$("#psdate"+response[i].tcode).datepicker("option", "onClose", function(selectDate) {
+							if(selectDate != "") {
+								$("#pedate"+this.id.substr(length-1)).datepicker("option", "minDate", selectDate);
+							}
+						}); 
+					
+						$("#pedate"+response[i].tcode).datepicker();
+						
+						$("#pedate"+response[i].tcode).datepicker("option", "onClose", function(selectDate) {
+							if(selectDate != "") {
+								$("#psdate"+this.id.substr(length-1)).datepicker("option", "maxDate", selectDate);
+							}
+						}); 
+						
+						jscolor.installByClassName("jscolor"); 
+					}
 				}
-			} else  {
+				/* for(var i=0;i<response.length;i++){
+					siquence.push(response[i].misequence);
+					$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+response[i].misequence+'. '+response[i].mititle+'</button>'
+					+'<input placeholder="공용 업무 제목을 입력해주세요." id="pttitle'+response[i].misequence+'" type="text"	class="form-control" maxlength="20">'
+					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+response[i].misequence+'"class="jscolor" onchange="update(this.jscolor,'+response[i].misequence+')" value="" style="width:60px;"> </p>'
+					+'<div>시작날짜: <input class="hasDatepicker" type="text" name="cAcqDate" id="psdate'+response[i].misequence+'"><div>'
+					+'<div>종료날짜: <input class="hasDatepicker" type="text" name="cAceDate" id="pedate'+response[i].misequence+'"></div>';
+					$("#methodlistss").append($div);
+					
+					$("#psdate"+response[i].misequence).removeClass('hasDatepicker').datepicker();
+					$("#pedate"+response[i].misequence).removeClass('hasDatepicker').datepicker();
+					
+					
+					$("#psdate"+response[i].misequence).datepicker();
+					
+					$("#psdate"+response[i].misequence).datepicker("option", "onClose", function(selectDate) {
+						if(selectDate != "") {
+							$("#pedate"+this.id.substr(length-1)).datepicker("option", "minDate", selectDate);
+						}
+					}); 
+				
+					$("#pedate"+response[i].misequence).datepicker();
+					
+					$("#pedate"+response[i].misequence).datepicker("option", "onClose", function(selectDate) {
+						if(selectDate != "") {
+							$("#psdate"+this.id.substr(length-1)).datepicker("option", "maxDate", selectDate);
+						}
+					}); 
+				}
+				jscolor.installByClassName("jscolor"); */
+			}
+			else  {
 				alert('Server or Client ERROR, method item list 조회 실패');
 			}
 		},
@@ -106,55 +184,13 @@ $(function() {
 			alert("ERROR : " + e.statusText);
 		}
 	});
-	
-	
-	$.datepicker.regional['ko'] = {
-		closeText : '닫기',
-		prevText : '이전달',
-		nextText : '다음달',
-		currentText : '오늘',
-		monthNames : [ '1월(JAN)', '2월(FEB)', '3월(MAR)', '4월(APR)',
-				'5월(MAY)', '6월(JUN)', '7월(JUL)', '8월(AUG)', '9월(SEP)',
-				'10월(OCT)', '11월(NOV)', '12월(DEC)' ],
-		monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월',
-				'9월', '10월', '11월', '12월' ],
-		dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
-		dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
-		dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
-		weekHeader : 'Wk',
-		dateFormat : 'yy-mm-dd',
-		firstDay : 0,
-		isRTL : false,
-		showMonthAfterYear : true,
-		yearSuffix : '',
-		changeMonth : true,
-		changeYear : true,
-		showButtonPanel : false,
-		yearRange : 'c-99:c+99',
-	};
-	$.datepicker.setDefaults($.datepicker.regional['ko']);
-	
-	$('#psdate').datepicker();
-	$("#psdate").datepicker("option", "minDate", fixpsdate);
-	$('#psdate').datepicker("option", "maxDate", fixpedate);
-	$('#psdate').datepicker("option", "onClose", function(selectDate) {
-	$("#pedate").datepicker("option", "minDate", selectDate);
-	});
-
-	$('#pedate').datepicker();
-	$("#pedate").datepicker("option", "minDate", fixpsdate);
-	$("#pedate").datepicker("option", "maxDate", fixpedate);
-	$('#pedate').datepicker("option", "onClose", function(selectDate) {
-	$("#psdate").datepicker("option", "maxDate", selectDate);
-	});
-	
-	//stomp
 	var socket = new SockJS('/goStomp'); 
 	stompClient = Stomp.over(socket);
 });
 
 
-function update(jscolor) {
+function update(jscolor,code) {
+	alert(code);
     // 'jscolor' instance can be used as a string
     $("#rect").css('background-color','#'+jscolor);
     var removeData='#'+jscolor;
@@ -166,6 +202,27 @@ function Cancel(){
 	window.close();
 } 
 function ptCreate(){
+	
+	var list=new Array();
+	var obj=new Object();
+	alert(siquence[0]);
+	alert(siquence[1]);
+	alert(siquence[2]);
+	for(var i=0; i<siquence.length; i++){
+		obj.ttitle = $("#pttitle"+siquence[i]).val();
+		obj.tcolor = $("#color"+siquence[i]).val();
+		obj.tsdate = $("#psdate"+siquence[i]).val();
+		obj.tedate = $("#pedate"+siquence[i]).val();
+		obj.tsequence = siquence[i];
+		obj.trefference = null;
+		obj.pcode=parseInt(<%=pcode%>);
+		list.push(obj);
+		obj=new Object();
+	}
+	console.log(list);
+	console.log(JSON.stringify(list));
+	
+	/* 
 	//공용 업무 생성 
 	var param = {
 		'ttitle' : $("#pttitle").val(),
@@ -209,17 +266,17 @@ function ptCreate(){
 		error : function(e) {
 			alert("ERROR : " + e.statusText);
 		}
-	});
+	}); */
 }
 
-function gomethodlists(){
+function gomymethodlist(){
 	var screenW = screen.availWidth;  
 	var screenH = screen.availHeight; 
 	var posL=( screenW-popW ) / 2;   
 	var posT=( screenH-popH ) / 2; 
 	var popW = 500; 
 	var popH = 400; 
-	window.open("/project/method/publicTask/create?tsdate="+fixpsdate+"&tedate="+fixpedate+"&pcode="+pcode+"&mcode="+mcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+	window.open("/project/mymethod/publicTask/create?tsdate="+fixpsdate+"&tedate="+fixpedate+"&mbcode="+mbcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 	window.close();
 }
 	

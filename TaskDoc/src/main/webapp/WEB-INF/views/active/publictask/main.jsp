@@ -323,6 +323,12 @@ $(document).ready(function() {
 	 var popW = 500; 
 	 var popH = 400; 
 	 window.open("/project/method/publicTask/create?tsdate="+fixpsdate+"&tedate="+fixpedate+"&pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+ }
+ 
+ function mymethodptcreate(){
+	 var popW = 500; 
+	 var popH = 400; 
+	 window.open("/project/mymethod/publicTask/create?tsdate="+fixpsdate+"&tedate="+fixpedate,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 	 
  }
   
