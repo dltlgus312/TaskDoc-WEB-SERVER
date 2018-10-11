@@ -90,7 +90,7 @@ $(document).ready(function() {
 		url : '/privatetask/'+<%=ptcode%>,
 		success : function(response) {
 			if (Object.keys(response).length>0) {
-				alert('공용업무 조회 완료!');
+				alert('개인업무 조회 완료!');
 				$("#pttitle").val(response.pttitle);
 				$("#ptcolor").val(response.ptcolor);
 				$("#ptsdate").val(response.ptsdate);
@@ -99,7 +99,7 @@ $(document).ready(function() {
 				$("#ptsequence").val(response.ptsequence);
 				$("#ptrefference").val(response.ptrefference);
 			} else {
-				alert('Server or Client ERROR, 공용업무 조회 실패');
+				alert('Server or Client ERROR, 개인 업무 조회 실패');
 			}
 		},
 		error : function(e) {
@@ -194,7 +194,7 @@ function edit(){
 			success : function(response) {
 				if (response == 1) {
 					alert('개인 업무 수정 완료!');
- 					//opener.location.reload(); 
+ 					opener.location.reload(); 
 				} else if (response == -1) {
 					alert('Server or Client ERROR, 개인 업무 수정 실패');
 				}

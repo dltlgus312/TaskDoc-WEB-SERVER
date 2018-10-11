@@ -40,7 +40,7 @@ var id='<%=loginid%>';
 					<button type="button" class="close">
 						<i class="fa fa-times"></i>
 					</button>
-					<h4 class="modal-title">개인 업무 생성을 환영합ㅇ니다.</h4>
+					<h4 class="modal-title">개인 업무 생성을 환영합니다.</h4>
 				</div>
 				
 				<div class="modal-body">
@@ -153,11 +153,10 @@ function ptCreate(){
 		contentType : 'application/json',
 		data : JSON.stringify(param),
 		success : function(response) {
-			if (response != -1) {
+			if (response>0) {
 				alert('개인 업무 생성 완료! 개인 업무의 id값은' + response);
-				opener.location.reload();
 				window.close();
-			} else if (response == -1) {
+			} else{
 				alert('Server or Client ERROR, 개인 업무 생성 실패');
 			}
 		},

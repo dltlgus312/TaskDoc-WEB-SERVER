@@ -3,6 +3,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <%@include file="/WEB-INF/views/fix/header.jsp"%>
 
 <%
@@ -47,7 +50,10 @@ $(function(){
 			<div id="contentwrap" style="background-color: #e0e0e0;">
 				<div class="container" style="background-color: white; overflow: auto;">
 					<%@include file="/WEB-INF/views/active/project/fix/pro_header.jsp"%>
-					<div style="width: 100%; height: 93%;">
+					
+					<button type="button" onclick="createfolder()" class="btn" style="outline:none; border:0px;background-color:#ed8151;color:white;">폴더 생성하기</button>
+					
+					<div style="width: 100%;">
 						<div id="rootbtn" class="bts">
 							
 						</div>
@@ -91,6 +97,9 @@ $(document).ready(function() {
 	
 });
 
+function createfolder(){
+	
+}
 //해당 업무에 대한 다운받을 수 있는 자료를 띄우는 페이지 window.open
 function gofileView(tcode){
 	event.stopPropagation();

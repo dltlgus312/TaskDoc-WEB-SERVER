@@ -102,6 +102,12 @@ public class Project {
 		return "/active/publictask/window/create";
 	}
 	
+	//폴더생성
+	@RequestMapping(value = "/folder/create", method = RequestMethod.GET)
+	public String filecreate() {
+		return "/active/file/create";
+	}
+	
 	//공용업무 수정
 	@RequestMapping(value = "/publicTask/edit", method = RequestMethod.GET)
 	public String publicTaskEdit() {

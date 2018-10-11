@@ -14,11 +14,15 @@
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script  src="${pageContext.request.contextPath }/resources/js/task/jscolor.js"></script>
+<script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
 	String tcode = request.getParameter("tcode");
+	String pcode = request.getParameter("pcode");
 	String tsdate = request.getParameter("tsdate");
 	String tedate = request.getParameter("tedate");
 %>
@@ -85,7 +89,7 @@
 </body>
 
 <script type="text/javascript">
-
+var pcode=<%=pcode%>;
 //공용업무 정보받아오기
 $(document).ready(function() {
 	$.ajax({
@@ -167,6 +171,9 @@ $(function() {
 	$('#ptedate').datepicker("option", "onClose", function(selectDate) {
 	$("#ptsdate").datepicker("option", "maxDate", selectDate);
 	});
+	
+	var socket = new SockJS('/goStomp'); 
+	stompClient = Stomp.over(socket);
 });
 
 //돌아가기
@@ -197,10 +204,25 @@ function edit(){
 			contentType : 'application/json',
 			data : JSON.stringify(param),
 			success : function(response) {
-				if (response == 1) {
+				if (response>0) {
 					alert('공용업무 수정 완료!');
- 					opener.location.reload(); 
-				} else if (response == -1) {
+					//stomp 서버전송
+					var peram={
+							 'message' : 'update',
+							 'type' : 'publictaskvo',
+							 'object' :{
+									 'ttitle' : $("#pttitle").val(),
+									 'tcolor' :  mycolor,
+								 	 'tsdate' : $("#ptsdate").val(),
+									 'tedate' : $("#ptedate").val(),
+									 'tpercent' : $("#ptpercent").val(),
+									 'trefference' : $("#ptrefference").val(),
+									 'tsequence' : $("#ptsequence").val(),
+									 'tcode' : <%=tcode%>
+								}
+						 };
+						stompClient.send('/app/project/'+pcode, {},JSON.stringify(peram));
+				} else{
 					alert('Server or Client ERROR, 공용업무 수정 실패');
 				}
 			},

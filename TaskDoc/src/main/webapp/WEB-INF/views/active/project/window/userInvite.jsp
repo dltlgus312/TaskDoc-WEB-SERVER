@@ -8,6 +8,9 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <%
 String loginid="";
 loginid=(String)session.getAttribute("loginid");
@@ -95,6 +98,10 @@ var id='<%=loginid%>';
 <script type="text/javascript">
 	var saveid = "";
 	var pcode =<%=pcode%>;
+	
+	var socket = new SockJS('/goStomp'); 
+	stompClient = Stomp.over(socket);
+	
 	//프로젝트에 초대하기 위해 아이디 검색
 	function userselect() {
 		//검색할때 projectjoin select해서 uid, pid 같으면 
@@ -155,11 +162,24 @@ var id='<%=loginid%>';
 			contentType : 'application/json',
 			data : JSON.stringify(param),
 			success : function(response) {
-				if (response == 1) {
+				if (response>0) {
 					alert('프로젝트에 사람 초대 완료!');
 					$("#tableDiv").css('display', 'none');
 					$("#selectuid").val("");
-				} else if (response == -1) {
+					
+					var closego={
+							 'message' : 'insert',
+							 'type' : 'projectjoinvo',
+							 'object' :{
+									 'pcode' : <%=pcode%>,
+									 'uid' : saveid,
+								 	 'ppermission' : 'MEMBER',
+									 'pinvite' : 0,
+								}
+						 };
+						stompClient.send('/app/project/'+pcode, {},JSON.stringify(closego));
+						
+				} else{
 					alert('이미 초대된 회원입니다.!');
 				}
 			},

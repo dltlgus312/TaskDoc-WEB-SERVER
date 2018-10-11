@@ -77,10 +77,10 @@ $(function(){
 	<!--FRAME  -->
 </body>
 <script type="text/javascript">
-var screenW = screen.availWidth;  // 스크린 가로사이즈
-var screenH = screen.availHeight; // 스크린 세로사이즈
-var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
-var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션
+var screenW = screen.availWidth;  
+var screenH = screen.availHeight; 
+var posL=( screenW-popW ) / 2;   
+var posT=( screenH-popH ) / 2;  
 
 
 $(document).ready(function() {
@@ -94,13 +94,13 @@ $(document).ready(function() {
 					if(response[i].tsdate!=null && !response[i].tedate!=null){
 						if(chatpermission=="OWNER"){
 							var $append = '<div id="publictask'+response[i].tcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
-							+'<div onclick="godowntask('+response[i].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : '+response[i].ttitle+','+response[i].tcode+'</span></div>'
+							+'<div id="color'+response[i].tcode+'" onclick="godowntask('+response[i].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : </span><span id="ttitle'+response[i].tcode+'">'+response[i].ttitle+'</span><span>,'+response[i].tcode+'</span></div>'
 							+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 							+'<div style="margin-left:20px;" id="chart'+response[i].tcode+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'">'
 							+'<div class="ppc-progress">'
 							+'<div class="ppc-progress-fill" id="fill'+response[i].tcode+'"></div></div>'
 							+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].tcode +'">%</span></div></div></div>'
-							+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span></div>'
+							+'<div><div><span id="tsdate'+response[i].tcode+'">시작 날짜 : '+response[i].tsdate+'</span></div><div><span id="tedate'+response[i].tcode+'">종료 날짜 : '+response[i].tedate+'</span></div>'
 							+'<div class="bts"><button onclick="downtaskcreate(\''+response[i].tsdate+ ',' +response[i].tedate+'\','+response[i].tcode+')" style="border:0px;outline:none;color:white;background-color:#ed8151; margin-right:5px; font-size:12px;" class="btn"type="button">하위 업무 생성</button>'
 							+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;margin-right:5px;font-size:12px;" class="btn" onclick= "ptedit(\''+response[i].tsdate+ ',' +response[i].tedate+'\','+response[i].tcode+')" type="button">수정</button>'
 							+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;font-size:12px;" class="btn" type="button" onclick="ptdel('+response[i].tcode+')">삭제</button></div></div></div></div>';
@@ -108,10 +108,10 @@ $(document).ready(function() {
 						}
 						else if(chatpermission=="MEMBER"){
 							var $append = '<div id="publictask'+response[i].tcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
-							+'<div onclick="godowntask('+response[i].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : '+response[i].ttitle+','+response[i].tcode+'</span></div>'
+							+'<div onclick="godowntask('+response[i].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : </span><span>'+response[i].ttitle+'</span><span>,'+response[i].tcode+'</span></div>'
 							+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 							+'<div style="margin-left:20px;" id="chart'+response[i].tcode+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'">'
-							+'<div class="ppc-progress">'
+							+'<div class="ppc-progress">'																		
 							+'<div class="ppc-progress-fill" id="fill'+response[i].tcode+'"></div></div>'
 							+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].tcode +'">%</span></div></div></div>'
 							+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span>'
@@ -168,32 +168,59 @@ $(document).ready(function() {
 								$("#ptcreatebtn").show();
 	        			 }
 	        			 else if(chatpermission=="MEMBER"){
-	        					var $append = '<div id="publictask'+response[i].tcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
-								+'<div onclick="godowntask('+response[i].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : '+response[i].ttitle+','+response[i].tcode+'</span></div>'
+	        					var $append = '<div id="publictask'+concat.object.tcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
+								+'<div onclick="godowntask('+concat.object.tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+concat.object.tcolor+';"><span>'+ 11 +'. : '+concat.object.ttitle+','+concat.object.tcode+'</span></div>'
 								+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
-								+'<div style="margin-left:20px;" id="chart'+response[i].tcode+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'">'
+								+'<div style="margin-left:20px;" id="chart'+concat.object.tcode+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'">'
 								+'<div class="ppc-progress">'
-								+'<div class="ppc-progress-fill" id="fill'+response[i].tcode+'"></div></div>'
-								+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].tcode +'">%</span></div></div></div>'
-								+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span>'
-								+'<div class="bts"><button style="border:0px;outline:none;color:white;background-color:#ed8151; margin-right:5px; font-size:12px;" class="btn" onclick= "privateCreate(\''+response[i].tsdate+ ',' +response[i].tedate+'\','+response[i].tcode+')" type="button">개인업무생성</button></div><div></div></div></div></div>';
+								+'<div class="ppc-progress-fill" id="fill'+concat.object.tcode+'"></div></div>'
+								+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ concat.object.tcode +'">%</span></div></div></div>'
+								+'<div><div><span>시작 날짜 : '+concat.object.tsdate+'</span></div><div><span>종료 날짜 : '+concat.object.tedate+'</span>'
+								+'<div class="bts"><button style="border:0px;outline:none;color:white;background-color:#ed8151; margin-right:5px; font-size:12px;" class="btn" onclick= "privateCreate(\''+concat.object.tsdate+ ',' +concat.object.tedate+'\','+concat.object.tcode+')" type="button">개인업무생성</button></div><div></div></div></div></div>';
 								$("#ptcreatebtn").hide();
 	        			 }
+	        			 $("#publictaskBOTTOM").append($append);
+							
+							/* var a = $("#chart"+concat.object.tcode.toString());
+							var percent = parseInt(a.data('percent'));
+							var deg = 360 * percent / 100;
+								if (percent > 50) {
+									a.addClass("gt-50");
+								}
+							var b=$("#fill"+concat.object.tcode.toString());
+							b.css('transform', 'rotate(' + deg + 'deg)');
+							$('#num'+concat.object.tcode.toString()).html(percent + '%'); */
         	     	}
-        			 $("#publictaskBOTTOM").append($append);
-						
-						var a = $("#chart"+concat.object.tcode.toString());
-						var percent = parseInt(a.data('percent'));
-						var deg = 360 * percent / 100;
-							if (percent > 50) {
-								a.addClass("gt-50");
-							}
-						var b=$("#fill"+concat.object.tcode.toString());
-						b.css('transform', 'rotate(' + deg + 'deg)');
-						$('#num'+concat.object.tcode.toString()).html(percent + '%');
         		}
         	 }
         	 
+        	 if(concat.message=="update"){
+        	 	if(concat.type=="publictaskvo"){
+        	 		//퍼센트 , 날짜, 제목
+        	 		$("#ttitle" + concat.object.tcode).text(concat.object.ttitle);
+        	 		$("#tsdate" + concat.object.tcode).text('시작 날짜 : '+concat.object.tsdate);
+        	 		$("#tedate" + concat.object.tcode).text('종료 날짜 : '+concat.object.tedate);
+        	 		$("#color" + concat.object.tcode).css('border', '3px solid #'+concat.object.tcolor);
+        	 		$("#chart" + concat.object.tcode).attr("data-percent", concat.object.tpercent);
+        	 		alert(concat.object.tpercent);
+        	 		
+        	 	}
+        	 }
+        	 
+        	 if(concat.message=="delete"){
+        		 if(concat.type=="publictaskvo") {
+        			 $("#publictask"+concat.object.tcode).remove();
+        		 }
+        	 }
+        	 		var a = $("#chart"+concat.object.tcode.toString());
+					var percent = parseInt(a.data('percent'));
+					var deg = 360 * percent / 100;
+						if (percent > 50) {
+							a.addClass("gt-50");
+						}
+					var b=$("#fill"+concat.object.tcode.toString());
+					b.css('transform', 'rotate(' + deg + 'deg)');
+					$('#num'+concat.object.tcode.toString()).html(percent + '%'); 
          });
     });
 });
@@ -214,10 +241,17 @@ $(document).ready(function() {
 			type : 'DELETE',
 			url : '/publictask/' + tcode,
 			success : function(response) {
-				if (response == 1) {
+				if (response>0) {
 					alert('공용업무 삭제 성공!');
-					location.reload();
-				} else if (response == -1) {
+					var peram={
+							 'message' : 'delete',
+							 'type' : 'publictaskvo',
+							 'object' :{
+									 'tcode' : tcode
+								}
+						 };
+					stompClient.send('/app/project/'+pcode, {},JSON.stringify(peram));
+				} else{
 					alert('Server or Client ERROR, 공용업무 삭제 실패');
 				}
 			},
@@ -239,7 +273,7 @@ $(document).ready(function() {
 	 list = date.split(',');
 	 
 	 if(confirm('업무를 수정하시겠습니까?')==true){
-			window.open("/project/publicTask/edit?tsdate="+list[0]+"&tedate="+list[1]+"&tcode="+tcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+			window.open("/project/publicTask/edit?tsdate="+list[0]+"&tedate="+list[1]+"&tcode="+tcode+"&pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 	 }
 	 else return;
  }

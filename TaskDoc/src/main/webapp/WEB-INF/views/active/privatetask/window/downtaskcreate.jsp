@@ -152,7 +152,6 @@ function ptCreate(){
 		success : function(response) {
 			if (response>0) {
 				alert('개인 업무 생성 완료! 개인 업무의 id값은' + response);
-				opener.location.reload();
 				window.close();
 			} else{
 				alert('Server or Client ERROR, 개인업무 생성 실패');
