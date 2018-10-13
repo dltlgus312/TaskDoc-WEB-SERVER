@@ -40,8 +40,7 @@
 
 					<div class="form-group">
 						<br></br> <label>투표 항목</label>
-						<button type="button" class="btn" style="background-color:#ed8151;color:white;""
-							onclick="addIndex()">
+						<button type="button" class="btn" style="background-color:#ed8151;color:white;" onclick="addIndex()">
 							항목 추가하기
 						</button>
 						<div style="display: block" id="indexes"></div>

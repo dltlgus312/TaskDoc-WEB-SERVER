@@ -1,6 +1,5 @@
 package com.taskdoc.www.service.voter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.taskdoc.www.database.dao.voter.VoterDAO;
-import com.taskdoc.www.database.dto.DecisionItemVO;
 import com.taskdoc.www.database.dto.VoterVO;
 
 @Service("VoterService")

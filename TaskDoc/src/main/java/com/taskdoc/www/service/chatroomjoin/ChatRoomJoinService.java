@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.taskdoc.www.database.dto.ChatRoomJoinVO;
-import com.taskdoc.www.database.dto.ChatRoomVO;
 import com.taskdoc.www.database.dto.ProjectJoinVO;
 import com.taskdoc.www.database.dto.UserInfoVO;
 

@@ -73,11 +73,17 @@ var mbcode=<%=pcode%>;
 </body>
 
 <script type="text/javascript">
+var socket = new SockJS('/goStomp'); 
+stompClient = Stomp.over(socket);
 var mycolor="";
 var fixpsdate='<%=tsdate%>';
 var fixpedate='<%=tedate%>';
-//misequence를 담을 배열생성
-var siquence=[];
+
+//tsdate!=null tedate!=null인 array 담기
+var parrays=new Array();
+
+//정렬된 array
+var realplist=new Array();
 
 $(function() {
 	$.datepicker.regional['ko'] = {
@@ -108,7 +114,6 @@ $(function() {
 			};
 	$.datepicker.setDefaults($.datepicker.regional['ko']);
 	
-	
 	// method item list 불러오기
 	$.ajax({
 		type : 'GET',
@@ -118,63 +123,11 @@ $(function() {
 				alert('public list 조회 완료');
 				for(var i=0;i<response.length;i++){
 					if(response[i].tsdate!=null && response[i].tedate!=null){
-						$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+response[i].tcode+'. '+response[i].ttitle+'</button>'
-						+'<input placeholder="공용 업무 제목을 입력해주세요." id="pttitle'+response[i].tcode+'" type="text"	class="form-control" maxlength="20">'
-						+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+response[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+response[i].misequence+')" value="" style="width:60px;"> </p>'
-						+'<div>시작날짜: <input class="hasDatepicker" type="text" name="cAcqDate" id="psdate'+response[i].tcode+'"><div>'
-						+'<div>종료날짜: <input class="hasDatepicker" type="text" name="cAceDate" id="pedate'+response[i].tcode+'"></div>';
-						$("#methodlistss").append($div);
-						$("#psdate"+response[i].tcode).removeClass('hasDatepicker').datepicker();
-						$("#pedate"+response[i].tcode).removeClass('hasDatepicker').datepicker();
-						$("#psdate"+response[i].tcode).datepicker();
-						
-						$("#psdate"+response[i].tcode).datepicker("option", "onClose", function(selectDate) {
-							if(selectDate != "") {
-								$("#pedate"+this.id.substr(length-1)).datepicker("option", "minDate", selectDate);
-							}
-						}); 
-					
-						$("#pedate"+response[i].tcode).datepicker();
-						
-						$("#pedate"+response[i].tcode).datepicker("option", "onClose", function(selectDate) {
-							if(selectDate != "") {
-								$("#psdate"+this.id.substr(length-1)).datepicker("option", "maxDate", selectDate);
-							}
-						}); 
-						
-						jscolor.installByClassName("jscolor"); 
+						parrays=response[i];
+					    goSort(parrays);
 					}
 				}
-				/* for(var i=0;i<response.length;i++){
-					siquence.push(response[i].misequence);
-					$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+response[i].misequence+'. '+response[i].mititle+'</button>'
-					+'<input placeholder="공용 업무 제목을 입력해주세요." id="pttitle'+response[i].misequence+'" type="text"	class="form-control" maxlength="20">'
-					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+response[i].misequence+'"class="jscolor" onchange="update(this.jscolor,'+response[i].misequence+')" value="" style="width:60px;"> </p>'
-					+'<div>시작날짜: <input class="hasDatepicker" type="text" name="cAcqDate" id="psdate'+response[i].misequence+'"><div>'
-					+'<div>종료날짜: <input class="hasDatepicker" type="text" name="cAceDate" id="pedate'+response[i].misequence+'"></div>';
-					$("#methodlistss").append($div);
-					
-					$("#psdate"+response[i].misequence).removeClass('hasDatepicker').datepicker();
-					$("#pedate"+response[i].misequence).removeClass('hasDatepicker').datepicker();
-					
-					
-					$("#psdate"+response[i].misequence).datepicker();
-					
-					$("#psdate"+response[i].misequence).datepicker("option", "onClose", function(selectDate) {
-						if(selectDate != "") {
-							$("#pedate"+this.id.substr(length-1)).datepicker("option", "minDate", selectDate);
-						}
-					}); 
-				
-					$("#pedate"+response[i].misequence).datepicker();
-					
-					$("#pedate"+response[i].misequence).datepicker("option", "onClose", function(selectDate) {
-						if(selectDate != "") {
-							$("#psdate"+this.id.substr(length-1)).datepicker("option", "maxDate", selectDate);
-						}
-					}); 
-				}
-				jscolor.installByClassName("jscolor"); */
+				listmake();
 			}
 			else  {
 				alert('Server or Client ERROR, method item list 조회 실패');
@@ -184,8 +137,98 @@ $(function() {
 			alert("ERROR : " + e.statusText);
 		}
 	});
-	var socket = new SockJS('/goStomp'); 
-	stompClient = Stomp.over(socket);
+	
+	var cnt=0;
+	var ccnt=0;
+	//정렬하는 함수
+	function goSort(parrays){
+		// 최상단 이라면 그냥 추가 하고 리턴..
+        if (parrays.tcode == parrays.trefference) {
+            realplist.push(parrays);
+            cnt++;
+            console.log(cnt);
+            return;
+        }
+	
+        // 같은걸 참조하는 동급 업무중 순서도(시퀀스) 가 제일큰 업무 찾기
+        var max = null;
+        for (var i=0;i<realplist.length;i++) {
+            if (realplist[i].trefference == parrays.trefference) {
+                max = realplist[i];
+            }
+        }
+	 
+        // 찾지 못했다면 부모를 찾아서 부모 바로 아래에 추가..
+        if (max == null) {
+            for (var j=0;j<realplist.length; j++) {
+                if (realplist[j].tcode == parrays.trefference) {
+                    realplist.splice(j+1,0,parrays);
+                    console.log(realplist);
+                    return;
+                }
+            }
+        }
+	
+        // 찾았다면 그의 자식이 있는지 재귀함수로 찾는다..
+        else {
+        	var chMax=null;
+            chMax = findMaxTask(max, realplist);
+            if (chMax == null) realplist.splice(realplist.indexOf(max) + 1, 0 , parrays);
+            else realplist.add(realplist.indexOf(chMax) + 1, 0 , max);
+        }  
+	}
+	
+	//정렬하는 재귀 함수
+	function findMaxTask(vo, list){
+		var max=null;
+		var chMax=null;
+		
+		for (var i=0;i<list.length;i++) {
+	       if (vo != list[i] && vo.tcode == list[i].trefference) {
+	             max = list[i];
+	         }
+	     }
+	       if (max != null) {
+	    	   chMax = findMaxTask(max, list);
+	          if (chMax == null) return max;
+		        else return chMax;
+		   }
+	       console.log(cnt+"-");
+	       return null; 
+	} 
+	
+	function listmake(){
+		//for문으로 업무생성
+		 for(var i=0;i<realplist.length;i++){
+				$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+realplist[i].tcode+'. '+realplist[i].ttitle+'</button>'
+				+'<input placeholder="공용 업무 제목을 입력해주세요." id="pttitle'+realplist[i].tcode+'" type="text"	class="form-control" maxlength="20">'
+				+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+realplist[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+realplist[i].tcode+')" value="" style="width:60px;"> </p>'
+				+'<div>시작날짜: <input class="hasDatepicker" type="text" name="cAcqDate" id="psdate'+realplist[i].tcode+'"><div>'
+				+'<div>종료날짜: <input class="hasDatepicker" type="text" name="cAceDate" id="pedate'+realplist[i].tcode+'"></div>';
+				$("#methodlistss").append($div);
+				
+				$("#psdate"+realplist[i].tcode).removeClass('hasDatepicker').datepicker();
+				$("#pedate"+realplist[i].tcode).removeClass('hasDatepicker').datepicker();
+				
+				
+				$("#psdate"+realplist[i].tcode).datepicker();
+				
+				$("#psdate"+realplist[i].tcode).datepicker("option", "onClose", function(selectDate) {
+					if(selectDate != "") {
+						$("#pedate"+this.id.substr(length-1)).datepicker("option", "minDate", selectDate);
+					}
+				}); 
+			
+				$("#pedate"+realplist[i].tcode).datepicker();
+				
+				$("#pedate"+realplist[i].tcode).datepicker("option", "onClose", function(selectDate) {
+					if(selectDate != "") {
+						$("#psdate"+this.id.substr(length-1)).datepicker("option", "maxDate", selectDate);
+					}
+				}); 
+		}
+		jscolor.installByClassName("jscolor"); 
+	}
 });
 
 
@@ -205,40 +248,26 @@ function ptCreate(){
 	
 	var list=new Array();
 	var obj=new Object();
-	alert(siquence[0]);
-	alert(siquence[1]);
-	alert(siquence[2]);
-	for(var i=0; i<siquence.length; i++){
-		obj.ttitle = $("#pttitle"+siquence[i]).val();
-		obj.tcolor = $("#color"+siquence[i]).val();
-		obj.tsdate = $("#psdate"+siquence[i]).val();
-		obj.tedate = $("#pedate"+siquence[i]).val();
-		obj.tsequence = siquence[i];
-		obj.trefference = null;
+	for(var i=0; i<realplist.length; i++){
+		obj.ttitle = $("#pttitle"+realplist[i].tcode).val();
+		obj.tcolor = $("#color"+realplist[i].tcode).val();
+		obj.tsdate = $("#psdate"+realplist[i].tcode).val();
+		obj.tedate = $("#pedate"+realplist[i].tcode).val();
+		obj.tsequence = realplist[i].tsequence;
+		obj.trefference = realplist[i].trefference;
 		obj.pcode=parseInt(<%=pcode%>);
 		list.push(obj);
 		obj=new Object();
 	}
-	console.log(list);
-	console.log(JSON.stringify(list));
 	
-	/* 
-	//공용 업무 생성 
-	var param = {
-		'ttitle' : $("#pttitle").val(),
-		'tcolor' : mycolor,
-		'tsdate' : $("#psdate").val(),
-		'tedate' : $("#pedate").val(),
-		'trefference' : null,
-		'pcode' : pcode
-	};
+	//전송
 	$.ajax({
 		type : 'POST',
 		url : '/publictask',
 		contentType : 'application/json',
-		data : JSON.stringify(param),
+		data : JSON.stringify(list),
 		success : function(response) {
-			if (response > 0) {
+			if (response.length > 0) {
 				alert('공용업무 생성 완료! 프로젝트의 공용업무의 id값은' + response);
 				
 				//stomp 서버전송
@@ -266,7 +295,7 @@ function ptCreate(){
 		error : function(e) {
 			alert("ERROR : " + e.statusText);
 		}
-	}); */
+	})
 }
 
 function gomymethodlist(){

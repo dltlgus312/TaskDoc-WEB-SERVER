@@ -43,7 +43,7 @@ var id='<%=loginid%>';
 								style="VISIBILITY: hidden; WIDTH: 0px">
 
 
-							<button type="button" class="btn btn-success btn-icon"
+							<button type="button" class="btn" style="outline:none;border:0px;background-color:#ed8151;color:white;"
 								onclick="userselect()">
 								<i class="fa fa-check"></i> 검색하기
 							</button>
@@ -71,8 +71,8 @@ var id='<%=loginid%>';
 											<td id="uids"></td>
 											<td id="uname"></td>
 											<td>
-												<button type="button" class="btn btn-default btn-icon"
-													onclick="addProuser()">추가</button>
+												<button type="button" class="btn"
+													onclick="addProuser()" style="outline:none;border:0px;background-color:#ed8151;color:white;">추가</button>
 											</td>
 										</tr>
 									</tbody>
@@ -85,8 +85,7 @@ var id='<%=loginid%>';
 				</div>
 				<div class="modal-footer">
 					<!-- <input type="hidden" name="isEmpty" value=""> -->
-					<button type="button" class="btn btn-default btn-icon"
-						onclick="proCancel()">
+					<button type="button" class="btn" style="outline:none;border:0px;background-color:#ed8151;color:white;" onclick="proCancel()">
 						<i class="fa fa-times-circle"></i> Cancel
 					</button>
 				</div>

@@ -2,7 +2,6 @@ package com.taskdoc.www.service.voter;
 
 import java.util.List;
 
-import com.taskdoc.www.database.dto.DecisionItemVO;
 import com.taskdoc.www.database.dto.VoterVO;
 
 public interface VoterService {

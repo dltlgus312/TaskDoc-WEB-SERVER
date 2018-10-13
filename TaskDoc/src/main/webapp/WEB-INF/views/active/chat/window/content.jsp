@@ -140,12 +140,17 @@ $(function(){
 <!--채팅방 클릭시 나와야할 div들  -->
 <div id="chatmenu" style="width:100%%; height:100%;">
 	<div id="chatsetbtn" style="width:100%;height:5%; border:solid 1px blue;">
-	<div id="chatsetbtnmenu" style="width:300px;height:500px; position: absolute; display:none;border:3px solid #ed8151;background-color:white; right:0px;overflow:auto; ">
+		<div id="chatsetbtnmenu" style="width:300px;height:500px; position: absolute; display:none;border:3px solid #ed8151;background-color:white; right:0px;overflow:auto; ">
+		</div>
 	</div>
-</div>
+		
+	<div style="display:-webkit-box;">
+		<input id="chatinputtext" type="text" class="form-control" style="width:30%;"><!-- <button id="searchbtn" class="btn" style="color:white;background-color:#ed8151;outline:none;border:0px;"type="button">검색</button> -->
+	</div>
 								
-<div id="chatcontentdiv<%=crcode %>" style="width:100%;height:75%;border:solid 1px blue; overflow-y:scroll; background-color: #e0e0e0">
-</div>				
+	<div class="bts" id="chatcontentdiv<%=crcode %>" style="width:100%;height:75%;border:solid 1px blue; overflow-y:scroll; background-color: #e0e0e0">
+	</div>	
+	
 	<div id="chatconinput" class="bts" style="width:100%;height:20%; border:solid 1px blue; display:-webkit-box;">
 		<textarea id="chatcontent<%=crcode %>" class="form-control" style="width:95%;height:100%;font-size:17px; resize: none;"></textarea>
 		<button id="chatbtn<%=crcode %>" type="button" onclick="chattest(0,0,0,<%=crcode %>)" style="font-size:18px;">테스트</button>
@@ -438,6 +443,11 @@ $(function(){
         		 }
          });
 	});
+    
+	$("#keyword").keyup(function() {
+		var k = $(this).val();
+		console.log(k);
+        })
 });
 //메뉴버튼열기, param - crcode
 function menubtn(code, crmode){

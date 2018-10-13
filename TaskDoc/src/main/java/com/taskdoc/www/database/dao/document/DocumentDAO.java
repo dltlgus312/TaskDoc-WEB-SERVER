@@ -1,7 +1,6 @@
 package com.taskdoc.www.database.dao.document;
 
 import java.util.List;
-import java.util.Map;
 
 import com.taskdoc.www.database.dto.DocumentVO;
 
