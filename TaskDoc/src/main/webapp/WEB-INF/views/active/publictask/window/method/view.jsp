@@ -180,6 +180,7 @@ function ptCreate(){
 	alert(siquence[0]);
 	alert(siquence[1]);
 	alert(siquence[2]);
+	
 	for(var i=0; i<siquence.length; i++){
 		obj.ttitle = $("#pttitle"+siquence[i]).val();
 		obj.tcolor = $("#color"+siquence[i]).val();

@@ -322,7 +322,6 @@ function Cancel(){
 } 
 function ptCreate(){
 	
-	//
 	var list=new Array();
 	var obj=new Object();
 	for(var i=0; i<sendArray.length; i++){
@@ -330,12 +329,6 @@ function ptCreate(){
 		obj.tcolor = $("#color"+sendArray[i].tcode).val();
 		obj.tsdate = $("#psdate"+sendArray[i].tcode).val();
 		obj.tedate = $("#pedate"+sendArray[i].tcode).val();
-		obj.tsequence = sendArray[i].tsequence;
-		if(sendArray[i].trefference == 0) {
-			obj.trefference = sendArray[i].tcode;
-		}else {
-			obj.trefference = sendArray[i].trefference;
-		}
 		obj.pcode=parseInt(<%=pcode%>);
 		list.push(obj);
 		obj=new Object();
@@ -351,22 +344,7 @@ function ptCreate(){
 			if (response.length > 0) {
 				alert('공용업무 생성 완료! 프로젝트의 공용업무의 id값은' + response);
 				
-				//stomp 서버전송
-				var peram={
-						 'message' : 'insert',
-						 'type' : 'publictaskvo',
-						 'object' :{
-								 'ttitle' : $("#pttitle").val(),
-								 'tcolor' :  mycolor,
-							 	 'tsdate' : $("#psdate").val(),
-								 'tedate' : $("#pedate").val(),
-								 'tpercent' : 0,
-								 'trefference' : response,
-								 'pcode' : pcode,
-								 'tcode' : response
-							}
-					 };
-					stompClient.send('/app/project/'+pcode, {},JSON.stringify(peram));
+					stompClient.send('/app/project/'+pcode, {},JSON.stringify(response));
 					window.close();
 					
 			} else  {
