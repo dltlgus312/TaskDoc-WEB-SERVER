@@ -133,7 +133,7 @@ $(function() {
 					
 					$("#psdate"+response[i].misequence).datepicker("option", "onClose", function(selectDate) {
 						if(selectDate != "") {
-							$("#pedate"+this.id.substr(length-1)).datepicker("option", "minDate", selectDate);
+							$("#pedate"+this.id.substr(6)).datepicker("option", "minDate", selectDate);
 						}
 					}); 
 				
@@ -141,7 +141,7 @@ $(function() {
 					
 					$("#pedate"+response[i].misequence).datepicker("option", "onClose", function(selectDate) {
 						if(selectDate != "") {
-							$("#psdate"+this.id.substr(length-1)).datepicker("option", "maxDate", selectDate);
+							$("#psdate"+this.id.substr(6)).datepicker("option", "maxDate", selectDate);
 						}
 					}); 
 				}

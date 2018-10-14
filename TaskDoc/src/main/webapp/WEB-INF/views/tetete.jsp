@@ -78,21 +78,25 @@
 </body>
 
 <script type="text/javascript">
-var parrays=new Array();
-
-var realplist=new Array();
-
+var b=new Array();
+var a=new Array();
 $(function() {
     $.ajax({
 		type : 'GET',
-		url : '/publictask/'+2,
+		url : '/publictask/'+1,
 		success : function(response) {
 			if (response.length > 0) {
 			   for(var i=0;i<response.length;i++){
-			       parrays=response[i];
-			       test(parrays);
-			       
+				   if(response[i].tcode == response[i].trefference) {
+					   response[i].trefference = 0;
+				   }
+			 		a.push(response[i]);	
 			   } 
+			console.log(a);
+			
+			b = treeModel(a, 0);
+			
+			console.log(b);
 		   }
 			else  {
 				alert('Server or Client ERROR, method item list 조회 실패');
@@ -102,85 +106,21 @@ $(function() {
 			alert("ERROR : " + e.statusText);
 		}
 	});
-    
-    function test(parrays){
-    	
-    	// 최상단 이라면 그냥 추가 하고 리턴..
-        if (parrays.tcode == parrays.trefference) {
-            realplist.push(parrays);
-            return;
-        }
-	
-        // 같은걸 참조하는 동급 업무중 순서도(시퀀스) 가 제일큰 업무 찾기
-        var max = null;
-        for (var i=0;i<realplist.length;i++) {
-            if (realplist[i].trefference == parrays.trefference) {
-                max = realplist[i];
-            }
-        }
-	 
-        // 찾지 못했다면 부모를 찾아서 부모 바로 아래에 추가..
-        if (max == null) {
-            for (var j=0;j<realplist.length; j++) {
-                if (realplist[j].tcode == parrays.trefference) {
-                    realplist.splice(j+1,0,parrays);
-                    console.log(realplist);
-                    return;
-                }
-            }
-        }
-	
-        // 찾았다면 그의 자식이 있는지 재귀함수로 찾는다..
-        else {
-        	var chMax=null;
-            chMax = findMaxTask(max, realplist);
-            if (chMax == null) realplist.splice(realplist.indexOf(max) + 1, 0 , parrays);
-            else realplist.add(realplist.indexOf(chMax) + 1, 0 , max);
-        }  
-    }
-    
-    
-     
-	function findMaxTask(vo, list){
-		var max=null;
-		var chMax=null;
-		
-		for (var i=0;i<list.length;i++) {
-	       if (vo != list[i] && vo.tcode == list[i].trefference) {
-	             max = list[i];
-	         }
-	     }
-	       if (max != null) {
-	    	   chMax = findMaxTask(max, list);
-	          if (chMax == null) return max;
-		        else return chMax;
-		   }
-	       return null; 
-	} 
-	console.log(realplist);
-       
 }); 
 
 
 
-
-
-//b = treeModel(a, 0);
-/* var treeModel = function (arrayList, rootId) {
+var treeModel = function (arrayList, rootId) {
 	var rootNodes = [];
 	var traverse = function (nodes, item, index) {
 		if (nodes instanceof Array) {
-			var children = new Array();
 			return nodes.some(function (node) {
 				if (node.tcode === item.trefference) {
-					
-					return children.push(arrayList.splice(index, 1)[0]);;
+					node.children = node.children || [];
+					return node.children.push(arrayList.splice(index, 1)[0]);
 				}
 
-				children.some(function (item, index) {
-					return rootNodes.push(children.splice(index, 1)[0]);
-				})
-				return traverse(children, item, index);
+				return traverse(node.children, item, index);
 			});
 		}
 	};
@@ -196,7 +136,7 @@ $(function() {
 	}
 
 	return rootNodes;
-}; */
+};
 
 function test(a,b){
 	 /* 	tcode, trefference				response는 tcode순서로, sequence순으로 정렬

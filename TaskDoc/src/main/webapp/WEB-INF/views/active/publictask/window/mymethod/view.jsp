@@ -79,12 +79,14 @@ var mycolor="";
 var fixpsdate='<%=tsdate%>';
 var fixpedate='<%=tedate%>';
 
+
 //tsdate!=null tedate!=null인 array 담기
 var parrays=new Array();
 
 //정렬된 array
 var realplist=new Array();
 
+var sendArray=new Array();
 $(function() {
 	$.datepicker.regional['ko'] = {
 			closeText : '닫기',
@@ -123,10 +125,13 @@ $(function() {
 				alert('public list 조회 완료');
 				for(var i=0;i<response.length;i++){
 					if(response[i].tsdate!=null && response[i].tedate!=null){
-						parrays=response[i];
-					    goSort(parrays);
+						  if(response[i].tcode == response[i].trefference) {
+							   response[i].trefference = 0;
+						   }
+						  parrays.push(response[i]);	
 					}
 				}
+				realplist = treeModel(parrays, 0);
 				listmake();
 			}
 			else  {
@@ -138,98 +143,169 @@ $(function() {
 		}
 	});
 	
-	var cnt=0;
-	var ccnt=0;
-	//정렬하는 함수
-	function goSort(parrays){
-		// 최상단 이라면 그냥 추가 하고 리턴..
-        if (parrays.tcode == parrays.trefference) {
-            realplist.push(parrays);
-            cnt++;
-            console.log(cnt);
-            return;
-        }
-	
-        // 같은걸 참조하는 동급 업무중 순서도(시퀀스) 가 제일큰 업무 찾기
-        var max = null;
-        for (var i=0;i<realplist.length;i++) {
-            if (realplist[i].trefference == parrays.trefference) {
-                max = realplist[i];
-            }
-        }
+	var treeModel = function (arrayList, rootId) {
+		var rootNodes = [];
+		var traverse = function (nodes, item, index) {
+			if (nodes instanceof Array) {
+				return nodes.some(function (node) {
+					if (node.tcode === item.trefference) {
+						node.children = node.children || [];
+						return node.children.push(arrayList.splice(index, 1)[0]);
+					}
+
+					return traverse(node.children, item, index);
+				});
+			}
+		};
+
+		while (arrayList.length > 0) {
+			arrayList.some(function (item, index) {
+				if (item.trefference === rootId) {
+					return rootNodes.push(arrayList.splice(index, 1)[0]);
+				}
+
+				return traverse(rootNodes, item, index);
+			});
+		}
+
+		return rootNodes;
+	};
 	 
-        // 찾지 못했다면 부모를 찾아서 부모 바로 아래에 추가..
-        if (max == null) {
-            for (var j=0;j<realplist.length; j++) {
-                if (realplist[j].tcode == parrays.trefference) {
-                    realplist.splice(j+1,0,parrays);
-                    console.log(realplist);
-                    return;
-                }
-            }
-        }
-	
-        // 찾았다면 그의 자식이 있는지 재귀함수로 찾는다..
-        else {
-        	var chMax=null;
-            chMax = findMaxTask(max, realplist);
-            if (chMax == null) realplist.splice(realplist.indexOf(max) + 1, 0 , parrays);
-            else realplist.add(realplist.indexOf(chMax) + 1, 0 , max);
-        }  
-	}
-	
-	//정렬하는 재귀 함수
-	function findMaxTask(vo, list){
-		var max=null;
-		var chMax=null;
-		
-		for (var i=0;i<list.length;i++) {
-	       if (vo != list[i] && vo.tcode == list[i].trefference) {
-	             max = list[i];
-	         }
-	     }
-	       if (max != null) {
-	    	   chMax = findMaxTask(max, list);
-	          if (chMax == null) return max;
-		        else return chMax;
-		   }
-	       console.log(cnt+"-");
-	       return null; 
-	} 
-	
+	 
 	function listmake(){
 		//for문으로 업무생성
 		 for(var i=0;i<realplist.length;i++){
-				$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+realplist[i].tcode+'. '+realplist[i].ttitle+'</button>'
-				+'<input placeholder="공용 업무 제목을 입력해주세요." id="pttitle'+realplist[i].tcode+'" type="text"	class="form-control" maxlength="20">'
-				+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+realplist[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+realplist[i].tcode+')" value="" style="width:60px;"> </p>'
-				+'<div>시작날짜: <input class="hasDatepicker" type="text" name="cAcqDate" id="psdate'+realplist[i].tcode+'"><div>'
-				+'<div>종료날짜: <input class="hasDatepicker" type="text" name="cAceDate" id="pedate'+realplist[i].tcode+'"></div>';
-				$("#methodlistss").append($div);
+				if(realplist[i].children != null){
+					sendArray.push(realplist[i]);
+					$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+ (i+1) +'. '+realplist[i].ttitle+'</button>'
+					+'<input placeholder="공용 업무 제목을 입력해주세요." id="pttitle'+realplist[i].tcode+'" type="text"	class="form-control" maxlength="20">'
+					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+realplist[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+realplist[i].tcode+')" value="" style="width:60px;"> </p>'
+					+'<div>시작날짜: <input class="hasDatepicker" type="text" name="cAcqDate" id="psdate'+realplist[i].tcode+'"><div>'
+					+'<div>종료날짜: <input class="hasDatepicker" type="text" name="cAceDate" id="pedate'+realplist[i].tcode+'"></div>';
+					$("#methodlistss").append($div);
+					
+					$("#psdate"+realplist[i].tcode).removeClass('hasDatepicker').datepicker();
+					$("#pedate"+realplist[i].tcode).removeClass('hasDatepicker').datepicker();
+					
+					
+					$("#psdate"+realplist[i].tcode).datepicker();
+					
+					$("#psdate"+realplist[i].tcode).datepicker("option", "onClose", function(selectDate) {
+						if(selectDate != "") {
+							$("#pedate"+this.id.substr(6)).datepicker("option", "minDate", selectDate);
+						}
+					}); 
 				
-				$("#psdate"+realplist[i].tcode).removeClass('hasDatepicker').datepicker();
-				$("#pedate"+realplist[i].tcode).removeClass('hasDatepicker').datepicker();
+					$("#pedate"+realplist[i].tcode).datepicker();
+					
+					$("#pedate"+realplist[i].tcode).datepicker("option", "onClose", function(selectDate) {
+						if(selectDate != "") {
+							$("#psdate"+this.id.substr(6)).datepicker("option", "maxDate", selectDate);
+						}
+					}); 
+					createListDiv(realplist[i].children, i+1);
+			 	} 
 				
+				else {
+					sendArray.push(realplist[i]);
+			 		$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+(i+1)+'. '+realplist[i].ttitle+'</button>'
+					+'<input placeholder="공용 업무 제목을 입력해주세요." id="pttitle'+realplist[i].tcode+'" type="text"	class="form-control" maxlength="20">'
+					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+realplist[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+realplist[i].tcode+')" value="" style="width:60px;"> </p>'
+					+'<div>시작날짜: <input class="hasDatepicker" type="text" name="cAcqDate" id="psdate'+realplist[i].tcode+'"><div>'
+					+'<div>종료날짜: <input class="hasDatepicker" type="text" name="cAceDate" id="pedate'+realplist[i].tcode+'"></div>';
+					$("#methodlistss").append($div);
+					
+					$("#psdate"+realplist[i].tcode).removeClass('hasDatepicker').datepicker();
+					$("#pedate"+realplist[i].tcode).removeClass('hasDatepicker').datepicker();
+					
+					
+					$("#psdate"+realplist[i].tcode).datepicker();
+					
+					$("#psdate"+realplist[i].tcode).datepicker("option", "onClose", function(selectDate) {
+						if(selectDate != "") {
+							$("#pedate"+this.id.substr(6)).datepicker("option", "minDate", selectDate);
+						}
+					}); 
 				
-				$("#psdate"+realplist[i].tcode).datepicker();
-				
-				$("#psdate"+realplist[i].tcode).datepicker("option", "onClose", function(selectDate) {
-					if(selectDate != "") {
-						$("#pedate"+this.id.substr(length-1)).datepicker("option", "minDate", selectDate);
-					}
-				}); 
-			
-				$("#pedate"+realplist[i].tcode).datepicker();
-				
-				$("#pedate"+realplist[i].tcode).datepicker("option", "onClose", function(selectDate) {
-					if(selectDate != "") {
-						$("#psdate"+this.id.substr(length-1)).datepicker("option", "maxDate", selectDate);
-					}
-				}); 
+					$("#pedate"+realplist[i].tcode).datepicker();
+					
+					$("#pedate"+realplist[i].tcode).datepicker("option", "onClose", function(selectDate) {
+						if(selectDate != "") {
+							$("#psdate"+this.id.substr(6)).datepicker("option", "maxDate", selectDate);
+						}
+					}); 
+			 	}
 		}
-		jscolor.installByClassName("jscolor"); 
+		 jscolor.installByClassName("jscolor"); 
 	}
+	
+	 
+	 function createListDiv(list, parrenti) {
+			for(var i= 0; i<list.length; i++) {
+				var str = parrenti +'-'+ (i+1);
+				if(list[i].children != null) {
+					sendArray.push(list[i]);
+					$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+/* (i+1) */str+'. '+list[i].ttitle+'</button>'
+					+'<input placeholder="공용 업무 제목을 입력해주세요." id="pttitle'+list[i].tcode+'" type="text"	class="form-control" maxlength="20">'
+					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+list[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+list[i].tcode+')" value="" style="width:60px;"> </p>'
+					+'<div>시작날짜: <input class="hasDatepicker" type="text" name="cAcqDate" id="psdate'+list[i].tcode+'"><div>'
+					+'<div>종료날짜: <input class="hasDatepicker" type="text" name="cAceDate" id="pedate'+list[i].tcode+'"></div>';
+					$("#methodlistss").append($div);
+					
+					$("#psdate"+list[i].tcode).removeClass('hasDatepicker').datepicker();
+					$("#pedate"+list[i].tcode).removeClass('hasDatepicker').datepicker();
+					
+					
+					$("#psdate"+list[i].tcode).datepicker();
+					
+					$("#psdate"+list[i].tcode).datepicker("option", "onClose", function(selectDate) {
+						if(selectDate != "") {
+							$("#pedate"+this.id.substr(6)).datepicker("option", "minDate", selectDate);
+						}
+					}); 
+				
+					$("#pedate"+list[i].tcode).datepicker();
+					
+					$("#pedate"+list[i].tcode).datepicker("option", "onClose", function(selectDate) {
+						if(selectDate != "") {
+							$("#psdate"+this.id.substr(6)).datepicker("option", "maxDate", selectDate);
+						}
+					}); 
+					createListDiv(list[i].children, str);
+				} else {
+					sendArray.push(list[i]);
+					$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+str+'. '+list[i].ttitle+'</button>'
+					+'<input placeholder="공용 업무 제목을 입력해주세요." id="pttitle'+list[i].tcode+'" type="text"	class="form-control" maxlength="20">'
+					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+list[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+list[i].tcode+')" value="" style="width:60px;"> </p>'
+					+'<div>시작날짜: <input class="hasDatepicker" type="text" name="cAcqDate" id="psdate'+list[i].tcode+'"><div>'
+					+'<div>종료날짜: <input class="hasDatepicker" type="text" name="cAceDate" id="pedate'+list[i].tcode+'"></div>';
+					$("#methodlistss").append($div);
+					
+					$("#psdate"+list[i].tcode).removeClass('hasDatepicker').datepicker();
+					$("#pedate"+list[i].tcode).removeClass('hasDatepicker').datepicker();
+					
+					
+					$("#psdate"+list[i].tcode).datepicker();
+					
+					$("#psdate"+list[i].tcode).datepicker("option", "onClose", function(selectDate) {
+						if(selectDate != "") {
+							$("#pedate"+this.id.substr(6)).datepicker("option", "minDate", selectDate);
+						}
+					}); 
+				
+					$("#pedate"+list[i].tcode).datepicker();
+					
+					$("#pedate"+list[i].tcode).datepicker("option", "onClose", function(selectDate) {
+						if(selectDate != "") {
+							$("#psdate"+this.id.substr(6)).datepicker("option", "maxDate", selectDate);
+						}
+					}); 
+				}
+			}
+			 jscolor.installByClassName("jscolor"); 
+		}
 });
+
 
 
 function update(jscolor,code) {
@@ -246,15 +322,20 @@ function Cancel(){
 } 
 function ptCreate(){
 	
+	//
 	var list=new Array();
 	var obj=new Object();
-	for(var i=0; i<realplist.length; i++){
-		obj.ttitle = $("#pttitle"+realplist[i].tcode).val();
-		obj.tcolor = $("#color"+realplist[i].tcode).val();
-		obj.tsdate = $("#psdate"+realplist[i].tcode).val();
-		obj.tedate = $("#pedate"+realplist[i].tcode).val();
-		obj.tsequence = realplist[i].tsequence;
-		obj.trefference = realplist[i].trefference;
+	for(var i=0; i<sendArray.length; i++){
+		obj.ttitle = $("#pttitle"+sendArray[i].tcode).val();
+		obj.tcolor = $("#color"+sendArray[i].tcode).val();
+		obj.tsdate = $("#psdate"+sendArray[i].tcode).val();
+		obj.tedate = $("#pedate"+sendArray[i].tcode).val();
+		obj.tsequence = sendArray[i].tsequence;
+		if(sendArray[i].trefference == 0) {
+			obj.trefference = sendArray[i].tcode;
+		}else {
+			obj.trefference = sendArray[i].trefference;
+		}
 		obj.pcode=parseInt(<%=pcode%>);
 		list.push(obj);
 		obj=new Object();
