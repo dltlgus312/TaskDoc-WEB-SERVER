@@ -39,7 +39,7 @@ $(function(){
 							cObject.crclose=response.chatRoomList[i].crclose;
 							cObject.crcoderef=response.chatRoomList[i].crcoderef;
 							cArray.push(cObject);
-							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:80px; border-left:1px solid #ed8151;border-bottom:1px solid #ed8151;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +','+cArray[i].crclose+','+cArray[i].crcoderef+')">'
+							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:80px; border: 1px solid #ed8151;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +','+cArray[i].crclose+','+cArray[i].crcoderef+')">'
 							+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+'프로젝트 채팅방'+'</span></div>' 
 							+'<div style="width:100%;height:50%;overflow:auto;"><img src="/resources/img/img_prochat.png"alt="" style="width: 30px; height:30px;">'
 							+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'

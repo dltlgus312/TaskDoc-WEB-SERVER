@@ -27,10 +27,6 @@ $(function(){
 	$(".chat_hover").css('color','#6d6d6d').css('border-bottom','none');
 	$(".ptask_hover").css('color','#6d6d6d').css('border-bottom','none');
 	$(".gantt_hover").css('color','#6d6d6d').css('border-bottom','none');
-	 if(chatpermission=="MEMBER"){
-		 $("#forderDels").hide();
-	 }else
-		 $("#forderDels").show();
 	});
 </script>
 
@@ -89,11 +85,11 @@ $(document).ready(function() {
 				for(var i=0;i<response.length;i++){
 					if(response[i].tsdate==null && response[i].tedate==null){
 						var folder="folder";
-						var $plist='<div id="plist'+response[i].tcode+'" style="width:10%;height:120px;  margin-right:20px; margin-top:20px; float:left;">'
+						var $plist='<div id="plist'+response[i].tcode+'" style="width:10%;height:160px;  margin-right:20px; margin-top:20px; float:left;">'
 						+'<div style="width:100%;height:60%; cursor:pointer;"data-toggle="tootlip" data-placement="bottom" title="하위 업무 파일 보기" onclick="downtaskView(\''+folder+'\','+response[i].tcode+')">'
 						+'<img src="${pageContext.request.contextPath }/resources/img/img_filetask.png"style="width:100%;height:100%;"></div>'
 						+'<div style="width:100%;height:20%; text-align:center;cursor:pointer; " data-toggle="tootlip" data-placement="bottom" title="파일 다운로드 하기" onclick="gofileView('+response[i].tcode+')">'+response[i].ttitle+'</div>'
-						+'<div class="bts"><button id="forderDels"onclick="folderDel('+response[i].tcode+')" class="btn" style="display:none;border:0px;outline:none;background-color:#ed8151;color:white;" type="button">삭제</button></div></div>';
+						+'<div class="bts"><button id="forderDels"onclick="folderDel('+response[i].tcode+')" class="btn" style="border:0px;outline:none;background-color:#ed8151;color:white;" type="button">삭제</button></div></div>';
 						$("#fileList").append($plist);
 					}
 					else{

@@ -15,7 +15,7 @@ $(document).ready(function(){
 		success : function(response) {
 			if (Object.keys(response).length > 0) {
 				var $plist='<div data-toggle="tootlip" data-placement="bottom" title="하위 업무 파일 보기" onclick="downtasklist('+response.tcode+', $(this).parent()[0].id)" id="ptask'+response.tcode+'"'
-				+'style="width:150px;height:150px;   margin-right:20px; margin-top:20px; float:left;">'
+				+'style="width:140px;height:170px;   margin-right:20px; margin-top:20px; float:left;">'
 				+'<div style="width:100%;height:60%; cursor:pointer;"><img src="${pageContext.request.contextPath }/resources/img/img_filetask.png"style="width:100%;height:100%;"></div>'
 				+'<div style="width:100%;height:20%; text-align:center;cursor:pointer; "data-toggle="tootlip" data-placement="bottom" title="파일 다운로드 하기" onclick="gofileView('+response.tcode+')">'+response.ttitle+'</div>'
 				+'<div class="bts"><button onclick="downfoldercreate('+response.tcode+')" class="btn" style="background-color:#ed8151;color:white;outline:none;border:0px;" type="button">하위 폴더 생성</button></div></div>';
@@ -49,10 +49,10 @@ function downtasklist(tcode, curLv){
 					$("#publictaskList").append($cppend);
 					
 					for(var i=0;i<response.length;i++){
-						var $bppend = '<div data-toggle="tootlip" data-placement="bottom" title="하위 업무 파일 보기" onclick="downtasklist('+response[i].tcode+', $(this).parent()[0].id)" id="ptask'+response.tcode+'" style="width:170px; height:150px;   margin-right:20px; margin-top:20px; float:left;">'
+						var $bppend = '<div data-toggle="tootlip" data-placement="bottom" title="하위 업무 파일 보기" onclick="downtasklist('+response[i].tcode+', $(this).parent()[0].id)" id="ptask'+response.tcode+'" style="width:156px; height:172px;   margin-right:20px; margin-top:20px; float:left;">'
 						+'<div style="width:100%;height:60%; cursor:pointer;"><img src="${pageContext.request.contextPath }/resources/img/img_filetask.png"style="width:100%;height:100%;"></div>'
 						+'<div style="width:100%;height:20%; text-align:center;cursor:pointer; "data-toggle="tootlip" data-placement="bottom" title="파일 다운로드 하기" onclick="gofileView('+response[i].tcode+')">'+response[i].ttitle+'</div>'
-						+'<div class="bts"><button onclick="downfoldercreate('+response[i].tcode+')" class="btn" style="background-color:#ed8151;color:white;outline:none;border:0px;" type="button">하위 폴더 생성</button>'
+						+'<div class="bts"><button onclick="downfoldercreate('+response[i].tcode+')" class="btn" style="margin-right:3px;background-color:#ed8151;color:white;outline:none;border:0px;" type="button">하위 폴더 생성</button>'
 						+'<button onclick="folderDel('+response[i].tcode+')" class="btn" style="border:0px;outline:none;background-color:#ed8151;color:white;" type="button">삭제</button></div></div>';
 						$("#LV"+downLv).append($bppend);
 						}
