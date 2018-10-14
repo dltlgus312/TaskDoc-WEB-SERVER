@@ -16,12 +16,6 @@
 							<span>새 프로젝트</span>
 							</a>
 						</li>
-						<li>
-							<a id="newtask">
-							<img src="${pageContext.request.contextPath }/resources/img/img_newtask.png" style="width:15px;height:15px;">
-							<span>새 개인 업무</span>
-							</a>
-						</li>
 					</ul>
 				</div> 
 				

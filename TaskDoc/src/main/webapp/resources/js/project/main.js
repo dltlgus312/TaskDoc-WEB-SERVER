@@ -20,8 +20,7 @@ $(document).ready(function() {
 		url : '/projectjoin/'+id,
 		success : function(response) {
 			if (response.projectJoinList.length>0) {
-				/* projectList , projectJoinList */
-				alert('개인별 프로젝트 조회 완료!');
+				alert('프로젝트 조회가 완료되었습니다.');
 				
 				for(var i=0;i<response.projectJoinList.length;i++){
 					/*프로젝트에 가입된 현황 pinvite==1 , 권한 OWNER  */

@@ -32,7 +32,6 @@
 			<div class="wrapper">
 				<div class="codrops-top clearfix">
 					<a><span style="font-size:14px;font-family:Title_Light;">TaskDoc</span></a>
-					<button id="showMenu" style="font-family:Title_Light;font-size: 14px;">Show Menu</button>
 
 					<!-- LOGIN BUTTON -->
 					<span class="right">
@@ -45,38 +44,23 @@
 							<span style="font-size: 14px;font-family:Title_Light;">JOIN</span>
 						</button> <!-- /JOIN BUTTON -->
 					</span>
-					
-					<!--  <span class="right">
-						<button id="proButton">
-							<span style="font-size: 14px;">PROJECT</span>
-						</button> /JOIN BUTTON
-					</span>
-					 <span class="right">
-						<button id="chatButton">
-							<span style="font-size: 14px;">CHAT</span>
-						</button> /JOIN BUTTON
-					</span> -->
 				</div>
 				
 				<header class="codrops-header" style="margin-bottom:-48px;">
-					<span style="font-family: Title_Medium;font-size:55px;color:#ed8151;">
-						TaskDoc <span style="font-size:30px;">Task(작업) + Document(기록)</span>
+					<span style="font-family: Title_Medium;font-size:90px;color:#ed8151;">
+						TaskDoc <span style="font-size:30px;">Task(작업) + Document(기록)를 이용한 프로젝트 관리 서비스</span>
 					</span>
 				</header>
 
 
 				<div class="main clearfix" style="margin-top:50px;">
-					<div class="column" style="display:grid;text-align:center;">
-						<p style="font-family:Title_Light; font-size:20px;color:#aca89a">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
-						<p style="font-family:Title_Light; font-size:20px;color:#aca89a">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
-						<p style="font-family:Title_Light; font-size:20px;color:#aca89a">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
-						<p style="font-family:Title_Light; font-size:20px;color:#aca89a">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
-						<p style="font-family:Title_Light; font-size:20px;color:#aca89a">- 일정과 톡을 연동한 프로젝트(일정, 회의, 파일) 관리 시스템</p>
-					</div>
-					<div class="column">
-						<nav class="codrops-demos">
-						<!--여기사진넣기  -->
-						</nav>
+					<div style="display:grid;text-align:center;">
+						<p style="font-family:Title_Light; font-size:20px;color:#aca89a;margin-top:-1px;"><span style="color:#ed8151; font-size:30px; font-family: Title_Bold">Project</span> 창의적인 아이디어를 결정하여 프로젝트로 선정 합니다.</p>
+						<p style="font-family:Title_Light; font-size:20px;color:#aca89a;margin-top:-1px;"><span style="color: rgb(99, 164, 137); font-size:30px; font-family: Title_Bold">Methodology</span> 프로젝트를 진행하는데 도움을 줄 방법론을 선정하여 기본적인 틀을 잡아 줄 수 있습니다.</p>
+						<p style="font-family:Title_Light; font-size:20px;color:#aca89a;margin-top:-1px;"><span style="color: rgba(111, 88, 100, 1);font-size:30px; font-family: Title_Bold">Authority</span> 팀장과 팀원의 권한을 구분하여 프로젝트를 효율적으로 관리할 수 있습니다.</p>
+						<p style="font-family:Title_Light; font-size:20px;color:#aca89a;margin-top:-1px;"><span style="color: rgba(224, 170, 50, 1);font-size:30px; font-family: Title_Bold">Chatting</span> 일반 채팅 기능과 회의모드, 파일 업로드, 투표 등의 기능을 통해 의사소통 활성화에 도움을 줄 수 있습니다.</p>
+						<p style="font-family:Title_Light; font-size:20px;color:#aca89a;margin-top:-1px;"><span style="color: rgba(11, 117, 116, 1);font-size:30px; font-family: Title_Bold">Gantt Chart</span> 프로젝트 전체 진행도를 한눈에 볼 수 있도록 도와주고 자신의 개인 업무 체크 또한 가능하게 도와줄 수 있습니다.</p>
+						<p style="font-family:Title_Light; font-size:20px;color:#aca89a;margin-top:-1px;"><span style="color: rgba(217, 133, 101, 1);font-size:30px; font-family: Title_Bold">Output</span> 프로젝트 진행중, 업무에 대한 산출물을 팀장이 관리하고 승인 할 수 있습니다.</p>
 					</div>
 					<div class="related">
 						<p style="font-family:Title_Light;">Copyright 2018. TaskDoc all rights reserved.</p>
@@ -92,23 +76,7 @@
 			</div>
 			<!-- wrapper -->
 		</div>
-		<!-- /container -->
-		<nav class="outer-nav left vertical">
-			<a href="/" >Home</a> <a
-				href="/" >Board</a> <a
-				href="/" >Images</a> <a href="">Uploads</a> <a href="/"></a>
-			<a href="/" >Messages</a> <a href="#"
-				>Edit Account</a>
-		</nav>
 	</div>
-	<!-- /perspective -->
-
-	<!-- Main에서 SHOW MENU클릭시 나타나는 이벤트 js -->
-	<script
-		src="${pageContext.request.contextPath }/resources/js/taskdocMain/classie.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/js/taskdocMain/menu.js"></script>
-	<!-- Main에서 SHOW MENU클릭시 나타나는 이벤트 js -->
 
 <script type="text/javascript">
 
@@ -121,19 +89,5 @@
 		});
 	});
 	
-	/* TEST  */
-	$(function() {
-		$("#proButton").click(function() {
-			location.href ='/project/main';
-		});
-		$("#chatButton").click(function() {
-			location.href = '/chat/main';
-		});
-	});
-	
-	
-	
-	/* /TEST */
-
 	</script>
 </html>

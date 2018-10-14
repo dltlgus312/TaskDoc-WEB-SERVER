@@ -38,13 +38,13 @@ var id='<%=loginid%>';
 					</div>
 					<div class="modal-footer">
 						<input type="hidden" name="isEmpty">
-						<button type="button" class="btn btn-success btn-icon"
+						<button type="button" class="btn" style="background-color:#ed8151;color:white;border:0px;outline:none;"
 							onclick="noticeCreate()">
-							<i class="fa fa-check"></i> Create Notice
+							Create Notice
 						</button>
-						<button type="button" class="btn btn-default btn-icon"
+						<button type="button" class="btn" style="background-color:#ed8151;color:white;border:0px;outline:none;"
 							onclick="noticeCancel()">
-							<i class="fa fa-times-circle"></i> Cancel
+							Cancel
 						</button>
 					</div>
 				</div>

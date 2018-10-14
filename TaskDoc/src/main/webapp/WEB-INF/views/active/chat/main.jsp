@@ -49,14 +49,14 @@ $(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
 					<%@include file="/WEB-INF/views/active/project/fix/pro_header.jsp"%>
 
 					<!-- CHAT CONTENTS  -->
-					<div  id="chatcontainer" style="width: 100%; height: 93%; display:-webkit-box; ">
+					<div  id="chatcontainer" style="width: 100%; height: 87%; display:-webkit-box; ">
 						
 						<div id="leftchatlist" style="width:15%; height:100%;" >
-							<div id="chatADD" style="width:100%;height:5%; border:solid 1px blue;" class="">
+							<div id="chatADD" style="width:100%;height:5%;" class="">
 								<img data-toggle="tootlip" data-placement="right" title="채팅방 만들기" id="chatadd" src="${pageContext.request.contextPath }/resources/img/img_chatadd.png" style="height:100%;cursor: pointer;">
 							</div>
-							<div id="chatlistTOP" style="width:100%;height:15%; border:solid 1px blue;"></div>
-							<div id="chatlistBOTTOM" style="width:100%;height:80%; border:solid 1px blue;overflow:auto;"></div>
+							<div id="chatlistTOP" style="width:100%;height:15%;"></div>
+							<div id="chatlistBOTTOM" style="width:100%;height:80%;overflow:auto;"></div>
 						</div>
 						
 						<div id="rightchatlist" style="width: 85%; height: 100%;">

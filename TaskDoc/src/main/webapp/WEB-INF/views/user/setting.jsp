@@ -44,7 +44,7 @@ var id='<%=loginid%>';
 
 						<div class="container">
 							<h2>관 리</h2>
-							<p>자네가 올린 게시물과 자료를 관리할 수 있습니다.</p>
+							<p>자신이 업로드한 게시글과 자료를 관리할 수 있습니다.</p>
 
 							<ul class="nav nav-tabs">
 								<li class="active"><a data-toggle="tab" href="#myboard">내가 올린 게시물</a></li>

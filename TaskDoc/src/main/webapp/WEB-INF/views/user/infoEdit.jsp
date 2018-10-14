@@ -50,8 +50,8 @@ var id='<%=loginid%>';
 						</div>
 						<div id="3" class="bts" style="width: 100%;">
 							<span>비밀번호</span> <input id="upasswd"
-								style="width: 80%; margin-top: 5px;" type="text"
-								class="form-control" readonly="readonly">
+								style="width: 80%; margin-top: 5px;" type="password"
+								class="form-control">
 						</div>
 						<div id="4" class="bts" style="width: 100%;">
 							<span>이름</span> <input id="uname"

@@ -329,6 +329,7 @@ function ptCreate(){
 		obj.tcolor = $("#color"+sendArray[i].tcode).val();
 		obj.tsdate = $("#psdate"+sendArray[i].tcode).val();
 		obj.tedate = $("#pedate"+sendArray[i].tcode).val();
+		obj.tpercent=0,
 		obj.pcode=parseInt(<%=pcode%>);
 		list.push(obj);
 		obj=new Object();
@@ -344,7 +345,15 @@ function ptCreate(){
 			if (response.length > 0) {
 				alert('공용업무 생성 완료! 프로젝트의 공용업무의 id값은' + response);
 				
-					stompClient.send('/app/project/'+pcode, {},JSON.stringify(response));
+				//stomp 서버전송
+				var peram={
+						 'message' : 'insert',
+						 'type' : 'publictasks',
+						 'object' :{
+							 		'list' : response 
+							}
+					 };
+					stompClient.send('/app/project/'+pcode, {},JSON.stringify(peram));
 					window.close();
 					
 			} else  {

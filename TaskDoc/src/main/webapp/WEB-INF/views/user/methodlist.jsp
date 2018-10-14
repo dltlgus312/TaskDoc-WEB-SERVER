@@ -18,8 +18,8 @@
 	<thead>
 		<tr style="width:100%;">
 			<th style="width: 20%;">게시글 코드</th>
-			<th style="width: 50%;">방법론 제목</th>
-			<th style="width: 30%;">★</th>
+			<th style="width: 47%;">방법론 제목</th>
+			<th style="width: 33%;">★</th>
 		</tr>
 	</thead>
 	<tbody id="tbodys">
@@ -34,7 +34,9 @@ $.ajax({
 		if(response.length>0){
 			for(var i=0;i<response.length;i++){
 				var $div='<tr><td style="vertical-align:middle;">'+response[i].mbcode+'</td>'
-				+'<td style="bts">'+response[i].mltitle+'</td><td><button onclick="goBoard('+response[i].mbcode+')" class="btn" style="outline:none;border:0px;background-color:#ed8151;color:white;">해당 게시글로 이동</button></td></tr>'
+				+'<td style="bts">'+response[i].mltitle+'</td>'
+				+'<td><button onclick="goBoard('+response[i].mbcode+')" class="btn" style="outline:none;border:0px;background-color:#ed8151;color:white;margin-right:5px;">'
+				+'게시글로 이동</button><button onclick="deleteMethod('+response[i].mbcode+')" class="btn" style="outline:none;border:0px;background-color:#ed8151;color:white;">삭제</button></td></tr>'
 				$("#tbodys").append($div);
 			}
 		}else{
@@ -51,6 +53,33 @@ function goBoard(mbcode){
 	if(confirm('해당 방법론이있는 게시글로 이동하시겠습니까?')==true){
 		window.close();
 		opener.location.href="/methodboard/view?mbcode="+mbcode;
+	}
+	else return;
+}
+
+function deleteMethod(mbcode){
+	if(confirm('저장된 방법론을 삭제 하시겠습니까?')==true){
+		var param = {
+				'uid' : '<%=loginid%>',
+				'mbcode' : mbcode,
+			};
+			$.ajax({
+				type : 'DELETE',
+				url : '/methodlist',
+				contentType : 'application/json',
+				data : JSON.stringify(param),
+				success : function(response) {
+					if (response>0) {
+						alert('나의 방법론 리스트 삭제 완료되었습니다.' + response);
+						location.reload();
+					} else{
+						alert('나의 방법론 리스트 삭제가 실패 되었습니다.');
+					}
+				},
+				error : function(e) {
+					alert("ERROR : " + e.statusText);
+				}
+			});
 	}
 	else return;
 }

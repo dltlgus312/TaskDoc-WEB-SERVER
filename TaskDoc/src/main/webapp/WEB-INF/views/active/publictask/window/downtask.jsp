@@ -19,7 +19,7 @@ $(document).ready(function(){
 		success : function(response) {
 			if (Object.keys(response).length > 0) {
 					if(chatpermission=="OWNER"){
-						var $append = '<div onclick="downtasklist('+response.tcode+', $(this).parent()[0].id)" id="publictask'+response.tcode+'" style="margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
+						var $append = '<div data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="downtasklist('+response.tcode+', $(this).parent()[0].id)" id="publictask'+response.tcode+'" style="margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
 						+'<div  style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response.tcolor+';"><span>'+ 1 +'. : '+response.ttitle+','+response.tcode+'</span></div>'
 						+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 						+'<div style="margin-left:20px;" id="chart'+response.tcode+'" class="progress-pie-chart" data-percent="'+response.tpercent+'">'
@@ -33,7 +33,7 @@ $(document).ready(function(){
 					}
 					
 				  else if(chatpermission=="MEMBER"){
-						var $append = '<div onclick="downtasklist('+response.tcode+', $(this).parent()[0].id)" id="publictask'+response.tcode+'" style="margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
+						var $append = '<div data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="downtasklist('+response.tcode+', $(this).parent()[0].id)" id="publictask'+response.tcode+'" style="margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
 						+'<div  style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response.tcolor+';"><span>'+ 1 +'. : '+response.ttitle+','+response.tcode+'</span></div>'
 						+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 						+'<div style="margin-left:20px;" id="chart'+response.tcode+'" class="progress-pie-chart" data-percent="'+response.tpercent+'">'
@@ -94,7 +94,7 @@ $(document).ready(function(){
 					for(var i=0;i<response.length;i++){
 						if(chatpermission=="OWNER"){
 							if(response[i].tsdate!=null && response[i].tedate!=null){
-								var $bppend = '<div id="publictask'+response[i].tcode+'" style="margin-bottom:10px; height: 200px; background-color: white;" onclick="downtasklist('+response[i].tcode+', $(this).parent()[0].id)">'
+								var $bppend = '<div id="publictask'+response[i].tcode+'" style="margin-bottom:10px; height: 200px; background-color: white;" data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="downtasklist('+response[i].tcode+', $(this).parent()[0].id)">'
 								+'<div onclick="" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : '+response[i].ttitle+','+response[i].tcode+'</span></div>'
 								+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 								+'<div style="margin-left:20px;" id="chart'+response[i].tcode+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'">'
@@ -102,7 +102,7 @@ $(document).ready(function(){
 								+'<div class="ppc-progress-fill" id="fill'+response[i].tcode+'"></div></div>'
 								+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].tcode +'">%</span></div></div></div>'
 								+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span></div><div class="bts">'
-								+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;font-size:12px; margin-right:5px;" class="btn" type="button" onclick="downtaskcreate(\''+response[i].tsdate+ ',' +response[i].tedate+'\','+response[i].tcode+')">하위업무생성</button>'
+								+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;font-size:12px; margin-right:5px;" class="btn" type="button" data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="downtaskcreate(\''+response[i].tsdate+ ',' +response[i].tedate+'\','+response[i].tcode+')">하위업무생성</button>'
 								+'<button style="border:0px;outline:none;color:white;background-color:#ed8151; font-size:12px; margin-right:5px;" class="btn" onclick= "ptedit(\''+response.tsdate+ ',' +response[i].tedate+'\','+response[i].tcode+')" type="button">수정</button>'
 								+'<button style="border:0px;outline:none;color:white;background-color:#ed8151; font-size:12px;" class="btn" type="button" onclick="ptdel('+response[i].tcode+')">삭제</button></div></div></div></div>';
 							}
@@ -110,7 +110,7 @@ $(document).ready(function(){
 						
 						else if(chatpermission=="MEMBER"){
 							if(response[i].tsdate!=null && response[i].tedate!=null){
-								var $bppend = '<div id="publictask'+response[i].tcode+'" style="margin-bottom:10px; height: 200px; background-color: white;" onclick="downtasklist('+response[i].tcode+', $(this).parent()[0].id)">'
+								var $bppend = '<div id="publictask'+response[i].tcode+'" style="margin-bottom:10px; height: 200px; background-color: white;" data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="downtasklist('+response[i].tcode+', $(this).parent()[0].id)">'
 								+'<div onclick="" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : '+response[i].ttitle+','+response[i].tcode+'</span></div>'
 								+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 								+'<div style="margin-left:20px;" id="chart'+response[i].tcode+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'">'
