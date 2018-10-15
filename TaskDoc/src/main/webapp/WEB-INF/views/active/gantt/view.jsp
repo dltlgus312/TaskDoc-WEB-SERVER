@@ -4,8 +4,10 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/fix/header.jsp"%>
-<script src="${pageContext.request.contextPath }/resources/js/project/jsgantt.js"></script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/project/jsgantt.css" >
+<script
+	src="${pageContext.request.contextPath }/resources/js/project/jsgantt.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/resources/css/project/jsgantt.css">
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
@@ -19,11 +21,12 @@ var id='<%=loginid%>';
 	}
 //pro_header.jsp , pro_header.js 에서 <script>태그 안에서 변수 사용가능하다.	
 var pcode=<%=pcode%>;
-$(function(){
-	$(".gantt_hover").css('color','#ed8151').css('border-bottom','1px solid #ed8151');
-	$(".chat_hover").css('color','#6d6d6d').css('border-bottom','none');
-	$(".ptask_hover").css('color','#6d6d6d').css('border-bottom','none');
-	$(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
+	$(function() {
+		$(".gantt_hover").css('color', '#ed8151').css('border-bottom',
+				'1px solid #ed8151');
+		$(".chat_hover").css('color', '#6d6d6d').css('border-bottom', 'none');
+		$(".ptask_hover").css('color', '#6d6d6d').css('border-bottom', 'none');
+		$(".files_hover").css('color', '#6d6d6d').css('border-bottom', 'none');
 	});
 </script>
 
@@ -51,8 +54,8 @@ $(function(){
 					<%@include file="/WEB-INF/views/active/project/fix/pro_header.jsp"%>
 
 					<!-- CHAT CONTENTS  -->
-					<div  style="width: 100%; height: 93%;">
-					<div style="position:relative" class="gantt" id="GanttChartDIV"></div>
+					<div style="width: 100%; height: 93%;">
+						<div style="position:relative" class="gantt" id="GanttChartDIV"></div>
 					</div>
 				</div>
 
@@ -65,118 +68,129 @@ $(function(){
 	</div>
 	<!--FRAME  -->
 </body>
-
 <script type="text/javascript">
-
 //tsdate!=null tedate!=null인 array 담기
 var parrays=new Array();
-
 //정렬된 array
 var realplist=new Array();
-var g = new JSGantt.GanttChart('g',document.getElementById('GanttChartDIV'), 'day');
-g.setShowRes(1); // Show/Hide Responsible (0/1)
-g.setShowDur(1); // Show/Hide Duration (0/1)
-g.setShowComp(1); // Show/Hide % Complete(0/1)
-g.setCaptionType('Resource');  // Set to Show Caption
-g.setDateInputFormat('yyyy-mm-dd')  // Set format of input dates ('mm/dd/yyyy', 'dd/mm/yyyy', 'yyyy-mm-dd')
-g.setDateDisplayFormat('yyyy-mm-dd') // Set format to display dates ('mm/dd/yyyy', 'dd/mm/yyyy', 'yyyy-mm-dd')
-	$(function(){		
-			$.ajax({
-				type : 'GET',
-				url : '/publictask/' + pcode,
-				success : function(response) {
-					if (response.length>0) {
-						alert('공용 업무 조회 성공!');
-						for(var i=0;i<response.length;i++){
-							if(response[i].tsdate!=null && response[i].tedate!=null){
-								parrays=response[i];
-							    goSort(parrays);
-							}
-						}
-						goGantt();
-					} else {
-						alert('Server or Client ERROR, 공용 업무 조회 실패');
-					}
-				},
-				error : function(e) {
-					alert("ERROR : " + e.statusText);
-				}
-			});
-			
-			//정렬하는 함수
-			function goSort(parrays){
-				// 최상단 이라면 그냥 추가 하고 리턴..
-		        if (parrays.tcode == parrays.trefference) {
-		            realplist.push(parrays);
-		            return;
-		        }
-			
-		        // 같은걸 참조하는 동급 업무중 순서도(시퀀스) 가 제일큰 업무 찾기
-		        var max = null;
-		        for (var i=0;i<realplist.length;i++) {
-		            if (realplist[i].trefference == parrays.trefference) {
-		                max = realplist[i];
-		            }
-		        }
-			 
-		        // 찾지 못했다면 부모를 찾아서 부모 바로 아래에 추가..
-		        if (max == null) {
-		            for (var j=0;j<realplist.length; j++) {
-		                if (realplist[j].tcode == parrays.trefference) {
-		                    realplist.splice(j+1,0,parrays);
-		                    console.log(realplist);
-		                    return;
-		                }
-		            }
-		        }
-			
-		        // 찾았다면 그의 자식이 있는지 재귀함수로 찾는다..
-		        else {
-		        	var chMax=null;
-		            chMax = findMaxTask(max, realplist);
-		            if (chMax == null) realplist.splice(realplist.indexOf(max) + 1, 0 , parrays);
-		            else realplist.add(realplist.indexOf(chMax) + 1, 0 , max);
-		        }  
-			}
-			
-			//정렬하는 재귀 함수
-			function findMaxTask(vo, list){
-				var max=null;
-				var chMax=null;
-				
-				for (var i=0;i<list.length;i++) {
-			       if (vo != list[i] && vo.tcode == list[i].trefference) {
-			             max = list[i];
-			         }
-			     }
-			       if (max != null) {
-			    	   chMax = findMaxTask(max, list);
-			          if (chMax == null) return max;
-				        else return chMax;
-				   }
-			       return null; 
-			} 
-	});
-	
-	function goGantt(){
-		if( g ) { 
-			for(var i=0;i<realplist.length;i++){
-	 		g.AddTaskItem(new JSGantt.TaskItem(i, realplist[i].ttitle, realplist[i].tsdate, realplist[i].tedate, realplist[i].tcolor, '', 0, 'TaskDoc',realplist[i].tpercent, 0, 0, 1));
-			g.Draw();	
-			g.DrawDependencies();
-	 	}
-	}else alert("not defined");
-	
-	}
-		
- 
- 
- 
- 
- 			//'pid' , '제목' , '시작날짜' , '끝나는날짜', '색상' , '링크(비워놔도됨)' ,'끝냈는여부 0->진행중 1->종료' , '이름' , '퍼센트','업무접을지여부(0->안접음 1->접음)','부모pid(내가부모면 0)',1,'화살표표시'
-		   /*  g.AddTaskItem(new JSGantt.TaskItem(1,  '테스트1','2/20/2018', '6/10/2018', 'ff00ff', '', 0, 'Dongho1','', 1, 0, 1));
-		    g.AddTaskItem(new JSGantt.TaskItem(11, '테스트1-1','2/25/2018', '2/31/2018','00ff00', '', 0, 'Dongho1-1',40, 0, 1, 1,1));
-		    g.AddTaskItem(new JSGantt.TaskItem(12,'테스트1-2','2/25/2018', '2/31/2018','00ff00', '', 0, 'Dongho1-2',40, 0, 1, 1,1)); */
-</script>
+var sendArray=new Array();
+var step=new Array();
 
+$(function(){
+	//method item list 불러오기
+	$.ajax({
+		type : 'GET',
+		url : '/publictask/'+<%=pcode%>,
+		success : function(response) {
+			if (response.length > 0) {
+				alert('public list 조회 완료');
+				for(var i=0;i<response.length;i++){
+					if(response[i].tsdate!=null && response[i].tedate!=null){
+						  if(response[i].tcode == response[i].trefference) {
+							   response[i].trefference = 0;
+						   }
+						  parrays.push(response[i]);	
+					}
+				}
+				realplist = treeModel(parrays, 0);
+				listmake();
+				drawg();
+			}
+			else  {
+				alert('Server or Client ERROR, method item list 조회 실패');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+	var treeModel = function (arrayList, rootId) {
+		var rootNodes = [];
+		var traverse = function (nodes, item, index) {
+			if (nodes instanceof Array) {
+				return nodes.some(function (node) {
+					if (node.tcode === item.trefference) {
+						node.children = node.children || [];
+						return node.children.push(arrayList.splice(index, 1)[0]);
+					}
+	
+					return traverse(node.children, item, index);
+				});
+			}
+		};
+	
+		while (arrayList.length > 0) {
+			arrayList.some(function (item, index) {
+				if (item.trefference === rootId) {
+					return rootNodes.push(arrayList.splice(index, 1)[0]);
+				}
+	
+				return traverse(rootNodes, item, index);
+			});
+		}
+	
+		return rootNodes;
+	};
+	
+	function listmake(){
+		//for문으로 업무생성
+		 for(var i=0;i<realplist.length;i++){
+				if(realplist[i].children != null){
+					sendArray.push(realplist[i]);
+					step.push(i+1);
+					createListDiv(realplist[i].children, i+1);
+			 	} 
+				
+				else {	
+					sendArray.push(realplist[i]);
+					step.push(i+1);
+			}
+		}
+	}
+	
+	 
+	 function createListDiv(list, parrenti) {
+			for(var i= 0; i<list.length; i++) {
+				var str = parrenti +''+ (i+1);
+				if(list[i].children != null) {
+					sendArray.push(realplist[i]);
+					step.push(str);
+					createListDiv(list[i].children, str);
+				} else {
+					sendArray.push(realplist[i]);
+					step.push(str);
+				}
+			}
+		}
+	 function drawg(){
+		 var g = new JSGantt.GanttChart(document.getElementById('GanttChartDIV'), 'day');
+			for(var j=0;j<sendArray.length;j++){
+				 g.AddTaskItem(new JSGantt.TaskItem( parseInt(step[j]),   sendArray[j].ttitle+'',     '',           '',          'ggroupblack',  '',       0, 'Brian',    0,   1, 0,  1, '',      '',      'Some Notes text', g ));
+			}
+			g.Draw();
+	 }
+});
+
+	/* g.AddTaskItem(new JSGantt.TaskItem(1,   'Define Chart API',     '',           '',          'ggroupblack',  '',       0, 'Brian',    0,   1, 0,  1, '',      '',      'Some Notes text', g ));
+	g.AddTaskItem(new JSGantt.TaskItem(11,  'Chart Object',         '2016-02-20','2016-02-20', 'gmilestone',   '',       1, 'Shlomy',   100, 0, 1,  1, '',      '',      '',      g));
+	g.AddTaskItem(new JSGantt.TaskItem(12,  'Task Objects',         '',           '',          'ggroupblack',  '',       0, 'Shlomy',   40,  1, 1,  1, '',      '',      '',      g));
+	g.AddTaskItem(new JSGantt.TaskItem(121, 'Constructor Proc',     '2016-02-21','2016-03-09', 'gtaskblue',    '',       0, 'Brian T.', 60,  0, 12, 1, '',      '',      '',      g));
+	g.AddTaskItem(new JSGantt.TaskItem(122, 'Task Variables',       '2016-03-06','2016-03-11', 'gtaskred',     '',       0, 'Brian',    60,  0, 12, 1, 121,     '',      '',      g));
+	g.AddTaskItem(new JSGantt.TaskItem(123, 'Task by Minute/Hour',  '2016-03-09','2016-03-14 12:00', 'gtaskyellow', '',  0, 'Ilan',     60,  0, 12, 1, '',      '',      '',      g));
+	g.AddTaskItem(new JSGantt.TaskItem(124, 'Task Functions',       '2016-03-09','2016-03-29', 'gtaskred',     '',       0, 'Anyone',   60,  0, 12, 1, '123SS', 'This is a caption', null, g));
+	g.AddTaskItem(new JSGantt.TaskItem(2,   'Create HTML Shell',    '2016-03-24','2016-03-24', 'gtaskyellow',  '',       0, 'Brian',    20,  0, 0,  1, 122,     '',      '',      g));
+	g.AddTaskItem(new JSGantt.TaskItem(3,   'Code Javascript',      '',           '',          'ggroupblack',  '',       0, 'Brian',    0,   1, 0,  1, '',      '',      '',      g));
+	g.AddTaskItem(new JSGantt.TaskItem(31,  'Define Variables',     '2016-02-25','2016-03-17', 'gtaskpurple',  '',       0, 'Brian',    30,  0, 3,  1, '',      'Caption 1','',   g));
+	g.AddTaskItem(new JSGantt.TaskItem(32,  'Calculate Chart Size', '2016-03-15','2016-03-24', 'gtaskgreen',   '',       0, 'Shlomy',   40,  0, 3,  1, '',      '',      '',      g));
+	g.AddTaskItem(new JSGantt.TaskItem(33,  'Draw Task Items',      '',           '',          'ggroupblack',  '',       0, 'Someone',  40,  2, 3,  1, '',      '',      '',      g));
+	g.AddTaskItem(new JSGantt.TaskItem(332, 'Task Label Table',     '2016-03-06','2016-03-09', 'gtaskblue',    '',       0, 'Brian',    60,  0, 33, 1, '',      '',      '',      g));
+	g.AddTaskItem(new JSGantt.TaskItem(333, 'Task Scrolling Grid',  '2016-03-11','2016-03-20', 'gtaskblue',    '',       0, 'Brian',    0,   0, 33, 1, '332',   '',      '',      g));
+	g.AddTaskItem(new JSGantt.TaskItem(34,  'Draw Task Bars',       '',           '',          'ggroupblack',  '',       0, 'Anybody',  60,  1, 3,  0, '',      '',      '',      g));
+	g.AddTaskItem(new JSGantt.TaskItem(341, 'Loop each Task',       '2016-03-26','2016-04-11', 'gtaskred',     '',       0, 'Brian',    60,  0, 34, 1, '',      '',      '',      g));
+	g.AddTaskItem(new JSGantt.TaskItem(342, 'Calculate Start/Stop', '2016-04-12','2016-05-18', 'gtaskpink',    '',       0, 'Brian',    60,  0, 34, 1, '',      '',      '',      g));
+	g.AddTaskItem(new JSGantt.TaskItem(343, 'Draw Task Div',        '2016-05-13','2016-05-17', 'gtaskred',     '',       0, 'Brian',    60,  0, 34, 1, '',      '',      '',      g));
+	g.AddTaskItem(new JSGantt.TaskItem(344, 'Draw Completion Div',  '2016-05-17','2016-06-04', 'gtaskred',     '',       0, 'Brian',    60,  0, 34, 1, "342,343",'',     '',      g));
+	g.AddTaskItem(new JSGantt.TaskItem(35,  'Make Updates',         '2016-07-17','2017-09-04', 'gtaskpurple',  '',       0, 'Brian',    30,  0, 3,  1, '333',   '',      '',      g)); */
+
+</script>
 </html>
