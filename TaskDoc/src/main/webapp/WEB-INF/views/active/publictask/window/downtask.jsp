@@ -28,7 +28,7 @@ $(document).ready(function(){
 						+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response.tcode +'">%</span></div></div></div>'
 						+'<div><div><span>시작 날짜 : '+response.tsdate+'</span></div><div><span>종료 날짜 : '+response.tedate+'</span></div><div class="bts">'
 						+'<button style="border:0px;outline:none;color:white;background-color:#ed8151; font-size:12px; margin-right:5px;" class="btn" type="button" onclick="downtaskcreate(\''+response.tsdate+ ',' +response.tedate+'\','+response.tcode+')">하위업무생성</button>'
-						+'<button style="border:0px;outline:none;color:white;background-color:#ed8151; font-size:12px; margin-right:5px;" class="btn" onclick= "ptedit(\''+response.tsdate+ ',' +response.tedate+'\','+response.tcode+')" type="button">수정</button>'
+						+'<button style="border:0px;outline:none;color:white;background-color:#ed8151; font-size:12px; margin-right:5px;" class="btn" onclick= "ptedit(\''+response.tsdate+ ',' +response.tedate+','+response.tcolor+'\','+response.tcode+')" type="button">수정</button>'
 						+'<button style="border:0px;outline:none;color:white;background-color:#ed8151; font-size:12px;" class="btn" type="button" onclick="ptdel('+response.tcode+')">삭제</button></div></div></div></div>';
 					}
 					
@@ -103,7 +103,7 @@ $(document).ready(function(){
 								+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].tcode +'">%</span></div></div></div>'
 								+'<div><div><span>시작 날짜 : '+response[i].tsdate+'</span></div><div><span>종료 날짜 : '+response[i].tedate+'</span></div><div class="bts">'
 								+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;font-size:12px; margin-right:5px;" class="btn" type="button" data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="downtaskcreate(\''+response[i].tsdate+ ',' +response[i].tedate+'\','+response[i].tcode+')">하위업무생성</button>'
-								+'<button style="border:0px;outline:none;color:white;background-color:#ed8151; font-size:12px; margin-right:5px;" class="btn" onclick= "ptedit(\''+response.tsdate+ ',' +response[i].tedate+'\','+response[i].tcode+')" type="button">수정</button>'
+								+'<button style="border:0px;outline:none;color:white;background-color:#ed8151; font-size:12px; margin-right:5px;" class="btn" onclick= "ptedit(\''+response.tsdate+ ',' +response[i].tedate+','+response[i].tcolor+'\','+response[i].tcode+')" type="button">수정</button>'
 								+'<button style="border:0px;outline:none;color:white;background-color:#ed8151; font-size:12px;" class="btn" type="button" onclick="ptdel('+response[i].tcode+')">삭제</button></div></div></div></div>';
 							}
 						}

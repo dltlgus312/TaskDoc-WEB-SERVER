@@ -184,17 +184,61 @@ $(document).ready(function() {
 								$("#mymethodptcreatebtn").hide();
 	        			 }
 	        			 $("#publictaskBOTTOM").append($append);
-							
-							/* var a = $("#chart"+concat.object.tcode.toString());
-							var percent = parseInt(a.data('percent'));
-							var deg = 360 * percent / 100;
-								if (percent > 50) {
-									a.addClass("gt-50");
-								}
-							var b=$("#fill"+concat.object.tcode.toString());
-							b.css('transform', 'rotate(' + deg + 'deg)');
-							$('#num'+concat.object.tcode.toString()).html(percent + '%'); */
+	        			 
+	        			 var a = $("#chart"+concat.object.tcode.toString());
+	 					 var percent = parseInt(a.data('percent'));
+	 					 var deg = 360 * percent / 100;
+	 						if (percent > 50) {
+	 							a.addClass("gt-50");
+	 						}
+	 					 var b=$("#fill"+concat.object.tcode.toString());
+	 					 b.css('transform', 'rotate(' + deg + 'deg)');
+	 					 $('#num'+concat.object.tcode.toString()).html(percent + '%'); 
         	     	}
+        		}else if(concat.type=="publictasks"){
+        			for(var a=0;a<concat.object.response.length;a++){
+	        			if(concat.object.response[a].tcode==concat.object.response[a].trefference){
+		        			 if(chatpermission=="OWNER"){
+		        				 var $append = '<div id="publictask'+concat.object.response[a].tcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
+									+'<div data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="godowntask('+concat.object.response[a].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+concat.object.response[a].tcolor+';"><span>'+ 11 +'. : '+concat.object.response[a].ttitle+','+concat.object.response[a].tcode+'</span></div>'
+									+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
+									+'<div style="margin-left:20px;" id="chart'+concat.object.response[a].tcode+'" class="progress-pie-chart" data-percent="'+concat.object.response[a].tpercent+'">'
+									+'<div class="ppc-progress">'
+									+'<div class="ppc-progress-fill" id="fill'+concat.object.response[a].tcode+'"></div></div>'
+									+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ concat.object.response[a].tcode +'">%</span></div></div></div>'
+									+'<div><div><span>시작 날짜 : '+concat.object.response[a].tsdate+'</span></div><div><span>종료 날짜 : '+concat.object.response[a].tedate+'</span></div>'
+									+'<div class="bts"><button onclick="downtaskcreate(\''+concat.object.response[a].tsdate+ ',' +concat.object.response[a].tedate+'\','+concat.object.response[a].tcode+')" style="border:0px;outline:none;color:white;background-color:#ed8151; margin-right:5px; font-size:12px;" class="btn"type="button">하위 업무 생성</button>'
+									+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;margin-right:5px;font-size:12px;" class="btn" onclick= "ptedit(\''+concat.object.response[a].tsdate+ ',' +concat.object.response[a].tedate+'\','+concat.object.response[a].tcode+')" type="button">수정</button>'
+									+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;font-size:12px;" class="btn" type="button" onclick="ptdel('+concat.object.response[a].tcode+')">삭제</button></div></div></div></div>';
+									$("#ptcreatebtn").show();
+		        			 }
+		        			 else if(chatpermission=="MEMBER"){
+		        					var $append = '<div id="publictask'+concat.object.response[a].tcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
+									+'<div data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="godowntask('+concat.object.response[a].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+concat.object.response[a].tcolor+';"><span>'+ 11 +'. : '+concat.object.response[a].ttitle+','+concat.object.response[a].tcode+'</span></div>'
+									+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
+									+'<div style="margin-left:20px;" id="chart'+concat.object.response[a].tcode+'" class="progress-pie-chart" data-percent="'+concat.object.response[a].tpercent+'">'
+									+'<div class="ppc-progress">'
+									+'<div class="ppc-progress-fill" id="fill'+concat.object.response[a].tcode+'"></div></div>'
+									+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ concat.object.response[a].tcode +'">%</span></div></div></div>'
+									+'<div><div><span>시작 날짜 : '+concat.object.response[a].tsdate+'</span></div><div><span>종료 날짜 : '+concat.object.response[a].tedate+'</span>'
+									+'<div class="bts"><button style="border:0px;outline:none;color:white;background-color:#ed8151; margin-right:5px; font-size:12px;" class="btn" onclick= "privateCreate(\''+concat.object.response[a].tsdate+ ',' +concat.object.response[a].tedate+'\','+concat.object.response[a].tcode+')" type="button">개인업무생성</button></div><div></div></div></div></div>';
+									$("#ptcreatebtn").hide();
+									$("#methodptcreatebtn").hide();
+									$("#mymethodptcreatebtn").hide();
+		        			 }
+		        			 $("#publictaskBOTTOM").append($append);
+		        			 
+		        			var ab = $("#chart" + concat.object.response[a].tcode.toString());
+		 					var percent = parseInt(ab.data('percent'));
+		 					var deg = 360 * percent / 100;
+		 						if (percent > 50) {
+		 							ab.addClass("gt-50");
+		 						}
+		 					var b=$("#fill" + concat.object.response[a].tcode.toString());
+		 					b.css('transform', 'rotate(' + deg + 'deg)');
+		 					$('#num'+concat.object.response[a].tcode.toString()).html(percent + '%'); 
+       	     			}
+        			}
         		}
         	 }
         	 
@@ -226,15 +270,6 @@ $(document).ready(function() {
         			 $("#publictask"+concat.object.tcode).remove();
         		 }
         	 }
-        	 		var a = $("#chart"+concat.object.tcode.toString());
-					var percent = parseInt(a.data('percent'));
-					var deg = 360 * percent / 100;
-						if (percent > 50) {
-							a.addClass("gt-50");
-						}
-					var b=$("#fill"+concat.object.tcode.toString());
-					b.css('transform', 'rotate(' + deg + 'deg)');
-					$('#num'+concat.object.tcode.toString()).html(percent + '%'); 
          });
     });
     $('[data-toggle="tootlip"]').tooltip();

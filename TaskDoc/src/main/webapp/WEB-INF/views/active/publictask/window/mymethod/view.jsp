@@ -182,7 +182,7 @@ $(function() {
 					sendArray.push(realplist[i]);
 					$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+ (i+1) +'. '+realplist[i].ttitle+'</button>'
 					+'<input placeholder="공용 업무 제목을 입력해주세요." id="pttitle'+realplist[i].tcode+'" type="text"	class="form-control" maxlength="20">'
-					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+realplist[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+realplist[i].tcode+')" value="" style="width:60px;"> </p>'
+					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+realplist[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+realplist[i].tcode+')" value="'+realplist[i].tcolor+'" style="width:60px;"> </p>'
 					+'<div>시작날짜: <input class="hasDatepicker" type="text" name="cAcqDate" id="psdate'+realplist[i].tcode+'"><div>'
 					+'<div>종료날짜: <input class="hasDatepicker" type="text" name="cAceDate" id="pedate'+realplist[i].tcode+'"></div>';
 					$("#methodlistss").append($div);
@@ -213,7 +213,7 @@ $(function() {
 					sendArray.push(realplist[i]);
 			 		$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+(i+1)+'. '+realplist[i].ttitle+'</button>'
 					+'<input placeholder="공용 업무 제목을 입력해주세요." id="pttitle'+realplist[i].tcode+'" type="text"	class="form-control" maxlength="20">'
-					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+realplist[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+realplist[i].tcode+')" value="" style="width:60px;"> </p>'
+					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+realplist[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+realplist[i].tcode+')" value="'+realplist[i].tcolor+'" style="width:60px;"> </p>'
 					+'<div>시작날짜: <input class="hasDatepicker" type="text" name="cAcqDate" id="psdate'+realplist[i].tcode+'"><div>'
 					+'<div>종료날짜: <input class="hasDatepicker" type="text" name="cAceDate" id="pedate'+realplist[i].tcode+'"></div>';
 					$("#methodlistss").append($div);
@@ -250,7 +250,7 @@ $(function() {
 					sendArray.push(list[i]);
 					$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+/* (i+1) */str+'. '+list[i].ttitle+'</button>'
 					+'<input placeholder="공용 업무 제목을 입력해주세요." id="pttitle'+list[i].tcode+'" type="text"	class="form-control" maxlength="20">'
-					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+list[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+list[i].tcode+')" value="" style="width:60px;"> </p>'
+					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+list[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+list[i].tcode+')" value="'+list[i].tcolor+'" style="width:60px;"> </p>'
 					+'<div>시작날짜: <input class="hasDatepicker" type="text" name="cAcqDate" id="psdate'+list[i].tcode+'"><div>'
 					+'<div>종료날짜: <input class="hasDatepicker" type="text" name="cAceDate" id="pedate'+list[i].tcode+'"></div>';
 					$("#methodlistss").append($div);
@@ -279,7 +279,7 @@ $(function() {
 					sendArray.push(list[i]);
 					$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+str+'. '+list[i].ttitle+'</button>'
 					+'<input placeholder="공용 업무 제목을 입력해주세요." id="pttitle'+list[i].tcode+'" type="text"	class="form-control" maxlength="20">'
-					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+list[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+list[i].tcode+')" value="" style="width:60px;"> </p>'
+					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+list[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+list[i].tcode+')" value="'+list[i].tcolor+'" style="width:60px;"> </p>'
 					+'<div>시작날짜: <input class="hasDatepicker" type="text" name="cAcqDate" id="psdate'+list[i].tcode+'"><div>'
 					+'<div>종료날짜: <input class="hasDatepicker" type="text" name="cAceDate" id="pedate'+list[i].tcode+'"></div>';
 					$("#methodlistss").append($div);
@@ -355,13 +355,13 @@ function ptCreate(){
 				alert('공용업무 생성 완료! 프로젝트의 공용업무의 id값은' + response);
 				
 				for(var i=0;i<response.length;i++){
-					stompsend.push({
+					var stompsend = {
 						'message' : 'insert',
 						'type' : 'publictasks',
 						'object': {
 							response
 						}
-					});
+					};
 				}
 				stompClient.send('/app/project/'+realpcode, {},JSON.stringify(stompsend));
 					

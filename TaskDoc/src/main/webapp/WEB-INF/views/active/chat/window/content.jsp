@@ -44,7 +44,7 @@ $(function(){
 						if(response[i].uid=='<%=loginid%>'){
 							//일반 대화
 							if(response[i].dmcode == 0 && response[i].dscode == 0 && response[i].crcoderef==0){
-								$delist='<div style="width:100%;height:100px;">'
+								$delist='<div  style="width:100%;height:100px;">'
 									    +'<div style="float:right; background-color: cornsilk; width:50%;border-radius:20px;">'
 					   					+'<div><span style="margin-left:8px;">'+response[i].uid+'('+chatpermission+') : </span></div>'
 					   					+'<div><span style="margin-left:8px;">'+response[i].ccontents+'</span></div><div><span style="margin-left:8px;"">'+response[i].cdate+'</span></div></div></div>';
@@ -125,8 +125,9 @@ $(function(){
 		}
 	});
 	
+	 $( "#chatcontentdiv"+<%=crcode %> ).scrollTop( 300 );
 });
-</script>
+</script> 
 
 <!--채팅방 클릭시 나와야할 div들  -->
 <div id="chatmenu" style="width:100%%; height:100%;">
@@ -412,7 +413,9 @@ $(function(){
 	$("#keyword").keyup(function() {
 		var k = $(this).val();
 		console.log(k);
-        })
+        });
+	
+	 $( "#chatcontentdiv"+<%=crcode %> ).scrollTop( 300 );
 });
 //메뉴버튼열기, param - crcode
 function menubtn(code, crmode){
