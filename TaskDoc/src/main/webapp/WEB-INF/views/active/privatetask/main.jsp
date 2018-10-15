@@ -79,7 +79,7 @@ $(function(){
 				for(var i=0;i<response.length;i++){
 					if(response[i].ptcode==response[i].ptrefference){
 						var $append = '<div id="publictask'+response[i].ptcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
-						+'<div id="color'+response[i].ptcode+'" onclick="godowntask('+response[i].ptcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].ptcolor+';"><span>'+ (i+1) +'. : '+response[i].pttitle+','+response[i].ptcode+'</span></div>'
+						+'<div id="color'+response[i].ptcode+'" onclick="godowntask('+response[i].ptcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].ptcolor+';"><span>'+ (i+1) +'. : '+response[i].pttitle+'</span></div>'
 						+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 						+'<div style="margin-left:20px;" id="chart'+response[i].ptcode+'" class="progress-pie-chart" data-percent="'+response[i].ptpercent+'">'
 						+'<div class="ppc-progress">'

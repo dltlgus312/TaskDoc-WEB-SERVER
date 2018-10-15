@@ -104,7 +104,7 @@ $(document).ready(function() {
 							+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].tcode +'">%</span></div></div></div>'
 							+'<div><div><span id="tsdate'+response[i].tcode+'">시작 날짜 : '+response[i].tsdate+'</span></div><div><span id="tedate'+response[i].tcode+'">종료 날짜 : '+response[i].tedate+'</span></div>'
 							+'<div class="bts"><button onclick="downtaskcreate(\''+response[i].tsdate+ ',' +response[i].tedate+'\','+response[i].tcode+')" style="border:0px;outline:none;color:white;background-color:#ed8151; margin-right:5px; font-size:12px;" class="btn"type="button">하위 업무 생성</button>'
-							+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;margin-right:5px;font-size:12px;" class="btn" onclick= "ptedit(\''+response[i].tsdate+ ',' +response[i].tedate+'\','+response[i].tcode+')" type="button">수정</button>'
+							+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;margin-right:5px;font-size:12px;" class="btn" onclick= "ptedit(\''+response[i].tsdate+ ',' +response[i].tedate+',' + response[i].tcolor + '\','+response[i].tcode+')" type="button">수정</button>'
 							+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;font-size:12px;" class="btn" type="button" onclick="ptdel('+response[i].tcode+')">삭제</button></div></div></div></div>';
 							$("#ptcreatebtn").show();
 						}
@@ -205,8 +205,18 @@ $(document).ready(function() {
         	 		$("#tsdate" + concat.object.tcode).text('시작 날짜 : '+concat.object.tsdate);
         	 		$("#tedate" + concat.object.tcode).text('종료 날짜 : '+concat.object.tedate);
         	 		$("#color" + concat.object.tcode).css('border', '3px solid #'+concat.object.tcolor);
-        	 		$("#chart" + concat.object.tcode).attr("data-percent", concat.object.tpercent);
+        	 		$("#chart" + concat.object.tcode).attr("data-percent", parseInt(concat.object.tpercent));
         	 		alert(concat.object.tpercent);
+        	 		
+        	 		var a = $("#chart"+concat.object.tcode.toString());
+					var percent = parseInt(a.data('percent'));
+					var deg = 360 * percent / 100;
+						if (percent > 50) {
+							a.addClass("gt-50");
+						}
+					var b=$("#fill"+concat.object.tcode.toString());
+					b.css('transform', 'rotate(' + deg + 'deg)');
+					$('#num'+concat.object.tcode.toString()).html(percent + '%'); 
         	 		
         	 	}
         	 }
@@ -278,7 +288,7 @@ $(document).ready(function() {
 	 list = date.split(',');
 	 
 	 if(confirm('업무를 수정하시겠습니까?')==true){
-			window.open("/project/publicTask/edit?tsdate="+list[0]+"&tedate="+list[1]+"&tcode="+tcode+"&pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+			window.open("/project/publicTask/edit?tsdate="+list[0]+"&tedate="+list[1]+"&tcolor="+list[2]+"&tcode="+tcode+"&pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 	 }
 	 else return;
  }

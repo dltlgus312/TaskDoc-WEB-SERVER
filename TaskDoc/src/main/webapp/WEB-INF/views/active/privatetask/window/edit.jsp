@@ -83,6 +83,7 @@
 </body>
 
 <script type="text/javascript">
+var mycolor="";
 //개인 업무 정보받아오기
 $(document).ready(function() {
 	$.ajax({
@@ -92,7 +93,8 @@ $(document).ready(function() {
 			if (Object.keys(response).length>0) {
 				alert('개인업무 조회 완료!');
 				$("#pttitle").val(response.pttitle);
-				$("#ptcolor").val(response.ptcolor);
+				$(".jscolor").val(response.ptcolor);
+				mycolor=response.ptcolor;
 				$("#ptsdate").val(response.ptsdate);
 				$("#ptedate").val(response.ptedate);
 				$("#ptpercent").val(response.ptpercent);
@@ -110,7 +112,6 @@ $(document).ready(function() {
 });
 
 
-var mycolor="";
 	 
 function update(jscolor) {
     // 'jscolor' instance can be used as a string

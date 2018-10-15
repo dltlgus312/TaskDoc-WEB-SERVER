@@ -25,6 +25,7 @@
 	String pcode = request.getParameter("pcode");
 	String tsdate = request.getParameter("tsdate");
 	String tedate = request.getParameter("tedate");
+	String tcolor = request.getParameter("tcolor");
 %>
 
 
@@ -90,6 +91,7 @@
 
 <script type="text/javascript">
 var pcode=<%=pcode%>;
+var mycolor="";
 //공용업무 정보받아오기
 $(document).ready(function() {
 	$.ajax({
@@ -99,7 +101,8 @@ $(document).ready(function() {
 			if (Object.keys(response).length>0) {
 				alert('공용업무 조회 완료!');
 				$("#pttitle").val(response.ttitle);
-				$("#ptcolor").val(response.tcolor);
+				$(".jscolor").val(response.tcolor);
+				mycolor=response.tcolor;
 				$("#ptsdate").val(response.tsdate);
 				$("#ptedate").val(response.tedate);
 				$("#ptpercent").val(response.tpercent);
@@ -117,7 +120,6 @@ $(document).ready(function() {
 });
 
 
-var mycolor="";
 function update(jscolor) {
     // 'jscolor' instance can be used as a string
     $("#rect").css('background-color','#'+jscolor);
@@ -210,16 +212,7 @@ function edit(){
 					var peram={
 							 'message' : 'update',
 							 'type' : 'publictaskvo',
-							 'object' :{
-									 'ttitle' : $("#pttitle").val(),
-									 'tcolor' :  mycolor,
-								 	 'tsdate' : $("#ptsdate").val(),
-									 'tedate' : $("#ptedate").val(),
-									 'tpercent' : $("#ptpercent").val(),
-									 'trefference' : $("#ptrefference").val(),
-									 'tsequence' : $("#ptsequence").val(),
-									 'tcode' : <%=tcode%>
-								}
+							 'object' : param
 						 };
 						stompClient.send('/app/project/'+pcode, {},JSON.stringify(peram));
 				} else{

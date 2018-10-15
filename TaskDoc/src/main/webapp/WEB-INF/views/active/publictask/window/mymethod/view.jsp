@@ -355,24 +355,15 @@ function ptCreate(){
 				alert('공용업무 생성 완료! 프로젝트의 공용업무의 id값은' + response);
 				
 				for(var i=0;i<response.length;i++){
-
 					stompsend.push({
 						'message' : 'insert',
 						'type' : 'publictasks',
 						'object': {
-							'tcode' : response[i].tcode,
-							'ttitle' : response[i].ttitle,
-							'tcolor' : response[i].tcolor,
-							'tsdate' : response[i].tsdate,
-							'tpercent' : response[i].tpercent,
-							'tsequence' : response[i].tsequence,
-							'trefference' :response[i].trefference,
-							'pcode' : response[i].pcode
+							response
 						}
 					});
 				}
 				stompClient.send('/app/project/'+realpcode, {},JSON.stringify(stompsend));
-				window.close(); 
 					
 			} else  {
 				alert('Server or Client ERROR, 공용업무 생성 실패');
