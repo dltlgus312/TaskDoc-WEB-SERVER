@@ -211,7 +211,7 @@ $(document).ready(function(){
 	        dsicode=radioVal.split(',');
 	         
 	     	var param = {
-	     		'dsicode' : dsicode[0],
+	     		'dsicode' : parseInt(dsicode[0]),
 	     		'uid' : '<%=loginid%>'
 	     	};
 	     	$.ajax({
@@ -229,7 +229,7 @@ $(document).ready(function(){
 	     			}
 	     		},
 	     		error : function(e) {
-	     			alert("ERROR : " + e.statusText);
+	     			alert("ERRORㅎㅎㅎㅎㅎㅎ : " + e.statusText);
 	     		}
 	     	});
 		});	
