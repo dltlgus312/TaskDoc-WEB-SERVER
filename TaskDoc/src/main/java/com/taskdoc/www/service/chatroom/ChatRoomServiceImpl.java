@@ -96,7 +96,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 			joinDao.chatRoomJoinInsert(chatRoomJoinVo);
 		}
 
-		return chatRoomVo;
+		return roomDao.chatRoomView(chatRoomVo.getCrcode());
 
 	}
 

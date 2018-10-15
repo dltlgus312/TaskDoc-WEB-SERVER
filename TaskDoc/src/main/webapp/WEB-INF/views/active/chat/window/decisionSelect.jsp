@@ -251,7 +251,6 @@ $(document).ready(function(){
 	     			}
 	     		},
 	     		error : function(e) {
-	     			alert("ERROR ?? : " + e.statusText);
 	     		}
 	     	});
 		});	

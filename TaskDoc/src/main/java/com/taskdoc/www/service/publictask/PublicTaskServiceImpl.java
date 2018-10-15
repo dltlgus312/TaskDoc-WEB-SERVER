@@ -68,6 +68,30 @@ public class PublicTaskServiceImpl implements PublicTaskService{
 		dao.publicTaskUpdate(publicTaskVo);
 		return tcode;
 	}
+	
+	@Override
+	@Transactional
+	public List<PublicTaskVO> publicTaskInsertMulti(List<PublicTaskVO> vos){
+		
+		Map<Integer, Integer> maps = new HashMap<>();
+		
+		for(PublicTaskVO vo : vos) {
+			
+			// 폴더 (OUTPUT) 이라면 건너뛴다.
+			if(vo.getTsdate() == null) continue;
+			
+			if(maps.containsKey(vo.getTrefference())) {
+				vo.setTrefference(maps.get(vo.getTrefference()));
+			} else {
+				vo.setTrefference(0);
+			}
+			
+			int tcode = vo.getTcode();
+			maps.put(tcode, publicTaskInsert(vo));
+		}
+		
+		return vos;
+	}
 
 	@Override
 	public int publicTaskUpdate(PublicTaskVO publicTaskVo) {
@@ -93,7 +117,5 @@ public class PublicTaskServiceImpl implements PublicTaskService{
 	public PublicTaskVO publicTaskView(int tcode) {
 		return dao.publicTaskView(tcode);
 	}
-
-
 
 }
