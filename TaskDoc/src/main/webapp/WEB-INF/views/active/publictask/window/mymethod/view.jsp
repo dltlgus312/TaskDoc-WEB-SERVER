@@ -23,9 +23,11 @@
 	String tsdate=request.getParameter("tsdate");
 	String tedate=request.getParameter("tedate");
 	String mbcode=request.getParameter("tedate");
+	String realpcode=request.getParameter("realpcode");
 %>
 
 <script type="text/javascript">
+var realpcode=parseInt(<%=realpcode%>);
 var id='<%=loginid%>';
 	if (id == "null") {
 		alert('로그인이 필요한 페이지입니다.');
@@ -78,7 +80,8 @@ stompClient = Stomp.over(socket);
 var mycolor="";
 var fixpsdate='<%=tsdate%>';
 var fixpedate='<%=tedate%>';
-
+//스톰프전송
+var stompsend=[];
 
 //tsdate!=null tedate!=null인 array 담기
 var parrays=new Array();
@@ -321,16 +324,22 @@ function Cancel(){
 	window.close();
 } 
 function ptCreate(){
-	
 	var list=new Array();
 	var obj=new Object();
 	for(var i=0; i<sendArray.length; i++){
+		
+		obj.tcode=sendArray[i].tcode;
+		if(sendArray[i].trefference==0){
+			obj.trefference = sendArray[i].tcode;
+		}else{
+			obj.trefference = sendArray[i].trefference;
+		}
 		obj.ttitle = $("#pttitle"+sendArray[i].tcode).val();
 		obj.tcolor = $("#color"+sendArray[i].tcode).val();
 		obj.tsdate = $("#psdate"+sendArray[i].tcode).val();
 		obj.tedate = $("#pedate"+sendArray[i].tcode).val();
-		obj.tpercent=0,
-		obj.pcode=parseInt(<%=pcode%>);
+		obj.tpercent=0;
+		obj.pcode=realpcode;;
 		list.push(obj);
 		obj=new Object();
 	}
@@ -338,23 +347,32 @@ function ptCreate(){
 	//전송
 	$.ajax({
 		type : 'POST',
-		url : '/publictask',
+		url : '/publictask/multiple',
 		contentType : 'application/json',
 		data : JSON.stringify(list),
 		success : function(response) {
 			if (response.length > 0) {
 				alert('공용업무 생성 완료! 프로젝트의 공용업무의 id값은' + response);
 				
-				//stomp 서버전송
-				var peram={
-						 'message' : 'insert',
-						 'type' : 'publictasks',
-						 'object' :{
-							 		'list' : response 
-							}
-					 };
-					stompClient.send('/app/project/'+pcode, {},JSON.stringify(peram));
-					window.close();
+				for(var i=0;i<response.length;i++){
+
+					stompsend.push({
+						'message' : 'insert',
+						'type' : 'publictasks',
+						'object': {
+							'tcode' : response[i].tcode,
+							'ttitle' : response[i].ttitle,
+							'tcolor' : response[i].tcolor,
+							'tsdate' : response[i].tsdate,
+							'tpercent' : response[i].tpercent,
+							'tsequence' : response[i].tsequence,
+							'trefference' :response[i].trefference,
+							'pcode' : response[i].pcode
+						}
+					});
+				}
+				stompClient.send('/app/project/'+realpcode, {},JSON.stringify(stompsend));
+				window.close(); 
 					
 			} else  {
 				alert('Server or Client ERROR, 공용업무 생성 실패');

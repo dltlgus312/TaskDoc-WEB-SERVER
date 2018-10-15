@@ -153,21 +153,25 @@ $(function(){
 			for(var i= 0; i<list.length; i++) {
 				var str = parrenti +''+ (i+1);
 				if(list[i].children != null) {
-					sendArray.push(realplist[i]);
+					sendArray.push(list[i]);
 					step.push(str);
 					createListDiv(list[i].children, str);
 				} else {
-					sendArray.push(realplist[i]);
+					sendArray.push(list[i]);
 					step.push(str);
 				}
 			}
 		}
+	 
 	 function drawg(){
-		 var g = new JSGantt.GanttChart(document.getElementById('GanttChartDIV'), 'day');
-			for(var j=0;j<sendArray.length;j++){
-				 g.AddTaskItem(new JSGantt.TaskItem( parseInt(step[j]),   sendArray[j].ttitle+'',     '',           '',          'ggroupblack',  '',       0, 'Brian',    0,   1, 0,  1, '',      '',      'Some Notes text', g ));
+		console.log(sendArray);
+		   var g = new JSGantt.GanttChart(document.getElementById('GanttChartDIV'), 'day');
+			for(var j=0;j<realplist.length;j++){
+				var tsdate=realplist[j].tsdate; 
+				var tedate=realplist[j].tedate; 
+				g.AddTaskItem(new JSGantt.TaskItem( parseInt(step[j]),  'test',tsdate,tedate,          'ggroupblack',  '',       0, 'Brian',    0,   1, 0,  1, '',      '',      'Some Notes text', g ));
 			}
-			g.Draw();
+			g.Draw(); 
 	 }
 });
 

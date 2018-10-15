@@ -195,7 +195,7 @@ function ptCreate(){
 	console.log(list);
 	console.log(JSON.stringify(list));
 	
-	/* 
+	
 	//공용 업무 생성 
 	var param = {
 		'ttitle' : $("#pttitle").val(),
@@ -239,7 +239,7 @@ function ptCreate(){
 		error : function(e) {
 			alert("ERROR : " + e.statusText);
 		}
-	}); */
+	}); 
 }
 
 function gomethodlists(){

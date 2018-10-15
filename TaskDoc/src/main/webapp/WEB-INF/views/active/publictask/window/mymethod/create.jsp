@@ -17,6 +17,7 @@
 	loginid = (String) session.getAttribute("loginid");
 	String tsdate=request.getParameter("tsdate");
 	String tedate=request.getParameter("tedate");
+	String realpcode=request.getParameter("realpcode");
 %>
 
 <script type="text/javascript">
@@ -107,7 +108,7 @@ function mymethodview(mbcode){
 		var posT=( screenH-popH ) / 2; 
 		var popW = 500; 
 		var popH = 800; 
-		window.open("/project/mymethod/publicTask/view?tsdate="+tsdate+"&tedate="+tedate+"&pcode="+pcode+"&mbcode="+mbcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
+		window.open("/project/mymethod/publicTask/view?tsdate="+tsdate+"&tedate="+tedate+"&pcode="+pcode+"&mbcode="+mbcode+"&realpcode="+<%=realpcode%>,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 		window.close(); 
  }
 </script>
