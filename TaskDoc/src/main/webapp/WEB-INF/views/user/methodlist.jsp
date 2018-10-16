@@ -70,7 +70,7 @@ function deleteMethod(mbcode){
 				data : JSON.stringify(param),
 				success : function(response) {
 					if (response>0) {
-						alert('나의 방법론 리스트 삭제 완료되었습니다.' + response);
+						alert('나의 방법론 리스트가 삭제 되었습니다.');
 						location.reload();
 					} else{
 						alert('나의 방법론 리스트 삭제가 실패 되었습니다.');

@@ -102,7 +102,7 @@ $(document).ready(function() {
 					}
 				}
 			} else if (response.length == 0) {
-				alert('Server or Client ERROR, 공용업무 리스트 불러오기 실패');
+				alert('Server or Client ERROR, 공용업무 리스트 불러오기에 실패 했습니다.');
 			}
 		},
 		error : function(e) {
@@ -195,7 +195,7 @@ function folderDel(tcode){
 			url : '/publictask/' + tcode,
 			success : function(response) {
 				if (response>0) {
-					alert('공용업무 삭제 성공!');
+					alert('공용업무 삭제에 성공 했습니다.');
 					var peram={
 							 'message' : 'delete',
 							 'type' : 'publictaskvo',
@@ -205,7 +205,7 @@ function folderDel(tcode){
 						 };
 					stompClient.send('/app/project/'+pcode, {},JSON.stringify(peram));
 				} else{
-					alert('Server or Client ERROR, 폴더 삭제 실패');
+					alert('Server or Client ERROR, 폴더 삭제에 실패 했습니다.');
 				}
 			},
 			error : function(e) {

@@ -99,7 +99,7 @@ $(document).ready(function() {
 		url : '/publictask/publicTaskView/'+<%=tcode%>,
 		success : function(response) {
 			if (Object.keys(response).length>0) {
-				alert('공용업무 조회 완료!');
+				alert('공용업무 조회가 완료 되었습니다.');
 				$("#pttitle").val(response.ttitle);
 				$(".jscolor").val(response.tcolor);
 				mycolor=response.tcolor;
@@ -109,7 +109,7 @@ $(document).ready(function() {
 				$("#ptsequence").val(response.tsequence);
 				$("#ptrefference").val(response.trefference);
 			} else {
-				alert('Server or Client ERROR, 공용업무 조회 실패');
+				alert('Server or Client ERROR, 공용업무 조회에 실패 했습니다.');
 			}
 		},
 		error : function(e) {
@@ -186,10 +186,6 @@ function cancel() {
 
 //공용업무 수정.
 function edit(){
-/* re = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
-	if(re.test($("#pttitle").val())){
-		alert('프로젝트 제목에 특수문자를 넣을 수 없 습ㄴ ㅣ 다!');
-	}else{ */
 		var param = {
 			'ttitle' : $("#pttitle").val(),
 			'tcolor' : mycolor,

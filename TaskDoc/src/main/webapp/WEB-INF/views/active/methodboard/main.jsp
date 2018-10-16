@@ -98,7 +98,6 @@
 				url : '/methodboard/all',
 				success : function(response) {
 						if (response.length > 0) {
-							alert('게시판 목록 전체 받아오기 성공! ' + response);
 							for(var i=0;i<response.length;i++){
 								var trtag = document.createElement("tr");
 								var td_idx=document.createElement("td");
@@ -153,7 +152,7 @@
 							$("#tbodys").append(trtag);
 							}
 					} else {
-						alert('Server or Client ERROR, 게시판 목록 전체 받아오기 실패');
+						alert('Server or Client ERROR, 게시판 목록이 존재하지 않습니다.');
 					}
 					},
 				error : function(e) {
@@ -175,10 +174,10 @@
 				url : '/methodboard/'+code,
 			success : function(response) {
 				if (response > 0) {
-					alert('게시글 삭제 완료! ' + response);
+					alert('게시글 삭제가 완료 되었습니다.');
 					location.href="/methodboard/main";
 				} else {
-					alert('Server or Client ERROR, 게시글 삭제 실패');
+					alert('Server or Client ERROR, 게시글 삭제에 실패 했습니다.');
 				}
 			},
 			error : function(e) {

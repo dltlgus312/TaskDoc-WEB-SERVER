@@ -104,7 +104,7 @@ $(function(){
 					
 					}
 				} else{
-				alert('Server or Client ERROR, 개인 업무 조회 실패');
+				alert('Server or Client ERROR, 개인 업무 조회에 실패 했습니다.');
 			}
 		},
 		error : function(e) {
@@ -122,10 +122,10 @@ function ptdel(ptcode){
 			url : '/privatetask/' + ptcode,
 			success : function(response) {
 				if (response == 1) {
-					alert('개인 업무 삭제 성공!');
+					alert('개인 업무가 삭제 되었습니다.');
 					location.reload();
 				} else if (response == -1) {
-					alert('Server or Client ERROR, 개인 업무 삭제 실패');
+					alert('Server or Client ERROR, 개인 업무 삭제에 실패 했습니다.');
 				}
 			},
 			error : function(e) {

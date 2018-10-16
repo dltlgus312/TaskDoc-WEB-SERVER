@@ -59,13 +59,12 @@ $(document).ready(function(){
 		url : '/notice/'+<%=nc%>,
 		success : function(response) {
 			if(Object.keys(response).length>0){
-				alert('불러오기성공');
 				$("#noticetitle").val(response.ntitle);
 				$(".asdf").text(response.ndate);
 				$("#noticecontents").val(response.ncontents);
 			}
 			else{
-				alert('실패')
+				alert('공지사항 상세보기에 실패 했습니다.')
 			}
 		},
 		error : function(e) {

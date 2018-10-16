@@ -21,7 +21,7 @@ $(document).ready(function(){
 				+'<div class="bts"><button onclick="downfoldercreate('+response.tcode+')" class="btn" style="background-color:#ed8151;color:white;outline:none;border:0px;" type="button">하위 폴더 생성</button></div></div>';
 				$("#LV1").append($plist);
 			} else {
-				alert('Server or Client ERROR, 공용업무 리스트 불러오기 실패');
+				alert('Server or Client ERROR, 공용업무 리스트 불러오기에 실패 했습니다.');
 			}
 		},
 		error : function(e) {
@@ -57,7 +57,7 @@ function downtasklist(tcode, curLv){
 						$("#LV"+downLv).append($bppend);
 						}
 				}else{
-					alert('Server or Client ERROR, 공용업무 리스트 불러오기 실패');
+					alert('Server or Client ERROR, 공용업무 리스트 불러오기에 실패 했습니다.');
 				}
 			},
 			error : function(e) {

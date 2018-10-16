@@ -134,7 +134,7 @@ $(document).ready(function() {
 					}
 				}
 			} else if (response.length == 0) {
-				alert('Server or Client ERROR, 공용업무 리스트 불러오기 실패');
+				alert('Server or Client ERROR, 공용업무 리스트 불러오기에 실패 했습니다.');
 			}
 		},
 		error : function(e) {
@@ -151,7 +151,6 @@ $(document).ready(function() {
          stompClient.subscribe('/project/'+pcode, function(msg) {
         	 var test=msg.body;
         	 var concat=JSON.parse(test);
-        	 alert(concat);
         	 if(concat.message=="insert"){
         		 if(concat.type=="publictaskvo"){
         	     	if(concat.object.tcode==concat.object.trefference){
@@ -250,7 +249,6 @@ $(document).ready(function() {
         	 		$("#tedate" + concat.object.tcode).text('종료 날짜 : '+concat.object.tedate);
         	 		$("#color" + concat.object.tcode).css('border', '3px solid #'+concat.object.tcolor);
         	 		$("#chart" + concat.object.tcode).attr("data-percent", parseInt(concat.object.tpercent));
-        	 		alert(concat.object.tpercent);
         	 		
         	 		var a = $("#chart"+concat.object.tcode.toString());
 					var percent = parseInt(a.data('percent'));
@@ -292,7 +290,7 @@ $(document).ready(function() {
 			url : '/publictask/' + tcode,
 			success : function(response) {
 				if (response>0) {
-					alert('공용업무 삭제 성공!');
+					alert('공용업무 삭제에 성공 했습니다.');
 					var peram={
 							 'message' : 'delete',
 							 'type' : 'publictaskvo',
@@ -302,7 +300,7 @@ $(document).ready(function() {
 						 };
 					stompClient.send('/app/project/'+pcode, {},JSON.stringify(peram));
 				} else{
-					alert('Server or Client ERROR, 공용업무 삭제 실패');
+					alert('Server or Client ERROR, 공용업무 삭제에 실패 했습니다.');
 				}
 			},
 			error : function(e) {
@@ -360,7 +358,6 @@ $(document).ready(function() {
 	 var popH = 400; 
 	 var list={};
 	 list=date.split(',');
-	 alert(list);
 	 window.open("/project/publicTask/downTaskCreate?tsdate="+list[0]+"&tedate="+list[1]+"&tcode="+tcode+"&pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
  	}
  

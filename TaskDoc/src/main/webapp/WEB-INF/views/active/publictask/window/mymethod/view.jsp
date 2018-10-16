@@ -125,7 +125,6 @@ $(function() {
 		url : '/publictask/'+pcode,
 		success : function(response) {
 			if (response.length > 0) {
-				alert('public list 조회 완료');
 				for(var i=0;i<response.length;i++){
 					if(response[i].tsdate!=null && response[i].tedate!=null){
 						  if(response[i].tcode == response[i].trefference) {
@@ -138,7 +137,7 @@ $(function() {
 				listmake();
 			}
 			else  {
-				alert('Server or Client ERROR, method item list 조회 실패');
+				alert('Server or Client ERROR, method item list 조회에 실패 했습니다.');
 			}
 		},
 		error : function(e) {
@@ -312,7 +311,6 @@ $(function() {
 
 
 function update(jscolor,code) {
-	alert(code);
     // 'jscolor' instance can be used as a string
     $("#rect").css('background-color','#'+jscolor);
     var removeData='#'+jscolor;
@@ -352,7 +350,7 @@ function ptCreate(){
 		data : JSON.stringify(list),
 		success : function(response) {
 			if (response.length > 0) {
-				alert('공용업무 생성 완료! 프로젝트의 공용업무의 id값은' + response);
+				alert('공용업무 생성이 완료 되었습니다.');
 				
 				for(var i=0;i<response.length;i++){
 					var stompsend = {
@@ -366,7 +364,7 @@ function ptCreate(){
 				stompClient.send('/app/project/'+realpcode, {},JSON.stringify(stompsend));
 					
 			} else  {
-				alert('Server or Client ERROR, 공용업무 생성 실패');
+				alert('Server or Client ERROR, 공용업무 생성이 실패 했습니다.');
 			}
 		},
 		error : function(e) {

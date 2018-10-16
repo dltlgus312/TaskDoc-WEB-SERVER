@@ -57,7 +57,7 @@ $(document).ready(function(){
 						$('#num'+response.tcode.toString()).html(percent + '%');
 						
 			} else {
-				alert('Server or Client ERROR, 공용업무 리스트 불러오기 실패');
+				alert('Server or Client ERROR, 공용업무 불러오기 실패 했습니다.');
 			}
 		},
 		error : function(e) {
@@ -81,7 +81,6 @@ $(document).ready(function(){
  function downtasklist(tcode, curLv){
 	 event.stopPropagation();
 	 var downLv = parseInt(curLv.substr(2)) + 1;
-	 alert(downLv);
 	 $("#"+curLv).nextAll().remove();
 	 $.ajax({
 			type : 'GET',
@@ -135,7 +134,7 @@ $(document).ready(function(){
 							
 						}
 				}else{
-					alert('Server or Client ERROR, 공용업무 리스트 불러오기 실패');
+					alert('Server or Client ERROR, 하위 공용업무가 존재하지 않습니다.');
 				}
 			},
 			error : function(e) {

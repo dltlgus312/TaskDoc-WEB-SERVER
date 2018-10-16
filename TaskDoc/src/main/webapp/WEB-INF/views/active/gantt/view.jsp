@@ -184,10 +184,12 @@ $(function(){
 				
 				
 				for(var j=0;j<sendArray.length;j++){
-					g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'ggroupblack','',0, 'Brian', 50,1,0, 1,'','','Some Notes text', g ));
+					alert(sendArray[j].ttitle);
+					g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'ggroupblack','www.naver.com',0, 'Brian', 50,1,0, 1,'','','Some Notes text', g ));
 				}
 				/* g.AddTaskItem(new JSGantt.TaskItem(11,  'Chart Object','2016-02-20','2016-02-20', 'gmilestone', '', 1,'Shlomy', 100, 0, 1,  1, '', '', '', g));
-				g.AddTaskItem(new JSGantt.TaskItem(12,  'Task Objects',         '',           '',          'ggroupblack',  '',       0, 'Shlomy',   40,  1, 1,  1, '',      '',      '',      g));
+				g.AddTaskItem
+				(new JSGantt.TaskItem(12,  'Task Objects',         '',           '',          'ggroupblack',  '',       0, 'Shlomy',   40,  1, 1,  1, '',      '',      '',      g));
 				g.AddTaskItem(new JSGantt.TaskItem(121, 'Constructor Proc',     '2016-02-21','2016-03-09', 'gtaskblue',    '',       0, 'Brian T.', 60,  0, 12, 1, '',      '',      '',      g));
 				g.AddTaskItem(new JSGantt.TaskItem(122, 'Task Variables',       '2016-03-06','2016-03-11', 'gtaskred',     '',       0, 'Brian',    60,  0, 12, 1, 121,     '',      '',      g));
 				g.AddTaskItem(new JSGantt.TaskItem(123, 'Task by Minute/Hour',  '2016-03-09','2016-03-14 12:00', 'gtaskyellow', '',  0, 'Ilan',     60,  0, 12, 1, '',      '',      '',      g));

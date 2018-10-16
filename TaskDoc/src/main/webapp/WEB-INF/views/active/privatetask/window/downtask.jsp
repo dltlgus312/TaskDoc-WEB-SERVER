@@ -43,7 +43,7 @@ $(document).ready(function(){
 						$('#num'+response.ptcode.toString()).html(percent + '%');
 						
 			} else {
-				alert('Server or Client ERROR, 개인업무 리스트 불러오기 실패');
+				alert('Server or Client ERROR, 개인업무가 존재하지 않습니다.');
 			}
 		},
 		error : function(e) {
@@ -57,7 +57,6 @@ $(document).ready(function(){
  function downtasklist(ptrefference, curLv){
 	 event.stopPropagation();
 	 var downLv = parseInt(curLv.substr(2)) + 1;
-	 alert(downLv);
 	 $("#"+curLv).nextAll().remove();
 	 $.ajax({
 			type : 'GET',
@@ -94,7 +93,7 @@ $(document).ready(function(){
 							
 						}
 				}else{
-					alert('Server or Client ERROR, 개인업무 리스트 불러오기 실패');
+					alert('Server or Client ERROR, 하위 개인업무가 존재하지 않습니다.');
 				}
 			},
 			error : function(e) {
