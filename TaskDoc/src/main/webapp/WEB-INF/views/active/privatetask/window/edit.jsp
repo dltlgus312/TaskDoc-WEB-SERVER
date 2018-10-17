@@ -149,18 +149,18 @@ $(function() {
 	};
 	$.datepicker.setDefaults($.datepicker.regional['ko']);
 
-	$('#psdate').datepicker();
-	$("#psdate").datepicker("option", "minDate", 0);
-	$('#psdate').datepicker("option", "maxDate", $("#toDate").val());
-	$('#psdate').datepicker("option", "onClose", function(selectedDate) {
-		$("#pedate").datepicker("option", "minDate", selectedDate);
+	$('#ptsdate').datepicker();
+	$("#ptsdate").datepicker("option", "minDate", 0);
+	$('#ptsdate').datepicker("option", "maxDate", $("#toDate").val());
+	$('#ptsdate').datepicker("option", "onClose", function(selectedDate) {
+		$("#ptedate").datepicker("option", "minDate", selectedDate);
 	});
 
-	$('#pedate').datepicker();
-	$("#pedate").datepicker("option", "minDate", 0);
-	$('#pedate').datepicker("option", "minDate", $("#psdate").val());
-	$('#pedate').datepicker("option", "onClose", function(selectedDate) {
-		$("#psdate").datepicker("option", "maxDate", selectedDate);
+	$('#ptedate').datepicker();
+	$("#ptedate").datepicker("option", "minDate", 0);
+	$('#ptedate').datepicker("option", "minDate", $("#psdate").val());
+	$('#ptedate').datepicker("option", "onClose", function(selectedDate) {
+		$("#ptsdate").datepicker("option", "maxDate", selectedDate);
 	});
 });
 

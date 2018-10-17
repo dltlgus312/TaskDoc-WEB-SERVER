@@ -7,6 +7,11 @@
 <%@include file="/WEB-INF/views/fix/header.jsp"%>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/resources/css/project/circleChart.css" />
+<script
+	src="${pageContext.request.contextPath }/resources/js/project/jsgantt.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/resources/css/project/jsgantt.css">
+	
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
@@ -50,13 +55,15 @@ $(document).ready(function(){
 					<div id="publictaskWRAP" style="width: 100%; /* height: 93%; */ padding-left:15px;">
 						<div id="publictaskTOP" class="bts" style="margin-bottom:30px;">
 							<span id="spans" style="font-size:30px;">개인 업무가 포함된 공용업무 리스트</span>
+							<div id="Zz">
+								<button id="gochart" type="button" class="btn" style="outline:none;border:0px;color:white;background-color:#ed8151;">간트차트로보기</button>
+							</div>
 						</div>	
 						
 						<div id="publictaskBOTTOM">
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 		<!-- FOOTER -->
@@ -110,6 +117,13 @@ $(function(){
 	});
 });
 
+$("#gochart").on('click',function(){
+	$("#spans").hide();
+	$("#gochart").hide();
+	$div='<button type="button" onclick="goptlist()"class="btn" style="outline:none;border:0px;color:white;background-color:#ed8151;margin-top:10px;">개인업무리스트로 돌아가기</button>';
+	$("#Zz").append($div);
+	$("#publictaskBOTTOM").load("/user/gantt/view");
+});
 //개인 업무 삭제
 function ptdel(ptcode){
 	 event.stopPropagation();
@@ -169,6 +183,11 @@ function godowntask(tcode){
 //모든 개인업무 리스트로 이동
 function gotasklist(){
 	 location.href='/project/privateTask/main';
+}
+
+function goptlist(){
+	 location.href='/project/privateTask/main';
+	
 }
 </script>
 

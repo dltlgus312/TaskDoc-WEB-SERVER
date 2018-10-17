@@ -193,9 +193,9 @@ $(function(){
 				for(var j=0;j<sendArray.length;j++){
 					if(sendArray[j].trefference == 0) {
 						if(sendArray[j].children != null)
-							g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'gtaskblue', 'alldocument?tcode='+sendArray[j].tcode+'&pcode='+<%=pcode%> +'&permission='+chatpermission , 0, 'TaskDoc', parseInt(sendArray[j].tpercent), 1, 0, 1,'','','Some Notes text', g ));
+							g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'gtaskgreen', 'alldocument?tcode='+sendArray[j].tcode+'&pcode='+<%=pcode%> +'&permission='+chatpermission , 0, 'TaskDoc', parseInt(sendArray[j].tpercent), 1, 0, 1,'','','Some Notes text', g ));
 						else
-							g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'gtaskblue','alldocument?tcode='+sendArray[j].tcode+'&pcode='+<%=pcode%> +'&permission='+chatpermission, 0, 'TaskDoc', parseInt(sendArray[j].tpercent), 0, 0, 1,'','','Some Notes text', g ));
+							g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'gtaskgreen','alldocument?tcode='+sendArray[j].tcode+'&pcode='+<%=pcode%> +'&permission='+chatpermission, 0, 'TaskDoc', parseInt(sendArray[j].tpercent), 0, 0, 1,'','','Some Notes text', g ));
 							
 					} else {
 						if(sendArray[j].children != null) {
@@ -205,7 +205,7 @@ $(function(){
 									prtstep = k;
 								}
 							}
-							g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'gtaskblue','alldocument?tcode='+sendArray[j].tcode+'&pcode='+<%=pcode%> +'&permission='+chatpermission, 0, 'TaskDoc', parseInt(sendArray[j].tpercent), 1, parseInt(step[prtstep]), 1,'','','Some Notes text', g ));
+							g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'gtaskgreen','alldocument?tcode='+sendArray[j].tcode+'&pcode='+<%=pcode%> +'&permission='+chatpermission, 0, 'TaskDoc', parseInt(sendArray[j].tpercent), 1, parseInt(step[prtstep]), 1,'','','Some Notes text', g ));
 						} else {
 							var prtstep = 0;
 							for(var k=0; k<sendArray.length; k++) {
@@ -214,7 +214,7 @@ $(function(){
 								}
 							}
 
-							g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'gtaskblue','alldocument?tcode='+sendArray[j].tcode+'&pcode='+<%=pcode%> +'&permission='+chatpermission, 0, 'TaskDoc', parseInt(sendArray[j].tpercent), 0, parseInt(step[prtstep]), 1,'','','Some Notes text', g ));
+							g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'gtaskgreen','alldocument?tcode='+sendArray[j].tcode+'&pcode='+<%=pcode%> +'&permission='+chatpermission, 0, 'TaskDoc', parseInt(sendArray[j].tpercent), 0, parseInt(step[prtstep]), 1,'','','Some Notes text', g ));
 						}
 					}
 					g.Draw();
@@ -234,6 +234,11 @@ $(function(){
 			$(".gstartdate").css('font-size','12.5px');
 			$(".genddate div").css('font-size','12.5px');
 			$(".gstartdate div").css('font-size','12.5px');
+			$(".ggroupcaption").css('font-size','13px');
+			$(".gcaption").css('font-size','13px');
+			$(".gtaskgreen").css('height','18px');
+			$(".gtaskgreencomplete").css('height','9px');
+
 	 }
 });
 </script>

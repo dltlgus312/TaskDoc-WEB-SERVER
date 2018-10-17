@@ -12,6 +12,7 @@ LV1
 <script type="text/javascript">
 
 $(document).ready(function(){
+	$("#gochart").hide();
 	//root 업무 한개 append
 	$("#publictaskBOTTOM").css('display','-webkit-box');
 	var peram={
