@@ -181,11 +181,26 @@ $(function(){
 				g.setShowEndWeekDate(0);
 				g.setUseSingleCell(10000);
 				g.setFormatArr('Day', 'Week', 'Month');
+				g.setUseSort(0);
 				
 				
 				for(var j=0;j<sendArray.length;j++){
-					alert("tsdate : "+sendArray[j].tsdate + "," +"tedate : "+sendArray[j].tedate);
-					g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'ggroupblack','www.naver.com',0, 'Brian', 50,1,0, 1,'','','Some Notes text', g ));
+					if(sendArray[j].trefference == 0) {
+						g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'gtaskblue','www.naver.com',0, 'Brian', parseInt(sendArray[j].tpercent), 1, 0, 1,'','','Some Notes text', g ));
+					} else {
+						if(sendArray[j].children != null) {
+							g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'gtaskblue','www.naver.com',0, 'Brian', parseInt(sendArray[j].tpercent), 1, parseInt(step[prtstep]), 1,'','','Some Notes text', g ));
+						} else {
+							var prtstep = 0;
+							for(var k=0; k<sendArray.length; k++) {
+								if(sendArray[j].trefference == sendArray[k].tcode) {
+									prtstep = k;
+								}
+							}
+							alert(step[prtstep]);
+							g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'gtaskblue','www.naver.com',0, 'Brian', parseInt(sendArray[j].tpercent), 0, parseInt(step[prtstep]), 1,'','','Some Notes text', g ));
+						}
+					}
 					g.Draw();
 				}
 				/* g.AddTaskItem(new JSGantt.TaskItem(11,  'Chart Object','2016-02-20','2016-02-20', 'gmilestone', '', 1,'Shlomy', 100, 0, 1,  1, '', '', '', g));
@@ -207,7 +222,8 @@ $(function(){
 				g.AddTaskItem(new JSGantt.TaskItem(342, 'Calculate Start/Stop', '2016-04-12','2016-05-18', 'gtaskpink',    '',       0, 'Brian',    60,  0, 34, 1, '',      '',      '',      g));
 				g.AddTaskItem(new JSGantt.TaskItem(343, 'Draw Task Div',        '2016-05-13','2016-05-17', 'gtaskred',     '',       0, 'Brian',    60,  0, 34, 1, '',      '',      '',      g));
 				g.AddTaskItem(new JSGantt.TaskItem(344, 'Draw Completion Div',  '2016-05-17','2016-06-04', 'gtaskred',     '',       0, 'Brian',    60,  0, 34, 1, "342,343",'',     '',      g));
-				g.AddTaskItem(new JSGantt.TaskItem(35,  'Make Updates',         '2016-07-17','2017-09-04', 'gtaskpurple',  '',       0, 'Brian',    30,  0, 3,  1, '333',   '',      '',      g));  */
+				g.AddTaskItem(new JSGantt.TaskItem(35,  'Make Updates',         '2016-07-17','2017-09-04', 'gtaskpurple',  '',       0, 'Brian',    30,  0, 3,  1, '333',   '',      '',      g)); 
+				g.Draw();*/
 			}
 	 }
 });

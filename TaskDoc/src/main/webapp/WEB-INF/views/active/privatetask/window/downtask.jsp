@@ -2,46 +2,56 @@
 	pageEncoding="UTF-8"%>
 
 <%
-String ptcode=request.getParameter("ptcode");
+String tcode=request.getParameter("tcode");
+String loginid = "";
+loginid = (String) session.getAttribute("loginid");
 %>
 <div id="LV1" style="width:24%; margin-right:1%;">
 LV1
 </div>
-
 <script type="text/javascript">
 
 $(document).ready(function(){
 	//root 업무 한개 append
 	$("#publictaskBOTTOM").css('display','-webkit-box');
+	var peram={
+			'uid' : '<%=loginid%>',
+			'tcode' : <%=tcode%>
+		 };
 	$.ajax({
-		type : 'GET',
-		url : '/privatetask/' + <%=ptcode%>,
+		type : 'POST',
+		url : '/privatetask/user/ptlist',
+		contentType : 'application/json',
+		data : JSON.stringify(peram),
 		success : function(response) {
-			if (Object.keys(response).length > 0) {
-						var $append = '<div onclick="downtasklist('+response.ptrefference+', $(this).parent()[0].id)" id="publictask'+response.ptcode+'" style="margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
-						+'<div  style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response.ptcolor+';"><span>'+ 1 +'. : '+response.pttitle+','+response.ptcode+'</span></div>'
+			if (response.length > 0) {
+				for(var i=0;i<response.length;i++){	
+					if(response[i].ptcode==response[i].ptrefference){
+						var $append = '<div onclick="downtasklist('+response[i].ptrefference+', $(this).parent()[0].id)" id="publictask'+response[i].ptcode+'" style="margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
+						+'<div  style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].ptcolor+';"><span>'+ (i+1) +'. : '+response[i].pttitle+'</span></div>'
 						+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
-						+'<div style="margin-left:20px;" id="chart'+response.ptcode+'" class="progress-pie-chart" data-percent="'+response.ptpercent+'">'
+						+'<div style="margin-left:20px;" id="chart'+response[i].ptcode+'" class="progress-pie-chart" data-percent="'+response[i].ptpercent+'">'
 						+'<div class="ppc-progress">'
-						+'<div class="ppc-progress-fill" id="fill'+response.ptcode+'"></div></div>'
-						+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response.ptcode +'">%</span></div></div></div>'
-						+'<div><div><span>시작 날짜 : '+response.ptsdate+'</span></div><div><span>종료 날짜 : '+response.ptedate+'</span></div><div class="bts">'                                  
-						+'<button class="btn" style="font-size:12px;outline:none;border:0px;color:white;background-color:#ed8151;margin-right:5px;" type="button" onclick="downtaskcreate(\''+response.ptsdate+','+response.ptedate+'\','+response.ptcode+','+response.tcode+')">하위업무생성</button>'
-						+'<button class="btn" style="font-size:12px; outline:none;border:0px;color:white;background-color:#ed8151;margin-right:5px;"type="button" onclick="goMemo('+response.ptcode+')">메모</button>'
-						+'<button onclick= "ptedit('+response.ptcode+')" type="button" class="btn" style="font-size:12px; outline:none;border:0px;color:white;background-color:#ed8151;margin-right:5px;">수정</button>'
-						+'<button class="btn" style="font-size:12px; outline:none;border:0px;color:white;background-color:#ed8151;margin-right:5px;"type="button" onclick="ptdel('+response.ptcode+')">삭제</button></div></div></div></div>';
+						+'<div class="ppc-progress-fill" id="fill'+response[i].ptcode+'"></div></div>'
+						+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].ptcode +'">%</span></div></div></div>'
+						+'<div><div><span>시작 날짜 : '+response[i].ptsdate+'</span></div><div><span>종료 날짜 : '+response[i].ptedate+'</span></div><div class="bts">'                                  
+						+'<button class="btn" style="font-size:12px;outline:none;border:0px;color:white;background-color:#ed8151;margin-right:5px;" type="button" onclick="downtaskcreate(\''+response[i].ptsdate+','+response[i].ptedate+'\','+response[i].ptcode+','+response[i].tcode+')">하위업무생성</button>'
+						+'<button class="btn" style="font-size:12px; outline:none;border:0px;color:white;background-color:#ed8151;margin-right:5px;"type="button" onclick="goMemo('+response[i].ptcode+')">메모</button>'
+						+'<button onclick= "ptedit('+response[i].ptcode+')" type="button" class="btn" style="font-size:12px; outline:none;border:0px;color:white;background-color:#ed8151;margin-right:5px;margin-top:5px;">수정</button>'
+						+'<button class="btn" style="font-size:12px; outline:none;border:0px;color:white;background-color:#ed8151;margin-right:5px;margin-top:5px;"type="button" onclick="ptdel('+response[i].ptcode+')">삭제</button></div></div></div></div>';
 						$("#LV1").append($append);
 						
-						var a = $("#chart"+response.ptcode.toString());
+						var a = $("#chart"+response[i].ptcode.toString());
 						var percent = parseInt(a.data('percent'));
 						var deg = 360 * percent / 100;
 							if (percent > 50) {
 								a.addClass("gt-50");
 							}
-						var b=$("#fill"+response.ptcode.toString());
+						var b=$("#fill"+response[i].ptcode.toString());
 						b.css('transform', 'rotate(' + deg + 'deg)');
-						$('#num'+response.ptcode.toString()).html(percent + '%');
-						
+						$('#num'+response[i].ptcode.toString()).html(percent + '%');
+					}
+				}
 			} else {
 				alert('Server or Client ERROR, 개인업무가 존재하지 않습니다.');
 			}
@@ -77,8 +87,8 @@ $(document).ready(function(){
 							+'<div><div><span>시작 날짜 : '+response[i].ptsdate+'</span></div><div><span>종료 날짜 : '+response[i].ptedate+'</span></div><div>'
 							+'<button class="btn" style="font-size:12px;outline:none;border:0px;color:white;background-color:#ed8151;margin-right:5px;" type="button" onclick="downtaskcreate(\''+response[i].ptsdate+','+response[i].ptedate+'\','+response[i].ptcode+','+response[i].tcode+')">하위업무생성</button>'
 							+'<button class="btn" style="font-size:12px; outline:none;border:0px;color:white;background-color:#ed8151;margin-right:5px;"type="button" onclick="goMemo('+response[i].ptcode+')">메모</button>'
-							+'<button onclick= "ptedit('+response[i].ptcode+')" type="button" class="btn" style="font-size:12px; outline:none;border:0px;color:white;background-color:#ed8151;margin-right:5px;">수정</button>'
-							+'<button class="btn" style="font-size:12px; outline:none;border:0px;color:white;background-color:#ed8151;margin-right:5px;"type="button" onclick="ptdel('+response[i].ptcode+')">삭제</button></div></div></div></div>';
+							+'<button onclick= "ptedit('+response[i].ptcode+')" type="button" class="btn" style="font-size:12px; outline:none;border:0px;color:white;background-color:#ed8151;margin-right:5px;margin-top:5px;">수정</button>'
+							+'<button class="btn" style="font-size:12px; outline:none;border:0px;color:white;background-color:#ed8151;margin-right:5px;margin-top:5px;"type="button" onclick="ptdel('+response[i].ptcode+')">삭제</button></div></div></div></div>';
 						
 						$("#LV"+downLv).append($bppend);
 						var c = $("#chart"+response[i].ptcode.toString());

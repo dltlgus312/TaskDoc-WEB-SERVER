@@ -192,10 +192,9 @@ function edit(){
 			contentType : 'application/json',
 			data : JSON.stringify(param),
 			success : function(response) {
-				if (response == 1) {
+				if (response >0) {
 					alert('개인 업무 수정이 완료 되었습니다.');
- 					opener.location.reload(); 
-				} else if (response == -1) {
+				} else{
 					alert('Server or Client ERROR, 개인 업무 수정이 실패 했습니다.');
 				}
 			},

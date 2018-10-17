@@ -11,4 +11,6 @@ public interface PrivateTaskService {
 	public int privateTaskupdate(PrivateTaskVO privateTaskVo);
 	public int privateTaskDelete(int ptcode);
 	public List<PrivateTaskVO> privateDownTask(int ptrefference);
+	public List<PrivateTaskVO> publicTaskList(String uid);
+	public List<PrivateTaskVO> multiPrivateTaskList(PrivateTaskVO privateTaskVO);
 }
