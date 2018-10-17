@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%
 String tcode=request.getParameter("tcode");
 %>
+<style>
+*{font-family:Title_Light;}
+</style>
 <div id="LV1" style="width:200px;">
 LV1
 </div>
@@ -17,7 +21,7 @@ $(document).ready(function(){
 				var $plist='<div data-toggle="tootlip" data-placement="bottom" title="하위 업무 파일 보기" onclick="downtasklist('+response.tcode+', $(this).parent()[0].id)" id="ptask'+response.tcode+'"'
 				+'style="width:140px;height:170px;   margin-right:20px; margin-top:20px; float:left;">'
 				+'<div style="width:100%;height:60%; cursor:pointer;"><img src="${pageContext.request.contextPath }/resources/img/img_filetask.png"style="width:100%;height:100%;"></div>'
-				+'<div style="width:100%;height:20%; text-align:center;cursor:pointer; "data-toggle="tootlip" data-placement="bottom" title="파일 다운로드 하기" onclick="gofileView('+response.tcode+')">'+response.ttitle+'</div>'
+				+'<div style="border :1px solid #ed8151;width:100%;height:20%; text-align:center;cursor:pointer; "data-toggle="tootlip" data-placement="bottom" title="파일 다운로드 하기" onclick="gofileView('+response.tcode+')">'+response.ttitle+'</div>'
 				+'<div class="bts"><button onclick="downfoldercreate('+response.tcode+')" class="btn" style="background-color:#ed8151;color:white;outline:none;border:0px;" type="button">하위 폴더 생성</button></div></div>';
 				$("#LV1").append($plist);
 			} else {
@@ -51,7 +55,7 @@ function downtasklist(tcode, curLv){
 					for(var i=0;i<response.length;i++){
 						var $bppend = '<div data-toggle="tootlip" data-placement="bottom" title="하위 업무 파일 보기" onclick="downtasklist('+response[i].tcode+', $(this).parent()[0].id)" id="ptask'+response.tcode+'" style="width:156px; height:172px;   margin-right:20px; margin-top:20px; float:left;">'
 						+'<div style="width:100%;height:60%; cursor:pointer;"><img src="${pageContext.request.contextPath }/resources/img/img_filetask.png"style="width:100%;height:100%;"></div>'
-						+'<div style="width:100%;height:20%; text-align:center;cursor:pointer; "data-toggle="tootlip" data-placement="bottom" title="파일 다운로드 하기" onclick="gofileView('+response[i].tcode+')">'+response[i].ttitle+'</div>'
+						+'<div style="border :1px solid #ed8151;width:100%;height:20%; text-align:center;cursor:pointer; "data-toggle="tootlip" data-placement="bottom" title="파일 다운로드 하기" onclick="gofileView('+response[i].tcode+')">'+response[i].ttitle+'</div>'
 						+'<div class="bts"><button onclick="downfoldercreate('+response[i].tcode+')" class="btn" style="margin-right:3px;background-color:#ed8151;color:white;outline:none;border:0px;" type="button">하위 폴더 생성</button>'
 						+'<button onclick="folderDel('+response[i].tcode+')" class="btn" style="border:0px;outline:none;background-color:#ed8151;color:white;" type="button">삭제</button></div></div>';
 						$("#LV"+downLv).append($bppend);

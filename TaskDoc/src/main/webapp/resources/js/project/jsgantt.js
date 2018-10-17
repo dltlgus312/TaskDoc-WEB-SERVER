@@ -331,7 +331,7 @@ JSGantt.GanttChart=function(pDiv, pFormat)
 			{'format':'Format','hour':'Hour','day':'Day','week':'Week','month':'Month','quarter':'Quarter','hours':'Hours','days':'Days',
 			 'weeks':'Weeks','months':'Months','quarters':'Quarters','hr':'Hr','dy':'Day','wk':'Wk','mth':'Mth','qtr':'Qtr','hrs':'Hrs',
 			 'dys':'Days','wks':'Wks','mths':'Mths','qtrs':'Qtrs','resource':'Resource','duration':'Duration','comp':'% Comp.',
-			 'completion':'Completion','startdate':'Start Date','enddate':'End Date','moreinfo':'More Information','notes':'Notes',
+			 'completion':'Completion','startdate':'Start Date','enddate':'End Date','moreinfo':'자료, 투표, 회의록 결과 보기','notes':'Notes',
 			 'january':'January','february':'February','march':'March','april':'April','maylong':'May','june':'June','july':'July',
 			 'august':'August','september':'September','october':'October','november':'November','december':'December','jan':'Jan',
 			 'feb':'Feb','mar':'Mar','apr':'Apr','may':'May','jun':'Jun','jul':'Jul','aug':'Aug','sep':'Sep','oct':'Oct','nov':'Nov',
@@ -1318,10 +1318,19 @@ JSGantt.GanttChart=function(pDiv, pFormat)
 			this.newNode(vTmpDiv, 'span', null, 'gTaskText', pTask.getResource());
 		}
 		if(vShowTaskInfoLink==1 && pTask.getLink()!=''){
+			
+			var screenW = screen.availWidth;  // 스크린 가로사이즈
+			var screenH = screen.availHeight; // 스크린 세로사이즈
+			var popW = 600; // 띄울창의 가로사이즈
+			var popH = 350; // 띄울창의 세로사이즈
+			var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
+			var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
+			
 			vTmpDiv=this.newNode(vTaskInfo, 'div', null, 'gTILine gTIl');
 			var vTmpNode=this.newNode(vTmpDiv, 'span', null, 'gTaskLabel');
 			vTmpNode=this.newNode(vTmpNode, 'a', null, 'gTaskText', vLangs[vLang]['moreinfo']);
-			vTmpNode.setAttribute('href',pTask.getLink());
+			vTmpNode.setAttribute('href','javascript:window.open("'+pTask.getLink()+'", "" , "width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no, scrollbars=no");');
+			
 		}
 		if(vShowTaskInfoNotes==1){
 			vTmpDiv=this.newNode(vTaskInfo, 'div', null, 'gTILine gTIn');
@@ -1330,7 +1339,8 @@ JSGantt.GanttChart=function(pDiv, pFormat)
 		}
 		return vTaskInfoBox;
 	};
-
+	
+	
 	this.getXMLProject=function()
 	{
 		var vProject='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';

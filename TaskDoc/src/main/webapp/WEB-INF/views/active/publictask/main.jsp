@@ -96,7 +96,7 @@ $(document).ready(function() {
 					if(response[i].tsdate!=null && !response[i].tedate!=null){
 						if(chatpermission=="OWNER"){
 							var $append = '<div id="publictask'+response[i].tcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
-							+'<div class="bts" data-toggle="tootlip" data-placement="right" title="하위 업무 보기" id="color'+response[i].tcode+'" onclick="godowntask('+response[i].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : </span><span id="ttitle'+response[i].tcode+'">'+response[i].ttitle+'</span><span>,'+response[i].tcode+'</span></div>'
+							+'<div class="bts" data-toggle="tootlip" data-placement="right" title="하위 업무 보기" id="color'+response[i].tcode+'" onclick="godowntask('+response[i].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : </span><span id="ttitle'+response[i].tcode+'">'+response[i].ttitle+'</span></div>'
 							+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 							+'<div style="margin-left:20px;" id="chart'+response[i].tcode+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'">'
 							+'<div class="ppc-progress">'
@@ -110,7 +110,7 @@ $(document).ready(function() {
 						}
 						else if(chatpermission=="MEMBER"){
 							var $append = '<div id="publictask'+response[i].tcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
-							+'<div class="bts" data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="godowntask('+response[i].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : </span><span>'+response[i].ttitle+'</span><span>,'+response[i].tcode+'</span></div>'
+							+'<div class="bts" data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="godowntask('+response[i].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : </span><span>'+response[i].ttitle+'</span></div>'
 							+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 							+'<div style="margin-left:20px;" id="chart'+response[i].tcode+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'">'
 							+'<div class="ppc-progress">'																		
@@ -156,7 +156,7 @@ $(document).ready(function() {
         	     	if(concat.object.tcode==concat.object.trefference){
 	        			 if(chatpermission=="OWNER"){
 	        				 var $append = '<div id="publictask'+concat.object.tcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
-								+'<div data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="godowntask('+concat.object.tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+concat.object.tcolor+';"><span>'+ 11 +'. : '+concat.object.ttitle+','+concat.object.tcode+'</span></div>'
+								+'<div data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="godowntask('+concat.object.tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+concat.object.tcolor+';"><span>'+ 11 +'. : '+concat.object.ttitle+'</span></div>'
 								+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 								+'<div style="margin-left:20px;" id="chart'+concat.object.tcode+'" class="progress-pie-chart" data-percent="'+concat.object.tpercent+'">'
 								+'<div class="ppc-progress">'
@@ -170,7 +170,7 @@ $(document).ready(function() {
 	        			 }
 	        			 else if(chatpermission=="MEMBER"){
 	        					var $append = '<div id="publictask'+concat.object.tcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
-								+'<div data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="godowntask('+concat.object.tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+concat.object.tcolor+';"><span>'+ 11 +'. : '+concat.object.ttitle+','+concat.object.tcode+'</span></div>'
+								+'<div data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="godowntask('+concat.object.tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+concat.object.tcolor+';"><span>'+ 11 +'. : '+concat.object.ttitle+'</span></div>'
 								+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 								+'<div style="margin-left:20px;" id="chart'+concat.object.tcode+'" class="progress-pie-chart" data-percent="'+concat.object.tpercent+'">'
 								+'<div class="ppc-progress">'
@@ -199,7 +199,7 @@ $(document).ready(function() {
 	        			if(concat.object.response[a].tcode==concat.object.response[a].trefference){
 		        			 if(chatpermission=="OWNER"){
 		        				 var $append = '<div id="publictask'+concat.object.response[a].tcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
-									+'<div data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="godowntask('+concat.object.response[a].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+concat.object.response[a].tcolor+';"><span>'+ 11 +'. : '+concat.object.response[a].ttitle+','+concat.object.response[a].tcode+'</span></div>'
+									+'<div data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="godowntask('+concat.object.response[a].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+concat.object.response[a].tcolor+';"><span>'+ 11 +'. : '+concat.object.response[a].ttitle+'</span></div>'
 									+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 									+'<div style="margin-left:20px;" id="chart'+concat.object.response[a].tcode+'" class="progress-pie-chart" data-percent="'+concat.object.response[a].tpercent+'">'
 									+'<div class="ppc-progress">'
@@ -213,7 +213,7 @@ $(document).ready(function() {
 		        			 }
 		        			 else if(chatpermission=="MEMBER"){
 		        					var $append = '<div id="publictask'+concat.object.response[a].tcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
-									+'<div data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="godowntask('+concat.object.response[a].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+concat.object.response[a].tcolor+';"><span>'+ 11 +'. : '+concat.object.response[a].ttitle+','+concat.object.response[a].tcode+'</span></div>'
+									+'<div data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="godowntask('+concat.object.response[a].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+concat.object.response[a].tcolor+';"><span>'+ 11 +'. : '+concat.object.response[a].ttitle+'</span></div>'
 									+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 									+'<div style="margin-left:20px;" id="chart'+concat.object.response[a].tcode+'" class="progress-pie-chart" data-percent="'+concat.object.response[a].tpercent+'">'
 									+'<div class="ppc-progress">'

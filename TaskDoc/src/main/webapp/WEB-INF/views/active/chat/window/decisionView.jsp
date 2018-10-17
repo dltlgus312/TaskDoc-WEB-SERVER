@@ -38,7 +38,7 @@ $(document).ready(function(){
 		<div class="row">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">종료된 투표 입ㅇ니다.</h4>
+					<h4 class="modal-title">종료된 투표 입니다.</h4>
 				</div>
 					<div class="modal-body">
 						<div class="form-group">

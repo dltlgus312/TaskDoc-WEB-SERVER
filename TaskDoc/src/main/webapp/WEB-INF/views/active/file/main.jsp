@@ -13,7 +13,9 @@
 	loginid = (String) session.getAttribute("loginid");
 	String pcode=request.getParameter("pcode");
 %>
-
+<style>
+*{font-family:Title_Light;}
+</style>
 <script type="text/javascript">
 var id='<%=loginid%>';
 	if (id == "null") {
@@ -88,7 +90,7 @@ $(document).ready(function() {
 						var $plist='<div id="plist'+response[i].tcode+'" style="width:10%;height:160px;  margin-right:20px; margin-top:20px; float:left;">'
 						+'<div style="width:100%;height:60%; cursor:pointer;"data-toggle="tootlip" data-placement="bottom" title="하위 업무 파일 보기" onclick="downtaskView(\''+folder+'\','+response[i].tcode+')">'
 						+'<img src="${pageContext.request.contextPath }/resources/img/img_filetask.png"style="width:100%;height:100%;"></div>'
-						+'<div style="width:100%;height:20%; text-align:center;cursor:pointer; " data-toggle="tootlip" data-placement="bottom" title="파일 다운로드 하기" onclick="gofileView('+response[i].tcode+')">'+response[i].ttitle+'</div>'
+						+'<div style="width:100%;height:20%; text-align:center;cursor:pointer; border :1px solid #ed8151;" data-toggle="tootlip" data-placement="bottom" title="파일 다운로드 하기" onclick="gofileView('+response[i].tcode+')">'+response[i].ttitle+'</div>'
 						+'<div class="bts"><button id="forderDels"onclick="folderDel('+response[i].tcode+')" class="btn" style="border:0px;outline:none;background-color:#ed8151;color:white;" type="button">삭제</button></div></div>';
 						$("#fileList").append($plist);
 					}
@@ -97,7 +99,7 @@ $(document).ready(function() {
 						var $plist='<div id="plist'+response[i].tcode+'" style="width:10%;height:120px; margin-right:20px; margin-top:20px; float:left;">'
 						+'<div style="width:100%;height:80%; cursor:pointer;" data-toggle="tootlip" data-placement="bottom" title="하위 폴더 파일 보기" onclick="downtaskView(\''+task+'\','+response[i].tcode+')">'
 						+'<img src="${pageContext.request.contextPath }/resources/img/img_filetask.png"style="width:100%;height:100%;"></div>'
-						+'<div style="width:100%;height:20%; text-align:center;cursor:pointer;" data-toggle="tootlip" data-placement="bottom" title="파일 다운로드 하기" onclick="gofileView('+response[i].tcode+')">'+response[i].ttitle+'</div></div>';
+						+'<div style="width:100%;height:20%; border :1px solid #ed8151; text-align:center;cursor:pointer;" data-toggle="tootlip" data-placement="bottom" title="파일 다운로드 하기" onclick="gofileView('+response[i].tcode+')">'+response[i].ttitle+'</div></div>';
 						$("#publictaskList").append($plist);
 					}
 				}

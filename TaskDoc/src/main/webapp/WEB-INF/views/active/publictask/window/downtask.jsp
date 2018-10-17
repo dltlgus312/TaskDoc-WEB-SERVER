@@ -20,7 +20,7 @@ $(document).ready(function(){
 			if (Object.keys(response).length > 0) {
 					if(chatpermission=="OWNER"){
 						var $append = '<div data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="downtasklist('+response.tcode+', $(this).parent()[0].id)" id="publictask'+response.tcode+'" style="margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
-						+'<div  style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response.tcolor+';"><span>'+ 1 +'. : '+response.ttitle+','+response.tcode+'</span></div>'
+						+'<div  style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response.tcolor+';"><span>'+ 1 +'. : '+response.ttitle+'</span></div>'
 						+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 						+'<div style="margin-left:20px;" id="chart'+response.tcode+'" class="progress-pie-chart" data-percent="'+response.tpercent+'">'
 						+'<div class="ppc-progress">'
@@ -34,7 +34,7 @@ $(document).ready(function(){
 					
 				  else if(chatpermission=="MEMBER"){
 						var $append = '<div data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="downtasklist('+response.tcode+', $(this).parent()[0].id)" id="publictask'+response.tcode+'" style="margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
-						+'<div  style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response.tcolor+';"><span>'+ 1 +'. : '+response.ttitle+','+response.tcode+'</span></div>'
+						+'<div  style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response.tcolor+';"><span>'+ 1 +'. : '+response.ttitle+'</span></div>'
 						+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 						+'<div style="margin-left:20px;" id="chart'+response.tcode+'" class="progress-pie-chart" data-percent="'+response.tpercent+'">'
 						+'<div class="ppc-progress">'
@@ -94,7 +94,7 @@ $(document).ready(function(){
 						if(chatpermission=="OWNER"){
 							if(response[i].tsdate!=null && response[i].tedate!=null){
 								var $bppend = '<div id="publictask'+response[i].tcode+'" style="margin-bottom:10px; height: 200px; background-color: white;" data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="downtasklist('+response[i].tcode+', $(this).parent()[0].id)">'
-								+'<div onclick="" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : '+response[i].ttitle+','+response[i].tcode+'</span></div>'
+								+'<div onclick="" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : '+response[i].ttitle+'</span></div>'
 								+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 								+'<div style="margin-left:20px;" id="chart'+response[i].tcode+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'">'
 								+'<div class="ppc-progress">'
@@ -110,7 +110,7 @@ $(document).ready(function(){
 						else if(chatpermission=="MEMBER"){
 							if(response[i].tsdate!=null && response[i].tedate!=null){
 								var $bppend = '<div id="publictask'+response[i].tcode+'" style="margin-bottom:10px; height: 200px; background-color: white;" data-toggle="tootlip" data-placement="right" title="하위 업무 보기" onclick="downtasklist('+response[i].tcode+', $(this).parent()[0].id)">'
-								+'<div onclick="" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : '+response[i].ttitle+','+response[i].tcode+'</span></div>'
+								+'<div onclick="" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : '+response[i].ttitle+'</span></div>'
 								+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
 								+'<div style="margin-left:20px;" id="chart'+response[i].tcode+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'">'
 								+'<div class="ppc-progress">'
