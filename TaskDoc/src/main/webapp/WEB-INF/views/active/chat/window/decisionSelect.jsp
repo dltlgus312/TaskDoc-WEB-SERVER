@@ -276,6 +276,7 @@ $(document).ready(function(){
 			success : function(response) {
 				if (response >0) {
 					alert('의사결정이 종료 되었습니다.'); //stomp
+					console.log(response);
 					var stompmsg={
 							 'message' : 'update',
 							 'type' : 'decisionvo',

@@ -184,8 +184,9 @@ $(function(){
 				
 				
 				for(var j=0;j<sendArray.length;j++){
-					alert(sendArray[j].ttitle);
+					alert("tsdate : "+sendArray[j].tsdate + "," +"tedate : "+sendArray[j].tedate);
 					g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'ggroupblack','www.naver.com',0, 'Brian', 50,1,0, 1,'','','Some Notes text', g ));
+					g.Draw();
 				}
 				/* g.AddTaskItem(new JSGantt.TaskItem(11,  'Chart Object','2016-02-20','2016-02-20', 'gmilestone', '', 1,'Shlomy', 100, 0, 1,  1, '', '', '', g));
 				g.AddTaskItem
@@ -207,7 +208,6 @@ $(function(){
 				g.AddTaskItem(new JSGantt.TaskItem(343, 'Draw Task Div',        '2016-05-13','2016-05-17', 'gtaskred',     '',       0, 'Brian',    60,  0, 34, 1, '',      '',      '',      g));
 				g.AddTaskItem(new JSGantt.TaskItem(344, 'Draw Completion Div',  '2016-05-17','2016-06-04', 'gtaskred',     '',       0, 'Brian',    60,  0, 34, 1, "342,343",'',     '',      g));
 				g.AddTaskItem(new JSGantt.TaskItem(35,  'Make Updates',         '2016-07-17','2017-09-04', 'gtaskpurple',  '',       0, 'Brian',    30,  0, 3,  1, '333',   '',      '',      g));  */
-				g.Draw(); 
 			}
 	 }
 });

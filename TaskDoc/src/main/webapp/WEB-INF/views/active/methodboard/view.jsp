@@ -161,7 +161,13 @@ var pcode;
 
 	//프로젝트의 방법론보기
 	function promethodInfo() {
-
+		var screenW = screen.availWidth;  // 스크린 가로사이즈
+		var screenH = screen.availHeight; // 스크린 세로사이즈
+		var popW = 500; // 띄울창의 가로사이즈
+		var popH = 500; // 띄울창의 세로사이즈
+		var posL=( screenW-popW ) / 2;   
+		var posT=( screenH-popH ) / 2;   
+		window.open("/methodboard/method/view?pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 	}
 	
 	//중복 오류 잡기..

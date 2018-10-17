@@ -115,13 +115,12 @@ function focusOK(){
 		data : JSON.stringify(param),
 		success : function(response) {
 			if (Object.keys(response).length>0) {
-				alert('채팅방 생성이 완료 되었습니다.);
-			
+				alert('채팅방 생성이 완료 되었습니다.');
 				opener.parent.focutest(response.crcode,response.crdate,response.crmode,response.fctitle,response.crclose,response.tcode,response.crcoderef);
-				
 				//채팅에 넣을것 -> chatcontents db  dmcode,dscode,crcoderef,crcode,dstitle
 				opener.parent.chattest(0,0,response.crcode,response.crcode,response.fctitle);
 				window.close();
+				
 				}
 			else if(response<0){
 				alert('Server or Client ERROR, 채팅방 생성에 실패 했습니다.');

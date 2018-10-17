@@ -40,7 +40,7 @@ $.ajax({
 				$("#tbodys").append($div);
 			}
 		}else{
-			alert('다운 받을 자료가 없습니다.');
+			alert('방법론 리스트가 존재하지 않습니다.');
 			window.close();
 		}
 	},

@@ -74,10 +74,21 @@
 			</div>
 		</div>
 	</div>
-
+	<input id="test" type="text" onkeyup="enterkey()">
+	
 </body>
 
 <script type="text/javascript">
+
+function enterkey(){
+	if(window.event.keyCode==13){
+		if($("#test").val()=="")
+			alert('채팅 내용을 입력해주세요.');
+		else
+			alert($("#test").val());
+	}
+}
+
 var b=new Array();
 var a=new Array();
 $(function() {

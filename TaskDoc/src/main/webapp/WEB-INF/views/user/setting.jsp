@@ -203,8 +203,7 @@ $(window).on(
 							for(var i=0;i<response.length;i++){
 								var $div='<tr><td>'+ (i+1) +'</td><td><a style="cursor:pointer;" onclick="documentView('+response[i].dmcode+')">'+response[i].dmtitle+'</a></td><td>'
 								+response[i].dmcontents+'</td><td>'+response[i].uid+'</td><td>'+response[i].dmdate+'</td>'
-								+'<td><img src="${pageContext.request.contextPath }/resources/img/img_boardsetting.png" style="width:20px;height:20px; cursor:pointer" onclick="documentEdit('+response[i].dmcode+')">'
-								+'<img src="${pageContext.request.contextPath }/resources/img/img_boarddelete.png" style="margin-left:20px;width:20px;height:20px;cursor:pointer"'
+								+'<td><img src="${pageContext.request.contextPath }/resources/img/img_boarddelete.png" style="margin-left:20px;width:20px;height:20px;cursor:pointer"'
 								+'onclick="documentDelete('+response[i].dmcode+')"></td></tr>';
 								$("#tbodyss").append($div);
 							}
