@@ -44,7 +44,6 @@
 			'mcontents' : $("#mcontents").val(),
 			'mcode' : <%=mcode%>
 		};
-		alert($("#mcontents").val());
 		alert(<%=mcode%>);
 		$.ajax({
 			type : 'PUT',
@@ -53,10 +52,10 @@
 			data : JSON.stringify(param),
 			success : function(response) {
 				if (response>0) {
-					alert('메모 수정 완료! 메모의 mcode값은' + response);
+					alert('메모 수정이완료 되었습니다.');
 					location.href='/project/memo/main?ptcode='+ptcode;
 				} else {
-					alert('Server or Client ERROR, 메모 수정 실패');
+					alert('Server or Client ERROR, 메모 수정에 실패 했습니다.');
 				}
 			},
 			error : function(e) {

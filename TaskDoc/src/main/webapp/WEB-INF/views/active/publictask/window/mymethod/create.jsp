@@ -56,7 +56,6 @@ $.ajax({
 	url : '/methodlist/'+id,
 	success : function(response) {
 		if (response.length > 0) {
-			alert('방법론 조회 완료!');
 			for(var i=0;i<response.length;i++){
 				$div='<tr><td>'+response[i].mbcode+'</td><td>'+response[i].mltitle+'</td>'
 				+'<td class="bts"><button class="btn" type="button" onclick="mymethodview('+response[i].mbcode+')" style="background-color:#ed8151;color:white;outline:none;border:0px;">방법론확인</button></td></tr>';
@@ -64,7 +63,7 @@ $.ajax({
 			}
 			
 		} else  {
-			alert('Server or Client ERROR, 방법론 조회  실패');
+			alert('Server or Client ERROR, 방법론 조회에  실패 했습니다.');
 		}
 	},
 	error : function(e) {
@@ -73,14 +72,13 @@ $.ajax({
 });
 	
 function mymethodview(mbcode){
-	alert(mbcode);
 	event.stopPropagation();
 	$.ajax({
 		type : 'GET',
 		url : '/methodboard/' + mbcode,
 		success : function(response) {
 			if (Object.keys(response).length > 0) {
-				alert('해당 게시글 조회 완료!' + response);
+				alert('해당 게시글 조회가 완료 되었습니다. ');
 				$("#tables").remove();
 				var $div='<table class="table table-striped table-hover" style="width:100%;"><thead><tr style="width:100%;"><th style="width: 10%;">번호</th>'
 				+'<th style="width: 30%;">제목</th><th style="width: 40%;">내용</th><th style="width: 20%;">ㅡ</th></tr></thead>'
@@ -88,7 +86,7 @@ function mymethodview(mbcode){
 				+'<td class="bts"><button onclick="gopublictask('+response.pcode+','+response.mbcode+')"type="button" class="btn" style="outline:none;border:0px;color:white;background-color:#ed8151;">방법론 추가하기</button></td></tr></tbody></table>';
 				$("#mymethod").append($div); 
 			} else  {
-				alert('Server or Client ERROR, 해당 게시글 조회 실패');
+				alert('Server or Client ERROR, 해당 게시글 조회에 실패 했습니다.');
 			}
 		},
 		error : function(e) {

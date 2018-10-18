@@ -26,6 +26,8 @@ public class PrivateTaskDAOImpl implements PrivateTaskDAO {
 	private final String SELFREFMAX = "selfRefMax";
 	private final String SAMEREFMAX = "sameRefMax";
 	private final String DOWNTASK="downtask";
+	private final String PLIST="plist";
+	private final String PTLIST="ptlist";
 
 	@Override
 	public List<PrivateTaskVO> privateTaskList(int tcode, String uid) {
@@ -97,5 +99,16 @@ public class PrivateTaskDAOImpl implements PrivateTaskDAO {
 	public List<PrivateTaskVO> privateDownTask(int ptrefference) {
 		return sql.selectList(NAMESPACE+DOWNTASK,ptrefference);
 	}
+
+	@Override
+	public List<PrivateTaskVO> publicTaskList(String uid) {
+		return sql.selectList(NAMESPACE+PLIST,uid);
+	}
+
+	@Override
+	public List<PrivateTaskVO> multiPrivateTaskList(PrivateTaskVO privateTaskVO) {
+		return sql.selectList(NAMESPACE+PTLIST,privateTaskVO);
+	}
+
 	
 }

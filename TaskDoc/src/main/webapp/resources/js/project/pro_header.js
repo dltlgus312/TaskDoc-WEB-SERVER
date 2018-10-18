@@ -174,7 +174,7 @@ var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션
 								}
 							}
 						} else if (response.length == 0) {
-							alert('Server or Client ERROR, 채팅방 리스트 조회 실패');
+							alert('Server or Client ERROR, 채팅방이 존재하지 않습니다.');
 						}
 					},
 					error : function(e) {
@@ -247,8 +247,8 @@ var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션
         	 $("#chats"+concat.object.crcode).remove(); 
         	 if(concat.message=="insert"){
         		 if(concat.type == "chatroomvo"){
-		        	 alert(concat.type);
-		        	 alert(concat.object);
+		        	 /*alert(concat.type);
+		        	 alert(concat.object);*/
 		        	 chatObj.crcode= concat.object.crcode;
 		        	 chatObj.crmode= concat.object.crmode;
 		        	 chatObj.crclose= concat.object.crclose;

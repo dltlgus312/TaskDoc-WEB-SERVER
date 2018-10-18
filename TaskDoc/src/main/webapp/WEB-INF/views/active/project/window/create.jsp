@@ -58,14 +58,14 @@ var id='<%=loginid%>';
 					<div class="modal-footer">
 						<input type="hidden" name="isEmpty">
 						
-						<button type="button" class="btn btn-success btn-icon"
-							onclick="projectCreate()">
-							<i class="fa fa-check"></i> Create Project
+						<button type="button" class="btn"
+							onclick="projectCreate()" style="color:white;background-color:#ed8151;outline:none;border:0px;">
+							Create Project
 						</button>
 						
-						<button type="button" class="btn btn-default btn-icon"
-							onclick="proCancel()">
-							<i class="fa fa-times-circle"></i> Cancel
+						<button type="button" class="btn"
+							onclick="proCancel()" style="color:white;background-color:#ed8151;outline:none;border:0px;">
+							 Cancel
 						</button>
 						
 					</div>

@@ -27,11 +27,11 @@ var id='<%=loginid%>';
 					<button type="button" class="close">
 						<i class="fa fa-times"></i>
 					</button>
-					<h4 class="modal-title">공지사항을 상세보기</h4>
+					<h4 class="modal-title">공지사항 수정 하기</h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label>제목</label> <input id="noticetitle" type="text"
+						<label>제목</label> <input id="noticetitle" type="text" maxlength="19"
 							class="form-control" style="background-color:white;"> 
 						<div>
 						<label style="margin-top:5px;">게시 시간 : </label><label class="asdf"></label>
@@ -62,13 +62,12 @@ $(document).ready(function(){
 		url : '/notice/'+<%=nc%>,
 		success : function(response) {
 			if(Object.keys(response).length>0){
-				alert('불러오기성공');
 				$("#noticetitle").val(response.ntitle);
 				$(".asdf").text(response.ndate);
 				$("#noticecontents").val(response.ncontents);
 			}
 			else{
-				alert('실패')
+				alert('공지사항이 존재하지 않습니다.')
 			}
 		},
 		error : function(e) {
@@ -93,12 +92,12 @@ function noticeEdit(){
 			response는 1 or -1
 			*/
 			if(response>0){
-				alert('공지사항 수정 완료');
+				alert('공지사항 수정이 완료 되었습니다.');
 				opener.parent.location.reload();
 				window.close();
 			}
 			else{
-				alert('Server or Client ERROR, 공지사항 수정 실패');
+				alert('Server or Client ERROR, 공지사항 수정에 실패 했습니다.');
 			}
 		},
 		error : function(e) {

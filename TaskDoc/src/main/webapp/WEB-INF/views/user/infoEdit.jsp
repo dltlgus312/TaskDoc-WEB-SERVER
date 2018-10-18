@@ -142,7 +142,7 @@ var savepasswd="";
 			success : function(response) {
 				//Object.keys(response).length --> 자바리턴값이 Object일때 Object 의 크기 구하는법
 				if (Object.keys(response).length > 0) {
-					alert('유저정보 조회완료');
+					alert('유저정보 조회가 완료 되었습니다.');
 					savepasswd=response.upasswd;
 					$('#uid').val(response.uid);
 					$('#upasswd').val(response.upasswd);
@@ -150,7 +150,7 @@ var savepasswd="";
 					$('#ustate').val(response.ustate);
 					$('#uphone').val(response.uphone);
 				} else {
-					alert('유저정보 조회 실패')
+					alert('유저정보 조회가 실패 되었습니다.')
 				}
 			},
 			error : function(e) {
@@ -178,9 +178,9 @@ function edit() {
 		data : JSON.stringify(param),
 		success : function(response) {
 			if (response >0) {
-				alert('회원정보 수정 완료!');
+				alert('회원정보 수정이 완료 되었습니다.');
 			} else {
-				alert('Server or Client ERROR, 회원정보 수정 실패');
+				alert('Server or Client ERROR, 회원정보 수정이 실패 되었습니다.');
 			}
 		},
 		error : function(e) {
@@ -199,10 +199,10 @@ function userdel(){
 				/* response 1 or -1
 				 */
 				if (response >0) {
-					alert('회원  탈퇴 완료');
+					alert('회원  탈퇴가 완료 되었습니다. 감사합니다.');
 					window.location.href='/';
 				} else {
-					alert('Server or Client ERROR, 회원 탈퇴 실패');
+					alert('Server or Client ERROR, 회원 탈퇴에 실패 했습니다.');
 				}
 			},
 			error : function(e) {

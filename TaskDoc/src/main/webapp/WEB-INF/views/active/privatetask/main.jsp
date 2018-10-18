@@ -7,6 +7,11 @@
 <%@include file="/WEB-INF/views/fix/header.jsp"%>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/resources/css/project/circleChart.css" />
+<script
+	src="${pageContext.request.contextPath }/resources/js/project/jsgantt.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/resources/css/project/jsgantt.css">
+	
 <%
 	String loginid = "";
 	loginid = (String) session.getAttribute("loginid");
@@ -49,13 +54,16 @@ $(document).ready(function(){
 					<!-- TASK CONTENTS  -->
 					<div id="publictaskWRAP" style="width: 100%; /* height: 93%; */ padding-left:15px;">
 						<div id="publictaskTOP" class="bts" style="margin-bottom:30px;">
+							<span id="spans" style="font-size:30px;">개인 업무가 포함된 공용업무 리스트</span>
+							<div id="Zz">
+								<button id="gochart" type="button" class="btn" style="outline:none;border:0px;color:white;background-color:#ed8151;">간트차트로보기</button>
+							</div>
 						</div>	
 						
 						<div id="publictaskBOTTOM">
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 		<!-- FOOTER -->
@@ -73,38 +81,34 @@ var posT=( screenH-popH ) / 2;
 $(function(){
 	$.ajax({
 		type : 'GET',
-		url : '/privatetask/user/' + id,
+		url : '/privatetask/user/plist/' + id,
 		success : function(response) {
 			if (response.length > 0 ) {
 				for(var i=0;i<response.length;i++){
-					if(response[i].ptcode==response[i].ptrefference){
-						var $append = '<div id="publictask'+response[i].ptcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
-						+'<div id="color'+response[i].ptcode+'" onclick="godowntask('+response[i].ptcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].ptcolor+';"><span>'+ (i+1) +'. : '+response[i].pttitle+','+response[i].ptcode+'</span></div>'
-						+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
-						+'<div style="margin-left:20px;" id="chart'+response[i].ptcode+'" class="progress-pie-chart" data-percent="'+response[i].ptpercent+'">'
-						+'<div class="ppc-progress">'
-						+'<div class="ppc-progress-fill" id="fill'+response[i].ptcode+'"></div></div>'
-						+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].ptcode +'">%</span></div></div></div>'
-						+'<div><div><span id="tsdate'+response[i].ptcode+'">시작 날짜 : '+response[i].ptsdate+'</span></div><div><span id="tedate'+response[i].tcode+'">종료 날짜 : '+response[i].ptedate+'</span></div>'
-						+'<div class="bts"><button style="border:0px;outline:none;color:white;background-color:#ed8151;margin-right:5px;font-size:12px;" class="btn" onclick= "goMemo('+response[i].ptcode+')" type="button">메모</button>'
-						+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;margin-right:5px;font-size:12px;" class="btn" onclick= "ptedit('+response[i].ptcode+')" type="button">수정</button>'
-						+'<button style="border:0px;outline:none;color:white;background-color:#ed8151;font-size:12px;" class="btn" type="button" onclick="ptdel('+response[i].ptcode+')">삭제</button></div></div></div></div>';
-						
-						$("#publictaskBOTTOM").append($append);
-					}
-					var a = $("#chart"+response[i].ptcode.toString());
+					var $append = '<div id="publictask'+response[i].tcode+'" style="float: left; width: 24%; margin-right:1%; margin-bottom:10px; height: 200px; background-color: white;">'
+					+'<div id="color'+response[i].ptcode+'" onclick="godowntask('+response[i].tcode+')" style="cursor:pointer; width: 100%; height: 20%; border:3px solid #'+response[i].tcolor+';"><span>'+ (i+1) +'. : '+response[i].ttitle+'</span></div>'
+					+'<div style="width: 100%; height: 80%; border:1px solid #ed8151; border-top:none;">'
+					+'<div style="margin-left:20px;" id="chart'+response[i].tcode+'" class="progress-pie-chart" data-percent="'+response[i].tpercent+'">'
+					+'<div class="ppc-progress">'
+					+'<div class="ppc-progress-fill" id="fill'+response[i].tcode+'"></div></div>'
+					+'<div class="ppc-percents"><div class="pcc-percents-wrapper"> <span id="num'+ response[i].tcode +'">%</span></div></div></div>'
+					+'<div><div><span id="tsdate'+response[i].tcode+'">시작 날짜 : '+response[i].tsdate+'</span></div><div><span id="tedate'+response[i].tcode+'">종료 날짜 : '+response[i].tedate+'</span></div>'
+					+'</div></div></div>';
+					
+					$("#publictaskBOTTOM").append($append);
+					var a = $("#chart"+response[i].tcode.toString());
 					var percent = parseInt(a.data('percent'));
 					var deg = 360 * percent / 100;
 						if (percent > 50) {
 							a.addClass("gt-50");
 						}
-					var b=$("#fill"+response[i].ptcode.toString());
+					var b=$("#fill"+response[i].tcode.toString());
 					b.css('transform', 'rotate(' + deg + 'deg)');
-					$('#num'+response[i].ptcode.toString()).html(percent + '%');	
+					$('#num'+response[i].tcode.toString()).html(percent + '%');	
 					
 					}
 				} else{
-				alert('Server or Client ERROR, 개인 업무 조회 실패');
+				alert('Server or Client ERROR, 개인 업무 조회에 실패 했습니다.');
 			}
 		},
 		error : function(e) {
@@ -113,6 +117,13 @@ $(function(){
 	});
 });
 
+$("#gochart").on('click',function(){
+	$("#spans").hide();
+	$("#gochart").hide();
+	$div='<button type="button" onclick="goptlist()"class="btn" style="outline:none;border:0px;color:white;background-color:#ed8151;margin-top:10px;">개인업무리스트로 돌아가기</button>';
+	$("#Zz").append($div);
+	$("#publictaskBOTTOM").load("/user/gantt/view");
+});
 //개인 업무 삭제
 function ptdel(ptcode){
 	 event.stopPropagation();
@@ -122,10 +133,10 @@ function ptdel(ptcode){
 			url : '/privatetask/' + ptcode,
 			success : function(response) {
 				if (response == 1) {
-					alert('개인 업무 삭제 성공!');
+					alert('개인 업무가 삭제 되었습니다.');
 					location.reload();
 				} else if (response == -1) {
-					alert('Server or Client ERROR, 개인 업무 삭제 실패');
+					alert('Server or Client ERROR, 개인 업무 삭제에 실패 했습니다.');
 				}
 			},
 			error : function(e) {
@@ -159,19 +170,24 @@ function goMemo(ptcode){
 }
 
 //하위업무로이동
-function godowntask(ptcode){
+function godowntask(tcode){
 	 if(confirm('하위 업무로 이동하시겠습니까?')==true){
 		 $("#ptcreatebtn").hide();
-		 $("#publictaskBOTTOM").load("/project/privateTask/downTask?ptcode="+ptcode); 
-		 
-		 $btntag='<button class="btn" type="button" onclick="gotasklist('+ptcode+')" style="background-color:#ed8151; border:0;outline:none; color:white;">개인업무 리스트로 이동</button>';
+		 $("#publictaskBOTTOM").load("/project/privateTask/downTask?tcode="+tcode); 
+		 $("#spans").hide();
+		 $btntag='<button class="btn" type="button" onclick="gotasklist()" style="background-color:#ed8151; border:0;outline:none; color:white;">개인업무 리스트로 이동</button>';
 		 $("#publictaskTOP").append($btntag);
 	 }else return;
 }
 
 //모든 개인업무 리스트로 이동
-function gotasklist(ptcode){
+function gotasklist(){
 	 location.href='/project/privateTask/main';
+}
+
+function goptlist(){
+	 location.href='/project/privateTask/main';
+	
 }
 </script>
 

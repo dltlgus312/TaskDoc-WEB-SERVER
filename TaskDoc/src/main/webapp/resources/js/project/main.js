@@ -8,6 +8,9 @@ var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션
 
 
 $(document).ready(function() {
+	var socket = new SockJS('/goStomp'); 
+	stompClient = Stomp.over(socket);
+	
 	/*DIV TOP , BOTTOM , MIDDLE 범위나누기  */
 	var contentWidth = $("#contentwrap").width();
 	var contentHeight = $("#contentwrap").height();
@@ -104,10 +107,19 @@ $(document).on('click','.projectlists',function(){
 					data : JSON.stringify(param),
 					success : function(response) {
 						if (response == 1) {
-							alert('초대 수락 완료!');
+							alert('초대 수락이 완료 되었습니다.');
+							var peram={
+									 'message' : 'update',
+									 'type' : 'projectjoinvo',
+									 'object' :{
+											 param
+										}
+								 };
+							stompClient.send('/app/project/'+pcode, {},JSON.stringify(peram));
+							
 							location.reload();
 						} else {
-							alert('Server or Client ERROR, 초대 수락  실패!');
+							alert('Server or Client ERROR, 초대 수락이 실패 하였습니다.');
 						}
 					},
 					error : function(e) {
@@ -127,10 +139,10 @@ $(document).on('click','.projectlists',function(){
 				data : JSON.stringify(param),
 				success : function(response) {
 					if (response == 1) {
-						alert('초대 거절 완료!');
+						alert('초대 거절이 완료 되었습니다.');
 						location.reload();
 					} else {
-						alert('Server or Client ERROR, 초대 거절  실패!');
+						alert('Server or Client ERROR, 초대 거절에 실패 했습니다.');
 					}
 				},
 				error : function(e) {

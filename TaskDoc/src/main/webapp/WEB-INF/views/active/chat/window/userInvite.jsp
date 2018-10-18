@@ -126,7 +126,7 @@
 					document.getElementById('thead').appendChild(ttag);
 					}
 				} else {
-					alert('Server or Client ERROR, 채팅방 유저 리스트 조회 실패');
+					alert('Server or Client ERROR, 채팅방 유저 리스트 조회에 실패 했습니다.');
 				}
 			},
 			error : function(e) {
@@ -165,11 +165,11 @@
 			data : JSON.stringify(listparam),
 			success : function(response) {
 				if (response.length != -1) {
-					alert('채팅방 유저 초대 성공!' + response);
+					alert('채팅방에 유저를 초대 완료 하였습니다.');
 					window.close();
 					opener.location.reload();
 				} else if (response.length == 0) {
-					alert('Server or Client ERROR, 채팅방 유저 초대 실패');
+					alert('Server or Client ERROR, 채팅방에 유저 초대를 실패 했습니다.');
 				}
 			},
 			error : function(e) {

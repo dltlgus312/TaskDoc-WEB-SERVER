@@ -140,10 +140,10 @@
 				data : JSON.stringify(param),
 				success : function(response) {
 					if (response > 0) {
-						alert('게시판 생성 완료! 게시판의 mbcode값은' + response);
+						alert('게시판 생성이 완료 되었습니다.');
 						location.href='/methodboard/main';
 					} else {
-						alert('Server or Client ERROR, 게시판 생성 실패');
+						alert('Server or Client ERROR, 게시판 생성에 실패 했습니다.');
 					}
 				},
 				error : function(e) {

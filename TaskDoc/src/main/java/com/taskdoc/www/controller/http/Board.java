@@ -23,6 +23,11 @@ public class Board {
 	public String view() {
 		return "/active/methodboard/view";
 	}
+	//게시판 상세보기
+	@RequestMapping(value = "/method/view", method = RequestMethod.GET)
+	public String method() {
+		return "/active/methodboard/methoddetail";
+	}
 	//게시판 수정
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String edit() {
