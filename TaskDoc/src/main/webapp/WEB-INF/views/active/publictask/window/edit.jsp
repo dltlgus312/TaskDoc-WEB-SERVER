@@ -210,16 +210,8 @@ function edit(){
 					var peram={
 							 'message' : 'update',
 							 'type' : 'publictaskvo',
-							 'object' :{
-									 'ttitle' : $("#pttitle").val(),
-									 'tcolor' :  mycolor,
-								 	 'tsdate' : $("#ptsdate").val(),
-									 'tedate' : $("#ptedate").val(),
-									 'tpercent' : $("#ptpercent").val(),
-									 'trefference' : $("#ptrefference").val(),
-									 'tsequence' : $("#ptsequence").val(),
-									 'tcode' : <%=tcode%>
-								}
+							 'object' : param
+								
 						 };
 						stompClient.send('/app/project/'+pcode, {},JSON.stringify(peram));
 				} else{

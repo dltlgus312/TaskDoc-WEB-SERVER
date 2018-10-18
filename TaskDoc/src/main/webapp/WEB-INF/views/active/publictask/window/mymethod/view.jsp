@@ -80,8 +80,6 @@ stompClient = Stomp.over(socket);
 var mycolor="";
 var fixpsdate='<%=tsdate%>';
 var fixpedate='<%=tedate%>';
-//스톰프전송
-var stompsend=[];
 
 //tsdate!=null tedate!=null인 array 담기
 var parrays=new Array();
@@ -353,24 +351,11 @@ function ptCreate(){
 		success : function(response) {
 			if (response.length > 0) {
 				alert('공용업무 생성 완료! 프로젝트의 공용업무의 id값은' + response);
-				
-				for(var i=0;i<response.length;i++){
-
-					stompsend.push({
+					var stompsend={
 						'message' : 'insert',
 						'type' : 'publictasks',
-						'object': {
-							'tcode' : response[i].tcode,
-							'ttitle' : response[i].ttitle,
-							'tcolor' : response[i].tcolor,
-							'tsdate' : response[i].tsdate,
-							'tpercent' : response[i].tpercent,
-							'tsequence' : response[i].tsequence,
-							'trefference' :response[i].trefference,
-							'pcode' : response[i].pcode
-						}
-					});
-				}
+						'object': response
+					};
 				stompClient.send('/app/project/'+realpcode, {},JSON.stringify(stompsend));
 				window.close(); 
 					
