@@ -80,8 +80,6 @@ stompClient = Stomp.over(socket);
 var mycolor="";
 var fixpsdate='<%=tsdate%>';
 var fixpedate='<%=tedate%>';
-//스톰프전송
-var stompsend=[];
 
 //tsdate!=null tedate!=null인 array 담기
 var parrays=new Array();
@@ -350,10 +348,8 @@ function ptCreate(){
 		data : JSON.stringify(list),
 		success : function(response) {
 			if (response.length > 0) {
-				alert('공용업무 생성이 완료 되었습니다.');
-				
 				for(var i=0;i<response.length;i++){
-					var stompsend = {
+					var stompsend={
 						'message' : 'insert',
 						'type' : 'publictasks',
 						'object': {
