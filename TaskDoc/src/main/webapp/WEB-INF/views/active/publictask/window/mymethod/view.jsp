@@ -80,8 +80,6 @@ stompClient = Stomp.over(socket);
 var mycolor="";
 var fixpsdate='<%=tsdate%>';
 var fixpedate='<%=tedate%>';
-//스톰프전송
-var stompsend=[];
 
 //tsdate!=null tedate!=null인 array 담기
 var parrays=new Array();
@@ -125,7 +123,6 @@ $(function() {
 		url : '/publictask/'+pcode,
 		success : function(response) {
 			if (response.length > 0) {
-				alert('public list 조회 완료');
 				for(var i=0;i<response.length;i++){
 					if(response[i].tsdate!=null && response[i].tedate!=null){
 						  if(response[i].tcode == response[i].trefference) {
@@ -138,7 +135,7 @@ $(function() {
 				listmake();
 			}
 			else  {
-				alert('Server or Client ERROR, method item list 조회 실패');
+				alert('Server or Client ERROR, method item list 조회에 실패 했습니다.');
 			}
 		},
 		error : function(e) {
@@ -182,7 +179,7 @@ $(function() {
 					sendArray.push(realplist[i]);
 					$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+ (i+1) +'. '+realplist[i].ttitle+'</button>'
 					+'<input placeholder="공용 업무 제목을 입력해주세요." id="pttitle'+realplist[i].tcode+'" type="text"	class="form-control" maxlength="20">'
-					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+realplist[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+realplist[i].tcode+')" value="" style="width:60px;"> </p>'
+					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+realplist[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+realplist[i].tcode+')" value="'+realplist[i].tcolor+'" style="width:60px;"> </p>'
 					+'<div>시작날짜: <input class="hasDatepicker" type="text" name="cAcqDate" id="psdate'+realplist[i].tcode+'"><div>'
 					+'<div>종료날짜: <input class="hasDatepicker" type="text" name="cAceDate" id="pedate'+realplist[i].tcode+'"></div>';
 					$("#methodlistss").append($div);
@@ -213,7 +210,7 @@ $(function() {
 					sendArray.push(realplist[i]);
 			 		$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+(i+1)+'. '+realplist[i].ttitle+'</button>'
 					+'<input placeholder="공용 업무 제목을 입력해주세요." id="pttitle'+realplist[i].tcode+'" type="text"	class="form-control" maxlength="20">'
-					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+realplist[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+realplist[i].tcode+')" value="" style="width:60px;"> </p>'
+					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+realplist[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+realplist[i].tcode+')" value="'+realplist[i].tcolor+'" style="width:60px;"> </p>'
 					+'<div>시작날짜: <input class="hasDatepicker" type="text" name="cAcqDate" id="psdate'+realplist[i].tcode+'"><div>'
 					+'<div>종료날짜: <input class="hasDatepicker" type="text" name="cAceDate" id="pedate'+realplist[i].tcode+'"></div>';
 					$("#methodlistss").append($div);
@@ -250,7 +247,7 @@ $(function() {
 					sendArray.push(list[i]);
 					$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+/* (i+1) */str+'. '+list[i].ttitle+'</button>'
 					+'<input placeholder="공용 업무 제목을 입력해주세요." id="pttitle'+list[i].tcode+'" type="text"	class="form-control" maxlength="20">'
-					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+list[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+list[i].tcode+')" value="" style="width:60px;"> </p>'
+					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+list[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+list[i].tcode+')" value="'+list[i].tcolor+'" style="width:60px;"> </p>'
 					+'<div>시작날짜: <input class="hasDatepicker" type="text" name="cAcqDate" id="psdate'+list[i].tcode+'"><div>'
 					+'<div>종료날짜: <input class="hasDatepicker" type="text" name="cAceDate" id="pedate'+list[i].tcode+'"></div>';
 					$("#methodlistss").append($div);
@@ -279,7 +276,7 @@ $(function() {
 					sendArray.push(list[i]);
 					$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+str+'. '+list[i].ttitle+'</button>'
 					+'<input placeholder="공용 업무 제목을 입력해주세요." id="pttitle'+list[i].tcode+'" type="text"	class="form-control" maxlength="20">'
-					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+list[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+list[i].tcode+')" value="" style="width:60px;"> </p>'
+					+'<p style="margin-top:20px;"> 공용업무 색상: <input id="color'+list[i].tcode+'"class="jscolor" onchange="update(this.jscolor,'+list[i].tcode+')" value="'+list[i].tcolor+'" style="width:60px;"> </p>'
 					+'<div>시작날짜: <input class="hasDatepicker" type="text" name="cAcqDate" id="psdate'+list[i].tcode+'"><div>'
 					+'<div>종료날짜: <input class="hasDatepicker" type="text" name="cAceDate" id="pedate'+list[i].tcode+'"></div>';
 					$("#methodlistss").append($div);
@@ -312,7 +309,6 @@ $(function() {
 
 
 function update(jscolor,code) {
-	alert(code);
     // 'jscolor' instance can be used as a string
     $("#rect").css('background-color','#'+jscolor);
     var removeData='#'+jscolor;
@@ -352,30 +348,19 @@ function ptCreate(){
 		data : JSON.stringify(list),
 		success : function(response) {
 			if (response.length > 0) {
-				alert('공용업무 생성 완료! 프로젝트의 공용업무의 id값은' + response);
-				
 				for(var i=0;i<response.length;i++){
-
-					stompsend.push({
+					var stompsend={
 						'message' : 'insert',
 						'type' : 'publictasks',
 						'object': {
-							'tcode' : response[i].tcode,
-							'ttitle' : response[i].ttitle,
-							'tcolor' : response[i].tcolor,
-							'tsdate' : response[i].tsdate,
-							'tpercent' : response[i].tpercent,
-							'tsequence' : response[i].tsequence,
-							'trefference' :response[i].trefference,
-							'pcode' : response[i].pcode
+							response
 						}
-					});
+					};
 				}
 				stompClient.send('/app/project/'+realpcode, {},JSON.stringify(stompsend));
-				window.close(); 
 					
 			} else  {
-				alert('Server or Client ERROR, 공용업무 생성 실패');
+				alert('Server or Client ERROR, 공용업무 생성이 실패 했습니다.');
 			}
 		},
 		error : function(e) {

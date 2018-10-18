@@ -52,7 +52,6 @@ $.ajax({
 	url : '/method/all',
 	success : function(response) {
 		if (response.length > 0) {
-			alert('방법론 조회 완료!');
 			for(var i=0;i<response.length;i++){
 				$div='<tr><td>'+response[i].mcode+'</td><td>'+response[i].method+'</td>'
 				+'<td class="bts"><button class="btn" type="button" onclick="methodview('+response[i].mcode+')" style="background-color:#ed8151;color:white;outline:none;border:0px;">방법론확인</button></td></tr>';
@@ -60,7 +59,7 @@ $.ajax({
 			}
 			
 		} else  {
-			alert('Server or Client ERROR, 방법론 조회  실패');
+			alert('Server or Client ERROR, 방법론 조회에 실패 했습니다.');
 		}
 	},
 	error : function(e) {
@@ -69,7 +68,6 @@ $.ajax({
 });
 	
 function methodview(mcode){
-	alert(mcode);
 	var screenW = screen.availWidth;  
 	var screenH = screen.availHeight; 
 	var posL=( screenW-popW ) / 2;   

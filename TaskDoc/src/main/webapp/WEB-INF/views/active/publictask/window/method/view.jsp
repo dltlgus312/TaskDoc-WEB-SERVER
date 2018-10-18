@@ -115,7 +115,6 @@ $(function() {
 		url : '/methoditem/'+mcode,
 		success : function(response) {
 			if (response.length > 0) {
-				alert('method item list 조회 완료');
 				for(var i=0;i<response.length;i++){
 					siquence.push(response[i].misequence);
 					$div='<button type="button" class="btn" style="margin-top:20px; outline:none;color:white;background-color:#ed8151;border:0px;margin-right: 10px; ">'+response[i].misequence+'. '+response[i].mititle+'</button>'
@@ -148,7 +147,7 @@ $(function() {
 				jscolor.installByClassName("jscolor");
 			}
 			else  {
-				alert('Server or Client ERROR, method item list 조회 실패');
+				alert('Server or Client ERROR, method item list 조회에 실패 했습니다.');
 			}
 		},
 		error : function(e) {
@@ -157,12 +156,10 @@ $(function() {
 	});
 	var socket = new SockJS('/goStomp'); 
 	stompClient = Stomp.over(socket);
-	alert(siquence);
 });
 
 
 function update(jscolor,code) {
-	alert(code);
     // 'jscolor' instance can be used as a string
     $("#rect").css('background-color','#'+jscolor);
     var removeData='#'+jscolor;
@@ -177,10 +174,10 @@ function ptCreate(){
 	
 	var list=new Array();
 	var obj=new Object();
-	alert(siquence[0]);
+/* 	alert(siquence[0]);
 	alert(siquence[1]);
 	alert(siquence[2]);
-	
+ */	
 	for(var i=0; i<siquence.length; i++){
 		obj.ttitle = $("#pttitle"+siquence[i]).val();
 		obj.tcolor = $("#color"+siquence[i]).val();
@@ -212,7 +209,7 @@ function ptCreate(){
 		data : JSON.stringify(param),
 		success : function(response) {
 			if (response > 0) {
-				alert('공용업무 생성 완료! 프로젝트의 공용업무의 id값은' + response);
+				alert('공용 업무 생성이 완료 되었습니다.');
 				
 				//stomp 서버전송
 				var peram={
@@ -233,7 +230,7 @@ function ptCreate(){
 					window.close();
 					
 			} else  {
-				alert('Server or Client ERROR, 공용업무 생성 실패');
+				alert('Server or Client ERROR, 공용업무 생성이 실패 했습니다.');
 			}
 		},
 		error : function(e) {

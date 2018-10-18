@@ -82,9 +82,9 @@
 						$whattask='<option value="'+response[i].tcode+'">'+ (i+1 )+'.' +response[i].tcode+ response[i].ttitle + '</option>';
 						$("#whattask").append($whattask);
 					}
-					alert('공용업무 리스트 불러오기 성공!');
+					/* alert('공용업무 리스트 불러오기 성공!'); */
 				} else if (response.length == 0) {
-					alert('Server or Client ERROR, 공용업무 리스트 불러오기 실패');
+					alert('Server or Client ERROR, 공용업무 리스트 불러오기에  실패 했습니다.');
 				}
 			},
 			error : function(e) {
@@ -156,7 +156,7 @@
 			data : JSON.stringify(param),
 			success : function(response) {
 				if (Object.keys(response).length>0) {
-					alert('의사결정 생성 완료! ');
+					alert('의사결정 생성이 완료 되었습니다. ');
 					for (var i = 0; i < tlist.length; i++) {
 						paramitem.push({
 								'dsilist' : document.getElementById(tlist[i]).value,
@@ -174,9 +174,9 @@
 						data : JSON.stringify(paramitem),
 						success : function(responseitem) {
 							if (responseitem.length>0) {
-								alert('의사결정 아이템 생성 완료! ' + responseitem);
-								alert(response.dscode);
-								alert(response.dstitle);
+								/* alert('의사결정 아이템 생성 완료! ' + responseitem); */
+								/* alert(response.dscode);
+								alert(response.dstitle); */
 								opener.parent.decitest(response.dscode,response.dsdate,response.dstitle,response.dsclose,response.crcode,response.tcode);
 								opener.parent.chattest(0,response.dscode,0,response.crcode,response.dstitle);
 								window.close();

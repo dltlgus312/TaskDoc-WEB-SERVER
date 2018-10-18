@@ -97,7 +97,7 @@ $(function(){
 					}
 				}
 			}else{
-				alert('피드백이 없습니다..');
+				alert('피드백이 없습니다.');
 			}
 		},
 		error : function(e) {
@@ -132,10 +132,10 @@ function createfeedback(){
 		data : JSON.stringify(param),
 		success : function(response) {
 			if (Object.keys(response).length>0) {
-				alert('피드백 추가 완료 ~');
+				alert('피드백 추가가 완료 되었습니다.');
 				location.reload();
 			} else {
-				alert('Server or Client ERROR, 피드백 생성 실패');
+				alert('Server or Client ERROR, 피드백 생성에 실패 했습니다.');
 			}
 		},
 		error : function(e) {
@@ -150,11 +150,11 @@ function feedbackdel(fbcode){
 		url : '/feedback/'+fbcode,
 		success : function(response) {
 			if(response>0){
-				alert('피드백 삭제 성공');
+				alert('피드백 삭제가 완료 되었습니다.');
 				location.reload();
 			}
 			else
-				alert('피드백 삭제 성공');
+				alert('피드백 삭제가 실패 되었습니다.');
 		},
 		error : function(e) {
 			alert("ERROR : " + e.statusText);

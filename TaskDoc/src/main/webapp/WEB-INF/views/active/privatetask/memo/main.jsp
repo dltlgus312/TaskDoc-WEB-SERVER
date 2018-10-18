@@ -42,7 +42,6 @@ ptcode=parseInt(<%=ptcode%>);
 			url : '/memo/' + <%=ptcode%>,
 			success : function(response) {
 				if (response.length>0) {
-					alert('메모 조회 완료!' + response); 
 					for(var i=0;i<response.length;i++){
 						$div='<tr calss="bts"><td>'+ (i+1) +'</td> <td>'+response[i].mcontents+'</td><td>'+response[i].mdate+'</td>'
 						+'<td><img onclick="memoEdit(\''+response[i].mcontents+'\','+response[i].mcode+')" src="${pageContext.request.contextPath }/resources/img/img_boardsetting.png" style="width:20px;height:20px;margin-right:20px;cursor:pointer;">'
@@ -51,7 +50,7 @@ ptcode=parseInt(<%=ptcode%>);
 					}
 					
 				} else{
-					alert('Server or Client ERROR, 메모 조회 실패');
+					alert('Server or Client ERROR, 메모 조회에 실패 했습니다.');
 				}
 			},
 			error : function(e) {
@@ -75,10 +74,10 @@ ptcode=parseInt(<%=ptcode%>);
 		url : '/memo/'+mcode,
 		success : function(response) {
 			if (response>0) {
-				alert('메모 삭제 완료!');
+				alert('메모가 삭제 되었습니다.');
 				location.reload();
 			} else{
-				alert('Server or Client ERROR, 메모 삭제 실패');
+				alert('Server or Client ERROR, 메모 삭제가 실패 되었습니다.');
 			}
 		},
 		error : function(e) {

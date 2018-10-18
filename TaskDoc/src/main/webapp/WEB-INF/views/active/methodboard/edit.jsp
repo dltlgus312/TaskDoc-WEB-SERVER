@@ -132,7 +132,6 @@ var popupY= (window.screen.height /2) - (400 / 2);
 			success : function(response) {
 				if (Object.keys(response).length > 0) {
 					pcode=response.pcode;
-					alert('게시판 글 상세보기 완료! ' + response);
 					$("#mbcode").text(response.mbcode);
 					$("#mbcontents").val(response.mbcontents);
 					$("#mbdate").text(response.mbdate);
@@ -140,7 +139,7 @@ var popupY= (window.screen.height /2) - (400 / 2);
 					$("#pcode").text(response.pcode);
 					$("#uid").text(response.uid);
 				} else{
-					alert('Server or Client ERROR, 게시판 글 상세보기 실패');
+					alert('Server or Client ERROR, 게시판 글 확인이 실패 되었습니다.');
 				}
 			},
 			error : function(e) {
@@ -159,7 +158,7 @@ var popupY= (window.screen.height /2) - (400 / 2);
 		pcode=child_pcode;
 		$("#selectProject").remove();
 		var h4tag=document.createElement("h4");
-		var h4ele=document.createTextNode("프로젝트 수정 완료!");
+		var h4ele=document.createTextNode("프로젝트 수정이 완료 되었습니다.");
 		h4tag.appendChild(h4ele);
 		$("#editproject").append(h4tag);
 	}
@@ -182,10 +181,10 @@ var popupY= (window.screen.height /2) - (400 / 2);
 				data : JSON.stringify(param),
 				success : function(response) {
 					if (response > 0) {
-						alert('게시판 수정 완료' + response);
+						alert('게시판 수정이 완료 되었습니다.');
 						history.back();
 					} else {
-						alert('Server or Client ERROR, 게시판 수정 실패');
+						alert('Server or Client ERROR, 게시판 수정이 실패 했습니다.');
 					}
 				},
 				error : function(e) {

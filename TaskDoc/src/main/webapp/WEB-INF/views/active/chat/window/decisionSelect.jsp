@@ -143,7 +143,7 @@ $(document).ready(function(){
 						}
 				}
 				else{
-					alert('Server or Client ERROR, 의사결정 정보 조회 실패');
+					alert('Server or Client ERROR, 의사결정 정보 조회에 실패 했습니다.');
 				}
 			},
 			error : function(e) {
@@ -176,7 +176,6 @@ $(document).ready(function(){
 			}
 			
 			if(voterOk==true){
-				alert('투표했다');
 				$("#choiceDecision").attr('disabled','true');
 				$.ajax({
 					type : 'GET',
@@ -191,7 +190,7 @@ $(document).ready(function(){
 							$("input[type=radio]").attr('disabled', true);
 						}
 						else{
-							alert('Server or Client ERROR, 의사결정 정보 조회 실패');
+							alert('Server or Client ERROR, 의사결정 정보 조회에 실패 했습니다.');
 						}
 					},
 					error : function(e) {
@@ -199,7 +198,6 @@ $(document).ready(function(){
 					}
 				});
 			}else{
-				alert('투표 안했다');
 				$.ajax({
 					type : 'GET',
 					url : '/decisionitem/count/'+<%=dscode%>,
@@ -212,7 +210,7 @@ $(document).ready(function(){
 							}
 						}
 						else{
-							alert('Server or Client ERROR, 의사결정 정보 조회 실패');
+							alert('Server or Client ERROR, 의사결정 정보 조회에 실패 했습니다.');
 						}
 					},
 					error : function(e) {
@@ -244,10 +242,10 @@ $(document).ready(function(){
 	     		data : JSON.stringify(param),
 	     		success : function(response) {
 	     			if (response > 0) {
-	     				alert('의사결정 항목 선택 완료! ' + response);
+	     				alert('항목 선택이 완료 되었습니다.');
 	     			 	window.close();
 	     			} else{
-	     				alert('Server or Client ERROR, 의사결정 항목 선택 실패');
+	     				alert('Server or Client ERROR, 항목 선택이 실패 되었습니다.');
 	     			}
 	     		},
 	     		error : function(e) {
@@ -277,7 +275,8 @@ $(document).ready(function(){
 			data : JSON.stringify(param),
 			success : function(response) {
 				if (response >0) {
-					alert('의사결정 종료 완료!'); //stomp
+					alert('의사결정이 종료 되었습니다.'); //stomp
+					console.log(response);
 					var stompmsg={
 							 'message' : 'update',
 							 'type' : 'decisionvo',
@@ -290,7 +289,7 @@ $(document).ready(function(){
 							 };
 					stompClient.send('/app/project/'+pcode, {},JSON.stringify(stompmsg));
 				} else {
-					alert('Server or Client ERROR, 의사결정 종료 실패');
+					alert('Server or Client ERROR, 의사결정 종료가 실패 되었습니다.');
 				}
 			},
 			error : function(e) {
@@ -306,7 +305,7 @@ $(document).ready(function(){
 			url : '/decision/'+<%=dscode%>,
 			success : function(response) {
 				if(response>0){
-					alert('의사결정 삭제 성공');
+					alert('의사결정 삭제에 성공 했습니다.');
 					window.close();
 				}
 				else{

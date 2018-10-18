@@ -69,4 +69,17 @@ public class PrivateTaskServiceImpl implements PrivateTaskService{
 		return dao.privateDownTask(ptrefference);
 	}
 
+	@Override
+	public List<PrivateTaskVO> publicTaskList(String uid) {
+		return dao.publicTaskList(uid);
+	}
+
+	@Override
+	public List<PrivateTaskVO> multiPrivateTaskList(PrivateTaskVO privateTaskVO) {
+		return dao.multiPrivateTaskList(privateTaskVO);
+	}
+
+
+
+
 }

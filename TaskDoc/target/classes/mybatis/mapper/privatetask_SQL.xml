@@ -31,6 +31,22 @@
 		SELECT * FROM privatetask WHERE ptrefference=#{ptrefference} AND ptcode!=ptrefference;	
 	</select> 
 	
+	<!--uid로 어떤 공용업무로 개인업무생성했는지-->
+	 <select id="plist" resultType="publictask">		
+		SELECT tcode , ttitle, tcolor,tsdate,tedate,tpercent, tsequence, trefference, pcode
+		FROM publictask p
+		WHERE p.tcode IN (
+			SELECT distinct pt.tcode 
+    		FROM privatetask pt
+    		WHERE pt.uid=#{uid}
+    		);	
+	</select> 
+	
+	<!--tcode로 privatetask 조회-->
+	 <select id="ptlist" resultType="privatetask">		
+		SELECT * FROM privatetask where tcode=#{tcode} and uid=#{uid};
+	</select> 
+	
 	<insert id="insert" parameterType="privatetask" useGeneratedKeys="true" keyProperty="ptcode">
 		INSERT INTO privatetask VALUES(null, #{pttitle}, #{ptcolor}, #{ptsdate}, #{ptedate}, 0, 0, 
 		<choose>

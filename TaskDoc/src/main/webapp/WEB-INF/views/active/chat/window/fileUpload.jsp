@@ -99,9 +99,9 @@ $(function(){
 					$whattask='<option value="'+response[i].tcode+'">'+ (i+1 )+'.' +response[i].tcode+ response[i].ttitle + '</option>';
 					$("#whattask").append($whattask);
 				}
-				alert('공용업무 리스트 불러오기 성공!');
+				alert('공용업무 리스트를 불러 옵니다.');
 			} else if (response.length == 0) {
-				alert('Server or Client ERROR, 공용업무 리스트 불러오기 실패');
+				alert('Server or Client ERROR, 공용업무 리스트 불러오기에 실패 했습니다.');
 			}
 		},
 		error : function(e) {
@@ -131,7 +131,7 @@ $(function(){
 		            percent.html(percentVal);
 		        },
 		        complete: function(success) {
-		        	alert('파일업로드 완료');
+		        	alert('파일 업로드가 완료 되었습니다.');
 		        	var json=success.responseJSON;
 		        	var obj=new Object();
 					obj.dmcode=json.dmcode;

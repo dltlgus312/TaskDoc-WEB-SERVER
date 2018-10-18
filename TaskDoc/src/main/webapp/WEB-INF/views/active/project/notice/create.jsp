@@ -32,7 +32,7 @@ var id='<%=loginid%>';
 				<div class="modal-body">
 					<div class="form-group">
 						<label>공지사항 제목</label> <input id="noticetitle" type="text"
-							class="form-control" maxlength="20"> <label
+							class="form-control" maxlength="19"> <label
 							style="padding-top: 5px;">공지사항 내용</label> <textarea id="noticecontents"
 							class="form-control" style="height:100px;"></textarea>
 					</div>

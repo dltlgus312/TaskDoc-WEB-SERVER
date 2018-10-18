@@ -151,10 +151,10 @@ function ptCreate(){
 		data : JSON.stringify(param),
 		success : function(response) {
 			if (response>0) {
-				alert('개인 업무 생성 완료! 개인 업무의 id값은' + response);
+				alert('개인 업무의 하위 업무가 생성 되었습니다.');
 				window.close();
 			} else{
-				alert('Server or Client ERROR, 개인업무 생성 실패');
+				alert('Server or Client ERROR, 업무 생성이 실패 되었습니다.');
 			}
 		},
 		error : function(e) {
