@@ -29,6 +29,12 @@ $(function(){
 	$(".chat_hover").css('color','#6d6d6d').css('border-bottom','none');
 	$(".gantt_hover").css('color','#6d6d6d').css('border-bottom','none');
 	$(".files_hover").css('color','#6d6d6d').css('border-bottom','none');
+	
+	if(chatpermission=="MEMBER"){
+		$("#ptcreatebtn").hide();
+		$("#methodptcreatebtn").hide();
+		$("#mymethodptcreatebtn").hide();
+	}
 });
 	
 </script>
@@ -315,7 +321,7 @@ $(document).ready(function() {
  function ptedit(date, tcode){
 	 event.stopPropagation();
 	 var popW = 400; // 띄울창의 가로사이즈
-	 var popH = 560; // 띄울창의 세로사이즈
+	 var popH = 600; // 띄울창의 세로사이즈
 	 
 	 var list={};
 	 list = date.split(',');

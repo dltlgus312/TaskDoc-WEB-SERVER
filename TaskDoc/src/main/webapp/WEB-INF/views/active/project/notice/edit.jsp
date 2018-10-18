@@ -27,11 +27,11 @@ var id='<%=loginid%>';
 					<button type="button" class="close">
 						<i class="fa fa-times"></i>
 					</button>
-					<h4 class="modal-title">공지사항을 상세보기</h4>
+					<h4 class="modal-title">공지사항 수정 하기</h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label>제목</label> <input id="noticetitle" type="text"
+						<label>제목</label> <input id="noticetitle" type="text" maxlength="19"
 							class="form-control" style="background-color:white;"> 
 						<div>
 						<label style="margin-top:5px;">게시 시간 : </label><label class="asdf"></label>

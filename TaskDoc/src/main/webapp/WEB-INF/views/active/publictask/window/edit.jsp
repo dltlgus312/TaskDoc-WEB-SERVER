@@ -34,60 +34,52 @@
 	<div class="container">
 		<h2>공용업무 수정</h2>
 		<p>공용업무를 수정해보세요</p>
-
-		<div class="tab-content">
-			<div id="home" class="tab-pane fade in active">
-				<div class="main"
-					style="border: 1px solid rgba(0, 0, 0, 0.2); box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5); background-color: white; display: contents;">
-					<div  class="bts" style="width: 100%; margin-top: 10px;">
-						<span>공용업무 제목</span> <input id="pttitle"
-							style="width: 80%; margin-top: 5px;" type="text"
-							class="form-control" maxlength="20">
-					</div>
-					
-					<div  class="bts" style="width: 100%; margin-top: 10px;">
-						<p style="margin-top:20px;"> 공용업무 색상: <input class="jscolor" onchange="update(this.jscolor)" value="" style="width:60px;"> </p>
-					</div>
-					
-					<div class="bts" style="width: 100%; margin-top: 10px;">
-						<span>시작날짜</span> <input id="ptsdate" class="form-control"
-							style="width: 80%; margin-top: 5px;" type="text">
-					</div>
-					
-					<div  class="bts" style="width: 100%; margin-top: 10px;">
-						<span>종료날짜</span> <input id="ptedate" class="form-control"
-							style="width: 80%; margin-top: 5px;" type="text">
-					</div>
-					
-					<div  class="bts" style="width: 100%; margin-top: 10px;">
-						<span>진행도</span> <input id="ptpercent" class="form-control"
-							style="width: 80%; margin-top: 5px;" type="text">
-					</div>
-					
-					<div  class="bts" style="width: 100%; margin-top: 10px;">
-						<span>참조</span> <input id="ptrefference" class="form-control" readonly="readonly"
-							style="width: 80%; margin-top: 5px;" type="text">
-					</div>
-					
-					<div  class="bts" style="width: 100%; margin-top: 10px;">
-						<span>순서</span> <input id="ptsequence" class="form-control" readonly="readonly"
-							style="width: 80%; margin-top: 5px;" type="text">
-					</div>
-					
-					<div id="7" style="width: 100%; margin-top: 30px;">
-						<div class="bts" style="height: 70%; margin-top: 16px;">
-							<button type="button"
-								style="float: right; margin-right: 7px; background-color: #ed8151; border: 0; outline: none;"
-								class="btn btn-success" onclick="cancel()">Cancel</button>
-							<button type="button" class="btn btn-success" onclick="edit()"
-								style="margin: auto 0; margin-left: 6px; float: right; margin-right: 7px; background-color: #ed8151; border: 0; outline: none;">Edit</button>
-						</div>
-					</div>
+			<div  class="bts" style="width: 100%; margin-top: 10px;">
+				<span>공용업무 제목</span> <input id="pttitle"
+					style="width: 80%; margin-top: 5px;" type="text"
+					class="form-control" maxlength="20">
+			</div>
+			
+			<div  class="bts" style="width: 100%; margin-top: 10px;">
+				<p style="margin-top:20px;"> 공용업무 색상: <input class="jscolor" onchange="update(this.jscolor)" value="" style="width:60px;"> </p>
+			</div>
+			
+			<div class="bts" style="width: 100%; margin-top: 10px;">
+				<span>시작날짜</span> <input id="ptsdate" class="form-control"
+					style="width: 80%; margin-top: 5px;" type="text">
+			</div>
+			
+			<div  class="bts" style="width: 100%; margin-top: 10px;">
+				<span>종료날짜</span> <input id="ptedate" class="form-control"
+					style="width: 80%; margin-top: 5px;" type="text">
+			</div>
+			
+			<div  class="bts" style="width: 100%; margin-top: 10px;">
+				<span>진행도</span> <input id="ptpercent" class="form-control"
+					style="width: 80%; margin-top: 5px;" type="text">
+			</div>
+			
+			<div  class="bts" style="width: 100%; margin-top: 10px;">
+				<span>참조</span> <input id="ptrefference" class="form-control" readonly="readonly"
+					style="width: 80%; margin-top: 5px;" type="text">
+			</div>
+			
+			<div  class="bts" style="width: 100%; margin-top: 10px;">
+				<span>순서</span> <input id="ptsequence" class="form-control" readonly="readonly"
+					style="width: 80%; margin-top: 5px;" type="text">
+			</div>
+			
+			<div id="7" style="width: 100%; margin-top: 30px;">
+				<div class="bts" style="height: 70%; margin-top: 16px;">
+					<button type="button"
+						style="float: right; margin-right: 7px; background-color: #ed8151; border: 0; outline: none;"
+						class="btn btn-success" onclick="cancel()">Cancel</button>
+					<button type="button" class="btn btn-success" onclick="edit()"
+						style="margin: auto 0; margin-left: 6px; float: right; margin-right: 7px; background-color: #ed8151; border: 0; outline: none;">Edit</button>
 				</div>
 			</div>
 		</div>
-	</div>
-</body>
+	</body>
 
 <script type="text/javascript">
 var pcode=<%=pcode%>;
