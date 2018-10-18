@@ -66,5 +66,10 @@ public class User {
 		return "/user/methodlist";
 	}
 	
+	@RequestMapping(value = "/gantt/view", method = RequestMethod.GET)
+	public String gantt() {
+		return "/user/gantt";
+	}
+	
 
 }

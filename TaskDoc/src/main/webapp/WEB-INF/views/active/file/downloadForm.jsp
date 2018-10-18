@@ -45,7 +45,7 @@ var socket = new SockJS('/goStomp');
 stompClient = Stomp.over(socket);
 stompClient.connect({}, function() { //접속
 stompClient.subscribe('/project/'+pcode, function(msg) {
-	alert(msg);
+	/* alert(msg); */
 	var test=msg.body;
 	 	var concat=JSON.parse(test);
 	 	if(concat.message=="insert"){
@@ -70,7 +70,7 @@ $(function(){
 					$("#tbodys"+<%=tcode%>).append($div);
 				}
 			}
-			else alert('자료가 없습니다.');
+			else alert('자료가 존재하지 않습니다.');
 		},
 		error : function(e) {
 			alert("ERROR : " + e.statusText);

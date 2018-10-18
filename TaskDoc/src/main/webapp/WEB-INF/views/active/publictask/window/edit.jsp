@@ -25,6 +25,7 @@
 	String pcode = request.getParameter("pcode");
 	String tsdate = request.getParameter("tsdate");
 	String tedate = request.getParameter("tedate");
+	String tcolor = request.getParameter("tcolor");
 %>
 
 
@@ -90,6 +91,7 @@
 
 <script type="text/javascript">
 var pcode=<%=pcode%>;
+var mycolor="";
 //공용업무 정보받아오기
 $(document).ready(function() {
 	$.ajax({
@@ -97,16 +99,17 @@ $(document).ready(function() {
 		url : '/publictask/publicTaskView/'+<%=tcode%>,
 		success : function(response) {
 			if (Object.keys(response).length>0) {
-				alert('공용업무 조회 완료!');
+				alert('공용업무 조회가 완료 되었습니다.');
 				$("#pttitle").val(response.ttitle);
-				$("#ptcolor").val(response.tcolor);
+				$(".jscolor").val(response.tcolor);
+				mycolor=response.tcolor;
 				$("#ptsdate").val(response.tsdate);
 				$("#ptedate").val(response.tedate);
 				$("#ptpercent").val(response.tpercent);
 				$("#ptsequence").val(response.tsequence);
 				$("#ptrefference").val(response.trefference);
 			} else {
-				alert('Server or Client ERROR, 공용업무 조회 실패');
+				alert('Server or Client ERROR, 공용업무 조회에 실패 했습니다.');
 			}
 		},
 		error : function(e) {
@@ -117,7 +120,6 @@ $(document).ready(function() {
 });
 
 
-var mycolor="";
 function update(jscolor) {
     // 'jscolor' instance can be used as a string
     $("#rect").css('background-color','#'+jscolor);
@@ -184,10 +186,6 @@ function cancel() {
 
 //공용업무 수정.
 function edit(){
-/* re = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
-	if(re.test($("#pttitle").val())){
-		alert('프로젝트 제목에 특수문자를 넣을 수 없 습ㄴ ㅣ 다!');
-	}else{ */
 		var param = {
 			'ttitle' : $("#pttitle").val(),
 			'tcolor' : mycolor,
@@ -210,16 +208,7 @@ function edit(){
 					var peram={
 							 'message' : 'update',
 							 'type' : 'publictaskvo',
-							 'object' :{
-									 'ttitle' : $("#pttitle").val(),
-									 'tcolor' :  mycolor,
-								 	 'tsdate' : $("#ptsdate").val(),
-									 'tedate' : $("#ptedate").val(),
-									 'tpercent' : $("#ptpercent").val(),
-									 'trefference' : $("#ptrefference").val(),
-									 'tsequence' : $("#ptsequence").val(),
-									 'tcode' : <%=tcode%>
-								}
+							 'object' : param
 						 };
 						stompClient.send('/app/project/'+pcode, {},JSON.stringify(peram));
 				} else{

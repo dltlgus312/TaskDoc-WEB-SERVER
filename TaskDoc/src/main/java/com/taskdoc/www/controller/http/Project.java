@@ -220,6 +220,11 @@ public class Project {
 	public String gantView() {
 		return "/active/gantt/view";
 	}
+	//간트
+	@RequestMapping(value = "/gantt/main/alldocument", method = RequestMethod.GET)
+	public String alldocument() {
+		return "/active/gantt/alldocument";
+	}
 	
 	
 }

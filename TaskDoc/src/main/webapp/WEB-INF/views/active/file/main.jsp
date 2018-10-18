@@ -13,7 +13,9 @@
 	loginid = (String) session.getAttribute("loginid");
 	String pcode=request.getParameter("pcode");
 %>
-
+<style>
+*{font-family:Title_Light;}
+</style>
 <script type="text/javascript">
 var id='<%=loginid%>';
 	if (id == "null") {
@@ -88,7 +90,7 @@ $(document).ready(function() {
 						var $plist='<div id="plist'+response[i].tcode+'" style="width:10%;height:160px;  margin-right:20px; margin-top:20px; float:left;">'
 						+'<div style="width:100%;height:60%; cursor:pointer;"data-toggle="tootlip" data-placement="bottom" title="하위 업무 파일 보기" onclick="downtaskView(\''+folder+'\','+response[i].tcode+')">'
 						+'<img src="${pageContext.request.contextPath }/resources/img/img_filetask.png"style="width:100%;height:100%;"></div>'
-						+'<div style="width:100%;height:20%; text-align:center;cursor:pointer; " data-toggle="tootlip" data-placement="bottom" title="파일 다운로드 하기" onclick="gofileView('+response[i].tcode+')">'+response[i].ttitle+'</div>'
+						+'<div style="width:100%;height:20%; text-align:center;cursor:pointer; border :1px solid #ed8151;" data-toggle="tootlip" data-placement="bottom" title="파일 다운로드 하기" onclick="gofileView('+response[i].tcode+')">'+response[i].ttitle+'</div>'
 						+'<div class="bts"><button id="forderDels"onclick="folderDel('+response[i].tcode+')" class="btn" style="border:0px;outline:none;background-color:#ed8151;color:white;" type="button">삭제</button></div></div>';
 						$("#fileList").append($plist);
 					}
@@ -97,12 +99,12 @@ $(document).ready(function() {
 						var $plist='<div id="plist'+response[i].tcode+'" style="width:10%;height:120px; margin-right:20px; margin-top:20px; float:left;">'
 						+'<div style="width:100%;height:80%; cursor:pointer;" data-toggle="tootlip" data-placement="bottom" title="하위 폴더 파일 보기" onclick="downtaskView(\''+task+'\','+response[i].tcode+')">'
 						+'<img src="${pageContext.request.contextPath }/resources/img/img_filetask.png"style="width:100%;height:100%;"></div>'
-						+'<div style="width:100%;height:20%; text-align:center;cursor:pointer;" data-toggle="tootlip" data-placement="bottom" title="파일 다운로드 하기" onclick="gofileView('+response[i].tcode+')">'+response[i].ttitle+'</div></div>';
+						+'<div style="width:100%;height:20%; border :1px solid #ed8151; text-align:center;cursor:pointer;" data-toggle="tootlip" data-placement="bottom" title="파일 다운로드 하기" onclick="gofileView('+response[i].tcode+')">'+response[i].ttitle+'</div></div>';
 						$("#publictaskList").append($plist);
 					}
 				}
 			} else if (response.length == 0) {
-				alert('Server or Client ERROR, 공용업무 리스트 불러오기 실패');
+				alert('Server or Client ERROR, 공용업무 리스트 불러오기에 실패 했습니다.');
 			}
 		},
 		error : function(e) {
@@ -195,7 +197,7 @@ function folderDel(tcode){
 			url : '/publictask/' + tcode,
 			success : function(response) {
 				if (response>0) {
-					alert('공용업무 삭제 성공!');
+					alert('공용업무 삭제에 성공 했습니다.');
 					var peram={
 							 'message' : 'delete',
 							 'type' : 'publictaskvo',
@@ -205,7 +207,7 @@ function folderDel(tcode){
 						 };
 					stompClient.send('/app/project/'+pcode, {},JSON.stringify(peram));
 				} else{
-					alert('Server or Client ERROR, 폴더 삭제 실패');
+					alert('Server or Client ERROR, 폴더 삭제에 실패 했습니다.');
 				}
 			},
 			error : function(e) {

@@ -104,10 +104,10 @@ $(document).on('click','.projectlists',function(){
 					data : JSON.stringify(param),
 					success : function(response) {
 						if (response == 1) {
-							alert('초대 수락 완료!');
+							alert('초대 수락이 완료 되었습니다.');
 							location.reload();
 						} else {
-							alert('Server or Client ERROR, 초대 수락  실패!');
+							alert('Server or Client ERROR, 초대 수락이 실패 하였습니다.');
 						}
 					},
 					error : function(e) {
@@ -127,10 +127,10 @@ $(document).on('click','.projectlists',function(){
 				data : JSON.stringify(param),
 				success : function(response) {
 					if (response == 1) {
-						alert('초대 거절 완료!');
+						alert('초대 거절이 완료 되었습니다.');
 						location.reload();
 					} else {
-						alert('Server or Client ERROR, 초대 거절  실패!');
+						alert('Server or Client ERROR, 초대 거절에 실패 했습니다.');
 					}
 				},
 				error : function(e) {

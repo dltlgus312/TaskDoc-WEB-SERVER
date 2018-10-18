@@ -155,7 +155,7 @@ function ptCreate(){
 		data : JSON.stringify(param),
 		success : function(response) {
 			if (response > 0) {
-				alert('공용업무 생성 완료! 프로젝트의 공용업무의 id값은' + response);
+				alert('공용업무 생성이 완료 되었습니다.');
 				
 				//stomp 서버전송
 				var peram={
@@ -176,7 +176,7 @@ function ptCreate(){
 					window.close();
 					
 			} else  {
-				alert('Server or Client ERROR, 공용업무 생성 실패');
+				alert('Server or Client ERROR, 공용업무 생성이 실패 했습니다.');
 			}
 		},
 		error : function(e) {

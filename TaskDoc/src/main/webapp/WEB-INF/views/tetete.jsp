@@ -74,10 +74,43 @@
 			</div>
 		</div>
 	</div>
-
+	<input id="test" type="text" onkeyup="enterkey()">
+	
 </body>
 
 <script type="text/javascript">
+$(function(){
+	
+	var peram={
+			'uid' : 'b',
+			'tcode' : 127
+		 };
+	$.ajax({
+		type : 'POST',
+		url : '/privatetask/user/ptlist',
+		contentType : 'application/json',
+		data : JSON.stringify(peram),
+		success : function(response) {
+			if (response.length > 0) {
+				alert(response);
+			} else  {
+				alert('Server or Client ERROR, 공용업무 생성이 실패 했습니다.');
+			}
+		},
+		error : function(e) {
+			alert("ERROR : " + e.statusText);
+		}
+	});
+});
+function enterkey(){
+	if(window.event.keyCode==13){
+		if($("#test").val()=="")
+			alert('채팅 내용을 입력해주세요.');
+		else
+			alert($("#test").val());
+	}
+}
+
 var b=new Array();
 var a=new Array();
 $(function() {

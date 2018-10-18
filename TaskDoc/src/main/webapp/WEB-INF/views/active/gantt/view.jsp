@@ -20,7 +20,7 @@ var id='<%=loginid%>';
 		window.location.href = '/';
 	}
 //pro_header.jsp , pro_header.js 에서 <script>태그 안에서 변수 사용가능하다.	
-var pcode=<%=pcode%>;
+var pcode= <%=pcode%> ;
 	$(function() {
 		$(".gantt_hover").css('color', '#ed8151').css('border-bottom',
 				'1px solid #ed8151');
@@ -68,7 +68,10 @@ var pcode=<%=pcode%>;
 	</div>
 	<!--FRAME  -->
 </body>
+</html>
+
 <script type="text/javascript">
+
 //tsdate!=null tedate!=null인 array 담기
 var parrays=new Array();
 //정렬된 array
@@ -80,7 +83,7 @@ $(function(){
 	//method item list 불러오기
 	$.ajax({
 		type : 'GET',
-		url : '/publictask/'+<%=pcode%>,
+		url : '/publictask/'+ <%=pcode%> ,
 		success : function(response) {
 			if (response.length > 0) {
 				alert('public list 조회 완료');
@@ -162,39 +165,80 @@ $(function(){
 				}
 			}
 		}
-	 
 	 function drawg(){
-		console.log(sendArray);
-		   var g = new JSGantt.GanttChart(document.getElementById('GanttChartDIV'), 'day');
-			for(var j=0;j<realplist.length;j++){
-				var tsdate=realplist[j].tsdate; 
-				var tedate=realplist[j].tedate; 
-				g.AddTaskItem(new JSGantt.TaskItem( parseInt(step[j]),  'test',tsdate,tedate,          'ggroupblack',  '',       0, 'Brian',    0,   1, 0,  1, '',      '',      'Some Notes text', g ));
+		 var popW = 500; // 띄울창의 가로사이즈
+		 var popH = 400; // 띄울창의 세로사이즈 
+		 var g = new JSGantt.GanttChart(document.getElementById('GanttChartDIV'), 'day');
+			
+			if( g.getDivId() != null ) {
+				//설정
+				g.setDayColWidth(30);
+				g.setRowHeight(15);
+				g.setCaptionType('Complete');
+				g.setDateTaskTableDisplayFormat('yyyy-mm-dd');
+				g.setDateTaskDisplayFormat('day dd month yyyy');
+				g.setDayMajorDateDisplayFormat('yyyy/mm - ww 주차');
+				g.setWeekMinorDateDisplayFormat('dd mon');
+				//g.setShowTaskInfoLink(1);
+				g.setUseToolTip(1); //툴팁 잠시안보이게
+				g.setShowEndWeekDate(0);
+				g.setUseSingleCell(10000);
+				g.setFormatArr('Day');
+				g.setShowTaskInfoLink(1);
+				g.setUseSort(0);
+				
+				/* g.setCaptionType('Duration'); */
+				
+				
+				for(var j=0;j<sendArray.length;j++){
+					if(sendArray[j].trefference == 0) {
+						if(sendArray[j].children != null)
+							g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'gtaskgreen', 'alldocument?tcode='+sendArray[j].tcode+'&pcode='+<%=pcode%> +'&permission='+chatpermission , 0, 'TaskDoc', parseInt(sendArray[j].tpercent), 1, 0, 1,'','','Some Notes text', g ));
+						else
+							g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'gtaskgreen','alldocument?tcode='+sendArray[j].tcode+'&pcode='+<%=pcode%> +'&permission='+chatpermission, 0, 'TaskDoc', parseInt(sendArray[j].tpercent), 0, 0, 1,'','','Some Notes text', g ));
+							
+					} else {
+						if(sendArray[j].children != null) {
+							var prtstep = 0;
+							for(var k=0; k<sendArray.length; k++) {
+								if(sendArray[j].trefference == sendArray[k].tcode) {
+									prtstep = k;
+								}
+							}
+							g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'gtaskgreen','alldocument?tcode='+sendArray[j].tcode+'&pcode='+<%=pcode%> +'&permission='+chatpermission, 0, 'TaskDoc', parseInt(sendArray[j].tpercent), 1, parseInt(step[prtstep]), 1,'','','Some Notes text', g ));
+						} else {
+							var prtstep = 0;
+							for(var k=0; k<sendArray.length; k++) {
+								if(sendArray[j].trefference == sendArray[k].tcode) {
+									prtstep = k;
+								}
+							}
+
+							g.AddTaskItem(new JSGantt.TaskItem(parseInt(step[j]), sendArray[j].ttitle, sendArray[j].tsdate, sendArray[j].tedate,'gtaskgreen','alldocument?tcode='+sendArray[j].tcode+'&pcode='+<%=pcode%> +'&permission='+chatpermission, 0, 'TaskDoc', parseInt(sendArray[j].tpercent), 0, parseInt(step[prtstep]), 1,'','','Some Notes text', g ));
+						}
+					}
+					g.Draw();
+				}
 			}
-			g.Draw(); 
+			$(".gselector").hide();
+			$(".gtaskname").css('height','42px');
+			$(".gmajorheading").css('height','42px').css('font-size','13px');
+			$(".gminorheading").css('height','42px').css('font-size','13px');
+			$(".gminorheadingwkend").css('font-size','13px');
+			$(".gtaskcellwkend").css('height','42px');
+			$(".gresource").css('font-size','13px');
+			$(".genddate").css('font-size','12.5px');
+			$(".gtaskname div").css('font-size','13px');
+			$(".gduration").css('font-size','13px');
+			$(".gpccomplete").css('font-size','13px');
+			$(".gstartdate").css('font-size','12.5px');
+			$(".genddate div").css('font-size','12.5px');
+			$(".gstartdate div").css('font-size','12.5px');
+			$(".ggroupcaption").css('font-size','13px');
+			$(".gcaption").css('font-size','13px');
+			$(".gtaskgreen").css('height','18px');
+			$(".gtaskgreencomplete").css('height','9px');
+
 	 }
 });
-
-	/* g.AddTaskItem(new JSGantt.TaskItem(1,   'Define Chart API',     '',           '',          'ggroupblack',  '',       0, 'Brian',    0,   1, 0,  1, '',      '',      'Some Notes text', g ));
-	g.AddTaskItem(new JSGantt.TaskItem(11,  'Chart Object',         '2016-02-20','2016-02-20', 'gmilestone',   '',       1, 'Shlomy',   100, 0, 1,  1, '',      '',      '',      g));
-	g.AddTaskItem(new JSGantt.TaskItem(12,  'Task Objects',         '',           '',          'ggroupblack',  '',       0, 'Shlomy',   40,  1, 1,  1, '',      '',      '',      g));
-	g.AddTaskItem(new JSGantt.TaskItem(121, 'Constructor Proc',     '2016-02-21','2016-03-09', 'gtaskblue',    '',       0, 'Brian T.', 60,  0, 12, 1, '',      '',      '',      g));
-	g.AddTaskItem(new JSGantt.TaskItem(122, 'Task Variables',       '2016-03-06','2016-03-11', 'gtaskred',     '',       0, 'Brian',    60,  0, 12, 1, 121,     '',      '',      g));
-	g.AddTaskItem(new JSGantt.TaskItem(123, 'Task by Minute/Hour',  '2016-03-09','2016-03-14 12:00', 'gtaskyellow', '',  0, 'Ilan',     60,  0, 12, 1, '',      '',      '',      g));
-	g.AddTaskItem(new JSGantt.TaskItem(124, 'Task Functions',       '2016-03-09','2016-03-29', 'gtaskred',     '',       0, 'Anyone',   60,  0, 12, 1, '123SS', 'This is a caption', null, g));
-	g.AddTaskItem(new JSGantt.TaskItem(2,   'Create HTML Shell',    '2016-03-24','2016-03-24', 'gtaskyellow',  '',       0, 'Brian',    20,  0, 0,  1, 122,     '',      '',      g));
-	g.AddTaskItem(new JSGantt.TaskItem(3,   'Code Javascript',      '',           '',          'ggroupblack',  '',       0, 'Brian',    0,   1, 0,  1, '',      '',      '',      g));
-	g.AddTaskItem(new JSGantt.TaskItem(31,  'Define Variables',     '2016-02-25','2016-03-17', 'gtaskpurple',  '',       0, 'Brian',    30,  0, 3,  1, '',      'Caption 1','',   g));
-	g.AddTaskItem(new JSGantt.TaskItem(32,  'Calculate Chart Size', '2016-03-15','2016-03-24', 'gtaskgreen',   '',       0, 'Shlomy',   40,  0, 3,  1, '',      '',      '',      g));
-	g.AddTaskItem(new JSGantt.TaskItem(33,  'Draw Task Items',      '',           '',          'ggroupblack',  '',       0, 'Someone',  40,  2, 3,  1, '',      '',      '',      g));
-	g.AddTaskItem(new JSGantt.TaskItem(332, 'Task Label Table',     '2016-03-06','2016-03-09', 'gtaskblue',    '',       0, 'Brian',    60,  0, 33, 1, '',      '',      '',      g));
-	g.AddTaskItem(new JSGantt.TaskItem(333, 'Task Scrolling Grid',  '2016-03-11','2016-03-20', 'gtaskblue',    '',       0, 'Brian',    0,   0, 33, 1, '332',   '',      '',      g));
-	g.AddTaskItem(new JSGantt.TaskItem(34,  'Draw Task Bars',       '',           '',          'ggroupblack',  '',       0, 'Anybody',  60,  1, 3,  0, '',      '',      '',      g));
-	g.AddTaskItem(new JSGantt.TaskItem(341, 'Loop each Task',       '2016-03-26','2016-04-11', 'gtaskred',     '',       0, 'Brian',    60,  0, 34, 1, '',      '',      '',      g));
-	g.AddTaskItem(new JSGantt.TaskItem(342, 'Calculate Start/Stop', '2016-04-12','2016-05-18', 'gtaskpink',    '',       0, 'Brian',    60,  0, 34, 1, '',      '',      '',      g));
-	g.AddTaskItem(new JSGantt.TaskItem(343, 'Draw Task Div',        '2016-05-13','2016-05-17', 'gtaskred',     '',       0, 'Brian',    60,  0, 34, 1, '',      '',      '',      g));
-	g.AddTaskItem(new JSGantt.TaskItem(344, 'Draw Completion Div',  '2016-05-17','2016-06-04', 'gtaskred',     '',       0, 'Brian',    60,  0, 34, 1, "342,343",'',     '',      g));
-	g.AddTaskItem(new JSGantt.TaskItem(35,  'Make Updates',         '2016-07-17','2017-09-04', 'gtaskpurple',  '',       0, 'Brian',    30,  0, 3,  1, '333',   '',      '',      g)); */
-
 </script>
-</html>

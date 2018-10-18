@@ -14,5 +14,7 @@ public interface PrivateTaskDAO {
 	public Integer selfRefMax(int tcode);
 	public Integer sameRefMax(int ptrefference);
 	public List<PrivateTaskVO> privateDownTask(int ptrefference);
+	public List<PrivateTaskVO> publicTaskList(String uid);
+	public List<PrivateTaskVO> multiPrivateTaskList(PrivateTaskVO privateTaskVO);
 
 }

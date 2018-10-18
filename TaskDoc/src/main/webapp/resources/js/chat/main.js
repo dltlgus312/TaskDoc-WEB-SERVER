@@ -39,7 +39,7 @@ $(function(){
 							cObject.crclose=response.chatRoomList[i].crclose;
 							cObject.crcoderef=response.chatRoomList[i].crcoderef;
 							cArray.push(cObject);
-							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:80px; border: 1px solid #ed8151;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +','+cArray[i].crclose+','+cArray[i].crcoderef+')">'
+							$cdiv='<div id="croom'+cArray[i].crcode+'" style="width:100%;height:83px; border: 1px solid #ed8151;" onclick="gochatCon('+cArray[i].crcode+',' + cArray[i].crmode +','+cArray[i].crclose+','+cArray[i].crcoderef+')">'
 							+'<div style="width:100%;height:25%"><span>'+cArray[i].crcode+':'+'프로젝트 채팅방'+'</span></div>' 
 							+'<div style="width:100%;height:50%;overflow:auto;"><img src="/resources/img/img_prochat.png"alt="" style="width: 30px; height:30px;">'
 							+'<span id="croomSpan'+cArray[i].crcode+'"></span></div>'
@@ -77,7 +77,7 @@ $(function(){
 						}
 					}
 				} else if (response.length == 0) {
-					alert('Server or Client ERROR, 채팅방 리스트 조회 실패');
+					alert('Server or Client ERROR, 채팅방이 존재하지 않습니다.');
 				}
 			},
 			error : function(e) {
@@ -113,11 +113,11 @@ $("#chatadd").on("click",function(){
 				data : JSON.stringify(param),
 				success : function(response) {
 					if (response>0) {
-						alert('채팅방 생성 완료! 채팅방 crcode값은'+response);
+						alert('채팅방 생성이 완료되었습니다.');
 						location.reload();
 					}
 					else if(response<0){
-						alert('Server or Client ERROR, 채팅방 생성 실패');
+						alert('Server or Client ERROR, 채팅방 생성에 실패 했습니다.');
 					}
 				},
 				error : function(e) {
@@ -139,12 +139,12 @@ function gochatCon(crcode,crmode,crclose,crcoderef){
 	if(crmode==1){
 		if(confirm('프로젝트 채팅에 입장하시겠습니까?')==true){
 			if(chatpermission=="OWNER" &&crmode==1){
-				alert(crcode+","+crmode+", owner다");
-			 	$("#rightchatlist").load("/chat/content?crcode="+crcode+"&crmode="+crmode+"&crclose="+crclose+"&crcoderef="+crcoderef+"&pcode="+pcode);  
+/*				alert(crcode+","+crmode+", owner다");
+*/			 	$("#rightchatlist").load("/chat/content?crcode="+crcode+"&crmode="+crmode+"&crclose="+crclose+"&crcoderef="+crcoderef+"&pcode="+pcode);  
 			}
 			else if(chatpermission=="MEMBER" && crmode==1){
-				alert(crcode+","+crmode+", member다");
-				$("#rightchatlist").load("/chat/content?crcode="+crcode+"&crmode="+crmode+"&crclose="+crclose+"&crcoderef="+crcoderef+"&pcode="+pcode);  
+/*				alert(crcode+","+crmode+", member다");
+*/				$("#rightchatlist").load("/chat/content?crcode="+crcode+"&crmode="+crmode+"&crclose="+crclose+"&crcoderef="+crcoderef+"&pcode="+pcode);  
 			}
 		}
 		else return;

@@ -83,7 +83,7 @@ function ptCreate(){
 		data : JSON.stringify(param),
 		success : function(response) {
 			if (response > 0) {
-				alert('폴더 생성 완료! 폴더의 id값은' + response);
+				alert('폴더 생성이 완료 되었습니다.');
 				//stomp 서버전송
 				var peram={
 						 'message' : 'insert',
@@ -99,7 +99,7 @@ function ptCreate(){
 					window.close();
 					
 			} else  {
-				alert('Server or Client ERROR, 폴더 생성 실패');
+				alert('Server or Client ERROR, 폴더 생성에 실패 했습니다.');
 			}
 		},
 		error : function(e) {

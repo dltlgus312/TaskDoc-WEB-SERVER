@@ -83,6 +83,7 @@
 </body>
 
 <script type="text/javascript">
+var mycolor="";
 //개인 업무 정보받아오기
 $(document).ready(function() {
 	$.ajax({
@@ -90,16 +91,16 @@ $(document).ready(function() {
 		url : '/privatetask/'+<%=ptcode%>,
 		success : function(response) {
 			if (Object.keys(response).length>0) {
-				alert('개인업무 조회 완료!');
 				$("#pttitle").val(response.pttitle);
-				$("#ptcolor").val(response.ptcolor);
+				$(".jscolor").val(response.ptcolor);
+				mycolor=response.ptcolor;
 				$("#ptsdate").val(response.ptsdate);
 				$("#ptedate").val(response.ptedate);
 				$("#ptpercent").val(response.ptpercent);
 				$("#ptsequence").val(response.ptsequence);
 				$("#ptrefference").val(response.ptrefference);
 			} else {
-				alert('Server or Client ERROR, 개인 업무 조회 실패');
+				alert('Server or Client ERROR, 개인 업무 조회가 존재하지 않습니다.');
 			}
 		},
 		error : function(e) {
@@ -110,7 +111,6 @@ $(document).ready(function() {
 });
 
 
-var mycolor="";
 	 
 function update(jscolor) {
     // 'jscolor' instance can be used as a string
@@ -149,18 +149,18 @@ $(function() {
 	};
 	$.datepicker.setDefaults($.datepicker.regional['ko']);
 
-	$('#psdate').datepicker();
-	$("#psdate").datepicker("option", "minDate", 0);
-	$('#psdate').datepicker("option", "maxDate", $("#toDate").val());
-	$('#psdate').datepicker("option", "onClose", function(selectedDate) {
-		$("#pedate").datepicker("option", "minDate", selectedDate);
+	$('#ptsdate').datepicker();
+	$("#ptsdate").datepicker("option", "minDate", 0);
+	$('#ptsdate').datepicker("option", "maxDate", $("#toDate").val());
+	$('#ptsdate').datepicker("option", "onClose", function(selectedDate) {
+		$("#ptedate").datepicker("option", "minDate", selectedDate);
 	});
 
-	$('#pedate').datepicker();
-	$("#pedate").datepicker("option", "minDate", 0);
-	$('#pedate').datepicker("option", "minDate", $("#psdate").val());
-	$('#pedate').datepicker("option", "onClose", function(selectedDate) {
-		$("#psdate").datepicker("option", "maxDate", selectedDate);
+	$('#ptedate').datepicker();
+	$("#ptedate").datepicker("option", "minDate", 0);
+	$('#ptedate').datepicker("option", "minDate", $("#psdate").val());
+	$('#ptedate').datepicker("option", "onClose", function(selectedDate) {
+		$("#ptsdate").datepicker("option", "maxDate", selectedDate);
 	});
 });
 
@@ -192,11 +192,10 @@ function edit(){
 			contentType : 'application/json',
 			data : JSON.stringify(param),
 			success : function(response) {
-				if (response == 1) {
-					alert('개인 업무 수정 완료!');
- 					opener.location.reload(); 
-				} else if (response == -1) {
-					alert('Server or Client ERROR, 개인 업무 수정 실패');
+				if (response >0) {
+					alert('개인 업무 수정이 완료 되었습니다.');
+				} else{
+					alert('Server or Client ERROR, 개인 업무 수정이 실패 했습니다.');
 				}
 			},
 			error : function(e) {

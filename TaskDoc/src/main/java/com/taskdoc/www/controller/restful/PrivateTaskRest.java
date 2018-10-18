@@ -24,6 +24,18 @@ public class PrivateTaskRest {
 	public List<PrivateTaskVO> list(@PathVariable String uid) {
 		return service.privateTaskList(uid);
 	}
+	
+	//UID와 개인업무PTCODE를 이용해 공용업무를 미리 조회
+	@RequestMapping(value = "/user/plist/{uid}", method = RequestMethod.GET)
+	public List<PrivateTaskVO> plist(@PathVariable String uid) {
+		return service.publicTaskList(uid);
+	}
+
+	//UID와 개인업무PTCODE를 이용해 공용업무를 미리 조회
+	@RequestMapping(value = "/user/ptlist", method = RequestMethod.POST)
+	public List<PrivateTaskVO> ptlist(@RequestBody PrivateTaskVO privateTaskVO) {
+		return service.multiPrivateTaskList(privateTaskVO);
+	}
 
 	@RequestMapping(value = "/{ptcode}", method = RequestMethod.GET)
 	public PrivateTaskVO view(@PathVariable int ptcode) {

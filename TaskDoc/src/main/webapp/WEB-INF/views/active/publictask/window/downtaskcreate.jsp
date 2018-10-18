@@ -161,7 +161,7 @@ function ptCreate(){
 		data : JSON.stringify(param),
 		success : function(response) {
 			if (response>0) {
-				alert('공용업무 생성 완료! 프로젝트의 공용업무의 id값은' + response);
+				alert('하위 업무 생성이 완료 되었습니다.');
 				//stomp 서버전송
 				var peram={
 						 'message' : 'insert',
@@ -181,7 +181,7 @@ function ptCreate(){
 					
 					window.close();
 			} else{
-				alert('Server or Client ERROR, 공용업무 생성 실패');
+				alert('Server or Client ERROR, 하위 업무 생성에 실패 했습니다.');
 			}
 		},
 		error : function(e) {
@@ -189,71 +189,6 @@ function ptCreate(){
 		}
 	});
 }
-	
-	/* 
-	
-	//공용 업무안의 새로운 공용 업무 생성 
-	var param = {
-		'ttitle' : ' ',
-		'tcolor' : ' ',
-		'tsdate' : ' ',
-		'tedate' : ' ',
-		'trefference' : '공용업무안의 새로운공용업무를 생성하기위해 부모의 공용업무 값을넣어준다.',
-		'pcode' : '현재 프로젝트 PCODE'
-	};
-	$.ajax({
-		type : 'POST',
-		url : 'publictask',
-		contentType : 'application/json',
-		data : JSON.stringify(param),
-		success : function(response) {
-			if (response != -1) {
-				alert('공용업무 생성 완료! 프로젝트의 공용업무의 id값은' + response);
-			} else if (response == -1) {
-				alert('Server or Client ERROR, 공용업무 생성 실패');
-			}
-		},
-		error : function(e) {
-			alert("ERROR : " + e.statusText);
-		}
-	});
-
-
-
-	// 해당 공용업무내의 모든 회의록 리스트를 가져온다 
-	$.ajax({
-		type : 'GET',
-		url : 'chatroom/task/' + '해당 공용업무의  tcode',
-		success : function(response) {
-			if (response.length != 0) {
-				alert('회의록 리스트 불러오기 성공!');
-			} else if (response.length == 0) {
-				alert('Server or Client ERROR, 회의록 리스트 불러오기 실패');
-			}
-		},
-		error : function(e) {
-			alert("ERROR : " + e.statusText);
-		}
-	});
-	
-	// 해당 공용업무내의 모든 의사결정 리스트를 가져온다 
-	$.ajax({
-		type : 'GET',
-		url : 'decision/task/' + '해당 공용업무의  tcode',
-		success : function(response) {
-			if (response.length != 0) {
-				alert('의사결정 리스트 불러오기 성공!');
-			} else if (response.length == 0) {
-				alert('Server or Client ERROR, 의사결정 리스트 불러오기  실패');
-			}
-		},
-		error : function(e) {
-			alert("ERROR : " + e.statusText);
-		}
-	});
-	
-	
-	 */
 	
 </script>
 </html>

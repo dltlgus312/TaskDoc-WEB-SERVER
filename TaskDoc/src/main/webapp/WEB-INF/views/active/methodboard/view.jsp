@@ -137,7 +137,6 @@ var pcode;
 					success : function(response) {
 						if (Object.keys(response).length > 0) {
 							pcode = response.pcode;
-							alert('게시판 글 상세보기 완료! ' + response);
 							$("#mbcode").text(response.mbcode);
 							$("#mbcontents").val(response.mbcontents);
 							$("#mbdate").text(response.mbdate);
@@ -145,7 +144,7 @@ var pcode;
 							$("#pcode").text(response.pcode);
 							$("#uid").text(response.uid);
 						} else {
-							alert('Server or Client ERROR, 게시판 글 상세보기 실패');
+							alert('Server or Client ERROR, 게시판 상세보기에 실패 했습니다.');
 						}
 					},
 					error : function(e) {
@@ -162,7 +161,13 @@ var pcode;
 
 	//프로젝트의 방법론보기
 	function promethodInfo() {
-
+		var screenW = screen.availWidth;  // 스크린 가로사이즈
+		var screenH = screen.availHeight; // 스크린 세로사이즈
+		var popW = 500; // 띄울창의 가로사이즈
+		var popH = 500; // 띄울창의 세로사이즈
+		var posL=( screenW-popW ) / 2;   
+		var posT=( screenH-popH ) / 2;   
+		window.open("/methodboard/method/view?pcode="+pcode,"", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no'); 
 	}
 	
 	//중복 오류 잡기..
@@ -181,10 +186,10 @@ var pcode;
 			data : JSON.stringify(param),
 			success : function(response) {
 				if (response > 0) {
-					alert('방법론 등록하기 성공! id값은' + response);
+					alert('방법론 등록하기 성공에 성공 했습니다.');
 					window.close();
 				} else  {
-					alert('Server or Client ERROR, 방법론 등록하기 실패');
+					alert('Server or Client ERROR, 방법론 등록하기에 실패 했습니다.');
 				}
 			},
 			error : function(e) {

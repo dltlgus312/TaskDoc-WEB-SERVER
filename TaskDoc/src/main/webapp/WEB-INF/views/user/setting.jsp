@@ -135,7 +135,6 @@ $(window).on(
 				url : '/methodboard/all',
 				success : function(response) {
 						if (response.length > 0) {
-							alert('게시판 목록 전체 받아오기 성공! ' + response);
 							for(var i=0;i<response.length;i++){
 							if(response[i].uid=='<%=loginid%>'){
 								var trtag = document.createElement("tr");
@@ -186,7 +185,7 @@ $(window).on(
 							$("#tbodys").append(trtag);
 							}
 					} else {
-						alert('Server or Client ERROR, 게시판 목록 전체 받아오기 실패');
+						alert('Server or Client ERROR, 게시글이 존재하지 않습니다.');
 					}
 					},
 				error : function(e) {
@@ -200,17 +199,16 @@ $(window).on(
 				url : '/document/user/'+id,
 				success : function(response) {
 						if (response.length > 0) {
-							alert('파일 목록 전체 받아오기 성공! ' + response);
+							alert('파일 목록을 조회 합니다.');
 							for(var i=0;i<response.length;i++){
 								var $div='<tr><td>'+ (i+1) +'</td><td><a style="cursor:pointer;" onclick="documentView('+response[i].dmcode+')">'+response[i].dmtitle+'</a></td><td>'
 								+response[i].dmcontents+'</td><td>'+response[i].uid+'</td><td>'+response[i].dmdate+'</td>'
-								+'<td><img src="${pageContext.request.contextPath }/resources/img/img_boardsetting.png" style="width:20px;height:20px; cursor:pointer" onclick="documentEdit('+response[i].dmcode+')">'
-								+'<img src="${pageContext.request.contextPath }/resources/img/img_boarddelete.png" style="margin-left:20px;width:20px;height:20px;cursor:pointer"'
+								+'<td><img src="${pageContext.request.contextPath }/resources/img/img_boarddelete.png" style="margin-left:20px;width:20px;height:20px;cursor:pointer"'
 								+'onclick="documentDelete('+response[i].dmcode+')"></td></tr>';
 								$("#tbodyss").append($div);
 							}
 					} else {
-						alert('Server or Client ERROR, 파일 목록 전체 받아오기 실패');
+						alert('Server or Client ERROR, 파일 목록이 존재하지 않습니다.');
 					}
 					},
 				error : function(e) {
@@ -234,10 +232,10 @@ $(window).on(
 				url : '/methodboard/'+code,
 			success : function(response) {
 				if (response > 0) {
-					alert('게시글 삭제 완료! ' + response);
+					alert('게시글 삭제가 완료 되었습니다.');
 					location.reload();
 				} else {
-					alert('Server or Client ERROR, 게시글 삭제 실패');
+					alert('Server or Client ERROR, 게시글 삭제에 실패 했습니다.');
 				}
 			},
 			error : function(e) {
@@ -282,10 +280,10 @@ $(window).on(
 					url : '/document/'+dmcode,
 				success : function(response) {
 					if (response > 0) {
-						alert('자료 삭제 완료! ' + response);
+						alert('자료 삭제가 완료 되었습니다. ' + response);
 						location.reload();
 					} else {
-						alert('Server or Client ERROR, 자료 삭제 실패');
+						alert('Server or Client ERROR, 자료 삭제가 실패 되었습니다.');
 					}
 				},
 				error : function(e) {

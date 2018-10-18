@@ -63,9 +63,9 @@ $(function(){
 					$whattask='<option value="'+response[i].tcode+'">'+ (i+1 )+'.' +response[i].tcode+ response[i].ttitle + '</option>';
 					$("#whattask").append($whattask);
 				}
-				alert('공용업무 리스트 불러오기 성공!');
+				alert('공용업무 리스트를 불러옵니다.');
 			} else if (response.length == 0) {
-				alert('Server or Client ERROR, 공용업무 리스트 불러오기 실패');
+				alert('Server or Client ERROR, 공용업무 리스트 불러오기에 실패 했습니다.');
 			}
 		},
 		error : function(e) {
@@ -115,16 +115,15 @@ function focusOK(){
 		data : JSON.stringify(param),
 		success : function(response) {
 			if (Object.keys(response).length>0) {
-				alert('채팅방 생성 완료! 채팅방 crcode값은'+response);
-			
+				alert('채팅방 생성이 완료 되었습니다.');
 				opener.parent.focutest(response.crcode,response.crdate,response.crmode,response.fctitle,response.crclose,response.tcode,response.crcoderef);
-				
 				//채팅에 넣을것 -> chatcontents db  dmcode,dscode,crcoderef,crcode,dstitle
 				opener.parent.chattest(0,0,response.crcode,response.crcode,response.fctitle);
 				window.close();
+				
 				}
 			else if(response<0){
-				alert('Server or Client ERROR, 채팅방 생성 실패');
+				alert('Server or Client ERROR, 채팅방 생성에 실패 했습니다.');
 			}
 		},
 		error : function(e) {
