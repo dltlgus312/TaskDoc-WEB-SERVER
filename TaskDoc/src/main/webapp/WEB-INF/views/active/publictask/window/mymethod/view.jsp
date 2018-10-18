@@ -358,6 +358,8 @@ function ptCreate(){
 					};
 				}
 				stompClient.send('/app/project/'+realpcode, {},JSON.stringify(stompsend));
+				alert('공용 업무 생성  완료!');
+				window.close();
 					
 			} else  {
 				alert('Server or Client ERROR, 공용업무 생성이 실패 했습니다.');
