@@ -68,7 +68,6 @@ var pcode= <%=pcode%> ;
 	</div>
 	<!--FRAME  -->
 </body>
-</html>
 
 <script type="text/javascript">
 
@@ -242,3 +241,5 @@ $(function(){
 	 }
 });
 </script>
+</html>
+

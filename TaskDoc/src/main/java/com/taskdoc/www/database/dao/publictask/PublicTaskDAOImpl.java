@@ -24,7 +24,6 @@ public class PublicTaskDAOImpl implements PublicTaskDAO {
 	private final String SAMEREFMAX = "sameRefMax";
 	private final String ROOTTASK = "roottask";
 	private final String DOWNTASK = "downtask";
-	private final String ONETASK = "onetask";
 
 	@Override
 	public List<PublicTaskVO> publicTaskList(int pcode) {

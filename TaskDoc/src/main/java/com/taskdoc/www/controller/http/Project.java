@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/project")
 public class Project {
-	private static final Logger logger = LoggerFactory.getLogger(Project.class);
 
 	/*
 	 * 2.프로젝트 메인 , 생성 , 프로젝트 멤버 초대, 프로젝트(이름, 멤버 삭제 등등,,) 수정 , 프로젝트 공지사항,
